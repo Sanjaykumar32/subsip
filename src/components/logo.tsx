@@ -1,12 +1,14 @@
 import { ReactElement } from "react";
-import { Typography } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 
 export function Logo(): ReactElement {
+  const theme = useTheme();
+
   return (
     <Typography
       fontWeight={700}
       sx={{
-        fontSize: "37px",
+        fontSize: theme.typography.pxToRem(27),
         lineHeight: "48px",
       }}
     >
