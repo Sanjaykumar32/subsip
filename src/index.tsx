@@ -1,13 +1,14 @@
 import React from "react";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { NavigationBar } from "./layouts";
 import { SignIn, SignUp } from "./pages";
 import { store } from "data";
+import { theme } from "theme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -31,11 +32,14 @@ const router = createBrowserRouter([
   },
 ]);
 
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <CssBaseline />
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme} >
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );
