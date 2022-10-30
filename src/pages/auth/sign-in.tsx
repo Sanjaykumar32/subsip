@@ -1,5 +1,5 @@
 import React from "react";
-import { Label } from "components";
+import { InputBox, Label } from "components";
 import {
   Box,
   Button,
@@ -8,9 +8,12 @@ import {
   TextField,
   Typography,
   Link,
+  useTheme,
 } from "@mui/material";
 
 export function SignIn() {
+  const theme = useTheme();
+
   return (
     <Container maxWidth="xs" sx={{ p: 4 }}>
       <Box sx={{ my: 1, textAlign: "center" }}>
@@ -28,15 +31,18 @@ export function SignIn() {
         </Box>
 
         <FormGroup sx={{ textAlign: "left" }}>
-          <Box sx={{ mt: 1.5 }}>
+          <InputBox>
             <Label> Email </Label>
             <TextField fullWidth />
-          </Box>
-          <Box sx={{ mt: 1.5 }}>
+          </InputBox>
+          <InputBox>
             <Label> Password </Label>
             <TextField fullWidth />
-          </Box>
-          <Button variant="contained" sx={{ mt: 4 }}>
+          </InputBox>
+          <Button
+            variant="contained"
+            sx={{ mt: 4, fontSize: theme.typography.pxToRem(20) }}
+          >
             Log in
           </Button>
           <Link href="/forgotPassword" sx={{ textAlign: "center", mt: 2 }}>
