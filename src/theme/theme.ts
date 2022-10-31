@@ -28,6 +28,18 @@ export const theme = createTheme({
             },
           }),
         },
+        {
+          props: { variant: "rounded", color: "error" },
+          style: ({ theme }) => ({
+            padding: theme.spacing(0.5, 3),
+            backgroundColor: theme.palette.error.main,
+            color: theme.palette.error.contrastText,
+            borderRadius: "100px",
+            "&:hover": {
+              backgroundColor: theme.palette.error.dark,
+            },
+          }),
+        },
       ],
       defaultProps: {
         disableElevation: true,

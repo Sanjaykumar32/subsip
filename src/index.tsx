@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { NavigationBar } from "./layouts";
-import { SignIn, SignUp } from "./pages";
+import { Home, SignIn, SignUp } from "./pages";
 import { store } from "data";
 import { theme } from "theme";
 
@@ -28,15 +28,18 @@ const router = createBrowserRouter([
         path: "/signUp",
         element: <SignUp />,
       },
+      {
+        path: "/home",
+        element: <Home />,
+      },
     ],
   },
 ]);
 
-
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme} >
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <RouterProvider router={router} />
       </ThemeProvider>
