@@ -18,7 +18,7 @@ export function NavigationBar() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Container disableGutters={isMobile} maxWidth="lg" sx={{ height: "100vh" }}>
+    <Container disableGutters={isMobile} maxWidth="xl" sx={{ height: "100vh" }}>
       <ScrollToTop />
       <AppBar
         position="static"
@@ -28,7 +28,7 @@ export function NavigationBar() {
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Logo />
-          <Button variant="rounded">Log in</Button>
+          <Button variant="rounded" href="/signIn" >Log in</Button>
         </Toolbar>
       </AppBar>
       <Outlet />
