@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(
 
 const router = createBrowserRouter([
   {
-    path: "/signIn",
+    path: "/",
     element: <NavigationBar />,
     errorElement: <div> 404 Page Not Found </div>,
     children: [
