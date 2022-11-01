@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { NavigationBar } from "./layouts";
-import { Home, SignIn, SignUp } from "./pages";
+import { Home, PasswordReset, Profile, SignIn, SignUp } from "./pages";
 import { store } from "data";
 import { theme } from "theme";
 
@@ -31,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/PasswordReset",
+        element: <PasswordReset />,
+      },
+      {
+        path: "/Profile",
+        element: <Profile />,
       },
     ],
   },
