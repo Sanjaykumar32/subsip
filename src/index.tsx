@@ -9,10 +9,15 @@ import { NavigationBar } from "./layouts";
 import {
   ClickOnCategory,
   Home,
+  ListingDetails,
+  ListingOnPoshSub,
   PasswordReset,
   Profile,
+  ReferralProgram,
+  Rewards,
   SignIn,
   SignUp,
+  Subscriptions,
 } from "./pages";
 import { store } from "data";
 import { theme } from "theme";
@@ -50,6 +55,26 @@ const router = createBrowserRouter([
       {
         path: "/ClickOnCategory",
         element: <ClickOnCategory />,
+      },
+      {
+        path: "/ListingOnPoshSub",
+        element: <ListingOnPoshSub />,
+      },
+      {
+        path: "/ListingDetails",
+        element: <ListingDetails />,
+      },
+      {
+        path: "/ReferralProgram",
+        element: <ReferralProgram />,
+      },
+      {
+        path: "/Rewards",
+        element: <Rewards />,
+      },
+      {
+        path: "/Subscriptions",
+        element: <Subscriptions />,
       },
     ],
   },
