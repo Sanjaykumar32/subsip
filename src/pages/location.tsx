@@ -93,7 +93,7 @@ export function Location() {
       <Address />
       <Info />
 
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item sm={12} md={8}>
           <Card sx={{ width: "100%", maxHeight: "500px" }}>
             <img
@@ -102,7 +102,6 @@ export function Location() {
                 width: "100%",
                 height: "auto",
                 objectFit: "cover",
-                transform: "translateY(-240px)",
               }}
               src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1560&q=80"
             />
