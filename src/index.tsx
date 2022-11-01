@@ -9,7 +9,7 @@ import { theme } from "theme";
 import { NavigationBar } from "./layouts";
 
 import { SignIn, SignUp } from "./pages";
-import { Location } from "pages/location";
+import { LocationPage } from "pages/location";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/location/:id",
-        element: <Location />,
+        element: <LocationPage />,
       },
     ],
   },
