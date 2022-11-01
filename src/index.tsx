@@ -2,8 +2,9 @@ import React from "react";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { store } from "data";
+import { theme } from "theme";
 
 import { NavigationBar } from "./layouts";
 import {
@@ -37,9 +38,11 @@ import {
   SignUp,
   Subscriptions,
 } from "./pages";
-import { store } from "data";
-import { theme } from "theme";
+
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
+
+import { Location } from "pages/location";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -176,6 +179,10 @@ const router = createBrowserRouter([
       {
         path: "/AdminSubscribers",
         element: <AdminSubscribers />,
+      },
+      {
+        path: "/location/:id",
+        element: <Location />,
       },
     ],
   },
