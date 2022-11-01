@@ -1,27 +1,37 @@
 import React from "react";
+import Carousel from "react-material-ui-carousel";
 import {
   Box,
   Button,
   Card,
+  Chip,
   Container,
   Grid,
   Typography,
   useTheme,
 } from "@mui/material";
+import { LocationCard1 } from "components/location/location-card-1";
+import {
+  Address,
+  Info,
+  Subscribe,
+  Title,
+} from "components/location/location-card";
 
 export function Home() {
-  const theme = useTheme();
-
   const data = {
     image:
       "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2881&q=80",
-    title: "India Gate Restaurant",
+    name: "India Gate Restaurant",
     location: "Seattle,WA",
-    desc: "Welcome to the India Gate Restaurant where we offer unique food.",
+    description:
+      "Welcome to the India Gate Restaurant where we offer unique food.",
     subscribers: "46.2K subscribers",
     footer:
       "Claim FREE gift cards as they become available from the business listed above ",
   };
+
+  const theme = useTheme();
 
   return (
     <Container maxWidth="lg" sx={{ p: 4 }}>
@@ -29,82 +39,86 @@ export function Home() {
         sx={{
           my: 1,
           textAlign: "center",
-          height: "240px",
+          height: "fit-content",
           backgroundColor: "black",
+          p: 2,
         }}
-      ></Box>
-      <Box sx={{ mt: 4 }}>
-        <Typography variant="h6">Seattle,WA</Typography>
-        <Grid container spacing={2} gap={1.5}>
+      >
+        <Carousel>
           {Array(12)
             .fill(data)
             .map((data) => (
-              <Grid item sm={2.3}>
-                <Card
-                  sx={{
-                    maxWidth: "251px",
-                    maxHeight: "400px",
-                  }}
-                  elevation={6}
-                >
-                  <img
-                    src={data.image}
-                    alt={data.title}
-                    width="100%"
-                    height="165px"
-                    style={{ objectFit: "cover" }}
-                  />
-                  <Box sx={{ p: 1.5 }}>
-                    <Typography variant="body1" fontWeight={600}>
-                      {data.title}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      fontWeight={600}
-                      color={theme.palette.grey[500]}
-                    >
-                      {data.location}
-                    </Typography>
-
-                    <Box sx={{ my: 1, lineHeight: 0 }}>
-                      <Typography fontSize={11} fontWeight={600}>
-                        {data.desc}
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "baseline",
-                      }}
-                    >
-                      <Typography
-                        variant="caption"
-                        fontWeight={600}
-                        color={theme.palette.grey[500]}
-                      >
-                        {data.subscribers}
-                      </Typography>
-                      <Button color="error" variant="rounded" size="small">
-                        Subscribe
-                      </Button>
-                    </Box>
-                  </Box>
-                  <Box
+              <Box sx={{ px: 7, pt: 7, pb: 3 }}>
+                <Grid container spacing={2}>
+                  <Grid
+                    item
                     sx={{
-                      textAlign: "center",
-                      backgroundColor: theme.palette.grey[300],
-                      p: 1,
+                      display: "flex",
+                      justifyContent: "start",
+                      flexDirection: "column",
+                      alignItems: "flex-start",
                     }}
+                    xs={7}
                   >
-                    <Typography fontSize={11} fontWeight={600}>
-                      {data.footer}
-                    </Typography>
-                  </Box>
-                </Card>
+                    <Chip
+                      label="Featured"
+                      color="info"
+                      size="small"
+                      sx={{ borderRadius: "4px", fontWeight: 900 }}
+                    />
+                    <Title color="white">{data.name}</Title>
+                    <Address>{data.location}</Address>
+                    <Box sx={{ pr: "35%" }}>
+                      <Info color="white" sx={{ textAlign: "left", mt: 1 }}>
+                        {data.description}
+                      </Info>
+                    </Box>
+                    <Subscribe
+                      subsctibers={46.2}
+                      color={theme.palette.info.light}
+                    />
+                  </Grid>
+
+                  <Grid item xs={5}>
+                    <Card sx={{ width: "100%", maxHeight: "300px" }}>
+                      <img
+                        src={data.image}
+                        alt={data.name}
+                        width="100%"
+                        height="100%"
+                        style={{ objectFit: "cover" }}
+                      />
+                    </Card>
+                  </Grid>
+                </Grid>
+              </Box>
+            ))}
+        </Carousel>
+      </Box>
+      <Box sx={{ mt: 4 }}>
+        <Typography variant="h6" sx={{ mb: 2, fontWeight: 900 }}>
+          Seattle,WA
+        </Typography>
+        <Grid container spacing={2} gap={1.5}>
+          {Array(15)
+            .fill(data)
+            .map((data) => (
+              <Grid item sm={2.3}>
+                <LocationCard1 data={data} />
               </Grid>
             ))}
         </Grid>
+      </Box>
+      <Box
+        sx={{
+          my: 6,
+          mx: "auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Button variant="rounded">Load More</Button>
       </Box>
     </Container>
   );

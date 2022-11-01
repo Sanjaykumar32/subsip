@@ -19,7 +19,7 @@ export const Address = ({ children, ...props }: TypographyProps) => (
   <Typography
     variant="body1"
     fontWeight={900}
-    color={theme.palette.grey[600]}
+    color={theme.palette.grey[400]}
     {...props}
   >
     {children}
@@ -32,12 +32,18 @@ export const Info = ({ children, ...props }: TypographyProps) => (
   </Typography>
 );
 
-export const Subscribe = ({ subsctibers }: { subsctibers: number }) => (
+export const Subscribe = ({
+  subsctibers,
+  color,
+}: {
+  subsctibers: number;
+  color?: string;
+}) => (
   <>
     <Box sx={{ my: 3 }}>
       <Typography
         variant="subtitle1"
-        color={theme.palette.grey[600]}
+        color={color || theme.palette.grey[600]}
         fontWeight={900}
       >
         {`${subsctibers}k Subscribers`}
@@ -85,6 +91,7 @@ export interface ILocationProps {
   location: string;
   description: string;
   subscribers: number;
+  footer: string;
 }
 
 export function Location({
