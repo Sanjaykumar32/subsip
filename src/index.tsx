@@ -7,6 +7,24 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { NavigationBar } from "./layouts";
 import {
+  AdminCategories,
+  AdminDashboard,
+  AdminListing,
+  AdminListingToSubscribers,
+  AdminNewCategory,
+  AdminNewlisting,
+  AdminNewNotifictaion,
+  AdminNewReferralPrice,
+  AdminNewReward,
+  AdminNewSubcategory,
+  AdminNotification,
+  AdminReferral,
+  AdminReferralToSubscribe,
+  AdminRewards,
+  AdminRewardsToWinner,
+  AdminRewardToDetails,
+  AdminSubCategory,
+  AdminSubscribers,
   ClickOnCategory,
   Home,
   ListingDetails,
@@ -21,6 +39,7 @@ import {
 } from "./pages";
 import { store } from "data";
 import { theme } from "theme";
+import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -32,6 +51,7 @@ const router = createBrowserRouter([
     element: <NavigationBar />,
     errorElement: <div> 404 Page Not Found </div>,
     children: [
+      // auth
       {
         path: "/signIn",
         element: <SignIn />,
@@ -41,10 +61,6 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/home",
-        element: <Home />,
-      },
-      {
         path: "/PasswordReset",
         element: <PasswordReset />,
       },
@@ -52,6 +68,13 @@ const router = createBrowserRouter([
         path: "/Profile",
         element: <Profile />,
       },
+
+      // pages
+      {
+        path: "/home",
+        element: <Home />,
+      },
+
       {
         path: "/ClickOnCategory",
         element: <ClickOnCategory />,
@@ -75,6 +98,84 @@ const router = createBrowserRouter([
       {
         path: "/Subscriptions",
         element: <Subscriptions />,
+      },
+
+      //admin
+      {
+        path: "/AdminCategories",
+        element: <AdminCategories />,
+      },
+      {
+        path: "/AdminDashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "/AdminListingToSubscribers",
+        element: <AdminListingToSubscribers />,
+      },
+      {
+        path: "/AdminListing",
+        element: <AdminListing />,
+      },
+      {
+        path: "/AdminNewCategory",
+        element: <AdminNewCategory />,
+      },
+      {
+        path: "/AdminNewlisting",
+        element: <AdminNewlisting />,
+      },
+      {
+        path: "/AdminNewNotifictaion",
+        element: <AdminNewNotifictaion />,
+      },
+      {
+        path: "/AdminNewReferralPrice",
+        element: <AdminNewReferralPrice />,
+      },
+      {
+        path: "/AdminNewReward",
+        element: <AdminNewReward />,
+      },
+      {
+        path: "/AdminNewSubcategory",
+        element: <AdminNewSubcategory />,
+      },
+      {
+        path: "/AdminNotification",
+        element: <AdminNotification />,
+      },
+      {
+        path: "/AdminNotifyButton",
+        element: <AdminNotifyButton />,
+      },
+      {
+        path: "/AdminReferralToSubscribe",
+        element: <AdminReferralToSubscribe />,
+      },
+      {
+        path: "/AdminReferral",
+        element: <AdminReferral />,
+      },
+      {
+        path: "/AdminRewardToDetails",
+        element: <AdminRewardToDetails />,
+      },
+      {
+        path: "/AdminRewardsToWinner",
+        element: <AdminRewardsToWinner />,
+      },
+      {
+        path: "/AdminRewards",
+        element: <AdminRewards />,
+      },
+      {
+        path: "/AdminSubCategory",
+        element: <AdminSubCategory />,
+      },
+      {
+        path: "/AdminSubscribers",
+        element: <AdminSubscribers />,
       },
     ],
   },
