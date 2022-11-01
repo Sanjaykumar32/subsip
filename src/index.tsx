@@ -37,11 +37,11 @@ import {
   SignIn,
   SignUp,
   Subscriptions,
+  LocationPage,
 } from "./pages";
 
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
 
-import { Location } from "pages/location";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
@@ -182,7 +182,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/location/:id",
-        element: <Location />,
+        element: <LocationPage />,
       },
     ],
   },

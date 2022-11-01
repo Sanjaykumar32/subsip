@@ -1,97 +1,32 @@
-import { faShareFromSquare } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  TypographyProps,
-  useTheme,
-} from "@mui/material";
+import { Box, Container, useTheme } from "@mui/material";
 import { Card, Grid, Typography } from "@mui/material";
+import {
+  Location,
+  Address,
+  ILocationProps,
+  Info,
+  Title,
+} from "components/location/location-card";
 import { useParams } from "react-router-dom";
 
-export function Location() {
+export function LocationPage() {
   const theme = useTheme();
   const { id } = useParams();
 
-  const name = `India Gate Restaurant ${id}`;
+  const name = `India Gate Restaurant`;
   const location = "Seattle, WA";
   const description =
     "Welcome to the India Gate Restaurant where we offer unique food.";
   const subscribers = 42.2;
+  const obj = { name, location, description, subscribers } as ILocationProps;
 
-  const Title = (props: TypographyProps) => (
-    <Typography variant="h5" fontWeight={900} sx={{ mt: 2, mb: 1 }} {...props}>
-      {name}
-    </Typography>
-  );
-
-  const Address = () => (
-    <Typography
-      variant="body1"
-      fontWeight={900}
-      color={theme.palette.grey[600]}
-    >
-      {location}
-    </Typography>
-  );
-
-  const Info = () => (
-    <Typography variant="body1" fontWeight={600} sx={{ mt: 4, mb: 2 }}>
-      {description}
-    </Typography>
-  );
-
-  const Subscribe = () => (
-    <>
-      <Box sx={{ my: 3 }}>
-        <Typography
-          variant="subtitle1"
-          color={theme.palette.grey[600]}
-          fontWeight={900}
-        >
-          {`${subscribers}k Subscribers`}
-        </Typography>
-      </Box>
-      <Button
-        size="large"
-        variant="contained"
-        color="error"
-        sx={{ fontWeight: 800, borderRadius: "24px" }}
-      >
-        Subscribe Now
-      </Button>
-    </>
-  );
-
-  const CardFooter = () => (
-    <Box
-      sx={{
-        backgroundColor: theme.palette.grey[200],
-        position: "absolute",
-        bottom: 0,
-      }}
-    >
-      <Typography
-        variant="body2"
-        fontWeight={600}
-        sx={{
-          p: 3,
-          textAlign: "center",
-        }}
-      >
-        Claim FREE gift cards as they become available from the business listed
-        above
-      </Typography>
-    </Box>
-  );
+  console.log(id);
 
   return (
     <Container maxWidth="lg" sx={{ my: 8 }}>
-      <Title />
-      <Address />
-      <Info />
+      <Title>{name}</Title>
+      <Address>{location}</Address>
+      <Info>{description}</Info>
 
       <Grid container spacing={2}>
         <Grid item sm={12} md={8}>
@@ -108,33 +43,7 @@ export function Location() {
           </Card>
         </Grid>
         <Grid item sm={12} md={4} sx={{ px: 2 }}>
-          <Card elevation={3} sx={{ height: "100%", position: "relative" }}>
-            <Box sx={{ p: 2, fontSize: theme.typography.h5.fontSize }}>
-              <Box sx={{ display: "flex" }}>
-                <span style={{ fontFamily: "Bree Serif" }}> PoshSub </span>{" "}
-                <Divider
-                  color="info"
-                  sx={{ m: 1 }}
-                  variant="middle"
-                  orientation="vertical"
-                  flexItem
-                />
-                <span
-                  style={{
-                    color: theme.palette.info.main,
-                    fontFamily: "Josefin Slab",
-                  }}
-                >
-                  RWEARDS
-                </span>
-              </Box>
-              <Title />
-              <Address />
-              <Info />
-              <Subscribe />
-            </Box>
-            <CardFooter />
-          </Card>
+          <Location {...obj} />
         </Grid>
         <Grid item xs={8}>
           <Box>

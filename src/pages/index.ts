@@ -12,6 +12,7 @@ export * from "./subscriptions";
 export * from "./listing-details";
 export * from "./referralProgram";
 export * from "./rewards";
+export * from "./location";
 
 // admin
 export * from "./admin-panel/admin-categories";
