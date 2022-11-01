@@ -3,3 +3,4 @@ export * from "./auth/sign-up";
 export * from "./auth/password-reset";
 export * from "./auth/profile";
 export * from "./home";
+export * from "./click-on-category";

@@ -6,7 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { NavigationBar } from "./layouts";
-import { Home, PasswordReset, Profile, SignIn, SignUp } from "./pages";
+import {
+  ClickOnCategory,
+  Home,
+  PasswordReset,
+  Profile,
+  SignIn,
+  SignUp,
+} from "./pages";
 import { store } from "data";
 import { theme } from "theme";
 
@@ -39,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/Profile",
         element: <Profile />,
+      },
+      {
+        path: "/ClickOnCategory",
+        element: <ClickOnCategory />,
       },
     ],
   },
