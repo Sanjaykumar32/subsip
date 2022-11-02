@@ -41,6 +41,7 @@ export function SignIn() {
           </InputBox>
           <Button
             variant="contained"
+            href="/location/1"
             sx={{ mt: 4, fontSize: theme.typography.pxToRem(20) }}
           >
             Log in
