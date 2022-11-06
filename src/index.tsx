@@ -17,7 +17,7 @@ import {
   AdminNewNotifictaion,
   AdminNewReferralPrice,
   AdminNewReward,
-  AdminNewSubcategory,
+  AdminNewSubCategory,
   AdminNotification,
   AdminReferral,
   AdminReferralToSubscribe,
@@ -142,7 +142,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/AdminNewSubcategory",
-        element: <AdminNewSubcategory />,
+        element: <AdminNewSubCategory />,
       },
       {
         path: "/AdminNotification",
