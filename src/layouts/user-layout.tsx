@@ -5,9 +5,7 @@ import { Outlet } from "react-router-dom";
 import { FooterContainer, Links, Logo, ScrollToTop, Social } from "components";
 import {
   Container,
-  Paper,
   Button,
-  Box,
   useTheme,
   useMediaQuery,
   Grid,
@@ -28,7 +26,9 @@ export function NavigationBar() {
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Logo />
-          <Button variant="rounded" href="/signIn" >Log in</Button>
+          <Button variant="rounded" href="/signIn">
+            Log in
+          </Button>
         </Toolbar>
       </AppBar>
       <Outlet />

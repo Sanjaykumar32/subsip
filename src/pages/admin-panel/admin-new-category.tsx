@@ -60,7 +60,7 @@ export function AdminNewCategory() {
 
             <Box sx={{ my: 2 }}>
               <FormControl sx={{ width: 300 }}>
-                <Typography variant="body2" fontWeight={600}>
+                <Typography variant="body2" fontWeight={500}>
                   Select Business Category
                 </Typography>
                 <Select
@@ -77,7 +77,7 @@ export function AdminNewCategory() {
               </FormControl>
 
               <Box sx={{ my: 2 }}>
-                <Typography variant="body2" fontWeight={600}>
+                <Typography variant="body2" fontWeight={500}>
                   Subcategory name
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -85,11 +85,7 @@ export function AdminNewCategory() {
                     fullWidth
                     sx={{ my: 1, borderRadius: "30px", mr: 1 }}
                   />
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    size="lg"
-                    color={theme.palette.info.main}
-                  />
+                  <FontAwesomeIcon icon={faPlus} size="lg" color="black" />
                 </Box>
               </Box>
             </Box>
