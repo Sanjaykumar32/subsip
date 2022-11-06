@@ -38,7 +38,7 @@ export function AdminNewCategory() {
             <Box sx={{ my: 2, alignItems: "center" }}>
               <Box sx={{ display: "flex" }}>
                 <Typography variant="body2" fontWeight={500}>
-                  Category name
+                  Category Name
                 </Typography>
                 <Typography
                   variant="caption"

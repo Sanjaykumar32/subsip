@@ -109,7 +109,7 @@ export function AdminNewNotifictaion() {
               <Box sx={{ my: 1, alignItems: "center", ml: 3 }}>
                 <Box sx={{ display: "flex" }}>
                   <Typography variant="body2" fontWeight={500}>
-                    Business location
+                    Business Location
                   </Typography>
                   <Typography
                     variant="caption"
@@ -135,18 +135,9 @@ export function AdminNewNotifictaion() {
             <Box sx={{ my: 1, alignItems: "center" }}>
               <Box sx={{ display: "flex" }}>
                 <FormControl sx={{ width: 300 }}>
-                  <Box sx={{ display: "flex" }}>
-                    <Typography variant="body2" fontWeight={500}>
-                      Category
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      fontWeight={400}
-                      sx={{ ml: 2, color: theme.palette.grey[400] }}
-                    >
-                      *required
-                    </Typography>
-                  </Box>
+                  <Typography variant="body2" fontWeight={500}>
+                    Category
+                  </Typography>
                   <Select
                     fullWidth
                     variant="outlined"
@@ -159,20 +150,10 @@ export function AdminNewNotifictaion() {
                     <MenuItem value={"Oldest"}>Oldest</MenuItem>
                   </Select>
                 </FormControl>
-
                 <FormControl sx={{ width: 300, ml: 2 }}>
-                  <Box sx={{ display: "flex" }}>
-                    <Typography variant="body2" fontWeight={500}>
-                      Subcategory
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      fontWeight={400}
-                      sx={{ ml: 2, color: theme.palette.grey[400] }}
-                    >
-                      *required
-                    </Typography>
-                  </Box>
+                  <Typography variant="body2" fontWeight={500}>
+                    Subcategory
+                  </Typography>
                   <Select
                     fullWidth
                     variant="outlined"
@@ -188,7 +169,7 @@ export function AdminNewNotifictaion() {
               </Box>
               <FormControl sx={{ width: 300 }}>
                 <Typography variant="body2" fontWeight={500}>
-                  Business name
+                  Business Name
                 </Typography>
                 <Select
                   fullWidth
@@ -222,7 +203,7 @@ export function AdminNewNotifictaion() {
                 }}
                 variant="rounded"
               >
-                Send notification
+                Send Notification
               </Button>
             </Box>
           </Container>

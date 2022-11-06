@@ -5,8 +5,6 @@ import {
   Container,
   FormControl,
   Grid,
-  List,
-  ListItem,
   MenuItem,
   Select,
   TextField,
@@ -33,7 +31,6 @@ export function AdminNewSubCategory() {
               size="lg"
               color={theme.palette.info.main}
             />
-
             <Button
               size="large"
               sx={{
@@ -73,7 +70,7 @@ export function AdminNewSubCategory() {
               <Box sx={{ my: 2, alignItems: "center" }}>
                 <Box sx={{ display: "flex" }}>
                   <Typography variant="body2" fontWeight={500}>
-                    Subcategory name
+                    Subcategory Name
                   </Typography>
                   <Typography
                     variant="caption"
