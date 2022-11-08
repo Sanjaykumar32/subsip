@@ -1,22 +1,13 @@
 import * as React from "react";
+import { Outlet } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import { Outlet } from "react-router-dom";
+import { Container, Button, Grid } from "@mui/material";
 import { FooterContainer, Links, Logo, ScrollToTop, Social } from "components";
-import {
-  Container,
-  Button,
-  useTheme,
-  useMediaQuery,
-  Grid,
-} from "@mui/material";
 
 export function NavigationBar() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   return (
-    <Container disableGutters={isMobile} maxWidth="xl" sx={{ height: "100vh" }}>
+    <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
       <ScrollToTop />
       <AppBar
         position="static"

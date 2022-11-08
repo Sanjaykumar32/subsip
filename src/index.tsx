@@ -64,11 +64,11 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/PasswordReset",
+        path: "/passwordReset",
         element: <PasswordReset />,
       },
       {
-        path: "/Profile",
+        path: "/profile",
         element: <Profile />,
       },
 
@@ -79,110 +79,110 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/ClickOnCategory",
+        path: "/clickOnCategory",
         element: <ClickOnCategory />,
       },
       {
-        path: "/ListingOnPoshSub",
+        path: "/listingOnPoshSub",
         element: <ListingOnPoshSub />,
       },
       {
-        path: "/ListingDetails",
+        path: "/listingDetails",
         element: <ListingDetails />,
       },
       {
-        path: "/ReferralProgram",
+        path: "/referralProgram",
         element: <ReferralProgram />,
       },
       {
-        path: "/Rewards",
+        path: "/rewards",
         element: <Rewards />,
       },
       {
-        path: "/Subscriptions",
+        path: "/subscriptions",
         element: <Subscriptions />,
-      },
-
-      //admin
-      {
-        path: "/AdminCategories",
-        element: <AdminCategories />,
-      },
-      {
-        path: "/AdminDashboard",
-        element: <AdminDashboard />,
-      },
-      {
-        path: "/AdminListingToSubscribers",
-        element: <AdminListingToSubscribers />,
-      },
-      {
-        path: "/AdminListing",
-        element: <AdminListing />,
-      },
-      {
-        path: "/AdminNewCategory",
-        element: <AdminNewCategory />,
-      },
-      {
-        path: "/AdminNewlisting",
-        element: <AdminNewlisting />,
-      },
-      {
-        path: "/AdminNewNotifictaion",
-        element: <AdminNewNotifictaion />,
-      },
-      {
-        path: "/AdminNewReferralPrice",
-        element: <AdminNewReferralPrice />,
-      },
-      {
-        path: "/AdminNewReward",
-        element: <AdminNewReward />,
-      },
-      {
-        path: "/AdminNewSubcategory",
-        element: <AdminNewSubCategory />,
-      },
-      {
-        path: "/AdminNotification",
-        element: <AdminNotification />,
-      },
-      {
-        path: "/AdminNotifyButton",
-        element: <AdminNotifyButton />,
-      },
-      {
-        path: "/AdminReferralToSubscribe",
-        element: <AdminReferralToSubscribe />,
-      },
-      {
-        path: "/AdminReferral",
-        element: <AdminReferral />,
-      },
-      {
-        path: "/AdminRewardToDetails",
-        element: <AdminRewardToDetails />,
-      },
-      {
-        path: "/AdminRewardsToWinner",
-        element: <AdminRewardsToWinner />,
-      },
-      {
-        path: "/AdminRewards",
-        element: <AdminRewards />,
-      },
-      {
-        path: "/AdminSubCategory",
-        element: <AdminSubCategory />,
-      },
-      {
-        path: "/AdminSubscribers",
-        element: <AdminSubscribers />,
       },
       {
         path: "/location/:id",
         element: <LocationPage />,
+      },
+
+      //admin
+      {
+        path: "/admin/categories",
+        element: <AdminCategories />,
+      },
+      {
+        path: "/admin/dashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "/admin/listingToSubscribers",
+        element: <AdminListingToSubscribers />,
+      },
+      {
+        path: "/admin/listing",
+        element: <AdminListing />,
+      },
+      {
+        path: "/admin/newCategory",
+        element: <AdminNewCategory />,
+      },
+      {
+        path: "/admin/newlisting",
+        element: <AdminNewlisting />,
+      },
+      {
+        path: "/admin/newNotifictaion",
+        element: <AdminNewNotifictaion />,
+      },
+      {
+        path: "/admin/newReferralPrice",
+        element: <AdminNewReferralPrice />,
+      },
+      {
+        path: "/admin/newReward",
+        element: <AdminNewReward />,
+      },
+      {
+        path: "/admin/newSubcategory",
+        element: <AdminNewSubCategory />,
+      },
+      {
+        path: "/admin/notification",
+        element: <AdminNotification />,
+      },
+      {
+        path: "/admin/notifyButton",
+        element: <AdminNotifyButton />,
+      },
+      {
+        path: "/admin/referralToSubscribe",
+        element: <AdminReferralToSubscribe />,
+      },
+      {
+        path: "/admin/referral",
+        element: <AdminReferral />,
+      },
+      {
+        path: "/admin/rewardToDetails",
+        element: <AdminRewardToDetails />,
+      },
+      {
+        path: "/admin/rewardsToWinner",
+        element: <AdminRewardsToWinner />,
+      },
+      {
+        path: "/admin/rewards",
+        element: <AdminRewards />,
+      },
+      {
+        path: "/admin/subCategory",
+        element: <AdminSubCategory />,
+      },
+      {
+        path: "/admin/subscribers",
+        element: <AdminSubscribers />,
       },
     ],
   },
