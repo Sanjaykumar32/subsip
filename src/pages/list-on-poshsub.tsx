@@ -14,6 +14,7 @@ import {
   Select,
   TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { Label } from "components";
 import Grid from "@mui/material/Grid";
@@ -30,6 +31,7 @@ interface ListFormItem {
 }
 
 export function ListingOnPoshSub() {
+  const theme = useTheme();
   const [
     step1,
     step2,
@@ -101,7 +103,7 @@ export function ListingOnPoshSub() {
     },
   ];
 
-  const ref = useRef<HTMLInputElement>();
+  const ref = useRef<HTMLInputElement>(null);
 
   return (
     <Container disableGutters sx={{ p: 4 }}>
@@ -208,12 +210,22 @@ export function ListingOnPoshSub() {
               <Box sx={{ my: 4 }}>
                 <Label> {step6.label} </Label>
                 <Typography variant="body2"> {step6.caption} </Typography>
-                <Input
-                  type="file"
+                <input
                   ref={ref}
+                  type="file"
                   onChange={(event) => console.log(event.target.value)}
+                  hidden
                 />
-                <IconButton onClick={() => ref.current?.click()}>
+                <IconButton
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: theme.palette.grey[300],
+                    borderRadius: "4px",
+                    p: 4,
+                  }}
+                  onClick={() => ref.current?.click()}
+                >
                   <FontAwesomeIcon icon={faUpload} size="lg" />
                 </IconButton>
               </Box>
