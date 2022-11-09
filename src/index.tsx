@@ -109,36 +109,16 @@ const router = createBrowserRouter([
 
       //admin
       {
-        path: "/admin/categories",
-        element: <AdminCategories />,
-      },
-      {
-        path: "/admin/dashboard",
-        element: <AdminDashboard />,
-      },
-      {
-        path: "/admin/listingToSubscribers",
-        element: <AdminListingToSubscribers />,
-      },
-      {
-        path: "/admin/listing",
-        element: <AdminListing />,
+        path: "/admin/newReferralPrice",
+        element: <AdminNewReferralPrice />,
       },
       {
         path: "/admin/newCategory",
         element: <AdminNewCategory />,
       },
       {
-        path: "/admin/newlisting",
-        element: <AdminNewlisting />,
-      },
-      {
         path: "/admin/newNotifictaion",
         element: <AdminNewNotifictaion />,
-      },
-      {
-        path: "/admin/newReferralPrice",
-        element: <AdminNewReferralPrice />,
       },
       {
         path: "/admin/newReward",
@@ -156,34 +136,54 @@ const router = createBrowserRouter([
         path: "/admin/notifyButton",
         element: <AdminNotifyButton />,
       },
-      {
-        path: "/admin/referralToSubscribe",
-        element: <AdminReferralToSubscribe />,
-      },
-      {
-        path: "/admin/referral",
-        element: <AdminReferral />,
-      },
-      {
-        path: "/admin/rewardToDetails",
-        element: <AdminRewardToDetails />,
-      },
-      {
-        path: "/admin/rewardsToWinner",
-        element: <AdminRewardsToWinner />,
-      },
-      {
-        path: "/admin/rewards",
-        element: <AdminRewards />,
-      },
+      // {
+      //   path: "/admin/categories",
+      //   element: <AdminCategories />,
+      // },
+      // {
+      //   path: "/admin/dashboard",
+      //   element: <AdminDashboard />,
+      // },
+      // {
+      //   path: "/admin/listingToSubscribers",
+      //   element: <AdminListingToSubscribers />,
+      // },
+      // {
+      //   path: "/admin/listing",
+      //   element: <AdminListing />,
+      // },
+      // {
+      //   path: "/admin/newlisting",
+      //   element: <AdminNewlisting />,
+      // },
+      // {
+      //   path: "/admin/referralToSubscribe",
+      //   element: <AdminReferralToSubscribe />,
+      // },
+      // {
+      //   path: "/admin/referral",
+      //   element: <AdminReferral />,
+      // },
+      // {
+      //   path: "/admin/rewardToDetails",
+      //   element: <AdminRewardToDetails />,
+      // },
+      // {
+      //   path: "/admin/rewardsToWinner",
+      //   element: <AdminRewardsToWinner />,
+      // },
+      // {
+      //   path: "/admin/rewards",
+      //   element: <AdminRewards />,
+      // },
       {
         path: "/admin/subCategory",
         element: <AdminSubCategory />,
       },
-      {
-        path: "/admin/subscribers",
-        element: <AdminSubscribers />,
-      },
+      // {
+      //   path: "/admin/subscribers",
+      //   element: <AdminSubscribers />,
+      // },
     ],
   },
 ]);
