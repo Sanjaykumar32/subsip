@@ -25,7 +25,6 @@ export function SignIn() {
             New to PoshSub?
           </Typography>
           <Link href="/signup" variant="body1">
-            {" "}
             Click here to sign up!
           </Link>
         </Box>
@@ -46,7 +45,7 @@ export function SignIn() {
           >
             Log in
           </Button>
-          <Link href="/forgotPassword" sx={{ textAlign: "center", mt: 2 }}>
+          <Link href="/PasswordReset" sx={{ textAlign: "center", mt: 2 }}>
             Forgot Password?
           </Link>
         </FormGroup>
