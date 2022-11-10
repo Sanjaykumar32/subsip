@@ -25,20 +25,25 @@ export function AdminSubCategory() {
         </Grid>
         <Grid item xs={12} md={10}>
           <Container sx={{ width: "100%", height: "100%" }}>
-            <FontAwesomeIcon
-              icon={faAngleLeft}
-              size="lg"
-              color={theme.palette.info.main}
-            />
-            <Button
-              size="large"
-              sx={{
-                fontWeight: 800,
-                color: "black",
-              }}
-            >
-              Back
-            </Button>
+            <Box>
+              <FontAwesomeIcon
+                icon={faAngleLeft}
+                size="lg"
+                color={theme.palette.info.main}
+              />
+              <Button
+                size="large"
+                sx={{
+                  fontWeight: 800,
+                  color: "black",
+                }}
+              >
+                Back
+              </Button>
+            </Box>
+            <Box>
+              <Typography variant="h6">Category: Home services</Typography>
+            </Box>
 
             <Box
               sx={{

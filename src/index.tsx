@@ -148,18 +148,18 @@ const router = createBrowserRouter([
       //   path: "/admin/listingToSubscribers",
       //   element: <AdminListingToSubscribers />,
       // },
-      // {
-      //   path: "/admin/listing",
-      //   element: <AdminListing />,
-      // },
+      {
+        path: "/admin/listing",
+        element: <AdminListing />,
+      },
       // {
       //   path: "/admin/newlisting",
       //   element: <AdminNewlisting />,
       // },
-      // {
-      //   path: "/admin/referralToSubscribe",
-      //   element: <AdminReferralToSubscribe />,
-      // },
+      {
+        path: "/admin/referralToSubscribe",
+        element: <AdminReferralToSubscribe />,
+      },
       {
         path: "/admin/referral",
         element: <AdminReferral />,
@@ -180,10 +180,10 @@ const router = createBrowserRouter([
         path: "/admin/subCategory",
         element: <AdminSubCategory />,
       },
-      // {
-      //   path: "/admin/subscribers",
-      //   element: <AdminSubscribers />,
-      // },
+      {
+        path: "/admin/subscribers",
+        element: <AdminSubscribers />,
+      },
     ],
   },
 ]);
