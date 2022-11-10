@@ -11,12 +11,12 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { faAngleLeft, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminSidebar } from "components";
 import { theme } from "theme";
 
-export function AdminCategories() {
+export function AdminRewardsMileStones() {
   return (
     <Container maxWidth="lg" sx={{ p: 4 }}>
       <Grid container>
@@ -44,29 +44,9 @@ export function AdminCategories() {
             </Box>
 
             <Box
-              sx={{ display: "flex", alignItems: "baseline", ml: 90, my: 2 }}
-            >
-              <Typography variant="body2" fontWeight={600} sx={{ ml: 2 }}>
-                Sort By:
-              </Typography>
-              <FormControl variant="standard">
-                <Select
-                  variant="standard"
-                  labelId="sort-by-select-label"
-                  id="sort-by-simple-select"
-                  value="Newest"
-                  size="small"
-                  sx={{ ml: 1 }}
-                >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-
-            <Box
               sx={{
                 backgroundColor: "black",
+                my: 6,
               }}
             >
               <Box
@@ -79,7 +59,7 @@ export function AdminCategories() {
                   Name
                 </Typography>
                 <Typography variant="h6" sx={{ color: "white" }}>
-                  Subcategory
+                  Rewards
                 </Typography>
                 <Typography variant="h6" sx={{ color: "white" }}>
                   Actions
@@ -88,8 +68,8 @@ export function AdminCategories() {
 
               {Array(4)
                 .fill({
-                  name: "Notification 1",
-                  subCategory: "17 subcategories",
+                  name: "India Gate Restaurant",
+                  subCategory: "1 reward",
                 })
                 .map((element) => (
                   <Box

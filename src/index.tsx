@@ -21,7 +21,7 @@ import {
   AdminNotification,
   AdminReferral,
   AdminReferralToSubscribe,
-  AdminRewards,
+  AdminRewardsMileStones,
   AdminRewardsToWinner,
   AdminRewardToDetails,
   AdminSubCategory,
@@ -136,10 +136,10 @@ const router = createBrowserRouter([
         path: "/admin/notifyButton",
         element: <AdminNotifyButton />,
       },
-      // {
-      //   path: "/admin/categories",
-      //   element: <AdminCategories />,
-      // },
+      {
+        path: "/admin/categories",
+        element: <AdminCategories />,
+      },
       // {
       //   path: "/admin/dashboard",
       //   element: <AdminDashboard />,
@@ -160,10 +160,10 @@ const router = createBrowserRouter([
       //   path: "/admin/referralToSubscribe",
       //   element: <AdminReferralToSubscribe />,
       // },
-      // {
-      //   path: "/admin/referral",
-      //   element: <AdminReferral />,
-      // },
+      {
+        path: "/admin/referral",
+        element: <AdminReferral />,
+      },
       // {
       //   path: "/admin/rewardToDetails",
       //   element: <AdminRewardToDetails />,
@@ -172,10 +172,10 @@ const router = createBrowserRouter([
       //   path: "/admin/rewardsToWinner",
       //   element: <AdminRewardsToWinner />,
       // },
-      // {
-      //   path: "/admin/rewards",
-      //   element: <AdminRewards />,
-      // },
+      {
+        path: "/admin/rewards-milestones",
+        element: <AdminRewardsMileStones />,
+      },
       {
         path: "/admin/subCategory",
         element: <AdminSubCategory />,

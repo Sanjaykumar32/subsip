@@ -29,7 +29,7 @@ export * from "./admin-panel/admin-notification";
 export * from "./admin-panel/admin-referral";
 export * from "./admin-panel/admin-referral-to-subscribe";
 export * from "./admin-panel/admin-reward-to-details";
-export * from "./admin-panel/admin-rewards";
+export * from "./admin-panel/admin-rewards-milestones";
 export * from "./admin-panel/admin-rewards-to-winner";
 export * from "./admin-panel/admin-subcategory";
 export * from "./admin-panel/admin-subscribers";
