@@ -17,7 +17,7 @@ import { theme } from "theme";
 
 export function AdminNewReferralPrice() {
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
+    <Container maxWidth="lg" sx={{ p: 4, my: 5 }}>
       <Grid container>
         <Grid item xs={12} md={2}>
           <AdminSidebar />
@@ -46,7 +46,7 @@ export function AdminNewReferralPrice() {
                 <Typography
                   variant="caption"
                   fontWeight={400}
-                  sx={{ ml: 2, color: theme.palette.grey[400] }}
+                  sx={{ ml: 1, color: theme.palette.grey[500] }}
                 >
                   *required
                 </Typography>
@@ -56,7 +56,7 @@ export function AdminNewReferralPrice() {
                 sx={{ my: 1, borderRadius: "30px", mr: 1 }}
               />
             </Box>
-            <FormControl sx={{ width: 300 }}>
+            <FormControl sx={{ width: 400 }}>
               <Box sx={{ display: "flex" }}>
                 <Typography variant="body2" fontWeight={500}>
                   Referal Amount
@@ -64,7 +64,7 @@ export function AdminNewReferralPrice() {
                 <Typography
                   variant="caption"
                   fontWeight={400}
-                  sx={{ ml: 2, color: theme.palette.grey[400] }}
+                  sx={{ ml: 1, color: theme.palette.grey[500] }}
                 >
                   *required
                 </Typography>
@@ -75,7 +75,7 @@ export function AdminNewReferralPrice() {
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
                 size="medium"
-                sx={{ my: 1 }}
+                sx={{ my: 1, width: "100%" }}
               >
                 <MenuItem value={"Newest"}>Newest</MenuItem>
                 <MenuItem value={"Oldest"}>Oldest</MenuItem>
@@ -83,7 +83,7 @@ export function AdminNewReferralPrice() {
             </FormControl>
             <Box
               sx={{
-                my: 2,
+                my: 3,
                 mx: "auto",
                 display: "flex",
                 alignItems: "center",
