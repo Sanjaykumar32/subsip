@@ -20,7 +20,7 @@ import { Label } from "components";
 import Grid from "@mui/material/Grid";
 import { InputTypeEnum } from "enum";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 interface ListFormItem {
   id: string;
@@ -106,8 +106,10 @@ export function ListingOnPoshSub() {
   const ref = useRef<HTMLInputElement>(null);
 
   return (
-    <Container disableGutters sx={{ p: 4 }}>
-      <Typography variant="alternet"> List on Poshsub </Typography>
+    <Container maxWidth="md" disableGutters sx={{ p: 4 }}>
+      <Typography variant="alternet" sx={{ ml: 3 }}>
+        List your business on PoshSub
+      </Typography>
 
       <FormControl fullWidth size="small">
         <Grid container>
@@ -237,6 +239,13 @@ export function ListingOnPoshSub() {
                   // onChange={(event) => setValue(event.target.value)}
                   required
                   fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton>
+                        <FontAwesomeIcon icon={faLocationDot} size="xs" />
+                      </IconButton>
+                    ),
+                  }}
                 />
               </Box>
             </Box>
@@ -251,7 +260,7 @@ export function ListingOnPoshSub() {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-          mt: 10,
+          mt: 3,
         }}
       >
         <Button variant="rounded"> Submit for Approval </Button>
