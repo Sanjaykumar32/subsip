@@ -14,18 +14,18 @@ export function PasswordReset() {
   const theme = useTheme();
 
   return (
-    <Container maxWidth="xs" sx={{ p: 4 }}>
+    <Container maxWidth="xs" sx={{ p: 4, my: 3.5 }}>
       <Box sx={{ my: 1 }}>
         <Typography variant="alternet"> Password Reset </Typography>
-        <Box sx={{ display: "flex", whiteSpace: "pre" }}>
-          <Typography fontWeight={500} variant="body1">
+        <Box sx={{ display: "flex", whiteSpace: "pre", mt: 1 }}>
+          <Typography fontWeight={500} variant="body2">
             Forget your Password? Enter your email below to reset it.
           </Typography>
         </Box>
 
         <FormGroup sx={{ textAlign: "left" }}>
           <InputBox>
-            <Label> Email </Label>
+            <Label> Email * </Label>
             <TextField fullWidth />
           </InputBox>
           <Button
@@ -34,7 +34,7 @@ export function PasswordReset() {
           >
             Reset my password
           </Button>
-          <Typography fontWeight={500} variant="body1">
+          <Typography fontWeight={500} variant="body2" sx={{ my: 2 }}>
             Please contact us if you have any trouble resetting your password.
           </Typography>
         </FormGroup>
