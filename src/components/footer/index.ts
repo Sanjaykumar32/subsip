@@ -13,7 +13,7 @@ export const FooterContainer = styled(Paper)(({ theme }) => ({
   flexDirection: "column",
   flexWrap: "wrap",
   justifyContent: "left",
-  marginTop: theme.spacing(5, 0),
+  marginTop: "auto",
 
   [theme.breakpoints.down("md")]: {
     padding: theme.spacing(1),
