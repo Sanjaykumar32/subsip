@@ -5,55 +5,83 @@ import {
   Button,
   Container,
   FormGroup,
+  IconButton,
   TextField,
   Typography,
   useTheme,
 } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCertificate,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
 
 export function Profile() {
   const theme = useTheme();
 
   return (
-    <Container maxWidth="xs" sx={{ p: 4 }}>
-      <Box sx={{ my: 1, textAlign: "center" }}>
-        <Typography variant="alternet"> Profile </Typography>
-        <Box
-          sx={{ display: "flex", justifyContent: "center", whiteSpace: "pre" }}
-        >
-          <Typography fontWeight={500} variant="body1">
-            verified
-          </Typography>
+    <Container sx={{ p: 4, my: 3.5 }}>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Typography variant="h6" fontWeight={600}>
+          Profile{" "}
+        </Typography>
+        <Box sx={{ ml: 2, mr: 1 }}>
+          <FontAwesomeIcon
+            icon={faCertificate}
+            size="lg"
+            color={theme.palette.success.light}
+          />
         </Box>
-
-        <FormGroup sx={{ textAlign: "left" }}>
-          <InputBox>
-            <Label> Email </Label>
-            <Typography fontWeight={500} variant="body1">
-              (rewards will be sent here)
-            </Typography>
-            <TextField fullWidth />
-          </InputBox>
-          <InputBox>
-            <Label> My Location </Label>
-            <Typography fontWeight={500} variant="body1">
-              (city)
-            </Typography>
-            <TextField fullWidth />
-          </InputBox>
-          <Button
-            variant="contained"
-            sx={{ mt: 4, fontSize: theme.typography.pxToRem(20) }}
-          >
-            Update email
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ mt: 4, fontSize: theme.typography.pxToRem(20) }}
-          >
-            Reset Password
-          </Button>
-        </FormGroup>
+        <Typography fontWeight={400} variant="caption">
+          Verified
+        </Typography>
       </Box>
+
+      <Container maxWidth="xs">
+        <Box sx={{ my: 1, textAlign: "center" }}>
+          <FormGroup sx={{ textAlign: "left" }}>
+            <InputBox>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Label> Email </Label>
+                <Typography fontWeight={400} variant="caption" sx={{ ml: 1 }}>
+                  (rewards will be sent here)
+                </Typography>
+              </Box>
+              <TextField fullWidth />
+            </InputBox>
+            <InputBox>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Label> My Location </Label>
+                <Typography fontWeight={400} variant="caption" sx={{ ml: 1 }}>
+                  (city)
+                </Typography>
+              </Box>
+              <TextField
+                fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <IconButton>
+                      <FontAwesomeIcon icon={faLocationDot} size="xs" />
+                    </IconButton>
+                  ),
+                }}
+              />
+            </InputBox>
+            <Button
+              variant="contained"
+              sx={{ mt: 4, fontSize: theme.typography.pxToRem(20) }}
+            >
+              Update Email
+            </Button>
+            <Button
+              variant="contained"
+              sx={{ mt: 2, fontSize: theme.typography.pxToRem(20) }}
+            >
+              Reset Password
+            </Button>
+          </FormGroup>
+        </Box>
+      </Container>
     </Container>
   );
 }

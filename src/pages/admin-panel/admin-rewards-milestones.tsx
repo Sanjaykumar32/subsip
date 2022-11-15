@@ -2,7 +2,6 @@ import React from "react";
 import {
   Box,
   Button,
-  Checkbox,
   Container,
   FormControl,
   Grid,
@@ -12,14 +11,12 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { faCertificate } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminSidebar } from "components";
 import { theme } from "theme";
 
-export function AdminListingToSubscribers() {
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
+export function AdminRewardsMileStones() {
   return (
     <Container maxWidth="lg" sx={{ p: 4 }}>
       <Grid container>
@@ -34,7 +31,7 @@ export function AdminListingToSubscribers() {
               }}
             >
               <Button
-                size="medium"
+                size="large"
                 sx={{
                   fontWeight: 800,
                   backgroundColor: theme.palette.info.main,
@@ -42,34 +39,14 @@ export function AdminListingToSubscribers() {
                 }}
                 variant="contained"
               >
-                Notify
+                New Category
               </Button>
-            </Box>
-
-            <Box
-              sx={{ display: "flex", alignItems: "baseline", ml: 90, my: 2 }}
-            >
-              <Typography variant="body2" fontWeight={600} sx={{ ml: 2 }}>
-                Sort By:
-              </Typography>
-              <FormControl variant="standard">
-                <Select
-                  variant="standard"
-                  labelId="sort-by-select-label"
-                  id="sort-by-simple-select"
-                  value="Newest"
-                  size="small"
-                  sx={{ ml: 1 }}
-                >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
-                </Select>
-              </FormControl>
             </Box>
 
             <Box
               sx={{
                 backgroundColor: "black",
+                my: 6,
               }}
             >
               <Box
@@ -79,11 +56,10 @@ export function AdminListingToSubscribers() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: "white" }}>
-                  Email
+                  Name
                 </Typography>
-
                 <Typography variant="h6" sx={{ color: "white" }}>
-                  Verified
+                  Rewards
                 </Typography>
                 <Typography variant="h6" sx={{ color: "white" }}>
                   Actions
@@ -92,9 +68,8 @@ export function AdminListingToSubscribers() {
 
               {Array(4)
                 .fill({
-                  name: "Jake@gmail.com",
-                  Verified: "Verified",
-                  Location: "Seattle, WA ",
+                  name: "India Gate Restaurant",
+                  subCategory: "1 reward",
                 })
                 .map((element) => (
                   <Box
@@ -106,21 +81,12 @@ export function AdminListingToSubscribers() {
                   >
                     <List>
                       <ListItem sx={{ color: "white" }}>
-                        <Checkbox {...label} defaultChecked />
                         {element.name}
                       </ListItem>
                     </List>
                     <List>
-                      <ListItem sx={{ color: "white" }}>
-                        <FontAwesomeIcon
-                          icon={faCertificate}
-                          size="xl"
-                          style={{
-                            marginRight: "3px",
-                            color: theme.palette.success.main,
-                          }}
-                        />
-                        {element.Verified}
+                      <ListItem sx={{ color: theme.palette.info.main }}>
+                        {element.subCategory}
                       </ListItem>
                     </List>
                     <List>
@@ -129,12 +95,13 @@ export function AdminListingToSubscribers() {
                           size="small"
                           sx={{
                             fontWeight: 500,
-                            backgroundColor: theme.palette.grey[200],
-                            color: theme.palette.error.main,
+                            backgroundColor: "white",
+                            color: "black",
                           }}
+                          endIcon={<FontAwesomeIcon icon={faPen} size="sm" />}
                           variant="rounded"
                         >
-                          Delete
+                          Edit
                         </Button>
                       </ListItem>
                     </List>

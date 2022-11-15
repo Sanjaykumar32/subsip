@@ -15,7 +15,7 @@ export function SignIn() {
   const theme = useTheme();
 
   return (
-    <Container maxWidth="xs" sx={{ p: 4 }}>
+    <Container maxWidth="xs" sx={{ p: 4, my: 3 }}>
       <Box sx={{ my: 1, textAlign: "center" }}>
         <Typography variant="alternet"> Log in </Typography>
         <Box
@@ -24,13 +24,12 @@ export function SignIn() {
           <Typography fontWeight={500} variant="body1">
             New to PoshSub?
           </Typography>
-          <Link href="/signup" variant="body1">
-            {" "}
-            Click here to sign up!
+          <Link href="/signup" variant="body1" sx={{ ml: 1 }}>
+            Click here to sign up
           </Link>
         </Box>
 
-        <FormGroup sx={{ textAlign: "left" }}>
+        <FormGroup sx={{ textAlign: "left", my: 2 }}>
           <InputBox>
             <Label> Email </Label>
             <TextField fullWidth />
@@ -46,7 +45,7 @@ export function SignIn() {
           >
             Log in
           </Button>
-          <Link href="/forgotPassword" sx={{ textAlign: "center", mt: 2 }}>
+          <Link href="/PasswordReset" sx={{ textAlign: "center", mt: 2 }}>
             Forgot Password?
           </Link>
         </FormGroup>

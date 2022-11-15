@@ -21,7 +21,7 @@ import {
   AdminNotification,
   AdminReferral,
   AdminReferralToSubscribe,
-  AdminRewards,
+  AdminRewardsMileStones,
   AdminRewardsToWinner,
   AdminRewardToDetails,
   AdminSubCategory,
@@ -109,36 +109,16 @@ const router = createBrowserRouter([
 
       //admin
       {
-        path: "/admin/categories",
-        element: <AdminCategories />,
-      },
-      {
-        path: "/admin/dashboard",
-        element: <AdminDashboard />,
-      },
-      {
-        path: "/admin/listingToSubscribers",
-        element: <AdminListingToSubscribers />,
-      },
-      {
-        path: "/admin/listing",
-        element: <AdminListing />,
+        path: "/admin/newReferralPrice",
+        element: <AdminNewReferralPrice />,
       },
       {
         path: "/admin/newCategory",
         element: <AdminNewCategory />,
       },
       {
-        path: "/admin/newlisting",
-        element: <AdminNewlisting />,
-      },
-      {
         path: "/admin/newNotifictaion",
         element: <AdminNewNotifictaion />,
-      },
-      {
-        path: "/admin/newReferralPrice",
-        element: <AdminNewReferralPrice />,
       },
       {
         path: "/admin/newReward",
@@ -157,6 +137,26 @@ const router = createBrowserRouter([
         element: <AdminNotifyButton />,
       },
       {
+        path: "/admin/categories",
+        element: <AdminCategories />,
+      },
+      {
+        path: "/admin/dashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "/admin/listingToSubscribers",
+        element: <AdminListingToSubscribers />,
+      },
+      {
+        path: "/admin/listing",
+        element: <AdminListing />,
+      },
+      {
+        path: "/admin/newlisting",
+        element: <AdminNewlisting />,
+      },
+      {
         path: "/admin/referralToSubscribe",
         element: <AdminReferralToSubscribe />,
       },
@@ -173,8 +173,8 @@ const router = createBrowserRouter([
         element: <AdminRewardsToWinner />,
       },
       {
-        path: "/admin/rewards",
-        element: <AdminRewards />,
+        path: "/admin/rewards-milestones",
+        element: <AdminRewardsMileStones />,
       },
       {
         path: "/admin/subCategory",
