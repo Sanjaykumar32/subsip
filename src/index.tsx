@@ -140,22 +140,22 @@ const router = createBrowserRouter([
         path: "/admin/categories",
         element: <AdminCategories />,
       },
-      // {
-      //   path: "/admin/dashboard",
-      //   element: <AdminDashboard />,
-      // },
-      // {
-      //   path: "/admin/listingToSubscribers",
-      //   element: <AdminListingToSubscribers />,
-      // },
+      {
+        path: "/admin/dashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "/admin/listingToSubscribers",
+        element: <AdminListingToSubscribers />,
+      },
       {
         path: "/admin/listing",
         element: <AdminListing />,
       },
-      // {
-      //   path: "/admin/newlisting",
-      //   element: <AdminNewlisting />,
-      // },
+      {
+        path: "/admin/newlisting",
+        element: <AdminNewlisting />,
+      },
       {
         path: "/admin/referralToSubscribe",
         element: <AdminReferralToSubscribe />,
@@ -164,10 +164,10 @@ const router = createBrowserRouter([
         path: "/admin/referral",
         element: <AdminReferral />,
       },
-      // {
-      //   path: "/admin/rewardToDetails",
-      //   element: <AdminRewardToDetails />,
-      // },
+      {
+        path: "/admin/rewardToDetails",
+        element: <AdminRewardToDetails />,
+      },
       // {
       //   path: "/admin/rewardsToWinner",
       //   element: <AdminRewardsToWinner />,
