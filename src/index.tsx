@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { store } from "data";
 import { theme } from "theme";
 
-import { NavigationBar } from "./layouts";
+import { AuthLayout, NavigationBar } from "./layouts";
 import {
   AdminCategories,
   AdminDashboard,
@@ -51,7 +51,7 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <NavigationBar />,
+    element: <AuthLayout />,
     errorElement: <div> 404 Page Not Found </div>,
     children: [
       // auth
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/passwordReset",
+        path: "/forgotPassword",
         element: <PasswordReset />,
       },
       {
