@@ -78,7 +78,7 @@ export function AdminRewardsToWinner() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: "white" }}>
-                  Name
+                  Email
                 </Typography>
 
                 <Typography variant="h6" sx={{ color: "white" }}>
@@ -121,7 +121,6 @@ export function AdminRewardsToWinner() {
                         />
                       </ListItem>
                     </List>
-
                     <List>
                       <ListItem sx={{ color: "white" }}>
                         <Button
