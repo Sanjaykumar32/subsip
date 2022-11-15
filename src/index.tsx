@@ -168,10 +168,10 @@ const router = createBrowserRouter([
         path: "/admin/rewardToDetails",
         element: <AdminRewardToDetails />,
       },
-      // {
-      //   path: "/admin/rewardsToWinner",
-      //   element: <AdminRewardsToWinner />,
-      // },
+      {
+        path: "/admin/rewardsToWinner",
+        element: <AdminRewardsToWinner />,
+      },
       {
         path: "/admin/rewards-milestones",
         element: <AdminRewardsMileStones />,
