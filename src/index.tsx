@@ -106,7 +106,6 @@ const router = createBrowserRouter([
         path: "/location/:id",
         element: <LocationPage />,
       },
-
       //admin
       {
         path: "/admin/newReferralPrice",
