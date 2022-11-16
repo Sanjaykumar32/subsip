@@ -38,8 +38,9 @@ export function SignUp() {
         </FormGroup>
         <Box sx={{ mt: 3 }}>
           <Typography variant="caption" fontWeight={600}>
-            By clicking "Create your account", you are creating a PoshSub
-            account and agree to PoshSub's Terms of Service and Privacy Policy.
+            By clicking &quot;Create your account&quot;, you are creating a
+            PoshSub account and agree to PoshSub&apos;s Terms of Service and
+            Privacy Policy.
           </Typography>
           <Box sx={{ mt: 2 }}>
             <Link href="/signin">Already have an account ?</Link>

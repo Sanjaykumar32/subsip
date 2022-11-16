@@ -98,6 +98,7 @@ export function AdminListing() {
                 })
                 .map((element) => (
                   <Box
+                    key={element.name}
                     sx={{
                       display: "flex",
                       justifyContent: "space-around",

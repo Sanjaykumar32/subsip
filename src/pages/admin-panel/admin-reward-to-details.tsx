@@ -1,15 +1,11 @@
 import React from "react";
 import {
-  Avatar,
   Box,
   Button,
   Container,
-  FormControl,
   Grid,
   List,
   ListItem,
-  MenuItem,
-  Select,
   Typography,
 } from "@mui/material";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
@@ -77,6 +73,7 @@ export function AdminRewardToDetails() {
                 })
                 .map((element) => (
                   <Box
+                    key={element.name}
                     sx={{
                       display: "flex",
                       justifyContent: "space-around",

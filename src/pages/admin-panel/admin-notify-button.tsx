@@ -3,20 +3,15 @@ import {
   Box,
   Button,
   Container,
-  FormControl,
   Grid,
   IconButton,
-  MenuItem,
-  Select,
   TextareaAutosize,
   TextField,
   Typography,
 } from "@mui/material";
 import {
   faAngleLeft,
-  faCalendar,
   faCalendarDays,
-  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminSidebar } from "components";

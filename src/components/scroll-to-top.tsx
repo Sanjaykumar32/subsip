@@ -1,3 +1,4 @@
+import React from "react";
 import { Fab, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
@@ -14,13 +15,13 @@ export function ScrollToTop() {
       }
 
       setIsVisible(false);
-    }
+    };
 
-    window.addEventListener("scroll", onListen)
+    window.addEventListener("scroll", onListen);
 
     return () => {
       window.removeEventListener("scroll", onListen);
-    }
+    };
   }, []);
 
   if (!isVisible) {
@@ -28,11 +29,15 @@ export function ScrollToTop() {
   }
 
   return (
-    <Tooltip title="Scroll to Top" arrow >
-      <Fab onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} size="small" sx={{ position: "fixed", bottom: "25px", right: "15px" }} color="secondary"  >
+    <Tooltip title="Scroll to Top" arrow>
+      <Fab
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        size="small"
+        sx={{ position: "fixed", bottom: "25px", right: "15px" }}
+        color="secondary"
+      >
         <FontAwesomeIcon icon={faChevronUp} size="lg" />
       </Fab>
     </Tooltip>
-
   );
 }

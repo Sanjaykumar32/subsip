@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Typography, TypographyProps, styled } from "@mui/material";
 
 export const InputBox = styled(Box)(({ theme }) => ({

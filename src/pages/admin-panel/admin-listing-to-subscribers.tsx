@@ -98,6 +98,7 @@ export function AdminListingToSubscribers() {
                 })
                 .map((element) => (
                   <Box
+                    key={element.name}
                     sx={{
                       display: "flex",
                       justifyContent: "space-around",

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { Logo } from "components/logo";
 import { Box, Typography, IconButton, styled, Grid } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -66,8 +66,8 @@ export function Social() {
         Reward for Subscribers
       </Typography>
       <IconList container>
-        {socialIcons.map((data) => (
-          <Grid item>
+        {socialIcons.map((data, index: number) => (
+          <Grid item key={`Social-${data.link}-${index}`}>
             <IconButton onClick={() => (window.location.href = data.link)}>
               <FontAwesomeIcon
                 style={{ width: "32px", height: "32px" }}

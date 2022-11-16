@@ -1,17 +1,24 @@
-import { forwardRef } from 'react';
-import { LinkProps } from '@mui/material/Link';
-import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
-import { ThemeOptions } from '@mui/material';
+import React, { forwardRef } from "react";
+import { LinkProps } from "@mui/material/Link";
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from "react-router-dom";
+import { ThemeOptions } from "@mui/material";
 
-const LinkBehavior = forwardRef<
-  HTMLAnchorElement,
-  Omit<RouterLinkProps, 'to'> & { href: RouterLinkProps['to'] }
->((props, ref) => {
-  const { href, ...other } = props;
-  // Map href (MUI) -> to (react-router)
-  return <RouterLink ref={ref} to={href} {...other} />;
-});
+type LinkBehaviorType = Omit<RouterLinkProps, "to"> & {
+  href: RouterLinkProps["to"];
+};
 
+const LinkBehavior = forwardRef<HTMLAnchorElement, LinkBehaviorType>(
+  (props, ref) => {
+    const { href, ...other } = props;
+    // Map href (MUI) -> to (react-router)
+    return <RouterLink ref={ref} to={href} {...other} />;
+  }
+);
+
+LinkBehavior.displayName = "LinkBehaviour";
 
 export const LinkComponent: ThemeOptions["components"] = {
   MuiLink: {
@@ -23,8 +30,8 @@ export const LinkComponent: ThemeOptions["components"] = {
         textDecoration: "none",
         fontWeight: 500,
         color: theme.palette.secondary.main,
-      })
-    }
+      }),
+    },
   },
   MuiButtonBase: {
     defaultProps: {

@@ -11,7 +11,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.11",
+    "@mui/material": "^5.10.14",
     "@mui/system": "^5.10.14",
     "@reduxjs/toolkit": "^1.8.6",
     "npm-check-updates": "^16.3.15",
@@ -23,6 +23,7 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
     "typescript": "^4.8.4",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^3.0.4"
   },
   "devDependencies": {
@@ -32,7 +33,11 @@
     "@types/jest": "^29.2.0",
     "@types/node": "^18.11.7",
     "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8"
+    "@types/react-dom": "^18.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "eslint": "^8.27.0",
+    "eslint-plugin-react": "^7.31.10"
   },
   "scripts": {
     "start": "react-scripts start",

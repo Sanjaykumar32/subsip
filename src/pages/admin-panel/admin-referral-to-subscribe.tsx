@@ -100,6 +100,7 @@ export function AdminReferralToSubscribe() {
                 })
                 .map((element) => (
                   <Box
+                    key={element.name}
                     sx={{
                       display: "flex",
                       justifyContent: "space-around",

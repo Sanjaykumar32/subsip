@@ -5,18 +5,12 @@ import {
   Container,
   FormControl,
   Grid,
-  IconButton,
   MenuItem,
   Select,
-  TextareaAutosize,
   TextField,
   Typography,
 } from "@mui/material";
-import {
-  faAngleLeft,
-  faCalendarDays,
-  faLocationDot,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminSidebar } from "components";
 import { theme } from "theme";

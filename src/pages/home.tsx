@@ -48,7 +48,7 @@ export function Home() {
           {Array(12)
             .fill(data)
             .map((data) => (
-              <Box sx={{ px: 7, pt: 7, pb: 3 }}>
+              <Box key={data.name} sx={{ px: 7, pt: 7, pb: 3 }}>
                 <Grid container spacing={2}>
                   <Grid
                     item
@@ -103,7 +103,7 @@ export function Home() {
           {Array(15)
             .fill(data)
             .map((data) => (
-              <Grid item sm={2.3}>
+              <Grid key={data.name} item sm={2.3}>
                 <LocationCard1 data={data} />
               </Grid>
             ))}

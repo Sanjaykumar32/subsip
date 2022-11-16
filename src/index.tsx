@@ -50,34 +50,39 @@ const root = ReactDOM.createRoot(
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/auth",
     element: <AuthLayout />,
     errorElement: <div> 404 Page Not Found </div>,
     children: [
       // auth
       {
-        path: "/signIn",
+        path: "/auth/signIn",
         element: <SignIn />,
       },
       {
-        path: "/signUp",
+        path: "/auth/signUp",
         element: <SignUp />,
       },
       {
-        path: "/forgotPassword",
+        path: "/auth/forgotPassword",
         element: <PasswordReset />,
       },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-
+    ],
+  },
+  {
+    path: "/",
+    element: <NavigationBar />,
+    errorElement: <div> Some Error Occured </div>,
+    children: [
       // pages
       {
         path: "/home",
         element: <Home />,
       },
-
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
       {
         path: "/clickOnCategory",
         element: <ClickOnCategory />,
@@ -106,7 +111,13 @@ const router = createBrowserRouter([
         path: "/location/:id",
         element: <LocationPage />,
       },
-
+    ],
+  },
+  {
+    path: "/admin",
+    element: <NavigationBar />,
+    errorElement: <div> Some Error Occured </div>,
+    children: [
       //admin
       {
         path: "/admin/newReferralPrice",
@@ -189,14 +200,12 @@ const router = createBrowserRouter([
 ]);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

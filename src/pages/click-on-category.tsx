@@ -40,7 +40,7 @@ export function ClickOnCategory() {
           {Array(12)
             .fill(data)
             .map((data) => (
-              <Grid item sm={2.3}>
+              <Grid key={data.title} item sm={2.3}>
                 <Card
                   sx={{
                     maxWidth: "251px",

@@ -3,17 +3,15 @@ import {
   Box,
   Button,
   Container,
-  Divider,
   FormControl,
   Grid,
   List,
   ListItem,
   MenuItem,
   Select,
-  TextField,
   Typography,
 } from "@mui/material";
-import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminSidebar } from "components";
 import { theme } from "theme";
@@ -92,6 +90,7 @@ export function AdminNotification() {
                 })
                 .map((element) => (
                   <Box
+                    key={element.name}
                     sx={{
                       display: "flex",
                       justifyContent: "space-around",

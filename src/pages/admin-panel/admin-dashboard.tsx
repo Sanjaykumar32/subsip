@@ -1,17 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  Grid,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { AdminSidebar } from "components";
 import { theme } from "theme";
 

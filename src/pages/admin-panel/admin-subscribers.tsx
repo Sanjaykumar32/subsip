@@ -12,11 +12,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import {
-  faAngleLeft,
-  faCertificate,
-  faPen,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCertificate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminSidebar } from "components";
 import { theme } from "theme";
@@ -104,6 +100,7 @@ export function AdminSubscribers() {
                 })
                 .map((element) => (
                   <Box
+                    key={element.name}
                     sx={{
                       display: "flex",
                       justifyContent: "space-around",

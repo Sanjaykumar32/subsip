@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import { RewardStatusEnum } from "enum";
 import { MuiColor } from "type";

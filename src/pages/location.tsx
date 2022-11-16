@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Container, useTheme } from "@mui/material";
 import { Card, Grid, Typography } from "@mui/material";
 import {
@@ -7,11 +8,9 @@ import {
   Info,
   Title,
 } from "components/location/location-card";
-import { useParams } from "react-router-dom";
 
 export function LocationPage() {
   const theme = useTheme();
-  const { id } = useParams();
 
   const name = `India Gate Restaurant`;
   const location = "Seattle, WA";
@@ -19,8 +18,6 @@ export function LocationPage() {
     "Welcome to the India Gate Restaurant where we offer unique food.";
   const subscribers = 42.2;
   const obj = { name, location, description, subscribers } as ILocationProps;
-
-  console.log(id);
 
   return (
     <Container maxWidth="lg" sx={{ my: 8 }}>
