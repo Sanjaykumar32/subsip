@@ -13,6 +13,8 @@ import {
   InputAdornment,
   IconButton,
   Badge,
+  List,
+  ListItem,
 } from "@mui/material";
 import { FooterContainer, Links, Logo, ScrollToTop, Social } from "components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,8 +26,27 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "@mui/material";
 import { Box } from "@mui/material";
+import { RoutePathEnum } from "enum";
 
 export function NavigationBar() {
+  const links = [
+    {
+      name: "Restaurant",
+      url: RoutePathEnum.RESTAURANT,
+    },
+    {
+      name: "Home Services",
+      url: RoutePathEnum.RESTAURANT,
+    },
+    {
+      name: "Auto Services",
+      url: RoutePathEnum.RESTAURANT,
+    },
+    {
+      name: "More",
+      url: RoutePathEnum.RESTAURANT,
+    },
+  ];
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
       <ScrollToTop />
@@ -93,6 +114,18 @@ export function NavigationBar() {
             </Box>
           </Box>
         </Toolbar>
+        <Container maxWidth="xl">
+          <List sx={{ display: "flex" }}>
+            {links.map((res) => (
+              <ListItem
+                key={res.name}
+                sx={{ maxWidth: "150px", width: "fit-content" }}
+              >
+                {res.name}
+              </ListItem>
+            ))}
+          </List>
+        </Container>
       </AppBar>
       <Outlet />
       <FooterContainer>
@@ -101,7 +134,7 @@ export function NavigationBar() {
             <Social />
           </Grid>
           <Grid item xs={12} md={8}>
-            <Links />
+            <Link />
           </Grid>
         </Grid>
       </FooterContainer>
