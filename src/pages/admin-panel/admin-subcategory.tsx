@@ -15,6 +15,8 @@ import { GridColDef } from "@mui/x-data-grid";
 import { Edit } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
 import { theme } from "theme";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function AdminSubCategory() {
   const columns: GridColDef[] = [
@@ -23,7 +25,6 @@ export function AdminSubCategory() {
       headerName: "Name",
       width: 200,
     },
-    { field: "Subcategory", headerName: "Subcategory", width: 200 },
     {
       field: "Actions",
       headerName: "Actions",
@@ -50,122 +51,137 @@ export function AdminSubCategory() {
   const rows = [
     {
       id: 1,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
+      Name: "Pest control",
       Actions: "Edit",
     },
     {
       id: 2,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
+      Name: "Pest control",
       Actions: "Edit",
     },
     {
       id: 3,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
+      Name: "Pest control",
       Actions: "Edit",
     },
     {
       id: 4,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
+      Name: "Pest control",
       Actions: "Edit",
     },
     {
       id: 5,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
+      Name: "Pest control",
       Actions: "Edit",
     },
     {
       id: 6,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
+      Name: "Pest control",
       Actions: "Edit",
     },
     {
       id: 7,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
+      Name: "Pest control",
       Actions: "Edit",
     },
     {
       id: 8,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
+      Name: "Pest control",
       Actions: "Edit",
     },
     {
       id: 9,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
+      Name: "Pest control",
       Actions: "Edit",
     },
   ];
 
   return (
     <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
-      <Grid container spacing={2}>
-        <Container>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", my: 1 }}>
-            <Button
-              size="large"
-              sx={{
-                fontWeight: 800,
-                width: "120px",
-                textAlign: "center",
-                height: "35px",
-              }}
-              color="info"
-              variant="contained"
-            >
-              New Listing
-            </Button>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "baseline",
-              justifyContent: "flex-end",
-              my: 2,
-            }}
-          >
-            <Typography variant="caption" sx={{ mr: 1 }}>
-              Sort By:
-            </Typography>
-            <FormControl variant="standard">
-              <Select
-                labelId="sort-by-select-label"
-                id="sort-by-simple-select"
-                value="Newest"
-                size="small"
-                sx={{ fontWeight: 500 }}
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Box>
+              <Button
+                size="large"
+                sx={{
+                  color: "black",
+                }}
+                startIcon={
+                  <FontAwesomeIcon
+                    icon={faAngleLeft}
+                    size="2x"
+                    color={theme.palette.info.main}
+                  />
+                }
               >
-                <MenuItem value={"Newest"}>
-                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                    Newest
-                  </Typography>
-                </MenuItem>
-                <MenuItem value={"Oldest"}>
-                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                    Oldest
-                  </Typography>
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-            />
-          </Box>
-        </Container>
-      </Grid>
+                Back
+              </Button>
+            </Box>
+            <Box>
+              <Typography variant="body1" sx={{ fontWeight: 800, my: 2 }}>
+                Category: Home services
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                size="large"
+                sx={{
+                  fontWeight: 800,
+                  textAlign: "center",
+                  height: "35px",
+                }}
+                color="info"
+                variant="contained"
+              >
+                New subcategory
+              </Button>
+            </Box>
+
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "baseline",
+                justifyContent: "flex-end",
+                my: 2,
+              }}
+            >
+              <Typography variant="caption" sx={{ mr: 1 }}>
+                Sort By:
+              </Typography>
+              <FormControl variant="standard">
+                <Select
+                  labelId="sort-by-select-label"
+                  id="sort-by-simple-select"
+                  value="Newest"
+                  size="small"
+                  sx={{ fontWeight: 500 }}
+                >
+                  <MenuItem value={"Newest"}>
+                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                      Newest
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                    <Typography variant="body2">Oldest</Typography>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+        </Grid>
+
+        <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }

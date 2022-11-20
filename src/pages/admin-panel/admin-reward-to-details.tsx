@@ -2,127 +2,189 @@ import React from "react";
 import {
   Box,
   Button,
+  Chip,
   Container,
+  FormControl,
   Grid,
-  List,
-  ListItem,
+  MenuItem,
+  Select,
   Typography,
 } from "@mui/material";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+
+import { GridColDef } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminSidebar } from "components";
 import { theme } from "theme";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import { Edit } from "@mui/icons-material";
 
 export function AdminRewardToDetails() {
+  const columns: GridColDef[] = [
+    {
+      field: "Name",
+      headerName: "Name",
+      width: 200,
+    },
+    {
+      field: "Reward",
+      headerName: "Rewards",
+      width: 200,
+      renderCell: (params) => <Chip label={params.value} color="info" />,
+    },
+    {
+      field: "Status",
+      headerName: "Status",
+      width: 200,
+      renderCell: (params) => <Chip label={params.value} color="success" />,
+    },
+    {
+      field: "Actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => (
+        <Button
+          size="small"
+          endIcon={<Edit />}
+          variant="rounded"
+          sx={{
+            ".MuiButton-iconSizeSmall": { size: "10px" },
+            backgroundColor: theme.palette.grey[300],
+            color: theme.palette.common.black,
+          }}
+        >
+          {params.value}
+        </Button>
+      ),
+    },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      Name: "50 Gift Card",
+      Reward: "5/100 claimed",
+      Status: "Active",
+      Actions: "Deactivate/edit",
+    },
+    {
+      id: 2,
+      Name: "50 Gift Card",
+      Reward: "5/100 claimed",
+      Status: "Active",
+      Actions: "Deactivate/edit",
+    },
+    {
+      id: 3,
+      Name: "50 Gift Card",
+      Reward: "5/100 claimed",
+      Status: "Active",
+      Actions: "Deactivate/edit",
+    },
+    {
+      id: 4,
+      Name: "50 Gift Card",
+      Reward: "5/100 claimed",
+      Status: "Active",
+      Actions: "Deactivate/edit",
+    },
+    {
+      id: 5,
+      Name: "50 Gift Card",
+      Reward: "5/100 claimed",
+      Status: "Active",
+      Actions: "Deactivate/edit",
+    },
+    {
+      id: 6,
+      Name: "50 Gift Card",
+      Reward: "5/100 claimed",
+      Status: "Active",
+      Actions: "Deactivate/edit",
+    },
+    {
+      id: 7,
+      Name: "50 Gift Card",
+      Reward: "5/100 claimed",
+      Status: "Active",
+      Actions: "Deactivate/edit",
+    },
+    {
+      id: 8,
+      Name: "50 Gift Card",
+      Reward: "5/100 claimed",
+      Status: "Active",
+      Actions: "Deactivate/edit",
+    },
+    {
+      id: 9,
+      Name: "50 Gift Card",
+      Reward: "5/100 claimed",
+      Status: "Active",
+      Actions: "Deactivate/edit",
+    },
+  ];
+
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
-      <Grid container>
-        <Grid item xs={12} md={2}>
-          <AdminSidebar />
-        </Grid>
-        <Grid item xs={12} md={10}>
-          <Container sx={{ width: "100%", height: "100%" }}>
-            <Box
-              sx={{
-                ml: 90,
-              }}
-            >
+    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Box>
+              <Button
+                size="large"
+                sx={{
+                  color: "black",
+                }}
+                startIcon={
+                  <FontAwesomeIcon
+                    icon={faAngleLeft}
+                    size="2x"
+                    color={theme.palette.info.main}
+                  />
+                }
+              >
+                Back
+              </Button>
+            </Box>
+            <Box>
+              <Typography variant="body1" sx={{ fontWeight: 800, my: 1 }}>
+                India Gate Restaurant
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
                 size="large"
                 sx={{
                   fontWeight: 800,
-                  backgroundColor: theme.palette.info.main,
-                  color: "white",
+                  width: "120px",
+                  textAlign: "center",
+                  height: "35px",
                 }}
+                color="info"
                 variant="contained"
               >
                 New Reward
               </Button>
             </Box>
-            <Box
-              sx={{
-                backgroundColor: "black",
-                my: 2,
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}
-              >
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Name
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Rewards
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Status
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Actions
-                </Typography>
-              </Box>
-
-              {Array(1)
-                .fill({
-                  name: "50 Gift Card",
-                  rewards: "5/100 claimed",
-                  status: "Active",
-                })
-                .map((element) => (
-                  <Box
-                    key={element.name}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      alignItems: "center",
-                      my: 1,
-                    }}
-                  >
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        {element.name}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: theme.palette.info.light }}>
-                        {element.rewards}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem
-                        sx={{
-                          color: theme.palette.success.light,
-                          fontWeight: 200,
-                        }}
-                      >
-                        {element.status}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        <Button
-                          size="small"
-                          sx={{
-                            fontWeight: 500,
-                            backgroundColor: "white",
-                            color: "black",
-                          }}
-                          endIcon={<FontAwesomeIcon icon={faPen} size="sm" />}
-                          variant="rounded"
-                        >
-                          Edit
-                        </Button>
-                      </ListItem>
-                    </List>
-                  </Box>
-                ))}
-            </Box>
-          </Container>
+          </Grid>
         </Grid>
-      </Grid>
+        <Box
+          style={{
+            height: 400,
+            width: "100%",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }
