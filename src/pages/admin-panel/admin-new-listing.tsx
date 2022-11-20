@@ -110,10 +110,7 @@ export function AdminNewlisting() {
   const ref = useRef<HTMLInputElement>(null);
 
   return (
-    <Container maxWidth="md" disableGutters sx={{ p: 4 }}>
-      {/* <Typography variant="h6" sx={{ ml: 3 }}>
-        Back
-      </Typography> */}
+    <Container maxWidth="md" disableGutters>
       <FontAwesomeIcon
         icon={faAngleLeft}
         size="lg"
