@@ -40,7 +40,14 @@ export function AdminListingToSubscribers() {
       headerName: "Actions",
       width: 110,
       renderCell: (params) => (
-        <Button size="small" variant="rounded" color="error">
+        <Button
+          size="small"
+          variant="rounded"
+          sx={{
+            backgroundColor: theme.palette.grey[300],
+            color: theme.palette.error.main,
+          }}
+        >
           {params.value}
         </Button>
       ),
@@ -113,7 +120,6 @@ export function AdminListingToSubscribers() {
               <Button
                 size="large"
                 sx={{
-                  fontWeight: 600,
                   color: "black",
                 }}
                 startIcon={
@@ -177,11 +183,11 @@ export function AdminListingToSubscribers() {
                   sx={{ fontWeight: 500 }}
                 >
                   <MenuItem value={"Newest"}>
-                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
                       Newest
                     </Typography>
                   </MenuItem>
-                  <MenuItem value={"Oldest"}>
+                  <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
                     <Typography variant="body2">Oldest</Typography>
                   </MenuItem>
                 </Select>
@@ -193,7 +199,7 @@ export function AdminListingToSubscribers() {
           style={{
             height: 400,
             width: "100%",
-            marginTop: "10px",
+            marginTop: "5px",
           }}
         >
           <DataGrid

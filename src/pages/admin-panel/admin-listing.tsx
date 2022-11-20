@@ -147,6 +147,9 @@ export function AdminListing() {
               size="large"
               sx={{
                 fontWeight: 800,
+                width: "120px",
+                textAlign: "center",
+                height: "35px",
               }}
               color="info"
               variant="contained"
@@ -160,26 +163,34 @@ export function AdminListing() {
               display: "flex",
               alignItems: "baseline",
               justifyContent: "flex-end",
-              my: 2,
+              my: 1,
             }}
           >
-            <Typography variant="body2" sx={{ ml: 2 }}>
+            <Typography variant="caption" sx={{ mr: 1 }}>
               Sort By:
             </Typography>
             <FormControl variant="standard">
               <Select
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                value="Recommended "
+                value="Recommended"
                 size="small"
-                sx={{ ml: 1, fontWeight: 600 }}
+                sx={{ fontWeight: 500 }}
               >
-                <MenuItem value={"Recommended "}>Recommended </MenuItem>
-                <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                <MenuItem value={"Recommended"}>
+                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    Recommended
+                  </Typography>
+                </MenuItem>
+                <MenuItem value={"Oldest"}>
+                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    Oldest
+                  </Typography>
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
-          <Box style={{ height: 400, width: "100%" }}>
+          <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
             <DataGrid
               rows={rows}
               columns={columns}
