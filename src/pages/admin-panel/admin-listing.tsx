@@ -6,39 +6,37 @@ import {
   Container,
   FormControl,
   Grid,
-  List,
-  ListItem,
   MenuItem,
   Select,
   Typography,
 } from "@mui/material";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { theme } from "theme";
+
+import { GridColDef } from "@mui/x-data-grid";
+import { Edit } from "@mui/icons-material";
+import { DataGrid } from "@mui/x-data-grid";
 
 export function AdminListing() {
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 70 },
+    {
+      field: "Profile",
+      headerName: "Profile",
+      width: 70,
+      renderCell: (params) => {
+        return (
+          <Avatar
+            sx={{
+              height: "30px",
+              width: "30px",
+            }}
+            src={params.value}
+          />
+        );
+      },
+    },
     {
       field: "Name",
       headerName: "Name",
       width: 200,
-      renderCell: (params) => {
-        return (
-          <Box sx={{ display: "flex" }}>
-            <Avatar
-              sx={{
-                height: "30px",
-                width: "30px",
-                mr: 1,
-              }}
-            />
-
-            {params.value}
-          </Box>
-        );
-      },
     },
     { field: "Subscribers", headerName: "Subscribers", width: 200 },
     {
@@ -54,8 +52,9 @@ export function AdminListing() {
         <Box className="tableButton">
           <Button
             size="small"
-            endIcon={<FontAwesomeIcon icon={faPen} size="sm" />}
+            endIcon={<Edit />}
             variant="rounded"
+            sx={{ ".MuiButton-iconSizeSmall": { size: "10px" } }}
           >
             {params.value}
           </Button>
@@ -67,6 +66,7 @@ export function AdminListing() {
   const rows = [
     {
       id: 1,
+      Profile: "Profile",
       Name: "India Gate Restaurant",
       Subscribers: "46.2K subscribers",
       Location: "Seattle, WA",
@@ -74,6 +74,7 @@ export function AdminListing() {
     },
     {
       id: 2,
+      Profile: "Profile",
       Name: "India Gate Restaurant",
       Subscribers: "46.2K subscribers",
       Location: "Seattle, WA",
@@ -81,6 +82,7 @@ export function AdminListing() {
     },
     {
       id: 3,
+      Profile: "Profile",
       Name: "India Gate Restaurant",
       Subscribers: "46.2K subscribers",
       Location: "Seattle, WA",
@@ -88,6 +90,7 @@ export function AdminListing() {
     },
     {
       id: 4,
+      Profile: "Profile",
       Name: "India Gate Restaurant",
       Subscribers: "46.2K subscribers",
       Location: "Seattle, WA",
@@ -95,6 +98,7 @@ export function AdminListing() {
     },
     {
       id: 5,
+      Profile: "Profile",
       Name: "India Gate Restaurant",
       Subscribers: "46.2K subscribers",
       Location: "Seattle, WA",
@@ -102,6 +106,7 @@ export function AdminListing() {
     },
     {
       id: 6,
+      Profile: "Profile",
       Name: "India Gate Restaurant",
       Subscribers: "46.2K subscribers",
       Location: "Seattle, WA",
@@ -109,6 +114,7 @@ export function AdminListing() {
     },
     {
       id: 7,
+      Profile: "Profile",
       Name: "India Gate Restaurant",
       Subscribers: "46.2K subscribers",
       Location: "Seattle, WA",
@@ -116,6 +122,7 @@ export function AdminListing() {
     },
     {
       id: 8,
+      Profile: "Profile",
       Name: "India Gate Restaurant",
       Subscribers: "46.2K subscribers",
       Location: "Seattle, WA",
@@ -123,6 +130,7 @@ export function AdminListing() {
     },
     {
       id: 9,
+      Profile: "Profile",
       Name: "India Gate Restaurant",
       Subscribers: "46.2K subscribers",
       Location: "Seattle, WA",
@@ -131,59 +139,55 @@ export function AdminListing() {
   ];
 
   return (
-    <Container>
-      <Grid container>
-        <Grid item xs={12} md={10}>
-          <Container>
-            {/* <Box
+    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
+      <Grid container spacing={2}>
+        <Container>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", my: 1 }}>
+            <Button
+              size="large"
               sx={{
-                ml: 90,
+                fontWeight: 800,
               }}
+              color="info"
+              variant="contained"
             >
-              <Button
-                size="large"
-                sx={{
-                  fontWeight: 800,
-                  backgroundColor: theme.palette.info.main,
-                  color: "white",
-                }}
-                variant="contained"
+              New Listing
+            </Button>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "flex-end",
+              my: 2,
+            }}
+          >
+            <Typography variant="body2" sx={{ ml: 2 }}>
+              Sort By:
+            </Typography>
+            <FormControl variant="standard">
+              <Select
+                labelId="sort-by-select-label"
+                id="sort-by-simple-select"
+                value="Recommended "
+                size="small"
+                sx={{ ml: 1, fontWeight: 600 }}
               >
-                New Listing
-              </Button>
-            </Box>
-
-            <Box
-              sx={{ display: "flex", alignItems: "baseline", ml: 80, my: 2 }}
-            >
-              <Typography variant="body2" fontWeight={600} sx={{ ml: 2 }}>
-                Sort By:
-              </Typography>
-              <FormControl variant="standard">
-                <Select
-                  variant="standard"
-                  labelId="sort-by-select-label"
-                  id="sort-by-simple-select"
-                  value="Recommended "
-                  size="small"
-                  sx={{ ml: 1 }}
-                >
-                  <MenuItem value={"Recommended "}>Recommended </MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
-                </Select>
-              </FormControl>
-            </Box> */}
-
-            <Box style={{ height: 400, width: "100%" }}>
-              <DataGrid
-                rows={rows}
-                columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-              />
-            </Box>
-          </Container>
-        </Grid>
+                <MenuItem value={"Recommended "}>Recommended </MenuItem>
+                <MenuItem value={"Oldest"}>Oldest</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Box style={{ height: 400, width: "100%" }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+            />
+          </Box>
+        </Container>
       </Grid>
     </Container>
   );
