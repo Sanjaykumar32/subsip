@@ -146,6 +146,9 @@ export function AdminListingToSubscribers() {
                 size="large"
                 sx={{
                   fontWeight: 800,
+                  width: "120px",
+                  textAlign: "center",
+                  height: "35px",
                 }}
                 color="info"
                 variant="contained"
