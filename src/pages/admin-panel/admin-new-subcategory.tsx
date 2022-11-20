@@ -7,112 +7,193 @@ import {
   Grid,
   MenuItem,
   Select,
-  TextField,
   Typography,
-  useTheme,
 } from "@mui/material";
+
+import { GridColDef } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { AdminSidebar } from "components";
+import { theme } from "theme";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import { Edit } from "@mui/icons-material";
 
 export function AdminNewSubCategory() {
-  const theme = useTheme();
+  const columns: GridColDef[] = [
+    {
+      field: "Name",
+      headerName: "Name",
+      width: 200,
+    },
+    {
+      field: "Actions",
+      headerName: "Actions",
+      width: 110,
+      renderCell: (params) => (
+        <Button
+          size="small"
+          endIcon={<Edit />}
+          variant="rounded"
+          sx={{
+            ".MuiButton-iconSizeSmall": { size: "10px" },
+            backgroundColor: theme.palette.grey[300],
+            color: theme.palette.common.black,
+          }}
+        >
+          {params.value}
+        </Button>
+      ),
+    },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      Name: "Jake@gmail.com",
+      Actions: "Edit",
+    },
+    {
+      id: 2,
+      Name: "Hik@hik.com",
+      Actions: "Edit",
+    },
+    {
+      id: 3,
+      Name: "Abi@abi.com",
+      Actions: "Edit",
+    },
+    {
+      id: 4,
+      Name: "Abe@abe.com",
+      Actions: "Edit",
+    },
+    {
+      id: 5,
+      Name: "Jake@gmail.com",
+      Actions: "Edit",
+    },
+    {
+      id: 6,
+      Name: "Abe@abe.com",
+      Actions: "Edit",
+    },
+    {
+      id: 7,
+      Name: "Jake@gmail.com",
+      Actions: "Edit",
+    },
+    {
+      id: 8,
+      Name: "Hik@hik.com",
+      Actions: "Edit",
+    },
+    {
+      id: 9,
+      Name: "Abe@abe.com",
+      Actions: "Edit",
+    },
+  ];
 
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
-      <Grid container>
-        <Grid item xs={12} md={2}>
-          <AdminSidebar />
-        </Grid>
-        <Grid item xs={12} md={10}>
-          <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
-            <FontAwesomeIcon
-              icon={faAngleLeft}
-              size="lg"
-              color={theme.palette.info.main}
-            />
-            <Button
-              size="large"
-              sx={{
-                fontWeight: 800,
-                color: "black",
-              }}
-            >
-              Back
-            </Button>
-
-            <Box sx={{ my: 2 }}>
-              <FormControl sx={{ width: 300 }}>
-                <Box sx={{ display: "flex" }}>
-                  <Typography variant="body2" fontWeight={500}>
-                    Select Business Category
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    fontWeight={400}
-                    sx={{ ml: 2, color: theme.palette.grey[400] }}
-                  >
-                    *required
-                  </Typography>
-                </Box>
-                <Select
-                  fullWidth
-                  variant="outlined"
-                  labelId="sort-by-select-label"
-                  id="sort-by-simple-select"
-                  size="medium"
-                  sx={{ my: 1 }}
-                >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
-                </Select>
-              </FormControl>
-              <Box sx={{ my: 2, alignItems: "center" }}>
-                <Box sx={{ display: "flex" }}>
-                  <Typography variant="body2" fontWeight={500}>
-                    Subcategory Name
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    fontWeight={400}
-                    sx={{ ml: 2, color: theme.palette.grey[400] }}
-                  >
-                    *required
-                  </Typography>
-                </Box>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <TextField
-                    fullWidth
-                    sx={{ my: 1, borderRadius: "30px", mr: 1 }}
+    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Box>
+              <Button
+                size="large"
+                sx={{
+                  color: "black",
+                }}
+                startIcon={
+                  <FontAwesomeIcon
+                    icon={faAngleLeft}
+                    size="2x"
+                    color={theme.palette.info.main}
                   />
-                  <FontAwesomeIcon icon={faPlus} size="lg" color="black" />
-                </Box>
-              </Box>
+                }
+              >
+                Back
+              </Button>
             </Box>
-            <Box
-              sx={{
-                my: 2,
-                mx: "auto",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <Box>
+              <Typography variant="body1" sx={{ fontWeight: 800 }}>
+                India Gate Restaurant Subscribers
+              </Typography>
+              <Typography
+                variant="caption"
+                color={theme.palette.info.main}
+                sx={{ fontWeight: 600 }}
+              >
+                46,200 Subscribers
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
                 size="large"
                 sx={{
                   fontWeight: 800,
-                  backgroundColor: theme.palette.info.main,
-                  color: "white",
+                  width: "120px",
+                  textAlign: "center",
+                  height: "35px",
                 }}
-                variant="rounded"
+                color="info"
+                variant="contained"
               >
-                Add Subcategory
+                Notify
               </Button>
             </Box>
-          </Container>
+
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "baseline",
+                justifyContent: "flex-end",
+                my: 1,
+              }}
+            >
+              <Typography variant="caption" sx={{ mr: 1 }}>
+                Sort By:
+              </Typography>
+              <FormControl variant="standard">
+                <Select
+                  labelId="sort-by-select-label"
+                  id="sort-by-simple-select"
+                  value="Newest"
+                  size="small"
+                  sx={{ fontWeight: 500 }}
+                >
+                  <MenuItem value={"Newest"}>
+                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                      Newest
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                    <Typography variant="body2">Oldest</Typography>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
+        <Box
+          style={{
+            height: 400,
+            width: "100%",
+            marginTop: "5px",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }

@@ -1,136 +1,169 @@
 import React from "react";
 import {
+  Avatar,
   Box,
   Button,
   Container,
   FormControl,
   Grid,
-  List,
-  ListItem,
   MenuItem,
   Select,
   Typography,
 } from "@mui/material";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminSidebar } from "components";
+
+import { GridColDef } from "@mui/x-data-grid";
+import { Edit } from "@mui/icons-material";
+import { DataGrid } from "@mui/x-data-grid";
 import { theme } from "theme";
 
 export function AdminCategories() {
+  const columns: GridColDef[] = [
+    {
+      field: "Name",
+      headerName: "Name",
+      width: 200,
+    },
+    { field: "Subcategory", headerName: "Subcategory", width: 200 },
+    {
+      field: "Actions",
+      headerName: "Actions",
+      width: 110,
+      renderCell: (params) => (
+        <Box className="tableButton">
+          <Button
+            size="small"
+            endIcon={<Edit />}
+            variant="rounded"
+            sx={{
+              ".MuiButton-iconSizeSmall": { size: "10px" },
+              backgroundColor: theme.palette.grey[300],
+              color: theme.palette.common.black,
+            }}
+          >
+            {params.value}
+          </Button>
+        </Box>
+      ),
+    },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      Name: "India Gate Restaurant",
+      Subcategory: "17 subcategories",
+      Actions: "Edit",
+    },
+    {
+      id: 2,
+      Name: "India Gate Restaurant",
+      Subcategory: "17 subcategories",
+      Actions: "Edit",
+    },
+    {
+      id: 3,
+      Name: "India Gate Restaurant",
+      Subcategory: "17 subcategories",
+      Actions: "Edit",
+    },
+    {
+      id: 4,
+      Name: "India Gate Restaurant",
+      Subcategory: "17 subcategories",
+      Actions: "Edit",
+    },
+    {
+      id: 5,
+      Name: "India Gate Restaurant",
+      Subcategory: "17 subcategories",
+      Actions: "Edit",
+    },
+    {
+      id: 6,
+      Name: "India Gate Restaurant",
+      Subcategory: "17 subcategories",
+      Actions: "Edit",
+    },
+    {
+      id: 7,
+      Name: "India Gate Restaurant",
+      Subcategory: "17 subcategories",
+      Actions: "Edit",
+    },
+    {
+      id: 8,
+      Name: "India Gate Restaurant",
+      Subcategory: "17 subcategories",
+      Actions: "Edit",
+    },
+    {
+      id: 9,
+      Name: "India Gate Restaurant",
+      Subcategory: "17 subcategories",
+      Actions: "Edit",
+    },
+  ];
+
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
-      <Grid container>
-        <Grid item xs={12} md={2}>
-          <AdminSidebar />
-        </Grid>
-        <Grid item xs={12} md={10}>
-          <Container sx={{ width: "100%", height: "100%" }}>
-            <Box
+    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
+      <Grid container spacing={2}>
+        <Container>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", my: 1 }}>
+            <Button
+              size="large"
               sx={{
-                ml: 90,
+                fontWeight: 800,
+                textAlign: "center",
+                height: "35px",
               }}
+              color="info"
+              variant="contained"
             >
-              <Button
-                size="large"
-                sx={{
-                  fontWeight: 800,
-                  backgroundColor: theme.palette.info.main,
-                  color: "white",
-                }}
-                variant="contained"
+              New category
+            </Button>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "flex-end",
+              my: 2,
+            }}
+          >
+            <Typography variant="caption" sx={{ mr: 1 }}>
+              Sort By:
+            </Typography>
+            <FormControl variant="standard">
+              <Select
+                labelId="sort-by-select-label"
+                id="sort-by-simple-select"
+                value="Newest"
+                size="small"
+                sx={{ fontWeight: 500 }}
               >
-                New Category
-              </Button>
-            </Box>
-
-            <Box
-              sx={{ display: "flex", alignItems: "baseline", ml: 90, my: 2 }}
-            >
-              <Typography variant="body2" fontWeight={600} sx={{ ml: 2 }}>
-                Sort By:
-              </Typography>
-              <FormControl variant="standard">
-                <Select
-                  variant="standard"
-                  labelId="sort-by-select-label"
-                  id="sort-by-simple-select"
-                  value="Newest"
-                  size="small"
-                  sx={{ ml: 1 }}
-                >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-
-            <Box
-              sx={{
-                backgroundColor: "black",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}
-              >
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Name
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Subcategory
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Actions
-                </Typography>
-              </Box>
-
-              {Array(4)
-                .fill({
-                  name: "Notification 1",
-                  subCategory: "17 subcategories",
-                })
-                .map((element) => (
-                  <Box
-                    key={element.name}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      my: 1,
-                    }}
-                  >
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        {element.name}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: theme.palette.info.main }}>
-                        {element.subCategory}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        <Button
-                          size="small"
-                          sx={{
-                            fontWeight: 500,
-                            backgroundColor: "white",
-                            color: "black",
-                          }}
-                          endIcon={<FontAwesomeIcon icon={faPen} size="sm" />}
-                          variant="rounded"
-                        >
-                          Edit
-                        </Button>
-                      </ListItem>
-                    </List>
-                  </Box>
-                ))}
-            </Box>
-          </Container>
-        </Grid>
+                <MenuItem value={"Newest"}>
+                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    Newest
+                  </Typography>
+                </MenuItem>
+                <MenuItem value={"Oldest"}>
+                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    Oldest
+                  </Typography>
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+            />
+          </Box>
+        </Container>
       </Grid>
     </Container>
   );
