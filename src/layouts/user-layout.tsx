@@ -16,7 +16,7 @@ import {
   List,
   ListItem,
 } from "@mui/material";
-import { FooterContainer, Links, Logo, ScrollToTop, Social } from "components";
+import { FooterContainer, Logo, ScrollToTop, Social } from "components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,

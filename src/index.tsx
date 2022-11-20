@@ -43,6 +43,7 @@ import {
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
 
 import reportWebVitals from "./reportWebVitals";
+import { AdminLayout } from "layouts/admin-panel";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -115,7 +116,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <NavigationBar />,
+    element: <AdminLayout />,
     errorElement: <div> Some Error Occured </div>,
     children: [
       //admin
