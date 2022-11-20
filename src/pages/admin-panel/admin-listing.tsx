@@ -49,12 +49,13 @@ export function AdminListing() {
     {
       field: "Actions",
       headerName: "Actions",
-      width: 90,
+      width: 110,
       renderCell: (params) => (
         <Box className="tableButton">
           <Button
             size="small"
             endIcon={<FontAwesomeIcon icon={faPen} size="sm" />}
+            variant="rounded"
           >
             {params.value}
           </Button>
@@ -133,8 +134,8 @@ export function AdminListing() {
     <Container>
       <Grid container>
         <Grid item xs={12} md={10}>
-          <Container sx={{ width: "100%", height: "100%" }}>
-            <Box
+          <Container>
+            {/* <Box
               sx={{
                 ml: 90,
               }}
@@ -171,7 +172,7 @@ export function AdminListing() {
                   <MenuItem value={"Oldest"}>Oldest</MenuItem>
                 </Select>
               </FormControl>
-            </Box>
+            </Box> */}
 
             <Box style={{ height: 400, width: "100%" }}>
               <DataGrid
