@@ -14,16 +14,124 @@ import {
 } from "@mui/material";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminSidebar } from "components";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { theme } from "theme";
 
 export function AdminListing() {
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "ID", width: 70 },
+    {
+      field: "Name",
+      headerName: "Name",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <Box sx={{ display: "flex" }}>
+            <Avatar
+              sx={{
+                height: "30px",
+                width: "30px",
+                mr: 1,
+              }}
+            />
+
+            {params.value}
+          </Box>
+        );
+      },
+    },
+    { field: "Subscribers", headerName: "Subscribers", width: 200 },
+    {
+      field: "Location",
+      headerName: "Location",
+      width: 150,
+    },
+    {
+      field: "Actions",
+      headerName: "Actions",
+      width: 90,
+      renderCell: (params) => (
+        <Box className="tableButton">
+          <Button
+            size="small"
+            endIcon={<FontAwesomeIcon icon={faPen} size="sm" />}
+          >
+            {params.value}
+          </Button>
+        </Box>
+      ),
+    },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      Name: "India Gate Restaurant",
+      Subscribers: "46.2K subscribers",
+      Location: "Seattle, WA",
+      Actions: "Edit",
+    },
+    {
+      id: 2,
+      Name: "India Gate Restaurant",
+      Subscribers: "46.2K subscribers",
+      Location: "Seattle, WA",
+      Actions: "Edit",
+    },
+    {
+      id: 3,
+      Name: "India Gate Restaurant",
+      Subscribers: "46.2K subscribers",
+      Location: "Seattle, WA",
+      Actions: "Edit",
+    },
+    {
+      id: 4,
+      Name: "India Gate Restaurant",
+      Subscribers: "46.2K subscribers",
+      Location: "Seattle, WA",
+      Actions: "Edit",
+    },
+    {
+      id: 5,
+      Name: "India Gate Restaurant",
+      Subscribers: "46.2K subscribers",
+      Location: "Seattle, WA",
+      Actions: "Edit",
+    },
+    {
+      id: 6,
+      Name: "India Gate Restaurant",
+      Subscribers: "46.2K subscribers",
+      Location: "Seattle, WA",
+      Actions: "Edit",
+    },
+    {
+      id: 7,
+      Name: "India Gate Restaurant",
+      Subscribers: "46.2K subscribers",
+      Location: "Seattle, WA",
+      Actions: "Edit",
+    },
+    {
+      id: 8,
+      Name: "India Gate Restaurant",
+      Subscribers: "46.2K subscribers",
+      Location: "Seattle, WA",
+      Actions: "Edit",
+    },
+    {
+      id: 9,
+      Name: "India Gate Restaurant",
+      Subscribers: "46.2K subscribers",
+      Location: "Seattle, WA",
+      Actions: "Edit",
+    },
+  ];
+
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
+    <Container>
       <Grid container>
-        <Grid item xs={12} md={2}>
-          <AdminSidebar />
-        </Grid>
         <Grid item xs={12} md={10}>
           <Container sx={{ width: "100%", height: "100%" }}>
             <Box
@@ -65,81 +173,13 @@ export function AdminListing() {
               </FormControl>
             </Box>
 
-            <Box
-              sx={{
-                backgroundColor: "black",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}
-              >
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Name
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Subscribers
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Location
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Actions
-                </Typography>
-              </Box>
-
-              {Array(4)
-                .fill({
-                  name: "Notification 1",
-                  Subscribers: "17 subcategories",
-                  location: "Seattle, WA ",
-                })
-                .map((element) => (
-                  <Box
-                    key={element.name}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      alignItems: "center",
-                      my: 1,
-                    }}
-                  >
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        <Avatar sx={{ height: "30px", width: "30px", mr: 1 }} />
-                        {element.name}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: theme.palette.info.main }}>
-                        {element.Subscribers}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: "white", fontWeight: 200 }}>
-                        {element.location}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        <Button
-                          size="small"
-                          sx={{
-                            fontWeight: 500,
-                            backgroundColor: "white",
-                            color: "black",
-                          }}
-                          endIcon={<FontAwesomeIcon icon={faPen} size="sm" />}
-                          variant="rounded"
-                        >
-                          Edit
-                        </Button>
-                      </ListItem>
-                    </List>
-                  </Box>
-                ))}
+            <Box style={{ height: 400, width: "100%" }}>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+              />
             </Box>
           </Container>
         </Grid>
