@@ -1,36 +1,14 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminSidebar } from "components";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { AdminBackButton } from "components";
 import { theme } from "theme";
 
 export function AdminNewCategory() {
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
-      <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
-        <FontAwesomeIcon
-          icon={faAngleLeft}
-          size="lg"
-          color={theme.palette.info.main}
-        />
-        <Button
-          size="large"
-          sx={{
-            fontWeight: 800,
-            color: "black",
-          }}
-        >
-          Back
-        </Button>
-        <Box sx={{ my: 2, alignItems: "center" }}>
+    <Container maxWidth="lg">
+      <AdminBackButton />
+      <Container maxWidth="xs" sx={{ m: 0 }}>
+        <Box sx={{ my: 4, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>
               Category Name
@@ -38,7 +16,7 @@ export function AdminNewCategory() {
             <Typography
               variant="caption"
               fontWeight={400}
-              sx={{ ml: 2, color: theme.palette.grey[400] }}
+              sx={{ ml: 1, color: theme.palette.grey[400] }}
             >
               *required
             </Typography>

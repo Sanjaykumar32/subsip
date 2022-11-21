@@ -19,23 +19,23 @@ export function AdminNewSubCategory() {
   const theme = useTheme();
 
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
-      <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
+    <Container maxWidth="lg">
+      <Button
+        size="large"
+        sx={{
+          fontWeight: 800,
+          color: "black",
+        }}
+      >
         <FontAwesomeIcon
           icon={faAngleLeft}
           size="lg"
           color={theme.palette.info.main}
+          style={{ marginRight: 2 }}
         />
-        <Button
-          size="large"
-          sx={{
-            fontWeight: 800,
-            color: "black",
-          }}
-        >
-          Back
-        </Button>
-
+        Back
+      </Button>
+      <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
         <Box sx={{ my: 2 }}>
           <FormControl sx={{ width: 300 }}>
             <Box sx={{ display: "flex" }}>
@@ -45,7 +45,7 @@ export function AdminNewSubCategory() {
               <Typography
                 variant="caption"
                 fontWeight={400}
-                sx={{ ml: 2, color: theme.palette.grey[400] }}
+                sx={{ ml: 1, color: theme.palette.grey[400] }}
               >
                 *required
               </Typography>
@@ -70,7 +70,7 @@ export function AdminNewSubCategory() {
               <Typography
                 variant="caption"
                 fontWeight={400}
-                sx={{ ml: 2, color: theme.palette.grey[400] }}
+                sx={{ ml: 1, color: theme.palette.grey[400] }}
               >
                 *required
               </Typography>
