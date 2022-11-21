@@ -16,7 +16,7 @@ import {
   List,
   ListItem,
 } from "@mui/material";
-import { FooterContainer, Logo, ScrollToTop, Social } from "components";
+import { FooterContainer, Links, Logo, ScrollToTop, Social } from "components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -140,13 +140,23 @@ export function NavigationBar() {
         </Container>
       </AppBar>
       <Outlet />
-      <FooterContainer>
+      {/* <FooterContainer>
         <Grid container>
           <Grid item xs={12} md={4}>
             <Social />
           </Grid>
           <Grid item xs={12} md={8}>
             <Link />
+          </Grid>
+        </Grid>
+      </FooterContainer> */}
+      <FooterContainer>
+        <Grid container>
+          <Grid item xs={12} md={4}>
+            <Social />
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Links />
           </Grid>
         </Grid>
       </FooterContainer>
