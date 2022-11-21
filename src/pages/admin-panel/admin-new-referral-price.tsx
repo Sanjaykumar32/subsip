@@ -12,16 +12,12 @@ import {
 } from "@mui/material";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminSidebar } from "components";
 import { theme } from "theme";
 
 export function AdminNewReferralPrice() {
   return (
     <Container maxWidth="lg" sx={{ p: 4, my: 5 }}>
       <Grid container>
-        <Grid item xs={12} md={2}>
-          <AdminSidebar />
-        </Grid>
         <Grid item xs={12} md={10}>
           <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
             <FontAwesomeIcon

@@ -1,147 +1,187 @@
 import React from "react";
 import {
+  Avatar,
   Box,
   Button,
   Container,
   FormControl,
   Grid,
-  List,
-  ListItem,
   MenuItem,
   Select,
   Typography,
 } from "@mui/material";
-import { faAngleLeft, faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminSidebar } from "components";
+
+import { GridColDef } from "@mui/x-data-grid";
+import { Edit } from "@mui/icons-material";
+import { DataGrid } from "@mui/x-data-grid";
 import { theme } from "theme";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function AdminSubCategory() {
+  const columns: GridColDef[] = [
+    {
+      field: "Name",
+      headerName: "Name",
+      width: 200,
+    },
+    {
+      field: "Actions",
+      headerName: "Actions",
+      width: 110,
+      renderCell: (params) => (
+        <Box className="tableButton">
+          <Button
+            size="small"
+            endIcon={<Edit />}
+            variant="rounded"
+            sx={{
+              ".MuiButton-iconSizeSmall": { size: "10px" },
+              backgroundColor: theme.palette.grey[300],
+              color: theme.palette.common.black,
+            }}
+          >
+            {params.value}
+          </Button>
+        </Box>
+      ),
+    },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      Name: "Pest control",
+      Actions: "Edit",
+    },
+    {
+      id: 2,
+      Name: "Pest control",
+      Actions: "Edit",
+    },
+    {
+      id: 3,
+      Name: "Pest control",
+      Actions: "Edit",
+    },
+    {
+      id: 4,
+      Name: "Pest control",
+      Actions: "Edit",
+    },
+    {
+      id: 5,
+      Name: "Pest control",
+      Actions: "Edit",
+    },
+    {
+      id: 6,
+      Name: "Pest control",
+      Actions: "Edit",
+    },
+    {
+      id: 7,
+      Name: "Pest control",
+      Actions: "Edit",
+    },
+    {
+      id: 8,
+      Name: "Pest control",
+      Actions: "Edit",
+    },
+    {
+      id: 9,
+      Name: "Pest control",
+      Actions: "Edit",
+    },
+  ];
+
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
-      <Grid container>
-        <Grid item xs={12} md={2}>
-          <AdminSidebar />
-        </Grid>
-        <Grid item xs={12} md={10}>
-          <Container sx={{ width: "100%", height: "100%" }}>
+    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
             <Box>
-              <FontAwesomeIcon
-                icon={faAngleLeft}
-                size="lg"
-                color={theme.palette.info.main}
-              />
               <Button
                 size="large"
                 sx={{
-                  fontWeight: 800,
                   color: "black",
                 }}
+                startIcon={
+                  <FontAwesomeIcon
+                    icon={faAngleLeft}
+                    size="2x"
+                    color={theme.palette.info.main}
+                  />
+                }
               >
                 Back
               </Button>
             </Box>
             <Box>
-              <Typography variant="h6">Category: Home services</Typography>
+              <Typography variant="body1" sx={{ fontWeight: 800, my: 2 }}>
+                Category: Home services
+              </Typography>
             </Box>
-
-            <Box
-              sx={{
-                ml: 90,
-              }}
-            >
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
                 size="large"
                 sx={{
                   fontWeight: 800,
-                  backgroundColor: theme.palette.info.main,
-                  color: "white",
+                  textAlign: "center",
+                  height: "35px",
                 }}
+                color="info"
                 variant="contained"
               >
-                New Notification
+                New subcategory
               </Button>
             </Box>
 
             <Box
-              sx={{ display: "flex", alignItems: "baseline", ml: 90, my: 2 }}
+              sx={{
+                display: "flex",
+                alignItems: "baseline",
+                justifyContent: "flex-end",
+                my: 2,
+              }}
             >
-              <Typography variant="body2" fontWeight={600} sx={{ ml: 2 }}>
+              <Typography variant="caption" sx={{ mr: 1 }}>
                 Sort By:
               </Typography>
               <FormControl variant="standard">
                 <Select
-                  variant="standard"
                   labelId="sort-by-select-label"
                   id="sort-by-simple-select"
                   value="Newest"
                   size="small"
-                  sx={{ ml: 1 }}
+                  sx={{ fontWeight: 500 }}
                 >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                  <MenuItem value={"Newest"}>
+                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                      Newest
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                    <Typography variant="body2">Oldest</Typography>
+                  </MenuItem>
                 </Select>
               </FormControl>
             </Box>
-
-            <Box
-              sx={{
-                backgroundColor: "black",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}
-              >
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Name
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Actions
-                </Typography>
-              </Box>
-
-              {Array(4)
-                .fill({
-                  name: "Notification 1",
-                })
-                .map((element) => (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      my: 1,
-                    }}
-                  >
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        {element.name}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        <Button
-                          size="small"
-                          sx={{
-                            fontWeight: 500,
-                            backgroundColor: "white",
-                            color: "black",
-                          }}
-                          endIcon={<FontAwesomeIcon icon={faPen} size="sm" />}
-                          variant="rounded"
-                        >
-                          Edit
-                        </Button>
-                      </ListItem>
-                    </List>
-                  </Box>
-                ))}
-            </Box>
-          </Container>
+          </Grid>
         </Grid>
-      </Grid>
+
+        <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }

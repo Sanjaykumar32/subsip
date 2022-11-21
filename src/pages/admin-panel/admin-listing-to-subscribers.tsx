@@ -2,44 +2,161 @@ import React from "react";
 import {
   Box,
   Button,
-  Checkbox,
   Container,
   FormControl,
   Grid,
-  List,
-  ListItem,
   MenuItem,
   Select,
   Typography,
 } from "@mui/material";
-import { faCertificate } from "@fortawesome/free-solid-svg-icons";
+
+import { GridColDef } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminSidebar } from "components";
 import { theme } from "theme";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 
 export function AdminListingToSubscribers() {
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const columns: GridColDef[] = [
+    {
+      field: "Name",
+      headerName: "Name",
+      width: 200,
+    },
+    {
+      field: "Verified",
+      headerName: "Verified",
+      width: 200,
+      renderCell: (params) => (
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <VerifiedUserIcon color="success" sx={{ mr: 1 }} />
+          {params.value}
+        </Box>
+      ),
+    },
+    {
+      field: "Actions",
+      headerName: "Actions",
+      width: 110,
+      renderCell: (params) => (
+        <Button
+          size="small"
+          variant="rounded"
+          sx={{
+            backgroundColor: theme.palette.grey[300],
+            color: theme.palette.error.main,
+          }}
+        >
+          {params.value}
+        </Button>
+      ),
+    },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      Name: "Jake@gmail.com",
+      Verified: "Verified",
+      Actions: "Delete",
+    },
+    {
+      id: 2,
+      Name: "Hik@hik.com",
+      Verified: "Verified",
+      Actions: "Delete",
+    },
+    {
+      id: 3,
+      Name: "Abi@abi.com",
+      Verified: "Verified",
+      Actions: "Delete",
+    },
+    {
+      id: 4,
+      Name: "Abe@abe.com",
+      Verified: "Verified",
+      Actions: "Delete",
+    },
+    {
+      id: 5,
+      Name: "Jake@gmail.com",
+      Verified: "Verified",
+      Actions: "Delete",
+    },
+    {
+      id: 6,
+      Name: "Abe@abe.com",
+      Verified: "Verified",
+      Actions: "Delete",
+    },
+    {
+      id: 7,
+      Name: "Jake@gmail.com",
+      Verified: "Verified",
+      Actions: "Delete",
+    },
+    {
+      id: 8,
+      Name: "Hik@hik.com",
+      Verified: "Verified",
+      Actions: "Delete",
+    },
+    {
+      id: 9,
+      Name: "Abe@abe.com",
+      Verified: "Verified",
+      Actions: "Delete",
+    },
+  ];
 
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
-      <Grid container>
-        <Grid item xs={12} md={2}>
-          <AdminSidebar />
-        </Grid>
-        <Grid item xs={12} md={10}>
-          <Container sx={{ width: "100%", height: "100%" }}>
-            <Box
-              sx={{
-                ml: 90,
-              }}
-            >
+    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Box>
               <Button
-                size="medium"
+                size="large"
+                sx={{
+                  color: "black",
+                }}
+                startIcon={
+                  <FontAwesomeIcon
+                    icon={faAngleLeft}
+                    size="2x"
+                    color={theme.palette.info.main}
+                  />
+                }
+              >
+                Back
+              </Button>
+            </Box>
+            <Box>
+              <Typography variant="body1" sx={{ fontWeight: 800 }}>
+                India Gate Restaurant Subscribers
+              </Typography>
+              <Typography
+                variant="caption"
+                color={theme.palette.info.main}
+                sx={{ fontWeight: 600 }}
+              >
+                46,200 Subscribers
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                size="large"
                 sx={{
                   fontWeight: 800,
-                  backgroundColor: theme.palette.info.main,
-                  color: "white",
+                  width: "120px",
+                  textAlign: "center",
+                  height: "35px",
                 }}
+                color="info"
                 variant="contained"
               >
                 Notify
@@ -47,103 +164,53 @@ export function AdminListingToSubscribers() {
             </Box>
 
             <Box
-              sx={{ display: "flex", alignItems: "baseline", ml: 90, my: 2 }}
+              sx={{
+                display: "flex",
+                alignItems: "baseline",
+                justifyContent: "flex-end",
+                my: 1,
+              }}
             >
-              <Typography variant="body2" fontWeight={600} sx={{ ml: 2 }}>
+              <Typography variant="caption" sx={{ mr: 1 }}>
                 Sort By:
               </Typography>
               <FormControl variant="standard">
                 <Select
-                  variant="standard"
                   labelId="sort-by-select-label"
                   id="sort-by-simple-select"
                   value="Newest"
                   size="small"
-                  sx={{ ml: 1 }}
+                  sx={{ fontWeight: 500 }}
                 >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                  <MenuItem value={"Newest"}>
+                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                      Newest
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                    <Typography variant="body2">Oldest</Typography>
+                  </MenuItem>
                 </Select>
               </FormControl>
             </Box>
-
-            <Box
-              sx={{
-                backgroundColor: "black",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}
-              >
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Email
-                </Typography>
-
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Verified
-                </Typography>
-                <Typography variant="h6" sx={{ color: "white" }}>
-                  Actions
-                </Typography>
-              </Box>
-
-              {Array(4)
-                .fill({
-                  name: "Jake@gmail.com",
-                  Verified: "Verified",
-                  Location: "Seattle, WA ",
-                })
-                .map((element) => (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      my: 1,
-                    }}
-                  >
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        <Checkbox {...label} defaultChecked />
-                        {element.name}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        <FontAwesomeIcon
-                          icon={faCertificate}
-                          size="xl"
-                          style={{
-                            marginRight: "3px",
-                            color: theme.palette.success.main,
-                          }}
-                        />
-                        {element.Verified}
-                      </ListItem>
-                    </List>
-                    <List>
-                      <ListItem sx={{ color: "white" }}>
-                        <Button
-                          size="small"
-                          sx={{
-                            fontWeight: 500,
-                            backgroundColor: theme.palette.grey[200],
-                            color: theme.palette.error.main,
-                          }}
-                          variant="rounded"
-                        >
-                          Delete
-                        </Button>
-                      </ListItem>
-                    </List>
-                  </Box>
-                ))}
-            </Box>
-          </Container>
+          </Grid>
         </Grid>
-      </Grid>
+        <Box
+          style={{
+            height: 400,
+            width: "100%",
+            marginTop: "5px",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }

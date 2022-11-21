@@ -1,9 +1,7 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Box, List, ListItem, Typography } from "@mui/material";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MuiColor } from "type";
-import { AdminSidebarEnum } from "enum";
 
 export function AdminSidebar(): ReactElement {
   const sideBarOption = [
@@ -36,26 +34,6 @@ export function AdminSidebar(): ReactElement {
     },
   ];
 
-  const chipStatusColor = (icon: string) => {
-    switch (icon) {
-      case AdminSidebarEnum.DASHBOARD:
-        return "faUser";
-      case AdminSidebarEnum.LISTINGS:
-        return "warning";
-      case AdminSidebarEnum.SUBSCRIBERS:
-        return "warning";
-      case AdminSidebarEnum.CATEGORIES:
-        return "warning";
-      case AdminSidebarEnum.NOTIFICATIONS:
-        return "warning";
-      case AdminSidebarEnum.REWARDS:
-        return "warning";
-      case AdminSidebarEnum.REFERRALS:
-        return "warning";
-      default:
-        return "error";
-    }
-  };
   return (
     <Box>
       <List>

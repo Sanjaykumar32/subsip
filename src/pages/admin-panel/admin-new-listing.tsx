@@ -16,7 +16,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { Label } from "components";
+import { AdminBackButton, Label } from "components";
 import Grid from "@mui/material/Grid";
 import { InputTypeEnum } from "enum";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -110,24 +110,8 @@ export function AdminNewlisting() {
   const ref = useRef<HTMLInputElement>(null);
 
   return (
-    <Container maxWidth="md" disableGutters sx={{ p: 4 }}>
-      {/* <Typography variant="h6" sx={{ ml: 3 }}>
-        Back
-      </Typography> */}
-      <FontAwesomeIcon
-        icon={faAngleLeft}
-        size="lg"
-        color={theme.palette.info.main}
-      />
-      <Button
-        size="large"
-        sx={{
-          fontWeight: 800,
-          color: "black",
-        }}
-      >
-        Back
-      </Button>
+    <Container maxWidth="lg">
+      <AdminBackButton />
 
       <FormControl fullWidth size="small">
         <Grid container>
