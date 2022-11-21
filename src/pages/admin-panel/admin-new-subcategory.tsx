@@ -4,7 +4,6 @@ import {
   Button,
   Container,
   FormControl,
-  Grid,
   MenuItem,
   Select,
   TextField,
@@ -12,29 +11,15 @@ import {
   useTheme,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { AdminSidebar } from "components";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { AdminBackButton } from "components";
 
 export function AdminNewSubCategory() {
   const theme = useTheme();
 
   return (
     <Container maxWidth="lg">
-      <Button
-        size="large"
-        sx={{
-          fontWeight: 800,
-          color: "black",
-        }}
-      >
-        <FontAwesomeIcon
-          icon={faAngleLeft}
-          size="lg"
-          color={theme.palette.info.main}
-          style={{ marginRight: 2 }}
-        />
-        Back
-      </Button>
+      <AdminBackButton />
       <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
         <Box sx={{ my: 2 }}>
           <FormControl sx={{ width: 300 }}>

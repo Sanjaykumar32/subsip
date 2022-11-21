@@ -10,30 +10,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminSidebar } from "components";
+import { AdminBackButton } from "components";
 import { theme } from "theme";
 
 export function AdminNewReward() {
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
+    <Container maxWidth="lg">
+      <AdminBackButton />
       <Grid container>
         <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
-          <FontAwesomeIcon
-            icon={faAngleLeft}
-            size="lg"
-            color={theme.palette.info.main}
-          />
-          <Button
-            size="large"
-            sx={{
-              fontWeight: 800,
-              color: "black",
-            }}
-          >
-            Back
-          </Button>
           <Box sx={{ display: "flex" }}>
             <Box sx={{ my: 1, alignItems: "center" }}>
               <Box sx={{ display: "flex" }}>
