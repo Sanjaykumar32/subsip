@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,7 +16,7 @@ import {
   List,
   ListItem,
 } from "@mui/material";
-import { FooterContainer, Links, Logo, ScrollToTop, Social } from "components";
+import { FooterContainer, Logo, ScrollToTop, Social } from "components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -27,6 +27,7 @@ import {
 import { Link } from "@mui/material";
 import { Box } from "@mui/material";
 import { RoutePathEnum } from "enum";
+import MultipleSelect from "components/profile-menu";
 
 export function NavigationBar() {
   const links = [
@@ -47,6 +48,12 @@ export function NavigationBar() {
       url: RoutePathEnum.RESTAURANT,
     },
   ];
+
+  const [profileMenu, setProfileMenu] = useState<boolean>(false);
+
+  const handleProfileMenu = () => {
+    setProfileMenu(true);
+  };
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
       <ScrollToTop />
@@ -105,8 +112,13 @@ export function NavigationBar() {
             <Divider />
             <Button variant="rounded">Login</Button>
             <Box sx={{ mx: 1 }}>
-              <FontAwesomeIcon icon={faUserCircle} size="lg" />
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                size="lg"
+                onClick={handleProfileMenu}
+              />
             </Box>
+            {profileMenu && <MultipleSelect />}
             <Box sx={{ mx: 1 }}>
               <Badge badgeContent={4} color="error">
                 <FontAwesomeIcon icon={faBell} size="lg" />
