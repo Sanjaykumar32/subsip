@@ -10,30 +10,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { theme } from "theme";
+import { AdminBackButton } from "components";
 
 export function AdminNewReferralPrice() {
   return (
-    <Container maxWidth="lg" sx={{ p: 4, my: 5 }}>
+    <Container maxWidth="lg">
+      <AdminBackButton />
       <Grid container>
         <Grid item xs={12} md={10}>
           <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
-            <FontAwesomeIcon
-              icon={faAngleLeft}
-              size="lg"
-              color={theme.palette.info.main}
-            />
-            <Button
-              size="large"
-              sx={{
-                fontWeight: 800,
-                color: "black",
-              }}
-            >
-              Back
-            </Button>
             <Box sx={{ my: 2, alignItems: "center" }}>
               <Box sx={{ display: "flex" }}>
                 <Typography variant="body2" fontWeight={500}>

@@ -4,7 +4,6 @@ import {
   Button,
   Container,
   FormControl,
-  Grid,
   IconButton,
   MenuItem,
   Select,
@@ -13,32 +12,18 @@ import {
   Typography,
 } from "@mui/material";
 import {
-  faAngleLeft,
   faCalendarDays,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AdminSidebar } from "components";
+import { AdminBackButton } from "components";
 import { theme } from "theme";
 
 export function AdminNewNotifictaion() {
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
+    <Container maxWidth="lg">
+      <AdminBackButton />
       <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
-        <FontAwesomeIcon
-          icon={faAngleLeft}
-          size="lg"
-          color={theme.palette.info.main}
-        />
-        <Button
-          size="large"
-          sx={{
-            fontWeight: 800,
-            color: "black",
-          }}
-        >
-          Back
-        </Button>
         <Box sx={{ my: 2, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>

@@ -24,9 +24,7 @@ export function AuthLayout() {
           </Button>
         </Toolbar>
       </AppBar>
-
       <Outlet />
-
       <FooterContainer>
         <Grid container>
           <Grid item xs={12} md={4}>
