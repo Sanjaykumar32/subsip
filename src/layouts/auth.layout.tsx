@@ -18,7 +18,7 @@ export function AuthLayout() {
         sx={{ borderBottom: "1px solid black" }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Logo />
+          <Logo variant="dark" />
           <Button variant="rounded" href="/signIn">
             Log in
           </Button>

@@ -1,26 +1,16 @@
+import { PoshSubLogo, PoshSubLogoProps } from "assets";
 import React, { ReactElement } from "react";
-import { Button, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export function Logo(): ReactElement {
-  const theme = useTheme();
+export function Logo(props: PoshSubLogoProps): ReactElement {
   const navigate = useNavigate();
 
   return (
-    <Button
-      onClick={() => {
-        navigate("/home");
-      }}
+    <div
+      style={{ width: "150px", height: "48px" }}
+      onClick={() => navigate("/home")}
     >
-      <Typography
-        fontWeight={700}
-        sx={{
-          fontSize: theme.typography.pxToRem(27),
-          lineHeight: "48px",
-        }}
-      >
-        PoshSub
-      </Typography>
-    </Button>
+      <PoshSubLogo {...props} />
+    </div>
   );
 }

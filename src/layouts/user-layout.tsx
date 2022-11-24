@@ -64,7 +64,7 @@ export function NavigationBar() {
         sx={{ borderBottom: "1px solid black" }}
       >
         <Toolbar>
-          <Logo />
+          <Logo variant="dark" />
           <TextField
             fullWidth
             sx={{ maxWidth: "50%", mx: "auto" }}
@@ -126,7 +126,7 @@ export function NavigationBar() {
             </Box>
           </Box>
         </Toolbar>
-        <Container maxWidth="xl">
+        <Container maxWidth={false} disableGutters>
           <List sx={{ display: "flex" }}>
             {links.map((res) => (
               <ListItem

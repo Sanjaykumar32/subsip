@@ -16,8 +16,11 @@ export function LocationCard1({ data }: ILocationCard1) {
   return (
     <Card
       sx={{
-        maxWidth: "251px",
-        maxHeight: "fit-content",
+        display: "inline-block",
+        mx: 2,
+        width: "325px",
+        height: "458px",
+        whiteSpace: "normal",
       }}
       elevation={6}
     >

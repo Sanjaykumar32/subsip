@@ -75,7 +75,7 @@ export function AdminLayout() {
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Logo />
+          <Logo variant="dark" />
           <TextField
             size="small"
             sx={{ width: "50%" }}
