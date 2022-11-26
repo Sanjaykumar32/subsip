@@ -84,7 +84,7 @@ export function ResponsiveAppBar() {
           aria-label="account of current user"
           aria-controls="menu-appbar"
           aria-haspopup="true"
-          onClick={(event) => setAnchorElMenu(event.target as HTMLElement)}
+          // onClick={(event) => setAnchorElMenu(event.target as HTMLElement)}
           color="inherit"
         >
           <MenuIcon />
@@ -127,7 +127,7 @@ export function ResponsiveAppBar() {
           sx={{ mx: "auto", maxWidth: "400px" }}
           InputProps={{
             endAdornment: (
-              <IconButton onClick={() => console.log("Not Implemented")}>
+              <IconButton>
                 <FontAwesomeIcon icon={faSearch} size="sm" />
               </IconButton>
             ),
@@ -158,7 +158,7 @@ export function ResponsiveAppBar() {
         {settings.map((setting) => (
           <MenuItem
             key={setting}
-            onClick={(event) => setAnchorElSetting(event.target as HTMLElement)}
+            //onClick={(event) => setAnchorElSetting(event.target as HTMLElement)}
           >
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
