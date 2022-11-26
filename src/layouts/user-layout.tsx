@@ -28,6 +28,7 @@ import { Link } from "@mui/material";
 import { Box } from "@mui/material";
 import { RoutePathEnum } from "enum";
 import MultipleSelect from "components/profile-menu";
+import ResponsiveAppBar from "components/appbar/navigation";
 
 export function NavigationBar() {
   const links = [
@@ -54,10 +55,12 @@ export function NavigationBar() {
   const handleProfileMenu = () => {
     setProfileMenu(true);
   };
+
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
+      <ResponsiveAppBar />
       <ScrollToTop />
-      <AppBar
+      {/* <AppBar
         position="static"
         color="transparent"
         elevation={0}
@@ -138,27 +141,19 @@ export function NavigationBar() {
             ))}
           </List>
         </Container>
-      </AppBar>
+      </AppBar> */}
       <Outlet />
-      {/* <FooterContainer>
-        <Grid container>
-          <Grid item xs={12} md={4}>
-            <Social />
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Link />
-          </Grid>
-        </Grid>
-      </FooterContainer> */}
       <FooterContainer>
-        <Grid container>
-          <Grid item xs={12} md={4}>
-            <Social />
+        <Container maxWidth="lg" disableGutters>
+          <Grid container>
+            <Grid item xs={12} md={4}>
+              <Social />
+            </Grid>
+            <Grid item xs={12} md={8}>
+              <Links />
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={8}>
-            <Links />
-          </Grid>
-        </Grid>
+        </Container>
       </FooterContainer>
     </Container>
   );
