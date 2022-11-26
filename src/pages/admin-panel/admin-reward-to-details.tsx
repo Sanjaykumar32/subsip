@@ -4,22 +4,21 @@ import {
   Button,
   Chip,
   Container,
-  FormControl,
   Grid,
-  MenuItem,
-  Select,
+  Switch,
+  Tooltip,
   Typography,
 } from "@mui/material";
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { theme } from "theme";
-import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
-import { Edit } from "@mui/icons-material";
 
 export function AdminRewardToDetails() {
+  const label = { inputProps: { "aria-label": "Size switch demo" } };
+
   const columns: GridColDef[] = [
     {
       field: "Name",
@@ -43,18 +42,23 @@ export function AdminRewardToDetails() {
       headerName: "Actions",
       width: 150,
       renderCell: (params) => (
-        <Button
-          size="small"
-          endIcon={<Edit />}
-          variant="rounded"
-          sx={{
-            ".MuiButton-iconSizeSmall": { size: "10px" },
-            backgroundColor: theme.palette.grey[300],
-            color: theme.palette.common.black,
-          }}
-        >
-          {params.value}
-        </Button>
+        <Box>
+          <Tooltip title={params.value}>
+            <FontAwesomeIcon icon={faPen} />
+          </Tooltip>
+        </Box>
+      ),
+    },
+    {
+      field: "Active",
+      headerName: "Active",
+      width: 150,
+      renderCell: (params) => (
+        <Box>
+          <Tooltip title={params.value}>
+            <Switch {...label} defaultChecked size="small" color="info" />
+          </Tooltip>
+        </Box>
       ),
     },
   ];
@@ -65,63 +69,72 @@ export function AdminRewardToDetails() {
       Name: "50 Gift Card",
       Reward: "5/100 claimed",
       Status: "Active",
-      Actions: "Deactivate/edit",
+      Actions: "Edit",
+      Active: "Active",
     },
     {
       id: 2,
       Name: "50 Gift Card",
       Reward: "5/100 claimed",
       Status: "Active",
-      Actions: "Deactivate/edit",
+      Actions: "Edit",
+      Active: "Active",
     },
     {
       id: 3,
       Name: "50 Gift Card",
       Reward: "5/100 claimed",
       Status: "Active",
-      Actions: "Deactivate/edit",
+      Actions: "Edit",
+      Active: "Active",
     },
     {
       id: 4,
       Name: "50 Gift Card",
       Reward: "5/100 claimed",
       Status: "Active",
-      Actions: "Deactivate/edit",
+      Actions: "Edit",
+      Active: "Active",
     },
     {
       id: 5,
       Name: "50 Gift Card",
       Reward: "5/100 claimed",
       Status: "Active",
-      Actions: "Deactivate/edit",
+      Actions: "Edit",
+      Active: "Active",
     },
     {
       id: 6,
       Name: "50 Gift Card",
       Reward: "5/100 claimed",
       Status: "Active",
-      Actions: "Deactivate/edit",
+      Actions: "Edit",
+      Active: "Active",
     },
     {
       id: 7,
       Name: "50 Gift Card",
       Reward: "5/100 claimed",
       Status: "Active",
-      Actions: "Deactivate/edit",
+      Actions: "Edit",
+      Active: "Active",
     },
     {
       id: 8,
       Name: "50 Gift Card",
       Reward: "5/100 claimed",
       Status: "Active",
-      Actions: "Deactivate/edit",
+      Actions: "Edit",
+      Active: "Active",
     },
     {
       id: 9,
       Name: "50 Gift Card",
       Reward: "5/100 claimed",
       Status: "Active",
-      Actions: "Deactivate/edit",
+      Actions: "Edit",
+      Active: "Active",
     },
   ];
 

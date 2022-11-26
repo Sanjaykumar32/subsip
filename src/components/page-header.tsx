@@ -30,12 +30,12 @@ export function PageHeader({
       <Box
         sx={{
           display: "flex",
-          alignItems: "baseline",
+          alignItems: "center",
         }}
       >
         <Typography variant="alternet"> {name} </Typography>
         <Tooltip title={icon.tooltip}>
-          <IconButton sx={{ ml: 1 }}>
+          <IconButton sx={{ ml: 0.5 }}>
             <FontAwesomeIcon icon={icon.icon} />
           </IconButton>
         </Tooltip>

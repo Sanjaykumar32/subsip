@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import { theme } from "theme";
 
 export function AdminDashboard() {
@@ -32,12 +32,13 @@ export function AdminDashboard() {
                 height: "100px",
               }}
             >
-              <Box
+              <Card
                 sx={{
-                  backgroundColor: theme.palette.grey[900],
                   width: "300px",
                   borderRadius: "4px",
-                  color: theme.palette.common.white,
+                  color: theme.palette.text.primary,
+                  boxShadow:
+                    "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px",
                 }}
               >
                 <Box sx={{ ml: 3, my: 2 }}>
@@ -58,7 +59,7 @@ export function AdminDashboard() {
                     {data.count}
                   </Typography>
                 </Box>
-              </Box>
+              </Card>
             </Box>
           </Grid>
         ))}

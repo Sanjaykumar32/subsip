@@ -1,10 +1,10 @@
 import React from "react";
-import { Box, Button, Chip, Container } from "@mui/material";
+import { Box, Button, Chip, Container, Tooltip } from "@mui/material";
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { theme } from "theme";
-import { Edit } from "@mui/icons-material";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function AdminRewardsMileStones() {
   const columns: GridColDef[] = [
@@ -24,18 +24,9 @@ export function AdminRewardsMileStones() {
       headerName: "Actions",
       width: 150,
       renderCell: (params) => (
-        <Button
-          size="small"
-          endIcon={<Edit />}
-          variant="rounded"
-          sx={{
-            ".MuiButton-iconSizeSmall": { size: "10px" },
-            backgroundColor: theme.palette.grey[300],
-            color: theme.palette.common.black,
-          }}
-        >
-          {params.value}
-        </Button>
+        <Tooltip title={params.value}>
+          <FontAwesomeIcon icon={faPen} />
+        </Tooltip>
       ),
     },
   ];
