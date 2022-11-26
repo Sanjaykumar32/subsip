@@ -75,9 +75,8 @@ const router = createBrowserRouter([
     element: <NavigationBar />,
     errorElement: <div> Some Error Occured </div>,
     children: [
-      // pages
       {
-        path: "/home",
+        path: "/",
         element: <Home />,
       },
       {
@@ -85,19 +84,19 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "/clickOnCategory",
+        path: "/listing",
         element: <ClickOnCategory />,
       },
       {
-        path: "/listingOnPoshSub",
+        path: "/listing/add",
         element: <ListingOnPoshSub />,
       },
       {
-        path: "/listingDetails",
-        element: <ListingDetails />,
+        path: "/listing/:id",
+        element: <LocationPage />,
       },
       {
-        path: "/referralProgram",
+        path: "/refer",
         element: <ReferralProgram />,
       },
       {
@@ -107,10 +106,6 @@ const router = createBrowserRouter([
       {
         path: "/subscriptions",
         element: <Subscriptions />,
-      },
-      {
-        path: "/location/:id",
-        element: <LocationPage />,
       },
     ],
   },
