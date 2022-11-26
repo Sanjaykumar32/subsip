@@ -19,7 +19,7 @@ export function Profile() {
   const theme = useTheme();
 
   return (
-    <Container sx={{ p: 2 }} maxWidth={false}>
+    <Container sx={{ p: 5 }} maxWidth={false}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Typography variant="h6" fontWeight={600}>
           Profile{" "}
