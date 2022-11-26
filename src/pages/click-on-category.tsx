@@ -6,17 +6,13 @@ import {
   Container,
   FormControl,
   Grid,
-  IconButton,
   List,
   ListItem,
   MenuItem,
   Select,
-  TextField,
   Typography,
   useTheme,
 } from "@mui/material";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function ClickOnCategory() {
   const theme = useTheme();
@@ -33,72 +29,77 @@ export function ClickOnCategory() {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
+    <Container maxWidth={false} sx={{ p: 2 }}>
       <Grid container>
-        <Grid item xs={12} md={2.5}>
-          <Box sx={{ height: "170%", overflow: "auto" }}>
-            <Typography variant="body1" gap={1.5} fontWeight="600">
+        <Grid item xs={12} md={2}>
+          <Box sx={{ overflow: "auto" }}>
+            <Typography variant="body1" fontWeight="600">
               Listings by subcategory:
             </Typography>
-
             <List>
-              {Array(12)
+              {Array(30)
                 .fill({
-                  name: "India Gate Restaurant",
+                  name: "Sandwiches",
                 })
                 .map((element, index: number) => (
-                  <ListItem key={`${element.name}-${index}`}>
+                  <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }}>
                     {element.name}
                   </ListItem>
                 ))}
             </List>
           </Box>
         </Grid>
-        <Grid item xs={12} md={8.5}>
+        <Grid item xs={12} md={9}>
           <Box>
             <Typography variant="alternet">
               Browse restaurants in Seattle, WA
             </Typography>
-            <Box>
-              <Typography variant="body2" gap={1.5} fontWeight="600">
-                61 listings
-              </Typography>
-            </Box>
             <Box
               sx={{
                 display: "flex",
                 alignItems: "baseline",
-                justifyContent: "flex-end",
+                justifyContent: "space-between",
               }}
             >
-              <Typography variant="caption">Sort By:</Typography>
-              <FormControl variant="standard">
-                <Select
-                  labelId="sort-by-select-label"
-                  id="sort-by-simple-select"
-                  value="Newest"
-                  size="small"
-                  sx={{ fontWeight: 500 }}
-                >
-                  <MenuItem value={"Newest"}>
-                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                      Newest
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem value={"Oldest"}>
-                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                      Oldest
-                    </Typography>
-                  </MenuItem>
-                </Select>
-              </FormControl>
+              <Typography variant="body2" fontWeight="600">
+                61 listings
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography variant="caption">Sort By:</Typography>
+                <FormControl variant="standard">
+                  <Select
+                    labelId="sort-by-select-label"
+                    id="sort-by-simple-select"
+                    value="Newest"
+                    size="small"
+                    sx={{ fontWeight: 500, ml: 1 }}
+                  >
+                    <MenuItem value={"Newest"}>
+                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                        Newest
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem value={"Oldest"}>
+                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                        Oldest
+                      </Typography>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
             </Box>
 
-            <Grid container spacing={2} gap={1.5}>
+            <Grid container spacing={2} sx={{ my: 0.5 }}>
               {Array(12)
                 .fill(data)
                 .map((data) => (
-                  <Grid key={data.title} item sm={2.3}>
+                  <Grid key={data.title} item sm={3}>
                     <Card
                       sx={{
                         maxWidth: "251px",
