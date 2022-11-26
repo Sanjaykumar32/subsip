@@ -1,60 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import {
-  Container,
-  Button,
-  Grid,
-  Divider,
-  TextField,
-  Select,
-  MenuItem,
-  InputAdornment,
-  IconButton,
-  Badge,
-  List,
-  ListItem,
-} from "@mui/material";
-import { FooterContainer, Links, Logo, ScrollToTop, Social } from "components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBell,
-  faLocationDot,
-  faSearch,
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "@mui/material";
-import { Box } from "@mui/material";
-import { RoutePathEnum } from "enum";
-import MultipleSelect from "components/profile-menu";
+import { Container, Grid } from "@mui/material";
+import { FooterContainer, Links, ScrollToTop, Social } from "components";
 import ResponsiveAppBar from "components/appbar/navigation";
 
 export function NavigationBar() {
-  const links = [
-    {
-      name: "Restaurant",
-      url: RoutePathEnum.RESTAURANT,
-    },
-    {
-      name: "Home Services",
-      url: RoutePathEnum.RESTAURANT,
-    },
-    {
-      name: "Auto Services",
-      url: RoutePathEnum.RESTAURANT,
-    },
-    {
-      name: "More",
-      url: RoutePathEnum.RESTAURANT,
-    },
-  ];
+  // const links = [
+  //   {
+  //     name: "Restaurant",
+  //     url: RoutePathEnum.RESTAURANT,
+  //   },
+  //   {
+  //     name: "Home Services",
+  //     url: RoutePathEnum.RESTAURANT,
+  //   },
+  //   {
+  //     name: "Auto Services",
+  //     url: RoutePathEnum.RESTAURANT,
+  //   },
+  //   {
+  //     name: "More",
+  //     url: RoutePathEnum.RESTAURANT,
+  //   },
+  // ];
 
-  const [profileMenu, setProfileMenu] = useState<boolean>(false);
+  // const [profileMenu, setProfileMenu] = useState<boolean>(false);
 
-  const handleProfileMenu = () => {
-    setProfileMenu(true);
-  };
+  // const handleProfileMenu = () => {
+  //   setProfileMenu(true);
+  // };
 
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>

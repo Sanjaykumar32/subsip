@@ -4,8 +4,6 @@ import {
   faDiagramProject,
   faHome,
   faList,
-  faPerson,
-  faRefresh,
   faSearch,
   faTrophy,
   faUserCircle,

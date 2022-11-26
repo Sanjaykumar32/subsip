@@ -89,39 +89,41 @@ export function AdminRewardsMileStones() {
   ];
 
   return (
-    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
-      <Container>
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            size="large"
-            sx={{
-              fontWeight: 800,
-              width: "120px",
-              textAlign: "center",
-              height: "35px",
-              my: 2,
-            }}
-            color="info"
-            variant="contained"
-          >
-            New Reward
-          </Button>
-        </Box>
-
-        <Box
-          style={{
-            height: 400,
-            width: "100%",
+    <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <Button
+          size="large"
+          sx={{
+            fontWeight: 800,
+            width: "120px",
+            textAlign: "center",
+            height: "35px",
           }}
+          color="info"
+          variant="contained"
         >
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-        </Box>
-      </Container>
+          New Reward
+        </Button>
+      </Box>
+      <Box
+        style={{
+          height: 400,
+          width: "100%",
+          marginTop: "40px",
+        }}
+      >
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+        />
+      </Box>
     </Container>
   );
 }

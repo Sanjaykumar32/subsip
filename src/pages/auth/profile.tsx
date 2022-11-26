@@ -10,11 +10,10 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCertificate,
-  faLocationDot,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 export function Profile() {
   const theme = useTheme();
@@ -25,12 +24,8 @@ export function Profile() {
         <Typography variant="h6" fontWeight={600}>
           Profile{" "}
         </Typography>
-        <Box sx={{ ml: 2, mr: 1 }}>
-          <FontAwesomeIcon
-            icon={faCertificate}
-            size="lg"
-            color={theme.palette.success.light}
-          />
+        <Box sx={{ ml: 2 }}>
+          <VerifiedUserIcon color="success" sx={{ mr: 0.5 }} />
         </Box>
         <Typography fontWeight={400} variant="caption">
           Verified

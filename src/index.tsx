@@ -28,7 +28,6 @@ import {
   AdminSubscribers,
   ClickOnCategory,
   Home,
-  ListingDetails,
   ListingOnPoshSub,
   PasswordReset,
   Profile,

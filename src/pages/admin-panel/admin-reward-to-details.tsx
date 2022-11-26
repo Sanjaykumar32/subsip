@@ -4,7 +4,6 @@ import {
   Button,
   Chip,
   Container,
-  Grid,
   Switch,
   Tooltip,
   Typography,
@@ -12,9 +11,9 @@ import {
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { faAngleLeft, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { theme } from "theme";
+import { AdminBackButton } from "components";
 
 export function AdminRewardToDetails() {
   const label = { inputProps: { "aria-label": "Size switch demo" } };
@@ -139,65 +138,59 @@ export function AdminRewardToDetails() {
   ];
 
   return (
-    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
-      <Container>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <Box>
-              <Button
-                size="large"
-                sx={{
-                  color: "black",
-                }}
-                startIcon={
-                  <FontAwesomeIcon
-                    icon={faAngleLeft}
-                    size="2x"
-                    color={theme.palette.info.main}
-                  />
-                }
-              >
-                Back
-              </Button>
-            </Box>
-            <Box>
-              <Typography variant="body1" sx={{ fontWeight: 800, my: 1 }}>
-                India Gate Restaurant
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-              <Button
-                size="large"
-                sx={{
-                  fontWeight: 800,
-                  width: "120px",
-                  textAlign: "center",
-                  height: "35px",
-                }}
-                color="info"
-                variant="contained"
-              >
-                New Reward
-              </Button>
-            </Box>
-          </Grid>
-        </Grid>
-        <Box
-          style={{
-            height: 400,
-            width: "100%",
-          }}
-        >
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
+    <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+        }}
+      >
+        <AdminBackButton />
+        <Box>
+          <Button
+            size="large"
+            sx={{
+              fontWeight: 800,
+              width: "120px",
+              textAlign: "center",
+              height: "35px",
+            }}
+            color="info"
+            variant="contained"
+          >
+            New Reward
+          </Button>
         </Box>
-      </Container>
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          my: 1,
+          mt: 4,
+        }}
+      >
+        <Typography variant="body1" sx={{ fontWeight: 800 }}>
+          India Gate Restaurant
+        </Typography>
+      </Box>
+
+      <Box
+        style={{
+          height: 400,
+          width: "100%",
+        }}
+      >
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+        />
+      </Box>
     </Container>
   );
 }

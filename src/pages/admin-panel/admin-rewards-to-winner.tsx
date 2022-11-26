@@ -4,18 +4,18 @@ import {
   Button,
   Container,
   FormControl,
-  Grid,
   MenuItem,
   Select,
+  Tooltip,
   Typography,
 } from "@mui/material";
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { theme } from "theme";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import { AdminBackButton } from "components";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function AdminRewardsToWinner() {
   const columns: GridColDef[] = [
@@ -40,16 +40,11 @@ export function AdminRewardsToWinner() {
       headerName: "Actions",
       width: 110,
       renderCell: (params) => (
-        <Button
-          size="small"
-          variant="rounded"
-          sx={{
-            backgroundColor: theme.palette.grey[300],
-            color: theme.palette.error.main,
-          }}
-        >
-          {params.value}
-        </Button>
+        <Box>
+          <Tooltip title={params.value}>
+            <FontAwesomeIcon icon={faTrash} />
+          </Tooltip>
+        </Box>
       ),
     },
   ];
@@ -112,98 +107,83 @@ export function AdminRewardsToWinner() {
   ];
 
   return (
-    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
-      <Container>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <Box>
-              <Button
-                size="large"
-                sx={{
-                  color: "black",
-                }}
-                startIcon={
-                  <FontAwesomeIcon
-                    icon={faAngleLeft}
-                    size="2x"
-                    color={theme.palette.info.main}
-                  />
-                }
-              >
-                Back
-              </Button>
-            </Box>
-            <Box>
-              <Typography variant="body1" sx={{ fontWeight: 800, my: 1 }}>
-                India Gate Restaurant Rewards Winners
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-              <Button
-                size="large"
-                sx={{
-                  fontWeight: 800,
-                  width: "120px",
-                  textAlign: "center",
-                  height: "35px",
-                }}
-                color="info"
-                variant="contained"
-              >
-                Notify
-              </Button>
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "baseline",
-                justifyContent: "flex-end",
-                my: 1,
-              }}
-            >
-              <Typography variant="caption" sx={{ mr: 1 }}>
-                Sort By:
-              </Typography>
-              <FormControl variant="standard">
-                <Select
-                  labelId="sort-by-select-label"
-                  id="sort-by-simple-select"
-                  value="Newest"
-                  size="small"
-                  sx={{ fontWeight: 500 }}
-                >
-                  <MenuItem value={"Newest"}>
-                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                      Newest
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                    <Typography variant="body2">Oldest</Typography>
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Grid>
-        </Grid>
-        <Box
-          style={{
-            height: 400,
-            width: "100%",
-            marginTop: "5px",
-          }}
-        >
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-          />
+    <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+        }}
+      >
+        <AdminBackButton />
+        <Box>
+          <Button
+            size="large"
+            sx={{
+              fontWeight: 800,
+              width: "120px",
+              textAlign: "center",
+              height: "35px",
+            }}
+            color="info"
+            variant="contained"
+          >
+            Notify
+          </Button>
         </Box>
-      </Container>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          my: 1,
+          mt: 4,
+        }}
+      >
+        <Typography variant="body1" sx={{ fontWeight: 800 }}>
+          India Gate Restaurant Rewards Winners
+        </Typography>
+
+        <Box>
+          <Typography variant="caption" sx={{ mr: 1 }}>
+            Sort By:
+          </Typography>
+          <FormControl variant="standard">
+            <Select
+              labelId="sort-by-select-label"
+              id="sort-by-simple-select"
+              value="Newest"
+              size="small"
+              sx={{ fontWeight: 500 }}
+            >
+              <MenuItem value={"Newest"}>
+                <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                  Newest
+                </Typography>
+              </MenuItem>
+              <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                <Typography variant="body2">Oldest</Typography>
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      </Box>
+      <Box
+        style={{
+          height: 400,
+          width: "100%",
+          marginTop: "5px",
+        }}
+      >
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+        />
+      </Box>
     </Container>
   );
 }
