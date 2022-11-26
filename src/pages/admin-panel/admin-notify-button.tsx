@@ -33,7 +33,7 @@ export function AdminNotifyButton() {
           </Box>
           <TextField fullWidth sx={{ my: 1, borderRadius: "30px", mr: 1 }} />
         </Box>
-        <Box sx={{ my: 2, alignItems: "center" }}>
+        <Box sx={{ my: 1, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>
               Description
@@ -41,7 +41,7 @@ export function AdminNotifyButton() {
             <Typography
               variant="caption"
               fontWeight={400}
-              sx={{ ml: 2, color: theme.palette.grey[400] }}
+              sx={{ ml: 1, color: theme.palette.grey[400] }}
             >
               *required
             </Typography>
@@ -52,7 +52,7 @@ export function AdminNotifyButton() {
           />
         </Box>
 
-        <Box sx={{ my: 2, alignItems: "center" }}>
+        <Box sx={{ my: 1, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>
               Date
@@ -60,7 +60,7 @@ export function AdminNotifyButton() {
             <Typography
               variant="caption"
               fontWeight={400}
-              sx={{ ml: 2, color: theme.palette.grey[400] }}
+              sx={{ ml: 1, color: theme.palette.grey[400] }}
             >
               *required
             </Typography>

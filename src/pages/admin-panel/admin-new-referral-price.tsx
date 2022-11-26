@@ -56,7 +56,7 @@ export function AdminNewReferralPrice() {
                 variant="outlined"
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                size="medium"
+                size="small"
                 sx={{ my: 1, width: "100%" }}
               >
                 <MenuItem value={"Newest"}>Newest</MenuItem>

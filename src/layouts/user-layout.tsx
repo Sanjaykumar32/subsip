@@ -107,10 +107,12 @@ export function NavigationBar() {
             </Box>
             <Divider />
             <Box sx={{ mx: 2 }}>
-              <Link>List on PoshSub</Link>
+              <Link href="/ListingOnPoshSub">List on PoshSub</Link>
             </Box>
             <Divider />
-            <Button variant="rounded">Login</Button>
+            <Button variant="rounded" href="/auth/signin">
+              Login
+            </Button>
             <Box sx={{ mx: 1 }}>
               <FontAwesomeIcon
                 icon={faUserCircle}

@@ -163,7 +163,7 @@ export function AdminListing() {
               display: "flex",
               alignItems: "baseline",
               justifyContent: "flex-end",
-              my: 1,
+              my: 2,
             }}
           >
             <Typography variant="caption" sx={{ mr: 1 }}>
@@ -190,7 +190,7 @@ export function AdminListing() {
               </Select>
             </FormControl>
           </Box>
-          <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
+          <Box style={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={rows}
               columns={columns}
