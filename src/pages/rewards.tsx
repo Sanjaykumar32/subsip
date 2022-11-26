@@ -20,7 +20,7 @@ export function Rewards() {
   const theme = useTheme();
 
   return (
-    <Container maxWidth="lg" sx={{ p: 8 }}>
+    <Container maxWidth={false} sx={{ p: 2 }}>
       <PageHeader
         name="Rewards"
         icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
@@ -39,10 +39,10 @@ export function Rewards() {
           ))}
         </Box>
       </PageHeader>
-      <Container sx={{ mt: 2 }}>
+      <Container maxWidth={false} sx={{ mt: 2 }}>
         <Grid container>
           <Grid item xs={12} md={2.5}>
-            <Box sx={{ height: "70%", overflow: "auto" }}>
+            <Box sx={{ height: "170%", overflow: "auto" }}>
               <Typography variant="h6">Subscribed Businesses:</Typography>
               <TextField
                 size="small"
@@ -73,7 +73,7 @@ export function Rewards() {
             </Box>
           </Grid>
           <Grid item xs={12} md={8.5}>
-            <Container maxWidth="xs" sx={{ my: 4 }}>
+            <Container maxWidth={false}>
               {Array(4)
                 .fill({
                   name: "Reward One",

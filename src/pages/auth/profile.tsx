@@ -20,7 +20,7 @@ export function Profile() {
   const theme = useTheme();
 
   return (
-    <Container sx={{ p: 4, my: 3.5 }}>
+    <Container sx={{ p: 2 }} maxWidth={false}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Typography variant="h6" fontWeight={600}>
           Profile{" "}
@@ -37,7 +37,7 @@ export function Profile() {
         </Typography>
       </Box>
 
-      <Container maxWidth="xs">
+      <Container maxWidth="xs" sx={{ my: 4 }}>
         <Box sx={{ my: 1, textAlign: "center" }}>
           <FormGroup sx={{ textAlign: "left" }}>
             <InputBox>
