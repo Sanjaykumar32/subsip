@@ -28,15 +28,18 @@ export function AdminNewReward() {
                 <Typography
                   variant="caption"
                   fontWeight={400}
-                  sx={{ ml: 2, color: theme.palette.grey[400] }}
+                  sx={{ ml: 1, color: theme.palette.grey[400] }}
                 >
                   *required
                 </Typography>
               </Box>
-              <TextField sx={{ my: 1, borderRadius: "30px" }} />
+              <TextField
+                fullWidth
+                sx={{ my: 1, borderRadius: "30px", mr: 1, width: "400px" }}
+              />
             </Box>
 
-            <Box sx={{ my: 1, alignItems: "center", ml: 3 }}>
+            <Box sx={{ my: 1, alignItems: "center", ml: 2 }}>
               <Box sx={{ display: "flex" }}>
                 <Typography variant="body2" fontWeight={500}>
                   Availability
@@ -44,18 +47,21 @@ export function AdminNewReward() {
                 <Typography
                   variant="caption"
                   fontWeight={400}
-                  sx={{ ml: 2, color: theme.palette.grey[400] }}
+                  sx={{ ml: 1, color: theme.palette.grey[400] }}
                 >
                   *required
                 </Typography>
               </Box>
-              <TextField sx={{ my: 1, borderRadius: "30px" }} />
+              <TextField
+                fullWidth
+                sx={{ my: 1, borderRadius: "30px", mr: 1, width: "400px" }}
+              />
             </Box>
           </Box>
 
-          <Box sx={{ my: 1, alignItems: "center" }}>
+          <Box sx={{ my: 1.5, alignItems: "center" }}>
             <Box sx={{ display: "flex" }}>
-              <FormControl sx={{ width: 300 }}>
+              <FormControl>
                 <Box sx={{ display: "flex" }}>
                   <Typography variant="body2" fontWeight={500}>
                     Category
@@ -63,7 +69,7 @@ export function AdminNewReward() {
                   <Typography
                     variant="caption"
                     fontWeight={400}
-                    sx={{ ml: 2, color: theme.palette.grey[400] }}
+                    sx={{ ml: 1, color: theme.palette.grey[400] }}
                   >
                     *required
                   </Typography>
@@ -73,41 +79,43 @@ export function AdminNewReward() {
                   variant="outlined"
                   labelId="sort-by-select-label"
                   id="sort-by-simple-select"
-                  size="medium"
-                  sx={{ my: 1 }}
+                  size="small"
+                  sx={{ my: 1, width: "400px" }}
                 >
                   <MenuItem value={"Newest"}>Newest</MenuItem>
                   <MenuItem value={"Oldest"}>Oldest</MenuItem>
                 </Select>
               </FormControl>
-
-              <FormControl sx={{ width: 300, ml: 2 }}>
-                <Box sx={{ display: "flex" }}>
-                  <Typography variant="body2" fontWeight={500}>
-                    Subcategory
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    fontWeight={400}
-                    sx={{ ml: 2, color: theme.palette.grey[400] }}
+              <Box sx={{ ml: 53 }}>
+                <FormControl>
+                  <Box sx={{ display: "flex" }}>
+                    <Typography variant="body2" fontWeight={500}>
+                      Subcategory
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      fontWeight={400}
+                      sx={{ ml: 1, color: theme.palette.grey[400] }}
+                    >
+                      *required
+                    </Typography>
+                  </Box>
+                  <Select
+                    fullWidth
+                    variant="outlined"
+                    labelId="sort-by-select-label"
+                    id="sort-by-simple-select"
+                    size="small"
+                    sx={{ my: 1, width: "400px" }}
                   >
-                    *required
-                  </Typography>
-                </Box>
-                <Select
-                  fullWidth
-                  variant="outlined"
-                  labelId="sort-by-select-label"
-                  id="sort-by-simple-select"
-                  size="medium"
-                  sx={{ my: 1 }}
-                >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
-                </Select>
-              </FormControl>
+                    <MenuItem value={"Newest"}>Newest</MenuItem>
+                    <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
             </Box>
-            <FormControl sx={{ width: 300 }}>
+
+            <FormControl sx={{ my: 1.5 }}>
               <Box sx={{ display: "flex" }}>
                 <Typography variant="body2" fontWeight={500}>
                   Business name
@@ -115,7 +123,7 @@ export function AdminNewReward() {
                 <Typography
                   variant="caption"
                   fontWeight={400}
-                  sx={{ ml: 2, color: theme.palette.grey[400] }}
+                  sx={{ ml: 1, color: theme.palette.grey[400] }}
                 >
                   *required
                 </Typography>
@@ -125,8 +133,8 @@ export function AdminNewReward() {
                 variant="outlined"
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                size="medium"
-                sx={{ my: 1 }}
+                size="small"
+                sx={{ my: 1, width: "400px" }}
               >
                 <MenuItem value={"Newest"}>Newest</MenuItem>
                 <MenuItem value={"Oldest"}>Oldest</MenuItem>
@@ -148,7 +156,7 @@ export function AdminNewReward() {
               sx={{
                 fontWeight: 800,
                 backgroundColor: theme.palette.info.main,
-                color: "white",
+                color: theme.palette.common.white,
               }}
               variant="rounded"
             >

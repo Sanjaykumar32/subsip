@@ -20,8 +20,8 @@ import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 export function AdminSubscribers() {
   const columns: GridColDef[] = [
     {
-      field: "Name",
-      headerName: "Name",
+      field: "Email",
+      headerName: "Email",
       width: 200,
     },
     {
@@ -62,63 +62,63 @@ export function AdminSubscribers() {
   const rows = [
     {
       id: 1,
-      Name: "Jake@gmail.com",
+      Email: "Jake@gmail.com",
       Verified: "Verified",
       Actions: "Delete",
       Location: "Seattle, WA",
     },
     {
       id: 2,
-      Name: "Hik@hik.com",
+      Email: "Hik@hik.com",
       Verified: "Verified",
       Actions: "Delete",
       Location: "Seattle, WA",
     },
     {
       id: 3,
-      Name: "Abi@abi.com",
+      Email: "Abi@abi.com",
       Verified: "Verified",
       Actions: "Delete",
       Location: "Seattle, WA",
     },
     {
       id: 4,
-      Name: "Abe@abe.com",
+      Email: "Abe@abe.com",
       Verified: "Verified",
       Actions: "Delete",
       Location: "Seattle, WA",
     },
     {
       id: 5,
-      Name: "Jake@gmail.com",
+      Email: "Jake@gmail.com",
       Verified: "Verified",
       Actions: "Delete",
       Location: "Seattle, WA",
     },
     {
       id: 6,
-      Name: "Abe@abe.com",
+      Email: "Abe@abe.com",
       Verified: "Verified",
       Actions: "Delete",
       Location: "Seattle, WA",
     },
     {
       id: 7,
-      Name: "Jake@gmail.com",
+      Email: "Jake@gmail.com",
       Verified: "Verified",
       Actions: "Delete",
       Location: "Seattle, WA",
     },
     {
       id: 8,
-      Name: "Hik@hik.com",
+      Email: "Hik@hik.com",
       Verified: "Verified",
       Actions: "Delete",
       Location: "Seattle, WA",
     },
     {
       id: 9,
-      Name: "Abe@abe.com",
+      Email: "Abe@abe.com",
       Verified: "Verified",
       Actions: "Delete",
       Location: "Seattle, WA",

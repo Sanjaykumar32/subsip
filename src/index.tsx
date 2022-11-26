@@ -116,23 +116,23 @@ const router = createBrowserRouter([
     children: [
       //admin
       {
-        path: "/admin/newReferralPrice",
+        path: "/admin/referral-price",
         element: <AdminNewReferralPrice />,
       },
       {
-        path: "/admin/newCategory",
+        path: "/admin/new-category",
         element: <AdminNewCategory />,
       },
       {
-        path: "/admin/newNotifictaion",
+        path: "/admin/new-notification",
         element: <AdminNewNotifictaion />,
       },
       {
-        path: "/admin/newReward",
+        path: "/admin/new-rewards",
         element: <AdminNewReward />,
       },
       {
-        path: "/admin/newSubcategory",
+        path: "/admin/new-subcategory",
         element: <AdminNewSubCategory />,
       },
       {
@@ -140,7 +140,7 @@ const router = createBrowserRouter([
         element: <AdminNotification />,
       },
       {
-        path: "/admin/notifyButton",
+        path: "/admin/notify-button",
         element: <AdminNotifyButton />,
       },
       {
@@ -152,7 +152,7 @@ const router = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: "/admin/listingToSubscribers",
+        path: "/admin/listing-to-subscribers",
         element: <AdminListingToSubscribers />,
       },
       {
@@ -160,23 +160,23 @@ const router = createBrowserRouter([
         element: <AdminListing />,
       },
       {
-        path: "/admin/newlisting",
+        path: "/admin/new-listing",
         element: <AdminNewlisting />,
       },
       {
-        path: "/admin/referralToSubscribe",
+        path: "/admin/referral-to-subscribe",
         element: <AdminReferralToSubscribe />,
       },
       {
-        path: "/admin/referral",
+        path: "/admin/referrals",
         element: <AdminReferral />,
       },
       {
-        path: "/admin/rewardToDetails",
+        path: "/admin/rewards-to-details",
         element: <AdminRewardToDetails />,
       },
       {
-        path: "/admin/rewardsToWinner",
+        path: "/admin/rewards-to-winner",
         element: <AdminRewardsToWinner />,
       },
       {
@@ -184,7 +184,7 @@ const router = createBrowserRouter([
         element: <AdminRewardsMileStones />,
       },
       {
-        path: "/admin/subCategory",
+        path: "/admin/subcategory",
         element: <AdminSubCategory />,
       },
       {

@@ -32,12 +32,15 @@ export function AdminNewNotifictaion() {
             <Typography
               variant="caption"
               fontWeight={400}
-              sx={{ ml: 2, color: theme.palette.grey[400] }}
+              sx={{ ml: 1, color: theme.palette.grey[400] }}
             >
               *required
             </Typography>
           </Box>
-          <TextField fullWidth sx={{ my: 1, borderRadius: "30px", mr: 1 }} />
+          <TextField
+            fullWidth
+            sx={{ my: 1, borderRadius: "30px", mr: 1, width: 600 }}
+          />
         </Box>
         <Box sx={{ my: 2, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
@@ -47,14 +50,14 @@ export function AdminNewNotifictaion() {
             <Typography
               variant="caption"
               fontWeight={400}
-              sx={{ ml: 2, color: theme.palette.grey[400] }}
+              sx={{ ml: 1, color: theme.palette.grey[400] }}
             >
               *required
             </Typography>
           </Box>
           <TextareaAutosize
             aria-label="minimum height"
-            style={{ width: 400, height: 50, marginTop: 4 }}
+            style={{ width: 600, height: 50, marginTop: 4 }}
           />
         </Box>
         <Box sx={{ display: "flex" }}>
@@ -66,13 +69,13 @@ export function AdminNewNotifictaion() {
               <Typography
                 variant="caption"
                 fontWeight={400}
-                sx={{ ml: 2, color: theme.palette.grey[400] }}
+                sx={{ ml: 1, color: theme.palette.grey[400] }}
               >
                 *required
               </Typography>
             </Box>
             <TextField
-              sx={{ my: 1, borderRadius: "30px" }}
+              sx={{ my: 1, borderRadius: "30px", width: 300 }}
               InputProps={{
                 endAdornment: (
                   <IconButton>
@@ -83,7 +86,7 @@ export function AdminNewNotifictaion() {
             />
           </Box>
 
-          <Box sx={{ my: 1, alignItems: "center", ml: 3 }}>
+          <Box sx={{ my: 1, alignItems: "center", ml: 1 }}>
             <Box sx={{ display: "flex" }}>
               <Typography variant="body2" fontWeight={500}>
                 Business Location
@@ -91,13 +94,13 @@ export function AdminNewNotifictaion() {
               <Typography
                 variant="caption"
                 fontWeight={400}
-                sx={{ ml: 2, color: theme.palette.grey[400] }}
+                sx={{ ml: 1, color: theme.palette.grey[400] }}
               >
                 *required
               </Typography>
             </Box>
             <TextField
-              sx={{ my: 1, borderRadius: "30px" }}
+              sx={{ my: 1, borderRadius: "30px", width: 290 }}
               InputProps={{
                 endAdornment: (
                   <IconButton>
@@ -120,14 +123,14 @@ export function AdminNewNotifictaion() {
                 variant="outlined"
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                size="medium"
-                sx={{ my: 1 }}
+                size="small"
+                sx={{ my: 1, width: 300 }}
               >
                 <MenuItem value={"Newest"}>Newest</MenuItem>
                 <MenuItem value={"Oldest"}>Oldest</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ width: 300, ml: 2 }}>
+            <FormControl sx={{ ml: 1 }}>
               <Typography variant="body2" fontWeight={500}>
                 Subcategory
               </Typography>
@@ -136,15 +139,15 @@ export function AdminNewNotifictaion() {
                 variant="outlined"
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                size="medium"
-                sx={{ my: 1 }}
+                size="small"
+                sx={{ my: 1, width: 290, ml: 18 }}
               >
                 <MenuItem value={"Newest"}>Newest</MenuItem>
                 <MenuItem value={"Oldest"}>Oldest</MenuItem>
               </Select>
             </FormControl>
           </Box>
-          <FormControl sx={{ width: 300 }}>
+          <FormControl sx={{ width: 600, my: 1 }}>
             <Typography variant="body2" fontWeight={500}>
               Business Name
             </Typography>
@@ -153,7 +156,7 @@ export function AdminNewNotifictaion() {
               variant="outlined"
               labelId="sort-by-select-label"
               id="sort-by-simple-select"
-              size="medium"
+              size="small"
               sx={{ my: 1 }}
             >
               <MenuItem value={"Newest"}>Newest</MenuItem>

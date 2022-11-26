@@ -26,7 +26,7 @@ export function AdminNotifyButton() {
             <Typography
               variant="caption"
               fontWeight={400}
-              sx={{ ml: 2, color: theme.palette.grey[400] }}
+              sx={{ ml: 1, color: theme.palette.grey[400] }}
             >
               *required
             </Typography>
@@ -48,7 +48,7 @@ export function AdminNotifyButton() {
           </Box>
           <TextareaAutosize
             aria-label="minimum height"
-            style={{ width: 400, height: 50, marginTop: 4 }}
+            style={{ width: 400, height: 70, marginTop: 4 }}
           />
         </Box>
 
@@ -66,7 +66,7 @@ export function AdminNotifyButton() {
             </Typography>
           </Box>
           <TextField
-            sx={{ my: 1, borderRadius: "30px" }}
+            sx={{ my: 1, borderRadius: "30px", width: "400px" }}
             InputProps={{
               endAdornment: (
                 <IconButton>
