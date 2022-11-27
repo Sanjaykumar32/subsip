@@ -102,7 +102,7 @@ export function AdminReferral() {
   ];
 
   return (
-    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
+    <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
       <Box
         sx={{
           display: "flex",
