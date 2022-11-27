@@ -61,8 +61,8 @@ export function Social() {
 
   return (
     <SocialBox>
-      <Logo />
-      <Typography variant="body1" sx={{ ml: 1 }}>
+      <Logo variant="light" />
+      <Typography variant="body2" sx={{ mb: 3 }}>
         Reward for Subscribers
       </Typography>
       <IconList container>
