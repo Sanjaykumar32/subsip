@@ -34,10 +34,9 @@ export function Home() {
   const theme = useTheme();
 
   return (
-    <Container maxWidth="lg" sx={{ p: 4 }}>
+    <Container maxWidth={false} disableGutters>
       <Box
         sx={{
-          my: 1,
           textAlign: "center",
           height: "fit-content",
           backgroundColor: "black",
@@ -95,31 +94,37 @@ export function Home() {
             ))}
         </Carousel>
       </Box>
-      <Box sx={{ mt: 4 }}>
+      <Container maxWidth={false} sx={{ mt: 4 }}>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 900 }}>
           Seattle,WA
         </Typography>
-        <Grid container spacing={2} gap={1.5}>
+        <Container
+          maxWidth={false}
+          disableGutters
+          sx={{
+            width: "100vw",
+            overflow: "auto",
+            whiteSpace: "nowrap",
+          }}
+        >
           {Array(15)
             .fill(data)
             .map((data) => (
-              <Grid key={data.name} item sm={2.3}>
-                <LocationCard1 data={data} />
-              </Grid>
+              <LocationCard1 key={data.name} data={data} />
             ))}
-        </Grid>
-      </Box>
-      <Box
-        sx={{
-          my: 6,
-          mx: "auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Button variant="rounded">Load More</Button>
-      </Box>
+        </Container>
+        <Box
+          sx={{
+            my: 6,
+            mx: "auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Button variant="rounded">Load More</Button>
+        </Box>
+      </Container>
     </Container>
   );
 }
