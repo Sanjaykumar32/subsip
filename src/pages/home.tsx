@@ -17,6 +17,7 @@ import {
   Subscribe,
   Title,
 } from "components/location/location-card";
+import { Spacing } from "components";
 
 export function Home() {
   const data = {
@@ -98,6 +99,38 @@ export function Home() {
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 900 }}>
           Seattle,WA
         </Typography>
+        <Container
+          maxWidth={false}
+          disableGutters
+          sx={{
+            width: "100vw",
+            overflow: "auto",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {Array(15)
+            .fill(data)
+            .map((data) => (
+              <LocationCard1 key={data.name} data={data} />
+            ))}
+        </Container>
+        <Spacing spacing={2} variant="bottom" />
+        <Container
+          maxWidth={false}
+          disableGutters
+          sx={{
+            width: "100vw",
+            overflow: "auto",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {Array(15)
+            .fill(data)
+            .map((data) => (
+              <LocationCard1 key={data.name} data={data} />
+            ))}
+        </Container>
+        <Spacing spacing={2} variant="bottom" />
         <Container
           maxWidth={false}
           disableGutters

@@ -19,7 +19,6 @@ export function LocationCard1({ data }: ILocationCard1) {
         display: "inline-block",
         mx: 2,
         width: "325px",
-        height: "458px",
         whiteSpace: "normal",
       }}
       elevation={6}
