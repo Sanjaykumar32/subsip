@@ -131,7 +131,7 @@ export function AdminSubscribers() {
       >
         <Box>
           <Typography
-            variant="caption"
+            variant="body1"
             color={theme.palette.info.main}
             sx={{ fontWeight: 600 }}
           >
@@ -154,59 +154,62 @@ export function AdminSubscribers() {
           </Button>
         </Box>
       </Box>
+      <Container maxWidth="md" sx={{ my: 4 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box>
+            <FontAwesomeIcon
+              icon={faSliders}
+              size="sm"
+              style={{ marginLeft: "4px" }}
+            />
+          </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          my: 2,
-        }}
-      >
-        <Box>
-          <FontAwesomeIcon icon={faSliders} size="lg" />
+          <Box>
+            <Typography variant="caption" sx={{ mr: 1 }}>
+              Sort By:
+            </Typography>
+            <FormControl variant="standard">
+              <Select
+                labelId="sort-by-select-label"
+                id="sort-by-simple-select"
+                value="Newest"
+                size="small"
+                sx={{ fontWeight: 500 }}
+              >
+                <MenuItem value={"Newest"}>
+                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    Newest
+                  </Typography>
+                </MenuItem>
+                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                  <Typography variant="body2">Oldest</Typography>
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Box>
 
-        <Box>
-          <Typography variant="caption" sx={{ mr: 1 }}>
-            Sort By:
-          </Typography>
-          <FormControl variant="standard">
-            <Select
-              labelId="sort-by-select-label"
-              id="sort-by-simple-select"
-              value="Newest"
-              size="small"
-              sx={{ fontWeight: 500 }}
-            >
-              <MenuItem value={"Newest"}>
-                <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                  Newest
-                </Typography>
-              </MenuItem>
-              <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                <Typography variant="body2">Oldest</Typography>
-              </MenuItem>
-            </Select>
-          </FormControl>
+        <Box
+          style={{
+            height: 400,
+            width: "100%",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+          />
         </Box>
-      </Box>
-
-      <Box
-        style={{
-          height: 400,
-          width: "100%",
-          marginTop: "5px",
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-        />
-      </Box>
+      </Container>
     </Container>
   );
 }
