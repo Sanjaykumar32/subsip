@@ -11,12 +11,19 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Badge, Divider, TextField, useTheme } from "@mui/material";
+import {
+  Badge,
+  Divider,
+  TextField,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { Link } from "@mui/material";
 import {
   faLocationDot,
   faSearch,
   faBell,
+  faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
@@ -31,7 +38,10 @@ const notification = [{ title: "You just won a Promo Code!!" }];
 
 export function ResponsiveAppBar() {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
+  const [anchorElActionsMobileMenu, setAnchorElActionsMobileMenu] =
+    useState<null | HTMLElement>(null);
   const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLElement>(null);
   const [anchorElSetting, setAnchorElSetting] = useState<null | HTMLElement>(
     null
@@ -62,6 +72,24 @@ export function ResponsiveAppBar() {
     []
   );
 
+  const SearchField = useMemo(
+    () => (
+      <TextField
+        fullWidth
+        size="small"
+        sx={{ mx: "auto", maxWidth: "400px" }}
+        InputProps={{
+          endAdornment: (
+            <IconButton>
+              <FontAwesomeIcon icon={faSearch} size="sm" />
+            </IconButton>
+          ),
+        }}
+      />
+    ),
+    []
+  );
+
   const DesktopMenu = useMemo(() => {
     return pages.map((page) => {
       const isActive = window.location.pathname
@@ -74,6 +102,7 @@ export function ResponsiveAppBar() {
           key={page.title}
           sx={{
             mr: 4,
+            pb: 0.5,
             borderBottom: isActive
               ? `3px solid ${theme.palette.info.main}`
               : "",
@@ -89,37 +118,22 @@ export function ResponsiveAppBar() {
 
   const MobileLogo = useMemo(
     () => (
-      <Typography
-        variant="h5"
-        noWrap
-        component="a"
-        href=""
-        sx={{
-          mr: 2,
-          display: { xs: "flex", md: "none" },
-          flexGrow: 1,
-          fontFamily: "monospace",
-          fontWeight: 700,
-          letterSpacing: ".3rem",
-          color: "inherit",
-          textDecoration: "none",
-        }}
-      >
-        LOGO
-      </Typography>
+      <Box sx={{ flexGrow: 1, display: { md: "none", sm: "flex" } }}>
+        {SearchField}
+      </Box>
     ),
-    []
+    [SearchField]
   );
 
   const MobileMenu = useMemo(
     () => (
-      <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+      <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
         <IconButton
           size="large"
           aria-label="account of current user"
           aria-controls="menu-appbar"
           aria-haspopup="true"
-          // onClick={(event) => setAnchorElMenu(event.target as HTMLElement)}
+          onClick={(event) => setAnchorElMenu(event.target as HTMLElement)}
           color="inherit"
         >
           <MenuIcon />
@@ -156,21 +170,10 @@ export function ResponsiveAppBar() {
   const AppbarCenter = useMemo(
     () => (
       <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-        <TextField
-          fullWidth
-          size="small"
-          sx={{ mx: "auto", maxWidth: "400px" }}
-          InputProps={{
-            endAdornment: (
-              <IconButton>
-                <FontAwesomeIcon icon={faSearch} size="sm" />
-              </IconButton>
-            ),
-          }}
-        />
+        {SearchField}
       </Box>
     ),
-    []
+    [SearchField]
   );
 
   const ActionMenu = useMemo(
@@ -230,64 +233,117 @@ export function ResponsiveAppBar() {
     [anchorElNotification]
   );
 
+  const ActionsList = useMemo(
+    () => [
+      <Tooltip key="notification-menu" title="Notifications">
+        <IconButton
+          onClick={(event) =>
+            setAnchorElNotification(event.target as HTMLElement)
+          }
+          sx={{ p: 0, mx: 1.5 }}
+        >
+          <Badge badgeContent={4} color="error">
+            <FontAwesomeIcon icon={faBell} />
+          </Badge>
+        </IconButton>
+      </Tooltip>,
+      <Tooltip key="profile-menu" title="Open settings">
+        <IconButton
+          onClick={(event) => setAnchorElSetting(event.target as HTMLElement)}
+          sx={{ p: 0, mx: 1.5 }}
+        >
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+        </IconButton>
+      </Tooltip>,
+      <Divider
+        flexItem
+        key="profile-divider"
+        variant={isMobile ? "fullWidth" : "middle"}
+        orientation={!isMobile ? "vertical" : "horizontal"}
+        sx={{ width: { sm: "100%", md: "" }, mx: { sm: 0, md: 1 } }}
+      />,
+      <Link key="listing-new" href="/listing/add">
+        List on PoshSub
+      </Link>,
+      <Divider
+        flexItem
+        key="listing-divider"
+        variant={isMobile ? "fullWidth" : "middle"}
+        orientation={!isMobile ? "vertical" : "horizontal"}
+        sx={{ width: { sm: "100%", md: "" }, mx: { sm: 0, md: 1 } }}
+      />,
+      <Box
+        key="location-selector"
+        sx={{
+          display: "flex",
+        }}
+      >
+        <FontAwesomeIcon icon={faLocationDot} size="1x" />
+        <Typography variant="body2" sx={{ ml: 1 }}>
+          Seattle, WA
+        </Typography>
+      </Box>,
+    ],
+    [isMobile]
+  );
+
   const Actions = useMemo(
     () => (
       <Box
         sx={{
-          display: "flex",
+          display: { xs: "none", md: "flex" },
           flexGrow: 0,
           flexDirection: "row-reverse",
           alignItems: "center",
         }}
       >
-        <Tooltip title="Open settings">
-          <IconButton
-            onClick={(event) =>
-              setAnchorElNotification(event.target as HTMLElement)
-            }
-            sx={{ p: 0, mx: 1.5 }}
-          >
-            <Badge badgeContent={4} color="error">
-              <FontAwesomeIcon icon={faBell} />
-            </Badge>
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Open settings">
-          <IconButton
-            onClick={(event) => setAnchorElSetting(event.target as HTMLElement)}
-            sx={{ p: 0, mx: 1.5 }}
-          >
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-          </IconButton>
-        </Tooltip>
-        <Divider
-          flexItem
-          variant="middle"
-          orientation="vertical"
-          sx={{ mx: 2 }}
-        />
-        <Link href="/listing/add">List on PoshSub</Link>
-        <Divider
-          flexItem
-          variant="middle"
-          orientation="vertical"
-          sx={{ mx: 2 }}
-        />
-        <Box
-          sx={{
-            display: "flex",
-          }}
-        >
-          <FontAwesomeIcon icon={faLocationDot} size="1x" />
-          <Typography variant="body2" sx={{ ml: 1 }}>
-            Seattle, WA
-          </Typography>
-        </Box>
-        {ActionMenu}
-        {NotificationMenu}
+        {ActionsList}
       </Box>
     ),
-    [ActionMenu, NotificationMenu]
+    [ActionsList]
+  );
+
+  const ActionMenuMobile = useMemo(
+    () => (
+      <>
+        <IconButton
+          sx={{
+            display: { sm: "flex", md: "none" },
+          }}
+          onClick={(event) =>
+            setAnchorElActionsMobileMenu(event.target as HTMLElement)
+          }
+        >
+          <FontAwesomeIcon icon={faEllipsisV} />
+        </IconButton>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorElActionsMobileMenu}
+          open={Boolean(anchorElActionsMobileMenu)}
+          onClose={() => setAnchorElActionsMobileMenu(null)}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: -10,
+            horizontal: 68,
+          }}
+        >
+          {ActionsList.map((element) => (
+            <MenuItem
+              sx={{ justifyContent: "center" }}
+              key={element.key}
+              onClick={element.props?.children?.props?.onClick}
+            >
+              {element}
+            </MenuItem>
+          ))}
+        </Menu>
+      </>
+    ),
+    [ActionsList, anchorElActionsMobileMenu]
   );
 
   return (
@@ -299,11 +355,21 @@ export function ResponsiveAppBar() {
           {MobileMenu}
           {MobileLogo}
           {Actions}
+          {ActionMenuMobile}
         </Toolbar>
-        <Toolbar disableGutters variant="dense" sx={{ alignItems: "flex-end" }}>
+        <Toolbar
+          disableGutters
+          variant="dense"
+          sx={{
+            alignItems: "flex-end",
+            display: { xs: "none", md: "flex" },
+          }}
+        >
           {DesktopMenu}
         </Toolbar>
       </Container>
+      {ActionMenu}
+      {NotificationMenu}
     </AppBar>
   );
 }
