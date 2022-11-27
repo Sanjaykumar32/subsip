@@ -11,16 +11,27 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
-import { Badge, Divider, TextField } from "@mui/material";
+import { Badge, Divider, TextField, useTheme } from "@mui/material";
 import { Link } from "@mui/material";
-import { faLocationDot, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationDot,
+  faSearch,
+  faBell,
+} from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = [
+  { title: "Restaurant", path: "/" },
+  { title: "Home Service", path: "/home" },
+  { title: "Auto Service", path: "/list" },
+  { title: "More", path: "/more" },
+];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const notification = [{ title: "You just won a Promo Code!!" }];
 
 export function ResponsiveAppBar() {
+  const theme = useTheme();
+  const navigate = useNavigate();
   const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLElement>(null);
   const [anchorElSetting, setAnchorElSetting] = useState<null | HTMLElement>(
     null
@@ -50,6 +61,31 @@ export function ResponsiveAppBar() {
     ),
     []
   );
+
+  const DesktopMenu = useMemo(() => {
+    return pages.map((page) => {
+      const isActive = window.location.pathname
+        .toLowerCase()
+        .includes(page.path.toLowerCase());
+
+      return (
+        <Link
+          href={page.path}
+          key={page.title}
+          sx={{
+            mr: 4,
+            borderBottom: isActive
+              ? `3px solid ${theme.palette.info.main}`
+              : "",
+          }}
+        >
+          <Typography color="text.primary" variant="body1" fontWeight="700">
+            {page.title}
+          </Typography>
+        </Link>
+      );
+    });
+  }, [theme.palette.info.main]);
 
   const MobileLogo = useMemo(
     () => (
@@ -107,17 +143,17 @@ export function ResponsiveAppBar() {
           }}
         >
           {pages.map((page) => (
-            <MenuItem key={page} onClick={() => setAnchorElMenu(null)}>
-              <Typography textAlign="center">{page}</Typography>
+            <MenuItem key={page.title} onClick={() => navigate(page.path)}>
+              <Typography textAlign="center">{page.title}</Typography>
             </MenuItem>
           ))}
         </Menu>
       </Box>
     ),
-    [anchorElMenu]
+    [anchorElMenu, navigate]
   );
 
-  const DesktopMenu = useMemo(
+  const AppbarCenter = useMemo(
     () => (
       <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
         <TextField
@@ -259,10 +295,13 @@ export function ResponsiveAppBar() {
       <Container maxWidth={false}>
         <Toolbar disableGutters>
           {Logo}
-          {DesktopMenu}
+          {AppbarCenter}
           {MobileMenu}
           {MobileLogo}
           {Actions}
+        </Toolbar>
+        <Toolbar disableGutters variant="dense" sx={{ alignItems: "flex-end" }}>
+          {DesktopMenu}
         </Toolbar>
       </Container>
     </AppBar>
