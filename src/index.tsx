@@ -43,6 +43,7 @@ import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
 
 import reportWebVitals from "./reportWebVitals";
 import { AdminLayout } from "layouts/admin-panel";
+import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -50,144 +51,143 @@ const root = ReactDOM.createRoot(
 
 const router = createBrowserRouter([
   {
-    path: "/auth",
+    path: AuthRoutePathEnum.AUTH,
     element: <AuthLayout />,
     errorElement: <div> 404 Page Not Found </div>,
     children: [
       // auth
       {
-        path: "/auth/signIn",
+        path: AuthRoutePathEnum.SIGN_IN,
         element: <SignIn />,
       },
       {
-        path: "/auth/signUp",
+        path: AuthRoutePathEnum.SIGN_UP,
         element: <SignUp />,
       },
       {
-        path: "/auth/forgotPassword",
+        path: AuthRoutePathEnum.PASSWORD_RESET,
         element: <PasswordReset />,
       },
     ],
   },
   {
-    path: "/",
+    path: RoutePathEnum.HOME,
     element: <NavigationBar />,
     errorElement: <div> Some Error Occured </div>,
     children: [
       {
-        path: "/",
+        path: RoutePathEnum.HOME,
         element: <Home />,
       },
       {
-        path: "/profile",
+        path: RoutePathEnum.PROFILE,
         element: <Profile />,
       },
       {
-        path: "/listing",
+        path: RoutePathEnum.LISTING,
         element: <ClickOnCategory />,
       },
       {
-        path: "/listing/add",
+        path: RoutePathEnum.LISTING_ADD,
         element: <ListingOnPoshSub />,
       },
       {
-        path: "/listing/:id",
+        path: RoutePathEnum.LISTING_PRODUCT,
         element: <LocationPage />,
       },
       {
-        path: "/refer",
+        path: RoutePathEnum.REFER,
         element: <ReferralProgram />,
       },
       {
-        path: "/rewards",
+        path: RoutePathEnum.REWARDS,
         element: <Rewards />,
       },
       {
-        path: "/subscriptions",
+        path: RoutePathEnum.SUBSCRIPTIONS,
         element: <Subscriptions />,
       },
     ],
   },
   {
-    path: "/admin",
+    path: AdminRoutePathEnum.ADMIN,
     element: <AdminLayout />,
     errorElement: <div> Some Error Occured </div>,
     children: [
-      //admin
       {
-        path: "/admin/referral-price",
+        path: AdminRoutePathEnum.ADMIN_REFERRAL_PRICE,
         element: <AdminNewReferralPrice />,
       },
       {
-        path: "/admin/new-category",
+        path: AdminRoutePathEnum.ADMIN_NEW_CATEGORY,
         element: <AdminNewCategory />,
       },
       {
-        path: "/admin/new-notification",
+        path: AdminRoutePathEnum.ADMIN_NEW_NOTIFICTAION,
         element: <AdminNewNotifictaion />,
       },
       {
-        path: "/admin/new-rewards",
+        path: AdminRoutePathEnum.ADMIN_NEW_REWARDS,
         element: <AdminNewReward />,
       },
       {
-        path: "/admin/new-subcategory",
+        path: AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY,
         element: <AdminNewSubCategory />,
       },
       {
-        path: "/admin/notification",
+        path: AdminRoutePathEnum.ADMIN_NOTIFICATION,
         element: <AdminNotification />,
       },
       {
-        path: "/admin/notify-button",
+        path: AdminRoutePathEnum.ADMIN_NOTIFY_BUTTON,
         element: <AdminNotifyButton />,
       },
       {
-        path: "/admin/categories",
+        path: AdminRoutePathEnum.ADMIN_CATEGORY,
         element: <AdminCategories />,
       },
       {
-        path: "/admin/dashboard",
+        path: AdminRoutePathEnum.ADMIN_DASHBOARD,
         element: <AdminDashboard />,
       },
       {
-        path: "/admin/listing-to-subscribers",
+        path: AdminRoutePathEnum.ADMIN_LISTING_TO_SUBSCRIBERS,
         element: <AdminListingToSubscribers />,
       },
       {
-        path: "/admin/listing",
+        path: AdminRoutePathEnum.ADMIN_LISTING,
         element: <AdminListing />,
       },
       {
-        path: "/admin/new-listing",
+        path: AdminRoutePathEnum.ADMIN_NEW_LISTING,
         element: <AdminNewlisting />,
       },
       {
-        path: "/admin/referral-to-subscribe",
+        path: AdminRoutePathEnum.ADMIN_REFERRAL_TO_SUBSCRIBE,
         element: <AdminReferralToSubscribe />,
       },
       {
-        path: "/admin/referrals",
+        path: AdminRoutePathEnum.ADMIN_REFERRALS,
         element: <AdminReferral />,
       },
       {
-        path: "/admin/rewards-to-details",
+        path: AdminRoutePathEnum.ADMIN_REWARDS_TO_DETAILS,
         element: <AdminRewardToDetails />,
       },
       {
-        path: "/admin/rewards-to-winner",
+        path: AdminRoutePathEnum.ADMIN_REWARDS_TO_WINNERS,
         element: <AdminRewardsToWinner />,
       },
       {
-        path: "/admin/rewards-milestones",
+        path: AdminRoutePathEnum.ADMIN_MILESTONES,
         element: <AdminRewardsMileStones />,
       },
       {
-        path: "/admin/subcategory",
+        path: AdminRoutePathEnum.ADMIN_SUBCATEGORY,
         element: <AdminSubCategory />,
       },
       {
-        path: "/admin/subscribers",
+        path: AdminRoutePathEnum.ADMIN_SUBSCRIBERS,
         element: <AdminSubscribers />,
       },
     ],
