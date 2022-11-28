@@ -110,20 +110,22 @@ export function AdminRewardsMileStones() {
           New Reward
         </Button>
       </Box>
-      <Box
-        style={{
-          height: 400,
-          width: "100%",
-          marginTop: "40px",
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
-      </Box>
+      <Container maxWidth="sm" sx={{ my: 4 }}>
+        <Box
+          style={{
+            height: 400,
+            width: "100%",
+            marginTop: "40px",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }

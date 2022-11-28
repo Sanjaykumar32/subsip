@@ -160,6 +160,7 @@ export function AdminSubscribers() {
             display: "flex",
             alignItems: "baseline",
             justifyContent: "space-between",
+            my: 1,
           }}
         >
           <Box>

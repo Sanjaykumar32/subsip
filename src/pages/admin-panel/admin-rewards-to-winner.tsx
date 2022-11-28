@@ -132,58 +132,59 @@ export function AdminRewardsToWinner() {
           </Button>
         </Box>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          my: 1,
-          mt: 4,
-        }}
-      >
-        <Typography variant="body1" sx={{ fontWeight: 800 }}>
-          India Gate Restaurant Rewards Winners
-        </Typography>
-
-        <Box>
-          <Typography variant="caption" sx={{ mr: 1 }}>
-            Sort By:
+      <Container maxWidth="md" sx={{ my: 4 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            my: 1,
+          }}
+        >
+          <Typography variant="body1" sx={{ fontWeight: 800 }}>
+            India Gate Restaurant Rewards Winners
           </Typography>
-          <FormControl variant="standard">
-            <Select
-              labelId="sort-by-select-label"
-              id="sort-by-simple-select"
-              value="Newest"
-              size="small"
-              sx={{ fontWeight: 500 }}
-            >
-              <MenuItem value={"Newest"}>
-                <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                  Newest
-                </Typography>
-              </MenuItem>
-              <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                <Typography variant="body2">Oldest</Typography>
-              </MenuItem>
-            </Select>
-          </FormControl>
+
+          <Box>
+            <Typography variant="caption" sx={{ mr: 1 }}>
+              Sort By:
+            </Typography>
+            <FormControl variant="standard">
+              <Select
+                labelId="sort-by-select-label"
+                id="sort-by-simple-select"
+                value="Newest"
+                size="small"
+                sx={{ fontWeight: 500 }}
+              >
+                <MenuItem value={"Newest"}>
+                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    Newest
+                  </Typography>
+                </MenuItem>
+                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                  <Typography variant="body2">Oldest</Typography>
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Box>
-      </Box>
-      <Box
-        style={{
-          height: 400,
-          width: "100%",
-          marginTop: "5px",
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-        />
-      </Box>
+        <Box
+          style={{
+            height: 400,
+            width: "100%",
+            marginTop: "5px",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }

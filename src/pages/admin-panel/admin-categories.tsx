@@ -117,46 +117,48 @@ export function AdminCategories() {
           </Button>
         </Box>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          my: 1,
-          mt: 4,
-        }}
-      >
-        <Box>
-          <Typography variant="caption" sx={{ mr: 1 }}>
-            Sort By:
-          </Typography>
-          <FormControl variant="standard">
-            <Select
-              labelId="sort-by-select-label"
-              id="sort-by-simple-select"
-              value="Newest"
-              size="small"
-              sx={{ fontWeight: 500 }}
-            >
-              <MenuItem value={"Newest"}>
-                <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                  Newest
-                </Typography>
-              </MenuItem>
-              <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                <Typography variant="body2">Oldest</Typography>
-              </MenuItem>
-            </Select>
-          </FormControl>
+
+      <Container maxWidth="md" sx={{ my: 4 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            my: 1,
+          }}
+        >
+          <Box>
+            <Typography variant="caption" sx={{ mr: 1 }}>
+              Sort By:
+            </Typography>
+            <FormControl variant="standard">
+              <Select
+                labelId="sort-by-select-label"
+                id="sort-by-simple-select"
+                value="Newest"
+                size="small"
+                sx={{ fontWeight: 500 }}
+              >
+                <MenuItem value={"Newest"}>
+                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    Newest
+                  </Typography>
+                </MenuItem>
+                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                  <Typography variant="body2">Oldest</Typography>
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Box>
-      </Box>
-      <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
-      </Box>
+        <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }

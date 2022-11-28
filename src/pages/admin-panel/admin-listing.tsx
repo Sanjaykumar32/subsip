@@ -163,13 +163,12 @@ export function AdminListing() {
           </Button>
         </Box>
       </Box>
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ my: 4 }}>
         <Box
           sx={{
             display: "flex",
             justifyContent: "flex-end",
             my: 1,
-            mt: 4,
           }}
         >
           <Box>

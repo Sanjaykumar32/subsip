@@ -99,10 +99,10 @@ export function ClickOnCategory() {
               {Array(12)
                 .fill(data)
                 .map((data) => (
-                  <Grid key={data.title} item sm={3}>
+                  <Grid key={data.title} item sm={4}>
                     <Card
                       sx={{
-                        maxWidth: "251px",
+                        maxWidth: "400px",
                         maxHeight: "400px",
                       }}
                       elevation={6}

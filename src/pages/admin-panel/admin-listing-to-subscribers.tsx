@@ -139,62 +139,65 @@ export function AdminListingToSubscribers() {
           India Gate Restaurant Subscribers
         </Typography>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          my: 1,
-        }}
-      >
-        <Box>
-          <Typography
-            variant="caption"
-            color={theme.palette.info.main}
-            sx={{ fontWeight: 600 }}
-          >
-            46,200 Subscribers
-          </Typography>
-        </Box>
-        <Box>
-          <Typography variant="caption" sx={{ mr: 1 }}>
-            Sort By:
-          </Typography>
-          <FormControl variant="standard">
-            <Select
-              labelId="sort-by-select-label"
-              id="sort-by-simple-select"
-              value="Newest"
-              size="small"
-              sx={{ fontWeight: 500 }}
-            >
-              <MenuItem value={"Newest"}>
-                <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                  Newest
-                </Typography>
-              </MenuItem>
-              <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                <Typography variant="body2">Oldest</Typography>
-              </MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
 
-      <Box
-        style={{
-          height: 400,
-          width: "100%",
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-        />
-      </Box>
+      <Container maxWidth="md" sx={{ my: 4 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            my: 1,
+          }}
+        >
+          <Box>
+            <Typography
+              variant="caption"
+              color={theme.palette.info.main}
+              sx={{ fontWeight: 600 }}
+            >
+              46,200 Subscribers
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="caption" sx={{ mr: 1 }}>
+              Sort By:
+            </Typography>
+            <FormControl variant="standard">
+              <Select
+                labelId="sort-by-select-label"
+                id="sort-by-simple-select"
+                value="Newest"
+                size="small"
+                sx={{ fontWeight: 500 }}
+              >
+                <MenuItem value={"Newest"}>
+                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    Newest
+                  </Typography>
+                </MenuItem>
+                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                  <Typography variant="body2">Oldest</Typography>
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </Box>
+
+        <Box
+          style={{
+            height: 400,
+            width: "100%",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }

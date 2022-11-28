@@ -146,6 +146,7 @@ export function Home() {
               <LocationCard1 key={data.name} data={data} />
             ))}
         </Container>
+
         <Box
           sx={{
             my: 6,

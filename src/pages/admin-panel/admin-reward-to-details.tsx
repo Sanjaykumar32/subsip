@@ -163,34 +163,34 @@ export function AdminRewardToDetails() {
           </Button>
         </Box>
       </Box>
+      <Container maxWidth="md" sx={{ my: 4 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            my: 1,
+          }}
+        >
+          <Typography variant="body1" sx={{ fontWeight: 800 }}>
+            India Gate Restaurant
+          </Typography>
+        </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          my: 1,
-          mt: 4,
-        }}
-      >
-        <Typography variant="body1" sx={{ fontWeight: 800 }}>
-          India Gate Restaurant
-        </Typography>
-      </Box>
-
-      <Box
-        style={{
-          height: 400,
-          width: "100%",
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
-      </Box>
+        <Box
+          style={{
+            height: 400,
+            width: "100%",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }
