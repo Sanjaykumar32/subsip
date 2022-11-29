@@ -107,9 +107,11 @@ export function ListingOnPoshSub() {
 
   return (
     <Container maxWidth="md" disableGutters sx={{ p: 4 }}>
-      <Typography variant="alternet" sx={{ ml: 3 }}>
-        List your business on PoshSub
-      </Typography>
+      <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
+        <Typography variant="alternet" sx={{ ml: { xs: 0, md: 3 } }}>
+          List your business on PoshSub
+        </Typography>
+      </Box>
 
       <FormControl fullWidth size="small">
         <Grid container>

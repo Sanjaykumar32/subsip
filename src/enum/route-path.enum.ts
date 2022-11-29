@@ -2,7 +2,7 @@ export enum AuthRoutePathEnum {
   AUTH = "/auth",
   SIGN_IN = "/auth/sign-in",
   SIGN_UP = "/auth/sign-up",
-  PASSWORD_RESET = "/auth/Password-reset",
+  PASSWORD_RESET = "/auth/password-reset",
 }
 
 export enum AdminRoutePathEnum {
@@ -32,9 +32,10 @@ export enum RoutePathEnum {
   HOME = "/",
   PROFILE = "/profile",
   LISTING = "/listing",
+
   LISTING_ADD = "/listing/add",
   REFER = "/refer",
   REWARDS = "/rewards",
   SUBSCRIPTIONS = "/subscriptions",
-  LISTING_PRODUCT = "/LISTING/:id",
+  LISTING_PRODUCT = "/listing/:id",
 }
