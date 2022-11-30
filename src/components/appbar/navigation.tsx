@@ -59,7 +59,7 @@ export function ResponsiveAppBar() {
         sx={{
           mr: 2,
           display: { xs: "none", md: "flex" },
-          fontFamily: "monospace",
+          fontFamily: "Kessel",
           fontWeight: 700,
           letterSpacing: ".2rem",
           color: "inherit",
@@ -77,8 +77,9 @@ export function ResponsiveAppBar() {
       <TextField
         fullWidth
         size="small"
-        sx={{ mx: "auto", maxWidth: "400px" }}
+        sx={{ mx: "auto", maxWidth: "800px" }}
         InputProps={{
+          sx: { borderRadius: "60px" },
           endAdornment: (
             <IconButton>
               <FontAwesomeIcon icon={faSearch} size="sm" />

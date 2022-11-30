@@ -29,10 +29,10 @@ export function ClickOnCategory() {
   };
 
   return (
-    <Container maxWidth={false} sx={{ p: 2 }}>
+    <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
         <Grid item xs={12} md={2}>
-          <Box sx={{ overflow: "auto" }}>
+          <Box sx={{ overflow: "auto", my: 2 }}>
             <Typography variant="body1" fontWeight="600">
               Listings by subcategory:
             </Typography>
@@ -49,7 +49,7 @@ export function ClickOnCategory() {
             </List>
           </Box>
         </Grid>
-        <Grid item xs={12} md={9}>
+        <Grid item xs={12} md={10}>
           <Box>
             <Typography variant="alternet">
               Browse restaurants in Seattle, WA
@@ -95,7 +95,7 @@ export function ClickOnCategory() {
               </Box>
             </Box>
 
-            <Grid container spacing={2} sx={{ my: 0.5 }}>
+            <Grid container spacing={2}>
               {Array(12)
                 .fill(data)
                 .map((data) => (
