@@ -32,7 +32,7 @@ export function ClickOnCategory() {
     <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
         <Grid item xs={12} md={2}>
-          <Box sx={{ overflow: "auto", my: 2 }}>
+          <Box sx={{ overflow: "auto", my: 1 }}>
             <Typography variant="body1" fontWeight="600">
               Listings by subcategory:
             </Typography>
