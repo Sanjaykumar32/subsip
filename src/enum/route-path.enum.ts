@@ -8,12 +8,13 @@ export enum AuthRoutePathEnum {
 export enum AdminRoutePathEnum {
   ADMIN = "/admin",
   ADMIN_REFERRAL_PRICE = "/admin/referral-price",
-  ADMIN_NEW_CATEGORY = "/admin/new-category",
   ADMIN_NEW_NOTIFICTAION = "/admin/new-notification",
   ADMIN_NEW_REWARDS = "/admin/new-rewards",
   ADMIN_NEW_SUBCATEGORY = "/admin/new-subcategory",
   ADMIN_NOTIFICATION = "/admin/notification",
   ADMIN_NOTIFY_BUTTON = "/admin/notify-button",
+
+  ADMIN_NEW_CATEGORY = "/admin/new-category",
   ADMIN_CATEGORY = "/admin/category",
   ADMIN_DASHBOARD = "/admin/dashboard",
   ADMIN_LISTING_TO_SUBSCRIBERS = "/admin/listing-to-subscribers",

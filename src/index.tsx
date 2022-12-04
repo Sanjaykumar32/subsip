@@ -5,6 +5,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { store } from "data";
 import { theme } from "theme";
+import "./index.css";
 
 import { AuthLayout, NavigationBar } from "./layouts";
 import {
