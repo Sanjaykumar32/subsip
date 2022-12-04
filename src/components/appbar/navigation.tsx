@@ -117,6 +117,29 @@ export function ResponsiveAppBar() {
     });
   }, [theme.palette.info.main]);
 
+  const MobilePoshSubLogo = useMemo(
+    () => (
+      <Box sx={{ flexGrow: 1, display: { md: "none", sm: "flex" } }}>
+        <Typography
+          variant="h5"
+          component="a"
+          sx={{
+            fontFamily: "Kessel",
+            fontWeight: 700,
+            color: "inherit",
+            textDecoration: "none",
+            display: "flex",
+            justifyContent: "center",
+          }}
+          onClick={(event) => setAnchorElMenu(event.target as HTMLElement)}
+        >
+          PoshSub
+        </Typography>
+      </Box>
+    ),
+    []
+  );
+
   const MobileLogo = useMemo(
     () => (
       <Box sx={{ flexGrow: 1, display: { md: "none", sm: "flex" } }}>
@@ -354,10 +377,11 @@ export function ResponsiveAppBar() {
           {Logo}
           {AppbarCenter}
           {MobileMenu}
-          {MobileLogo}
+          {MobilePoshSubLogo}
           {Actions}
           {ActionMenuMobile}
         </Toolbar>
+        <Toolbar>{MobileLogo}</Toolbar>
         <Toolbar
           disableGutters
           variant="dense"
