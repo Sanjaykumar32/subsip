@@ -9,7 +9,13 @@ import {
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, CssBaseline, ListItemText, useTheme } from "@mui/material";
+import {
+  Box,
+  CssBaseline,
+  ListItemText,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import Drawer from "@mui/material/Drawer";
@@ -73,7 +79,23 @@ export function AdminLayout() {
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Logo variant="dark" />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { md: "flex" },
+              fontFamily: "Kessel",
+              fontWeight: 700,
+              letterSpacing: ".2rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            PoshSub
+          </Typography>
           <TextField
             size="small"
             sx={{ width: "50%" }}

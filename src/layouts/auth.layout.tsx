@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, AppBar, Toolbar, Button, Grid } from "@mui/material";
+import {
+  Container,
+  AppBar,
+  Toolbar,
+  Button,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { ScrollToTop, Logo, FooterContainer, Social, Links } from "components";
 import { Outlet } from "react-router-dom";
 
@@ -18,7 +25,23 @@ export function AuthLayout() {
         sx={{ borderBottom: "1px solid black" }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Logo variant="dark" />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { md: "flex" },
+              fontFamily: "Kessel",
+              fontWeight: 700,
+              letterSpacing: ".2rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            PoshSub
+          </Typography>
           <Button variant="rounded" href="/signIn">
             Log in
           </Button>

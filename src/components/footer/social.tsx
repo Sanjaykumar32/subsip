@@ -61,8 +61,24 @@ export function Social() {
 
   return (
     <SocialBox>
-      <Logo variant="light" />
-      <Typography variant="body2" sx={{ mb: 3 }}>
+      <Typography
+        variant="h5"
+        noWrap
+        component="a"
+        href="/"
+        sx={{
+          mr: 2,
+          display: { md: "flex" },
+          fontFamily: "Kessel",
+          fontWeight: 700,
+          letterSpacing: ".2rem",
+          color: "inherit",
+          textDecoration: "none",
+        }}
+      >
+        PoshSub
+      </Typography>
+      <Typography variant="body2" sx={{ mb: 5, mt: 1 }}>
         Reward for Subscribers
       </Typography>
       <IconList container>
