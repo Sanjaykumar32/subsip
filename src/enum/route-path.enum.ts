@@ -31,12 +31,12 @@ export enum AdminRoutePathEnum {
 
 export enum RoutePathEnum {
   HOME = "/",
-  PROFILE = "/profile",
   LISTING = "/listing",
-
-  LISTING_ADD = "/listing/add",
-  REFER = "/refer",
   REWARDS = "/rewards",
+
   SUBSCRIPTIONS = "/subscriptions",
+  REFER = "/refer",
+  PROFILE = "/profile",
+  LISTING_ADD = "/listing/add",
   LISTING_PRODUCT = "/listing/:id",
 }
