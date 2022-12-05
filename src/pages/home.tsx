@@ -58,7 +58,9 @@ export function Home() {
                       flexDirection: "column",
                       alignItems: "flex-start",
                     }}
-                    xs={7}
+                    xs={12}
+                    md={7}
+                    order={{ xs: 1, md: 0 }}
                   >
                     <Chip
                       label="Featured"
@@ -79,7 +81,7 @@ export function Home() {
                     />
                   </Grid>
 
-                  <Grid item xs={5}>
+                  <Grid item xs={12} md={5} order={{ xs: 0, md: 1 }}>
                     <Card sx={{ width: "100%", maxHeight: "300px" }}>
                       <img
                         src={data.image}

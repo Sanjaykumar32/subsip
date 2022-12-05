@@ -381,7 +381,13 @@ export function ResponsiveAppBar() {
           {Actions}
           {ActionMenuMobile}
         </Toolbar>
-        <Toolbar>{MobileLogo}</Toolbar>
+        <Toolbar
+          sx={{
+            display: { xs: "flex", md: "none" },
+          }}
+        >
+          {MobileLogo}
+        </Toolbar>
         <Toolbar
           disableGutters
           variant="dense"
