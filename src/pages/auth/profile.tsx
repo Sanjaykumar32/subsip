@@ -22,7 +22,7 @@ export function Profile() {
     <Container sx={{ p: 5 }} maxWidth={false}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Typography variant="h6" fontWeight={600}>
-          Profile{" "}
+          Profile
         </Typography>
         <Box sx={{ ml: 2 }}>
           <VerifiedUserIcon color="success" sx={{ mr: 0.5 }} />
