@@ -32,7 +32,7 @@ export function AdminNewReferralPrice() {
           </Box>
           <TextField fullWidth sx={{ my: 1, borderRadius: "30px", mr: 1 }} />
         </Box>
-        <FormControl sx={{ width: 400 }}>
+        <FormControl sx={{ maxWidth: 400 }} fullWidth>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>
               Referal Amount

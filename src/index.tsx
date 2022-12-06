@@ -42,7 +42,7 @@ import {
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
 
 import reportWebVitals from "./reportWebVitals";
-import { AdminLayout } from "layouts/admin-panel";
+import { AdminLayout } from "components/admin-layout";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 
 const root = ReactDOM.createRoot(

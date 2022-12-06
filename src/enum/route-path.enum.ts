@@ -10,7 +10,7 @@ export enum AdminRoutePathEnum {
   ADMIN_REFERRAL_PRICE = "/admin/referral-price",
   ADMIN_NEW_NOTIFICTAION = "/admin/new-notification",
   ADMIN_NEW_REWARDS = "/admin/new-rewards",
-  ADMIN_NEW_SUBCATEGORY = "/admin/new-subcategory",
+  ADMIN_NEW_SUBCATEGORY = "/admin/subcategory/add",
   ADMIN_NOTIFY_BUTTON = "/admin/notify-button",
 
   ADMIN_NEW_CATEGORY = "/admin/new-category",

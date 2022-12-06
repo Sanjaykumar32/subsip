@@ -4,6 +4,7 @@ import {
   Button,
   Container,
   FormControl,
+  Grid,
   MenuItem,
   Select,
   TextField,
@@ -17,10 +18,10 @@ export function AdminNewReward() {
     <Container maxWidth="lg">
       <AdminBackButton />
 
-      <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
-        <Box sx={{ display: "flex" }}>
-          <Box sx={{ my: 1, alignItems: "center" }}>
-            <Box sx={{ display: "flex" }}>
+      <Container maxWidth="sm" sx={{ mt: 1, ml: 0.5 }}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ display: "flex", mt: 2 }}>
               <Typography variant="body2" fontWeight={500}>
                 Name
               </Typography>
@@ -32,14 +33,11 @@ export function AdminNewReward() {
                 *required
               </Typography>
             </Box>
-            <TextField
-              fullWidth
-              sx={{ my: 1, borderRadius: "30px", mr: 1, width: "400px" }}
-            />
-          </Box>
+            <TextField fullWidth />
+          </Grid>
 
-          <Box sx={{ my: 1, alignItems: "center", ml: 2 }}>
-            <Box sx={{ display: "flex" }}>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ display: "flex", mt: 2 }}>
               <Typography variant="body2" fontWeight={500}>
                 Availability
               </Typography>
@@ -51,17 +49,14 @@ export function AdminNewReward() {
                 *required
               </Typography>
             </Box>
-            <TextField
-              fullWidth
-              sx={{ my: 1, borderRadius: "30px", mr: 1, width: "400px" }}
-            />
-          </Box>
-        </Box>
+            <TextField fullWidth />
+          </Grid>
+        </Grid>
 
-        <Box sx={{ my: 1.5, alignItems: "center" }}>
-          <Box sx={{ display: "flex" }}>
-            <FormControl>
-              <Box sx={{ display: "flex" }}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={6}>
+            <FormControl fullWidth>
+              <Box sx={{ display: "flex", mt: 2 }}>
                 <Typography variant="body2" fontWeight={500}>
                   Category
                 </Typography>
@@ -74,76 +69,70 @@ export function AdminNewReward() {
                 </Typography>
               </Box>
               <Select
-                fullWidth
                 variant="outlined"
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
                 size="small"
-                sx={{ my: 1, width: "400px" }}
               >
                 <MenuItem value={"Newest"}>Newest</MenuItem>
                 <MenuItem value={"Oldest"}>Oldest</MenuItem>
               </Select>
             </FormControl>
-            <Box sx={{ ml: 53 }}>
-              <FormControl>
-                <Box sx={{ display: "flex" }}>
-                  <Typography variant="body2" fontWeight={500}>
-                    Subcategory
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    fontWeight={400}
-                    sx={{ ml: 1, color: theme.palette.grey[400] }}
-                  >
-                    *required
-                  </Typography>
-                </Box>
-                <Select
-                  fullWidth
-                  variant="outlined"
-                  labelId="sort-by-select-label"
-                  id="sort-by-simple-select"
-                  size="small"
-                  sx={{ my: 1, width: "400px" }}
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormControl fullWidth sx={{ mt: 2 }}>
+              <Box sx={{ display: "flex" }}>
+                <Typography variant="body2" fontWeight={500}>
+                  Subcategory
+                </Typography>
+                <Typography
+                  variant="caption"
+                  fontWeight={400}
+                  sx={{ ml: 1, color: theme.palette.grey[400] }}
                 >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Box>
-
-          <FormControl sx={{ my: 1.5 }}>
-            <Box sx={{ display: "flex" }}>
-              <Typography variant="body2" fontWeight={500}>
-                Business name
-              </Typography>
-              <Typography
-                variant="caption"
-                fontWeight={400}
-                sx={{ ml: 1, color: theme.palette.grey[400] }}
+                  *required
+                </Typography>
+              </Box>
+              <Select
+                variant="outlined"
+                labelId="sort-by-select-label"
+                id="sort-by-simple-select"
+                size="small"
               >
-                *required
-              </Typography>
-            </Box>
-            <Select
-              fullWidth
-              variant="outlined"
-              labelId="sort-by-select-label"
-              id="sort-by-simple-select"
-              size="small"
-              sx={{ my: 1, width: "400px" }}
+                <MenuItem value={"Newest"}>Newest</MenuItem>
+                <MenuItem value={"Oldest"}>Oldest</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+
+        <FormControl sx={{ mt: 2 }} fullWidth>
+          <Box sx={{ display: "flex" }}>
+            <Typography variant="body2" fontWeight={500}>
+              Business name
+            </Typography>
+            <Typography
+              variant="caption"
+              fontWeight={400}
+              sx={{ ml: 1, color: theme.palette.grey[400] }}
             >
-              <MenuItem value={"Newest"}>Newest</MenuItem>
-              <MenuItem value={"Oldest"}>Oldest</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+              *required
+            </Typography>
+          </Box>
+          <Select
+            variant="outlined"
+            labelId="sort-by-select-label"
+            id="sort-by-simple-select"
+            size="small"
+          >
+            <MenuItem value={"Newest"}>Newest</MenuItem>
+            <MenuItem value={"Oldest"}>Oldest</MenuItem>
+          </Select>
+        </FormControl>
 
         <Box
           sx={{
-            my: 2,
+            mt: 2,
             mx: "auto",
             display: "flex",
             alignItems: "center",

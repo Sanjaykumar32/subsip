@@ -18,7 +18,7 @@ export function AdminNotifyButton() {
     <Container maxWidth="lg">
       <AdminBackButton />
       <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
-        <Box sx={{ my: 2, alignItems: "center" }}>
+        <Box sx={{ mt: 2, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>
               Headline
@@ -31,9 +31,9 @@ export function AdminNotifyButton() {
               *required
             </Typography>
           </Box>
-          <TextField fullWidth sx={{ my: 1, borderRadius: "30px", mr: 1 }} />
+          <TextField fullWidth sx={{ my: 1, mr: 1 }} />
         </Box>
-        <Box sx={{ my: 1, alignItems: "center" }}>
+        <Box sx={{ mt: 2, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>
               Description
@@ -46,13 +46,10 @@ export function AdminNotifyButton() {
               *required
             </Typography>
           </Box>
-          <TextareaAutosize
-            aria-label="minimum height"
-            style={{ width: 400, height: 70, marginTop: 4 }}
-          />
+          <TextField multiline fullWidth minRows={2} maxRows={5} />
         </Box>
 
-        <Box sx={{ my: 1, alignItems: "center" }}>
+        <Box sx={{ mt: 2, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>
               Date
@@ -66,7 +63,7 @@ export function AdminNotifyButton() {
             </Typography>
           </Box>
           <TextField
-            sx={{ my: 1, borderRadius: "30px", width: "400px" }}
+            fullWidth
             InputProps={{
               endAdornment: (
                 <IconButton>

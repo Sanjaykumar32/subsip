@@ -22,7 +22,7 @@ export function AdminNewSubCategory() {
       <AdminBackButton />
       <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
         <Box sx={{ my: 2 }}>
-          <FormControl>
+          <FormControl fullWidth>
             <Box sx={{ display: "flex" }}>
               <Typography variant="body2" fontWeight={500}>
                 Select Business Category
@@ -41,7 +41,7 @@ export function AdminNewSubCategory() {
               labelId="sort-by-select-label"
               id="sort-by-simple-select"
               size="small"
-              sx={{ my: 1, width: "370px" }}
+              sx={{ my: 1 }}
             >
               <MenuItem value={"Newest"}>Newest</MenuItem>
               <MenuItem value={"Oldest"}>Oldest</MenuItem>
@@ -61,11 +61,13 @@ export function AdminNewSubCategory() {
               </Typography>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <TextField
-                fullWidth
-                sx={{ my: 1, borderRadius: "30px", mr: 1, width: "400px" }}
+              <TextField fullWidth sx={{ my: 1 }} />
+              <FontAwesomeIcon
+                icon={faPlus}
+                size="lg"
+                color="black"
+                style={{ marginLeft: theme.spacing(1) }}
               />
-              <FontAwesomeIcon icon={faPlus} size="lg" color="black" />
             </Box>
           </Box>
         </Box>
