@@ -135,7 +135,6 @@ export function AdminLayout(props: Props) {
           </IconButton>
           <Typography
             variant="h5"
-            noWrap
             component="a"
             href="/"
             sx={{
