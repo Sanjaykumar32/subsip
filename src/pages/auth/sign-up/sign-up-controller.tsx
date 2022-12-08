@@ -30,7 +30,6 @@ const SignUpController = (): ISignUpControllerReturns => {
    * @param  {ChangeEvent<HTMLInputElement>} event
    */
   const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    console.log(name);
     setValue({ ...value, [event.target.name]: event.target.value });
   };
 

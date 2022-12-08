@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Form } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import {
   Box,
   Button,
@@ -7,12 +7,12 @@ import {
   FormGroup,
   TextField,
   Typography,
-  Link,
 } from "@mui/material";
 
 import { InputBox, Label } from "components";
 
 import SignInController from "./sign-in-controller";
+import { AuthRoutePathEnum } from "enum";
 
 /**
  * Sign In form
@@ -33,8 +33,17 @@ export function SignIn(): ReactElement {
           <Typography fontWeight={500} variant="body1">
             New to PoshSub?
           </Typography>
-          <Link href="/signup" variant="body1" sx={{ ml: 1 }}>
-            Click here to sign up
+          <Link
+            to={AuthRoutePathEnum.SIGN_UP}
+            style={{
+              textDecoration: "none",
+              marginLeft: 4,
+              color: theme.palette.info.main,
+            }}
+          >
+            <Typography fontWeight={500} variant="body1">
+              Click here to sign up
+            </Typography>
           </Link>
         </Box>
         <Form onSubmit={submitHandler}>
@@ -64,8 +73,18 @@ export function SignIn(): ReactElement {
             >
               Log in
             </Button>
-            <Link href="/PasswordReset" sx={{ textAlign: "center", mt: 2 }}>
-              Forgot Password?
+            <Link
+              to={AuthRoutePathEnum.FORGET_PASSWORD}
+              style={{
+                textAlign: "center",
+                marginTop: 2,
+                textDecoration: "none",
+                color: theme.palette.info.main,
+              }}
+            >
+              <Typography fontWeight={500} variant="body1">
+                Forgot Password?
+              </Typography>
             </Link>
           </FormGroup>
         </Form>

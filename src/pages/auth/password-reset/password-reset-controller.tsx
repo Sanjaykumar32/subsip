@@ -2,11 +2,11 @@ import { Theme, useTheme } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 
 interface IInitialValue {
-  email: string;
   password: string;
+  confirmPassword: string;
 }
 
-interface ISignUpControllerReturns {
+interface IPasswordResetControllerReturns {
   getters: { value: IInitialValue; theme: Theme };
   handlers: {
     changeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -16,13 +16,13 @@ interface ISignUpControllerReturns {
 
 /**
  * Sign Up Controller
- * @return {ISignUpControllerReturns}
+ * @return {IPasswordResetControllerReturns}
  */
-const SignUpController = (): ISignUpControllerReturns => {
+const PasswordResetController = (): IPasswordResetControllerReturns => {
   const theme = useTheme();
   const [value, setValue] = useState<IInitialValue>({
-    email: "",
     password: "",
+    confirmPassword: "",
   });
 
   /**
@@ -30,7 +30,6 @@ const SignUpController = (): ISignUpControllerReturns => {
    * @param  {ChangeEvent<HTMLInputElement>} event
    */
   const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    console.log(name);
     setValue({ ...value, [event.target.name]: event.target.value });
   };
 
@@ -41,10 +40,10 @@ const SignUpController = (): ISignUpControllerReturns => {
   const submitHandler = (event: any): void => {
     event.preventDefault();
     console.log({
-      email: value.email,
       password: value.password,
+      confirmPassword: value.confirmPassword,
     });
-    setValue({ email: "", password: "" });
+    setValue({ password: "", confirmPassword: "" });
   };
 
   return {
@@ -53,4 +52,4 @@ const SignUpController = (): ISignUpControllerReturns => {
   };
 };
 
-export default SignUpController;
+export default PasswordResetController;

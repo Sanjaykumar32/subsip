@@ -3,10 +3,9 @@ import { ChangeEvent, useState } from "react";
 
 interface IInitialValue {
   email: string;
-  password: string;
 }
 
-interface ISignUpControllerReturns {
+interface IForgetPasswordControllerReturns {
   getters: { value: IInitialValue; theme: Theme };
   handlers: {
     changeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -15,14 +14,13 @@ interface ISignUpControllerReturns {
 }
 
 /**
- * Sign Up Controller
- * @return {ISignUpControllerReturns}
+ * Forget Password Controller
+ * @return {IForgetPasswordControllerReturns}
  */
-const SignUpController = (): ISignUpControllerReturns => {
+const ForgetPasswordController = (): IForgetPasswordControllerReturns => {
   const theme = useTheme();
   const [value, setValue] = useState<IInitialValue>({
     email: "",
-    password: "",
   });
 
   /**
@@ -42,9 +40,8 @@ const SignUpController = (): ISignUpControllerReturns => {
     event.preventDefault();
     console.log({
       email: value.email,
-      password: value.password,
     });
-    setValue({ email: "", password: "" });
+    setValue({ email: "" });
   };
 
   return {
@@ -53,4 +50,4 @@ const SignUpController = (): ISignUpControllerReturns => {
   };
 };
 
-export default SignUpController;
+export default ForgetPasswordController;

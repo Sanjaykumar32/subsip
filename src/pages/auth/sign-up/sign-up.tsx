@@ -1,8 +1,7 @@
 import React from "react";
-import { Form } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import {
   Box,
-  Link,
   Button,
   Container,
   FormGroup,
@@ -13,6 +12,7 @@ import {
 import { InputBox, Label } from "components";
 
 import SignUpController from "./sign-up-controller";
+import { AuthRoutePathEnum } from "enum";
 
 export function SignUp() {
   const { getters, handlers } = SignUpController();
@@ -60,7 +60,17 @@ export function SignUp() {
             Privacy Policy.
           </Typography>
           <Box sx={{ mt: 2 }}>
-            <Link href="/signin">Already have an account ?</Link>
+            <Link
+              to={AuthRoutePathEnum.SIGN_IN}
+              style={{
+                textDecoration: "none",
+                color: theme.palette.info.main,
+              }}
+            >
+              <Typography fontWeight={500} variant="body1">
+                Already have an account ?
+              </Typography>
+            </Link>
           </Box>
         </Box>
       </Box>
