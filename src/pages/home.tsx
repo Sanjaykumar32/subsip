@@ -66,7 +66,7 @@ export function Home() {
                       label="Featured"
                       color="info"
                       size="small"
-                      sx={{ borderRadius: "4px", fontWeight: 900 }}
+                      sx={{ borderRadius: "4px", fontWeight: 900, my: 2 }}
                     />
                     <Title
                       sx={{
