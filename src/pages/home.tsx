@@ -40,7 +40,7 @@ export function Home() {
         sx={{
           textAlign: "center",
           height: "fit-content",
-          backgroundColor: "black",
+          backgroundColor: { xs: "white", md: "black" },
           p: 2,
         }}
       >
@@ -68,10 +68,23 @@ export function Home() {
                       size="small"
                       sx={{ borderRadius: "4px", fontWeight: 900 }}
                     />
-                    <Title color="white">{data.name}</Title>
+                    <Title
+                      sx={{
+                        color: { xs: "black", md: "white" },
+                      }}
+                    >
+                      {data.name}
+                    </Title>
                     <Address>{data.location}</Address>
                     <Box sx={{ pr: "35%" }}>
-                      <Info color="white" sx={{ textAlign: "left", mt: 1 }}>
+                      <Info
+                        color="white"
+                        sx={{
+                          textAlign: "left",
+                          mt: 1,
+                          color: { xs: "black", md: "white" },
+                        }}
+                      >
                         {data.description}
                       </Info>
                     </Box>
