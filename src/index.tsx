@@ -37,6 +37,7 @@ import {
   SignUp,
   Subscriptions,
   LocationPage,
+  ForgetPassword,
 } from "./pages";
 
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: AuthRoutePathEnum.PASSWORD_RESET,
         element: <PasswordReset />,
+      },
+      {
+        path: AuthRoutePathEnum.FORGET_PASSWORD,
+        element: <ForgetPassword />,
       },
     ],
   },

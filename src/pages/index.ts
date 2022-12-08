@@ -3,6 +3,7 @@ export * from "./auth/sign-in";
 export * from "./auth/sign-up";
 export * from "./auth/password-reset";
 export * from "./auth/profile";
+export * from "./auth/forget-password";
 
 // pages
 export * from "./home";

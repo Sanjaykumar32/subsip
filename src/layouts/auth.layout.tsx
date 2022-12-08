@@ -8,7 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { ScrollToTop, Logo, FooterContainer, Social, Links } from "components";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import { AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { theme } from "theme";
 
 export function AuthLayout() {
   return (
@@ -29,21 +31,29 @@ export function AuthLayout() {
             variant="h5"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { md: "flex" },
               fontFamily: "Kessel",
               fontWeight: 700,
               letterSpacing: ".2rem",
-              color: "inherit",
               textDecoration: "none",
             }}
           >
-            PoshSub
+            <Link
+              to={RoutePathEnum.HOME}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              PoshSub
+            </Link>
           </Typography>
-          <Button variant="rounded" href="/signIn">
-            Log in
+          <Button variant="rounded">
+            <Link
+              to={AuthRoutePathEnum.SIGN_IN}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              Log in
+            </Link>
           </Button>
         </Toolbar>
       </AppBar>

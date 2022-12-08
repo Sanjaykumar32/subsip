@@ -3,6 +3,7 @@ export enum AuthRoutePathEnum {
   SIGN_IN = "/auth/sign-in",
   SIGN_UP = "/auth/sign-up",
   PASSWORD_RESET = "/auth/password-reset",
+  FORGET_PASSWORD = "/auth/forget-password",
 }
 
 export enum AdminRoutePathEnum {
