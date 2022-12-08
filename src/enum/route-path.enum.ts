@@ -33,7 +33,6 @@ export enum RoutePathEnum {
   HOME = "/",
   LISTING = "/listing",
   REWARDS = "/rewards",
-
   SUBSCRIPTIONS = "/subscriptions",
   REFER = "/refer",
   PROFILE = "/profile",

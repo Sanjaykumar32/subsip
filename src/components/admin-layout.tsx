@@ -13,8 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Outlet } from "react-router-dom";
-import Link from "@mui/material/Link";
+import { Link, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -27,6 +26,7 @@ import {
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { Badge, InputAdornment, TextField, useTheme } from "@mui/material";
+import { AdminRoutePathEnum } from "enum";
 
 const drawerWidth = 240;
 
@@ -52,30 +52,43 @@ export function AdminLayout(props: Props) {
       {
         title: "Dashboard",
         icon: faHome,
+        route: AdminRoutePathEnum.ADMIN_DASHBOARD,
       },
+
       {
         title: "Listing",
         icon: faList,
+        route: AdminRoutePathEnum.ADMIN_LISTING,
       },
+
       {
         title: "Subscribers",
         icon: faHome,
+        route: AdminRoutePathEnum.ADMIN_SUBSCRIBERS,
       },
+
       {
         title: "Categories",
         icon: faUser,
+        route: AdminRoutePathEnum.ADMIN_CATEGORY,
       },
+
       {
         title: "Notifications",
         icon: faBell,
+        route: AdminRoutePathEnum.ADMIN_NOTIFICATION,
       },
+
       {
         title: "Rewards",
         icon: faTrophy,
+        route: AdminRoutePathEnum.ADMIN_REWARDS_TO_DETAILS,
       },
+
       {
         title: "Referrals",
         icon: faDiagramProject,
+        route: AdminRoutePathEnum.ADMIN_REFERRALS,
       },
     ],
     []
@@ -86,21 +99,23 @@ export function AdminLayout(props: Props) {
       <Toolbar />
       <Divider />
       <List>
-        {menuList.map((text, index) => (
+        {menuList.map((item, index) => (
           <Link
-            key={text.title}
-            sx={{
+            to={item.route}
+            key={item.title}
+            style={{
               color: theme.palette.getContrastText(
                 theme.palette.background.default
               ),
+              textDecoration: "none",
             }}
           >
             <ListItem key={index} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <FontAwesomeIcon icon={text.icon} />
+                  <FontAwesomeIcon icon={item.icon} />
                 </ListItemIcon>
-                <ListItemText primary={text.title} />
+                <ListItemText primary={item.title} />
               </ListItemButton>
             </ListItem>
           </Link>
