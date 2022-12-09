@@ -45,6 +45,7 @@ import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
 import reportWebVitals from "./reportWebVitals";
 import { AdminLayout } from "components/admin-layout";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { AuthProvider } from "context/auth";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -203,7 +204,9 @@ root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>
   </Provider>
 );

@@ -4,7 +4,7 @@ import { ApiHelper } from "helpers";
 import {
   IForgetPasswordRequest,
   IResetPasswordRequest,
-  ISignInRequest,
+  ICredentials,
   ISignInResponse,
   ISignUpRequest,
 } from "interface";
@@ -15,11 +15,11 @@ import {
 export class AuthService {
   /**
    * Admin Sign In
-   * @param {ISignInRequest} credentials
+   * @param {ICredentials} credentials
    * @return {Promise<SignInResponse>}
    */
   public static async signIn(
-    credentials: ISignInRequest
+    credentials: ICredentials
   ): Promise<ISignInResponse> {
     const res: AxiosResponse<ISignInResponse> =
       await ApiHelper.send<ISignInResponse>({

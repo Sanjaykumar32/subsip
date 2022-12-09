@@ -26,6 +26,7 @@ import {
   faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "context/auth";
 
 const pages = [
   { title: "Restaurant", path: "/" },
@@ -37,6 +38,8 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const notification = [{ title: "You just won a Promo Code!!" }];
 
 export function ResponsiveAppBar() {
+  const auth = useAuth();
+  console.log(auth, "auth");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();

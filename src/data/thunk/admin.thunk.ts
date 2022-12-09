@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   IForgetPasswordRequest,
   IResetPasswordRequest,
-  ISignInRequest,
+  ICredentials,
   ISignInResponse,
   ISignUpRequest,
 } from "interface";
@@ -17,7 +17,7 @@ export class AuthenticationThunk {
    */
   public static signIn = createAsyncThunk(
     "authentication/signin/user",
-    async (credentials: ISignInRequest): Promise<ISignInResponse> => {
+    async (credentials: ICredentials): Promise<ISignInResponse> => {
       const response = await AuthService.signIn(credentials);
       return response;
     }
