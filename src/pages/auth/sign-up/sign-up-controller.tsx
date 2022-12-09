@@ -26,7 +26,7 @@ const SignUpController = (): ISignUpControllerReturns => {
   });
 
   /**
-   * set the email and password value
+   * Set the email and password value
    * @param  {ChangeEvent<HTMLInputElement>} event
    */
   const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -34,7 +34,6 @@ const SignUpController = (): ISignUpControllerReturns => {
   };
 
   /**
-   * @param {event:any}
    * @return {void}
    */
   const submitHandler = (): void => {

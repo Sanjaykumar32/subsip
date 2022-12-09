@@ -15,7 +15,7 @@ export class AuthenticationThunk {
   /**
    * SignIn Thunk
    */
-  public static SignIn = createAsyncThunk(
+  public static signIn = createAsyncThunk(
     "authentication/signin/user",
     async (credentials: ISignInRequest): Promise<ISignInResponse> => {
       const response = await AuthService.signIn(credentials);
@@ -26,7 +26,7 @@ export class AuthenticationThunk {
   /**
    * SignUp Thunk
    */
-  public static SignUp = createAsyncThunk(
+  public static signUp = createAsyncThunk(
     "authentication/SignUp/user",
     async (credentials: ISignUpRequest): Promise<ISignInResponse> => {
       const response = await AuthService.signUp(credentials);
@@ -37,7 +37,7 @@ export class AuthenticationThunk {
   /**
    * ForgetPassword Thunk
    */
-  public static ForgetPassword = createAsyncThunk(
+  public static forgetPassword = createAsyncThunk(
     "authentication/ForgetPassword/user",
     async (credentials: IForgetPasswordRequest): Promise<ISignInResponse> => {
       const response = await AuthService.forgetpassword(credentials);
@@ -48,7 +48,7 @@ export class AuthenticationThunk {
   /**
    * ResetPassword Thunk
    */
-  public static ResetPassword = createAsyncThunk(
+  public static resetPassword = createAsyncThunk(
     "authentication/ResetPassword/user",
     async (credentials: IResetPasswordRequest): Promise<ISignInResponse> => {
       const response = await AuthService.resetpassword(credentials);

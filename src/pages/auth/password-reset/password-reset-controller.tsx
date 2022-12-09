@@ -10,7 +10,7 @@ interface IPasswordResetControllerReturns {
   getters: { value: IInitialValue; theme: Theme };
   handlers: {
     changeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
-    submitHandler: (event: any) => void;
+    submitHandler: () => void;
   };
 }
 
@@ -34,11 +34,9 @@ const PasswordResetController = (): IPasswordResetControllerReturns => {
   };
 
   /**
-   * @param {event:any}
    * @return {void}
    */
-  const submitHandler = (event: any): void => {
-    event.preventDefault();
+  const submitHandler = (): void => {
     console.log({
       password: value.password,
       confirmPassword: value.confirmPassword,

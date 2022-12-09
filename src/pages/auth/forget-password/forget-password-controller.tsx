@@ -9,7 +9,7 @@ interface IForgetPasswordControllerReturns {
   getters: { value: IInitialValue; theme: Theme };
   handlers: {
     changeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
-    submitHandler: (event: any) => void;
+    submitHandler: () => void;
   };
 }
 
@@ -28,16 +28,13 @@ const ForgetPasswordController = (): IForgetPasswordControllerReturns => {
    * @param  {ChangeEvent<HTMLInputElement>} event
    */
   const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    console.log(name);
     setValue({ ...value, [event.target.name]: event.target.value });
   };
 
   /**
-   * @param {event:any}
    * @return {void}
    */
-  const submitHandler = (event: any): void => {
-    event.preventDefault();
+  const submitHandler = (): void => {
     console.log({
       email: value.email,
     });
