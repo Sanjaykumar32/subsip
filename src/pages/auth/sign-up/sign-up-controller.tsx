@@ -10,7 +10,7 @@ interface ISignUpControllerReturns {
   getters: { value: IInitialValue; theme: Theme };
   handlers: {
     changeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
-    submitHandler: (event: any) => void;
+    submitHandler: () => void;
   };
 }
 
@@ -37,8 +37,7 @@ const SignUpController = (): ISignUpControllerReturns => {
    * @param {event:any}
    * @return {void}
    */
-  const submitHandler = (event: any): void => {
-    event.preventDefault();
+  const submitHandler = (): void => {
     console.log({
       email: value.email,
       password: value.password,
