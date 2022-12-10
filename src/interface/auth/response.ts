@@ -16,6 +16,16 @@ export interface IBannerResponse {
   data: Daum[];
 }
 
+export interface ISignUpResponse {
+  success: number;
+  message: string;
+  data: ISignUp[];
+}
+
+export interface ISignUp {
+  insert_id: number;
+}
+
 export interface Daum {
   iBusinessId: number;
   vName: string;

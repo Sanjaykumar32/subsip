@@ -7,6 +7,7 @@ import {
   ICredentials,
   ISignInResponse,
   ISignUpRequest,
+  ISignUpResponse,
 } from "interface";
 
 /**
@@ -38,9 +39,9 @@ export class AuthService {
    */
   public static async signUp(
     credentials: ISignUpRequest
-  ): Promise<ISignInResponse> {
-    const res: AxiosResponse<ISignInResponse> =
-      await ApiHelper.send<ISignInResponse>({
+  ): Promise<ISignUpResponse> {
+    const res: AxiosResponse<ISignUpResponse> =
+      await ApiHelper.send<ISignUpResponse>({
         url: "/auth/signup",
         method: "POST",
         data: credentials,

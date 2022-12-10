@@ -1,4 +1,5 @@
 import { Theme, useTheme } from "@mui/material";
+import { useAuth } from "context/auth.context";
 import { ChangeEvent, useState } from "react";
 
 interface IInitialValue {
@@ -19,6 +20,7 @@ interface ISignUpControllerReturns {
  * @return {ISignUpControllerReturns}
  */
 const SignUpController = (): ISignUpControllerReturns => {
+  const auth = useAuth();
   const theme = useTheme();
   const [value, setValue] = useState<IInitialValue>({
     email: "",
@@ -41,6 +43,7 @@ const SignUpController = (): ISignUpControllerReturns => {
       email: value.email,
       password: value.password,
     });
+    auth.signUp({ email: value.email, password: value.password });
     setValue({ email: "", password: "" });
   };
 
