@@ -163,4 +163,26 @@ export class AdminThunk {
       return response;
     }
   );
+
+  /**
+   * Delete Business
+   */
+  // public static deleteBusiness = createAsyncThunk(
+  //   "admin/deleteBusiness",
+  //   async (payload: any): Promise<void> => {
+  //     const response = await AdminService.deleteBusiness(payload);
+  //     return response;
+  //   }
+  // );
+
+  /**
+   * Delete Subscribers
+   */
+  // public static deleteSubscribers = createAsyncThunk(
+  //   "admin/deleteSubscribers",
+  //   async (payload: any): Promise<void> => {
+  //     const response = await AdminService.deleteSubscribers(payload);
+  //     return response;
+  //   }
+  // );
 }

@@ -46,7 +46,7 @@ export class ApiHelper {
           ...config,
           headers: {
             ...config.headers,
-            Authorization: `Bearer ${accessToken}`,
+            ["x-access-token"]: accessToken,
           },
         };
         // Do something before request is sent

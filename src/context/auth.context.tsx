@@ -64,11 +64,11 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     dispatch(UserThunk.fetchProfile());
   }, [dispatch]);
 
-  // const businessId = 1;
+  const businessId = "1";
 
-  // useEffect(() => {
-  //   dispatch(AdminThunk.subscribeByBussinessId({ businessId }));
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(AdminThunk.subscribeByBussinessId({ businessId }));
+  }, [dispatch]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, signIn, signOut }}>

@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Badge,
+  Button,
   Divider,
   TextField,
   useMediaQuery,
@@ -27,6 +28,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth.context";
+import { AuthRoutePathEnum } from "enum";
 
 const pages = [
   { title: "Restaurant", path: "/" },
@@ -221,16 +223,13 @@ export function ResponsiveAppBar() {
         }}
       >
         {settings.map((setting) => (
-          <MenuItem
-            key={setting}
-            //onClick={(event) => setAnchorElSetting(event.target as HTMLElement)}
-          >
+          <MenuItem key={setting} onClick={() => auth.signOut()}>
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}
       </Menu>
     ),
-    [anchorElSetting]
+    [anchorElSetting, auth]
   );
 
   const NotificationMenu = useMemo(
@@ -258,6 +257,49 @@ export function ResponsiveAppBar() {
       </Menu>
     ),
     [anchorElNotification]
+  );
+
+  const commonMenu = useMemo(
+    () => [
+      <Link key="listing-new" href="/listing/add">
+        List on PoshSub
+      </Link>,
+
+      <Divider
+        flexItem
+        key="listing-divider"
+        variant={isMobile ? "fullWidth" : "middle"}
+        orientation={!isMobile ? "vertical" : "horizontal"}
+        sx={{ width: { sm: "100%", md: "" }, mx: { sm: 0, md: 1 } }}
+      />,
+      <Box
+        key="location-selector"
+        sx={{
+          display: "flex",
+        }}
+      >
+        <FontAwesomeIcon icon={faLocationDot} size="1x" />
+        <Typography variant="body2" sx={{ ml: 1 }}>
+          Seattle, WA
+        </Typography>
+      </Box>,
+    ],
+    [isMobile]
+  );
+
+  const LoggedOutMenu = useMemo(
+    () => [
+      <Button
+        key="login"
+        variant="rounded"
+        onClick={() => navigate(AuthRoutePathEnum.SIGN_IN)}
+        sx={{ ml: 1 }}
+      >
+        logIn
+      </Button>,
+      ...commonMenu,
+    ],
+    [commonMenu, navigate]
   );
 
   const ActionsList = useMemo(
@@ -289,29 +331,14 @@ export function ResponsiveAppBar() {
         orientation={!isMobile ? "vertical" : "horizontal"}
         sx={{ width: { sm: "100%", md: "" }, mx: { sm: 0, md: 1 } }}
       />,
-      <Link key="listing-new" href="/listing/add">
-        List on PoshSub
-      </Link>,
-      <Divider
-        flexItem
-        key="listing-divider"
-        variant={isMobile ? "fullWidth" : "middle"}
-        orientation={!isMobile ? "vertical" : "horizontal"}
-        sx={{ width: { sm: "100%", md: "" }, mx: { sm: 0, md: 1 } }}
-      />,
-      <Box
-        key="location-selector"
-        sx={{
-          display: "flex",
-        }}
-      >
-        <FontAwesomeIcon icon={faLocationDot} size="1x" />
-        <Typography variant="body2" sx={{ ml: 1 }}>
-          Seattle, WA
-        </Typography>
-      </Box>,
+      ...commonMenu,
     ],
-    [isMobile]
+    [commonMenu, isMobile]
+  );
+
+  const menu = useMemo(
+    () => (auth.isAuthenticated ? ActionsList : LoggedOutMenu),
+    [ActionsList, LoggedOutMenu, auth.isAuthenticated]
   );
 
   const Actions = useMemo(
@@ -323,12 +350,14 @@ export function ResponsiveAppBar() {
           flexDirection: "row-reverse",
           alignItems: "center",
         }}
+        key="action"
       >
-        {ActionsList}
+        {menu}
       </Box>
     ),
-    [ActionsList]
+    [menu]
   );
+  console.log(menu);
 
   const ActionMenuMobile = useMemo(
     () => (
@@ -358,7 +387,7 @@ export function ResponsiveAppBar() {
             horizontal: 68,
           }}
         >
-          {ActionsList.map((element) => (
+          {menu.map((element) => (
             <MenuItem
               sx={{ justifyContent: "center" }}
               key={element.key}
@@ -370,7 +399,7 @@ export function ResponsiveAppBar() {
         </Menu>
       </>
     ),
-    [ActionsList, anchorElActionsMobileMenu]
+    [anchorElActionsMobileMenu, menu]
   );
 
   return (

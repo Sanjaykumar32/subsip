@@ -1,23 +1,23 @@
 export interface ISubscribeByBussinessIDRequest {
-  businessId: number;
+  businessId: string;
 }
 
 export interface ISubscribeByAdminIdRequest {
-  adminId: number;
+  adminId: string;
 }
 
 export interface IAllBusinessSubscribersRequest {
-  userId: number;
+  userId: string;
 }
 
 export interface IBussinessRequest {
-  businessname: number;
+  businessname: string;
 }
 
 export interface IRefferralCountRequest {
-  userId: number;
+  userId: string;
 }
 
 export interface IRefferralCodeRequest {
-  userId: number;
+  userId: string;
 }

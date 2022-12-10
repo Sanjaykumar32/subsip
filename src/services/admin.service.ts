@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosResponse } from "axios";
 
-import { ApiHelper } from "helpers";
+import { ApiHelper, StringHelper } from "helpers";
 import {
   IAllBusinessSubscribersRequest,
   IBannerResponse,
@@ -33,7 +34,11 @@ export class AdminService {
   ): Promise<ISubscribeByBussinessIDResponse> {
     const res: AxiosResponse<ISubscribeByBussinessIDResponse> =
       await ApiHelper.send<ISubscribeByBussinessIDResponse>({
-        url: `/subscribers?businessId=${payload.businessId}`,
+        // url: `/subscribers?businessId=${payload.businessId}`,
+        url: StringHelper.translationHelper(
+          "/subscribers?businessId=%s",
+          payload.businessId.toString()
+        ),
         method: "GET",
       });
 
@@ -211,4 +216,30 @@ export class AdminService {
 
     return res.data;
   }
+
+  /**
+   * Delete Business
+   * @return {Promise<any>}
+   */
+  // public static async deleteBusiness(payload: any): Promise<any> {
+  //   const res: AxiosResponse<any> = await ApiHelper.send<any>({
+  //     url: `business/4`,
+  //     method: "DELETE",
+  //   });
+
+  //   return res.data;
+  // }
+
+  /**
+   * Delete Subscribers
+   * @return {Promise<any>}
+   */
+  // public static async deleteSubscribers(payload: any): Promise<any> {
+  //   const res: AxiosResponse<any> = await ApiHelper.send<any>({
+  //     url: `/subscriber/2`,
+  //     method: "DELETE",
+  //   });
+
+  //   return res.data;
+  // }
 }
