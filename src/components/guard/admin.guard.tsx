@@ -1,7 +1,10 @@
-import { useAuth } from "context/auth";
-import { RoutePathEnum } from "enum";
+import { useAuth } from "context/auth.context";
+import { useAppSelector } from "data";
+import { GET_ACCOUNT_TYPE } from "data/selectors";
+import { AccountTypeEnum, RoutePathEnum } from "enum";
 import React, { ReactElement, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import _ from "lodash";
 
 interface IAuthGuardProps {
   children: ReactElement;
@@ -15,14 +18,16 @@ export function AdminGuard({ children }: IAuthGuardProps): ReactElement {
   const auth = useAuth();
   const isAuthenticated = auth.isAuthenticated;
   const navigate = useNavigate();
+  const accountType = useAppSelector(GET_ACCOUNT_TYPE);
+  console.log(accountType, "accountType");
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated || accountType !== AccountTypeEnum.ADMIN) {
       navigate(RoutePathEnum.HOME);
     }
-  }, [isAuthenticated, navigate]);
+  }, [accountType, isAuthenticated, navigate]);
 
-  if (isAuthenticated) {
+  if (isAuthenticated || accountType !== AccountTypeEnum.ADMIN) {
     navigate(RoutePathEnum.HOME);
     return <> </>;
   }

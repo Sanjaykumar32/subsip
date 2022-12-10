@@ -1,3 +1,5 @@
+import { useAppDispatch } from "data";
+import { UserThunk } from "data/thunk/user.thunk";
 import { ICredentials, ISignInResponse } from "interface";
 import React, {
   createContext,
@@ -5,6 +7,7 @@ import React, {
   useState,
   useContext,
   useCallback,
+  useEffect,
 } from "react";
 import { AuthService } from "services";
 
@@ -39,6 +42,8 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     initState.isAuthenticated
   );
 
+  const dispatch = useAppDispatch();
+
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {
       const response: ISignInResponse = await AuthService.signIn(credentials);
@@ -53,6 +58,10 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     sessionStorage.clear();
     setAuthenticated(false);
   }, []);
+
+  useEffect(() => {
+    dispatch(UserThunk.fetchProfile());
+  }, [dispatch]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, signIn, signOut }}>

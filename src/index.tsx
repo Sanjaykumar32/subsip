@@ -45,8 +45,9 @@ import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
 import reportWebVitals from "./reportWebVitals";
 import { AdminLayout } from "components/admin-layout";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
-import { AuthProvider } from "context/auth";
+import { AuthProvider } from "context/auth.context";
 import { GuestGuard } from "components/guard";
+import { AdminGuard } from "components/guard/admin.guard";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -126,7 +127,11 @@ const router = createBrowserRouter([
   },
   {
     path: AdminRoutePathEnum.ADMIN,
-    element: <AdminLayout />,
+    element: (
+      <AdminGuard>
+        <AdminLayout />
+      </AdminGuard>
+    ),
     errorElement: <div> Some Error Occured </div>,
     children: [
       {

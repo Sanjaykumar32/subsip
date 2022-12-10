@@ -26,7 +26,7 @@ import {
   faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "context/auth";
+import { useAuth } from "context/auth.context";
 
 const pages = [
   { title: "Restaurant", path: "/" },

@@ -1,4 +1,4 @@
-import { useAuth } from "context/auth";
+import { useAuth } from "context/auth.context";
 import { RoutePathEnum } from "enum";
 import React, { ReactElement, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

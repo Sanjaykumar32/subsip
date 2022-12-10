@@ -1,5 +1,5 @@
 import { Theme, useTheme } from "@mui/material";
-import { useAuth } from "context/auth";
+import { useAuth } from "context/auth.context";
 import { ChangeEvent, useState } from "react";
 
 interface IInitialValue {
