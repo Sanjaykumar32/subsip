@@ -23,7 +23,7 @@ export class AuthService {
   ): Promise<ISignInResponse> {
     const res: AxiosResponse<ISignInResponse> =
       await ApiHelper.send<ISignInResponse>({
-        url: "http://159.223.194.50:8000/auth/Login",
+        url: "/auth/Login",
         method: "POST",
         data: credentials,
       });
@@ -84,4 +84,22 @@ export class AuthService {
 
     return res.data;
   }
+
+  /**
+   * Reset Password
+   * @param {IResetPasswordRequest} credentials
+   * @return {Promise<SignInResponse>}
+   */
+  // public static async resetpassword(
+  //   credentials: IResetPasswordRequest
+  // ): Promise<ISignInResponse> {
+  //   const res: AxiosResponse<ISignInResponse> =
+  //     await ApiHelper.send<ISignInResponse>({
+  //       url: "/subscribers?adminId=6",
+  //       method: "POST",
+  //       data: credentials,
+  //     });
+
+  //   return res.data;
+  // }
 }

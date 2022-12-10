@@ -46,6 +46,7 @@ import reportWebVitals from "./reportWebVitals";
 import { AdminLayout } from "components/admin-layout";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { AuthProvider } from "context/auth";
+import { GuestGuard } from "components/guard";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -60,11 +61,19 @@ const router = createBrowserRouter([
       // auth
       {
         path: AuthRoutePathEnum.SIGN_IN,
-        element: <SignIn />,
+        element: (
+          <GuestGuard>
+            <SignIn />
+          </GuestGuard>
+        ),
       },
       {
         path: AuthRoutePathEnum.SIGN_UP,
-        element: <SignUp />,
+        element: (
+          <GuestGuard>
+            <SignUp />
+          </GuestGuard>
+        ),
       },
       {
         path: AuthRoutePathEnum.PASSWORD_RESET,

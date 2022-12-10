@@ -41,22 +41,25 @@ export class ApiHelper {
   public static initRequestManager() {
     axios.interceptors.request.use(
       (config) => {
-        let newConfig = config;
         const accessToken = sessionStorage.getItem("token");
-        if (navigator.cookieEnabled) {
-          newConfig = { withCredentials: true, ...newConfig };
-        } else {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          newConfig.headers.common.Authorization = `Bearer ${accessToken}`;
-        }
-
+        config = {
+          ...config,
+          headers: {
+            ...config.headers,
+            Authorization: `Bearer ${accessToken}`,
+          },
+        };
         // Do something before request is sent
-        return newConfig;
+        return config;
       },
       (error) => Promise.resolve(error)
     );
   }
+
+  public static init() {
+    axios.defaults.baseURL = "http://159.223.194.50:8000";
+    ApiHelper.initRequestManager();
+  }
 }
 
-ApiHelper.initRequestManager();
+ApiHelper.init();
