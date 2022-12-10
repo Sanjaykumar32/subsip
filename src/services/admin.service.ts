@@ -21,7 +21,7 @@ export class AdminService {
   ): Promise<ISubscribeByBussinessIDResponse> {
     const res: AxiosResponse<ISubscribeByBussinessIDResponse> =
       await ApiHelper.send<ISubscribeByBussinessIDResponse>({
-        url: `/subscribers?${payload.businessId}`,
+        url: `/subscribers?businessId=${payload.businessId}`,
         method: "GET",
       });
 
@@ -38,7 +38,7 @@ export class AdminService {
   ): Promise<ISubscribeByBussinessIDResponse> {
     const res: AxiosResponse<ISubscribeByBussinessIDResponse> =
       await ApiHelper.send<ISubscribeByBussinessIDResponse>({
-        url: `/subscribers?${payload.adminId}`,
+        url: `/subscribers?adminId=${payload.adminId}`,
         method: "GET",
       });
 

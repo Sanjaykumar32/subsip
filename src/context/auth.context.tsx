@@ -1,4 +1,5 @@
 import { useAppDispatch } from "data";
+import { AdminThunk } from "data/thunk/admin.thunk";
 import { UserThunk } from "data/thunk/user.thunk";
 import { ICredentials, ISignInResponse } from "interface";
 import React, {
@@ -62,6 +63,12 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   useEffect(() => {
     dispatch(UserThunk.fetchProfile());
   }, [dispatch]);
+
+  // const businessId = 1;
+
+  // useEffect(() => {
+  //   dispatch(AdminThunk.subscribeByBussinessId({ businessId }));
+  // }, [dispatch]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, signIn, signOut }}>
