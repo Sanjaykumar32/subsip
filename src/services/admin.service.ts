@@ -9,6 +9,10 @@ import {
   ICategoryRequest,
   IForgetPasswordRequest,
   IHomeRequest,
+  IReferralCodeResponse,
+  IReferralCountResponse,
+  IRefferralCodeRequest,
+  IRefferralCountRequest,
   ISubCategoryRequest,
   ISubscribeByAdminIdRequest,
   ISubscribeByBussinessIDRequest,
@@ -123,7 +127,39 @@ export class AdminService {
   ): Promise<IBussinessResponse> {
     const res: AxiosResponse<IBussinessResponse> =
       await ApiHelper.send<IBussinessResponse>({
-        url: `/business?businessname=01=${payload.businessname}`,
+        url: `/business?businessname=${payload.businessname}`,
+        method: "GET",
+      });
+
+    return res.data;
+  }
+
+  /**
+   * refferral code
+   * @return {Promise<IReferralCodeResponse>}
+   */
+  public static async refferralCode(
+    payload: IRefferralCodeRequest
+  ): Promise<IReferralCodeResponse> {
+    const res: AxiosResponse<IReferralCodeResponse> =
+      await ApiHelper.send<IReferralCodeResponse>({
+        url: `referral?userId=${payload.userId}`,
+        method: "GET",
+      });
+
+    return res.data;
+  }
+
+  /**
+   * refferral count
+   * @return {Promise<IReferralCountResponse>}
+   */
+  public static async refferralCount(
+    payload: IRefferralCountRequest
+  ): Promise<IReferralCountResponse> {
+    const res: AxiosResponse<IReferralCountResponse> =
+      await ApiHelper.send<IReferralCountResponse>({
+        url: `/buser/referral-count?userId=${payload.userId}`,
         method: "GET",
       });
 

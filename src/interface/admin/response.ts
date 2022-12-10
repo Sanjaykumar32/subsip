@@ -1,10 +1,10 @@
 export interface ISubscribeByBussinessIDResponse {
   success: number;
   message: string;
-  data: Daum[];
+  data: IBusinessSubscribe[];
 }
 
-export interface Daum {
+export interface IBusinessSubscribe {
   iSubscriberId: number;
   iAdminId: number;
   iBusinessId: number;
@@ -14,10 +14,10 @@ export interface Daum {
 export interface ISubscriberOfBussinessResponse {
   success: number;
   message: string;
-  data: Daum[];
+  data: ISubscriberData[];
 }
 
-export interface Daum {
+export interface ISubscriberData {
   iSubscriberId: number;
   iAdminId: number;
   iBusinessId: number;
@@ -35,10 +35,10 @@ export interface Daum {
 export interface IBussinessResponse {
   success: number;
   message: string;
-  data: Daum[];
+  data: IBusiness[];
 }
 
-export interface Daum {
+export interface IBusiness {
   iBusinessId: number;
   vName: string;
   vTagLine: string;
@@ -56,4 +56,24 @@ export interface Daum {
   iCity: number;
   vAddress: string;
   onBanner: number;
+}
+
+export interface IReferralCountResponse {
+  success: number;
+  message: string;
+  data: IRefferralCount;
+}
+
+export interface IRefferralCount {
+  referralCount: number;
+}
+
+export interface IReferralCodeResponse {
+  success: number;
+  message: string;
+  data: IRefferralCode;
+}
+
+export interface IRefferralCode {
+  referralCode: string;
 }

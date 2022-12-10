@@ -6,6 +6,10 @@ import {
   IBussinessResponse,
   ICategoryRequest,
   IHomeRequest,
+  IReferralCodeResponse,
+  IReferralCountResponse,
+  IRefferralCodeRequest,
+  IRefferralCountRequest,
   ISubCategoryRequest,
   ISubscribeByAdminIdRequest,
   ISubscribeByBussinessIDRequest,
@@ -99,6 +103,30 @@ export class AdminThunk {
     "admin/businessById",
     async (payload: IBussinessRequest): Promise<IBussinessResponse> => {
       const response = await AdminService.allBussinessById(payload);
+      return response;
+    }
+  );
+
+  /**
+   * refferral code
+   */
+  public static refferralCode = createAsyncThunk(
+    "admin/refferralcode",
+    async (payload: IRefferralCodeRequest): Promise<IReferralCodeResponse> => {
+      const response = await AdminService.refferralCode(payload);
+      return response;
+    }
+  );
+
+  /**
+   * refferralCount
+   */
+  public static refferralCount = createAsyncThunk(
+    "admin/refferalcount",
+    async (
+      payload: IRefferralCountRequest
+    ): Promise<IReferralCountResponse> => {
+      const response = await AdminService.refferralCount(payload);
       return response;
     }
   );

@@ -13,3 +13,11 @@ export interface IAllBusinessSubscribersRequest {
 export interface IBussinessRequest {
   businessname: number;
 }
+
+export interface IRefferralCountRequest {
+  userId: number;
+}
+
+export interface IRefferralCodeRequest {
+  userId: number;
+}
