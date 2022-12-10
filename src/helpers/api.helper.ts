@@ -33,7 +33,30 @@ export class ApiHelper {
   public static async send<T>(
     config: AxiosRequestConfig
   ): Promise<AxiosResponse<T>> {
-    const res = await axios({ ...config, withCredentials: true });
+    const res = await axios(config);
     return res;
   }
+
+  /** Manage Request */
+  public static initRequestManager() {
+    axios.interceptors.request.use(
+      (config) => {
+        let newConfig = config;
+        const accessToken = sessionStorage.getItem("token");
+        if (navigator.cookieEnabled) {
+          newConfig = { withCredentials: true, ...newConfig };
+        } else {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          newConfig.headers.common.Authorization = `Bearer ${accessToken}`;
+        }
+
+        // Do something before request is sent
+        return newConfig;
+      },
+      (error) => Promise.resolve(error)
+    );
+  }
 }
+
+ApiHelper.initRequestManager();

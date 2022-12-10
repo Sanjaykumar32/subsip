@@ -1,4 +1,4 @@
-import { ICredentials } from "interface";
+import { ICredentials, ISignInResponse } from "interface";
 import React, {
   createContext,
   ReactElement,
@@ -41,8 +41,8 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
 
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {
-      //TODO:handle the response
-      const response = await AuthService.signIn(credentials);
+      const response: ISignInResponse = await AuthService.signIn(credentials);
+      sessionStorage.setItem("token", response.token.token);
       setAuthenticated(true);
     } catch (error) {
       console.log(error);
