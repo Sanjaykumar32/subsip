@@ -15,7 +15,7 @@ interface IAuthProvider {
   children: ReactElement;
 }
 
-interface IAuthContext {
+export interface IAuthContext {
   isAuthenticated: boolean;
   signIn: (credentials: ICredentials) => Promise<void>;
   signOut: () => Promise<void>;

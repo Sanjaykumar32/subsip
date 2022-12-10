@@ -28,13 +28,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth.context";
-import { AuthRoutePathEnum } from "enum";
+import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 
 const pages = [
-  { title: "Restaurant", path: "/" },
-  { title: "Home Service", path: "/home" },
-  { title: "Auto Service", path: "/list" },
-  { title: "More", path: "/more" },
+  { title: "Restaurant", path: RoutePathEnum.LISTING },
+  { title: "Home Service", path: RoutePathEnum.HOME },
+  { title: "Auto Service", path: RoutePathEnum.NONE },
+  { title: "More", path: RoutePathEnum.NONE },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const notification = [{ title: "You just won a Promo Code!!" }];
@@ -109,9 +109,9 @@ export function ResponsiveAppBar() {
           sx={{
             mr: 4,
             pb: 0.5,
-            borderBottom: isActive
-              ? `3px solid ${theme.palette.info.main}`
-              : "",
+            // borderBottom: !isActive
+            //   ? `3px solid ${theme.palette.info.main}`
+            //   : "",
           }}
         >
           <Typography color="text.primary" variant="body1" fontWeight="700">
@@ -120,7 +120,7 @@ export function ResponsiveAppBar() {
         </Link>
       );
     });
-  }, [theme.palette.info.main]);
+  }, []);
 
   const MobilePoshSubLogo = useMemo(
     () => (
@@ -295,7 +295,7 @@ export function ResponsiveAppBar() {
         onClick={() => navigate(AuthRoutePathEnum.SIGN_IN)}
         sx={{ ml: 1 }}
       >
-        logIn
+        Log in
       </Button>,
       ...commonMenu,
     ],

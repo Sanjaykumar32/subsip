@@ -39,4 +39,5 @@ export enum RoutePathEnum {
   PROFILE = "/profile",
   LISTING_ADD = "/listing/add",
   LISTING_PRODUCT = "/listing/:id",
+  NONE = "",
 }
