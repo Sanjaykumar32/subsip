@@ -7,7 +7,6 @@ import {
   IBussinessRequest,
   IBussinessResponse,
   ICategoryRequest,
-  IForgetPasswordRequest,
   IHomeRequest,
   IReferralCodeResponse,
   IReferralCountResponse,
