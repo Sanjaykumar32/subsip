@@ -23,7 +23,7 @@ export class AuthService {
   ): Promise<ISignInResponse> {
     const res: AxiosResponse<ISignInResponse> =
       await ApiHelper.send<ISignInResponse>({
-        url: "/auth/Login",
+        url: "http://ui.poshsub.com:8000/auth/Login",
         method: "POST",
         data: credentials,
       });
