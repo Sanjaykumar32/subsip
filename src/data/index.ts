@@ -3,10 +3,12 @@ import _ from "lodash";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import UserReducer from "./slices/user.slice";
+import AdminReducer from "./slices/admin.slice";
 
 export const store = configureStore({
   reducer: {
     user: UserReducer,
+    admin: AdminReducer,
   },
 });
 
