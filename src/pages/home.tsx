@@ -18,6 +18,7 @@ import {
   Title,
 } from "components/location/location-card";
 import { Spacing } from "components";
+import { useAuth } from "context/auth.context";
 
 export function Home() {
   const data = {
@@ -33,6 +34,7 @@ export function Home() {
   };
 
   const theme = useTheme();
+  const auth = useAuth();
 
   return (
     <Container maxWidth={false} disableGutters>
@@ -91,6 +93,7 @@ export function Home() {
                     <Subscribe
                       subsctibers={46.2}
                       color={theme.palette.info.light}
+                      auth={auth}
                     />
                   </Grid>
 
@@ -118,7 +121,7 @@ export function Home() {
           maxWidth={false}
           disableGutters
           sx={{
-            width: "100vw",
+            width: "100%",
             overflow: "auto",
             whiteSpace: "nowrap",
           }}
@@ -134,7 +137,7 @@ export function Home() {
           maxWidth={false}
           disableGutters
           sx={{
-            width: "100vw",
+            width: "100%",
             overflow: "auto",
             whiteSpace: "nowrap",
           }}
@@ -150,7 +153,7 @@ export function Home() {
           maxWidth={false}
           disableGutters
           sx={{
-            width: "100vw",
+            width: "100%",
             overflow: "auto",
             whiteSpace: "nowrap",
           }}

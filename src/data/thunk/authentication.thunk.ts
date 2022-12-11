@@ -2,43 +2,19 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   IForgetPasswordRequest,
   IResetPasswordRequest,
-  ICredentials,
   ISignInResponse,
-  ISignUpRequest,
 } from "interface";
-import { AuthService } from "services/authentication";
+import { AuthService } from "services/authentication.service";
 
 /**
  * Authentication Thunk Middleware
  */
 export class AuthenticationThunk {
   /**
-   * SignIn Thunk
-   */
-  public static SignIn = createAsyncThunk(
-    "authentication/signin/user",
-    async (credentials: ICredentials): Promise<ISignInResponse> => {
-      const response = await AuthService.signIn(credentials);
-      return response;
-    }
-  );
-
-  /**
-   * SignUp Thunk
-   */
-  public static SignUp = createAsyncThunk(
-    "authentication/SignUp/user",
-    async (credentials: ISignUpRequest): Promise<ISignInResponse> => {
-      const response = await AuthService.signUp(credentials);
-      return response;
-    }
-  );
-
-  /**
    * ForgetPassword Thunk
    */
-  public static ForgetPassword = createAsyncThunk(
-    "authentication/ForgetPassword/user",
+  public static forgetPassword = createAsyncThunk(
+    "auth/forgetPassword",
     async (credentials: IForgetPasswordRequest): Promise<ISignInResponse> => {
       const response = await AuthService.forgetpassword(credentials);
       return response;
@@ -48,8 +24,8 @@ export class AuthenticationThunk {
   /**
    * ResetPassword Thunk
    */
-  public static ResetPassword = createAsyncThunk(
-    "authentication/ResetPassword/user",
+  public static resetPassword = createAsyncThunk(
+    "auth/resetPassword",
     async (credentials: IResetPasswordRequest): Promise<ISignInResponse> => {
       const response = await AuthService.resetpassword(credentials);
       return response;

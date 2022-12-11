@@ -8,7 +8,11 @@ import {
   Typography,
   TypographyProps,
   useTheme,
+  Link,
 } from "@mui/material";
+import { IAuthContext } from "context/auth.context";
+import { AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { useNavigate } from "react-router-dom";
 
 export const Title = ({ children, ...props }: TypographyProps) => (
   <Typography variant="h5" fontWeight={900} sx={{ mt: 2, mb: 1 }} {...props}>
@@ -36,30 +40,41 @@ export const Info = ({ children, ...props }: TypographyProps) => (
 export const Subscribe = ({
   subsctibers,
   color,
+  auth,
 }: {
   subsctibers: number;
   color?: string;
-}) => (
-  <>
-    <Box sx={{ my: 3 }}>
-      <Typography
-        variant="subtitle1"
-        color={color || theme.palette.grey[600]}
-        fontWeight={900}
+  auth?: IAuthContext;
+}) => {
+  const navigate = useNavigate();
+  return (
+    <>
+      <Box sx={{ my: 3 }}>
+        <Typography
+          variant="subtitle1"
+          color={color || theme.palette.grey[600]}
+          fontWeight={900}
+        >
+          {`${subsctibers}k Subscribers`}
+        </Typography>
+      </Box>
+
+      <Button
+        size="large"
+        variant="contained"
+        color="error"
+        onClick={() => {
+          auth?.isAuthenticated
+            ? navigate(RoutePathEnum.LISTING_PRODUCT)
+            : navigate(AuthRoutePathEnum.SIGN_IN);
+        }}
+        sx={{ fontWeight: 800, borderRadius: "24px" }}
       >
-        {`${subsctibers}k Subscribers`}
-      </Typography>
-    </Box>
-    <Button
-      size="large"
-      variant="contained"
-      color="error"
-      sx={{ fontWeight: 800, borderRadius: "24px" }}
-    >
-      Subscribe Now
-    </Button>
-  </>
-);
+        {auth?.isAuthenticated ? "Subscribed" : "Subscribe"}
+      </Button>
+    </>
+  );
+};
 
 export const CardFooter = () => {
   const theme = useTheme();

@@ -1,58 +1,188 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  IForgetPasswordRequest,
-  IResetPasswordRequest,
-  ICredentials,
-  ISignInResponse,
-  ISignUpRequest,
+  IAllBusinessSubscribersRequest,
+  IBannerResponse,
+  IBussinessRequest,
+  IBussinessResponse,
+  ICategoryRequest,
+  IHomeRequest,
+  IReferralCodeResponse,
+  IReferralCountResponse,
+  IRefferralCodeRequest,
+  IRefferralCountRequest,
+  ISubCategoryRequest,
+  ISubscribeByAdminIdRequest,
+  ISubscribeByBussinessIDRequest,
+  ISubscribeByBussinessIDResponse,
+  ISubscriberOfBussinessResponse,
 } from "interface";
-import { AuthService } from "services/authentication";
+import { AdminService } from "services";
 
 /**
- * Authentication Thunk Middleware
+ * Admin Thunk Middleware
  */
-export class AuthenticationThunk {
+export class AdminThunk {
   /**
-   * SignIn Thunk
+   * Subscribe By businessId
    */
-  public static signIn = createAsyncThunk(
-    "authentication/signin/user",
-    async (credentials: ICredentials): Promise<ISignInResponse> => {
-      const response = await AuthService.signIn(credentials);
+  public static subscribeByBussinessId = createAsyncThunk(
+    "admin/subscribeByBId",
+    async (
+      payload: ISubscribeByBussinessIDRequest
+    ): Promise<ISubscribeByBussinessIDResponse> => {
+      const response = await AdminService.subscribeByBuissnessID(payload);
       return response;
     }
   );
 
   /**
-   * SignUp Thunk
+   * Subscribe By adminId
    */
-  public static signUp = createAsyncThunk(
-    "authentication/SignUp/user",
-    async (credentials: ISignUpRequest): Promise<ISignInResponse> => {
-      const response = await AuthService.signUp(credentials);
+  public static subscribeByAdminId = createAsyncThunk(
+    "admin/adminId",
+    async (
+      payload: ISubscribeByAdminIdRequest
+    ): Promise<ISubscribeByBussinessIDResponse> => {
+      const response = await AdminService.subscribeByAdminId(payload);
       return response;
     }
   );
 
   /**
-   * ForgetPassword Thunk
+   * Subscriber of bussiness
    */
-  public static forgetPassword = createAsyncThunk(
-    "authentication/ForgetPassword/user",
-    async (credentials: IForgetPasswordRequest): Promise<ISignInResponse> => {
-      const response = await AuthService.forgetpassword(credentials);
+  public static subscribeOfBussiness = createAsyncThunk(
+    "admin/subscriber",
+    async (
+      payload: ISubscribeByBussinessIDRequest
+    ): Promise<ISubscriberOfBussinessResponse> => {
+      const response = await AdminService.subscriberOfBussiness(payload);
       return response;
     }
   );
 
   /**
-   * ResetPassword Thunk
+   * All Subscriber of bussiness
    */
-  public static resetPassword = createAsyncThunk(
-    "authentication/ResetPassword/user",
-    async (credentials: IResetPasswordRequest): Promise<ISignInResponse> => {
-      const response = await AuthService.resetpassword(credentials);
+  public static allSubscriberOfBussiness = createAsyncThunk(
+    "admin/allSubscriber",
+    async (
+      payload: IAllBusinessSubscribersRequest
+    ): Promise<ISubscriberOfBussinessResponse> => {
+      const response = await AdminService.allSubscriberOfBussiness(payload);
       return response;
     }
   );
+
+  /**
+   * Banner List
+   */
+  public static bannerList = createAsyncThunk(
+    "admin/bannerlist",
+    async (): Promise<IBannerResponse> => {
+      const response = await AdminService.bannerList();
+      return response;
+    }
+  );
+
+  /**
+   * get All Business
+   */
+  public static business = createAsyncThunk(
+    "admin/business",
+    async (): Promise<IBussinessResponse> => {
+      const response = await AdminService.bussiness();
+      return response;
+    }
+  );
+
+  /**
+   * get Business ById
+   */
+  public static allBusiness = createAsyncThunk(
+    "admin/businessById",
+    async (payload: IBussinessRequest): Promise<IBussinessResponse> => {
+      const response = await AdminService.allBussinessById(payload);
+      return response;
+    }
+  );
+
+  /**
+   * refferral code
+   */
+  public static refferralCode = createAsyncThunk(
+    "admin/refferralcode",
+    async (payload: IRefferralCodeRequest): Promise<IReferralCodeResponse> => {
+      const response = await AdminService.refferralCode(payload);
+      return response;
+    }
+  );
+
+  /**
+   * refferralCount
+   */
+  public static refferralCount = createAsyncThunk(
+    "admin/refferalcount",
+    async (
+      payload: IRefferralCountRequest
+    ): Promise<IReferralCountResponse> => {
+      const response = await AdminService.refferralCount(payload);
+      return response;
+    }
+  );
+
+  /**
+   * category
+   */
+  public static category = createAsyncThunk(
+    "admin/category",
+    async (payload: ICategoryRequest): Promise<void> => {
+      const response = await AdminService.category(payload);
+      return response;
+    }
+  );
+
+  /**
+   * subCategory
+   */
+  public static subCategory = createAsyncThunk(
+    "admin/subCategory",
+    async (payload: ISubCategoryRequest): Promise<void> => {
+      const response = await AdminService.subCategory(payload);
+      return response;
+    }
+  );
+
+  /**
+   * home
+   */
+  public static home = createAsyncThunk(
+    "admin/home",
+    async (payload: IHomeRequest): Promise<void> => {
+      const response = await AdminService.home(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Delete Business
+   */
+  // public static deleteBusiness = createAsyncThunk(
+  //   "admin/deleteBusiness",
+  //   async (payload: any): Promise<void> => {
+  //     const response = await AdminService.deleteBusiness(payload);
+  //     return response;
+  //   }
+  // );
+
+  /**
+   * Delete Subscribers
+   */
+  // public static deleteSubscribers = createAsyncThunk(
+  //   "admin/deleteSubscribers",
+  //   async (payload: any): Promise<void> => {
+  //     const response = await AdminService.deleteSubscribers(payload);
+  //     return response;
+  //   }
+  // );
 }

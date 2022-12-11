@@ -4,6 +4,7 @@ import {
   Button,
   Container,
   FormControl,
+  Link,
   MenuItem,
   Select,
   Tooltip,
@@ -14,6 +15,8 @@ import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AdminRoutePathEnum } from "enum";
+import { useNavigate } from "react-router-dom";
 
 export function AdminCategories() {
   const columns: GridColDef[] = [
@@ -22,7 +25,14 @@ export function AdminCategories() {
       headerName: "Name",
       width: 200,
     },
-    { field: "Subcategory", headerName: "Subcategory", width: 200 },
+    {
+      field: "Subcategory",
+      headerName: "Subcategory",
+      width: 200,
+      renderCell: (params) => (
+        <Link href={AdminRoutePathEnum.ADMIN_SUBCATEGORY}>{params.value}</Link>
+      ),
+    },
     {
       field: "Actions",
       headerName: "Actions",
@@ -93,6 +103,7 @@ export function AdminCategories() {
       Actions: "Edit",
     },
   ];
+  const naviagate = useNavigate();
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -112,6 +123,9 @@ export function AdminCategories() {
             }}
             color="info"
             variant="contained"
+            onClick={() => {
+              naviagate(AdminRoutePathEnum.ADMIN_NEW_CATEGORY);
+            }}
           >
             New Category
           </Button>

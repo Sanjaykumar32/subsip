@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Badge,
+  Button,
   Divider,
   TextField,
   useMediaQuery,
@@ -26,15 +27,16 @@ import {
   faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "context/auth";
+import { useAuth } from "context/auth.context";
+import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 
 const pages = [
-  { title: "Restaurant", path: "/" },
-  { title: "Home Service", path: "/home" },
-  { title: "Auto Service", path: "/list" },
-  { title: "More", path: "/more" },
+  { title: "Restaurant", path: RoutePathEnum.LISTING },
+  { title: "Home Service", path: RoutePathEnum.HOME },
+  { title: "Auto Service", path: RoutePathEnum.NONE },
+  { title: "More", path: RoutePathEnum.NONE },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
 const notification = [{ title: "You just won a Promo Code!!" }];
 
 export function ResponsiveAppBar() {
@@ -51,6 +53,32 @@ export function ResponsiveAppBar() {
   );
   const [anchorElNotification, setAnchorElNotification] =
     useState<null | HTMLElement>(null);
+
+  const settings = React.useMemo(
+    () => [
+      {
+        title: "Profile",
+        route: RoutePathEnum.PROFILE,
+      },
+      {
+        title: "Subscription",
+        route: RoutePathEnum.SUBSCRIPTIONS,
+      },
+      {
+        title: "Rewards",
+        route: RoutePathEnum.REWARDS,
+      },
+      {
+        title: "Refferal Program",
+        route: RoutePathEnum.REFER,
+      },
+      {
+        title: "Logout",
+        route: AuthRoutePathEnum.SIGN_IN,
+      },
+    ],
+    []
+  );
 
   const Logo = useMemo(
     () => (
@@ -107,9 +135,9 @@ export function ResponsiveAppBar() {
           sx={{
             mr: 4,
             pb: 0.5,
-            borderBottom: isActive
-              ? `3px solid ${theme.palette.info.main}`
-              : "",
+            // borderBottom: !isActive
+            //   ? `3px solid ${theme.palette.info.main}`
+            //   : "",
           }}
         >
           <Typography color="text.primary" variant="body1" fontWeight="700">
@@ -118,7 +146,7 @@ export function ResponsiveAppBar() {
         </Link>
       );
     });
-  }, [theme.palette.info.main]);
+  }, []);
 
   const MobilePoshSubLogo = useMemo(
     () => (
@@ -222,15 +250,19 @@ export function ResponsiveAppBar() {
       >
         {settings.map((setting) => (
           <MenuItem
-            key={setting}
-            //onClick={(event) => setAnchorElSetting(event.target as HTMLElement)}
+            key={setting.route}
+            onClick={() => {
+              setting.title === "logout" ? auth.signOut() : setting.route;
+            }}
           >
-            <Typography textAlign="center">{setting}</Typography>
+            <Link key="profile-menu" href={setting.route}>
+              <Typography textAlign="center">{setting.title}</Typography>
+            </Link>
           </MenuItem>
         ))}
       </Menu>
     ),
-    [anchorElSetting]
+    [anchorElSetting, auth, settings]
   );
 
   const NotificationMenu = useMemo(
@@ -258,6 +290,49 @@ export function ResponsiveAppBar() {
       </Menu>
     ),
     [anchorElNotification]
+  );
+
+  const commonMenu = useMemo(
+    () => [
+      <Link key="listing-new" href={RoutePathEnum.LISTING_ADD}>
+        List on PoshSub
+      </Link>,
+
+      <Divider
+        flexItem
+        key="listing-divider"
+        variant={isMobile ? "fullWidth" : "middle"}
+        orientation={!isMobile ? "vertical" : "horizontal"}
+        sx={{ width: { sm: "100%", md: "" }, mx: { sm: 0, md: 1 } }}
+      />,
+      <Box
+        key="location-selector"
+        sx={{
+          display: "flex",
+        }}
+      >
+        <FontAwesomeIcon icon={faLocationDot} size="1x" />
+        <Typography variant="body2" sx={{ ml: 1 }}>
+          Seattle, WA
+        </Typography>
+      </Box>,
+    ],
+    [isMobile]
+  );
+
+  const LoggedOutMenu = useMemo(
+    () => [
+      <Button
+        key="login"
+        variant="rounded"
+        onClick={() => navigate(AuthRoutePathEnum.SIGN_IN)}
+        sx={{ ml: 1 }}
+      >
+        Log in
+      </Button>,
+      ...commonMenu,
+    ],
+    [commonMenu, navigate]
   );
 
   const ActionsList = useMemo(
@@ -289,29 +364,14 @@ export function ResponsiveAppBar() {
         orientation={!isMobile ? "vertical" : "horizontal"}
         sx={{ width: { sm: "100%", md: "" }, mx: { sm: 0, md: 1 } }}
       />,
-      <Link key="listing-new" href="/listing/add">
-        List on PoshSub
-      </Link>,
-      <Divider
-        flexItem
-        key="listing-divider"
-        variant={isMobile ? "fullWidth" : "middle"}
-        orientation={!isMobile ? "vertical" : "horizontal"}
-        sx={{ width: { sm: "100%", md: "" }, mx: { sm: 0, md: 1 } }}
-      />,
-      <Box
-        key="location-selector"
-        sx={{
-          display: "flex",
-        }}
-      >
-        <FontAwesomeIcon icon={faLocationDot} size="1x" />
-        <Typography variant="body2" sx={{ ml: 1 }}>
-          Seattle, WA
-        </Typography>
-      </Box>,
+      ...commonMenu,
     ],
-    [isMobile]
+    [commonMenu, isMobile]
+  );
+
+  const menu = useMemo(
+    () => (auth.isAuthenticated ? ActionsList : LoggedOutMenu),
+    [ActionsList, LoggedOutMenu, auth.isAuthenticated]
   );
 
   const Actions = useMemo(
@@ -323,12 +383,14 @@ export function ResponsiveAppBar() {
           flexDirection: "row-reverse",
           alignItems: "center",
         }}
+        key="action"
       >
-        {ActionsList}
+        {menu}
       </Box>
     ),
-    [ActionsList]
+    [menu]
   );
+  console.log(menu);
 
   const ActionMenuMobile = useMemo(
     () => (
@@ -358,7 +420,7 @@ export function ResponsiveAppBar() {
             horizontal: 68,
           }}
         >
-          {ActionsList.map((element) => (
+          {menu.map((element) => (
             <MenuItem
               sx={{ justifyContent: "center" }}
               key={element.key}
@@ -370,7 +432,7 @@ export function ResponsiveAppBar() {
         </Menu>
       </>
     ),
-    [ActionsList, anchorElActionsMobileMenu]
+    [anchorElActionsMobileMenu, menu]
   );
 
   return (

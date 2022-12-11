@@ -1,5 +1,5 @@
 export enum AccountTypeEnum {
-  NONE,
+  GUEST,
+  USER,
   ADMIN,
-  AGENT,
 }

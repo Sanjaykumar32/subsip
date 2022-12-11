@@ -6,8 +6,7 @@ export * from "./social";
 export const FooterContainer = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2, 3),
   backgroundColor: "#2C2E30",
-  color: "#fff",
-  minHeight: "291px",
+  color: theme.palette.getContrastText("#2C2E30"),
   position: "relative",
   display: "flex",
   flexDirection: "column",

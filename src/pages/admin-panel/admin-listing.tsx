@@ -6,6 +6,7 @@ import {
   Chip,
   Container,
   FormControl,
+  Link,
   MenuItem,
   Select,
   Tooltip,
@@ -16,6 +17,8 @@ import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AdminRoutePathEnum } from "enum";
+import { useNavigate } from "react-router-dom";
 
 export function AdminListing() {
   const columns: GridColDef[] = [
@@ -44,7 +47,9 @@ export function AdminListing() {
       field: "Subscribers",
       headerName: "Subscribers",
       width: 200,
-      renderCell: (params) => <Chip label={params.value} color="info" />,
+      renderCell: (params) => (
+        <Link href={AdminRoutePathEnum.ADMIN_SUBSCRIBERS}>{params.value}</Link>
+      ),
     },
     {
       field: "Location",
@@ -139,7 +144,7 @@ export function AdminListing() {
       Actions: "Edit",
     },
   ];
-
+  const naviagate = useNavigate();
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
       <Box
@@ -150,6 +155,9 @@ export function AdminListing() {
       >
         <Box>
           <Button
+            onClick={() => {
+              naviagate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
+            }}
             size="large"
             sx={{
               fontWeight: 800,
