@@ -121,7 +121,7 @@ export function Home() {
           maxWidth={false}
           disableGutters
           sx={{
-            width: "100vw",
+            width: "100%",
             overflow: "auto",
             whiteSpace: "nowrap",
           }}
@@ -137,7 +137,7 @@ export function Home() {
           maxWidth={false}
           disableGutters
           sx={{
-            width: "100vw",
+            width: "100%",
             overflow: "auto",
             whiteSpace: "nowrap",
           }}
@@ -153,7 +153,7 @@ export function Home() {
           maxWidth={false}
           disableGutters
           sx={{
-            width: "100vw",
+            width: "100%",
             overflow: "auto",
             whiteSpace: "nowrap",
           }}
