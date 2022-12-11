@@ -39,10 +39,6 @@ const SignUpController = (): ISignUpControllerReturns => {
    * @return {void}
    */
   const submitHandler = (): void => {
-    console.log({
-      email: value.email,
-      password: value.password,
-    });
     auth.signUp({ email: value.email, password: value.password });
     setValue({ email: "", password: "" });
   };

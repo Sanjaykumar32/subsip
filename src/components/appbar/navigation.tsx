@@ -28,7 +28,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth.context";
-import { AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 
 const pages = [
   { title: "Restaurant", path: RoutePathEnum.LISTING },
@@ -36,7 +36,7 @@ const pages = [
   { title: "Auto Service", path: RoutePathEnum.NONE },
   { title: "More", path: RoutePathEnum.NONE },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
 const notification = [{ title: "You just won a Promo Code!!" }];
 
 export function ResponsiveAppBar() {
@@ -53,6 +53,32 @@ export function ResponsiveAppBar() {
   );
   const [anchorElNotification, setAnchorElNotification] =
     useState<null | HTMLElement>(null);
+
+  const settings = React.useMemo(
+    () => [
+      {
+        title: "Profile",
+        route: RoutePathEnum.PROFILE,
+      },
+      {
+        title: "Subscription",
+        route: RoutePathEnum.SUBSCRIPTIONS,
+      },
+      {
+        title: "Rewards",
+        route: RoutePathEnum.REWARDS,
+      },
+      {
+        title: "Refferal Program",
+        route: RoutePathEnum.REFER,
+      },
+      {
+        title: "Logout",
+        route: AuthRoutePathEnum.SIGN_IN,
+      },
+    ],
+    []
+  );
 
   const Logo = useMemo(
     () => (
@@ -223,13 +249,20 @@ export function ResponsiveAppBar() {
         }}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={() => auth.signOut()}>
-            <Typography textAlign="center">{setting}</Typography>
+          <MenuItem
+            key={setting.route}
+            onClick={() => {
+              setting.title === "logout" ? auth.signOut() : setting.route;
+            }}
+          >
+            <Link key="profile-menu" href={setting.route}>
+              <Typography textAlign="center">{setting.title}</Typography>
+            </Link>
           </MenuItem>
         ))}
       </Menu>
     ),
-    [anchorElSetting, auth]
+    [anchorElSetting, auth, settings]
   );
 
   const NotificationMenu = useMemo(
