@@ -15,6 +15,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminBackButton } from "components";
+import { AdminRoutePathEnum } from "enum";
+import { useNavigate } from "react-router-dom";
 
 export function AdminSubCategory() {
   const columns: GridColDef[] = [
@@ -84,6 +86,7 @@ export function AdminSubCategory() {
       Actions: "Edit",
     },
   ];
+  const naviagate = useNavigate();
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -105,6 +108,9 @@ export function AdminSubCategory() {
             }}
             color="info"
             variant="contained"
+            onClick={() => {
+              naviagate(AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY);
+            }}
           >
             New subcategory
           </Button>
