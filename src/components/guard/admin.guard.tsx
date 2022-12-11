@@ -22,12 +22,12 @@ export function AdminGuard({ children }: IAuthGuardProps): ReactElement {
   console.log(accountType, "accountType");
 
   useEffect(() => {
-    if (isAuthenticated || accountType !== AccountTypeEnum.ADMIN) {
+    if (isAuthenticated && accountType !== AccountTypeEnum.ADMIN) {
       navigate(RoutePathEnum.HOME);
     }
   }, [accountType, isAuthenticated, navigate]);
 
-  if (isAuthenticated || accountType !== AccountTypeEnum.ADMIN) {
+  if (isAuthenticated && accountType !== AccountTypeEnum.ADMIN) {
     navigate(RoutePathEnum.HOME);
     return <> </>;
   }
