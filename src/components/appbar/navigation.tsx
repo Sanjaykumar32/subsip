@@ -261,7 +261,7 @@ export function ResponsiveAppBar() {
 
   const commonMenu = useMemo(
     () => [
-      <Link key="listing-new" href="/listing/add">
+      <Link key="listing-new" href={RoutePathEnum.LISTING_ADD}>
         List on PoshSub
       </Link>,
 
