@@ -40,6 +40,8 @@ import {
   ForgetPassword,
 } from "./pages";
 
+import "./index.css";
+
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
 
 import reportWebVitals from "./reportWebVitals";
