@@ -252,7 +252,7 @@ export function ResponsiveAppBar() {
           <MenuItem
             key={setting.route}
             onClick={() => {
-              setting.title === "logout" ? auth.signOut() : setting.route;
+              setting.title === "Logout" && auth.signOut();
             }}
           >
             <Link key="profile-menu" href={setting.route}>

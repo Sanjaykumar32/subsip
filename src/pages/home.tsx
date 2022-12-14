@@ -439,7 +439,7 @@ export function Home() {
   }, [AllBusiness]);
 
   return (
-    <div className="w-full border-[5px] border-black">
+    <div className="w-full border-[5px] ">
       <div className="py-5 md:py-20 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
           {dummArr.map((ele) => (
