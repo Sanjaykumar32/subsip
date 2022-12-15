@@ -23,13 +23,13 @@ export function Subscriptions() {
   });
 
   return (
-    <Container maxWidth="lg" sx={{ p: 8 }}>
+    <Container maxWidth={false} sx={{ p: 2 }}>
       <PageHeader
         name="Subscriptions"
         icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
       />
 
-      <Container maxWidth="xs" sx={{ my: 4 }}>
+      <Container maxWidth="xs">
         <Box
           sx={{
             display: "flex",
@@ -80,7 +80,7 @@ export function Subscriptions() {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                mt: 2,
+                mt: 1,
                 alignItems: "baseline",
               }}
             >

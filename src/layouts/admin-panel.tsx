@@ -1,17 +1,25 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import {
+  faBars,
   faBell,
   faDiagramProject,
+  faEllipsisV,
+  faEllipsisVertical,
   faHome,
   faList,
-  faPerson,
-  faRefresh,
   faSearch,
   faTrophy,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, CssBaseline, ListItemText, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  CssBaseline,
+  ListItemText,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import Drawer from "@mui/material/Drawer";
@@ -22,7 +30,7 @@ import ListItem from "@mui/material/ListItem";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import { Logo } from "components";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Outlet } from "react-router-dom";
 
 const drawerWidth = 200;
@@ -75,7 +83,22 @@ export function AdminLayout() {
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Logo />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              fontFamily: "Kessel",
+              fontWeight: 700,
+              letterSpacing: ".2rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            PoshSub
+          </Typography>
           <TextField
             size="small"
             sx={{ width: "50%" }}

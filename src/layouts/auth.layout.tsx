@@ -1,7 +1,16 @@
 import React from "react";
-import { Container, AppBar, Toolbar, Button, Grid } from "@mui/material";
+import {
+  Container,
+  AppBar,
+  Toolbar,
+  Button,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { ScrollToTop, Logo, FooterContainer, Social, Links } from "components";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import { AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { theme } from "theme";
 
 export function AuthLayout() {
   return (
@@ -18,9 +27,33 @@ export function AuthLayout() {
         sx={{ borderBottom: "1px solid black" }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Logo />
-          <Button variant="rounded" href="/signIn">
-            Log in
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            sx={{
+              mr: 2,
+              display: { md: "flex" },
+              fontFamily: "Kessel",
+              fontWeight: 700,
+              letterSpacing: ".2rem",
+              textDecoration: "none",
+            }}
+          >
+            <Link
+              to={RoutePathEnum.HOME}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              PoshSub
+            </Link>
+          </Typography>
+          <Button variant="rounded">
+            <Link
+              to={AuthRoutePathEnum.SIGN_IN}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              Log in
+            </Link>
           </Button>
         </Toolbar>
       </AppBar>

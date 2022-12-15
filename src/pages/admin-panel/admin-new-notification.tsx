@@ -4,10 +4,10 @@ import {
   Button,
   Container,
   FormControl,
+  Grid,
   IconButton,
   MenuItem,
   Select,
-  TextareaAutosize,
   TextField,
   Typography,
 } from "@mui/material";
@@ -23,8 +23,8 @@ export function AdminNewNotifictaion() {
   return (
     <Container maxWidth="lg">
       <AdminBackButton />
-      <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
-        <Box sx={{ my: 2, alignItems: "center" }}>
+      <Container maxWidth="sm" sx={{ my: 1, ml: 0.5 }}>
+        <Box sx={{ mt: 2, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>
               Headline
@@ -32,14 +32,14 @@ export function AdminNewNotifictaion() {
             <Typography
               variant="caption"
               fontWeight={400}
-              sx={{ ml: 2, color: theme.palette.grey[400] }}
+              sx={{ ml: 1, color: theme.palette.grey[400] }}
             >
               *required
             </Typography>
           </Box>
-          <TextField fullWidth sx={{ my: 1, borderRadius: "30px", mr: 1 }} />
+          <TextField fullWidth />
         </Box>
-        <Box sx={{ my: 2, alignItems: "center" }}>
+        <Box sx={{ mt: 2, alignItems: "center" }}>
           <Box sx={{ display: "flex" }}>
             <Typography variant="body2" fontWeight={500}>
               Description
@@ -47,120 +47,117 @@ export function AdminNewNotifictaion() {
             <Typography
               variant="caption"
               fontWeight={400}
-              sx={{ ml: 2, color: theme.palette.grey[400] }}
+              sx={{ ml: 1, color: theme.palette.grey[400] }}
             >
               *required
             </Typography>
           </Box>
-          <TextareaAutosize
-            aria-label="minimum height"
-            style={{ width: 400, height: 50, marginTop: 4 }}
-          />
+          <TextField multiline fullWidth minRows={2} maxRows={5} />
         </Box>
-        <Box sx={{ display: "flex" }}>
-          <Box sx={{ my: 1, alignItems: "center" }}>
-            <Box sx={{ display: "flex" }}>
-              <Typography variant="body2" fontWeight={500}>
-                Date
-              </Typography>
-              <Typography
-                variant="caption"
-                fontWeight={400}
-                sx={{ ml: 2, color: theme.palette.grey[400] }}
-              >
-                *required
-              </Typography>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ mt: 2, alignItems: "center" }}>
+              <Box sx={{ display: "flex" }}>
+                <Typography variant="body2" fontWeight={500}>
+                  Date
+                </Typography>
+                <Typography
+                  variant="caption"
+                  fontWeight={400}
+                  sx={{ ml: 1, color: theme.palette.grey[400] }}
+                >
+                  *required
+                </Typography>
+              </Box>
+              <TextField
+                fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <IconButton>
+                      <FontAwesomeIcon icon={faCalendarDays} size="xs" />
+                    </IconButton>
+                  ),
+                }}
+              />
             </Box>
-            <TextField
-              sx={{ my: 1, borderRadius: "30px" }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <FontAwesomeIcon icon={faCalendarDays} size="xs" />
-                  </IconButton>
-                ),
-              }}
-            />
-          </Box>
+          </Grid>
 
-          <Box sx={{ my: 1, alignItems: "center", ml: 3 }}>
-            <Box sx={{ display: "flex" }}>
-              <Typography variant="body2" fontWeight={500}>
-                Business Location
-              </Typography>
-              <Typography
-                variant="caption"
-                fontWeight={400}
-                sx={{ ml: 2, color: theme.palette.grey[400] }}
-              >
-                *required
-              </Typography>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ mt: 2, alignItems: "center" }}>
+              <Box sx={{ display: "flex" }}>
+                <Typography variant="body2" fontWeight={500}>
+                  Business Location
+                </Typography>
+                <Typography
+                  variant="caption"
+                  fontWeight={400}
+                  sx={{ ml: 1, color: theme.palette.grey[400] }}
+                >
+                  *required
+                </Typography>
+              </Box>
+              <TextField
+                fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <IconButton>
+                      <FontAwesomeIcon icon={faLocationDot} size="xs" />
+                    </IconButton>
+                  ),
+                }}
+              />
             </Box>
-            <TextField
-              sx={{ my: 1, borderRadius: "30px" }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton>
-                    <FontAwesomeIcon icon={faLocationDot} size="xs" />
-                  </IconButton>
-                ),
-              }}
-            />
-          </Box>
-        </Box>
-
-        <Box sx={{ my: 1, alignItems: "center" }}>
-          <Box sx={{ display: "flex" }}>
-            <FormControl sx={{ width: 300 }}>
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={6}>
+            <FormControl fullWidth sx={{ mt: 2 }}>
               <Typography variant="body2" fontWeight={500}>
                 Category
               </Typography>
               <Select
-                fullWidth
                 variant="outlined"
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                size="medium"
-                sx={{ my: 1 }}
+                size="small"
               >
                 <MenuItem value={"Newest"}>Newest</MenuItem>
                 <MenuItem value={"Oldest"}>Oldest</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ width: 300, ml: 2 }}>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormControl fullWidth sx={{ mt: 2 }}>
               <Typography variant="body2" fontWeight={500}>
                 Subcategory
               </Typography>
               <Select
-                fullWidth
                 variant="outlined"
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                size="medium"
-                sx={{ my: 1 }}
+                size="small"
               >
                 <MenuItem value={"Newest"}>Newest</MenuItem>
                 <MenuItem value={"Oldest"}>Oldest</MenuItem>
               </Select>
             </FormControl>
-          </Box>
-          <FormControl sx={{ width: 300 }}>
-            <Typography variant="body2" fontWeight={500}>
-              Business Name
-            </Typography>
-            <Select
-              fullWidth
-              variant="outlined"
-              labelId="sort-by-select-label"
-              id="sort-by-simple-select"
-              size="medium"
-              sx={{ my: 1 }}
-            >
-              <MenuItem value={"Newest"}>Newest</MenuItem>
-              <MenuItem value={"Oldest"}>Oldest</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+          </Grid>
+        </Grid>
+
+        <FormControl sx={{ mt: 2 }} fullWidth>
+          <Typography variant="body2" fontWeight={500}>
+            Business Name
+          </Typography>
+          <Select
+            variant="outlined"
+            labelId="sort-by-select-label"
+            id="sort-by-simple-select"
+            size="small"
+          >
+            <MenuItem value={"Newest"}>Newest</MenuItem>
+            <MenuItem value={"Oldest"}>Oldest</MenuItem>
+          </Select>
+        </FormControl>
 
         <Box
           sx={{

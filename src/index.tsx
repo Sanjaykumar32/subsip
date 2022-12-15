@@ -28,7 +28,6 @@ import {
   AdminSubscribers,
   ClickOnCategory,
   Home,
-  ListingDetails,
   ListingOnPoshSub,
   PasswordReset,
   Profile,
@@ -38,12 +37,19 @@ import {
   SignUp,
   Subscriptions,
   LocationPage,
+  ForgetPassword,
 } from "./pages";
+
+import "./index.css";
 
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button";
 
 import reportWebVitals from "./reportWebVitals";
-import { AdminLayout } from "layouts/admin-panel";
+import { AdminLayout } from "components/admin-layout";
+import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { AuthProvider } from "context/auth.context";
+import { GuestGuard } from "components/guard";
+import { AdminGuard } from "components/guard/admin.guard";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -51,144 +57,159 @@ const root = ReactDOM.createRoot(
 
 const router = createBrowserRouter([
   {
-    path: "/auth",
+    path: AuthRoutePathEnum.AUTH,
     element: <AuthLayout />,
     errorElement: <div> 404 Page Not Found </div>,
     children: [
       // auth
       {
-        path: "/auth/signIn",
-        element: <SignIn />,
+        path: AuthRoutePathEnum.SIGN_IN,
+        element: (
+          <GuestGuard>
+            <SignIn />
+          </GuestGuard>
+        ),
       },
       {
-        path: "/auth/signUp",
-        element: <SignUp />,
+        path: AuthRoutePathEnum.SIGN_UP,
+        element: (
+          <GuestGuard>
+            <SignUp />
+          </GuestGuard>
+        ),
       },
       {
-        path: "/auth/forgotPassword",
+        path: AuthRoutePathEnum.PASSWORD_RESET,
         element: <PasswordReset />,
+      },
+      {
+        path: AuthRoutePathEnum.FORGET_PASSWORD,
+        element: <ForgetPassword />,
       },
     ],
   },
   {
-    path: "/",
+    path: RoutePathEnum.HOME,
     element: <NavigationBar />,
     errorElement: <div> Some Error Occured </div>,
     children: [
       {
-        path: "/",
+        path: RoutePathEnum.HOME,
         element: <Home />,
       },
       {
-        path: "/profile",
+        path: RoutePathEnum.PROFILE,
         element: <Profile />,
       },
       {
-        path: "/listing",
+        path: RoutePathEnum.LISTING,
         element: <ClickOnCategory />,
       },
       {
-        path: "/listing/add",
+        path: RoutePathEnum.LISTING_ADD,
         element: <ListingOnPoshSub />,
       },
       {
-        path: "/listing/:id",
+        path: RoutePathEnum.LISTING_PRODUCT,
         element: <LocationPage />,
       },
       {
-        path: "/refer",
+        path: RoutePathEnum.REFER,
         element: <ReferralProgram />,
       },
       {
-        path: "/rewards",
+        path: RoutePathEnum.REWARDS,
         element: <Rewards />,
       },
       {
-        path: "/subscriptions",
+        path: RoutePathEnum.SUBSCRIPTIONS,
         element: <Subscriptions />,
       },
     ],
   },
   {
-    path: "/admin",
-    element: <AdminLayout />,
+    path: AdminRoutePathEnum.ADMIN,
+    element: (
+      <AdminGuard>
+        <AdminLayout />
+      </AdminGuard>
+    ),
     errorElement: <div> Some Error Occured </div>,
     children: [
-      //admin
       {
-        path: "/admin/newReferralPrice",
+        path: AdminRoutePathEnum.ADMIN_REFERRAL_PRICE,
         element: <AdminNewReferralPrice />,
       },
       {
-        path: "/admin/newCategory",
+        path: AdminRoutePathEnum.ADMIN_NEW_CATEGORY,
         element: <AdminNewCategory />,
       },
       {
-        path: "/admin/newNotifictaion",
+        path: AdminRoutePathEnum.ADMIN_NEW_NOTIFICTAION,
         element: <AdminNewNotifictaion />,
       },
       {
-        path: "/admin/newReward",
+        path: AdminRoutePathEnum.ADMIN_NEW_REWARDS,
         element: <AdminNewReward />,
       },
       {
-        path: "/admin/newSubcategory",
+        path: AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY,
         element: <AdminNewSubCategory />,
       },
       {
-        path: "/admin/notification",
+        path: AdminRoutePathEnum.ADMIN_NOTIFICATION,
         element: <AdminNotification />,
       },
       {
-        path: "/admin/notifyButton",
+        path: AdminRoutePathEnum.ADMIN_NOTIFY_BUTTON,
         element: <AdminNotifyButton />,
       },
       {
-        path: "/admin/categories",
+        path: AdminRoutePathEnum.ADMIN_CATEGORY,
         element: <AdminCategories />,
       },
       {
-        path: "/admin/dashboard",
+        path: AdminRoutePathEnum.ADMIN_DASHBOARD,
         element: <AdminDashboard />,
       },
       {
-        path: "/admin/listingToSubscribers",
+        path: AdminRoutePathEnum.ADMIN_LISTING_TO_SUBSCRIBERS,
         element: <AdminListingToSubscribers />,
       },
       {
-        path: "/admin/listing",
+        path: AdminRoutePathEnum.ADMIN_LISTING,
         element: <AdminListing />,
       },
       {
-        path: "/admin/newlisting",
+        path: AdminRoutePathEnum.ADMIN_NEW_LISTING,
         element: <AdminNewlisting />,
       },
       {
-        path: "/admin/referralToSubscribe",
+        path: AdminRoutePathEnum.ADMIN_REFERRAL_TO_SUBSCRIBE,
         element: <AdminReferralToSubscribe />,
       },
       {
-        path: "/admin/referral",
+        path: AdminRoutePathEnum.ADMIN_REFERRALS,
         element: <AdminReferral />,
       },
       {
-        path: "/admin/rewardToDetails",
+        path: AdminRoutePathEnum.ADMIN_REWARDS_TO_DETAILS,
         element: <AdminRewardToDetails />,
       },
       {
-        path: "/admin/rewardsToWinner",
+        path: AdminRoutePathEnum.ADMIN_REWARDS_TO_WINNERS,
         element: <AdminRewardsToWinner />,
       },
       {
-        path: "/admin/rewards-milestones",
+        path: AdminRoutePathEnum.ADMIN_MILESTONES,
         element: <AdminRewardsMileStones />,
       },
       {
-        path: "/admin/subCategory",
+        path: AdminRoutePathEnum.ADMIN_SUBCATEGORY,
         element: <AdminSubCategory />,
       },
       {
-        path: "/admin/subscribers",
+        path: AdminRoutePathEnum.ADMIN_SUBSCRIBERS,
         element: <AdminSubscribers />,
       },
     ],
@@ -199,7 +220,9 @@ root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>
   </Provider>
 );

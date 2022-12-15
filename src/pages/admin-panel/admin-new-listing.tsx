@@ -112,7 +112,6 @@ export function AdminNewlisting() {
   return (
     <Container maxWidth="lg">
       <AdminBackButton />
-
       <FormControl fullWidth size="small">
         <Grid container>
           <Grid item xs={12} md={6}>

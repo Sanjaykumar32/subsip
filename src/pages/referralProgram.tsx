@@ -5,13 +5,13 @@ import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
 
 export function ReferralProgram() {
   return (
-    <Container maxWidth="lg" sx={{ p: 8 }}>
+    <Container maxWidth={false} sx={{ p: 2 }}>
       <PageHeader
-        name="Referal Program"
+        name="Referral program"
         icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
       >
         <Box sx={{ display: "flex", alignItems: "baseline" }}>
-          <Typography variant="body1"> My Referals </Typography>
+          <Typography variant="body1">My referrals</Typography>
           <Chip
             label={0}
             color="primary"

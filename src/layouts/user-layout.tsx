@@ -1,70 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import {
-  Container,
-  Button,
-  Grid,
-  Divider,
-  TextField,
-  Select,
-  MenuItem,
-  InputAdornment,
-  IconButton,
-  Badge,
-  List,
-  ListItem,
-} from "@mui/material";
-import { FooterContainer, Links, Logo, ScrollToTop, Social } from "components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBell,
-  faLocationDot,
-  faSearch,
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "@mui/material";
-import { Box } from "@mui/material";
-import { RoutePathEnum } from "enum";
-import MultipleSelect from "components/profile-menu";
+import { Container, Grid } from "@mui/material";
+import { FooterContainer, Links, ScrollToTop, Social } from "components";
+import ResponsiveAppBar from "components/appbar/navigation";
 
 export function NavigationBar() {
-  const links = [
-    {
-      name: "Restaurant",
-      url: RoutePathEnum.RESTAURANT,
-    },
-    {
-      name: "Home Services",
-      url: RoutePathEnum.RESTAURANT,
-    },
-    {
-      name: "Auto Services",
-      url: RoutePathEnum.RESTAURANT,
-    },
-    {
-      name: "More",
-      url: RoutePathEnum.RESTAURANT,
-    },
-  ];
+  // const links = [
+  //   {
+  //     name: "Restaurant",
+  //     url: RoutePathEnum.RESTAURANT,
+  //   },
+  //   {
+  //     name: "Home Services",
+  //     url: RoutePathEnum.RESTAURANT,
+  //   },
+  //   {
+  //     name: "Auto Services",
+  //     url: RoutePathEnum.RESTAURANT,
+  //   },
+  //   {
+  //     name: "More",
+  //     url: RoutePathEnum.RESTAURANT,
+  //   },
+  // ];
 
-  const [profileMenu, setProfileMenu] = useState<boolean>(false);
+  // const [profileMenu, setProfileMenu] = useState<boolean>(false);
 
-  const handleProfileMenu = () => {
-    setProfileMenu(true);
-  };
+  // const handleProfileMenu = () => {
+  //   setProfileMenu(true);
+  // };
+
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
+      <ResponsiveAppBar />
       <ScrollToTop />
-      <AppBar
+      {/* <AppBar
         position="static"
         color="transparent"
         elevation={0}
         sx={{ borderBottom: "1px solid black" }}
       >
         <Toolbar>
-          <Logo />
+          <Logo variant="dark" />
           <TextField
             fullWidth
             sx={{ maxWidth: "50%", mx: "auto" }}
@@ -107,10 +84,12 @@ export function NavigationBar() {
             </Box>
             <Divider />
             <Box sx={{ mx: 2 }}>
-              <Link>List on PoshSub</Link>
+              <Link href="/ListingOnPoshSub">List on PoshSub</Link>
             </Box>
             <Divider />
-            <Button variant="rounded">Login</Button>
+            <Button variant="rounded" href="/auth/signin">
+              Login
+            </Button>
             <Box sx={{ mx: 1 }}>
               <FontAwesomeIcon
                 icon={faUserCircle}
@@ -126,7 +105,7 @@ export function NavigationBar() {
             </Box>
           </Box>
         </Toolbar>
-        <Container maxWidth="xl">
+        <Container maxWidth={false} disableGutters>
           <List sx={{ display: "flex" }}>
             {links.map((res) => (
               <ListItem
@@ -138,27 +117,19 @@ export function NavigationBar() {
             ))}
           </List>
         </Container>
-      </AppBar>
+      </AppBar> */}
       <Outlet />
-      {/* <FooterContainer>
-        <Grid container>
-          <Grid item xs={12} md={4}>
-            <Social />
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Link />
-          </Grid>
-        </Grid>
-      </FooterContainer> */}
       <FooterContainer>
-        <Grid container>
-          <Grid item xs={12} md={4}>
-            <Social />
+        <Container maxWidth="lg" disableGutters>
+          <Grid container>
+            <Grid item xs={12} md={4}>
+              <Social />
+            </Grid>
+            <Grid item xs={12} md={8}>
+              <Links />
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={8}>
-            <Links />
-          </Grid>
-        </Grid>
+        </Container>
       </FooterContainer>
     </Container>
   );

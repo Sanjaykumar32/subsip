@@ -9,16 +9,16 @@ export function AdminBackButton(): ReactElement {
     <Button
       size="large"
       sx={{
-        fontWeight: 800,
         color: "black",
       }}
+      startIcon={
+        <FontAwesomeIcon
+          icon={faAngleLeft}
+          size="2x"
+          color={theme.palette.info.main}
+        />
+      }
     >
-      <FontAwesomeIcon
-        icon={faAngleLeft}
-        size="lg"
-        color={theme.palette.info.main}
-        style={{ marginRight: 4, marginLeft: 10 }}
-      />
       Back
     </Button>
   );

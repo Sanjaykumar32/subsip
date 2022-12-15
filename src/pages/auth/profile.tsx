@@ -10,34 +10,29 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCertificate,
-  faLocationDot,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 export function Profile() {
   const theme = useTheme();
 
   return (
-    <Container sx={{ p: 4, my: 3.5 }}>
+    <Container sx={{ p: 5 }} maxWidth={false}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Typography variant="h6" fontWeight={600}>
-          Profile{" "}
+          Profile
         </Typography>
-        <Box sx={{ ml: 2, mr: 1 }}>
-          <FontAwesomeIcon
-            icon={faCertificate}
-            size="lg"
-            color={theme.palette.success.light}
-          />
+        <Box sx={{ ml: 2 }}>
+          <VerifiedUserIcon color="success" sx={{ mr: 0.5 }} />
         </Box>
         <Typography fontWeight={400} variant="caption">
           Verified
         </Typography>
       </Box>
 
-      <Container maxWidth="xs">
+      <Container maxWidth="xs" sx={{ my: 4 }}>
         <Box sx={{ my: 1, textAlign: "center" }}>
           <FormGroup sx={{ textAlign: "left" }}>
             <InputBox>

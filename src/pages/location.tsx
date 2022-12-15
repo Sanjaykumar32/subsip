@@ -42,7 +42,7 @@ export function LocationPage() {
         <Grid item sm={12} md={4} sx={{ px: 2 }}>
           <Location {...obj} />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <Box>
             <Typography
               variant="body1"

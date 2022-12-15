@@ -3,17 +3,22 @@ import {
   Avatar,
   Box,
   Button,
+  Chip,
   Container,
   FormControl,
-  Grid,
+  Link,
   MenuItem,
   Select,
+  Tooltip,
   Typography,
 } from "@mui/material";
 
 import { GridColDef } from "@mui/x-data-grid";
-import { Edit } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AdminRoutePathEnum } from "enum";
+import { useNavigate } from "react-router-dom";
 
 export function AdminListing() {
   const columns: GridColDef[] = [
@@ -38,7 +43,14 @@ export function AdminListing() {
       headerName: "Name",
       width: 200,
     },
-    { field: "Subscribers", headerName: "Subscribers", width: 200 },
+    {
+      field: "Subscribers",
+      headerName: "Subscribers",
+      width: 200,
+      renderCell: (params) => (
+        <Link href={AdminRoutePathEnum.ADMIN_SUBSCRIBERS}>{params.value}</Link>
+      ),
+    },
     {
       field: "Location",
       headerName: "Location",
@@ -49,15 +61,10 @@ export function AdminListing() {
       headerName: "Actions",
       width: 110,
       renderCell: (params) => (
-        <Box className="tableButton">
-          <Button
-            size="small"
-            endIcon={<Edit />}
-            variant="rounded"
-            sx={{ ".MuiButton-iconSizeSmall": { size: "10px" } }}
-          >
-            {params.value}
-          </Button>
+        <Box>
+          <Tooltip title={params.value}>
+            <FontAwesomeIcon icon={faPen} />
+          </Tooltip>
         </Box>
       ),
     },
@@ -137,35 +144,42 @@ export function AdminListing() {
       Actions: "Edit",
     },
   ];
-
+  const naviagate = useNavigate();
   return (
-    <Container maxWidth="md" disableGutters sx={{ m: 0 }}>
-      <Grid container spacing={2}>
-        <Container>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", my: 1 }}>
-            <Button
-              size="large"
-              sx={{
-                fontWeight: 800,
-                width: "120px",
-                textAlign: "center",
-                height: "35px",
-              }}
-              color="info"
-              variant="contained"
-            >
-              New Listing
-            </Button>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "baseline",
-              justifyContent: "flex-end",
-              my: 1,
+    <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <Box>
+          <Button
+            onClick={() => {
+              naviagate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
             }}
+            size="large"
+            sx={{
+              fontWeight: 800,
+              textAlign: "center",
+              height: "35px",
+            }}
+            color="info"
+            variant="contained"
           >
+            New Listing
+          </Button>
+        </Box>
+      </Box>
+      <Container maxWidth="md" sx={{ my: 4 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            my: 1,
+          }}
+        >
+          <Box>
             <Typography variant="caption" sx={{ mr: 1 }}>
               Sort By:
             </Typography>
@@ -182,24 +196,23 @@ export function AdminListing() {
                     Recommended
                   </Typography>
                 </MenuItem>
-                <MenuItem value={"Oldest"}>
-                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                    Oldest
-                  </Typography>
+                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                  <Typography variant="body2">Oldest</Typography>
                 </MenuItem>
               </Select>
             </FormControl>
           </Box>
-          <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-            />
-          </Box>
-        </Container>
-      </Grid>
+        </Box>
+
+        <Box style={{ height: 400, width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </Box>
+      </Container>
     </Container>
   );
 }

@@ -61,8 +61,24 @@ export function Social() {
 
   return (
     <SocialBox>
-      <Logo />
-      <Typography variant="body2" sx={{ mb: 3 }}>
+      <Typography
+        variant="h5"
+        noWrap
+        component="a"
+        href="/"
+        sx={{
+          mr: 2,
+          display: { md: "flex" },
+          fontFamily: "Kessel",
+          fontWeight: 700,
+          letterSpacing: ".2rem",
+          color: "inherit",
+          textDecoration: "none",
+        }}
+      >
+        PoshSub
+      </Typography>
+      <Typography variant="body2" sx={{ mb: 5, mt: 1 }}>
         Reward for Subscribers
       </Typography>
       <IconList container>
@@ -70,7 +86,7 @@ export function Social() {
           <Grid item key={`Social-${data.link}-${index}`}>
             <IconButton onClick={() => (window.location.href = data.link)}>
               <FontAwesomeIcon
-                style={{ width: "32px", height: "32px" }}
+                style={{ width: "25px", height: "25px" }}
                 fixedWidth
                 inverse
                 icon={data.icon}
