@@ -548,10 +548,6 @@ const SliderCard = (props: any) => {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    HomeBanner();
-  }, [HomeBanner]);
-
   return (
     <div className="w-full mx-auto  md:mx-5 relative max-w-[350px] bg-white  border-[1px] border-[#DADDE5] ">
       <img
