@@ -553,28 +553,28 @@ const SliderCard = (props: any) => {
   }, [HomeBanner]);
 
   return (
-    <div className="w-full mx-auto relative max-w-[350px] bg-white  border-[1px] border-[#dadde5] ">
+    <div className="w-full mx-auto  md:mx-5 relative max-w-[350px] bg-white  border-[1px] border-[#DADDE5] ">
       <img
         src={props.imgSrc}
         alt="image"
-        className="w-full h-full object-contain min-h-[215px]"
+        className="w-full h-full object-cover min-h-[215px]"
       />
       <div className="p-3">
         <p className="text-[1.3rem] font-semibold text-[#021414] leading-[22px] py-2">
           Inida gate Restaurant
         </p>
-        <p className="text-[0.9rem] text-[#09292b] leading-[22px] font-semibold py-2">
+        <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold py-2">
           Seattle, WA
         </p>
-        <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434d59] py-2">
+        <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434D59] py-2">
           Welcome to the India Gate Restaurant where we offer unique food.
         </p>
         <div className="flex justify-between">
-          <p className="text-[0.9rem] text-[#cdcdcd]">
+          <p className="text-[0.9rem] text-[#CDCDCD]">
             <span className="text-[20px] text-black pr-2"> 46.2k </span>
             subscribers
           </p>
-          <button className="bg-[#d32f3f] text-[0.9rem] w-36 rounded-full  py-2 px-1 font-normal text-white">
+          <button className="bg-[#D32F3F] text-[0.9rem] w-36 rounded-full  py-2 px-1 font-normal text-white">
             Subscribe Now
           </button>
         </div>
