@@ -176,7 +176,6 @@ export function AdminLayout(props: Props) {
               ),
             }}
           />
-
           <Box>
             <Badge badgeContent={5} color="primary" sx={{ mx: 2 }}>
               <FontAwesomeIcon icon={faBell} size="lg" />
