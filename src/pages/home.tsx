@@ -200,7 +200,6 @@ import {
   Subscribe,
   Title,
 } from "components/location/location-card";
-import { Spacing } from "components";
 import { useAuth } from "context/auth.context";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
