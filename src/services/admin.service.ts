@@ -147,7 +147,7 @@ export class AdminService {
   ): Promise<IReferralCodeResponse> {
     const res: AxiosResponse<IReferralCodeResponse> =
       await ApiHelper.send<IReferralCodeResponse>({
-        url: `referral?userId=${payload.userId}`,
+        url: `user/referral?userId=${payload.userId}`,
         method: "GET",
       });
 

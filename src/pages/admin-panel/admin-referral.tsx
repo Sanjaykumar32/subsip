@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   Box,
   Button,
@@ -15,6 +15,9 @@ import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAppDispatch, useAppSelector } from "data";
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { GET_REFFERRAL_CODE } from "data/selectors";
 
 export function AdminReferral() {
   const columns: GridColDef[] = [
@@ -100,6 +103,25 @@ export function AdminReferral() {
       Actions: "Edit",
     },
   ];
+
+  const dispatch = useAppDispatch();
+
+  const refferalCodeData = useAppSelector(GET_REFFERRAL_CODE);
+  console.log(refferalCodeData, "refferalCodeData");
+
+  const refferalCode = useCallback(async () => {
+    const userId = "11";
+
+    try {
+      dispatch(AdminThunk.refferralCode({ userId: userId }));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    refferalCode();
+  }, [refferalCode]);
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>

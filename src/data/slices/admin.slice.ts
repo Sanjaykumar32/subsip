@@ -7,6 +7,7 @@ import {
   IBussinessResponse,
   IReferralCodeResponse,
   IReferralCountResponse,
+  IRefferralCode,
   ISubscribeByBussinessIDResponse,
   ISubscriberData,
   ISubscriberOfBussinessResponse,
@@ -20,7 +21,7 @@ export interface IAdminState {
   AllsubscriberOfBussiness: ISubscriberOfBussinessResponse;
   Bussiness: IBussinessResponse;
   AllBussinessById: IBussinessResponse;
-  refferralCode: IReferralCodeResponse;
+  refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
 }
 
@@ -32,7 +33,7 @@ const initialState: IAdminState = {
   AllsubscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
   Bussiness: {} as IBussinessResponse,
   AllBussinessById: {} as IBussinessResponse,
-  refferralCode: {} as IReferralCodeResponse,
+  refferralCode: {} as IRefferralCode,
   refferralCount: {} as IReferralCountResponse,
 };
 
@@ -79,8 +80,10 @@ export const adminSlice = createSlice({
     builder.addCase(AdminThunk.allBusiness.fulfilled, (_state, action) => {
       action.payload;
     });
-    builder.addCase(AdminThunk.refferralCode.fulfilled, (_state, action) => {
-      action.payload;
+    builder.addCase(AdminThunk.refferralCode.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.refferralCode = action.payload.data;
+      }
     });
     builder.addCase(AdminThunk.refferralCount.fulfilled, (_state, action) => {
       action.payload;
