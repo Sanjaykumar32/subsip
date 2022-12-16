@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   Box,
   Button,
@@ -17,6 +17,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { theme } from "theme";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import { AdminBackButton } from "components";
+import { useAppDispatch, useAppSelector } from "data";
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { GET_SUBSCRIBER_OF_BUSSINESS } from "data/selectors";
 
 export function AdminListingToSubscribers() {
   const columns: GridColDef[] = [
@@ -106,6 +109,25 @@ export function AdminListingToSubscribers() {
       Actions: "Delete",
     },
   ];
+
+  const dispatch = useAppDispatch();
+
+  const AllBusiness = useCallback(async () => {
+    const businessId = "1";
+
+    try {
+      dispatch(AdminThunk.subscribeOfBussiness({ businessId: businessId }));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    AllBusiness();
+  }, [AllBusiness]);
+
+  const allSubscriberOfBussiness = useAppSelector(GET_SUBSCRIBER_OF_BUSSINESS);
+  console.log(allSubscriberOfBussiness, "allSubscriberOfBussiness");
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
