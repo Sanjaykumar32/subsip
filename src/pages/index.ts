@@ -25,7 +25,7 @@ export * from "./admin-panel/admin-new-listing";
 export * from "./admin-panel/admin-new-notification";
 export * from "./admin-panel/admin-new-referral-price";
 export * from "./admin-panel/admin-new-reward";
-export * from "./admin-panel/admin-new-category";
+export * from "./admin-panel/admin-new-category/admin-new-category";
 export * from "./admin-panel/admin-notification";
 export * from "./admin-panel/admin-referral";
 export * from "./admin-panel/admin-referral-to-subscribe";

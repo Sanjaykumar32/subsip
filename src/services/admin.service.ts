@@ -177,7 +177,7 @@ export class AdminService {
    */
   public static async category(credentials: ICategoryRequest): Promise<void> {
     const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/auth/forgot-password",
+      url: "/category/list",
       method: "POST",
       data: credentials,
     });
