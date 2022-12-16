@@ -1,9 +1,9 @@
 // auth
-export * from "./auth/sign-in";
-export * from "./auth/sign-up";
-export * from "./auth/password-reset";
-export * from "./auth/profile";
-export * from "./auth/forget-password";
+export * from "./auth/sign-in/sign-in";
+export * from "./auth/sign-up/sign-up";
+export * from "./auth/password-reset/password-reset";
+export * from "./auth/profile/profile";
+export * from "./auth/forget-password/forget-password";
 
 // pages
 export * from "./home";
@@ -16,21 +16,4 @@ export * from "./rewards";
 export * from "./location";
 
 // admin
-export * from "./admin-panel/admin-categories";
-export * from "./admin-panel/admin-dashboard";
-export * from "./admin-panel/admin-listing";
-export * from "./admin-panel/admin-listing-to-subscribers";
-export * from "./admin-panel/admin-new-subcategory";
-export * from "./admin-panel/admin-new-listing";
-export * from "./admin-panel/admin-new-notification";
-export * from "./admin-panel/admin-new-referral-price";
-export * from "./admin-panel/admin-new-reward";
-export * from "./admin-panel/admin-new-category/admin-new-category";
-export * from "./admin-panel/admin-notification";
-export * from "./admin-panel/admin-referral";
-export * from "./admin-panel/admin-referral-to-subscribe";
-export * from "./admin-panel/admin-reward-to-details";
-export * from "./admin-panel/admin-rewards-milestones";
-export * from "./admin-panel/admin-rewards-to-winner";
-export * from "./admin-panel/admin-subcategory";
-export * from "./admin-panel/admin-subscribers";
+export * from "./admin-panel";
