@@ -7,10 +7,9 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { ScrollToTop, Logo, FooterContainer, Social, Links } from "components";
+import { ScrollToTop, FooterContainer, Social, Links } from "components";
 import { Link, Outlet } from "react-router-dom";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
-import { theme } from "theme";
 
 export function AuthLayout() {
   return (

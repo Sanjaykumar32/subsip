@@ -45,7 +45,7 @@ import "./index.css";
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button/admin-notify-button";
 
 import reportWebVitals from "./reportWebVitals";
-import { AdminLayout } from "components/admin-layout";
+import { AdminLayout } from "layouts/admin-layout";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { AuthProvider } from "context/auth.context";
 import { GuestGuard } from "components/guard";
