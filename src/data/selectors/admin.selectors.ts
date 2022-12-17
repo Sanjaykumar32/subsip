@@ -19,3 +19,6 @@ export const GET_REFFERRAL_CODE = (state: RootState) =>
 
 export const GET_REFERRAL_COUNT = (state: RootState) =>
   state.admin.refferralCount;
+
+export const GET_BUSSINESSBY_NAME = (state: RootState) =>
+  state.admin.AllBussinessById;

@@ -131,7 +131,7 @@ export class AdminService {
   ): Promise<IBussinessResponse> {
     const res: AxiosResponse<IBussinessResponse> =
       await ApiHelper.send<IBussinessResponse>({
-        url: `/business?businessname=${payload.businessname}`,
+        url: `/business?businessName=${payload.businessName}`,
         method: "GET",
       });
 

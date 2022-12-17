@@ -4,6 +4,7 @@ import { ReducerEnum } from "enum";
 
 import {
   IBannerResponse,
+  IBusiness,
   IBussinessResponse,
   IReferralCodeResponse,
   IReferralCountResponse,
@@ -20,7 +21,7 @@ export interface IAdminState {
   subscriberOfBussiness: ISubscriberData[];
   AllsubscriberOfBussiness: ISubscriberOfBussinessResponse;
   Bussiness: IBussinessResponse;
-  AllBussinessById: IBussinessResponse;
+  AllBussinessById: IBusiness[];
   refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
 }
@@ -32,7 +33,7 @@ const initialState: IAdminState = {
   subscriberOfBussiness: [],
   AllsubscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
   Bussiness: {} as IBussinessResponse,
-  AllBussinessById: {} as IBussinessResponse,
+  AllBussinessById: [],
   refferralCode: {} as IRefferralCode,
   refferralCount: {} as IReferralCountResponse,
 };
@@ -77,8 +78,10 @@ export const adminSlice = createSlice({
     builder.addCase(AdminThunk.business.fulfilled, (_state, action) => {
       action.payload;
     });
-    builder.addCase(AdminThunk.allBusiness.fulfilled, (_state, action) => {
-      action.payload;
+    builder.addCase(AdminThunk.allBusiness.fulfilled, (state, action) => {
+      if (action.payload.data) {
+        state.AllBussinessById = action.payload.data;
+      }
     });
     builder.addCase(AdminThunk.refferralCode.fulfilled, (state, action) => {
       if (action.payload) {
