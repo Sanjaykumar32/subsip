@@ -10,7 +10,7 @@ import {
   useTheme,
   Link,
 } from "@mui/material";
-import { IAuthContext } from "context/auth.context";
+import { IAuthContext, useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 
@@ -70,7 +70,7 @@ export const Subscribe = ({
         }}
         sx={{ fontWeight: 800, borderRadius: "24px" }}
       >
-        {auth?.isAuthenticated ? "Subscribed" : "Subscribe"}
+        {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
       </Button>
     </>
   );
@@ -78,7 +78,6 @@ export const Subscribe = ({
 
 export const CardFooter = () => {
   const theme = useTheme();
-
   return (
     <Box
       sx={{
@@ -116,6 +115,7 @@ export function Location({
   description,
   subscribers,
 }: ILocationProps) {
+  const auth = useAuth();
   return (
     <Card elevation={3} sx={{ height: "100%", position: "relative" }}>
       <Box sx={{ p: 2, fontSize: theme.typography.h5.fontSize }}>
@@ -140,7 +140,7 @@ export function Location({
         <Title>{name}</Title>
         <Address>{location}</Address>
         <Info>{description}</Info>
-        <Subscribe subsctibers={subscribers} />
+        <Subscribe subsctibers={subscribers} auth={auth} />
       </Box>
       <CardFooter />
     </Card>
