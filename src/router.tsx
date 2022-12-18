@@ -120,6 +120,10 @@ export const router = createBrowserRouter([
     errorElement: <div> Some Error Occured </div>,
     children: [
       {
+        path: AdminRoutePathEnum.ADMIN,
+        element: <AdminDashboard />,
+      },
+      {
         path: AdminRoutePathEnum.ADMIN_REFERRAL_PRICE,
         element: <AdminNewReferralPrice />,
       },
@@ -150,10 +154,6 @@ export const router = createBrowserRouter([
       {
         path: AdminRoutePathEnum.ADMIN_CATEGORY,
         element: <AdminCategories />,
-      },
-      {
-        path: AdminRoutePathEnum.ADMIN_DASHBOARD,
-        element: <AdminDashboard />,
       },
       {
         path: AdminRoutePathEnum.ADMIN_LISTING_TO_SUBSCRIBERS,
