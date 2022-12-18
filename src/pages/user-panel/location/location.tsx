@@ -27,7 +27,12 @@ export function LocationPage() {
 
       <Grid container spacing={2}>
         <Grid item sm={12} md={8}>
-          <Card sx={{ width: "100%", maxHeight: "500px" }}>
+          <Card
+            sx={{
+              width: "100%",
+              maxHeight: "500px",
+            }}
+          >
             <img
               alt={name}
               style={{

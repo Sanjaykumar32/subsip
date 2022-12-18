@@ -82,7 +82,6 @@ export const CardFooter = () => {
     <Box
       sx={{
         backgroundColor: theme.palette.grey[200],
-        position: "absolute",
         bottom: 0,
       }}
     >
@@ -117,10 +116,19 @@ export function Location({
 }: ILocationProps) {
   const auth = useAuth();
   return (
-    <Card elevation={3} sx={{ height: "100%", position: "relative" }}>
+    <Card
+      elevation={3}
+      sx={{
+        height: "100%",
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       <Box sx={{ p: 2, fontSize: theme.typography.h5.fontSize }}>
         <Box sx={{ display: "flex" }}>
-          <span style={{ fontFamily: "Bree Serif" }}> PoshSub </span>{" "}
+          <span style={{ fontFamily: "Bree Serif" }}> PoshSub </span>
           <Divider
             color="info"
             sx={{ m: 1 }}
