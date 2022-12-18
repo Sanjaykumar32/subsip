@@ -6,7 +6,11 @@ import "slick-carousel/slick/slick-theme.css";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { GET_BANNER_LIST, GET_BUSSINESS_LIST } from "data/selectors";
+import {
+  GET_BANNER_LIST,
+  GET_BUSSINESSBY_NAME,
+  GET_BUSSINESS_LIST,
+} from "data/selectors";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
@@ -296,7 +300,7 @@ export function Home() {
             </div>
           ))}
         </Slider>
-        <SliderArrow refVal={sliderRef} />
+        {bannerData.length > 0 && <SliderArrow refVal={sliderRef} />}
       </div>
 
       <div className="w-full px-5 mt-8">
@@ -324,7 +328,7 @@ export function Home() {
               );
             })}
           </Slider>
-          <SliderArrow refVal={cardRef} />
+          {businessData.length > 0 && <SliderArrow refVal={cardRef} />}
         </div>
 
         <div className="relative mt-10 w-full">
@@ -349,13 +353,13 @@ export function Home() {
               );
             })}
           </Slider>
-
-          <SliderArrow refVal={cardRef2} />
+          {businessData.length > 0 && <SliderArrow refVal={cardRef2} />}
         </div>
 
         <div className="relative my-10 w-full">
           <Slider ref={cardRef3} {...cardSettings}>
             {businessData?.map((ele, index) => {
+              console.log(ele, "hhhh");
               return (
                 <div
                   style={{
@@ -370,12 +374,13 @@ export function Home() {
                     tagLine={ele?.vTagLine}
                     des={ele?.tDescription}
                     location={ele?.vLocation}
+                    bussinessId={ele.iBusinessId}
                   />
                 </div>
               );
             })}
           </Slider>
-          <SliderArrow refVal={cardRef3} />
+          {businessData.length > 0 && <SliderArrow refVal={cardRef3} />}
         </div>
       </div>
     </div>
@@ -383,18 +388,29 @@ export function Home() {
 }
 
 const SliderCard = (props: any) => {
-  console.log(props);
-  const { des, imgSrc, location, name } = props;
+  const { des, imgSrc, location, name, bussinessId } = props;
 
   const auth = useAuth();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const BussinessByName = useAppSelector(GET_BUSSINESSBY_NAME);
 
+  function onImageClick() {
+    dispatch(AdminThunk.allBusiness({ businessId: "1" }));
+  }
+
+  useEffect(() => {
+    if (BussinessByName.length > 0) {
+      navigate("/listing/:id");
+    }
+  }, [BussinessByName.length, navigate]);
   return (
     <div className="w-full mx-auto  md:mx-5 relative max-w-[350px] bg-white  border-[1px] border-[#DADDE5] ">
       <img
         src={imgSrc}
         alt="image"
         className="w-full h-full object-cover min-h-[215px]"
+        onClick={onImageClick}
       />
       <div className="p-3">
         <p className="text-[1.3rem] font-semibold text-[#021414] leading-[22px] py-2">

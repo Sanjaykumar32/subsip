@@ -129,9 +129,15 @@ export class AdminService {
   public static async allBussinessById(
     payload: IBussinessRequest
   ): Promise<IBussinessResponse> {
+    let URL = "/business";
+    if (payload.businessId) {
+      URL += `?businessId=${payload.businessId}`;
+    } else if (payload.businessName) {
+      URL += `?businessName=${payload.businessName}`;
+    }
     const res: AxiosResponse<IBussinessResponse> =
       await ApiHelper.send<IBussinessResponse>({
-        url: `/business?businessName=${payload.businessName}`,
+        url: URL,
         method: "GET",
       });
 
