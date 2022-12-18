@@ -13,6 +13,7 @@ import {
 import { IAuthContext, useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
+import { IBusiness } from "interface";
 
 export const Title = ({ children, ...props }: TypographyProps) => (
   <Typography variant="h5" fontWeight={900} sx={{ mt: 2, mb: 1 }} {...props}>
@@ -101,20 +102,12 @@ export const CardFooter = () => {
   );
 };
 
-export interface ILocationProps {
-  name: string;
-  location: string;
-  description: string;
-  subscribers: number;
-  footer: string;
-}
-
 export function Location({
-  name,
-  location,
-  description,
-  subscribers,
-}: ILocationProps) {
+  vName,
+  vLocation,
+  tDescription,
+  subscriberCount,
+}: IBusiness) {
   const auth = useAuth();
   return (
     <Card elevation={3} sx={{ height: "100%", position: "relative" }}>
@@ -137,10 +130,10 @@ export function Location({
             RWEARDS
           </span>
         </Box>
-        <Title>{name}</Title>
-        <Address>{location}</Address>
-        <Info>{description}</Info>
-        <Subscribe subsctibers={subscribers} auth={auth} />
+        <Title>{vName}</Title>
+        <Address>{vLocation}</Address>
+        <Info>{tDescription}</Info>
+        <Subscribe subsctibers={subscriberCount} auth={auth} />
       </Box>
       <CardFooter />
     </Card>

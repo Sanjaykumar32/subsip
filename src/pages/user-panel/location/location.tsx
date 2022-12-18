@@ -4,20 +4,24 @@ import { Card, Grid, Typography } from "@mui/material";
 import {
   Location,
   Address,
-  ILocationProps,
   Info,
   Title,
 } from "components/location/location-card";
+import { GET_BUSSINESSBY_NAME } from "data/selectors";
+import { useAppSelector } from "data";
+import { IBusiness } from "interface";
 
 export function LocationPage() {
   const theme = useTheme();
+  const bussinessByName = useAppSelector(GET_BUSSINESSBY_NAME);
+  console.log(bussinessByName, "BussinessByName");
 
   const name = `India Gate Restaurant`;
   const location = "Seattle, WA";
   const description =
     "Welcome to the India Gate Restaurant where we offer unique food.";
   const subscribers = 42.2;
-  const obj = { name, location, description, subscribers } as ILocationProps;
+  // const obj = { name, location, description, subscribers } as ILocationProps;
 
   return (
     <Container maxWidth="lg" sx={{ my: 8 }}>
@@ -27,20 +31,24 @@ export function LocationPage() {
 
       <Grid container spacing={2}>
         <Grid item sm={12} md={8}>
-          <Card sx={{ width: "100%", maxHeight: "500px" }}>
-            <img
-              alt={name}
-              style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "cover",
-              }}
-              src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZvb2R8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
-            />
-          </Card>
+          {bussinessByName.map((res: IBusiness, index: number) => (
+            <Card sx={{ width: "100%", maxHeight: "500px" }} key={index}>
+              <img
+                alt={name}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  objectFit: "cover",
+                }}
+                src={res.vImage}
+              />
+            </Card>
+          ))}
         </Grid>
         <Grid item sm={12} md={4} sx={{ px: 2 }}>
-          <Location {...obj} />
+          {bussinessByName.map((res: IBusiness, index: number) => {
+            return <Location {...res} key={index} />;
+          })}
         </Grid>
         <Grid item xs={12}>
           <Box>

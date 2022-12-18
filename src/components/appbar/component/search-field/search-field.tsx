@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField, IconButton } from "@mui/material";
@@ -6,7 +6,7 @@ import { SearchFieldController } from "./search-field-controller";
 
 export const SearchField = () => {
   const { getters, handlers } = SearchFieldController();
-  const { search, navigate, BussinessByName } = getters;
+  const { search } = getters;
   const { changeHandler, submitHandler } = handlers;
   return (
     <TextField
