@@ -56,6 +56,12 @@ export interface IBusiness {
   iCity: number;
   vAddress: string;
   onBanner: number;
+  vImage?: string;
+  iCategory: number;
+  iSubCategory: number;
+  categoryName: string;
+  subCategoryName: string;
+  subscriberCount: number;
 }
 
 export interface IReferralCountResponse {

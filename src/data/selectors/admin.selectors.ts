@@ -8,6 +8,8 @@ export const GET_SUBSCRIBE_BY_ADMIN = (state: RootState) =>
 
 export const GET_BANNER_LIST = (state: RootState) => state.admin.bannerList;
 
+export const GET_BUSSINESS_LIST = (state: RootState) => state.admin.Bussiness;
+
 export const GET_SUBSCRIBER_OF_BUSSINESS = (state: RootState) =>
   state.admin.subscriberOfBussiness;
 

@@ -3,10 +3,8 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 import { ReducerEnum } from "enum";
 
 import {
-  IBannerResponse,
+  IBannerData,
   IBusiness,
-  IBussinessResponse,
-  IReferralCodeResponse,
   IReferralCountResponse,
   IRefferralCode,
   ISubscribeByBussinessIDResponse,
@@ -17,10 +15,10 @@ import {
 export interface IAdminState {
   adminSubscribers: ISubscribeByBussinessIDResponse;
   bussinessSubscribers: ISubscribeByBussinessIDResponse;
-  bannerList: IBannerResponse;
+  bannerList: IBannerData[];
   subscriberOfBussiness: ISubscriberData[];
   AllsubscriberOfBussiness: ISubscriberOfBussinessResponse;
-  Bussiness: IBussinessResponse;
+  Bussiness: IBusiness[];
   AllBussinessById: IBusiness[];
   refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
@@ -29,10 +27,10 @@ export interface IAdminState {
 const initialState: IAdminState = {
   adminSubscribers: {} as ISubscribeByBussinessIDResponse,
   bussinessSubscribers: {} as ISubscribeByBussinessIDResponse,
-  bannerList: {} as IBannerResponse,
+  bannerList: [],
   subscriberOfBussiness: [],
   AllsubscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
-  Bussiness: {} as IBussinessResponse,
+  Bussiness: [],
   AllBussinessById: [],
   refferralCode: {} as IRefferralCode,
   refferralCount: {} as IReferralCountResponse,
@@ -57,8 +55,10 @@ export const adminSlice = createSlice({
         action.payload;
       }
     );
-    builder.addCase(AdminThunk.bannerList.fulfilled, (_state, action) => {
-      action.payload;
+    builder.addCase(AdminThunk.bannerList.fulfilled, (state, action) => {
+      if (action.payload.data) {
+        state.bannerList = action.payload.data;
+      }
     });
 
     builder.addCase(
@@ -75,8 +75,10 @@ export const adminSlice = createSlice({
         action.payload;
       }
     );
-    builder.addCase(AdminThunk.business.fulfilled, (_state, action) => {
-      action.payload;
+    builder.addCase(AdminThunk.business.fulfilled, (state, action) => {
+      if (action.payload.data) {
+        state.Bussiness = action.payload.data;
+      }
     });
     builder.addCase(AdminThunk.allBusiness.fulfilled, (state, action) => {
       if (action.payload.data) {

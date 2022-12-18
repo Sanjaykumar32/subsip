@@ -18,7 +18,7 @@ export interface IToken {
 export interface IBannerResponse {
   success: number;
   message: string;
-  data: Daum[];
+  data: IBannerData[];
 }
 
 export interface ISignUpResponse {
@@ -31,7 +31,7 @@ export interface ISignUp {
   insert_id: number;
 }
 
-export interface Daum {
+export interface IBannerData {
   iBusinessId: number;
   vName: string;
   vTagLine: string;
