@@ -1,11 +1,12 @@
 import React from "react";
-import { Home, Subscriptions } from "@mui/icons-material";
+import { Subscriptions } from "@mui/icons-material";
 import { GuestGuard } from "components/guard";
 import { AdminGuard } from "components/guard/admin.guard";
 import { AuthRoutePathEnum, RoutePathEnum, AdminRoutePathEnum } from "enum";
 import { AuthLayout, NavigationBar } from "layouts";
 import { AdminLayout } from "layouts/admin-layout";
 import {
+  Home,
   SignIn,
   SignUp,
   PasswordReset,
