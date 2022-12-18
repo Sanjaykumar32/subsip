@@ -57,7 +57,9 @@ export function SignIn(): ReactElement {
                 onChange={changeHandler}
               />
             </InputBox>
-            {errors.email && <span>{errors.email}</span>}
+            {errors.email && (
+              <span style={{ color: "red" }}>{errors.email}</span>
+            )}
             <InputBox>
               <Label> Password </Label>
               <TextField
@@ -67,7 +69,9 @@ export function SignIn(): ReactElement {
                 onChange={changeHandler}
               />
             </InputBox>
-            {errors.password && <span>{errors.password}</span>}
+            {errors.password && (
+              <span style={{ color: "red" }}>{errors.password}</span>
+            )}
             <Button
               variant="contained"
               type="submit"

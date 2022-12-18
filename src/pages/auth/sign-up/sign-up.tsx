@@ -16,7 +16,7 @@ import { AuthRoutePathEnum } from "enum";
 
 export function SignUp() {
   const { getters, handlers } = SignUpController();
-  const { theme, value } = getters;
+  const { theme, value, errors } = getters;
   const { changeHandler, submitHandler } = handlers;
 
   return (
@@ -34,6 +34,9 @@ export function SignUp() {
                 onChange={changeHandler}
               />
             </InputBox>
+            {errors.email && (
+              <span style={{ color: "red" }}>{errors.email}</span>
+            )}
             <InputBox>
               <Label> Password </Label>
               <TextField
@@ -43,6 +46,9 @@ export function SignUp() {
                 onChange={changeHandler}
               />
             </InputBox>
+            {errors.password && (
+              <span style={{ color: "red" }}>{errors.password}</span>
+            )}
             <Button variant="contained" sx={{ mt: 4 }} type="submit">
               <Typography
                 variant="alternet"
