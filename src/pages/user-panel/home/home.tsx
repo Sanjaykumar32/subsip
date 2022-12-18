@@ -394,8 +394,8 @@ const SliderCard = (props: any) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const BussinessByName = useAppSelector(GET_BUSSINESSBY_NAME);
-
-  function onImageClick() {
+  function onImageClick(bussinessId: string) {
+    console.log(bussinessId, "bussinessId");
     dispatch(AdminThunk.allBusiness({ businessId: "1" }));
   }
 
@@ -410,7 +410,10 @@ const SliderCard = (props: any) => {
         src={imgSrc}
         alt="image"
         className="w-full h-full object-cover min-h-[215px]"
-        onClick={onImageClick}
+        onClick={() => {
+          onImageClick(bussinessId);
+        }}
+        id={bussinessId}
       />
       <div className="p-3">
         <p className="text-[1.3rem] font-semibold text-[#021414] leading-[22px] py-2">
