@@ -59,7 +59,7 @@ export function SocialIcons() {
   );
 
   return (
-    <IconList container spacing={{ xs: 0, sm: 2, md: 4 }}>
+    <IconList container spacing={{ xs: 2, sm: 3, md: 4 }}>
       {socialIcons.map((data, index: number) => (
         <Grid item key={`Social-${data.link}-${index}`}>
           <IconButton onClick={() => (window.location.href = data.link)}>

@@ -20,17 +20,10 @@ export const FooterContainer = styled(Paper)(({ theme }) => ({
   backgroundColor: "#2C2E30",
   color: theme.palette.getContrastText("#2C2E30"),
   padding: theme.spacing(2, 3),
-  // position: "relative",
-  // display: "flex",
-  // flexDirection: "column",
-  // flexWrap: "wrap",
-  // justifyContent: "left",
-  // marginTop: "auto",
-  // [theme.breakpoints.down("md")]: {
-  //   padding: theme.spacing(1),
-  //   marginTop: theme.spacing(2, 0),
-  //   flexDirection: "column",
-  // },
+  minHeight: "291px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 export function FooterMain() {
@@ -41,14 +34,14 @@ export function FooterMain() {
     <FooterContainer>
       <Container maxWidth="lg" disableGutters>
         <Grid container>
-          <Grid item>
-            {isMobile && (
+          {isMobile && (
+            <Grid item>
               <Box>
                 <Logo />
                 <Typography> Reawrds on Subscription </Typography>
               </Box>
-            )}
-          </Grid>
+            </Grid>
+          )}
           <Grid item xs={12} md={4} order={{ xs: 2, md: 0 }}>
             {!isMobile && (
               <Box sx={{ mb: 2 }}>
