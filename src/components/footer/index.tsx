@@ -20,17 +20,10 @@ export const FooterContainer = styled(Paper)(({ theme }) => ({
   backgroundColor: "#2C2E30",
   color: theme.palette.getContrastText("#2C2E30"),
   padding: theme.spacing(2, 3),
-  // position: "relative",
-  // display: "flex",
-  // flexDirection: "column",
-  // flexWrap: "wrap",
-  // justifyContent: "left",
-  // marginTop: "auto",
-  // [theme.breakpoints.down("md")]: {
-  //   padding: theme.spacing(1),
-  //   marginTop: theme.spacing(2, 0),
-  //   flexDirection: "column",
-  // },
+  minHeight: "291px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 export function FooterMain() {
