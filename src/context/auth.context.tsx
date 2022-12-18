@@ -53,6 +53,8 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     try {
       const response: ISignInResponse = await AuthService.signIn(credentials);
       sessionStorage.setItem("token", response.token.token);
+      sessionStorage.setItem("userId", response.data.userId);
+
       setAuthenticated(true);
     } catch (error) {
       console.log(error);

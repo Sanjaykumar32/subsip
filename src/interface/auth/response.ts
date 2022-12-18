@@ -2,6 +2,11 @@ export interface ISignInResponse {
   success: number;
   message: string;
   token: IToken;
+  data: IData;
+}
+
+export interface IData {
+  userId: string;
 }
 
 export interface IToken {
