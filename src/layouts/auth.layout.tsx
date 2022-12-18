@@ -4,10 +4,10 @@ import {
   AppBar,
   Toolbar,
   Button,
-  Grid,
   Typography,
+  Box,
 } from "@mui/material";
-import { ScrollToTop, FooterContainer, SocialIcons, Links } from "components";
+import { ScrollToTop, FooterMain } from "components";
 import { Link, Outlet } from "react-router-dom";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 
@@ -16,7 +16,11 @@ export function AuthLayout() {
     <Container
       disableGutters
       maxWidth={false}
-      sx={{ height: "100vh", display: "flex", flexDirection: "column" }}
+      sx={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
       <ScrollToTop />
       <AppBar
@@ -56,17 +60,10 @@ export function AuthLayout() {
           </Button>
         </Toolbar>
       </AppBar>
-      <Outlet />
-      <FooterContainer>
-        <Grid container>
-          <Grid item xs={12} md={4}>
-            <SocialIcons />
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Links />
-          </Grid>
-        </Grid>
-      </FooterContainer>
+      <Box sx={{ py: 12 }}>
+        <Outlet />
+      </Box>
+      <FooterMain />
     </Container>
   );
 }
