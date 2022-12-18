@@ -41,14 +41,14 @@ export function FooterMain() {
     <FooterContainer>
       <Container maxWidth="lg" disableGutters>
         <Grid container>
-          <Grid item>
-            {isMobile && (
+          {isMobile && (
+            <Grid item>
               <Box>
                 <Logo />
                 <Typography> Reawrds on Subscription </Typography>
               </Box>
-            )}
-          </Grid>
+            </Grid>
+          )}
           <Grid item xs={12} md={4} order={{ xs: 2, md: 0 }}>
             {!isMobile && (
               <Box sx={{ mb: 2 }}>
