@@ -25,7 +25,13 @@ import {
   faUser,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import { Badge, InputAdornment, TextField, useTheme } from "@mui/material";
+import {
+  Badge,
+  InputAdornment,
+  TextField,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { AdminRoutePathEnum } from "enum";
 
 const drawerWidth = 240;
@@ -42,6 +48,7 @@ export function AdminLayout(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -97,6 +104,21 @@ export function AdminLayout(props: Props) {
   const drawer = (
     <div>
       <Toolbar />
+      {isMobile && (
+        <TextField
+          fullWidth
+          size="small"
+          label="Search Listings"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <FontAwesomeIcon icon={faSearch} />
+              </InputAdornment>
+            ),
+          }}
+          sx={{ my: 2, px: 1 }}
+        />
+      )}
       <Divider />
       <List>
         {menuList.map((item, index) => (
@@ -130,6 +152,7 @@ export function AdminLayout(props: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
+        elevation={0}
         color="default"
         position="fixed"
         sx={{
@@ -161,28 +184,32 @@ export function AdminLayout(props: Props) {
           >
             PoshSub
           </Typography>
-          <TextField
-            size="small"
-            sx={{ width: "50%" }}
-            label="Search Listings"
-            InputProps={{
-              sx: { borderRadius: "60px" },
-              endAdornment: (
-                <InputAdornment position="end" sx={{ mx: 1 }}>
-                  <FontAwesomeIcon icon={faSearch} />
-                </InputAdornment>
-              ),
-            }}
-          />
+          {!isMobile && (
+            <TextField
+              size="small"
+              sx={{ width: "50%" }}
+              label="Search Listings"
+              InputProps={{
+                sx: { borderRadius: "60px" },
+                endAdornment: (
+                  <InputAdornment position="end" sx={{ mx: 1 }}>
+                    <FontAwesomeIcon icon={faSearch} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          )}
           <Box>
             <Badge badgeContent={5} color="primary" sx={{ mx: 2 }}>
               <FontAwesomeIcon icon={faBell} size="lg" />
             </Badge>
-            <FontAwesomeIcon
-              icon={faUserCircle}
-              size="xl"
-              style={{ margin: theme.spacing(0, 2) }}
-            />
+            {!isMobile && (
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                size="xl"
+                style={{ margin: theme.spacing(0, 2) }}
+              />
+            )}
           </Box>
         </Toolbar>
       </AppBar>
