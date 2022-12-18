@@ -7,7 +7,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { ScrollToTop, FooterContainer, Social, Links } from "components";
+import { ScrollToTop, FooterContainer, SocialIcons, Links } from "components";
 import { Link, Outlet } from "react-router-dom";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 
@@ -60,7 +60,7 @@ export function AuthLayout() {
       <FooterContainer>
         <Grid container>
           <Grid item xs={12} md={4}>
-            <Social />
+            <SocialIcons />
           </Grid>
           <Grid item xs={12} md={8}>
             <Links />

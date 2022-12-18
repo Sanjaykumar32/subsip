@@ -1,26 +1,105 @@
-import React from "react";
-import { ColoredLabel, PageHeader, RewardListItem } from "components";
+import React, { useMemo } from "react";
+import { ColoredLabel, PageHeader } from "components";
 import {
   Box,
-  Container,
   Grid,
-  IconButton,
-  List,
+  Drawer,
   ListItem,
-  TextField,
+  List,
   Typography,
+  Container,
   useTheme,
+  useMediaQuery,
+  TextField,
 } from "@mui/material";
 import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
-import { RewardStatusEnum } from "enum";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import TableContainer from "@mui/material/TableContainer";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import { Search } from "@mui/icons-material";
 
 export function Rewards() {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const columns: GridColDef[] = [
+    {
+      field: "id",
+      headerName: "",
+      width: 100,
+      renderCell: () => <Avatar sx={{ mx: "auto", width: 35, height: 35 }} />,
+    },
+    {
+      field: "name",
+      headerName: "Name",
+      width: 200,
+    },
+    {
+      field: "amount",
+      headerName: "Amount",
+      type: "number",
+      width: 150,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      width: 150,
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: () => <Button variant="contained"> Claim </Button>,
+    },
+  ];
+
+  const rows = [
+    { id: 1, name: "India Gate Restaurant", amount: "50$", status: "Claimed" },
+    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
+    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
+    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
+    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  ];
+
+  const subscribedList = useMemo(
+    () => (
+      <Box sx={{ p: 2 }}>
+        <Typography sx={{ my: 1 }}>Subscribed Buisnesses :</Typography>
+        <TextField
+          sx={{ my: 2 }}
+          label="Search Subscriptions"
+          InputProps={{ endAdornment: <Search /> }}
+        />
+        <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>
+          <ListItem> All </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+          <ListItem> India Gate Restaurant </ListItem>
+        </List>
+      </Box>
+    ),
+    []
+  );
 
   return (
-    <Container maxWidth={false} sx={{ p: 2 }}>
+    <Container maxWidth="xl" sx={{ p: 2 }}>
       <PageHeader
         name="Rewards"
         icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
@@ -28,8 +107,8 @@ export function Rewards() {
         <Box sx={{ display: "flex" }}>
           {[
             { title: "Availabel", color: theme.palette.success.light },
-            { title: "Claimed by me", color: theme.palette.warning.light },
-            { title: "Missed", color: theme.palette.error.light },
+            { title: "Claimed", color: theme.palette.warning.light },
+            { title: "Missed", color: theme.palette.error.main },
           ].map((res, i) => (
             <ColoredLabel
               title={res.title}
@@ -39,57 +118,27 @@ export function Rewards() {
           ))}
         </Box>
       </PageHeader>
-      <Container maxWidth={false} sx={{ mt: 2 }}>
-        <Grid container>
-          <Grid item xs={12} md={2.5}>
-            <Box sx={{ height: "170%", overflow: "auto" }}>
-              <Typography variant="h6">Subscribed Businesses:</Typography>
-              <TextField
-                size="small"
-                label="Search Subscriptions"
-                sx={{ my: 2, borderRadius: "30px" }}
-                InputProps={{
-                  size: "small",
-                  sx: { borderRadius: "50px" },
-                  endAdornment: (
-                    <IconButton>
-                      <FontAwesomeIcon icon={faSearch} size="xs" />
-                    </IconButton>
-                  ),
-                }}
-              />
-              <List>
-                <Typography>All</Typography>
-                {Array(12)
-                  .fill({
-                    name: "India Gate Restaurant",
-                  })
-                  .map((element, index: number) => (
-                    <ListItem key={`${element.name}-${index}`}>
-                      {element.name}
-                    </ListItem>
-                  ))}
-              </List>
-            </Box>
+
+      <Grid container sx={{ my: 3 }}>
+        {!isMobile ? (
+          <Grid item xs={12} md={4}>
+            {subscribedList}
           </Grid>
-          <Grid item xs={12} md={8.5}>
-            <Container maxWidth={false}>
-              {Array(4)
-                .fill({
-                  name: "Reward One",
-                  status: RewardStatusEnum.CLAIM,
-                  amount: 50.0,
-                })
-                .map((element, index: number) => (
-                  <RewardListItem
-                    {...element}
-                    key={`${element.name}-${index}`}
-                  />
-                ))}
-            </Container>
-          </Grid>
+        ) : (
+          <Drawer open>{subscribedList}</Drawer>
+        )}
+
+        <Grid item xs={12} md={8}>
+          <TableContainer sx={{ height: 400, width: "100%" }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+            />
+          </TableContainer>
         </Grid>
-      </Container>
+      </Grid>
     </Container>
   );
 }

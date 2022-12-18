@@ -15,8 +15,9 @@ export function ColoredLabel({
       sx={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "right",
-        ml: 3,
+        justifyContent: "space-evenly",
+        ml: { xs: 1, md: 2 },
+        width: { xs: "100%", md: "inherit" },
       }}
     >
       <Box

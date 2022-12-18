@@ -52,7 +52,7 @@ export function AdminLayout(props: Props) {
       {
         title: "Dashboard",
         icon: faHome,
-        route: AdminRoutePathEnum.ADMIN_DASHBOARD,
+        route: AdminRoutePathEnum.ADMIN,
       },
 
       {
@@ -129,8 +129,6 @@ export function AdminLayout(props: Props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-
       <AppBar
         color="default"
         position="fixed"
