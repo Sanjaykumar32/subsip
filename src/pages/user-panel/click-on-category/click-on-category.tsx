@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   Container,
+  Drawer,
   FormControl,
   Grid,
   List,
@@ -11,11 +12,13 @@ import {
   MenuItem,
   Select,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 
 export function ClickOnCategory() {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const data = {
     image:
@@ -31,24 +34,46 @@ export function ClickOnCategory() {
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
-        <Grid item xs={12} md={2}>
-          <Box sx={{ overflow: "auto", my: 1 }}>
-            <Typography variant="body1" fontWeight="600">
-              Listings by subcategory:
-            </Typography>
-            <List>
-              {Array(30)
-                .fill({
-                  name: "Sandwiches",
-                })
-                .map((element, index: number) => (
-                  <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }}>
-                    {element.name}
-                  </ListItem>
-                ))}
-            </List>
-          </Box>
-        </Grid>
+        {isMobile && (
+          <Drawer>
+            <Box sx={{ overflow: "auto", my: 1, p: 4 }}>
+              <Typography variant="body1" fontWeight="600">
+                Listings by subcategory:
+              </Typography>
+              <List>
+                {Array(30)
+                  .fill({
+                    name: "Sandwiches",
+                  })
+                  .map((element, index: number) => (
+                    <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }}>
+                      {element.name}
+                    </ListItem>
+                  ))}
+              </List>
+            </Box>
+          </Drawer>
+        )}
+        {!isMobile && (
+          <Grid item xs={12} md={2}>
+            <Box sx={{ overflow: "auto", my: 1 }}>
+              <Typography variant="body1" fontWeight="600">
+                Listings by subcategory:
+              </Typography>
+              <List>
+                {Array(30)
+                  .fill({
+                    name: "Sandwiches",
+                  })
+                  .map((element, index: number) => (
+                    <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }}>
+                      {element.name}
+                    </ListItem>
+                  ))}
+              </List>
+            </Box>
+          </Grid>
+        )}
         <Grid item xs={12} md={10}>
           <Box>
             <Typography variant="alternet">
@@ -103,7 +128,7 @@ export function ClickOnCategory() {
                     <Card
                       sx={{
                         maxWidth: "400px",
-                        maxHeight: "400px",
+                        minHeight: "400px",
                       }}
                       elevation={6}
                     >
@@ -171,3 +196,4 @@ export function ClickOnCategory() {
     </Container>
   );
 }
+  
