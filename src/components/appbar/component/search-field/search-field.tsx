@@ -6,7 +6,7 @@ import { SearchFieldController } from "./search-field-controller";
 
 export const SearchField = () => {
   const { getters, handlers } = SearchFieldController();
-  const { search } = getters;
+  const { search, navigate, BussinessByName } = getters;
   const { changeHandler, submitHandler } = handlers;
   return (
     <TextField
