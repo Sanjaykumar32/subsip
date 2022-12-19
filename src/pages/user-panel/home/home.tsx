@@ -286,7 +286,7 @@ const SliderCard = (props: any) => {
             onClick={() => {
               auth?.isAuthenticated
                 ? navigate(RoutePathEnum.LISTING_PRODUCT)
-                : navigate(RoutePathEnum.LISTING_PRODUCT);
+                : navigate(AuthRoutePathEnum.SIGN_IN);
             }}
           >
             {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
