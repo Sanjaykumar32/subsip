@@ -399,11 +399,11 @@ const SliderCard = (props: any) => {
     dispatch(AdminThunk.allBusiness({ businessId: "1" }));
   }
 
-  useEffect(() => {
-    if (BussinessByName.length > 0) {
-      navigate("/listing/:id");
-    }
-  }, [BussinessByName.length, navigate]);
+  // useEffect(() => {
+  //   if (BussinessByName.length > 0) {
+  //     navigate("/listing/:id");
+  //   }
+  // }, [BussinessByName.length, navigate]);
   return (
     <div className="w-full mx-auto  md:mx-5 relative max-w-[350px] bg-white  border-[1px] border-[#DADDE5] ">
       <img
