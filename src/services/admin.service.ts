@@ -4,9 +4,6 @@ import { AxiosResponse } from "axios";
 import { ApiHelper, StringHelper } from "helpers";
 import {
   IAllBusinessSubscribersRequest,
-  IBannerResponse,
-  IBussinessRequest,
-  IBussinessResponse,
   ICategoryRequest,
   IHomeRequest,
   IReferralCodeResponse,
@@ -63,20 +60,6 @@ export class AdminService {
   }
 
   /**
-   * Banner List
-   * @return {Promise<IBannerResponse>}
-   */
-  public static async bannerList(): Promise<IBannerResponse> {
-    const res: AxiosResponse<IBannerResponse> =
-      await ApiHelper.send<IBannerResponse>({
-        url: `/banner`,
-        method: "GET",
-      });
-
-    return res.data;
-  }
-
-  /**
    * subscriber of bussiness
    * @return {Promise<ISubscriberOfBussinessResponse>}
    */
@@ -102,42 +85,6 @@ export class AdminService {
     const res: AxiosResponse<ISubscriberOfBussinessResponse> =
       await ApiHelper.send<ISubscriberOfBussinessResponse>({
         url: `/business/subscriber?userId=${payload.userId}`,
-        method: "GET",
-      });
-
-    return res.data;
-  }
-
-  /**
-   * All bussiness
-   * @return {Promise<IBussinessResponse>}
-   */
-  public static async bussiness(): Promise<IBussinessResponse> {
-    const res: AxiosResponse<IBussinessResponse> =
-      await ApiHelper.send<IBussinessResponse>({
-        url: `/business`,
-        method: "GET",
-      });
-
-    return res.data;
-  }
-
-  /**
-   * bussiness by Id
-   * @return {Promise<IBussinessResponse>}
-   */
-  public static async allBussinessById(
-    payload: IBussinessRequest
-  ): Promise<IBussinessResponse> {
-    let URL = "/business";
-    if (payload.businessId) {
-      URL += `?businessId=${payload.businessId}`;
-    } else if (payload.businessName) {
-      URL += `?businessName=${payload.businessName}`;
-    }
-    const res: AxiosResponse<IBussinessResponse> =
-      await ApiHelper.send<IBussinessResponse>({
-        url: URL,
         method: "GET",
       });
 

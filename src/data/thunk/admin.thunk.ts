@@ -1,9 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   IAllBusinessSubscribersRequest,
-  IBannerResponse,
-  IBussinessRequest,
-  IBussinessResponse,
   ICategoryRequest,
   IHomeRequest,
   IReferralCodeResponse,
@@ -70,39 +67,6 @@ export class AdminThunk {
       payload: IAllBusinessSubscribersRequest
     ): Promise<ISubscriberOfBussinessResponse> => {
       const response = await AdminService.allSubscriberOfBussiness(payload);
-      return response;
-    }
-  );
-
-  /**
-   * Banner List
-   */
-  public static bannerList = createAsyncThunk(
-    "admin/bannerlist",
-    async (): Promise<IBannerResponse> => {
-      const response = await AdminService.bannerList();
-      return response;
-    }
-  );
-
-  /**
-   * get All Business
-   */
-  public static business = createAsyncThunk(
-    "admin/business",
-    async (): Promise<IBussinessResponse> => {
-      const response = await AdminService.bussiness();
-      return response;
-    }
-  );
-
-  /**
-   * get Business ById
-   */
-  public static allBusiness = createAsyncThunk(
-    "admin/businessById",
-    async (payload: IBussinessRequest): Promise<IBussinessResponse> => {
-      const response = await AdminService.allBussinessById(payload);
       return response;
     }
   );

@@ -3,8 +3,6 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 import { ReducerEnum } from "enum";
 
 import {
-  IBannerData,
-  IBusiness,
   IReferralCountResponse,
   IRefferralCode,
   ISubscribeByBussinessIDResponse,
@@ -15,11 +13,9 @@ import {
 export interface IAdminState {
   adminSubscribers: ISubscribeByBussinessIDResponse;
   bussinessSubscribers: ISubscribeByBussinessIDResponse;
-  bannerList: IBannerData[];
   subscriberOfBussiness: ISubscriberData[];
   AllsubscriberOfBussiness: ISubscriberOfBussinessResponse;
-  Bussiness: IBusiness[];
-  AllBussinessById: IBusiness[];
+
   refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
 }
@@ -27,11 +23,8 @@ export interface IAdminState {
 const initialState: IAdminState = {
   adminSubscribers: {} as ISubscribeByBussinessIDResponse,
   bussinessSubscribers: {} as ISubscribeByBussinessIDResponse,
-  bannerList: [],
   subscriberOfBussiness: [],
   AllsubscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
-  Bussiness: [],
-  AllBussinessById: [],
   refferralCode: {} as IRefferralCode,
   refferralCount: {} as IReferralCountResponse,
 };
@@ -55,11 +48,6 @@ export const adminSlice = createSlice({
         action.payload;
       }
     );
-    builder.addCase(AdminThunk.bannerList.fulfilled, (state, action) => {
-      if (action.payload.data) {
-        state.bannerList = action.payload.data;
-      }
-    });
 
     builder.addCase(
       AdminThunk.subscribeOfBussiness.fulfilled,
@@ -75,16 +63,7 @@ export const adminSlice = createSlice({
         action.payload;
       }
     );
-    builder.addCase(AdminThunk.business.fulfilled, (state, action) => {
-      if (action.payload.data) {
-        state.Bussiness = action.payload.data;
-      }
-    });
-    builder.addCase(AdminThunk.allBusiness.fulfilled, (state, action) => {
-      if (action.payload.data) {
-        state.AllBussinessById = action.payload.data;
-      }
-    });
+
     builder.addCase(AdminThunk.refferralCode.fulfilled, (state, action) => {
       if (action.payload) {
         state.refferralCode = action.payload.data;

@@ -5,16 +5,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { useAppDispatch, useAppSelector } from "data";
-import { AdminThunk } from "data/thunk/admin.thunk";
-import {
-  GET_BANNER_LIST,
-  GET_BUSSINESSBY_NAME,
-  GET_BUSSINESS_LIST,
-} from "data/selectors";
+import { GET_BANNER_LIST, GET_BUSSINESSBY_NAME } from "data/selectors";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { IBannerData, IBusiness } from "interface";
+import { UserThunk } from "data/thunk/user.thunk";
 
 /**
  *
@@ -234,7 +230,7 @@ export function Home() {
 
   const bannerList = useCallback(async () => {
     try {
-      dispatch(AdminThunk.bannerList());
+      dispatch(UserThunk.bannerList());
     } catch (error) {
       console.log(error);
     }
@@ -243,12 +239,12 @@ export function Home() {
   useEffect(() => {
     bannerList();
   }, [bannerList]);
-  const businessData = useAppSelector(GET_BUSSINESS_LIST);
+  const businessData = useAppSelector(GET_BUSSINESSBY_NAME);
   console.log(businessData, "businessData");
 
   const allBusiness = useCallback(async () => {
     try {
-      dispatch(AdminThunk.business());
+      dispatch(UserThunk.allBusiness());
     } catch (error) {
       console.log(error);
     }
@@ -396,14 +392,9 @@ const SliderCard = (props: any) => {
   const BussinessByName = useAppSelector(GET_BUSSINESSBY_NAME);
   function onImageClick(bussinessId: string) {
     console.log(bussinessId, "bussinessId");
-    dispatch(AdminThunk.allBusiness({ businessId: "1" }));
+    dispatch(UserThunk.allBusiness({ businessId: "1" }));
   }
 
-  // useEffect(() => {
-  //   if (BussinessByName.length > 0) {
-  //     navigate("/listing/:id");
-  //   }
-  // }, [BussinessByName.length, navigate]);
   return (
     <div className="w-full mx-auto  md:mx-5 relative max-w-[350px] bg-white  border-[1px] border-[#DADDE5] ">
       <img
