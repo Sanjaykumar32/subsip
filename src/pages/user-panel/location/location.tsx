@@ -7,16 +7,30 @@ import {
   Info,
   Title,
 } from "components/location/location-card";
-import { GET_BUSINESS } from "data/selectors";
-import { useAppSelector } from "data";
+import { GET_BUSINESS, GET_REFFERRAL_CODE } from "data/selectors";
+import { useAppDispatch, useAppSelector } from "data";
 import { IBusiness } from "interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import ResponsiveDialog from "./component/referral";
+import { AdminThunk } from "data/thunk/admin.thunk";
 
 export function LocationPage() {
   const theme = useTheme();
   const bussinessByName = useAppSelector(GET_BUSINESS);
-  console.log(bussinessByName, "BussinessByName");
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    try {
+      dispatch(AdminThunk.refferralCode({ userId: "4" }));
+    } catch (error) {
+      console.log(error);
+    }
+    setOpen(true);
+  };
+  const dispatch = useAppDispatch();
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const name = `India Gate Restaurant`;
   const location = "Seattle, WA";
@@ -24,6 +38,8 @@ export function LocationPage() {
     "Welcome to the India Gate Restaurant where we offer unique food.";
   const subscribers = 42.2;
   // const obj = { name, location, description, subscribers } as ILocationProps;
+
+  const refferralCode = useAppSelector(GET_REFFERRAL_CODE);
 
   return (
     <Container maxWidth="lg" sx={{ my: 8 }}>
@@ -53,6 +69,7 @@ export function LocationPage() {
               <FontAwesomeIcon
                 icon={faArrowUpRightFromSquare}
                 style={{ marginRight: 4 }}
+                onClick={handleClickOpen}
               />
               Referral
             </Typography>
@@ -85,6 +102,13 @@ export function LocationPage() {
           </Box>
         </Grid>
       </Grid>
+      {open && (
+        <ResponsiveDialog
+          open={open}
+          handleClose={handleClose}
+          refferralCode={refferralCode}
+        />
+      )}
     </Container>
   );
 }
