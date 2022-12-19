@@ -10,6 +10,8 @@ import {
 import { GET_BUSINESS } from "data/selectors";
 import { useAppSelector } from "data";
 import { IBusiness } from "interface";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 export function LocationPage() {
   const theme = useTheme();
@@ -46,6 +48,15 @@ export function LocationPage() {
           ))}
         </Grid>
         <Grid item sm={12} md={4} sx={{ px: 2 }}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}>
+              <FontAwesomeIcon
+                icon={faArrowUpRightFromSquare}
+                style={{ marginRight: 4 }}
+              />
+              Referral
+            </Typography>
+          </Box>
           {bussinessByName.map((res: IBusiness, index: number) => {
             return <Location {...res} key={index} />;
           })}
