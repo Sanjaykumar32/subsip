@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import ResponsiveDialog from "./component/referral";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import { useAuth } from "context/auth.context";
 
 export function LocationPage() {
   const theme = useTheme();
@@ -32,6 +33,9 @@ export function LocationPage() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const auth = useAuth();
+  const isAuthenticated = auth.isAuthenticated;
 
   const name = `India Gate Restaurant`;
   const location = "Seattle, WA";
@@ -65,16 +69,18 @@ export function LocationPage() {
           ))}
         </Grid>
         <Grid item sm={12} md={4} sx={{ px: 2 }}>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}>
-              <FontAwesomeIcon
-                icon={faArrowUpRightFromSquare}
-                style={{ marginRight: 4 }}
-                onClick={handleClickOpen}
-              />
-              Referral
-            </Typography>
-          </Box>
+          {isAuthenticated && (
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}>
+                <FontAwesomeIcon
+                  icon={faArrowUpRightFromSquare}
+                  style={{ marginRight: 4 }}
+                  onClick={handleClickOpen}
+                />
+                Referral
+              </Typography>
+            </Box>
+          )}
           {bussinessByName.map((res: IBusiness, index: number) => {
             return <Location {...res} key={index} />;
           })}
