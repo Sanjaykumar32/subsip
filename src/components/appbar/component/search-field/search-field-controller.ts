@@ -32,6 +32,8 @@ export const SearchFieldController = () => {
       );
       if (response.payload.data.length > 0) {
         navigate(`/listing/:id`);
+      } else {
+        console.log("nodata");
       }
     } catch (error) {
       console.log(error);

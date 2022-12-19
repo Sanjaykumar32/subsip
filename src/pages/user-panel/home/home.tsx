@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -319,6 +319,7 @@ export function Home() {
                     tagLine={ele?.vTagLine}
                     des={ele?.tDescription}
                     location={ele?.vLocation}
+                    id={ele.iBusinessId}
                   />
                 </div>
               );
@@ -344,6 +345,7 @@ export function Home() {
                     tagLine={ele?.vTagLine}
                     des={ele?.tDescription}
                     location={ele?.vLocation}
+                    id={ele.iBusinessId}
                   />
                 </div>
               );
@@ -370,7 +372,7 @@ export function Home() {
                     tagLine={ele?.vTagLine}
                     des={ele?.tDescription}
                     location={ele?.vLocation}
-                    bussinessId={ele.iBusinessId}
+                    id={ele.iBusinessId}
                   />
                 </div>
               );
@@ -384,16 +386,29 @@ export function Home() {
 }
 
 const SliderCard = (props: any) => {
-  const { des, imgSrc, location, name, bussinessId } = props;
+  const { des, imgSrc, location, name, id } = props;
 
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const BussinessByName = useAppSelector(GET_BUSINESS);
-  function onImageClick(bussinessId: string) {
-    console.log(bussinessId, "bussinessId");
-    dispatch(UserThunk.business({ businessId: "1" }));
+
+  async function onImageClick(): Promise<void> {
+    try {
+      const response: any = await dispatch(
+        UserThunk.business({ businessId: id })
+      );
+      if (response.payload.data.length > 0) {
+        navigate(`/listing/${id}`);
+      } else {
+        console.log("nodata");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  console.log(BussinessByName, "BussinessByName");
 
   return (
     <div className="w-full mx-auto  md:mx-5 relative max-w-[350px] bg-white  border-[1px] border-[#DADDE5] ">
@@ -401,10 +416,7 @@ const SliderCard = (props: any) => {
         src={imgSrc}
         alt="image"
         className="w-full h-full object-cover min-h-[215px]"
-        onClick={() => {
-          onImageClick(bussinessId);
-        }}
-        id={bussinessId}
+        onClick={onImageClick}
       />
       <div className="p-3">
         <p className="text-[1.3rem] font-semibold text-[#021414] leading-[22px] py-2">
