@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
-import { IBussinessResponse } from "interface";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -37,6 +36,7 @@ export const SearchFieldController = () => {
     } catch (error) {
       console.log(error);
     }
+    setSearch("");
   }
 
   return {
