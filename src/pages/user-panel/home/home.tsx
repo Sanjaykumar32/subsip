@@ -387,11 +387,9 @@ export function Home() {
 
 const SliderCard = (props: any) => {
   const { des, imgSrc, location, name, id } = props;
-
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const BussinessByName = useAppSelector(GET_BUSINESS);
 
   async function onImageClick(): Promise<void> {
     try {
@@ -407,8 +405,6 @@ const SliderCard = (props: any) => {
       console.log(error);
     }
   }
-
-  console.log(BussinessByName, "BussinessByName");
 
   return (
     <div className="w-full mx-auto  md:mx-5 relative max-w-[350px] bg-white  border-[1px] border-[#DADDE5] ">
