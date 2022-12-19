@@ -18,12 +18,11 @@ export default function ResponsiveDialog({
   refferralCode,
 }: any) {
   /**
-   * copy App Id
+   * copy referral code
    * @return {void}
    */
   const appIdCopy = (): void => {
     navigator.clipboard.writeText(refferralCode.referralCode);
-    console.log("copy");
   };
 
   return (

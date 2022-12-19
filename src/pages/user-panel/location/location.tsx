@@ -19,9 +19,10 @@ export function LocationPage() {
   const theme = useTheme();
   const bussinessByName = useAppSelector(GET_BUSINESS);
   const [open, setOpen] = React.useState(false);
+  const userId = sessionStorage.getItem("userId");
   const handleClickOpen = () => {
     try {
-      dispatch(AdminThunk.refferralCode({ userId: "4" }));
+      dispatch(AdminThunk.refferralCode({ userId: userId ? userId : "" }));
     } catch (error) {
       console.log(error);
     }
@@ -94,7 +95,7 @@ export function LocationPage() {
               meetings across all your calendars.
             </Typography>
             <Typography variant="h6">
-              Introducing{" "}
+              Introducing
               <span style={{ color: theme.palette.info.main, fontWeight: 900 }}>
                 {name}
               </span>
