@@ -33,12 +33,12 @@ export class UserThunk {
   );
 
   /**
-   * get Business ById
+   * get business by all / Id / name
    */
-  public static allBusiness = createAsyncThunk(
-    "admin/businessById",
+  public static business = createAsyncThunk(
+    "admin/business/ID/Name",
     async (payload?: IBussinessRequest): Promise<IBussinessResponse> => {
-      const response = await UserService.allBussinessById(payload);
+      const response = await UserService.bussiness(payload);
       return response;
     }
   );

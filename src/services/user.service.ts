@@ -46,10 +46,10 @@ export class UserService {
   }
 
   /**
-   * bussiness by Id
+   * get business by all / Id / name
    * @return {Promise<IBussinessResponse>}
    */
-  public static async allBussinessById(
+  public static async bussiness(
     payload?: IBussinessRequest
   ): Promise<IBussinessResponse> {
     let URL = "/business";

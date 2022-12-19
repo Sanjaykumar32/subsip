@@ -7,13 +7,13 @@ import {
   Info,
   Title,
 } from "components/location/location-card";
-import { GET_BUSSINESSBY_NAME } from "data/selectors";
+import { GET_BUSINESS } from "data/selectors";
 import { useAppSelector } from "data";
 import { IBusiness } from "interface";
 
 export function LocationPage() {
   const theme = useTheme();
-  const bussinessByName = useAppSelector(GET_BUSSINESSBY_NAME);
+  const bussinessByName = useAppSelector(GET_BUSINESS);
   console.log(bussinessByName, "BussinessByName");
 
   const name = `India Gate Restaurant`;

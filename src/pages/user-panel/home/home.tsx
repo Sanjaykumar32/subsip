@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_BANNER_LIST, GET_BUSSINESSBY_NAME } from "data/selectors";
+import { GET_BANNER_LIST, GET_BUSINESS } from "data/selectors";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
@@ -239,12 +239,12 @@ export function Home() {
   useEffect(() => {
     bannerList();
   }, [bannerList]);
-  const businessData = useAppSelector(GET_BUSSINESSBY_NAME);
+  const businessData = useAppSelector(GET_BUSINESS);
   console.log(businessData, "businessData");
 
   const allBusiness = useCallback(async () => {
     try {
-      dispatch(UserThunk.allBusiness());
+      dispatch(UserThunk.business());
     } catch (error) {
       console.log(error);
     }
@@ -389,10 +389,10 @@ const SliderCard = (props: any) => {
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const BussinessByName = useAppSelector(GET_BUSSINESSBY_NAME);
+  const BussinessByName = useAppSelector(GET_BUSINESS);
   function onImageClick(bussinessId: string) {
     console.log(bussinessId, "bussinessId");
-    dispatch(UserThunk.allBusiness({ businessId: "1" }));
+    dispatch(UserThunk.business({ businessId: "1" }));
   }
 
   return (

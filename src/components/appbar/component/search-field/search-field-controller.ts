@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_BUSSINESSBY_NAME } from "data/selectors";
+import { GET_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ export const SearchFieldController = () => {
   const [search, setSearch] = useState<string>("");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const BussinessByName = useAppSelector(GET_BUSSINESSBY_NAME);
+  const BussinessByName = useAppSelector(GET_BUSINESS);
 
   /**
    *
@@ -25,7 +25,7 @@ export const SearchFieldController = () => {
    */
   function submitHandler(): void {
     try {
-      dispatch(UserThunk.allBusiness({ businessName: search }));
+      dispatch(UserThunk.business({ businessName: search }));
     } catch (error) {
       console.log(error);
     }

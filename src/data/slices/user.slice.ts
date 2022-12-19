@@ -38,7 +38,7 @@ export const userSlice = createSlice({
         state.bannerList = action.payload.data;
       }
     });
-    builder.addCase(UserThunk.allBusiness.fulfilled, (state, action) => {
+    builder.addCase(UserThunk.business.fulfilled, (state, action) => {
       if (action.payload.data) {
         state.AllBussinessById = action.payload.data;
       }
