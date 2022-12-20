@@ -55,3 +55,15 @@ export interface INewNotificationRequest {
   category: string;
   businessLocation: string;
 }
+
+export interface ICreateListingRequest {
+  businessName: string;
+  headline: string;
+  email: string;
+  businessCategory: string;
+  subCategory: string;
+  productcategory: string;
+  description: string;
+  image: string;
+  businessLocation: string;
+}

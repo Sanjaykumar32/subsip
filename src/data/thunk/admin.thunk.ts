@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
+  ICreateListingRequest,
   IHomeRequest,
   INewNotificationRequest,
   INewNotifyButtonRequest,
@@ -177,6 +178,18 @@ export class AdminThunk {
   public static newNotification = createAsyncThunk(
     "admin/newNotification",
     async (payload: INewNotificationRequest): Promise<void> => {
+      console.log(payload, "payload");
+      // const response = await AdminService.newReward(payload);
+      // return response;
+    }
+  );
+
+  /**
+   * Create Listing
+   */
+  public static createListing = createAsyncThunk(
+    "admin/createListing",
+    async (payload: ICreateListingRequest): Promise<void> => {
       console.log(payload, "payload");
       // const response = await AdminService.newReward(payload);
       // return response;

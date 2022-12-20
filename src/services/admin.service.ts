@@ -5,6 +5,7 @@ import { ApiHelper, StringHelper } from "helpers";
 import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
+  ICreateListingRequest,
   IHomeRequest,
   INewNotificationRequest,
   INewNotifyButtonRequest,
@@ -233,6 +234,23 @@ export class AdminService {
   ): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: "/notify-button",
+      method: "POST",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * create listing
+   * @param {ICreateListingRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async craeteListing(
+    payload: ICreateListingRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/create-listing",
       method: "POST",
       data: payload,
     });
