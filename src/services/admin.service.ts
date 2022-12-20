@@ -6,6 +6,8 @@ import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
   ICreateListingRequest,
+  IGetCategoryResponse,
+  IGetSubCategoryResponse,
   IHomeRequest,
   INewNotificationRequest,
   INewNotifyButtonRequest,
@@ -144,6 +146,32 @@ export class AdminService {
   }
 
   /**
+   * category
+   * @return {Promise<IGetCategoryResponse>}
+   */
+  public static async getcategory(): Promise<IGetCategoryResponse> {
+    const res: AxiosResponse<IGetCategoryResponse> =
+      await ApiHelper.send<IGetCategoryResponse>({
+        url: "/category/list",
+        method: "GET",
+      });
+    return res.data;
+  }
+
+  /**
+   * sub category
+   * @return {Promise<IGetSubCategoryResponse>}
+   */
+  public static async getSubcategory(): Promise<IGetSubCategoryResponse> {
+    const res: AxiosResponse<IGetSubCategoryResponse> =
+      await ApiHelper.send<IGetSubCategoryResponse>({
+        url: "/subcategory/list",
+        method: "GET",
+      });
+    return res.data;
+  }
+
+  /**
    * subcategory
    * @param {ISubCategoryRequest} credentials
    * @return {Promise<void>}
@@ -233,7 +261,7 @@ export class AdminService {
     payload: INewNotificationRequest
   ): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/notify-button",
+      url: "/user/notification",
       method: "POST",
       data: payload,
     });

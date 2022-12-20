@@ -3,6 +3,8 @@ import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
   ICreateListingRequest,
+  IGetCategoryResponse,
+  IGetSubCategoryResponse,
   IHomeRequest,
   INewNotificationRequest,
   INewNotifyButtonRequest,
@@ -177,9 +179,8 @@ export class AdminThunk {
   public static newNotification = createAsyncThunk(
     "admin/newNotification",
     async (payload: INewNotificationRequest): Promise<void> => {
-      console.log(payload, "payload");
-      // const response = await AdminService.newReward(payload);
-      // return response;
+      const response = await AdminService.newNotification(payload);
+      return response;
     }
   );
 
@@ -192,6 +193,28 @@ export class AdminThunk {
       console.log(payload, "payload");
       // const response = await AdminService.newReward(payload);
       // return response;
+    }
+  );
+
+  /**
+   * New Notification
+   */
+  public static getCategory = createAsyncThunk(
+    "admin/newNotification",
+    async (): Promise<IGetCategoryResponse> => {
+      const response = await AdminService.getcategory();
+      return response;
+    }
+  );
+
+  /**
+   * Create Listing
+   */
+  public static getSubCategory = createAsyncThunk(
+    "admin/createListing",
+    async (): Promise<IGetSubCategoryResponse> => {
+      const response = await AdminService.getSubcategory();
+      return response;
     }
   );
 

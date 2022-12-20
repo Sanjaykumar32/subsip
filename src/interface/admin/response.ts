@@ -83,3 +83,28 @@ export interface IReferralCodeResponse {
 export interface IRefferralCode {
   referralCode: string;
 }
+
+export interface IGetCategoryResponse {
+  keyword: string;
+  limit: string;
+  filters: IFilter[];
+  sort: ISort[];
+}
+
+export interface IGetSubCategoryResponse {
+  keyword: string;
+  limit: string;
+  category_id: string;
+  filters: IFilter[];
+  sort: ISort[];
+}
+
+export interface IFilter {
+  key: string;
+  value: string;
+}
+
+export interface ISort {
+  prop: string;
+  dir: string;
+}

@@ -3,6 +3,8 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 import { ReducerEnum } from "enum";
 
 import {
+  IGetCategoryResponse,
+  IGetSubCategoryResponse,
   IReferralCountResponse,
   IRefferralCode,
   ISubscribeByBussinessIDResponse,
@@ -15,7 +17,8 @@ export interface IAdminState {
   bussinessSubscribers: ISubscribeByBussinessIDResponse;
   subscriberOfBussiness: ISubscriberData[];
   AllsubscriberOfBussiness: ISubscriberOfBussinessResponse;
-
+  category: IGetCategoryResponse;
+  subCategory: IGetSubCategoryResponse;
   refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
 }
@@ -27,6 +30,8 @@ const initialState: IAdminState = {
   AllsubscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
   refferralCode: {} as IRefferralCode,
   refferralCount: {} as IReferralCountResponse,
+  category: {} as IGetCategoryResponse,
+  subCategory: {} as IGetSubCategoryResponse,
 };
 
 export const adminSlice = createSlice({
@@ -67,6 +72,16 @@ export const adminSlice = createSlice({
     builder.addCase(AdminThunk.refferralCode.fulfilled, (state, action) => {
       if (action.payload) {
         state.refferralCode = action.payload.data;
+      }
+    });
+    builder.addCase(AdminThunk.getCategory.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.category = action.payload;
+      }
+    });
+    builder.addCase(AdminThunk.getSubCategory.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.subCategory = action.payload;
       }
     });
     builder.addCase(AdminThunk.refferralCount.fulfilled, (_state, action) => {
