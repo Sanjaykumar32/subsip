@@ -151,7 +151,7 @@ export class AdminService {
     credentials: ISubCategoryRequest
   ): Promise<void> {
     const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/auth/forgot-password",
+      url: "/subCategory",
       method: "POST",
       data: credentials,
     });

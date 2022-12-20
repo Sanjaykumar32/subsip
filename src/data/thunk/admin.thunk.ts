@@ -105,8 +105,9 @@ export class AdminThunk {
   public static category = createAsyncThunk(
     "admin/category",
     async (payload: ICategoryRequest): Promise<void> => {
-      const response = await AdminService.category(payload);
-      return response;
+      console.log(payload, "payload");
+      // const response = await AdminService.category(payload);
+      // return response;
     }
   );
 
@@ -116,8 +117,10 @@ export class AdminThunk {
   public static subCategory = createAsyncThunk(
     "admin/subCategory",
     async (payload: ISubCategoryRequest): Promise<void> => {
-      const response = await AdminService.subCategory(payload);
-      return response;
+      console.log(payload, "payload");
+
+      // const response = await AdminService.subCategory(payload);
+      // return response;
     }
   );
 
