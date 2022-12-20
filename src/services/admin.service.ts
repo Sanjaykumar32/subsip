@@ -6,6 +6,7 @@ import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
   IHomeRequest,
+  INewRewardRequest,
   IReferralCodeResponse,
   IReferralCountResponse,
   IReferralPriceRequest,
@@ -181,6 +182,21 @@ export class AdminService {
   ): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: "/referralPrice",
+      method: "POST",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * New Reward
+   * @param {INewRewardRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async newReward(payload: INewRewardRequest): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/rewards",
       method: "POST",
       data: payload,
     });

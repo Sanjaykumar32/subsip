@@ -35,3 +35,11 @@ export interface IReferralPriceRequest {
   mileStoneName: string;
   referralAmount: string;
 }
+
+export interface INewRewardRequest {
+  name: string;
+  category: string;
+  availibility: string;
+  subCategory: string;
+  businessName: string;
+}

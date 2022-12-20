@@ -3,6 +3,7 @@ import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
   IHomeRequest,
+  INewRewardRequest,
   IReferralCodeResponse,
   IReferralCountResponse,
   IReferralPriceRequest,
@@ -137,6 +138,18 @@ export class AdminThunk {
     async (payload: IReferralPriceRequest): Promise<void> => {
       console.log(payload, "payload");
       // const response = await AdminService.newReferralPrice(payload);
+      // return response;
+    }
+  );
+
+  /**
+   * New Rewards
+   */
+  public static newReward = createAsyncThunk(
+    "admin/newReward",
+    async (payload: INewRewardRequest): Promise<void> => {
+      console.log(payload, "payload");
+      // const response = await AdminService.newReward(payload);
       // return response;
     }
   );
