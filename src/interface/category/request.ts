@@ -1,10 +1,7 @@
 import { Dayjs } from "dayjs";
 
 export interface ICategoryRequest {
-  keyword: string;
-  limit: string;
-  filters: Filter[];
-  sort: Sort[];
+  categoryName: string;
 }
 export interface ISubCategoryRequest {
   keyword: string;
