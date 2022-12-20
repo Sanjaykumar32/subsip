@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 export interface ICategoryRequest {
   keyword: string;
   limit: string;
@@ -42,4 +44,10 @@ export interface INewRewardRequest {
   availibility: string;
   subCategory: string;
   businessName: string;
+}
+
+export interface INewNotifyButtonRequest {
+  headline: string;
+  date: Dayjs | null;
+  description: string;
 }

@@ -3,6 +3,7 @@ import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
   IHomeRequest,
+  INewNotifyButtonRequest,
   INewRewardRequest,
   IReferralCodeResponse,
   IReferralCountResponse,
@@ -148,6 +149,18 @@ export class AdminThunk {
   public static newReward = createAsyncThunk(
     "admin/newReward",
     async (payload: INewRewardRequest): Promise<void> => {
+      console.log(payload, "payload");
+      // const response = await AdminService.newReward(payload);
+      // return response;
+    }
+  );
+
+  /**
+   * New Notify Button
+   */
+  public static newNotifyButton = createAsyncThunk(
+    "admin/newNotifyButton",
+    async (payload: INewNotifyButtonRequest): Promise<void> => {
       console.log(payload, "payload");
       // const response = await AdminService.newReward(payload);
       // return response;
