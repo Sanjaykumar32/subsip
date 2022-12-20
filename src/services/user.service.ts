@@ -4,6 +4,7 @@ import {
   IBannerResponse,
   IBussinessResponse,
   IBussinessRequest,
+  IAddSubscriberTobussinessRequest,
 } from "interface";
 
 /**
@@ -63,6 +64,22 @@ export class UserService {
         url: URL,
         method: "GET",
       });
+
+    return res.data;
+  }
+
+  /**
+   * add subscriber-to-business
+   * @return {Promise<any>}
+   */
+  public static async addSubscriberToBussiness(
+    payload: IAddSubscriberTobussinessRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `business/subscribe`,
+      method: "POST",
+      data: payload,
+    });
 
     return res.data;
   }

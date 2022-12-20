@@ -22,3 +22,8 @@ export interface IRefferralCountRequest {
 export interface IRefferralCodeRequest {
   userId: string;
 }
+
+export interface IAddSubscriberTobussinessRequest {
+  businessId: string;
+  userId: string;
+}

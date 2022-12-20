@@ -242,6 +242,7 @@ const SliderCard = (props: any) => {
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const userId = sessionStorage.getItem("userId");
 
   async function onImageClick(): Promise<void> {
     try {
@@ -253,6 +254,20 @@ const SliderCard = (props: any) => {
       } else {
         console.log("nodata");
       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function onButtonClick(): Promise<void> {
+    !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
+    try {
+      dispatch(
+        UserThunk.addSubscriberToBusiness({
+          businessId: id,
+          userId: userId ? userId : "",
+        })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -283,11 +298,7 @@ const SliderCard = (props: any) => {
           </p>
           <button
             className="bg-[#D32F3F] text-[0.9rem] w-36 rounded-full  py-2 px-1 font-normal text-white"
-            onClick={() => {
-              auth?.isAuthenticated
-                ? navigate(RoutePathEnum.LISTING_PRODUCT)
-                : navigate(AuthRoutePathEnum.SIGN_IN);
-            }}
+            onClick={onButtonClick}
           >
             {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
           </button>

@@ -3,6 +3,7 @@ import {
   IBannerResponse,
   IBussinessResponse,
   IBussinessRequest,
+  IAddSubscriberTobussinessRequest,
 } from "interface";
 import { UserService } from "services";
 
@@ -25,7 +26,7 @@ export class UserThunk {
    * Banner List
    */
   public static bannerList = createAsyncThunk(
-    "admin/bannerlist",
+    "user/bannerlist",
     async (): Promise<IBannerResponse> => {
       const response = await UserService.bannerList();
       return response;
@@ -36,9 +37,20 @@ export class UserThunk {
    * get business by all / Id / name
    */
   public static business = createAsyncThunk(
-    "admin/business/ID/Name",
+    "user/business/ID/Name",
     async (payload?: IBussinessRequest): Promise<IBussinessResponse> => {
       const response = await UserService.bussiness(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Add Subscribers to Business Thunk
+   */
+  public static addSubscriberToBusiness = createAsyncThunk(
+    "user/addSubscriberstoBusiness",
+    async (payload: IAddSubscriberTobussinessRequest): Promise<any> => {
+      const response = await UserService.addSubscriberToBussiness(payload);
       return response;
     }
   );
