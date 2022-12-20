@@ -1,15 +1,13 @@
+import { Dayjs } from "dayjs";
+
 export interface ICategoryRequest {
-  keyword: string;
-  limit: string;
-  filters: Filter[];
-  sort: Sort[];
+  name: string;
+  addedBy: number;
 }
 export interface ISubCategoryRequest {
-  keyword: string;
-  category_id: string;
-  limit: string;
-  filters: Filter[];
-  sort: Sort[];
+  categoryId: string;
+  name: string;
+  addedBy: number;
 }
 export interface Filter {
   key: string;
@@ -29,4 +27,45 @@ export interface IHomeRequest {
 export interface Filter {
   key: string;
   value: string;
+}
+
+export interface IReferralPriceRequest {
+  mileStoneName: string;
+  referralAmount: string;
+}
+
+export interface INewRewardRequest {
+  name: string;
+  category: string;
+  availibility: string;
+  subCategory: string;
+  businessName: string;
+}
+
+export interface INewNotifyButtonRequest {
+  headline: string;
+  date: Dayjs | null;
+  description: string;
+}
+
+export interface INewNotificationRequest {
+  Headline: string;
+  Desc: string;
+  Date: string;
+  BusinessLocation: string;
+  CategoryId: string;
+  SubCategoryId: string;
+  BusinessId: string;
+}
+
+export interface ICreateListingRequest {
+  businessName: string;
+  headline: string;
+  email: string;
+  businessCategory: string;
+  subCategory: string;
+  productcategory: string;
+  description: string;
+  image: string;
+  businessLocation: string;
 }

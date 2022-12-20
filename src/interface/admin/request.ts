@@ -11,7 +11,8 @@ export interface IAllBusinessSubscribersRequest {
 }
 
 export interface IBussinessRequest {
-  businessname: string;
+  businessName?: string;
+  businessId?: string;
 }
 
 export interface IRefferralCountRequest {
@@ -19,5 +20,10 @@ export interface IRefferralCountRequest {
 }
 
 export interface IRefferralCodeRequest {
+  userId: string;
+}
+
+export interface IAddSubscriberTobussinessRequest {
+  businessId: string;
   userId: string;
 }

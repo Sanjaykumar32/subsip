@@ -1,13 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   IAllBusinessSubscribersRequest,
-  IBannerResponse,
-  IBussinessRequest,
-  IBussinessResponse,
   ICategoryRequest,
+  ICreateListingRequest,
+  IGetCategoryResponse,
+  IGetSubCategoryResponse,
   IHomeRequest,
+  INewNotificationRequest,
+  INewNotifyButtonRequest,
+  INewRewardRequest,
   IReferralCodeResponse,
   IReferralCountResponse,
+  IReferralPriceRequest,
   IRefferralCodeRequest,
   IRefferralCountRequest,
   ISubCategoryRequest,
@@ -75,39 +79,6 @@ export class AdminThunk {
   );
 
   /**
-   * Banner List
-   */
-  public static bannerList = createAsyncThunk(
-    "admin/bannerlist",
-    async (): Promise<IBannerResponse> => {
-      const response = await AdminService.bannerList();
-      return response;
-    }
-  );
-
-  /**
-   * get All Business
-   */
-  public static business = createAsyncThunk(
-    "admin/business",
-    async (): Promise<IBussinessResponse> => {
-      const response = await AdminService.bussiness();
-      return response;
-    }
-  );
-
-  /**
-   * get Business ById
-   */
-  public static allBusiness = createAsyncThunk(
-    "admin/businessById",
-    async (payload: IBussinessRequest): Promise<IBussinessResponse> => {
-      const response = await AdminService.allBussinessById(payload);
-      return response;
-    }
-  );
-
-  /**
    * refferral code
    */
   public static refferralCode = createAsyncThunk(
@@ -137,6 +108,7 @@ export class AdminThunk {
   public static category = createAsyncThunk(
     "admin/category",
     async (payload: ICategoryRequest): Promise<void> => {
+      console.log(payload, "payload");
       const response = await AdminService.category(payload);
       return response;
     }
@@ -148,6 +120,7 @@ export class AdminThunk {
   public static subCategory = createAsyncThunk(
     "admin/subCategory",
     async (payload: ISubCategoryRequest): Promise<void> => {
+      console.log(payload, "payload");
       const response = await AdminService.subCategory(payload);
       return response;
     }
@@ -160,6 +133,87 @@ export class AdminThunk {
     "admin/home",
     async (payload: IHomeRequest): Promise<void> => {
       const response = await AdminService.home(payload);
+      return response;
+    }
+  );
+
+  /**
+   * New Referral Price
+   */
+  public static newReferralPrice = createAsyncThunk(
+    "admin/newReferralPrice",
+    async (payload: IReferralPriceRequest): Promise<void> => {
+      console.log(payload, "payload");
+      // const response = await AdminService.newReferralPrice(payload);
+      // return response;
+    }
+  );
+
+  /**
+   * New Rewards
+   */
+  public static newReward = createAsyncThunk(
+    "admin/newReward",
+    async (payload: INewRewardRequest): Promise<void> => {
+      console.log(payload, "payload");
+      // const response = await AdminService.newReward(payload);
+      // return response;
+    }
+  );
+
+  /**
+   * New Notify Button
+   */
+  public static newNotifyButton = createAsyncThunk(
+    "admin/newNotifyButton",
+    async (payload: INewNotifyButtonRequest): Promise<void> => {
+      console.log(payload, "payload");
+      // const response = await AdminService.newReward(payload);
+      // return response;
+    }
+  );
+
+  /**
+   * New Notification
+   */
+  public static newNotification = createAsyncThunk(
+    "admin/newNotification",
+    async (payload: INewNotificationRequest): Promise<void> => {
+      const response = await AdminService.newNotification(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Create Listing
+   */
+  public static createListing = createAsyncThunk(
+    "admin/createListing",
+    async (payload: ICreateListingRequest): Promise<void> => {
+      console.log(payload, "payload");
+      // const response = await AdminService.newReward(payload);
+      // return response;
+    }
+  );
+
+  /**
+   * New Notification
+   */
+  public static getCategory = createAsyncThunk(
+    "admin/newNotification",
+    async (): Promise<IGetCategoryResponse> => {
+      const response = await AdminService.getcategory();
+      return response;
+    }
+  );
+
+  /**
+   * Create Listing
+   */
+  public static getSubCategory = createAsyncThunk(
+    "admin/createListing",
+    async (): Promise<IGetSubCategoryResponse> => {
+      const response = await AdminService.getSubcategory();
       return response;
     }
   );

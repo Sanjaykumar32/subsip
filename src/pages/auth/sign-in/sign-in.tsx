@@ -20,7 +20,7 @@ import { AuthRoutePathEnum } from "enum";
  */
 export function SignIn(): ReactElement {
   const { getters, handlers } = SignInController();
-  const { theme, value } = getters;
+  const { theme, value, errors } = getters;
   const { changeHandler, submitHandler } = handlers;
 
   return (
@@ -57,6 +57,9 @@ export function SignIn(): ReactElement {
                 onChange={changeHandler}
               />
             </InputBox>
+            {errors.email && (
+              <span style={{ color: "red" }}>{errors.email}</span>
+            )}
             <InputBox>
               <Label> Password </Label>
               <TextField
@@ -66,6 +69,9 @@ export function SignIn(): ReactElement {
                 onChange={changeHandler}
               />
             </InputBox>
+            {errors.password && (
+              <span style={{ color: "red" }}>{errors.password}</span>
+            )}
             <Button
               variant="contained"
               type="submit"

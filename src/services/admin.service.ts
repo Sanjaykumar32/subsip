@@ -4,13 +4,17 @@ import { AxiosResponse } from "axios";
 import { ApiHelper, StringHelper } from "helpers";
 import {
   IAllBusinessSubscribersRequest,
-  IBannerResponse,
-  IBussinessRequest,
-  IBussinessResponse,
   ICategoryRequest,
+  ICreateListingRequest,
+  IGetCategoryResponse,
+  IGetSubCategoryResponse,
   IHomeRequest,
+  INewNotificationRequest,
+  INewNotifyButtonRequest,
+  INewRewardRequest,
   IReferralCodeResponse,
   IReferralCountResponse,
+  IReferralPriceRequest,
   IRefferralCodeRequest,
   IRefferralCountRequest,
   ISubCategoryRequest,
@@ -63,20 +67,6 @@ export class AdminService {
   }
 
   /**
-   * Banner List
-   * @return {Promise<IBannerResponse>}
-   */
-  public static async bannerList(): Promise<IBannerResponse> {
-    const res: AxiosResponse<IBannerResponse> =
-      await ApiHelper.send<IBannerResponse>({
-        url: `/banner`,
-        method: "GET",
-      });
-
-    return res.data;
-  }
-
-  /**
    * subscriber of bussiness
    * @return {Promise<ISubscriberOfBussinessResponse>}
    */
@@ -109,36 +99,6 @@ export class AdminService {
   }
 
   /**
-   * All bussiness
-   * @return {Promise<IBussinessResponse>}
-   */
-  public static async bussiness(): Promise<IBussinessResponse> {
-    const res: AxiosResponse<IBussinessResponse> =
-      await ApiHelper.send<IBussinessResponse>({
-        url: `/business`,
-        method: "GET",
-      });
-
-    return res.data;
-  }
-
-  /**
-   * bussiness by Id
-   * @return {Promise<IBussinessResponse>}
-   */
-  public static async allBussinessById(
-    payload: IBussinessRequest
-  ): Promise<IBussinessResponse> {
-    const res: AxiosResponse<IBussinessResponse> =
-      await ApiHelper.send<IBussinessResponse>({
-        url: `/business?businessname=${payload.businessname}`,
-        method: "GET",
-      });
-
-    return res.data;
-  }
-
-  /**
    * refferral code
    * @return {Promise<IReferralCodeResponse>}
    */
@@ -147,7 +107,7 @@ export class AdminService {
   ): Promise<IReferralCodeResponse> {
     const res: AxiosResponse<IReferralCodeResponse> =
       await ApiHelper.send<IReferralCodeResponse>({
-        url: `referral?userId=${payload.userId}`,
+        url: `user/referral?userId=${payload.userId}`,
         method: "GET",
       });
 
@@ -177,11 +137,37 @@ export class AdminService {
    */
   public static async category(credentials: ICategoryRequest): Promise<void> {
     const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/auth/forgot-password",
+      url: "/category",
       method: "POST",
       data: credentials,
     });
 
+    return res.data;
+  }
+
+  /**
+   * category
+   * @return {Promise<IGetCategoryResponse>}
+   */
+  public static async getcategory(): Promise<IGetCategoryResponse> {
+    const res: AxiosResponse<IGetCategoryResponse> =
+      await ApiHelper.send<IGetCategoryResponse>({
+        url: "/category/list",
+        method: "GET",
+      });
+    return res.data;
+  }
+
+  /**
+   * sub category
+   * @return {Promise<IGetSubCategoryResponse>}
+   */
+  public static async getSubcategory(): Promise<IGetSubCategoryResponse> {
+    const res: AxiosResponse<IGetSubCategoryResponse> =
+      await ApiHelper.send<IGetSubCategoryResponse>({
+        url: "sub-category/list",
+        method: "GET",
+      });
     return res.data;
   }
 
@@ -194,7 +180,7 @@ export class AdminService {
     credentials: ISubCategoryRequest
   ): Promise<void> {
     const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/auth/forgot-password",
+      url: "/sub-category",
       method: "POST",
       data: credentials,
     });
@@ -212,6 +198,89 @@ export class AdminService {
       url: "/auth/forgot-password",
       method: "POST",
       data: credentials,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * New Referral Price
+   * @param {IReferralPriceRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async newReferralPrice(
+    payload: IReferralPriceRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/referralPrice",
+      method: "POST",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * New Reward
+   * @param {INewRewardRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async newReward(payload: INewRewardRequest): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/rewards",
+      method: "POST",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * New NotifyButton
+   * @param {INewNotifyButtonRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async newNotifyButton(
+    payload: INewNotifyButtonRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/notify-button",
+      method: "POST",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * New Notification
+   * @param {INewNotificationRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async newNotification(
+    payload: INewNotificationRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/user/notification",
+      method: "POST",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * create listing
+   * @param {ICreateListingRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async craeteListing(
+    payload: ICreateListingRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/create-listing",
+      method: "POST",
+      data: payload,
     });
 
     return res.data;

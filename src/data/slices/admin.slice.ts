@@ -3,36 +3,36 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 import { ReducerEnum } from "enum";
 
 import {
-  IBannerResponse,
-  IBussinessResponse,
-  IReferralCodeResponse,
+  ICategoryData,
+  IGetSubCategoryResponse,
   IReferralCountResponse,
+  IRefferralCode,
+  ISubCategoryData,
   ISubscribeByBussinessIDResponse,
+  ISubscriberData,
   ISubscriberOfBussinessResponse,
 } from "interface";
 
 export interface IAdminState {
   adminSubscribers: ISubscribeByBussinessIDResponse;
   bussinessSubscribers: ISubscribeByBussinessIDResponse;
-  bannerList: IBannerResponse;
-  subscriberOfBussiness: ISubscriberOfBussinessResponse;
+  subscriberOfBussiness: ISubscriberData[];
   AllsubscriberOfBussiness: ISubscriberOfBussinessResponse;
-  Bussiness: IBussinessResponse;
-  AllBussinessById: IBussinessResponse;
-  refferralCode: IReferralCodeResponse;
+  category: ICategoryData[];
+  subCategory: ISubCategoryData[];
+  refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
 }
 
 const initialState: IAdminState = {
   adminSubscribers: {} as ISubscribeByBussinessIDResponse,
   bussinessSubscribers: {} as ISubscribeByBussinessIDResponse,
-  bannerList: {} as IBannerResponse,
-  subscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
+  subscriberOfBussiness: [],
   AllsubscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
-  Bussiness: {} as IBussinessResponse,
-  AllBussinessById: {} as IBussinessResponse,
-  refferralCode: {} as IReferralCodeResponse,
+  refferralCode: {} as IRefferralCode,
   refferralCount: {} as IReferralCountResponse,
+  category: [],
+  subCategory: [],
 };
 
 export const adminSlice = createSlice({
@@ -54,14 +54,13 @@ export const adminSlice = createSlice({
         action.payload;
       }
     );
-    builder.addCase(AdminThunk.bannerList.fulfilled, (_state, action) => {
-      action.payload;
-    });
 
     builder.addCase(
       AdminThunk.subscribeOfBussiness.fulfilled,
-      (_state, action) => {
-        action.payload;
+      (state, action) => {
+        if (action.payload.data) {
+          state.subscriberOfBussiness = action.payload.data;
+        }
       }
     );
     builder.addCase(
@@ -70,14 +69,21 @@ export const adminSlice = createSlice({
         action.payload;
       }
     );
-    builder.addCase(AdminThunk.business.fulfilled, (_state, action) => {
-      action.payload;
+
+    builder.addCase(AdminThunk.refferralCode.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.refferralCode = action.payload.data;
+      }
     });
-    builder.addCase(AdminThunk.allBusiness.fulfilled, (_state, action) => {
-      action.payload;
+    builder.addCase(AdminThunk.getCategory.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.category = action.payload.data;
+      }
     });
-    builder.addCase(AdminThunk.refferralCode.fulfilled, (_state, action) => {
-      action.payload;
+    builder.addCase(AdminThunk.getSubCategory.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.subCategory = action.payload.data;
+      }
     });
     builder.addCase(AdminThunk.refferralCount.fulfilled, (_state, action) => {
       action.payload;
