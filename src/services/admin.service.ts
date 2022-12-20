@@ -6,6 +6,7 @@ import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
   IHomeRequest,
+  INewNotificationRequest,
   INewNotifyButtonRequest,
   INewRewardRequest,
   IReferralCodeResponse,
@@ -212,6 +213,23 @@ export class AdminService {
    */
   public static async newNotifyButton(
     payload: INewNotifyButtonRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/notify-button",
+      method: "POST",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * New Notification
+   * @param {INewNotificationRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async newNotification(
+    payload: INewNotificationRequest
   ): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: "/notify-button",

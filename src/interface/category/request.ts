@@ -51,3 +51,13 @@ export interface INewNotifyButtonRequest {
   date: Dayjs | null;
   description: string;
 }
+
+export interface INewNotificationRequest {
+  headline: string;
+  date: Dayjs | null;
+  description: string;
+  subCategory: string;
+  businessName: string;
+  category: string;
+  businessLocation: string;
+}
