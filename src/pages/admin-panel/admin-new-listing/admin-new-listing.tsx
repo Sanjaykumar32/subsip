@@ -25,6 +25,8 @@ import {
   faLocationDot,
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
+import { NewlistingController } from "./admin-new-listing-controller";
+import { Form } from "react-router-dom";
 
 interface ListFormItem {
   id: string;
@@ -107,240 +109,194 @@ export function AdminNewlisting() {
     },
   ];
 
+  const { getters, handlers } = NewlistingController();
+  const {
+    headline,
+    description,
+    subCategory,
+    businessName,
+    category,
+    businessLocation,
+    email,
+    productCategory,
+    image,
+  } = getters;
+  const {
+    handleHeadlineChange,
+    submitHandler,
+    handleDescriptionChange,
+    handleCategoryChange,
+    handleSubCategoryChange,
+    handleBusinessNameChange,
+    handleBusinessLocationhange,
+    handleEmailChange,
+    handleProductChange,
+    handleImageChange,
+  } = handlers;
+
   const ref = useRef<HTMLInputElement>(null);
 
   return (
     <Container maxWidth="lg">
       <AdminBackButton />
-      <FormControl fullWidth size="small">
-        <Grid container>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ px: 3, py: 1 }}>
-              <Box sx={{ my: 4 }}>
-                <Label> {step1.label} </Label>
-                <Typography variant="body2"> {step1.caption} </Typography>
-                <TextField
-                  size="small"
-                  // value={}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
-                  fullWidth
-                />
+      <Form onSubmit={submitHandler}>
+        <FormControl fullWidth size="small">
+          <Grid container>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ px: 3, py: 1 }}>
+                <Box sx={{ my: 4 }}>
+                  <Label> {step1.label} </Label>
+                  <Typography variant="body2"> {step1.caption} </Typography>
+                  <TextField
+                    size="small"
+                    value={businessName}
+                    onChange={handleBusinessNameChange}
+                    required
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label> {step3.label} </Label>
+                  <Typography variant="body2"> {step3.caption} </Typography>
+                  <TextField
+                    size="small"
+                    value={headline}
+                    onChange={handleHeadlineChange}
+                    required
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label> {step5.label} </Label>
+                  <Typography variant="body2"> {step5.caption} </Typography>
+                  <TextField
+                    size="small"
+                    value={email}
+                    onChange={handleEmailChange}
+                    required
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label id={`${step7.id}-label`}> {step7.label} </Label>
+                  <Typography variant="body2"> {step7.caption} </Typography>
+                  <Select
+                    fullWidth
+                    id={`${step7.id}-select`}
+                    labelId={`${step7.id}-label`}
+                    value={category}
+                    onChange={handleCategoryChange}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label id={`${step9.id}-label`}> {step9.label} </Label>
+                  <Typography variant="body2"> {step9.caption} </Typography>
+                  <Select
+                    fullWidth
+                    id={`${step9.id}-select`}
+                    labelId={`${step9.id}-label`}
+                    value={subCategory}
+                    onChange={handleSubCategoryChange}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </Box>
               </Box>
-              <Box sx={{ my: 4 }}>
-                <Label> {step3.label} </Label>
-                <Typography variant="body2"> {step3.caption} </Typography>
-                <TextField
-                  size="small"
-                  // value={}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
-                  fullWidth
-                />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ px: 3, py: 1 }}>
+                <Box sx={{ my: 4 }}>
+                  <Label id={`${step2.id}-label`}> {step2.label} </Label>
+                  <Typography variant="body2"> {step2.caption} </Typography>
+                  <Select
+                    fullWidth
+                    id={`${step2.id}-select`}
+                    labelId={`${step2.id}-label`}
+                    value={productCategory}
+                    onChange={handleProductChange}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label> {step4.label} </Label>
+                  <Typography variant="body2"> {step4.caption} </Typography>
+                  <TextField
+                    multiline
+                    minRows={5}
+                    value={description}
+                    onChange={handleDescriptionChange}
+                    required
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label> {step6.label} </Label>
+                  <Typography variant="body2"> {step6.caption} </Typography>
+                  <input
+                    ref={ref}
+                    type="file"
+                    onChange={(event) => console.log(event.target.value)}
+                    hidden
+                  />
+                  <IconButton
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      backgroundColor: theme.palette.grey[300],
+                      borderRadius: "4px",
+                      p: 4,
+                    }}
+                    onClick={() => ref.current?.click()}
+                  >
+                    <FontAwesomeIcon icon={faUpload} size="lg" />
+                  </IconButton>
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label> {step8.label} </Label>
+                  <Typography variant="body2"> {step8.caption} </Typography>
+                  <TextField
+                    value={businessLocation}
+                    onChange={handleBusinessLocationhange}
+                    required
+                    fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton>
+                          <FontAwesomeIcon icon={faLocationDot} size="xs" />
+                        </IconButton>
+                      ),
+                    }}
+                  />
+                </Box>
               </Box>
-              <Box sx={{ my: 4 }}>
-                <Label> {step5.label} </Label>
-                <Typography variant="body2"> {step5.caption} </Typography>
-                <TextField
-                  size="small"
-                  // value={}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
-                  fullWidth
-                />
-              </Box>
-              <Box sx={{ my: 4 }}>
-                <Label id={`${step7.id}-label`}> {step7.label} </Label>
-                <Typography variant="body2"> {step7.caption} </Typography>
-                <Select
-                  fullWidth
-                  id={`${step7.id}-select`}
-                  labelId={`${step7.id}-label`}
-                  // value={value}
-                  // onChange={(event) => setValue(event.target.value)}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </Box>
-              <Box sx={{ my: 4 }}>
-                <Label id={`${step9.id}-label`}> {step9.label} </Label>
-                <Typography variant="body2"> {step9.caption} </Typography>
-                <Select
-                  fullWidth
-                  id={`${step9.id}-select`}
-                  labelId={`${step9.id}-label`}
-                  // value={value}
-                  // onChange={(event) => setValue(event.target.value)}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </Box>
-            </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ px: 3, py: 1 }}>
-              <Box sx={{ my: 4 }}>
-                <Label id={`${step2.id}-label`}> {step2.label} </Label>
-                <Typography variant="body2"> {step2.caption} </Typography>
-                <Select
-                  fullWidth
-                  id={`${step2.id}-select`}
-                  labelId={`${step2.id}-label`}
-                  // value={value}
-                  // onChange={(event) => setValue(event.target.value)}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </Box>
-              <Box sx={{ my: 4 }}>
-                <Label> {step4.label} </Label>
-                <Typography variant="body2"> {step4.caption} </Typography>
-                <TextField
-                  multiline
-                  minRows={5}
-                  // value={value}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
-                  fullWidth
-                />
-              </Box>
-              <Box sx={{ my: 4 }}>
-                <Label> {step6.label} </Label>
-                <Typography variant="body2"> {step6.caption} </Typography>
-                <input
-                  ref={ref}
-                  type="file"
-                  onChange={(event) => console.log(event.target.value)}
-                  hidden
-                />
-                <IconButton
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: theme.palette.grey[300],
-                    borderRadius: "4px",
-                    p: 4,
-                  }}
-                  onClick={() => ref.current?.click()}
-                >
-                  <FontAwesomeIcon icon={faUpload} size="lg" />
-                </IconButton>
-              </Box>
-              <Box sx={{ my: 4 }}>
-                <Label> {step8.label} </Label>
-                <Typography variant="body2"> {step8.caption} </Typography>
-                <TextField
-                  // value={value}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <IconButton>
-                        <FontAwesomeIcon icon={faLocationDot} size="xs" />
-                      </IconButton>
-                    ),
-                  }}
-                />
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
-      </FormControl>
+        </FormControl>
 
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          mt: 3,
-        }}
-      >
-        <Button variant="rounded"> Add listing </Button>
-      </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            mt: 3,
+          }}
+        >
+          <Button variant="rounded" type="submit">
+            Add listing
+          </Button>
+        </Box>
+      </Form>
     </Container>
   );
 }
-
-const GenerateTextField = ({
-  id,
-  label,
-  caption,
-  type,
-}: ListFormItem): ReactElement => {
-  const ref = useRef<HTMLInputElement>();
-  const [value, setValue] = useState<string>("");
-
-  switch (type) {
-    case InputTypeEnum.FILE_PICKER:
-      return (
-        <FormGroup>
-          <Label> {label} </Label>
-          <Typography variant="body2"> {caption} </Typography>
-          <Input
-            type="file"
-            ref={ref}
-            onChange={(event) => console.log(event.target.value)}
-          />
-          <IconButton onClick={() => ref.current?.click()}>
-            <FontAwesomeIcon icon={faUpload} size="lg" />
-          </IconButton>
-        </FormGroup>
-      );
-    case InputTypeEnum.SELECT:
-      return (
-        <FormGroup>
-          <Label id={`${id}-label`}> {label} </Label>
-          <Typography variant="body2"> {caption} </Typography>
-          <Select
-            id={`${id}-select`}
-            labelId={`${id}-label`}
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormGroup>
-      );
-    case InputTypeEnum.TEXT_AREA:
-      return (
-        <FormGroup>
-          <Label> {label} </Label>
-          <Typography variant="body2"> {caption} </Typography>
-          <TextField
-            multiline
-            minRows={5}
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-            required
-            fullWidth
-          />
-        </FormGroup>
-      );
-    case InputTypeEnum.INPUT:
-    default:
-      return (
-        <FormGroup>
-          <Label> {label} </Label>
-          <Typography variant="body2"> {caption} </Typography>
-          <TextField
-            size="small"
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-            required
-            fullWidth
-          />
-        </FormGroup>
-      );
-  }
-};
