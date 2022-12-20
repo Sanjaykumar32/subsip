@@ -1,11 +1,13 @@
 import { Dayjs } from "dayjs";
 
 export interface ICategoryRequest {
-  categoryName: string;
+  name: string;
+  addedBy: number;
 }
 export interface ISubCategoryRequest {
-  businessCategory: string;
-  subCategoryName: string;
+  categoryId: string;
+  name: string;
+  addedBy: number;
 }
 export interface Filter {
   key: string;

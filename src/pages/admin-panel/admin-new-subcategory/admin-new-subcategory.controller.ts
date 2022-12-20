@@ -23,6 +23,7 @@ export const AddSubCategoryController =
   (): IAddSubCategoryControllerReturns => {
     const [subCategory, setSubCategory] = useState<string>("");
     const [businessName, setBuisnessName] = useState<string>("");
+    const userId = sessionStorage.getItem("userId");
 
     const dispatch = useAppDispatch();
 
@@ -39,8 +40,9 @@ export const AddSubCategoryController =
     const submitHandler = (): void => {
       dispatch(
         AdminThunk.subCategory({
-          businessCategory: businessName,
-          subCategoryName: subCategory,
+          categoryId: businessName,
+          name: subCategory,
+          addedBy: userId ? parseInt(userId) : 0,
         })
       );
     };

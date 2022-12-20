@@ -135,7 +135,7 @@ export class AdminService {
    */
   public static async category(credentials: ICategoryRequest): Promise<void> {
     const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/category/list",
+      url: "/category",
       method: "POST",
       data: credentials,
     });
@@ -152,7 +152,7 @@ export class AdminService {
     credentials: ISubCategoryRequest
   ): Promise<void> {
     const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/subCategory",
+      url: "/sub-category",
       method: "POST",
       data: credentials,
     });

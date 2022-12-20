@@ -18,6 +18,7 @@ const CategoryController = (): ICategoryControllerReturns => {
   const dispatch = useAppDispatch();
 
   const [category, setCategory] = useState<string>("");
+  const userId = sessionStorage.getItem("userId");
 
   const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setCategory(event.target.value as string);
@@ -26,9 +27,11 @@ const CategoryController = (): ICategoryControllerReturns => {
   const submitHandler = (): void => {
     dispatch(
       AdminThunk.category({
-        categoryName: category,
+        name: category,
+        addedBy: userId ? parseInt(userId) : 0,
       })
     );
+    setCategory("");
   };
 
   return {

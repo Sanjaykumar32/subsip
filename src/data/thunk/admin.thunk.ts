@@ -107,8 +107,8 @@ export class AdminThunk {
     "admin/category",
     async (payload: ICategoryRequest): Promise<void> => {
       console.log(payload, "payload");
-      // const response = await AdminService.category(payload);
-      // return response;
+      const response = await AdminService.category(payload);
+      return response;
     }
   );
 
@@ -119,9 +119,8 @@ export class AdminThunk {
     "admin/subCategory",
     async (payload: ISubCategoryRequest): Promise<void> => {
       console.log(payload, "payload");
-
-      // const response = await AdminService.subCategory(payload);
-      // return response;
+      const response = await AdminService.subCategory(payload);
+      return response;
     }
   );
 
