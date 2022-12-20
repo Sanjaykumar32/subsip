@@ -4,11 +4,8 @@ export interface ICategoryRequest {
   categoryName: string;
 }
 export interface ISubCategoryRequest {
-  keyword: string;
-  category_id: string;
-  limit: string;
-  filters: Filter[];
-  sort: Sort[];
+  businessCategory: string;
+  subCategoryName: string;
 }
 export interface Filter {
   key: string;
