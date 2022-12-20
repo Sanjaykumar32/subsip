@@ -101,19 +101,18 @@ export interface ICategoryData {
 }
 
 export interface IGetSubCategoryResponse {
-  keyword: string;
-  limit: string;
-  category_id: string;
-  filters: IFilter[];
-  sort: ISort[];
+  success: number;
+  message: string;
+  data: ISubCategoryData[];
 }
 
-export interface IFilter {
-  key: string;
-  value: string;
-}
-
-export interface ISort {
-  prop: string;
-  dir: string;
+export interface ISubCategoryData {
+  iSubCategoryId: number;
+  iCategoryId: number;
+  vName: string;
+  eStatus: string;
+  dtAddedDate: string;
+  iAddedBy: number;
+  dtModifiedDate?: string;
+  iModifiedBy?: number;
 }

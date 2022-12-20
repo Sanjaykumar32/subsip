@@ -165,7 +165,7 @@ export class AdminService {
   public static async getSubcategory(): Promise<IGetSubCategoryResponse> {
     const res: AxiosResponse<IGetSubCategoryResponse> =
       await ApiHelper.send<IGetSubCategoryResponse>({
-        url: "/subcategory/list",
+        url: "sub-category/list",
         method: "GET",
       });
     return res.data;

@@ -23,8 +23,6 @@ export function AdminNewSubCategory() {
   const { submitHandler, handleCategoryChange, handleBusinessNameChange } =
     handlers;
 
-  console.log(categoryData, "categoryData");
-
   return (
     <Container maxWidth="lg">
       <AdminBackButton />

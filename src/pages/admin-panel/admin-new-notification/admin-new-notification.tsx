@@ -36,6 +36,8 @@ export function AdminNewNotifictaion() {
     category,
     businessLocation,
     businessData,
+    categoryData,
+    subCategoryData,
   } = getters;
   const {
     handleHeadlineChange,
@@ -164,8 +166,11 @@ export function AdminNewNotifictaion() {
                   value={category}
                   onChange={handleCategoryChange}
                 >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                  {categoryData.map((res, i) => (
+                    <MenuItem value={res.iCategoryId} key={i}>
+                      {res.vName}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -182,8 +187,11 @@ export function AdminNewNotifictaion() {
                   value={subCategory}
                   onChange={handleSubCategoryChange}
                 >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                  {subCategoryData.map((res, i) => (
+                    <MenuItem value={res.iSubCategoryId} key={i}>
+                      {res.vName}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>

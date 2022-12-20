@@ -1,10 +1,10 @@
 import { SelectChangeEvent } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_BUSINESS } from "data/selectors";
+import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { UserThunk } from "data/thunk/user.thunk";
 import dayjs, { Dayjs } from "dayjs";
-import { IBusiness } from "interface";
+import { IBusiness, ICategoryData, ISubCategoryData } from "interface";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 interface INewNotificationButtonControllerReturns {
@@ -17,6 +17,8 @@ interface INewNotificationButtonControllerReturns {
     category: string;
     businessLocation: string;
     businessData: IBusiness[];
+    categoryData: ICategoryData[];
+    subCategoryData: ISubCategoryData[];
   };
   handlers: {
     handleHeadlineChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -43,6 +45,8 @@ export const NewNotificationButtonController =
     const [businessName, setBuisnessName] = useState<string>("");
     const [subCategory, setSubCategory] = useState<string>("");
     const [businessLocation, setBusinessLocation] = useState<string>("");
+    const categoryData = useAppSelector(GET_CATEGORY);
+    const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
 
     const dispatch = useAppDispatch();
 
@@ -95,6 +99,30 @@ export const NewNotificationButtonController =
       allBusiness();
     }, [allBusiness]);
 
+    const getcategory = useCallback(async () => {
+      try {
+        dispatch(AdminThunk.getCategory());
+      } catch (error) {
+        console.log(error);
+      }
+    }, [dispatch]);
+
+    useEffect(() => {
+      getcategory();
+    }, [getcategory]);
+
+    const getSubCategory = useCallback(async () => {
+      try {
+        dispatch(AdminThunk.getSubCategory());
+      } catch (error) {
+        console.log(error);
+      }
+    }, [dispatch]);
+
+    useEffect(() => {
+      getSubCategory();
+    }, [getSubCategory]);
+
     const submitHandler = (): void => {
       dispatch(
         AdminThunk.newNotification({
@@ -119,6 +147,8 @@ export const NewNotificationButtonController =
         category,
         businessLocation,
         businessData,
+        categoryData,
+        subCategoryData,
       },
       handlers: {
         handleHeadlineChange,
