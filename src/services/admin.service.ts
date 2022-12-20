@@ -8,6 +8,7 @@ import {
   IHomeRequest,
   IReferralCodeResponse,
   IReferralCountResponse,
+  IReferralPriceRequest,
   IRefferralCodeRequest,
   IRefferralCountRequest,
   ISubCategoryRequest,
@@ -165,6 +166,23 @@ export class AdminService {
       url: "/auth/forgot-password",
       method: "POST",
       data: credentials,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * New Referral Price
+   * @param {IReferralPriceRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async newReferralPrice(
+    payload: IReferralPriceRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/referralPrice",
+      method: "POST",
+      data: payload,
     });
 
     return res.data;

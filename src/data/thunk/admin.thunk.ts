@@ -5,6 +5,7 @@ import {
   IHomeRequest,
   IReferralCodeResponse,
   IReferralCountResponse,
+  IReferralPriceRequest,
   IRefferralCodeRequest,
   IRefferralCountRequest,
   ISubCategoryRequest,
@@ -125,6 +126,18 @@ export class AdminThunk {
     async (payload: IHomeRequest): Promise<void> => {
       const response = await AdminService.home(payload);
       return response;
+    }
+  );
+
+  /**
+   * New Referral Price
+   */
+  public static newReferralPrice = createAsyncThunk(
+    "admin/newReferralPrice",
+    async (payload: IReferralPriceRequest): Promise<void> => {
+      console.log(payload, "payload");
+      // const response = await AdminService.newReferralPrice(payload);
+      // return response;
     }
   );
 

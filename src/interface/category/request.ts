@@ -30,3 +30,8 @@ export interface Filter {
   key: string;
   value: string;
 }
+
+export interface IReferralPriceRequest {
+  mileStoneName: string;
+  referralAmount: string;
+}
