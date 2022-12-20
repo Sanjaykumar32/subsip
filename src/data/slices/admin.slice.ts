@@ -3,7 +3,7 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 import { ReducerEnum } from "enum";
 
 import {
-  IGetCategoryResponse,
+  ICategoryData,
   IGetSubCategoryResponse,
   IReferralCountResponse,
   IRefferralCode,
@@ -17,7 +17,7 @@ export interface IAdminState {
   bussinessSubscribers: ISubscribeByBussinessIDResponse;
   subscriberOfBussiness: ISubscriberData[];
   AllsubscriberOfBussiness: ISubscriberOfBussinessResponse;
-  category: IGetCategoryResponse;
+  category: ICategoryData[];
   subCategory: IGetSubCategoryResponse;
   refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
@@ -30,7 +30,7 @@ const initialState: IAdminState = {
   AllsubscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
   refferralCode: {} as IRefferralCode,
   refferralCount: {} as IReferralCountResponse,
-  category: {} as IGetCategoryResponse,
+  category: [],
   subCategory: {} as IGetSubCategoryResponse,
 };
 
@@ -76,7 +76,7 @@ export const adminSlice = createSlice({
     });
     builder.addCase(AdminThunk.getCategory.fulfilled, (state, action) => {
       if (action.payload) {
-        state.category = action.payload;
+        state.category = action.payload.data;
       }
     });
     builder.addCase(AdminThunk.getSubCategory.fulfilled, (state, action) => {

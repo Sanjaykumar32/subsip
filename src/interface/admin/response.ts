@@ -85,10 +85,19 @@ export interface IRefferralCode {
 }
 
 export interface IGetCategoryResponse {
-  keyword: string;
-  limit: string;
-  filters: IFilter[];
-  sort: ISort[];
+  success: number;
+  message: string;
+  data: ICategoryData[];
+}
+
+export interface ICategoryData {
+  iCategoryId: number;
+  vName?: string;
+  eStatus: string;
+  dtAddedDate: string;
+  iAddedBy?: number;
+  dtModifiedDate: string;
+  iModifiedBy: string;
 }
 
 export interface IGetSubCategoryResponse {

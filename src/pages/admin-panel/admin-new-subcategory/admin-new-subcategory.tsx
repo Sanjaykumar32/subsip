@@ -19,9 +19,11 @@ import { Form } from "react-router-dom";
 export function AdminNewSubCategory() {
   const theme = useTheme();
   const { getters, handlers } = AddSubCategoryController();
-  const { subCategory, businessName } = getters;
+  const { subCategory, businessName, categoryData } = getters;
   const { submitHandler, handleCategoryChange, handleBusinessNameChange } =
     handlers;
+
+  console.log(categoryData, "categoryData");
 
   return (
     <Container maxWidth="lg">
@@ -52,8 +54,11 @@ export function AdminNewSubCategory() {
                 value={businessName}
                 onChange={handleBusinessNameChange}
               >
-                <MenuItem value={"Newest"}>Newest</MenuItem>
-                <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                {categoryData.map((res, i) => (
+                  <MenuItem value={res.iCategoryId} key={i}>
+                    {res.vName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
             <Box sx={{ my: 2, alignItems: "center" }}>
