@@ -14,13 +14,14 @@
     "@mui/material": "^5.10.14",
     "@mui/system": "^5.10.14",
     "@mui/x-data-grid": "^5.17.12",
+<<<<<<< HEAD
+=======
     "@mui/x-date-pickers": "^5.0.11",
+    "@react-spring/web": "^9.6.1",
+>>>>>>> 817a80fb25849ef3ddeefc3e61a453bf2d61203c
     "@reduxjs/toolkit": "^1.8.6",
     "axios": "^1.2.1",
-    "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
-    "moment": "^2.29.4",
-    "notistack": "^2.0.8",
     "npm-check-updates": "^16.3.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

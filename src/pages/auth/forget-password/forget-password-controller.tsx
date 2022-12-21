@@ -1,7 +1,4 @@
 import { Theme, useTheme } from "@mui/material";
-import { useAppDispatch } from "data";
-import { AuthenticationThunk } from "data/thunk";
-import { UserThunk } from "data/thunk/user.thunk";
 import { ChangeEvent, useState } from "react";
 
 interface IInitialValue {
@@ -25,7 +22,7 @@ const ForgetPasswordController = (): IForgetPasswordControllerReturns => {
   const [value, setValue] = useState<IInitialValue>({
     email: "",
   });
-  const dispatch = useAppDispatch();
+
   /**
    * set the email and password value
    * @param  {ChangeEvent<HTMLInputElement>} event
@@ -38,7 +35,9 @@ const ForgetPasswordController = (): IForgetPasswordControllerReturns => {
    * @return {void}
    */
   const submitHandler = (): void => {
-    dispatch(AuthenticationThunk.forgetPassword({ email: value.email }));
+    console.log({
+      email: value.email,
+    });
     setValue({ email: "" });
   };
 

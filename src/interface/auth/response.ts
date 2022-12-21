@@ -2,11 +2,6 @@ export interface ISignInResponse {
   success: number;
   message: string;
   token: IToken;
-  data: IData;
-}
-
-export interface IData {
-  userId: string;
 }
 
 export interface IToken {
@@ -18,7 +13,7 @@ export interface IToken {
 export interface IBannerResponse {
   success: number;
   message: string;
-  data: IBannerData[];
+  data: Daum[];
 }
 
 export interface ISignUpResponse {
@@ -31,7 +26,7 @@ export interface ISignUp {
   insert_id: number;
 }
 
-export interface IBannerData {
+export interface Daum {
   iBusinessId: number;
   vName: string;
   vTagLine: string;

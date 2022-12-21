@@ -29,7 +29,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth.context";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
-import { SearchField } from "./component/search-field/search-field";
 
 const pages = [
   { title: "Restaurant", path: RoutePathEnum.LISTING },
@@ -42,7 +41,6 @@ const notification = [{ title: "You just won a Promo Code!!" }];
 
 export function ResponsiveAppBar() {
   const auth = useAuth();
-  console.log(auth, "auth");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
@@ -104,6 +102,25 @@ export function ResponsiveAppBar() {
     []
   );
 
+  const SearchField = useMemo(
+    () => (
+      <TextField
+        fullWidth
+        size="small"
+        sx={{ mx: "auto", maxWidth: "800px" }}
+        InputProps={{
+          sx: { borderRadius: "60px" },
+          endAdornment: (
+            <IconButton>
+              <FontAwesomeIcon icon={faSearch} size="sm" />
+            </IconButton>
+          ),
+        }}
+      />
+    ),
+    []
+  );
+
   const DesktopMenu = useMemo(() => {
     return pages.map((page) => {
       const isActive = window.location.pathname
@@ -156,10 +173,10 @@ export function ResponsiveAppBar() {
   const MobileLogo = useMemo(
     () => (
       <Box sx={{ flexGrow: 1, display: { md: "none", sm: "flex" } }}>
-        <SearchField />
+        {SearchField}
       </Box>
     ),
-    []
+    [SearchField]
   );
 
   const MobileMenu = useMemo(
@@ -207,10 +224,10 @@ export function ResponsiveAppBar() {
   const AppbarCenter = useMemo(
     () => (
       <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-        <SearchField />
+        {SearchField}
       </Box>
     ),
-    []
+    [SearchField]
   );
 
   const ActionMenu = useMemo(

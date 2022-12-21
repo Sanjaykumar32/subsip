@@ -85,4 +85,22 @@ export class AuthService {
 
     return res.data;
   }
+
+  /**
+   * Reset Password
+   * @param {IResetPasswordRequest} credentials
+   * @return {Promise<SignInResponse>}
+   */
+  // public static async resetpassword(
+  //   credentials: IResetPasswordRequest
+  // ): Promise<ISignInResponse> {
+  //   const res: AxiosResponse<ISignInResponse> =
+  //     await ApiHelper.send<ISignInResponse>({
+  //       url: "/subscribers?adminId=6",
+  //       method: "POST",
+  //       data: credentials,
+  //     });
+
+  //   return res.data;
+  // }
 }

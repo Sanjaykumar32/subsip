@@ -8,7 +8,7 @@ interface IInitialValue {
 }
 
 interface ISignUpControllerReturns {
-  getters: { value: IInitialValue; theme: Theme; errors: IInitialValue };
+  getters: { value: IInitialValue; theme: Theme };
   handlers: {
     changeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
     submitHandler: () => void;
@@ -26,11 +26,6 @@ const SignUpController = (): ISignUpControllerReturns => {
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState<IInitialValue>({
-    email: "",
-    password: "",
-  });
-  const [errorCount, setErrorCount] = useState<number>(0);
 
   /**
    * Set the email and password value
@@ -38,39 +33,18 @@ const SignUpController = (): ISignUpControllerReturns => {
    */
   const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
     setValue({ ...value, [event.target.name]: event.target.value });
-    setErrors({ email: "", password: "" });
   };
-
-  function validate(value: { email: string; password: string }) {
-    const error: { email: string; password: string } = {
-      email: "",
-      password: "",
-    };
-    if (!value.email) {
-      error.email = "Email address is required";
-    } else if (!/\S+@\S+\.\S+/.test(value.email)) {
-      error.email = "Email address is invalid";
-    }
-    if (!value.password) {
-      error.password = "password is required";
-    }
-    return error;
-  }
 
   /**
    * @return {void}
    */
   const submitHandler = (): void => {
-    setErrors(validate(value));
-    setErrorCount(errorCount + 1);
-    if (!errors.email && !errors.password) {
-      auth.signUp({ email: value.email, password: value.password });
-      setValue({ email: "", password: "" });
-    }
+    auth.signUp({ email: value.email, password: value.password });
+    setValue({ email: "", password: "" });
   };
 
   return {
-    getters: { value, theme, errors },
+    getters: { value, theme },
     handlers: { changeHandler, submitHandler },
   };
 };

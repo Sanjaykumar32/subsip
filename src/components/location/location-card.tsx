@@ -10,10 +10,9 @@ import {
   useTheme,
   Link,
 } from "@mui/material";
-import { IAuthContext, useAuth } from "context/auth.context";
+import { IAuthContext } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
-import { IBusiness } from "interface";
 
 export const Title = ({ children, ...props }: TypographyProps) => (
   <Typography variant="h5" fontWeight={900} sx={{ mt: 2, mb: 1 }} {...props}>
@@ -71,7 +70,7 @@ export const Subscribe = ({
         }}
         sx={{ fontWeight: 800, borderRadius: "24px" }}
       >
-        {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
+        {auth?.isAuthenticated ? "Subscribed" : "Subscribe"}
       </Button>
     </>
   );
@@ -79,10 +78,12 @@ export const Subscribe = ({
 
 export const CardFooter = () => {
   const theme = useTheme();
+
   return (
     <Box
       sx={{
         backgroundColor: theme.palette.grey[200],
+        position: "absolute",
         bottom: 0,
       }}
     >
@@ -101,27 +102,25 @@ export const CardFooter = () => {
   );
 };
 
+export interface ILocationProps {
+  name: string;
+  location: string;
+  description: string;
+  subscribers: number;
+  footer: string;
+}
+
 export function Location({
-  vName,
-  vLocation,
-  tDescription,
-  subscriberCount,
-}: IBusiness) {
-  const auth = useAuth();
+  name,
+  location,
+  description,
+  subscribers,
+}: ILocationProps) {
   return (
-    <Card
-      elevation={3}
-      sx={{
-        height: "100%",
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
+    <Card elevation={3} sx={{ height: "100%", position: "relative" }}>
       <Box sx={{ p: 2, fontSize: theme.typography.h5.fontSize }}>
         <Box sx={{ display: "flex" }}>
-          <span style={{ fontFamily: "Bree Serif" }}> PoshSub </span>
+          <span style={{ fontFamily: "Bree Serif" }}> PoshSub </span>{" "}
           <Divider
             color="info"
             sx={{ m: 1 }}
@@ -138,10 +137,10 @@ export function Location({
             RWEARDS
           </span>
         </Box>
-        <Title>{vName}</Title>
-        <Address>{vLocation}</Address>
-        <Info>{tDescription}</Info>
-        <Subscribe subsctibers={subscriberCount} auth={auth} />
+        <Title>{name}</Title>
+        <Address>{location}</Address>
+        <Info>{description}</Info>
+        <Subscribe subsctibers={subscribers} />
       </Box>
       <CardFooter />
     </Card>

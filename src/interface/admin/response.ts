@@ -56,12 +56,6 @@ export interface IBusiness {
   iCity: number;
   vAddress: string;
   onBanner: number;
-  vImage?: string;
-  iCategory: number;
-  iSubCategory: number;
-  categoryName: string;
-  subCategoryName: string;
-  subscriberCount: number;
 }
 
 export interface IReferralCountResponse {
@@ -82,37 +76,4 @@ export interface IReferralCodeResponse {
 
 export interface IRefferralCode {
   referralCode: string;
-}
-
-export interface IGetCategoryResponse {
-  success: number;
-  message: string;
-  data: ICategoryData[];
-}
-
-export interface ICategoryData {
-  iCategoryId: number;
-  vName?: string;
-  eStatus: string;
-  dtAddedDate: string;
-  iAddedBy?: number;
-  dtModifiedDate: string;
-  iModifiedBy: string;
-}
-
-export interface IGetSubCategoryResponse {
-  success: number;
-  message: string;
-  data: ISubCategoryData[];
-}
-
-export interface ISubCategoryData {
-  iSubCategoryId: number;
-  iCategoryId: number;
-  vName: string;
-  eStatus: string;
-  dtAddedDate: string;
-  iAddedBy: number;
-  dtModifiedDate?: string;
-  iModifiedBy?: number;
 }

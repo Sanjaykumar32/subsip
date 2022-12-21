@@ -16,7 +16,7 @@ const ListBox = styled(Box)(({ theme }) => ({
 
   [theme.breakpoints.down("md")]: {
     marginTop: theme.spacing(2),
-    alignItems: "start",
+    alignItems: "center",
   },
 }));
 
@@ -71,10 +71,16 @@ export function Links() {
   );
 
   return (
-    <LinkBox container spacing={4}>
+    <LinkBox container>
       {links.map((data, index: number) => {
         return (
-          <Grid key={`Links-${data.title}-${index}}`} item sm={6} md={3}>
+          <Grid
+            key={`Links-${data.title}-${index}}`}
+            item
+            xs={12}
+            sm={6}
+            md={3}
+          >
             <List>
               <ListBox>
                 <Typography fontWeight="600" sx={{ fontSize: "21px" }}>
