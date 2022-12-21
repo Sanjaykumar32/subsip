@@ -17,12 +17,13 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
+import { CategoryController } from "./admin-categories.controller";
 
 export function AdminCategories() {
   const columns: GridColDef[] = [
     {
-      field: "Name",
-      headerName: "Name",
+      field: "vName",
+      headerName: "vName",
       width: 200,
     },
     {
@@ -104,6 +105,8 @@ export function AdminCategories() {
     },
   ];
   const naviagate = useNavigate();
+  const { getters } = CategoryController();
+  const { attributes } = getters;
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -166,7 +169,7 @@ export function AdminCategories() {
         </Box>
         <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
           <DataGrid
-            rows={rows}
+            rows={attributes}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}

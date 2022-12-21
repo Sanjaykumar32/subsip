@@ -1,6 +1,8 @@
 import { useAppDispatch } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import { AdminRoutePathEnum } from "enum";
 import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ICategoryControllerReturns {
   getters: { category: string };
@@ -16,7 +18,7 @@ interface ICategoryControllerReturns {
  */
 const CategoryController = (): ICategoryControllerReturns => {
   const dispatch = useAppDispatch();
-
+  const naviagate = useNavigate();
   const [category, setCategory] = useState<string>("");
   const userId = sessionStorage.getItem("userId");
 
@@ -24,13 +26,16 @@ const CategoryController = (): ICategoryControllerReturns => {
     setCategory(event.target.value as string);
   };
 
-  const submitHandler = (): void => {
-    dispatch(
+  const submitHandler = async (): Promise<void> => {
+    const response: any = await dispatch(
       AdminThunk.category({
         name: category,
         addedBy: userId ? parseInt(userId) : 0,
       })
     );
+    if (response.payload.data) {
+      naviagate(AdminRoutePathEnum.ADMIN_CATEGORY);
+    }
     setCategory("");
   };
 
