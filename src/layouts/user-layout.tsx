@@ -1,8 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+<<<<<<< HEAD
 import { Container, Grid } from "@mui/material";
 import { FooterContainer, Links, ScrollToTop, Social } from "components";
 import ResponsiveAppBar from "components/appbar/navigation";
+=======
+import { Container } from "@mui/material";
+import { FooterMain, ScrollToTop } from "components";
+import { UserAppBar } from "components/appbar/appbar.v2";
+>>>>>>> 817a80fb25849ef3ddeefc3e61a453bf2d61203c
 
 export function NavigationBar() {
   // const links = [
@@ -32,6 +38,7 @@ export function NavigationBar() {
 
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
+<<<<<<< HEAD
       <ResponsiveAppBar />
       <ScrollToTop />
       {/* <AppBar
@@ -131,6 +138,12 @@ export function NavigationBar() {
           </Grid>
         </Container>
       </FooterContainer>
+=======
+      <UserAppBar />
+      <Outlet />
+      <ScrollToTop />
+      <FooterMain />
+>>>>>>> 817a80fb25849ef3ddeefc3e61a453bf2d61203c
     </Container>
   );
 }
