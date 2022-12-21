@@ -6,6 +6,8 @@ import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
   ICreateListingRequest,
+  IGetCategoryResponse,
+  IGetSubCategoryResponse,
   IHomeRequest,
   INewNotificationRequest,
   INewNotifyButtonRequest,
@@ -135,11 +137,37 @@ export class AdminService {
    */
   public static async category(credentials: ICategoryRequest): Promise<void> {
     const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/category/list",
+      url: "/category",
       method: "POST",
       data: credentials,
     });
 
+    return res.data;
+  }
+
+  /**
+   * category
+   * @return {Promise<IGetCategoryResponse>}
+   */
+  public static async getcategory(): Promise<IGetCategoryResponse> {
+    const res: AxiosResponse<IGetCategoryResponse> =
+      await ApiHelper.send<IGetCategoryResponse>({
+        url: "/category/list",
+        method: "GET",
+      });
+    return res.data;
+  }
+
+  /**
+   * sub category
+   * @return {Promise<IGetSubCategoryResponse>}
+   */
+  public static async getSubcategory(): Promise<IGetSubCategoryResponse> {
+    const res: AxiosResponse<IGetSubCategoryResponse> =
+      await ApiHelper.send<IGetSubCategoryResponse>({
+        url: "sub-category/list",
+        method: "GET",
+      });
     return res.data;
   }
 
@@ -152,7 +180,7 @@ export class AdminService {
     credentials: ISubCategoryRequest
   ): Promise<void> {
     const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/subCategory",
+      url: "/sub-category",
       method: "POST",
       data: credentials,
     });
@@ -233,7 +261,7 @@ export class AdminService {
     payload: INewNotificationRequest
   ): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/notify-button",
+      url: "/user/notification",
       method: "POST",
       data: payload,
     });

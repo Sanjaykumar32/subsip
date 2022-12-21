@@ -1,11 +1,13 @@
 import { Dayjs } from "dayjs";
 
 export interface ICategoryRequest {
-  categoryName: string;
+  name: string;
+  addedBy: number;
 }
 export interface ISubCategoryRequest {
-  businessCategory: string;
-  subCategoryName: string;
+  categoryId: string;
+  name: string;
+  addedBy: number;
 }
 export interface Filter {
   key: string;
@@ -47,13 +49,13 @@ export interface INewNotifyButtonRequest {
 }
 
 export interface INewNotificationRequest {
-  headline: string;
-  date: Dayjs | null;
-  description: string;
-  subCategory: string;
-  businessName: string;
-  category: string;
-  businessLocation: string;
+  Headline: string;
+  Desc: string;
+  Date: string;
+  BusinessLocation: string;
+  CategoryId: string;
+  SubCategoryId: string;
+  BusinessId: string;
 }
 
 export interface ICreateListingRequest {

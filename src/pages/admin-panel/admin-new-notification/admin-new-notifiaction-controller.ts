@@ -1,8 +1,11 @@
 import { SelectChangeEvent } from "@mui/material";
-import { useAppDispatch } from "data";
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import { UserThunk } from "data/thunk/user.thunk";
 import dayjs, { Dayjs } from "dayjs";
-import { ChangeEvent, useState } from "react";
+import { IBusiness, ICategoryData, ISubCategoryData } from "interface";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 interface INewNotificationButtonControllerReturns {
   getters: {
@@ -13,6 +16,9 @@ interface INewNotificationButtonControllerReturns {
     businessName: string;
     category: string;
     businessLocation: string;
+    businessData: IBusiness[];
+    categoryData: ICategoryData[];
+    subCategoryData: ISubCategoryData[];
   };
   handlers: {
     handleHeadlineChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -39,6 +45,8 @@ export const NewNotificationButtonController =
     const [businessName, setBuisnessName] = useState<string>("");
     const [subCategory, setSubCategory] = useState<string>("");
     const [businessLocation, setBusinessLocation] = useState<string>("");
+    const categoryData = useAppSelector(GET_CATEGORY);
+    const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
 
     const dispatch = useAppDispatch();
 
@@ -76,16 +84,55 @@ export const NewNotificationButtonController =
       setBusinessLocation(event.target.value as string);
     };
 
+    const businessData = useAppSelector(GET_BUSINESS);
+    console.log(businessData, "businessData");
+
+    const allBusiness = useCallback(async () => {
+      try {
+        dispatch(UserThunk.business());
+      } catch (error) {
+        console.log(error);
+      }
+    }, [dispatch]);
+
+    useEffect(() => {
+      allBusiness();
+    }, [allBusiness]);
+
+    const getcategory = useCallback(async () => {
+      try {
+        dispatch(AdminThunk.getCategory());
+      } catch (error) {
+        console.log(error);
+      }
+    }, [dispatch]);
+
+    useEffect(() => {
+      getcategory();
+    }, [getcategory]);
+
+    const getSubCategory = useCallback(async () => {
+      try {
+        dispatch(AdminThunk.getSubCategory());
+      } catch (error) {
+        console.log(error);
+      }
+    }, [dispatch]);
+
+    useEffect(() => {
+      getSubCategory();
+    }, [getSubCategory]);
+
     const submitHandler = (): void => {
       dispatch(
         AdminThunk.newNotification({
-          headline: headline,
-          date: date,
-          description: description,
-          subCategory: subCategory,
-          businessName: businessName,
-          category: category,
-          businessLocation: businessLocation,
+          Headline: headline,
+          Desc: description,
+          Date: "12-13-20202",
+          BusinessLocation: businessLocation,
+          CategoryId: category,
+          SubCategoryId: subCategory,
+          BusinessId: businessName,
         })
       );
     };
@@ -99,6 +146,9 @@ export const NewNotificationButtonController =
         businessName,
         category,
         businessLocation,
+        businessData,
+        categoryData,
+        subCategoryData,
       },
       handlers: {
         handleHeadlineChange,

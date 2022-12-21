@@ -17,3 +17,7 @@ export const GET_REFFERRAL_CODE = (state: RootState) =>
 
 export const GET_REFERRAL_COUNT = (state: RootState) =>
   state.admin.refferralCount;
+
+export const GET_CATEGORY = (state: RootState) => state.admin.category;
+
+export const GET_SUB_CATEGORY = (state: RootState) => state.admin.subCategory;
