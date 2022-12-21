@@ -5,6 +5,7 @@ import { ApiHelper, StringHelper } from "helpers";
 import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
+  ICategoryDataResponse,
   ICreateListingRequest,
   IGetCategoryResponse,
   IGetSubCategoryResponse,
@@ -133,14 +134,17 @@ export class AdminService {
   /**
    * category
    * @param {ICategoryRequest} credentials
-   * @return {Promise<void>}
+   * @return {Promise<ICategoryDataResponse>}
    */
-  public static async category(credentials: ICategoryRequest): Promise<void> {
-    const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/category",
-      method: "POST",
-      data: credentials,
-    });
+  public static async category(
+    credentials: ICategoryRequest
+  ): Promise<ICategoryDataResponse> {
+    const res: AxiosResponse<ICategoryDataResponse> =
+      await ApiHelper.send<ICategoryDataResponse>({
+        url: "/category",
+        method: "POST",
+        data: credentials,
+      });
 
     return res.data;
   }
@@ -174,16 +178,17 @@ export class AdminService {
   /**
    * subcategory
    * @param {ISubCategoryRequest} credentials
-   * @return {Promise<void>}
+   * @return {Promise<ICategoryDataResponse>}
    */
   public static async subCategory(
     credentials: ISubCategoryRequest
-  ): Promise<void> {
-    const res: AxiosResponse<void> = await ApiHelper.send<void>({
-      url: "/sub-category",
-      method: "POST",
-      data: credentials,
-    });
+  ): Promise<ICategoryDataResponse> {
+    const res: AxiosResponse<ICategoryDataResponse> =
+      await ApiHelper.send<ICategoryDataResponse>({
+        url: "/sub-category",
+        method: "POST",
+        data: credentials,
+      });
 
     return res.data;
   }

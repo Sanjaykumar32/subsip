@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   IAllBusinessSubscribersRequest,
   ICategoryRequest,
+  ICategoryDataResponse,
   ICreateListingRequest,
   IGetCategoryResponse,
   IGetSubCategoryResponse,
@@ -107,7 +108,7 @@ export class AdminThunk {
    */
   public static category = createAsyncThunk(
     "admin/category",
-    async (payload: ICategoryRequest): Promise<void> => {
+    async (payload: ICategoryRequest): Promise<ICategoryDataResponse> => {
       console.log(payload, "payload");
       const response = await AdminService.category(payload);
       return response;
@@ -119,7 +120,7 @@ export class AdminThunk {
    */
   public static subCategory = createAsyncThunk(
     "admin/subCategory",
-    async (payload: ISubCategoryRequest): Promise<void> => {
+    async (payload: ISubCategoryRequest): Promise<ICategoryDataResponse> => {
       console.log(payload, "payload");
       const response = await AdminService.subCategory(payload);
       return response;

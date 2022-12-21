@@ -48,62 +48,6 @@ export function AdminCategories() {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
-      Actions: "Edit",
-    },
-    {
-      id: 2,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
-      Actions: "Edit",
-    },
-    {
-      id: 3,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
-      Actions: "Edit",
-    },
-    {
-      id: 4,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
-      Actions: "Edit",
-    },
-    {
-      id: 5,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
-      Actions: "Edit",
-    },
-    {
-      id: 6,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
-      Actions: "Edit",
-    },
-    {
-      id: 7,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
-      Actions: "Edit",
-    },
-    {
-      id: 8,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
-      Actions: "Edit",
-    },
-    {
-      id: 9,
-      Name: "India Gate Restaurant",
-      Subcategory: "17 subcategories",
-      Actions: "Edit",
-    },
-  ];
   const naviagate = useNavigate();
   const { getters } = CategoryController();
   const { attributes } = getters;

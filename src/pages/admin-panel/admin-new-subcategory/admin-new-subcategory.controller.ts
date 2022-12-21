@@ -2,8 +2,10 @@ import { SelectChangeEvent } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_CATEGORY } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import { AdminRoutePathEnum } from "enum";
 import { ICategoryData } from "interface";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface IAddSubCategoryControllerReturns {
   getters: {
@@ -28,6 +30,7 @@ export const AddSubCategoryController =
     const [businessName, setBuisnessName] = useState<string>("");
     const userId = sessionStorage.getItem("userId");
     const categoryData = useAppSelector(GET_CATEGORY);
+    const naviagate = useNavigate();
 
     const dispatch = useAppDispatch();
 
@@ -41,14 +44,18 @@ export const AddSubCategoryController =
       setBuisnessName(event.target.value as string);
     };
 
-    const submitHandler = (): void => {
-      dispatch(
+    const submitHandler = async (): Promise<void> => {
+      const response: any = await dispatch(
         AdminThunk.subCategory({
           categoryId: businessName,
           name: subCategory,
           addedBy: userId ? parseInt(userId) : 0,
         })
       );
+      console.log(response);
+      if (response.payload.data) {
+        naviagate(AdminRoutePathEnum.ADMIN_SUBCATEGORY);
+      }
       setSubCategory("");
       setBuisnessName("");
     };

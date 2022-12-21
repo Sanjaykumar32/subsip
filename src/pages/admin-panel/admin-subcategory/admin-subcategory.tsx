@@ -17,12 +17,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminBackButton } from "components";
 import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
+import { SubCategoryController } from "./admin-subcategory-controller";
 
 export function AdminSubCategory() {
   const columns: GridColDef[] = [
     {
-      field: "Name",
-      headerName: "Name",
+      field: "vName",
+      headerName: "vName",
       width: 200,
     },
     {
@@ -39,54 +40,9 @@ export function AdminSubCategory() {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      Name: "Pest control",
-      Actions: "Edit",
-    },
-    {
-      id: 2,
-      Name: "Pest control",
-      Actions: "Edit",
-    },
-    {
-      id: 3,
-      Name: "Pest control",
-      Actions: "Edit",
-    },
-    {
-      id: 4,
-      Name: "Pest control",
-      Actions: "Edit",
-    },
-    {
-      id: 5,
-      Name: "Pest control",
-      Actions: "Edit",
-    },
-    {
-      id: 6,
-      Name: "Pest control",
-      Actions: "Edit",
-    },
-    {
-      id: 7,
-      Name: "Pest control",
-      Actions: "Edit",
-    },
-    {
-      id: 8,
-      Name: "Pest control",
-      Actions: "Edit",
-    },
-    {
-      id: 9,
-      Name: "Pest control",
-      Actions: "Edit",
-    },
-  ];
   const naviagate = useNavigate();
+  const { getters } = SubCategoryController();
+  const { attributes } = getters;
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -156,7 +112,7 @@ export function AdminSubCategory() {
 
         <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
           <DataGrid
-            rows={rows}
+            rows={attributes}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}

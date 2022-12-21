@@ -33,6 +33,8 @@ const CategoryController = (): ICategoryControllerReturns => {
         addedBy: userId ? parseInt(userId) : 0,
       })
     );
+    console.log(response.payload, "response");
+
     if (response.payload.data) {
       naviagate(AdminRoutePathEnum.ADMIN_CATEGORY);
     }

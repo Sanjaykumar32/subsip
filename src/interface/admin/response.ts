@@ -116,3 +116,9 @@ export interface ISubCategoryData {
   dtModifiedDate?: string;
   iModifiedBy?: number;
 }
+
+export interface ICategoryDataResponse {
+  success: number;
+  message: string;
+  data: number[];
+}
