@@ -12,14 +12,15 @@ import {
   TextFieldProps,
   Typography,
 } from "@mui/material";
-import {
-  faCalendarDays,
-  faLocationDot,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminBackButton } from "components";
 import { theme } from "theme";
-import { LocalizationProvider, DesktopDatePicker } from "@mui/x-date-pickers";
+import {
+  LocalizationProvider,
+  DesktopDatePicker,
+  DatePicker,
+} from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { NewNotificationButtonController } from "./admin-new-notifiaction-controller";
 import { Form } from "react-router-dom";
@@ -110,16 +111,16 @@ export function AdminNewNotifictaion() {
                     *required
                   </Typography>
                 </Box>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DesktopDatePicker
-                    inputFormat="DD/MM/YYYY"
-                    value={date}
-                    onChange={handleDateChange}
-                    renderInput={(
-                      params: JSX.IntrinsicAttributes & TextFieldProps
-                    ) => <TextField {...params} fullWidth />}
-                  />
-                </LocalizationProvider>
+                <DatePicker
+                  disableFuture
+                  openTo="year"
+                  views={["month", "day", "year"]}
+                  value={date}
+                  onChange={handleDateChange}
+                  renderInput={(
+                    params: JSX.IntrinsicAttributes & TextFieldProps
+                  ) => <TextField {...params} fullWidth />}
+                />
               </Box>
             </Grid>
 
@@ -166,7 +167,7 @@ export function AdminNewNotifictaion() {
                   value={category}
                   onChange={handleCategoryChange}
                 >
-                  {categoryData.map((res, i) => (
+                  {categoryData?.map((res, i) => (
                     <MenuItem value={res.iCategoryId} key={i}>
                       {res.vName}
                     </MenuItem>

@@ -3,14 +3,14 @@ import { useAppDispatch, useAppSelector } from "data";
 import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { UserThunk } from "data/thunk/user.thunk";
-import dayjs, { Dayjs } from "dayjs";
 import { IBusiness, ICategoryData, ISubCategoryData } from "interface";
+import moment, { Moment } from "moment";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 interface INewNotificationButtonControllerReturns {
   getters: {
     headline: string;
-    date: Dayjs | null;
+    date: Moment;
     description: string;
     subCategory: string;
     businessName: string;
@@ -23,7 +23,7 @@ interface INewNotificationButtonControllerReturns {
   handlers: {
     handleHeadlineChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleDescriptionChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    handleDateChange: (ate: Dayjs | null) => void;
+    handleDateChange: (date: Moment | null) => void;
     handleCategoryChange: (event: SelectChangeEvent) => void;
     handleSubCategoryChange: (event: SelectChangeEvent) => void;
     handleBusinessNameChange: (event: SelectChangeEvent) => void;
@@ -40,7 +40,7 @@ export const NewNotificationButtonController =
   (): INewNotificationButtonControllerReturns => {
     const [headline, setHeadline] = useState<string>("");
     const [description, setDescription] = useState<string>("");
-    const [date, setDate] = useState<Dayjs | null>(dayjs());
+    const [date, setDate] = useState<Moment>(moment());
     const [category, setCategory] = useState<string>("");
     const [businessName, setBuisnessName] = useState<string>("");
     const [subCategory, setSubCategory] = useState<string>("");
@@ -50,7 +50,10 @@ export const NewNotificationButtonController =
 
     const dispatch = useAppDispatch();
 
-    const handleDateChange = (date: Dayjs | null): void => {
+    const handleDateChange = (date: Moment | null): void => {
+      if (!date) {
+        return;
+      }
       setDate(date);
     };
 
@@ -85,7 +88,6 @@ export const NewNotificationButtonController =
     };
 
     const businessData = useAppSelector(GET_BUSINESS);
-    console.log(businessData, "businessData");
 
     const allBusiness = useCallback(async () => {
       try {
