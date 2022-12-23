@@ -7,7 +7,6 @@ import {
   Button,
   Divider,
   IconButton,
-  InputAdornment,
   Link,
   List,
   ListItem,
@@ -22,9 +21,10 @@ import {
   faClose,
   faLocationDot,
   faSearch,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Logo } from "components/logo";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { faBell, faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import { useAuth } from "context/auth.context";
 import { useSpring, animated } from "@react-spring/web";
 
@@ -61,23 +61,23 @@ export const UserAppBar = () => {
 
           <Logo variant="dark" />
 
-          {auth.isAuthenticated ? (
-            <IconButton>
-              <Badge badgeContent={2} color="error">
-                <FontAwesomeIcon icon={faBell} />
-              </Badge>
-            </IconButton>
-          ) : (
-            <Button
-              variant="contained"
-              sx={{
-                minWidth: "fit-content",
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              Log In
-            </Button>
-          )}
+          {/* {auth.isAuthenticated ? ( */}
+          <IconButton>
+            <Badge badgeContent={2} color="error">
+              <FontAwesomeIcon icon={faUser} />
+            </Badge>
+          </IconButton>
+          {/* ) : ( */}
+          <Button
+            variant="contained"
+            sx={{
+              minWidth: "fit-content",
+              display: { xs: "block", md: "none" },
+            }}
+          >
+            Log In
+          </Button>
+          {/* )} */}
         </Toolbar>
         <Toolbar
           sx={{
@@ -131,25 +131,25 @@ export const UserAppBar = () => {
               sx={{ mx: 1, height: "30px", my: "auto" }}
             />
           </Box>
-          {!auth.isAuthenticated ? (
-            <Button
-              variant="contained"
-              sx={{ minWidth: "100px", display: { xs: "none", md: "block" } }}
-            >
-              Log In
-            </Button>
-          ) : (
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton sx={{ mx: 1 }}>
+          {/* {!auth.isAuthenticated ? ( */}
+          <Button
+            variant="contained"
+            sx={{ minWidth: "100px", display: { xs: "none", md: "block" } }}
+          >
+            Log In
+          </Button>
+          {/* ) : ( */}
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton sx={{ mx: 1 }}>
+              <FontAwesomeIcon icon={faUserCircle} />
+            </IconButton>
+            <IconButton sx={{ mx: 1 }}>
+              <Badge badgeContent={2} color="error">
                 <FontAwesomeIcon icon={faBell} />
-              </IconButton>
-              <IconButton sx={{ mx: 1 }}>
-                <Badge badgeContent={2} color="error">
-                  <FontAwesomeIcon icon={faBell} />
-                </Badge>
-              </IconButton>
-            </Box>
-          )}
+              </Badge>
+            </IconButton>
+          </Box>
+          {/* )} */}
         </Toolbar>
         <animated.div style={{ overflow: "hidden", ...spring }}>
           <Toolbar>
