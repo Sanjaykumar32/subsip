@@ -47,6 +47,7 @@ export const NewNotificationButtonController =
     const [businessLocation, setBusinessLocation] = useState<string>("");
     const categoryData = useAppSelector(GET_CATEGORY);
     const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
+    const businessData = useAppSelector(GET_BUSINESS);
 
     const dispatch = useAppDispatch();
 
@@ -86,8 +87,6 @@ export const NewNotificationButtonController =
     ): void => {
       setBusinessLocation(event.target.value as string);
     };
-
-    const businessData = useAppSelector(GET_BUSINESS);
 
     const allBusiness = useCallback(async () => {
       try {

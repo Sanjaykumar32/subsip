@@ -192,8 +192,8 @@ export class AdminThunk {
     "admin/createListing",
     async (payload: ICreateListingRequest): Promise<void> => {
       console.log(payload, "payload");
-      // const response = await AdminService.newReward(payload);
-      // return response;
+      const response = await AdminService.craeteListing(payload);
+      return response;
     }
   );
 

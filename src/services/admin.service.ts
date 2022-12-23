@@ -283,7 +283,7 @@ export class AdminService {
     payload: ICreateListingRequest
   ): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/create-listing",
+      url: "/business",
       method: "POST",
       data: payload,
     });

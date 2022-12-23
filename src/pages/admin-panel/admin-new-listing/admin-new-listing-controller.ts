@@ -1,8 +1,16 @@
 import { SelectChangeEvent } from "@mui/material";
-import { useAppDispatch } from "data";
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_CATEGORY, GET_SUB_CATEGORY, GET_BUSINESS } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import dayjs, { Dayjs } from "dayjs";
-import { ChangeEvent, useState } from "react";
+import { UserThunk } from "data/thunk/user.thunk";
+import { IBusiness, ICategoryData, ISubCategoryData } from "interface";
+import {
+  ChangeEvent,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 interface INewlistingControllerReturns {
   getters: {
@@ -15,6 +23,9 @@ interface INewlistingControllerReturns {
     email: string;
     productCategory: string;
     image: string;
+    businessData: IBusiness[];
+    categoryData: ICategoryData[];
+    subCategoryData: ISubCategoryData[];
   };
   handlers: {
     handleHeadlineChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -25,7 +36,9 @@ interface INewlistingControllerReturns {
     handleBusinessLocationhange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleProductChange: (event: SelectChangeEvent) => void;
-    handleImageChange: (event: SelectChangeEvent) => void;
+    handleImageChange: (event: {
+      target: { files: SetStateAction<string>[] };
+    }) => void;
     submitHandler: () => void;
   };
 }
@@ -41,10 +54,12 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const [category, setCategory] = useState<string>("");
   const [productCategory, setProductCategory] = useState<string>("");
   const [image, setImage] = useState<string>("");
-
   const [subCategory, setSubCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [businessLocation, setBusinessLocation] = useState<string>("");
+  const categoryData = useAppSelector(GET_CATEGORY);
+  const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
+  const businessData = useAppSelector(GET_BUSINESS);
 
   const dispatch = useAppDispatch();
 
@@ -66,8 +81,10 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     setProductCategory(event.target.value as string);
   };
 
-  const handleImageChange = (event: SelectChangeEvent): void => {
-    setImage(event.target.value as string);
+  const handleImageChange = (event: {
+    target: { files: SetStateAction<string>[] };
+  }): void => {
+    setImage(event.target.files[0]);
   };
 
   const handleCategoryChange = (event: SelectChangeEvent): void => {
@@ -93,18 +110,62 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const submitHandler = (): void => {
     dispatch(
       AdminThunk.createListing({
-        headline: headline,
+        name: businessName,
+        tagline: headline,
+        latitude: "56789",
+        longitute: "6789",
+        location: businessLocation,
         description: description,
-        subCategory: subCategory,
-        businessName: businessName,
-        businessCategory: category,
-        businessLocation: businessLocation,
+        addedBy: "7",
+        status: "Active",
+        type: "Pending",
+        country: "1",
+        state: "2",
+        city: "3",
+        onBanner: false,
+        image: image,
         email: email,
-        productcategory: productCategory,
-        image: "abc",
+        category: category,
+        subCategory: subCategory,
       })
     );
   };
+
+  const allBusiness = useCallback(async () => {
+    try {
+      dispatch(UserThunk.business());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    allBusiness();
+  }, [allBusiness]);
+
+  const getcategory = useCallback(async () => {
+    try {
+      dispatch(AdminThunk.getCategory());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getcategory();
+  }, [getcategory]);
+
+  const getSubCategory = useCallback(async () => {
+    try {
+      dispatch(AdminThunk.getSubCategory());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getSubCategory();
+  }, [getSubCategory]);
 
   return {
     getters: {
@@ -116,6 +177,9 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       businessLocation,
       email,
       productCategory,
+      businessData,
+      categoryData,
+      subCategoryData,
       image,
     },
     handlers: {

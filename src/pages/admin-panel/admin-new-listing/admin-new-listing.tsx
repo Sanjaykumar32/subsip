@@ -119,6 +119,9 @@ export function AdminNewlisting() {
     businessLocation,
     email,
     productCategory,
+    subCategoryData,
+    categoryData,
+    businessData,
     image,
   } = getters;
   const {
@@ -184,12 +187,14 @@ export function AdminNewlisting() {
                     fullWidth
                     id={`${step7.id}-select`}
                     labelId={`${step7.id}-label`}
-                    value={category}
-                    onChange={handleCategoryChange}
+                    value={productCategory}
+                    onChange={handleProductChange}
                   >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    {businessData.map((res, i) => (
+                      <MenuItem value={res.iBusinessId} key={i}>
+                        {res.vName}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </Box>
                 <Box sx={{ my: 4 }}>
@@ -202,9 +207,11 @@ export function AdminNewlisting() {
                     value={subCategory}
                     onChange={handleSubCategoryChange}
                   >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    {subCategoryData.map((res, i) => (
+                      <MenuItem value={res.iSubCategoryId} key={i}>
+                        {res.vName}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </Box>
               </Box>
@@ -218,12 +225,14 @@ export function AdminNewlisting() {
                     fullWidth
                     id={`${step2.id}-select`}
                     labelId={`${step2.id}-label`}
-                    value={productCategory}
-                    onChange={handleProductChange}
+                    value={category}
+                    onChange={handleCategoryChange}
                   >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    {categoryData?.map((res, i: number) => (
+                      <MenuItem value={res.iCategoryId} key={i}>
+                        {res.vName}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </Box>
                 <Box sx={{ my: 4 }}>
@@ -244,6 +253,7 @@ export function AdminNewlisting() {
                   <input
                     ref={ref}
                     type="file"
+                    value={image}
                     onChange={(event) => console.log(event.target.value)}
                     hidden
                   />
@@ -255,7 +265,10 @@ export function AdminNewlisting() {
                       borderRadius: "4px",
                       p: 4,
                     }}
-                    onClick={() => ref.current?.click()}
+                    onClick={(e: any) => {
+                      ref.current?.click();
+                      handleImageChange(e);
+                    }}
                   >
                     <FontAwesomeIcon icon={faUpload} size="lg" />
                   </IconButton>

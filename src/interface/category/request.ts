@@ -59,13 +59,21 @@ export interface INewNotificationRequest {
 }
 
 export interface ICreateListingRequest {
-  businessName: string;
-  headline: string;
-  email: string;
-  businessCategory: string;
-  subCategory: string;
-  productcategory: string;
+  name: string;
+  tagline: string;
+  latitude: string;
+  longitute: string;
+  location: string;
   description: string;
+  addedBy: string;
+  status: string;
+  type: string;
+  country: string;
+  state: string;
+  city: string;
+  onBanner: boolean;
   image: string;
-  businessLocation: string;
+  email: string;
+  category: string;
+  subCategory: string;
 }
