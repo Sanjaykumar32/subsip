@@ -22,6 +22,7 @@ export interface IAdminState {
   subCategory: ISubCategoryData[];
   refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
+  noticationList: any;
 }
 
 const initialState: IAdminState = {
@@ -33,6 +34,7 @@ const initialState: IAdminState = {
   refferralCount: {} as IReferralCountResponse,
   category: [],
   subCategory: [],
+  noticationList: [],
 };
 
 export const adminSlice = createSlice({
@@ -80,6 +82,12 @@ export const adminSlice = createSlice({
         state.category = action.payload.data;
       }
     });
+    builder.addCase(AdminThunk.notificationList.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.noticationList = action.payload.data;
+      }
+    });
+
     builder.addCase(AdminThunk.getSubCategory.fulfilled, (state, action) => {
       if (action.payload) {
         state.subCategory = action.payload.data;

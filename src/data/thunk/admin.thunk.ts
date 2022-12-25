@@ -20,6 +20,7 @@ import {
   ISubscribeByBussinessIDRequest,
   ISubscribeByBussinessIDResponse,
   ISubscriberOfBussinessResponse,
+  INotificationRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -49,6 +50,17 @@ export class AdminThunk {
       payload: ISubscribeByAdminIdRequest
     ): Promise<ISubscribeByBussinessIDResponse> => {
       const response = await AdminService.subscribeByAdminId(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Notification List
+   */
+  public static notificationList = createAsyncThunk(
+    "admin/notification-list",
+    async (payload: INotificationRequest): Promise<any> => {
+      const response = await AdminService.getNotoification(payload);
       return response;
     }
   );

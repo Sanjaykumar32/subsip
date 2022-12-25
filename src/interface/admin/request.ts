@@ -19,6 +19,10 @@ export interface IRefferralCountRequest {
   userId: string;
 }
 
+export interface INotificationRequest {
+  userId: string;
+}
+
 export interface IRefferralCodeRequest {
   userId: string;
 }

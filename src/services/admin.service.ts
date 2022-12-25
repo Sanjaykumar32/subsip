@@ -23,6 +23,7 @@ import {
   ISubscribeByBussinessIDRequest,
   ISubscribeByBussinessIDResponse,
   ISubscriberOfBussinessResponse,
+  INotificationRequest,
 } from "interface";
 
 /**
@@ -63,6 +64,22 @@ export class AdminService {
         url: `/subscribers?adminId=${payload.adminId}`,
         method: "GET",
       });
+
+    return res.data;
+  }
+
+  /**
+   * Notification List
+   * @param {INotificationRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async getNotoification(
+    payload: INotificationRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/user/notification/userId=${payload.userId}`,
+      method: "GET",
+    });
 
     return res.data;
   }

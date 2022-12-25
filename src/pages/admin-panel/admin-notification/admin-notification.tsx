@@ -16,9 +16,13 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
+import { AdminNotificationController } from "./admin-notification-controller";
 
 export function AdminNotification() {
   const navigate = useNavigate();
+  const { getters } = AdminNotificationController();
+  const { attributes, notificationData } = getters;
+  console.log(notificationData, "notificationData");
 
   const columns: GridColDef[] = [
     {

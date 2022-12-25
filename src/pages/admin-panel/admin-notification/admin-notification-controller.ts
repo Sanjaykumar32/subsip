@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_CATEGORY } from "data/selectors";
+import { GET_NOTIFICATION } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { ICategoryData } from "interface";
 import { useCallback, useEffect } from "react";
 
 type attributeType = {
@@ -13,6 +12,7 @@ type attributeType = {
 interface IAdminNotificationControllerReturns {
   getters: {
     attributes: attributeType[];
+    notificationData: any;
   };
 }
 
@@ -22,16 +22,18 @@ interface IAdminNotificationControllerReturns {
  */
 export const AdminNotificationController =
   (): IAdminNotificationControllerReturns => {
-    const categoryData = useAppSelector(GET_CATEGORY);
+    const notificationData = useAppSelector(GET_NOTIFICATION);
     const dispatch = useAppDispatch();
+    const userId = sessionStorage.getItem("userId");
+    console.log(notificationData, "notificationData");
 
     const getcategory = useCallback(async () => {
       try {
-        dispatch(AdminThunk.getCategory());
+        dispatch(AdminThunk.notificationList({ userId: userId ? userId : "" }));
       } catch (error) {
         console.log(error);
       }
-    }, [dispatch]);
+    }, [dispatch, userId]);
 
     useEffect(() => {
       getcategory();
@@ -39,19 +41,18 @@ export const AdminNotificationController =
 
     const attributes: attributeType[] = [];
 
-    const category = categoryData.forEach(
-      (res: ICategoryData, index: number) => {
-        attributes.push({
-          id: index + 1,
-          iCategoryId: res.iCategoryId,
-          vName: res.vName ? res.vName : "",
-        });
-      }
-    );
+    // const category = notificationData.forEach((res: any, index: number) => {
+    //   attributes.push({
+    //     id: index + 1,
+    //     iCategoryId: res.iCategoryId,
+    //     vName: res.vName ? res.vName : "",
+    //   });
+    // });
 
     return {
       getters: {
         attributes,
+        notificationData,
       },
     };
   };
