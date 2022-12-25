@@ -12,6 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { Toaster } from "react-hot-toast";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -20,6 +21,17 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <LocalizationProvider dateAdapter={AdapterMoment}>
+
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        // toastOptions=[{}]
+        toastOptions={{
+          // Define default options
+          duration: 5000
+        }}
+
+      />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AuthProvider>

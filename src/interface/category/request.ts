@@ -72,7 +72,7 @@ export interface ICreateListingRequest {
   state: string;
   city: string;
   onBanner: boolean;
-  image: string;
+  image: any;
   email: string;
   category: string;
   subCategory: string;

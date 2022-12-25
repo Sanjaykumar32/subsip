@@ -13,7 +13,6 @@ export enum AdminRoutePathEnum {
   ADMIN_NEW_REWARDS = "/admin/new-rewards",
   ADMIN_NEW_SUBCATEGORY = "/admin/subcategory/add",
   ADMIN_NOTIFY_BUTTON = "/admin/notify-button",
-
   ADMIN_NEW_CATEGORY = "/admin/new-category",
   ADMIN_CATEGORY = "/admin/category",
   ADMIN_DASHBOARD = "/admin/dashboard",

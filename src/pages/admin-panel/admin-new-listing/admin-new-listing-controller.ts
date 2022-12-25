@@ -11,6 +11,10 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-hot-toast'
+import { AdminRoutePathEnum, RoutePathEnum } from "enum";
+
 
 interface INewlistingControllerReturns {
   getters: {
@@ -22,7 +26,7 @@ interface INewlistingControllerReturns {
     businessLocation: string;
     email: string;
     productCategory: string;
-    image: string;
+    image: any;
     businessData: IBusiness[];
     categoryData: ICategoryData[];
     subCategoryData: ISubCategoryData[];
@@ -37,7 +41,7 @@ interface INewlistingControllerReturns {
     handleEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleProductChange: (event: SelectChangeEvent) => void;
     handleImageChange: (event: {
-      target: { files: SetStateAction<string>[] };
+      target: { files: SetStateAction<any>[] };
     }) => void;
     submitHandler: () => void;
   };
@@ -53,13 +57,16 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const [email, setEmail] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [productCategory, setProductCategory] = useState<string>("");
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [businessLocation, setBusinessLocation] = useState<string>("");
   const categoryData = useAppSelector(GET_CATEGORY);
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const businessData = useAppSelector(GET_BUSINESS);
+
+  // console.log(image, 'image')
+  // console.log(image.name, 'image name')
 
   const dispatch = useAppDispatch();
 
@@ -82,7 +89,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   };
 
   const handleImageChange = (event: {
-    target: { files: SetStateAction<string>[] };
+    target: { files: SetStateAction<any>[] };
   }): void => {
     setImage(event.target.files[0]);
   };
@@ -107,29 +114,61 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     setBusinessLocation(event.target.value as string);
   };
 
-  const submitHandler = (): void => {
-    dispatch(
-      AdminThunk.createListing({
-        name: businessName,
-        tagline: headline,
-        latitude: "56789",
-        longitute: "6789",
-        location: businessLocation,
-        description: description,
-        addedBy: "7",
-        status: "Active",
-        type: "Pending",
-        country: "1",
-        state: "2",
-        city: "3",
-        onBanner: false,
-        image: image,
-        email: email,
-        category: category,
-        subCategory: subCategory,
-      })
-    );
+  // const submitHandler = (): void => {
+  //   dispatch(
+  //     AdminThunk.createListing({
+  //       name: businessName,
+  //       tagline: headline,
+  //       latitude: "56789",
+  //       longitute: "6789",
+  //       location: businessLocation,
+  //       description: description,
+  //       addedBy: "7",
+  //       status: "Active",
+  //       type: "Pending",
+  //       country: "1",
+  //       state: "2",
+  //       city: "3",
+  //       onBanner: false,
+  //       image: image,
+  //       email: email,
+  //       category: category,
+  //       subCategory: subCategory,
+  //     })
+  //   );
+  // };
+
+
+  const navigate = useNavigate();
+
+
+
+  const submitHandler = async (): Promise<void> => {
+
+    const form = new FormData();
+    form.append("name", businessName);
+    form.append("latitude", "56789");
+    form.append("longitute", "6789");
+    form.append("location", businessLocation);
+    form.append("description", description);
+    form.append("addedBy", "7");
+    form.append("status", "Active");
+    form.append("type", "Pending");
+    form.append("country", "1");
+    form.append("state", "2");
+    form.append("city", "2");
+    form.append("onBanner", "false");
+    form.append("image", image, image?.name);
+    form.append("email", email);
+    form.append("category", category);
+    form.append("subCategory", subCategory);
+
+    const res = await dispatch(AdminThunk.createListing(form));
+    // console.log(res, 'res ')
+    navigate(AdminRoutePathEnum.ADMIN_LISTING)
+    toast.success('Create Listing SuccessFully')
   };
+
 
   const allBusiness = useCallback(async () => {
     try {

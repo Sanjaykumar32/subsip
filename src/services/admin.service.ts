@@ -280,7 +280,7 @@ export class AdminService {
    * @return {Promise<any>}
    */
   public static async craeteListing(
-    payload: ICreateListingRequest
+    payload: any
   ): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: "/business",
