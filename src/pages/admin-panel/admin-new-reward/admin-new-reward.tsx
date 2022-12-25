@@ -14,10 +14,20 @@ import { AdminBackButton } from "components";
 import { theme } from "theme";
 import { NewRewardController } from "./admin-new-reward-controller";
 import { Form } from "react-router-dom";
+import { IBusiness } from "interface";
 
 export function AdminNewReward() {
   const { getters, handlers } = NewRewardController();
-  const { name, category, availibility, subCategory, businessName } = getters;
+  const {
+    name,
+    category,
+    availibility,
+    subCategory,
+    businessName,
+    businessData,
+    categoryData,
+    subCategoryData,
+  } = getters;
   const {
     handleNameChange,
     submitHandler,
@@ -94,8 +104,11 @@ export function AdminNewReward() {
                   value={category}
                   onChange={handleCategoryChange}
                 >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                  {categoryData?.map((res, i) => (
+                    <MenuItem value={res.iCategoryId} key={i}>
+                      {res.vName}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -121,8 +134,11 @@ export function AdminNewReward() {
                   value={subCategory}
                   onChange={handleSubCategoryChange}
                 >
-                  <MenuItem value={"Newest"}>Newest</MenuItem>
-                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                  {subCategoryData.map((res, i) => (
+                    <MenuItem value={res.iSubCategoryId} key={i}>
+                      {res.vName}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -149,8 +165,11 @@ export function AdminNewReward() {
               value={businessName}
               onChange={handleBusinessNameChange}
             >
-              <MenuItem value={"Newest"}>Newest</MenuItem>
-              <MenuItem value={"Oldest"}>Oldest</MenuItem>
+              {businessData.map((res: IBusiness, i: number) => (
+                <MenuItem value={res.iBusinessId} key={i}>
+                  {res.vName}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
