@@ -4,6 +4,7 @@ import {
   Button,
   Chip,
   Container,
+  Link,
   Switch,
   Tooltip,
   Typography,
@@ -26,6 +27,11 @@ export function AdminRewardToDetails() {
       field: "Name",
       headerName: "Name",
       width: 200,
+      renderCell: (params) => (
+        <Link href={AdminRoutePathEnum.ADMIN_REWARDS_TO_WINNERS}>
+          {params.value}
+        </Link>
+      ),
     },
     {
       field: "Reward",

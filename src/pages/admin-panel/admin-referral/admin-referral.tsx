@@ -18,6 +18,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { GET_REFFERRAL_CODE } from "data/selectors";
+import { useNavigate } from "react-router-dom";
+import { AdminRoutePathEnum } from "enum";
 
 export function AdminReferral() {
   const columns: GridColDef[] = [
@@ -122,6 +124,7 @@ export function AdminReferral() {
   useEffect(() => {
     refferalCode();
   }, [refferalCode]);
+  const navigate = useNavigate();
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -141,6 +144,7 @@ export function AdminReferral() {
             }}
             color="info"
             variant="contained"
+            onClick={() => navigate(AdminRoutePathEnum.ADMIN_REFERRAL_PRICE)}
           >
             Add Milestone
           </Button>

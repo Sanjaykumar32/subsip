@@ -23,12 +23,12 @@ export function AdminCategories() {
   const columns: GridColDef[] = [
     {
       field: "vName",
-      headerName: "vName",
+      headerName: "Name",
       width: 200,
     },
     {
       field: "subCategoryName",
-      headerName: "subCategoryName",
+      headerName: "subcategory",
       width: 200,
       renderCell: (params) => (
         <Link href={AdminRoutePathEnum.ADMIN_SUBCATEGORY}>{params.value}</Link>

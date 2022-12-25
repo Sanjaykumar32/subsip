@@ -11,24 +11,16 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Badge,
-  Button,
-  Divider,
-  TextField,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Badge, Button, Divider, useMediaQuery, useTheme } from "@mui/material";
 import { Link } from "@mui/material";
 import {
   faLocationDot,
-  faSearch,
   faBell,
   faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth.context";
-import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { SearchField } from "./component/search-field/search-field";
 
 const pages = [
