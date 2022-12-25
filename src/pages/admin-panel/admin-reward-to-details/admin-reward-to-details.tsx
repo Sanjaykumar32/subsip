@@ -14,9 +14,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminBackButton } from "components";
+import { AdminRoutePathEnum } from "enum";
+import { useNavigate } from "react-router-dom";
 
 export function AdminRewardToDetails() {
   const label = { inputProps: { "aria-label": "Size switch demo" } };
+  const navigate = useNavigate();
 
   const columns: GridColDef[] = [
     {
@@ -158,6 +161,7 @@ export function AdminRewardToDetails() {
             }}
             color="info"
             variant="contained"
+            onClick={() => navigate(AdminRoutePathEnum.ADMIN_NEW_REWARDS)}
           >
             New Reward
           </Button>

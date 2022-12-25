@@ -26,6 +26,7 @@ export function AdminNewReward() {
     handleSubCategoryChange,
     handleBusinessNameChange,
   } = handlers;
+
   return (
     <Container maxWidth="lg">
       <AdminBackButton />
