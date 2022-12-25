@@ -91,7 +91,7 @@ export function AdminNewReferralPrice() {
               }}
               type="submit"
               variant="rounded"
-              onClick={() => navigate(AdminRoutePathEnum.ADMIN_MILESTONES)}
+              // onClick={() => navigate(AdminRoutePathEnum.ADMIN_MILESTONES)}
             >
               Add Milestone
             </Button>

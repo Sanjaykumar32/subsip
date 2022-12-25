@@ -180,6 +180,18 @@ export class AdminService {
   }
 
   /**
+   * Reward To Winner
+   * @return {Promise<any>}
+   */
+  public static async getRewardToWinner(): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/reward",
+      method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
    * refferal list
    * @return {Promise<any>}
    */

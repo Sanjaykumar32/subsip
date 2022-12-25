@@ -41,7 +41,7 @@ export const ReferralController = (): IReferralControllerReturns => {
 
   const attributes: attributeType[] = [];
 
-  const category = categoryData.forEach((res: ICategoryData, index: number) => {
+  const referral = categoryData.forEach((res: ICategoryData, index: number) => {
     attributes.push({
       id: index + 1,
       iCategoryId: res.iCategoryId,

@@ -23,6 +23,7 @@ export interface IAdminState {
   refferralCount: IReferralCountResponse;
   noticationList: any;
   referralList: any;
+  rewardToWinnerList: any;
 }
 
 const initialState: IAdminState = {
@@ -36,6 +37,7 @@ const initialState: IAdminState = {
   subCategory: [],
   noticationList: [],
   referralList: [],
+  rewardToWinnerList: [],
 };
 
 export const adminSlice = createSlice({
@@ -102,6 +104,11 @@ export const adminSlice = createSlice({
     });
     builder.addCase(AdminThunk.refferralCount.fulfilled, (_state, action) => {
       action.payload;
+    });
+    builder.addCase(AdminThunk.getRewardToWinner.fulfilled, (state, action) => {
+      if (action.payload.data) {
+        state.rewardToWinnerList = action.payload.data;
+      }
     });
   },
 });

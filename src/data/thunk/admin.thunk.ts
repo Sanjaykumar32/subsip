@@ -156,7 +156,7 @@ export class AdminThunk {
   public static newReferralPrice = createAsyncThunk(
     "admin/newReferralPrice",
     async (payload: IReferralPriceRequest): Promise<void> => {
-      console.log(payload, "payload");
+      console.log(payload, "payloaddddd");
       // const response = await AdminService.newReferralPrice(payload);
       // return response;
     }
@@ -216,6 +216,17 @@ export class AdminThunk {
     "admin/newNotification",
     async (): Promise<IGetCategoryResponse> => {
       const response = await AdminService.getcategory();
+      return response;
+    }
+  );
+
+  /**
+   * Reward To Winner
+   */
+  public static getRewardToWinner = createAsyncThunk(
+    "admin/reward-to-winner",
+    async (): Promise<any> => {
+      const response = await AdminService.getRewardToWinner();
       return response;
     }
   );
