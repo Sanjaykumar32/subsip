@@ -75,6 +75,11 @@ export const NewRewardController = (): INewRewardControllerReturns => {
         businessName: businessName,
       })
     );
+    setName("");
+    setAvailibility("");
+    setSubCategory("");
+    setBuisnessName("");
+    setCategory("");
   };
 
   const allBusiness = useCallback(async () => {

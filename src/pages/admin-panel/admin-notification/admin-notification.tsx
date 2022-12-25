@@ -14,8 +14,12 @@ import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AdminRoutePathEnum } from "enum";
+import { useNavigate } from "react-router-dom";
 
 export function AdminNotification() {
+  const navigate = useNavigate();
+
   const columns: GridColDef[] = [
     {
       field: "Name",
@@ -102,6 +106,7 @@ export function AdminNotification() {
             }}
             color="info"
             variant="contained"
+            onClick={() => navigate(AdminRoutePathEnum.ADMIN_NEW_NOTIFICTAION)}
           >
             New Notification
           </Button>
