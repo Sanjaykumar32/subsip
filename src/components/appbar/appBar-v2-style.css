@@ -1,0 +1,33 @@
+.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-1aara5h-MuiToolbar-root {
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+
+.css-xhk8t5-MuiList-root li a {
+    font-weight: 400;
+    color: #000;
+}
+
+.css-xhk8t5-MuiList-root li a {
+    font-weight: 400;
+    color: #000;
+    border-bottom: 1px solid transparent;
+    padding: 10px 10px;
+}
+
+.css-xhk8t5-MuiList-root li a:hover {
+    border-color: #000;
+}
+
+.css-flnk82 .cls-1 {
+    font-size: 110.52px;
+    fill: #343d45;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: 600;
+}
+
+.css-1fii6rv-MuiFormControl-root-MuiTextField-root {
+    margin: 0 4rem;
+}

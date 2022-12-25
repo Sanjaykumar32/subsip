@@ -27,7 +27,6 @@ import { Logo } from "components/logo";
 import { faBell, faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import { useAuth } from "context/auth.context";
 import { useSpring, animated } from "@react-spring/web";
-
 export const UserAppBar = () => {
   const theme = useTheme();
   const auth = useAuth();
