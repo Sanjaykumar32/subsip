@@ -4,7 +4,6 @@ import { ReducerEnum } from "enum";
 
 import {
   ICategoryData,
-  IGetSubCategoryResponse,
   IReferralCountResponse,
   IRefferralCode,
   ISubCategoryData,
@@ -23,6 +22,7 @@ export interface IAdminState {
   refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
   noticationList: any;
+  referralList: any;
 }
 
 const initialState: IAdminState = {
@@ -35,6 +35,7 @@ const initialState: IAdminState = {
   category: [],
   subCategory: [],
   noticationList: [],
+  referralList: [],
 };
 
 export const adminSlice = createSlice({
@@ -85,6 +86,12 @@ export const adminSlice = createSlice({
     builder.addCase(AdminThunk.notificationList.fulfilled, (state, action) => {
       if (action.payload) {
         state.noticationList = action.payload.data;
+      }
+    });
+
+    builder.addCase(AdminThunk.refferalDetail.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.referralList = action.payload.data;
       }
     });
 

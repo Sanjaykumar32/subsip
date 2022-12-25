@@ -24,3 +24,5 @@ export const GET_SUB_CATEGORY = (state: RootState) => state.admin.subCategory;
 
 export const GET_NOTIFICATION = (state: RootState) =>
   state.admin.noticationList;
+
+export const GET_REFERRAL_LIST = (state: RootState) => state.admin.referralList;

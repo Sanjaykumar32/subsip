@@ -221,6 +221,17 @@ export class AdminThunk {
   );
 
   /**
+   * Referral list
+   */
+  public static refferalDetail = createAsyncThunk(
+    "admin/refferalDetail",
+    async (): Promise<any> => {
+      const response = await AdminService.getRefferal();
+      return response;
+    }
+  );
+
+  /**
    * Create Listing
    */
   public static getSubCategory = createAsyncThunk(

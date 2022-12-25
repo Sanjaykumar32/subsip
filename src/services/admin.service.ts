@@ -180,6 +180,18 @@ export class AdminService {
   }
 
   /**
+   * refferal list
+   * @return {Promise<any>}
+   */
+  public static async getRefferal(): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/category/list",
+      method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
    * sub category
    * @return {Promise<IGetSubCategoryResponse>}
    */
