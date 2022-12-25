@@ -202,7 +202,7 @@ export class AdminThunk {
    */
   public static createListing = createAsyncThunk(
     "admin/createListing",
-    async (payload: ICreateListingRequest): Promise<void> => {
+    async (payload: any): Promise<void> => {
       console.log(payload, "payload");
       const response = await AdminService.craeteListing(payload);
       return response;

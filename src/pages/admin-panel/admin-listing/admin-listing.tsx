@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -19,6 +19,10 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "data";
+import { GET_BUSINESS } from "data/selectors";
+import { UserThunk } from "data/thunk/user.thunk";
+
 
 export function AdminListing() {
   const columns: GridColDef[] = [
@@ -70,80 +74,110 @@ export function AdminListing() {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      Profile: "Profile",
-      Name: "India Gate Restaurant",
-      Subscribers: "46.2K subscribers",
-      Location: "Seattle, WA",
-      Actions: "Edit",
-    },
-    {
-      id: 2,
-      Profile: "Profile",
-      Name: "India Gate Restaurant",
-      Subscribers: "46.2K subscribers",
-      Location: "Seattle, WA",
-      Actions: "Edit",
-    },
-    {
-      id: 3,
-      Profile: "Profile",
-      Name: "India Gate Restaurant",
-      Subscribers: "46.2K subscribers",
-      Location: "Seattle, WA",
-      Actions: "Edit",
-    },
-    {
-      id: 4,
-      Profile: "Profile",
-      Name: "India Gate Restaurant",
-      Subscribers: "46.2K subscribers",
-      Location: "Seattle, WA",
-      Actions: "Edit",
-    },
-    {
-      id: 5,
-      Profile: "Profile",
-      Name: "India Gate Restaurant",
-      Subscribers: "46.2K subscribers",
-      Location: "Seattle, WA",
-      Actions: "Edit",
-    },
-    {
-      id: 6,
-      Profile: "Profile",
-      Name: "India Gate Restaurant",
-      Subscribers: "46.2K subscribers",
-      Location: "Seattle, WA",
-      Actions: "Edit",
-    },
-    {
-      id: 7,
-      Profile: "Profile",
-      Name: "India Gate Restaurant",
-      Subscribers: "46.2K subscribers",
-      Location: "Seattle, WA",
-      Actions: "Edit",
-    },
-    {
-      id: 8,
-      Profile: "Profile",
-      Name: "India Gate Restaurant",
-      Subscribers: "46.2K subscribers",
-      Location: "Seattle, WA",
-      Actions: "Edit",
-    },
-    {
-      id: 9,
-      Profile: "Profile",
-      Name: "India Gate Restaurant",
-      Subscribers: "46.2K subscribers",
-      Location: "Seattle, WA",
-      Actions: "Edit",
-    },
-  ];
+  const dispatch = useAppDispatch();
+
+
+  const businessData = useAppSelector(GET_BUSINESS);
+  console.log(businessData, "businessData");
+
+  const allBusiness = useCallback(async () => {
+    try {
+      dispatch(UserThunk.business());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    allBusiness();
+  }, [allBusiness]);
+
+  const rows = businessData.map(function (item) {
+    return {
+      id: item.iBusinessId,
+      Profile: item.vName,
+      Name: item.vName,
+      Subscribers: item.subscriberCount + ' Subscribers',
+      Location: item.vAddress,
+      Actions: 'Edit',
+    }
+  })
+
+
+  // const rows = [
+  //   {
+  //     id: 1,
+  //     Profile: "Profile",
+  //     Name: "India Gate Restaurant ss ",
+  //     Subscribers: "46.2K subscribers",
+  //     Location: "Seattle, WA",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 2,
+  //     Profile: "Profile",
+  //     Name: "India Gate Restaurant",
+  //     Subscribers: "46.2K subscribers",
+  //     Location: "Seattle, WA",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 3,
+  //     Profile: "Profile",
+  //     Name: "India Gate Restaurant",
+  //     Subscribers: "46.2K subscribers",
+  //     Location: "Seattle, WA",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 4,
+  //     Profile: "Profile",
+  //     Name: "India Gate Restaurant",
+  //     Subscribers: "46.2K subscribers",
+  //     Location: "Seattle, WA",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 5,
+  //     Profile: "Profile",
+  //     Name: "India Gate Restaurant",
+  //     Subscribers: "46.2K subscribers",
+  //     Location: "Seattle, WA",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 6,
+  //     Profile: "Profile",
+  //     Name: "India Gate Restaurant",
+  //     Subscribers: "46.2K subscribers",
+  //     Location: "Seattle, WA",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 7,
+  //     Profile: "Profile",
+  //     Name: "India Gate Restaurant",
+  //     Subscribers: "46.2K subscribers",
+  //     Location: "Seattle, WA",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 8,
+  //     Profile: "Profile",
+  //     Name: "India Gate Restaurant",
+  //     Subscribers: "46.2K subscribers",
+  //     Location: "Seattle, WA",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 9,
+  //     Profile: "Profile",
+  //     Name: "India Gate Restaurant",
+  //     Subscribers: "46.2K subscribers",
+  //     Location: "Seattle, WA",
+  //     Actions: "Edit",
+  //   },
+  // ];
   const naviagate = useNavigate();
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
