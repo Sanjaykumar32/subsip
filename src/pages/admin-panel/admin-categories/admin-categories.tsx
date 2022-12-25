@@ -27,8 +27,8 @@ export function AdminCategories() {
       width: 200,
     },
     {
-      field: "Subcategory",
-      headerName: "Subcategory",
+      field: "subCategoryName",
+      headerName: "subCategoryName",
       width: 200,
       renderCell: (params) => (
         <Link href={AdminRoutePathEnum.ADMIN_SUBCATEGORY}>{params.value}</Link>

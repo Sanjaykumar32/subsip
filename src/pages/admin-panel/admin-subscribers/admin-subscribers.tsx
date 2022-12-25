@@ -16,6 +16,8 @@ import { faSliders, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { theme } from "theme";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import { useNavigate } from "react-router-dom";
+import { AdminRoutePathEnum } from "enum";
 
 export function AdminSubscribers() {
   const columns: GridColDef[] = [
@@ -53,6 +55,7 @@ export function AdminSubscribers() {
       ),
     },
   ];
+  const navigate = useNavigate();
 
   const rows = [
     {
@@ -149,6 +152,7 @@ export function AdminSubscribers() {
             }}
             color="info"
             variant="contained"
+            onClick={() => navigate(AdminRoutePathEnum.ADMIN_NOTIFY_BUTTON)}
           >
             Notify
           </Button>

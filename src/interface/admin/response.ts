@@ -98,6 +98,8 @@ export interface ICategoryData {
   iAddedBy?: number;
   dtModifiedDate: string;
   iModifiedBy: string;
+  subCategoryName: string;
+  iSubCategoryId: string;
 }
 
 export interface IGetSubCategoryResponse {

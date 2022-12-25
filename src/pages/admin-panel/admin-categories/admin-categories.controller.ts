@@ -8,6 +8,7 @@ type attributeType = {
   id: number;
   iCategoryId: number;
   vName: string;
+  subCategoryName: string;
 };
 
 interface IcategoryControllerReturns {
@@ -23,6 +24,7 @@ interface IcategoryControllerReturns {
 export const CategoryController = (): IcategoryControllerReturns => {
   const categoryData = useAppSelector(GET_CATEGORY);
   const dispatch = useAppDispatch();
+  console.log(categoryData, "categoryData");
 
   const getcategory = useCallback(async () => {
     try {
@@ -43,6 +45,7 @@ export const CategoryController = (): IcategoryControllerReturns => {
       id: index + 1,
       iCategoryId: res.iCategoryId,
       vName: res.vName ? res.vName : "",
+      subCategoryName: res.subCategoryName ? res.subCategoryName : "",
     });
   });
 

@@ -12,12 +12,14 @@ import {
 import { theme } from "theme";
 import { AdminBackButton } from "components";
 import { NewReferralPriceController } from "./admin-new-refferal-price.controller";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
+import { AdminRoutePathEnum } from "enum";
 
 export function AdminNewReferralPrice() {
   const { getters, handlers } = NewReferralPriceController();
   const { milestoneName, referralAmount } = getters;
   const { handleReferralAmount, handleMilestoneName, submitHandler } = handlers;
+  const navigate = useNavigate();
 
   return (
     <Container maxWidth="lg">
@@ -89,6 +91,7 @@ export function AdminNewReferralPrice() {
               }}
               type="submit"
               variant="rounded"
+              onClick={() => navigate(AdminRoutePathEnum.ADMIN_MILESTONES)}
             >
               Add Milestone
             </Button>
