@@ -36,7 +36,7 @@ export interface IBannerData {
   vName: string;
   vTagLine: string;
   dLatitude: number;
-  dLongitude: number;
+  dLongitude: string;
   vLocation: string;
   tDescription: string;
   dtAddedDate: string;
@@ -49,4 +49,12 @@ export interface IBannerData {
   iCity: number;
   vAddress: string;
   onBanner: number;
+  vImage: string;
+  iCategory: number;
+  iSubCategory: number;
+  vEmail: string;
+  iTagCategory: string;
+  categoryName: string;
+  subCategoryName: string;
+  subscriberCount: number;
 }

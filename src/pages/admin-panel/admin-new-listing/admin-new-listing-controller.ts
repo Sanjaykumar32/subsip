@@ -12,9 +12,8 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-hot-toast'
+import { toast } from "react-hot-toast";
 import { AdminRoutePathEnum, RoutePathEnum } from "enum";
-
 
 interface INewlistingControllerReturns {
   getters: {
@@ -138,13 +137,9 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   //   );
   // };
 
-
   const navigate = useNavigate();
 
-
-
   const submitHandler = async (): Promise<void> => {
-
     const form = new FormData();
     form.append("name", businessName);
     form.append("latitude", "56789");
@@ -157,7 +152,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("country", "1");
     form.append("state", "2");
     form.append("city", "2");
-    form.append("onBanner", "false");
+    form.append("onBanner", "true");
     form.append("image", image, image?.name);
     form.append("email", email);
     form.append("category", category);
@@ -165,10 +160,9 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
     const res = await dispatch(AdminThunk.createListing(form));
     // console.log(res, 'res ')
-    navigate(AdminRoutePathEnum.ADMIN_LISTING)
-    toast.success('Create Listing SuccessFully')
+    navigate(AdminRoutePathEnum.ADMIN_LISTING);
+    toast.success("Create Listing SuccessFully");
   };
-
 
   const allBusiness = useCallback(async () => {
     try {

@@ -92,8 +92,6 @@ export function Home() {
     bannerList();
   }, [bannerList]);
   const businessData = useAppSelector(GET_BUSINESS);
-  console.log(businessData, "businessData");
-
   const allBusiness = useCallback(async () => {
     try {
       dispatch(UserThunk.business());
@@ -110,6 +108,7 @@ export function Home() {
     <div className="w-full overflow-x-hidden">
       <div className="py-5 md:py-20 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
+          {console.log(bannerData, "bannerData")}
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
               <div className="max-w-[100%] lg:max-w-[80%] xl:max-w-[70%] gap-5  min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
@@ -139,10 +138,10 @@ export function Home() {
                   </button>
                 </div>
                 <div className=" relative min-h-[353px] max-h-[calc(100vh-25rem)] w-full  md:w-1/2 flex justify-center items-center">
-                  {/* <img
-                    src={ele?.}
+                  <img
+                    src={"http://159.223.194.50:8000/" + ele?.vImage}
                     className="h-full w-full object-cover"
-                  /> */}
+                  />
                 </div>
               </div>
             </div>
@@ -166,7 +165,7 @@ export function Home() {
                   className="relative overflow-x-auto md:overflow-x-hidden "
                 >
                   <SliderCard
-                    imgSrc={ele?.vImage}
+                    imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
                     name={ele?.vName}
                     tagLine={ele?.vTagLine}
                     des={ele?.tDescription}
@@ -192,7 +191,7 @@ export function Home() {
                   className="relative overflow-x-auto md:overflow-x-hidden "
                 >
                   <SliderCard
-                    imgSrc={ele?.vImage}
+                    imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
                     name={ele?.vName}
                     tagLine={ele?.vTagLine}
                     des={ele?.tDescription}
@@ -219,7 +218,7 @@ export function Home() {
                   className="relative overflow-x-auto md:overflow-x-hidden "
                 >
                   <SliderCard
-                    imgSrc={ele?.vImage}
+                    imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
                     name={ele?.vName}
                     tagLine={ele?.vTagLine}
                     des={ele?.tDescription}
