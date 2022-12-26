@@ -256,13 +256,13 @@ export class AdminThunk {
   /**
    * Delete Business
    */
-  // public static deleteBusiness = createAsyncThunk(
-  //   "admin/deleteBusiness",
-  //   async (payload: any): Promise<void> => {
-  //     const response = await AdminService.deleteBusiness(payload);
-  //     return response;
-  //   }
-  // );
+  public static deleteBusiness = createAsyncThunk(
+    "admin/deleteBusiness",
+    async (payload: any): Promise<void> => {
+      const response = await AdminService.deleteBusiness(payload);
+      return response;
+    }
+  );
 
   /**
    * Delete Subscribers

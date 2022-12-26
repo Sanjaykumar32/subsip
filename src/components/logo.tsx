@@ -7,9 +7,9 @@ export function Logo(props: PoshSubLogoProps): ReactElement {
 
   return (
     <div
-      style={{ width: "150px", height: "48px" }}
-      onClick={() => navigate("/home")}
-    >
+      style={{ width: "150px", height: "48px", cursor: "pointer", }}
+      onClick={() => navigate('/')
+      }>
       <PoshSubLogo {...props} />
     </div>
   );

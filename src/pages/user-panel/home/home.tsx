@@ -111,7 +111,7 @@ export function Home() {
           {console.log(bannerData, "bannerData")}
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
-              <div className="max-w-[100%] lg:max-w-[80%] xl:max-w-[70%] gap-5  min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
+              <div className="max-w-[100%] mt-[130px] lg:max-w-[80%] xl:max-w-[70%] gap-5  min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
                 <div className="w-full md:w-1/2 gap-5 flex flex-col px-2 md:px-10">
                   <button className="bg-[#0275d8] w-28 rounded-md text-[0.9rem] py-2 px-2 font-normal text-white">
                     Featured
@@ -139,8 +139,8 @@ export function Home() {
                 </div>
                 <div className=" relative min-h-[353px] max-h-[calc(100vh-25rem)] w-full  md:w-1/2 flex justify-center items-center">
                   <img
-                    src={"http://159.223.194.50:8000/" + ele?.vImage}
-                    className="h-full w-full object-cover"
+                    src={ele?.vImage ? "http://159.223.194.50:8000/" + ele?.vImage : 'http://159.223.194.50:8000/public/uploads/1672076769972.png'}
+                    className="h-full w-full object-contain"
                   />
                 </div>
               </div>

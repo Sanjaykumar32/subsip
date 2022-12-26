@@ -5,6 +5,11 @@
 }
 
 
+
+.css-xhk8t5-MuiList-root li {
+    padding: 0 !important;
+}
+
 .css-xhk8t5-MuiList-root li a {
     font-weight: 400;
     color: #000;
@@ -14,20 +19,20 @@
     font-weight: 400;
     color: #000;
     border-bottom: 1px solid transparent;
-    padding: 10px 10px;
+    padding: 10px 10px !important;
 }
 
 .css-xhk8t5-MuiList-root li a:hover {
-    border-color: #000;
+    border-color: #000 !important;
 }
 
 .css-flnk82 .cls-1 {
     font-size: 110.52px;
     fill: #343d45;
-    font-family: 'PT Sans', sans-serif;
-    font-weight: 600;
+    font-family: 'PT Sans', sans-serif !important;
+    font-weight: 600 !important;
 }
 
 .css-1fii6rv-MuiFormControl-root-MuiTextField-root {
-    margin: 0 4rem;
+    margin: 0 4rem !important;
 }

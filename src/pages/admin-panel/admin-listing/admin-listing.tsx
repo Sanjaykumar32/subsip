@@ -15,16 +15,28 @@ import {
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "data";
 import { GET_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
+import { AdminThunk } from "data/thunk/admin.thunk";
 
 
 export function AdminListing() {
+
+
+
+
+
+  async function deleteDatalist(ID: number) {
+    const res = await dispatch(AdminThunk.deleteBusiness(ID))
+    console.log(res, 'deleteDatalist')
+  }
+
+
   const columns: GridColDef[] = [
     {
       field: "Profile",
@@ -66,14 +78,19 @@ export function AdminListing() {
       width: 110,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value}>
+          <Tooltip title={params.value[0]}>
             <FontAwesomeIcon icon={faPen} />
+          </Tooltip>
+          <Tooltip title={params.value[1]} >
+            <FontAwesomeIcon icon={faTrash} onClick={() => { deleteDatalist(params.value[2]), console.log(params.value[2], 'params.value[2]') }}
+              className='ml-[25px]' />
           </Tooltip>
         </Box>
       ),
     },
   ];
 
+  // dispatch(AdminThunk.deleteBusiness(params.value[2])
   const dispatch = useAppDispatch();
 
 
@@ -99,7 +116,7 @@ export function AdminListing() {
       Name: item.vName,
       Subscribers: item.subscriberCount + ' Subscribers',
       Location: item.vAddress,
-      Actions: 'Edit',
+      Actions: ['Edit', 'Delete', item?.iBusinessId],
     }
   })
 
@@ -250,3 +267,4 @@ export function AdminListing() {
     </Container>
   );
 }
+
