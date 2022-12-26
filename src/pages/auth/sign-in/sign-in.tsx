@@ -67,6 +67,7 @@ export function SignIn(): ReactElement {
                 name="password"
                 value={value.password}
                 onChange={changeHandler}
+                type="password"
               />
             </InputBox>
             {errors.password && (
