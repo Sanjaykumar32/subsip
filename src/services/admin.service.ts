@@ -24,6 +24,7 @@ import {
   ISubscribeByBussinessIDResponse,
   ISubscriberOfBussinessResponse,
   INotificationRequest,
+  IDeleteListingRequest,
 } from "interface";
 
 /**
@@ -336,14 +337,15 @@ export class AdminService {
    * Delete Business
    * @return {Promise<any>}
    */
-  // public static async deleteBusiness(payload: any): Promise<any> {
-  //   const res: AxiosResponse<any> = await ApiHelper.send<any>({
-  //     url: `business/4`,
-  //     method: "DELETE",
-  //   });
+  public static async deleteBusiness(payload: IDeleteListingRequest): Promise<any> {
+    console.log(payload)
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `business/4`,
+      method: "DELETE",
+    });
 
-  //   return res.data;
-  // }
+    return res.data;
+  }
 
   /**
    * Delete Subscribers

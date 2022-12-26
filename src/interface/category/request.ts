@@ -77,3 +77,11 @@ export interface ICreateListingRequest {
   category: string;
   subCategory: string;
 }
+
+
+
+export interface IDeleteListingRequest {
+  userID: number;
+}
+
+
