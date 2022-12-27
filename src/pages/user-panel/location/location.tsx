@@ -63,7 +63,7 @@ export function LocationPage() {
                   height: "auto",
                   objectFit: "cover",
                 }}
-                src={res.vImage}
+                src={"http://159.223.194.50:8000/" + res.vImage}
               />
             </Card>
           ))}

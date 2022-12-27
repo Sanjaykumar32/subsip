@@ -16,7 +16,7 @@ export const SearchField = () => {
       onChange={changeHandler}
       sx={{ mx: { xs: 0, md: 4 } }}
       InputProps={{
-        sx: { borderRadius: "20px" },
+        sx: { borderRadius: "60px" },
         endAdornment: (
           <IconButton>
             <FontAwesomeIcon

@@ -10,8 +10,6 @@ export const SearchFieldController = () => {
   const navigate = useNavigate();
   const BussinessByName = useAppSelector(GET_BUSINESS);
 
-  console.log(BussinessByName, "BussinessByName");
-
   /**
    *
    * @param {ChangeEvent<HTMLInputElement>} event
@@ -22,6 +20,10 @@ export const SearchFieldController = () => {
     setSearch(event.target.value);
   }
 
+  const Conid = BussinessByName?.filter((item) => {
+    return item.vName === search;
+  })[0];
+
   /**
    * @return {Promise<void>}
    */
@@ -31,7 +33,7 @@ export const SearchFieldController = () => {
         UserThunk.business({ businessName: search })
       );
       if (response.payload.data.length > 0) {
-        navigate(`/listing/:id`);
+        navigate(`/listing/${Conid.iBusinessId}`);
       } else {
         console.log("nodata");
       }
