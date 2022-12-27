@@ -28,8 +28,9 @@ import { faBell, faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import { useAuth } from "context/auth.context";
 import { useSpring, animated } from "@react-spring/web";
 import "./appBar-v2-style.css";
-import { AuthRoutePathEnum } from "enum";
+import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
+import { SearchField } from "./component/search-field/search-field";
 
 export const UserAppBar = () => {
   const theme = useTheme();
@@ -41,6 +42,32 @@ export const UserAppBar = () => {
     to: { height: !isMobile ? "60px" : open ? "200px" : "0px" },
   });
   const navigate = useNavigate();
+
+  const settings = React.useMemo(
+    () => [
+      {
+        title: "Profile",
+        route: RoutePathEnum.PROFILE,
+      },
+      {
+        title: "Subscription",
+        route: RoutePathEnum.SUBSCRIPTIONS,
+      },
+      {
+        title: "Rewards",
+        route: RoutePathEnum.REWARDS,
+      },
+      {
+        title: "Refferal Program",
+        route: RoutePathEnum.REFER,
+      },
+      {
+        title: "Logout",
+        route: AuthRoutePathEnum.SIGN_IN,
+      },
+    ],
+    []
+  );
 
   return (
     <>
@@ -94,16 +121,8 @@ export const UserAppBar = () => {
           <Box sx={{ display: { xs: "none", md: "block" } }}>
             <Logo variant="dark" />
           </Box>
-          <TextField
-            label="Search Listing"
-            size="small"
-            fullWidth
-            sx={{ mx: { xs: 0, md: 4 } }}
-            InputProps={{
-              sx: { borderRadius: "20px" },
-              endAdornment: <FontAwesomeIcon icon={faSearch} />,
-            }}
-          />
+
+          <SearchField />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button
               disableRipple
@@ -171,10 +190,10 @@ export const UserAppBar = () => {
               }}
             >
               <ListItem>
-                <Link>Restaurant</Link>
+                <Link href={RoutePathEnum.LISTING}>Restaurant</Link>
               </ListItem>
               <ListItem>
-                <Link>Home Services</Link>
+                <Link href={RoutePathEnum.HOME}>Home Services</Link>
               </ListItem>
               <ListItem>
                 <Link>Auto Services</Link>
