@@ -10,13 +10,13 @@ export const SearchField = () => {
   const { changeHandler, submitHandler } = handlers;
   return (
     <TextField
-      fullWidth
+      label="Search Listing"
       size="small"
-      value={search}
+      fullWidth
       onChange={changeHandler}
-      sx={{ mx: "auto", maxWidth: "800px" }}
+      sx={{ mx: { xs: 0, md: 4 } }}
       InputProps={{
-        sx: { borderRadius: "60px" },
+        sx: { borderRadius: "20px" },
         endAdornment: (
           <IconButton>
             <FontAwesomeIcon
