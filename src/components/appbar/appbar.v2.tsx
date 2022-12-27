@@ -27,9 +27,9 @@ import { Logo } from "components/logo";
 import { faBell, faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import { useAuth } from "context/auth.context";
 import { useSpring, animated } from "@react-spring/web";
-import './appBar-v2-style.css';
-
-
+import "./appBar-v2-style.css";
+import { AuthRoutePathEnum } from "enum";
+import { useNavigate } from "react-router-dom";
 
 export const UserAppBar = () => {
   const theme = useTheme();
@@ -40,6 +40,7 @@ export const UserAppBar = () => {
     from: { height: "0px" },
     to: { height: !isMobile ? "60px" : open ? "200px" : "0px" },
   });
+  const navigate = useNavigate();
 
   return (
     <>
@@ -64,23 +65,23 @@ export const UserAppBar = () => {
 
           <Logo variant="dark" />
 
-          {/* {auth.isAuthenticated ? ( */}
-          <IconButton>
-            <Badge badgeContent={2} color="error">
-              <FontAwesomeIcon icon={faUser} />
-            </Badge>
-          </IconButton>
-          {/* ) : ( */}
-          <Button
-            variant="contained"
-            sx={{
-              minWidth: "fit-content",
-              display: { xs: "block", md: "none" },
-            }}
-          >
-            Log In
-          </Button>
-          {/* )} */}
+          {auth.isAuthenticated ? (
+            <IconButton>
+              <Badge badgeContent={2} color="error">
+                <FontAwesomeIcon icon={faUser} />
+              </Badge>
+            </IconButton>
+          ) : (
+            <Button
+              variant="contained"
+              sx={{
+                minWidth: "fit-content",
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              Log In
+            </Button>
+          )}
         </Toolbar>
         <Toolbar
           sx={{
@@ -134,25 +135,28 @@ export const UserAppBar = () => {
               sx={{ mx: 1, height: "30px", my: "auto" }}
             />
           </Box>
-          {/* {!auth.isAuthenticated ? ( */}
-          <Button
-            variant="contained"
-            sx={{ minWidth: "100px", display: { xs: "none", md: "block" } }}
-          >
-            Log In
-          </Button>
-          {/* ) : ( */}
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton sx={{ mx: 1 }}>
-              <FontAwesomeIcon icon={faUserCircle} />
-            </IconButton>
-            <IconButton sx={{ mx: 1 }}>
-              <Badge badgeContent={2} color="error">
-                <FontAwesomeIcon icon={faBell} />
-              </Badge>
-            </IconButton>
-          </Box>
-          {/* )} */}
+          {!auth.isAuthenticated ? (
+            <Button
+              variant="contained"
+              sx={{ minWidth: "100px", display: { xs: "none", md: "block" } }}
+              onClick={() => {
+                navigate(AuthRoutePathEnum.SIGN_IN);
+              }}
+            >
+              Log In
+            </Button>
+          ) : (
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <IconButton sx={{ mx: 1 }}>
+                <FontAwesomeIcon icon={faUserCircle} />
+              </IconButton>
+              <IconButton sx={{ mx: 1 }}>
+                <Badge badgeContent={2} color="error">
+                  <FontAwesomeIcon icon={faBell} />
+                </Badge>
+              </IconButton>
+            </Box>
+          )}
         </Toolbar>
         <animated.div style={{ overflow: "hidden", ...spring }}>
           <Toolbar>

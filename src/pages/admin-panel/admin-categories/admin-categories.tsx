@@ -18,8 +18,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { CategoryController } from "./admin-categories.controller";
+import { useAppSelector } from "data";
+import { GET_CATEGORY } from "data/selectors";
+import { ICategoryData } from "interface";
 
 export function AdminCategories() {
+  const categoryData = useAppSelector(GET_CATEGORY);
+
   const columns: GridColDef[] = [
     {
       field: "vName",
@@ -31,7 +36,14 @@ export function AdminCategories() {
       headerName: "subcategory",
       width: 200,
       renderCell: (params) => (
-        <Link href={AdminRoutePathEnum.ADMIN_SUBCATEGORY}>{params.value}</Link>
+        <Link
+          href={
+            AdminRoutePathEnum.ADMIN_SUBCATEGORY +
+            `?subCategory=${params.value[1]}`
+          }
+        >
+          {params.value[0]}
+        </Link>
       ),
     },
     {
@@ -51,6 +63,18 @@ export function AdminCategories() {
   const naviagate = useNavigate();
   const { getters } = CategoryController();
   const { attributes } = getters;
+
+  const rows = categoryData.map(function (res: ICategoryData, index: number) {
+    return {
+      id: index + 1,
+      iCategoryId: res.iCategoryId,
+      vName: res.vName ? res.vName : "",
+      subCategoryName: [
+        res.subCategoryName ? res.subCategoryName : "",
+        res.iCategoryId,
+      ],
+    };
+  });
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -113,7 +137,7 @@ export function AdminCategories() {
         </Box>
         <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
           <DataGrid
-            rows={attributes}
+            rows={rows}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
