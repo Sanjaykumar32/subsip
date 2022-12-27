@@ -13,7 +13,7 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { AdminRoutePathEnum, RoutePathEnum } from "enum";
+import { AdminRoutePathEnum } from "enum";
 
 interface INewlistingControllerReturns {
   getters: {
@@ -28,7 +28,7 @@ interface INewlistingControllerReturns {
     image: any;
     businessData: IBusiness[];
     categoryData: ICategoryData[];
-    subCategoryData: ISubCategoryData[];
+    filteredSubCategory: ISubCategoryData[];
   };
   handlers: {
     handleHeadlineChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -113,30 +113,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     setBusinessLocation(event.target.value as string);
   };
 
-  // const submitHandler = (): void => {
-  //   dispatch(
-  //     AdminThunk.createListing({
-  //       name: businessName,
-  //       tagline: headline,
-  //       latitude: "56789",
-  //       longitute: "6789",
-  //       location: businessLocation,
-  //       description: description,
-  //       addedBy: "7",
-  //       status: "Active",
-  //       type: "Pending",
-  //       country: "1",
-  //       state: "2",
-  //       city: "3",
-  //       onBanner: false,
-  //       image: image,
-  //       email: email,
-  //       category: category,
-  //       subCategory: subCategory,
-  //     })
-  //   );
-  // };
-
   const navigate = useNavigate();
 
   const submitHandler = async (): Promise<void> => {
@@ -188,6 +164,12 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     getcategory();
   }, [getcategory]);
 
+  const filteredSubCategory = subCategoryData?.filter(
+    (item: { iCategoryId: string }) => {
+      return item.iCategoryId == category;
+    }
+  );
+
   const getSubCategory = useCallback(async () => {
     try {
       dispatch(AdminThunk.getSubCategory());
@@ -212,7 +194,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       productCategory,
       businessData,
       categoryData,
-      subCategoryData,
+      filteredSubCategory,
       image,
     },
     handlers: {

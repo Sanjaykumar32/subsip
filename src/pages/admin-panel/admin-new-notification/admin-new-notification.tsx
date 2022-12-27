@@ -38,7 +38,7 @@ export function AdminNewNotifictaion() {
     businessLocation,
     businessData,
     categoryData,
-    subCategoryData,
+    filteredSubCategory,
   } = getters;
   const {
     handleHeadlineChange,
@@ -188,7 +188,7 @@ export function AdminNewNotifictaion() {
                   value={subCategory}
                   onChange={handleSubCategoryChange}
                 >
-                  {subCategoryData.map((res, i) => (
+                  {filteredSubCategory.map((res: any, i: number) => (
                     <MenuItem value={res.iSubCategoryId} key={i}>
                       {res.vName}
                     </MenuItem>

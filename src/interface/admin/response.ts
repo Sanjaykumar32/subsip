@@ -110,7 +110,7 @@ export interface IGetSubCategoryResponse {
 
 export interface ISubCategoryData {
   iSubCategoryId: number;
-  iCategoryId: number;
+  iCategoryId: string;
   vName: string;
   eStatus: string;
   dtAddedDate: string;

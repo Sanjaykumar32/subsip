@@ -15,7 +15,7 @@ interface INewRewardControllerReturns {
     businessName: string;
     businessData: IBusiness[];
     categoryData: ICategoryData[];
-    subCategoryData: ISubCategoryData[];
+    filteredSubCategory: ISubCategoryData[];
   };
   handlers: {
     handleNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -64,6 +64,12 @@ export const NewRewardController = (): INewRewardControllerReturns => {
   ): void => {
     setAvailibility(event.target.value as string);
   };
+
+  const filteredSubCategory = subCategoryData?.filter(
+    (item: { iCategoryId: string }) => {
+      return item.iCategoryId == category;
+    }
+  );
 
   const submitHandler = (): void => {
     dispatch(
@@ -127,7 +133,7 @@ export const NewRewardController = (): INewRewardControllerReturns => {
       businessName,
       businessData,
       categoryData,
-      subCategoryData,
+      filteredSubCategory,
     },
     handlers: {
       handleNameChange,

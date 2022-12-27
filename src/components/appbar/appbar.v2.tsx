@@ -10,7 +10,6 @@ import {
   Link,
   List,
   ListItem,
-  TextField,
   Toolbar,
   useMediaQuery,
   useTheme,
@@ -20,7 +19,6 @@ import {
   faBars,
   faClose,
   faLocationDot,
-  faSearch,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Logo } from "components/logo";

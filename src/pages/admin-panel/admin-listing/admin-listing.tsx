@@ -26,21 +26,16 @@ import { UserThunk } from "data/thunk/user.thunk";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { toast } from "react-hot-toast";
 
-
 export function AdminListing() {
-
-
   const dispatch = useAppDispatch();
-  const [loader, setLoader] = useState(false)
-
-
+  const [loader, setLoader] = useState(false);
 
   function deleteDatalist(ID: number) {
-    setLoader(true)
-    dispatch(AdminThunk.deleteBusiness(ID))
-    allBusiness()
-    toast.success('Listing Delete SuccessFully')
-    setLoader(false)
+    setLoader(true);
+    dispatch(AdminThunk.deleteBusiness(ID));
+    allBusiness();
+    toast.success("Listing Delete SuccessFully");
+    setLoader(false);
   }
 
   const columns: GridColDef[] = [
@@ -87,22 +82,21 @@ export function AdminListing() {
           <Tooltip title={params.value[0]}>
             <FontAwesomeIcon icon={faPen} />
           </Tooltip>
-          <Tooltip title={params.value[1]} >
-            <FontAwesomeIcon icon={faTrash} onClick={() => {
-              deleteDatalist(params.value[2])
-            }}
-              className='ml-[25px]' />
+          <Tooltip title={params.value[1]}>
+            <FontAwesomeIcon
+              icon={faTrash}
+              onClick={() => {
+                deleteDatalist(params.value[2]);
+              }}
+              className="ml-[25px]"
+            />
           </Tooltip>
         </Box>
       ),
     },
   ];
 
-  // dispatch(AdminThunk.deleteBusiness(params.value[2])
-
-
   const businessData = useAppSelector(GET_BUSINESS);
-  console.log(businessData, "businessData");
 
   const allBusiness = useCallback(async () => {
     try {
@@ -121,87 +115,12 @@ export function AdminListing() {
       id: item.iBusinessId,
       Profile: item.vImage,
       Name: item.vName,
-      Subscribers: item.subscriberCount + ' Subscribers',
-      Location: item.vAddress,
-      Actions: ['Edit', 'Delete', item?.iBusinessId],
-    }
-  })
+      Subscribers: item.subscriberCount + " Subscribers",
+      Location: item.vLocation,
+      Actions: ["Edit", "Delete", item?.iBusinessId],
+    };
+  });
 
-
-  // const rows = [
-  //   {
-  //     id: 1,
-  //     Profile: "Profile",
-  //     Name: "India Gate Restaurant ss ",
-  //     Subscribers: "46.2K subscribers",
-  //     Location: "Seattle, WA",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 2,
-  //     Profile: "Profile",
-  //     Name: "India Gate Restaurant",
-  //     Subscribers: "46.2K subscribers",
-  //     Location: "Seattle, WA",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 3,
-  //     Profile: "Profile",
-  //     Name: "India Gate Restaurant",
-  //     Subscribers: "46.2K subscribers",
-  //     Location: "Seattle, WA",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 4,
-  //     Profile: "Profile",
-  //     Name: "India Gate Restaurant",
-  //     Subscribers: "46.2K subscribers",
-  //     Location: "Seattle, WA",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 5,
-  //     Profile: "Profile",
-  //     Name: "India Gate Restaurant",
-  //     Subscribers: "46.2K subscribers",
-  //     Location: "Seattle, WA",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 6,
-  //     Profile: "Profile",
-  //     Name: "India Gate Restaurant",
-  //     Subscribers: "46.2K subscribers",
-  //     Location: "Seattle, WA",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 7,
-  //     Profile: "Profile",
-  //     Name: "India Gate Restaurant",
-  //     Subscribers: "46.2K subscribers",
-  //     Location: "Seattle, WA",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 8,
-  //     Profile: "Profile",
-  //     Name: "India Gate Restaurant",
-  //     Subscribers: "46.2K subscribers",
-  //     Location: "Seattle, WA",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 9,
-  //     Profile: "Profile",
-  //     Name: "India Gate Restaurant",
-  //     Subscribers: "46.2K subscribers",
-  //     Location: "Seattle, WA",
-  //     Actions: "Edit",
-  //   },
-  // ];
   const naviagate = useNavigate();
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -213,7 +132,6 @@ export function AdminListing() {
           justifyContent: "flex-end",
         }}
       >
-
         <Box>
           <Button
             onClick={() => {
@@ -279,4 +197,3 @@ export function AdminListing() {
     </Container>
   );
 }
-

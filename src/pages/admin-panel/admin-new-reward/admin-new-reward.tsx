@@ -26,7 +26,7 @@ export function AdminNewReward() {
     businessName,
     businessData,
     categoryData,
-    subCategoryData,
+    filteredSubCategory,
   } = getters;
   const {
     handleNameChange,
@@ -134,7 +134,7 @@ export function AdminNewReward() {
                   value={subCategory}
                   onChange={handleSubCategoryChange}
                 >
-                  {subCategoryData.map((res, i) => (
+                  {filteredSubCategory.map((res, i) => (
                     <MenuItem value={res.iSubCategoryId} key={i}>
                       {res.vName}
                     </MenuItem>

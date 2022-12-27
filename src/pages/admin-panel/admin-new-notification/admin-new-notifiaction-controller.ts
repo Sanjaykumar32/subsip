@@ -18,7 +18,7 @@ interface INewNotificationButtonControllerReturns {
     businessLocation: string;
     businessData: IBusiness[];
     categoryData: ICategoryData[];
-    subCategoryData: ISubCategoryData[];
+    filteredSubCategory: ISubCategoryData[];
   };
   handlers: {
     handleHeadlineChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -88,6 +88,12 @@ export const NewNotificationButtonController =
       setBusinessLocation(event.target.value as string);
     };
 
+    const filteredSubCategory = subCategoryData?.filter(
+      (item: { iCategoryId: string }) => {
+        return item.iCategoryId == category;
+      }
+    );
+
     const allBusiness = useCallback(async () => {
       try {
         dispatch(UserThunk.business());
@@ -149,7 +155,7 @@ export const NewNotificationButtonController =
         businessLocation,
         businessData,
         categoryData,
-        subCategoryData,
+        filteredSubCategory,
       },
       handlers: {
         handleHeadlineChange,
