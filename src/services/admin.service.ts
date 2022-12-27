@@ -340,7 +340,7 @@ export class AdminService {
   public static async deleteBusiness(payload: IDeleteListingRequest): Promise<any> {
     console.log(payload)
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `business/4`,
+      url: `business/${payload}`,
       method: "DELETE",
     });
 

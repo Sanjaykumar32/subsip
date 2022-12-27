@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Avatar,
   Box,
   Button,
   Chip,
+  CircularProgress,
   Container,
   FormControl,
   Link,
@@ -23,19 +24,24 @@ import { useAppSelector, useAppDispatch } from "data";
 import { GET_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import { toast } from "react-hot-toast";
 
 
 export function AdminListing() {
 
 
+  const dispatch = useAppDispatch();
+  const [loader, setLoader] = useState(false)
 
 
 
-  async function deleteDatalist(ID: number) {
-    const res = await dispatch(AdminThunk.deleteBusiness(ID))
-    console.log(res, 'deleteDatalist')
+  function deleteDatalist(ID: number) {
+    setLoader(true)
+    dispatch(AdminThunk.deleteBusiness(ID))
+    allBusiness()
+    toast.success('Listing Delete SuccessFully')
+    setLoader(false)
   }
-
 
   const columns: GridColDef[] = [
     {
@@ -49,7 +55,7 @@ export function AdminListing() {
               height: "30px",
               width: "30px",
             }}
-            src={params.value}
+            src={"http://159.223.194.50:8000/" + params.value}
           />
         );
       },
@@ -82,7 +88,9 @@ export function AdminListing() {
             <FontAwesomeIcon icon={faPen} />
           </Tooltip>
           <Tooltip title={params.value[1]} >
-            <FontAwesomeIcon icon={faTrash} onClick={() => { deleteDatalist(params.value[2]), console.log(params.value[2], 'params.value[2]') }}
+            <FontAwesomeIcon icon={faTrash} onClick={() => {
+              deleteDatalist(params.value[2])
+            }}
               className='ml-[25px]' />
           </Tooltip>
         </Box>
@@ -91,7 +99,6 @@ export function AdminListing() {
   ];
 
   // dispatch(AdminThunk.deleteBusiness(params.value[2])
-  const dispatch = useAppDispatch();
 
 
   const businessData = useAppSelector(GET_BUSINESS);
@@ -112,7 +119,7 @@ export function AdminListing() {
   const rows = businessData.map(function (item) {
     return {
       id: item.iBusinessId,
-      Profile: item.vName,
+      Profile: item.vImage,
       Name: item.vName,
       Subscribers: item.subscriberCount + ' Subscribers',
       Location: item.vAddress,
@@ -198,12 +205,15 @@ export function AdminListing() {
   const naviagate = useNavigate();
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
+      {/* {loader && */}
+      {/* } */}
       <Box
         sx={{
           display: "flex",
           justifyContent: "flex-end",
         }}
       >
+
         <Box>
           <Button
             onClick={() => {
@@ -256,6 +266,8 @@ export function AdminListing() {
         </Box>
 
         <Box style={{ height: 400, width: "100%" }}>
+          {loader && <CircularProgress />}
+
           <DataGrid
             rows={rows}
             columns={columns}

@@ -18,12 +18,12 @@
 .css-xhk8t5-MuiList-root li a {
     font-weight: 400;
     color: #000;
-    border-bottom: 1px solid transparent;
+    border-bottom: 2px solid transparent;
     padding: 10px 10px !important;
 }
 
 .css-xhk8t5-MuiList-root li a:hover {
-    border-color: #000 !important;
+    border-color: #f39516 !important;
 }
 
 .css-flnk82 .cls-1 {
@@ -35,4 +35,8 @@
 
 .css-1fii6rv-MuiFormControl-root-MuiTextField-root {
     margin: 0 4rem !important;
+}
+
+.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-hyum1k-MuiToolbar-root {
+    padding: 0 2rem;
 }
