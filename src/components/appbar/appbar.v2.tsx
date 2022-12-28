@@ -37,7 +37,7 @@ export const UserAppBar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const spring = useSpring({
     from: { height: "0px" },
-    to: { height: !isMobile ? "60px" : open ? "200px" : "0px" },
+    to: { height: !isMobile ? "60px" : open ? "250px" : "0px" },
   });
   const navigate = useNavigate();
 
@@ -84,12 +84,15 @@ export const UserAppBar = () => {
             alignItems: "center",
           }}
         >
-          <IconButton onClick={() => setOpen(!open)}>
-            <FontAwesomeIcon icon={open ? faClose : faBars} size="sm" />
-          </IconButton>
+          <div className=" absolute  left-4 top-[3px] ">
+            <IconButton onClick={() => setOpen(!open)}>
+              <FontAwesomeIcon icon={open ? faClose : faBars} size="sm" />
+            </IconButton>
+          </div>
 
-          <Logo variant="dark" />
-
+          <div className="w-[100%] flex justify-center ">
+            <Logo variant="dark" />
+          </div>
           {auth.isAuthenticated ? (
             <IconButton>
               <Badge badgeContent={2} color="error">
@@ -101,7 +104,7 @@ export const UserAppBar = () => {
               variant="contained"
               sx={{
                 minWidth: "fit-content",
-                display: { xs: "block", md: "none" },
+                display: { xs: "none", md: "none" },
               }}
             >
               Log In
@@ -133,7 +136,7 @@ export const UserAppBar = () => {
               />
               Seattle, WA
             </Button>
-            <Divider
+            {/* <Divider
               flexItem
               orientation="vertical"
               variant="middle"
@@ -144,7 +147,7 @@ export const UserAppBar = () => {
               sx={{ minWidth: "120px", color: "text.primary" }}
             >
               List on Poshhub
-            </Button>
+            </Button> */}
             <Divider
               flexItem
               orientation="vertical"
@@ -177,29 +180,55 @@ export const UserAppBar = () => {
         </Toolbar>
         <animated.div style={{ overflow: "hidden", ...spring }}>
           <Toolbar>
-            <List
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                ".MuiListItem-root": {
-                  minWidth: "fit-content",
-                  cursor: "pointer",
-                },
-              }}
-            >
-              <ListItem>
-                <Link href={RoutePathEnum.LISTING}>Restaurant</Link>
-              </ListItem>
-              <ListItem>
-                <Link href={RoutePathEnum.HOME}>Home Services</Link>
-              </ListItem>
-              <ListItem>
-                <Link>Auto Services</Link>
-              </ListItem>
-              <ListItem>
-                <Link>More</Link>
-              </ListItem>
-            </List>
+            <div className="moblieMenu">
+              <List
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  ".MuiListItem-root": {
+                    minWidth: "fit-content",
+                    cursor: "pointer",
+                  },
+                }}
+              >
+                <ListItem>
+                  <Link href={RoutePathEnum.LISTING}>Restaurant</Link>
+                </ListItem>
+                <ListItem>
+                  <Link href={RoutePathEnum.HOME}>Home Services</Link>
+                </ListItem>
+                <ListItem>
+                  <Link>Auto Services</Link>
+                </ListItem>
+                <ListItem>
+                  <Link>More</Link>
+                </ListItem>
+              </List>
+
+              {!auth.isAuthenticated ? (
+                <Button
+                  variant="contained"
+                  sx={{ minWidth: "100px", display: { xs: "block", md: "none" } }}
+                  onClick={() => {
+                    navigate(AuthRoutePathEnum.SIGN_IN);
+                  }}
+                >
+                  Log In
+                </Button>
+              ) : (
+                <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                  <IconButton sx={{ mx: 1 }}>
+                    <FontAwesomeIcon icon={faUserCircle} />
+                  </IconButton>
+                  <IconButton sx={{ mx: 1 }}>
+                    <Badge badgeContent={2} color="error">
+                      <FontAwesomeIcon icon={faBell} />
+                    </Badge>
+                  </IconButton>
+                </Box>
+              )}
+            </div>
+
           </Toolbar>
         </animated.div>
       </AppBar>

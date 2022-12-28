@@ -40,3 +40,50 @@
 .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-hyum1k-MuiToolbar-root {
     padding: 0 2rem;
 }
+
+
+
+/* mobile mode css */
+@media screen and (min-device-width: 300px) and (max-device-width: 767px) {
+    .css-1fii6rv-MuiFormControl-root-MuiTextField-root {
+        margin: 0 0rem !important;
+    }
+
+    .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-1aara5h-MuiToolbar-root {
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 15px;
+    }
+
+    ul.MuiList-root.MuiList-padding.css-xhk8t5-MuiList-root,
+    li.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.css-okkh7g-MuiListItem-root,
+    .css-xhk8t5-MuiList-root li a {
+        width: 100%;
+        padding: 0;
+    }
+
+    .moblieMenu {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    svg#Layer_1 {
+        width: 140px;
+        margin-left: 7px;
+        margin-top: 3px;
+    }
+
+    /* 
+    .css-1x9yojm-MuiContainer-root {
+        padding-top: 145px;
+    } */
+
+
+
+
+
+
+
+}

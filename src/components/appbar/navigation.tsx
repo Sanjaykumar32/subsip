@@ -24,7 +24,7 @@ import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { SearchField } from "./component/search-field/search-field";
 
 const pages = [
-  { title: "Restaurant", path: RoutePathEnum.LISTING },
+  { title: "Restaurant ", path: RoutePathEnum.LISTING },
   { title: "Home Service", path: RoutePathEnum.HOME },
   { title: "Auto Service", path: RoutePathEnum.NONE },
   { title: "More", path: RoutePathEnum.NONE },
@@ -185,9 +185,12 @@ export function ResponsiveAppBar() {
           }}
         >
           {pages.map((page) => (
-            <MenuItem key={page.title} onClick={() => navigate(page.path)}>
-              <Typography textAlign="center">{page.title}</Typography>
-            </MenuItem>
+            <>
+              <MenuItem key={page.title} onClick={() => navigate(page.path)}>
+                <Typography textAlign="center">{page.title}</Typography>
+              </MenuItem>
+              <h1>Hello world</h1>
+            </>
           ))}
         </Menu>
       </Box>
