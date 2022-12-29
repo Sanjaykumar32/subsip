@@ -15,7 +15,7 @@ import {
   Toolbar,
   useMediaQuery,
   useTheme,
-  Typography
+  Typography,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -37,20 +37,15 @@ export const UserAppBar = () => {
   const theme = useTheme();
   const auth = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
-  const [anchorElSetting, setAnchorElSetting] = useState<null | HTMLElement>(
-    null
-  );
-  // const opensss = Boolean(showUserMenu);
-  // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   setShowUserMenu(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setShowUserMenu(null);
-  // };
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const opens = Boolean(anchorEl);
 
-  console.log(showUserMenu, 'showUserMenu');
-
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const settings = [
     {
@@ -73,10 +68,8 @@ export const UserAppBar = () => {
       title: "Logout",
       route: AuthRoutePathEnum.SIGN_IN,
     },
-  ]
+  ];
   // );
-
-
 
   const [open, setOpen] = useState<boolean>(false);
   const spring = useSpring({
@@ -84,32 +77,6 @@ export const UserAppBar = () => {
     to: { height: !isMobile ? "60px" : open ? "250px" : "0px" },
   });
   const navigate = useNavigate();
-
-  // const settings = React.useMemo(
-  //   () => [
-  //     {
-  //       title: "Profile",
-  //       route: RoutePathEnum.PROFILE,
-  //     },
-  //     {
-  //       title: "Subscription",
-  //       route: RoutePathEnum.SUBSCRIPTIONS,
-  //     },
-  //     {
-  //       title: "Rewards",
-  //       route: RoutePathEnum.REWARDS,
-  //     },
-  //     {
-  //       title: "Refferal Program",
-  //       route: RoutePathEnum.REFER,
-  //     },
-  //     {
-  //       title: "Logout",
-  //       route: AuthRoutePathEnum.SIGN_IN,
-  //     },
-  //   ],
-  //   []
-  // );
 
   return (
     <>
@@ -211,51 +178,46 @@ export const UserAppBar = () => {
             </Button>
           ) : (
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton sx={{ mx: 1 }} onClick={() => setShowUserMenu(true)}  >
+              <IconButton
+                sx={{ mx: 1 }}
+                onClick={handleClick}
+                id="basic-button"
+                aria-controls={opens ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={opens ? "true" : undefined}
+              >
                 <FontAwesomeIcon icon={faUserCircle} />
               </IconButton>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={opens}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                {settings.map((setting) => (
+                  <MenuItem
+                    key={setting.route}
+                    onClick={() => {
+                      setting.title === "Logout" && auth.signOut();
+                      handleClose();
+                    }}
+                  >
+                    <Link key="profile-menu" href={setting.route}>
+                      <Typography textAlign="center">
+                        {setting.title}
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                ))}
+              </Menu>
               <IconButton sx={{ mx: 1 }}>
                 <Badge badgeContent={2} color="error">
                   <FontAwesomeIcon icon={faBell} />
                 </Badge>
               </IconButton>
-
-
-              {/* {showUserMenu &&
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElSetting}
-                  open={Boolean(anchorElSetting)}
-                  onClose={() => setAnchorElSetting(null)}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: -10,
-                    horizontal: 68,
-                  }}
-                >
-                  {console.log(showUserMenu, 'showUserMenu inners')}
-
-                  {settings.map((setting) => (
-                    <MenuItem
-                      key={setting.route}
-                      onClick={() => {
-                        setting.title === "Logout" && auth.signOut();
-                      }}
-                    >
-                      <Link key="profile-menu" href={setting.route}>
-                        <Typography textAlign="center">{setting.title}</Typography>
-                      </Link>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              } */}
-
-
-
             </Box>
           )}
         </Toolbar>
@@ -289,7 +251,10 @@ export const UserAppBar = () => {
               {!auth.isAuthenticated ? (
                 <Button
                   variant="contained"
-                  sx={{ minWidth: "100px", display: { xs: "block", md: "none" } }}
+                  sx={{
+                    minWidth: "100px",
+                    display: { xs: "block", md: "none" },
+                  }}
                   onClick={() => {
                     navigate(AuthRoutePathEnum.SIGN_IN);
                   }}
@@ -298,7 +263,7 @@ export const UserAppBar = () => {
                 </Button>
               ) : (
                 <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                  <IconButton sx={{ mx: 1 }} onClick={() => setShowUserMenu(true)} >
+                  <IconButton sx={{ mx: 1 }}>
                     <FontAwesomeIcon icon={faUserCircle} />
                   </IconButton>
                   <IconButton sx={{ mx: 1 }}>
@@ -306,13 +271,9 @@ export const UserAppBar = () => {
                       <FontAwesomeIcon icon={faBell} />
                     </Badge>
                   </IconButton>
-
-
-
                 </Box>
               )}
             </div>
-
           </Toolbar>
         </animated.div>
       </AppBar>

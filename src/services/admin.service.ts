@@ -25,6 +25,8 @@ import {
   ISubscriberOfBussinessResponse,
   INotificationRequest,
   IDeleteListingRequest,
+  IDeleteCategoryRequest,
+  IDeleteRewardRequest,
 } from "interface";
 
 /**
@@ -77,8 +79,10 @@ export class AdminService {
   public static async getNotoification(
     payload: INotificationRequest
   ): Promise<any> {
+    console.log(payload);
+
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `/user/notification/userId=${payload.userId}`,
+      url: `/user/notification/${payload.userId}`,
       method: "GET",
     });
 
@@ -269,12 +273,12 @@ export class AdminService {
 
   /**
    * New Reward
-   * @param {INewRewardRequest} payload
+   * @param {any} payload
    * @return {Promise<any>}
    */
-  public static async newReward(payload: INewRewardRequest): Promise<any> {
+  public static async newReward(payload: any): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/rewards",
+      url: "/user/reward",
       method: "POST",
       data: payload,
     });
@@ -321,9 +325,7 @@ export class AdminService {
    * @param {ICreateListingRequest} payload
    * @return {Promise<any>}
    */
-  public static async craeteListing(
-    payload: any
-  ): Promise<any> {
+  public static async craeteListing(payload: any): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: "/business",
       method: "POST",
@@ -337,11 +339,64 @@ export class AdminService {
    * Delete Business
    * @return {Promise<any>}
    */
-  public static async deleteBusiness(payload: IDeleteListingRequest): Promise<any> {
-    console.log(payload)
+  public static async deleteBusiness(
+    payload: IDeleteListingRequest
+  ): Promise<any> {
+    console.log(payload);
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `business/${payload}`,
       method: "DELETE",
+    });
+
+    return res.data;
+  }
+
+  /**
+   * Delete Category
+   * @return {Promise<any>}
+   */
+  public static async deleteCategory(
+    payload: IDeleteCategoryRequest
+  ): Promise<any> {
+    console.log(payload);
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/category`,
+      method: "DELETE",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * Delete SubCategory
+   * @return {Promise<any>}
+   */
+  public static async deleteSubCategory(
+    payload: IDeleteListingRequest
+  ): Promise<any> {
+    console.log(payload);
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/sub-category`,
+      method: "DELETE",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * Delete Reward
+   * @return {Promise<any>}
+   */
+  public static async deleteReward(
+    payload: IDeleteRewardRequest
+  ): Promise<any> {
+    console.log(payload);
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/user/reward?rewardId=${payload.rewardId}`,
+      method: "DELETE",
+      data: payload,
     });
 
     return res.data;

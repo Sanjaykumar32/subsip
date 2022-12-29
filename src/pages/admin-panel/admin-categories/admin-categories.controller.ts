@@ -3,6 +3,7 @@ import { GET_CATEGORY } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { ICategoryData } from "interface";
 import { useCallback, useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 type attributeType = {
   id: number;
@@ -14,6 +15,9 @@ type attributeType = {
 interface IcategoryControllerReturns {
   getters: {
     attributes: attributeType[];
+  };
+  handlers: {
+    deleteCategorylist: (ID: number) => void;
   };
 }
 
@@ -49,9 +53,18 @@ export const CategoryController = (): IcategoryControllerReturns => {
     });
   });
 
+  function deleteCategorylist(ID: number) {
+    dispatch(AdminThunk.deleteCategory({ category: ID }));
+    toast.success("Category Delete SuccessFully");
+    getcategory();
+  }
+
   return {
     getters: {
       attributes,
+    },
+    handlers: {
+      deleteCategorylist,
     },
   };
 };

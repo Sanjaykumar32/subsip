@@ -37,9 +37,9 @@ export interface IReferralPriceRequest {
 export interface INewRewardRequest {
   name: string;
   category: string;
-  availibility: string;
+  availibility: number;
   subCategory: string;
-  businessName: string;
+  businessId: string;
 }
 
 export interface INewNotifyButtonRequest {
@@ -78,10 +78,18 @@ export interface ICreateListingRequest {
   subCategory: string;
 }
 
-
-
 export interface IDeleteListingRequest {
   userID: number;
 }
 
+export interface IDeleteCategoryRequest {
+  categoryId: number;
+}
 
+export interface IDeleteSubCategoryRequest {
+  subCategoryId: number;
+}
+
+export interface IDeleteRewardRequest {
+  rewardId: number;
+}

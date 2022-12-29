@@ -3,9 +3,11 @@ import { useAppDispatch, useAppSelector } from "data";
 import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { UserThunk } from "data/thunk/user.thunk";
+import { AdminRoutePathEnum } from "enum";
 import { IBusiness, ICategoryData, ISubCategoryData } from "interface";
 import moment, { Moment } from "moment";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface INewNotificationButtonControllerReturns {
   getters: {
@@ -96,7 +98,7 @@ export const NewNotificationButtonController =
 
     const allBusiness = useCallback(async () => {
       try {
-        dispatch(UserThunk.business());
+        await dispatch(UserThunk.business());
       } catch (error) {
         console.log(error);
       }
@@ -108,7 +110,7 @@ export const NewNotificationButtonController =
 
     const getcategory = useCallback(async () => {
       try {
-        dispatch(AdminThunk.getCategory());
+        await dispatch(AdminThunk.getCategory());
       } catch (error) {
         console.log(error);
       }
@@ -120,7 +122,7 @@ export const NewNotificationButtonController =
 
     const getSubCategory = useCallback(async () => {
       try {
-        dispatch(AdminThunk.getSubCategory());
+        await dispatch(AdminThunk.getSubCategory());
       } catch (error) {
         console.log(error);
       }
@@ -130,8 +132,10 @@ export const NewNotificationButtonController =
       getSubCategory();
     }, [getSubCategory]);
 
-    const submitHandler = (): void => {
-      dispatch(
+    const navigate = useNavigate();
+
+    const submitHandler = async (): Promise<void> => {
+      await dispatch(
         AdminThunk.newNotification({
           Headline: headline,
           Desc: description,
@@ -142,7 +146,10 @@ export const NewNotificationButtonController =
           BusinessId: businessName,
         })
       );
+      navigate(AdminRoutePathEnum.ADMIN_NOTIFICATION);
     };
+
+    console.log(categoryData, "categoryData");
 
     return {
       getters: {

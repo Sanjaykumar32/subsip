@@ -13,7 +13,7 @@ import {
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
@@ -21,9 +21,14 @@ import { CategoryController } from "./admin-categories.controller";
 import { useAppSelector } from "data";
 import { GET_CATEGORY } from "data/selectors";
 import { ICategoryData } from "interface";
+import { AdminThunk } from "data/thunk/admin.thunk";
 
 export function AdminCategories() {
   const categoryData = useAppSelector(GET_CATEGORY);
+  const naviagate = useNavigate();
+  const { getters, handlers } = CategoryController();
+  const { attributes } = getters;
+  const { deleteCategorylist } = handlers;
 
   const columns: GridColDef[] = [
     {
@@ -55,14 +60,19 @@ export function AdminCategories() {
           <Tooltip title={params.value}>
             <FontAwesomeIcon icon={faPen} />
           </Tooltip>
+          <Tooltip title={params.value[1]}>
+            <FontAwesomeIcon
+              icon={faTrash}
+              onClick={() => {
+                deleteCategorylist(params.value[2]);
+              }}
+              className="ml-[25px]"
+            />
+          </Tooltip>
         </Box>
       ),
     },
   ];
-
-  const naviagate = useNavigate();
-  const { getters } = CategoryController();
-  const { attributes } = getters;
 
   const rows = categoryData.map(function (res: ICategoryData, index: number) {
     return {
@@ -73,6 +83,7 @@ export function AdminCategories() {
         res.subCategoryName ? res.subCategoryName : "",
         res.iCategoryId,
       ],
+      Actions: ["Edit", "Delete", res?.iCategoryId],
     };
   });
 

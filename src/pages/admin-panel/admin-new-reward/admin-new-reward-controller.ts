@@ -10,7 +10,7 @@ interface INewRewardControllerReturns {
   getters: {
     name: string;
     category: string;
-    availibility: string;
+    availibility: number;
     subCategory: string;
     businessName: string;
     businessData: IBusiness[];
@@ -33,7 +33,7 @@ interface INewRewardControllerReturns {
  */
 export const NewRewardController = (): INewRewardControllerReturns => {
   const [name, setName] = useState<string>("");
-  const [availibility, setAvailibility] = useState<string>("");
+  const [availibility, setAvailibility] = useState<number>(0);
   const [category, setCategory] = useState<string>("");
   const [businessName, setBuisnessName] = useState<string>("");
   const [subCategory, setSubCategory] = useState<string>("");
@@ -62,7 +62,7 @@ export const NewRewardController = (): INewRewardControllerReturns => {
   const handleAvailibityChange = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setAvailibility(event.target.value as string);
+    setAvailibility(event.target.value as unknown as number);
   };
 
   const filteredSubCategory = subCategoryData?.filter(
@@ -71,18 +71,16 @@ export const NewRewardController = (): INewRewardControllerReturns => {
     }
   );
 
+  const form = new FormData();
+  form.append("name", name);
+  form.append("availibility", "4");
+  form.append("category", category);
+  form.append("subCategory", subCategory);
+
   const submitHandler = (): void => {
-    dispatch(
-      AdminThunk.newReward({
-        name: name,
-        category: category,
-        availibility: availibility,
-        subCategory: subCategory,
-        businessName: businessName,
-      })
-    );
+    dispatch(AdminThunk.newReward(form));
     setName("");
-    setAvailibility("");
+    setAvailibility(0);
     setSubCategory("");
     setBuisnessName("");
     setCategory("");
@@ -90,7 +88,7 @@ export const NewRewardController = (): INewRewardControllerReturns => {
 
   const allBusiness = useCallback(async () => {
     try {
-      dispatch(UserThunk.business());
+      await dispatch(UserThunk.business());
     } catch (error) {
       console.log(error);
     }
@@ -102,7 +100,7 @@ export const NewRewardController = (): INewRewardControllerReturns => {
 
   const getcategory = useCallback(async () => {
     try {
-      dispatch(AdminThunk.getCategory());
+      await dispatch(AdminThunk.getCategory());
     } catch (error) {
       console.log(error);
     }
@@ -114,7 +112,7 @@ export const NewRewardController = (): INewRewardControllerReturns => {
 
   const getSubCategory = useCallback(async () => {
     try {
-      dispatch(AdminThunk.getSubCategory());
+      await dispatch(AdminThunk.getSubCategory());
     } catch (error) {
       console.log(error);
     }
