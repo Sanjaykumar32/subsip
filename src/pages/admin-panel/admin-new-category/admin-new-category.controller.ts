@@ -20,7 +20,7 @@ const CategoryController = (): ICategoryControllerReturns => {
   const dispatch = useAppDispatch();
   const naviagate = useNavigate();
   const [category, setCategory] = useState<string>("");
-  const userId = sessionStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
 
   const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setCategory(event.target.value as string);

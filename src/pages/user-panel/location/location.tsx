@@ -20,7 +20,7 @@ export function LocationPage() {
   const theme = useTheme();
   const bussinessByName = useAppSelector(GET_BUSINESS);
   const [open, setOpen] = React.useState(false);
-  const userId = sessionStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
   const handleClickOpen = () => {
     try {
       dispatch(AdminThunk.refferralCode({ userId: userId ? userId : "" }));

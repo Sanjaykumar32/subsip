@@ -41,7 +41,7 @@ export class ApiHelper {
   public static initRequestManager() {
     axios.interceptors.request.use(
       (config) => {
-        const accessToken = sessionStorage.getItem("token");
+        const accessToken = localStorage.getItem("token");
         config = {
           ...config,
           headers: {

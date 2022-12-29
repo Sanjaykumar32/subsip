@@ -52,8 +52,8 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {
       const response: ISignInResponse = await AuthService.signIn(credentials);
-      sessionStorage.setItem("token", response.token.token);
-      sessionStorage.setItem("userId", response.data.userId);
+      localStorage.setItem("token", response.token.token);
+      localStorage.setItem("userId", response.data.userId);
 
       setAuthenticated(true);
     } catch (error) {
@@ -71,7 +71,7 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   }, []);
 
   const signOut = useCallback(async () => {
-    sessionStorage.clear();
+    localStorage.clear();
     setAuthenticated(false);
   }, []);
 
