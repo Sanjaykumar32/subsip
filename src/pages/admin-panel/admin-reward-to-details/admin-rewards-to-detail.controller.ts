@@ -25,9 +25,8 @@ export const AdminNotificationController =
     const notificationData = useAppSelector(GET_NOTIFICATION);
     const dispatch = useAppDispatch();
     const userId = sessionStorage.getItem("userId");
-    console.log(notificationData, "notificationData");
 
-    const getNotification = useCallback(async () => {
+    const getReward = useCallback(async () => {
       try {
         dispatch(AdminThunk.notificationList({ userId: userId ? userId : "" }));
       } catch (error) {
@@ -36,8 +35,8 @@ export const AdminNotificationController =
     }, [dispatch, userId]);
 
     useEffect(() => {
-      getNotification();
-    }, [getNotification]);
+      getReward();
+    }, [getReward]);
 
     const attributes: attributeType[] = [];
 

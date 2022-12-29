@@ -167,10 +167,9 @@ export class AdminThunk {
    */
   public static newReward = createAsyncThunk(
     "admin/newReward",
-    async (payload: INewRewardRequest): Promise<void> => {
-      console.log(payload, "payload");
-      // const response = await AdminService.newReward(payload);
-      // return response;
+    async (payload: any): Promise<void> => {
+      const response = await AdminService.newReward(payload);
+      return response;
     }
   );
 
@@ -260,6 +259,39 @@ export class AdminThunk {
     "admin/deleteBusiness",
     async (payload: any): Promise<void> => {
       const response = await AdminService.deleteBusiness(payload);
+      return response;
+    }
+  );
+
+  /**
+   * categoey Business
+   */
+  public static deleteCategory = createAsyncThunk(
+    "admin/deleteCategory",
+    async (payload: any): Promise<void> => {
+      const response = await AdminService.deleteCategory(payload);
+      return response;
+    }
+  );
+
+  /**
+   * SubCategory Business
+   */
+  public static deleteSubCategory = createAsyncThunk(
+    "admin/deleteSubCategory",
+    async (payload: any): Promise<void> => {
+      const response = await AdminService.deleteSubCategory(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Reward Business
+   */
+  public static deleteReward = createAsyncThunk(
+    "admin/deleteReward",
+    async (payload: any): Promise<void> => {
+      const response = await AdminService.deleteReward(payload);
       return response;
     }
   );
