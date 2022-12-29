@@ -221,7 +221,7 @@ export const UserAppBar = () => {
               </IconButton>
 
 
-              {showUserMenu &&
+              {/* {showUserMenu &&
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorElSetting}
@@ -252,7 +252,7 @@ export const UserAppBar = () => {
                     </MenuItem>
                   ))}
                 </Menu>
-              }
+              } */}
 
 
 

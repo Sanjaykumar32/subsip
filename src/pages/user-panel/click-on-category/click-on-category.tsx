@@ -58,7 +58,7 @@ export function ClickOnCategory() {
           <Grid item xs={12} md={2}>
             <Box sx={{ overflow: "auto", my: 1 }}>
               <Typography variant="body1" fontWeight="600">
-                Listings by subcategory:
+                Listings by Category:
               </Typography>
               <List>
                 {Array(30)
@@ -84,6 +84,7 @@ export function ClickOnCategory() {
                 display: "flex",
                 alignItems: "baseline",
                 justifyContent: "space-between",
+                paddingBottom: '20px',
               }}
             >
               <Typography variant="body2" fontWeight="600">
@@ -103,7 +104,7 @@ export function ClickOnCategory() {
                     id="sort-by-simple-select"
                     value="Newest"
                     size="small"
-                    sx={{ fontWeight: 500, ml: 1 }}
+                    sx={{ fontWeight: 500, ml: 1, mr: 3 }}
                   >
                     <MenuItem value={"Newest"}>
                       <Typography variant="body2" sx={{ fontWeight: 500 }}>
@@ -120,15 +121,15 @@ export function ClickOnCategory() {
               </Box>
             </Box>
 
-            <Grid container spacing={2}>
+            <Grid container className=" pb-[20px] ">
               {Array(12)
                 .fill(data)
                 .map((data) => (
-                  <Grid key={data.title} item sm={4}>
+                  <Grid key={data.title} item sm={4} className=' pb-[20px] ' >
                     <Card
                       sx={{
-                        maxWidth: "400px",
-                        minHeight: "400px",
+                        maxWidth: "330px",
+                        minHeight: "350px",
                       }}
                       elevation={6}
                     >
@@ -136,10 +137,10 @@ export function ClickOnCategory() {
                         src={data.image}
                         alt={data.title}
                         width="100%"
-                        height="165px"
-                        style={{ objectFit: "cover" }}
+                        height="100px"
+                        style={{ objectFit: "cover", height: '215px', }}
                       />
-                      <Box sx={{ p: 1.5 }}>
+                      <Box sx={{ py: 1.5, pl: '12px' }}>
                         <Typography variant="body1" fontWeight={600}>
                           {data.title}
                         </Typography>
@@ -170,9 +171,14 @@ export function ClickOnCategory() {
                           >
                             {data.subscribers}
                           </Typography>
-                          <Button color="error" variant="rounded" size="small">
+                          {/* <Button color="error" variant="rounded" size="small">
                             Subscribe
-                          </Button>
+                          </Button> */}
+                          <div className="raletive">
+                            <div className="subscribeLebalListing">
+                              <span className=" text-white  ">Subscribe</span>
+                            </div>
+                          </div>
                         </Box>
                       </Box>
                       <Box
@@ -196,4 +202,3 @@ export function ClickOnCategory() {
     </Container>
   );
 }
-  

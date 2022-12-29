@@ -7,6 +7,30 @@
     padding-top: 145px !important;
 }
 
+.subscribeLebalListing {
+    text-align: center;
+    padding: 5px 18px 5px 45px;
+    position: relative;
+    background: #dc2626;
+}
+
+
+.subscribeLebalListing::before {
+    content: '';
+    background: white;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 2px;
+    left: -13px;
+    transform: rotate(45deg);
+}
+
+
+
+
+
+
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
 
