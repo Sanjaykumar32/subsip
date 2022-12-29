@@ -37,8 +37,8 @@ export class StorageUtil {
   /**
    * Clear the whole session storage
    */
-  static clearSessionStorage(): void {
-    sessionStorage.clear();
+  static clearlocalStorage(): void {
+    localStorage.clear();
   }
 
   /**
@@ -47,7 +47,7 @@ export class StorageUtil {
    * @return {void}
    */
   static getSessionSotrage(key: string): string {
-    const receivedKey = sessionStorage.getItem(key);
+    const receivedKey = localStorage.getItem(key);
     if (receivedKey == null) {
       return '';
     }
@@ -61,7 +61,7 @@ export class StorageUtil {
    * @param {string} value
    * @return {void}
    */
-  static setSessionStorage(key: string, value: string): void {
-    sessionStorage.setItem(key, value);
+  static setlocalStorage(key: string, value: string): void {
+    localStorage.setItem(key, value);
   }
 }

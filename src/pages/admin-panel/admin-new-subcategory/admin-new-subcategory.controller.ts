@@ -28,7 +28,7 @@ export const AddSubCategoryController =
   (): IAddSubCategoryControllerReturns => {
     const [subCategory, setSubCategory] = useState<string>("");
     const [businessName, setBuisnessName] = useState<string>("");
-    const userId = sessionStorage.getItem("userId");
+    const userId = localStorage.getItem("userId");
     const categoryData = useAppSelector(GET_CATEGORY);
     const naviagate = useNavigate();
 

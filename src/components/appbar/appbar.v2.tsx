@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {
+  Menu,
+  MenuItem,
   AppBar,
   Backdrop,
   Badge,
@@ -13,6 +15,7 @@ import {
   Toolbar,
   useMediaQuery,
   useTheme,
+  Typography
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -34,38 +37,79 @@ export const UserAppBar = () => {
   const theme = useTheme();
   const auth = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
+  const [anchorElSetting, setAnchorElSetting] = useState<null | HTMLElement>(
+    null
+  );
+  // const opensss = Boolean(showUserMenu);
+  // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   setShowUserMenu(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setShowUserMenu(null);
+  // };
+
+  console.log(showUserMenu, 'showUserMenu');
+
+
+  const settings = [
+    {
+      title: "Profile",
+      route: RoutePathEnum.PROFILE,
+    },
+    {
+      title: "Subscription",
+      route: RoutePathEnum.SUBSCRIPTIONS,
+    },
+    {
+      title: "Rewards",
+      route: RoutePathEnum.REWARDS,
+    },
+    {
+      title: "Refferal Program",
+      route: RoutePathEnum.REFER,
+    },
+    {
+      title: "Logout",
+      route: AuthRoutePathEnum.SIGN_IN,
+    },
+  ]
+  // );
+
+
+
   const [open, setOpen] = useState<boolean>(false);
   const spring = useSpring({
     from: { height: "0px" },
-    to: { height: !isMobile ? "60px" : open ? "200px" : "0px" },
+    to: { height: !isMobile ? "60px" : open ? "250px" : "0px" },
   });
   const navigate = useNavigate();
 
-  const settings = React.useMemo(
-    () => [
-      {
-        title: "Profile",
-        route: RoutePathEnum.PROFILE,
-      },
-      {
-        title: "Subscription",
-        route: RoutePathEnum.SUBSCRIPTIONS,
-      },
-      {
-        title: "Rewards",
-        route: RoutePathEnum.REWARDS,
-      },
-      {
-        title: "Refferal Program",
-        route: RoutePathEnum.REFER,
-      },
-      {
-        title: "Logout",
-        route: AuthRoutePathEnum.SIGN_IN,
-      },
-    ],
-    []
-  );
+  // const settings = React.useMemo(
+  //   () => [
+  //     {
+  //       title: "Profile",
+  //       route: RoutePathEnum.PROFILE,
+  //     },
+  //     {
+  //       title: "Subscription",
+  //       route: RoutePathEnum.SUBSCRIPTIONS,
+  //     },
+  //     {
+  //       title: "Rewards",
+  //       route: RoutePathEnum.REWARDS,
+  //     },
+  //     {
+  //       title: "Refferal Program",
+  //       route: RoutePathEnum.REFER,
+  //     },
+  //     {
+  //       title: "Logout",
+  //       route: AuthRoutePathEnum.SIGN_IN,
+  //     },
+  //   ],
+  //   []
+  // );
 
   return (
     <>
@@ -84,12 +128,15 @@ export const UserAppBar = () => {
             alignItems: "center",
           }}
         >
-          <IconButton onClick={() => setOpen(!open)}>
-            <FontAwesomeIcon icon={open ? faClose : faBars} size="sm" />
-          </IconButton>
+          <div className=" absolute  left-4 top-[3px] ">
+            <IconButton onClick={() => setOpen(!open)}>
+              <FontAwesomeIcon icon={open ? faClose : faBars} size="sm" />
+            </IconButton>
+          </div>
 
-          <Logo variant="dark" />
-
+          <div className="w-[100%] flex justify-center ">
+            <Logo variant="dark" />
+          </div>
           {auth.isAuthenticated ? (
             <IconButton>
               <Badge badgeContent={2} color="error">
@@ -101,7 +148,7 @@ export const UserAppBar = () => {
               variant="contained"
               sx={{
                 minWidth: "fit-content",
-                display: { xs: "block", md: "none" },
+                display: { xs: "none", md: "none" },
               }}
             >
               Log In
@@ -133,7 +180,7 @@ export const UserAppBar = () => {
               />
               Seattle, WA
             </Button>
-            <Divider
+            {/* <Divider
               flexItem
               orientation="vertical"
               variant="middle"
@@ -144,7 +191,7 @@ export const UserAppBar = () => {
               sx={{ minWidth: "120px", color: "text.primary" }}
             >
               List on Poshhub
-            </Button>
+            </Button> */}
             <Divider
               flexItem
               orientation="vertical"
@@ -164,7 +211,7 @@ export const UserAppBar = () => {
             </Button>
           ) : (
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton sx={{ mx: 1 }}>
+              <IconButton sx={{ mx: 1 }} onClick={() => setShowUserMenu(true)}  >
                 <FontAwesomeIcon icon={faUserCircle} />
               </IconButton>
               <IconButton sx={{ mx: 1 }}>
@@ -172,34 +219,100 @@ export const UserAppBar = () => {
                   <FontAwesomeIcon icon={faBell} />
                 </Badge>
               </IconButton>
+
+
+              {showUserMenu &&
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElSetting}
+                  open={Boolean(anchorElSetting)}
+                  onClose={() => setAnchorElSetting(null)}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: -10,
+                    horizontal: 68,
+                  }}
+                >
+                  {console.log(showUserMenu, 'showUserMenu inners')}
+
+                  {settings.map((setting) => (
+                    <MenuItem
+                      key={setting.route}
+                      onClick={() => {
+                        setting.title === "Logout" && auth.signOut();
+                      }}
+                    >
+                      <Link key="profile-menu" href={setting.route}>
+                        <Typography textAlign="center">{setting.title}</Typography>
+                      </Link>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              }
+
+
+
             </Box>
           )}
         </Toolbar>
         <animated.div style={{ overflow: "hidden", ...spring }}>
           <Toolbar>
-            <List
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                ".MuiListItem-root": {
-                  minWidth: "fit-content",
-                  cursor: "pointer",
-                },
-              }}
-            >
-              <ListItem>
-                <Link href={RoutePathEnum.LISTING}>Restaurant</Link>
-              </ListItem>
-              <ListItem>
-                <Link href={RoutePathEnum.HOME}>Home Services</Link>
-              </ListItem>
-              <ListItem>
-                <Link>Auto Services</Link>
-              </ListItem>
-              <ListItem>
-                <Link>More</Link>
-              </ListItem>
-            </List>
+            <div className="moblieMenu">
+              <List
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  ".MuiListItem-root": {
+                    minWidth: "fit-content",
+                    cursor: "pointer",
+                  },
+                }}
+              >
+                <ListItem>
+                  <Link href={RoutePathEnum.LISTING}>Restaurant</Link>
+                </ListItem>
+                <ListItem>
+                  <Link href={RoutePathEnum.HOME}>Home Services</Link>
+                </ListItem>
+                <ListItem>
+                  <Link>Auto Services</Link>
+                </ListItem>
+                <ListItem>
+                  <Link>More</Link>
+                </ListItem>
+              </List>
+
+              {!auth.isAuthenticated ? (
+                <Button
+                  variant="contained"
+                  sx={{ minWidth: "100px", display: { xs: "block", md: "none" } }}
+                  onClick={() => {
+                    navigate(AuthRoutePathEnum.SIGN_IN);
+                  }}
+                >
+                  Log In
+                </Button>
+              ) : (
+                <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                  <IconButton sx={{ mx: 1 }} onClick={() => setShowUserMenu(true)} >
+                    <FontAwesomeIcon icon={faUserCircle} />
+                  </IconButton>
+                  <IconButton sx={{ mx: 1 }}>
+                    <Badge badgeContent={2} color="error">
+                      <FontAwesomeIcon icon={faBell} />
+                    </Badge>
+                  </IconButton>
+
+
+
+                </Box>
+              )}
+            </div>
+
           </Toolbar>
         </animated.div>
       </AppBar>
