@@ -156,7 +156,6 @@ export function AdminNewlisting() {
                       value={businessName}
                       onChange={handleBusinessNameChange}
                       required
-                      // fullWidth
                     />
                   </FormControl>
                 </Box>
