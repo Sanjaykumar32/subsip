@@ -8,10 +8,16 @@ interface IInitialValue {
 }
 
 interface ISignUpControllerReturns {
-  getters: { value: IInitialValue; theme: Theme; errors: IInitialValue };
+  getters: {
+    value: IInitialValue;
+    theme: Theme;
+    errors: IInitialValue;
+    open: boolean;
+  };
   handlers: {
     changeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
     submitHandler: () => void;
+    handleClose: () => void;
   };
 }
 
@@ -31,6 +37,16 @@ const SignUpController = (): ISignUpControllerReturns => {
     password: "",
   });
   const [errorCount, setErrorCount] = useState<number>(0);
+
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   /**
    * Set the email and password value
@@ -60,18 +76,19 @@ const SignUpController = (): ISignUpControllerReturns => {
   /**
    * @return {void}
    */
-  const submitHandler = (): void => {
+  const submitHandler = async (): Promise<void> => {
     setErrors(validate(value));
     setErrorCount(errorCount + 1);
     if (!errors.email && !errors.password) {
-      auth.signUp({ email: value.email, password: value.password });
+      await auth.signUp({ email: value.email, password: value.password });
       setValue({ email: "", password: "" });
+      handleClickOpen();
     }
   };
 
   return {
-    getters: { value, theme, errors },
-    handlers: { changeHandler, submitHandler },
+    getters: { value, theme, errors, open },
+    handlers: { changeHandler, submitHandler, handleClose },
   };
 };
 
