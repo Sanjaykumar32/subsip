@@ -46,7 +46,7 @@ export function SignIn(): ReactElement {
             </Typography>
           </Link>
         </Box>
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} >
           <FormGroup sx={{ textAlign: "left", my: 2 }}>
             <InputBox>
               <Label> Email </Label>

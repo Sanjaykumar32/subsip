@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Menu,
   MenuItem,
@@ -29,7 +29,7 @@ import { faBell, faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import { useAuth } from "context/auth.context";
 import { useSpring, animated } from "@react-spring/web";
 import "./appBar-v2-style.css";
-import { AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { SearchField } from "./component/search-field/search-field";
 
@@ -38,6 +38,8 @@ export const UserAppBar = () => {
   const auth = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [menuItem, setMenuItem] = useState<any>([])
+
   const opens = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,6 +48,76 @@ export const UserAppBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+
+  useEffect(() => {
+
+    const userId = localStorage.getItem("userId")
+    if (userId === '4') {
+
+      const data = [
+        {
+          title: "DashBoard",
+          route: AdminRoutePathEnum.ADMIN,
+        },
+        {
+          title: "Profile",
+          route: RoutePathEnum.PROFILE,
+        },
+        {
+          title: "Subscription",
+          route: RoutePathEnum.SUBSCRIPTIONS,
+        },
+        {
+          title: "Rewards",
+          route: RoutePathEnum.REWARDS,
+        },
+        {
+          title: "Refferal Program",
+          route: RoutePathEnum.REFER,
+        },
+        {
+          title: "Logout",
+          route: AuthRoutePathEnum.SIGN_IN,
+        },
+      ]
+      setMenuItem(data)
+
+
+    } else {
+      // setAuthenticated(false);
+      const data = [
+        {
+          title: "Profile",
+          route: RoutePathEnum.PROFILE,
+        },
+        {
+          title: "Subscription",
+          route: RoutePathEnum.SUBSCRIPTIONS,
+        },
+        {
+          title: "Rewards",
+          route: RoutePathEnum.REWARDS,
+        },
+        {
+          title: "Refferal Program",
+          route: RoutePathEnum.REFER,
+        },
+        {
+          title: "Logout",
+          route: AuthRoutePathEnum.SIGN_IN,
+        },
+      ]
+      setMenuItem(data)
+
+
+    }
+
+  }, [])
+
+  console.log(menuItem, 'admin here')
+
 
   const settings = [
     {
@@ -197,16 +269,19 @@ export const UserAppBar = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                {settings.map((setting) => (
+                {menuItem.map((setting: any) => (
                   <MenuItem
+
                     key={setting.route}
                     onClick={() => {
                       setting.title === "Logout" && auth.signOut();
                       handleClose();
                     }}
                   >
+
+
                     <Link key="profile-menu" href={setting.route}>
-                      <Typography textAlign="center">
+                      <Typography textAlign="center" className='text-black ' >
                         {setting.title}
                       </Typography>
                     </Link>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   Box,
   Button,
@@ -15,6 +15,13 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+// import { ICategoryData } from "interface";
+import { GET_CATEGORY } from "data/selectors";
+import { useAppDispatch, useAppSelector } from "data";
+import { AdminThunk } from "data/thunk/admin.thunk";
+
+
+
 
 export function ClickOnCategory() {
   const theme = useTheme();
@@ -31,6 +38,24 @@ export function ClickOnCategory() {
       "Claim FREE gift cards as they become available from the business listed above ",
   };
 
+
+  const categoryData = useAppSelector(GET_CATEGORY);
+  const dispatch = useAppDispatch();
+  console.log(categoryData, "categoryData");
+
+  const getcategory = useCallback(async () => {
+    try {
+      dispatch(AdminThunk.getCategory());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getcategory();
+  }, [getcategory]);
+
+
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
@@ -41,7 +66,13 @@ export function ClickOnCategory() {
                 Listings by subcategory:
               </Typography>
               <List>
-                {Array(30)
+                {categoryData.map((item, index) => (
+                  <ListItem key={index} sx={{ px: 0 }}>
+                    {item.vName}
+                  </ListItem>
+                ))}
+
+                {/* {Array(30)
                   .fill({
                     name: "Sandwiches",
                   })
@@ -49,32 +80,38 @@ export function ClickOnCategory() {
                     <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }}>
                       {element.name}
                     </ListItem>
-                  ))}
+                  ))} */}
               </List>
             </Box>
           </Drawer>
         )}
         {!isMobile && (
-          <Grid item xs={12} md={2}>
-            <Box sx={{ overflow: "auto", my: 1 }}>
+          <Grid item xs={12} md={2.1} >
+            <Box sx={{ overflow: "auto", my: 1 }} className="pl-[18px]">
               <Typography variant="body1" fontWeight="600">
                 Listings by Category:
               </Typography>
-              <List>
-                {Array(30)
+              <List >
+                {categoryData.map((item, index) => (
+                  <ListItem key={index} sx={{ px: 0 }} className='font-normal text-[16px] leading-[24px] text-[#434d59]'>
+                    {item.vName}
+                  </ListItem>
+                ))}
+
+                {/* {Array(30)
                   .fill({
                     name: "Sandwiches",
                   })
                   .map((element, index: number) => (
-                    <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }}>
+                    <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }} className='font-normal text-[16px] leading-[24px] text-[#434d59]'>
                       {element.name}
                     </ListItem>
-                  ))}
+                  ))} */}
               </List>
             </Box>
           </Grid>
         )}
-        <Grid item xs={12} md={10}>
+        <Grid item xs={12} md={9.8}>
           <Box>
             <Typography variant="alternet">
               Browse restaurants in Seattle, WA
@@ -125,13 +162,16 @@ export function ClickOnCategory() {
               {Array(12)
                 .fill(data)
                 .map((data) => (
-                  <Grid key={data.title} item sm={4} className=' pb-[20px] ' >
+                  <Grid key={data.title} item sm={4} className='pb-[20px] ' >
                     <Card
                       sx={{
                         maxWidth: "330px",
                         minHeight: "350px",
                       }}
-                      elevation={6}
+                      elevation={0}
+                      className='border-[1px] border-[#dadde5] '
+                      style={{ boxShadow: '0 0 20px #0100001a' }}
+
                     >
                       <img
                         src={data.image}

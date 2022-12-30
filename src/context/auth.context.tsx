@@ -49,6 +49,19 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
 
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+
+    const token = localStorage.getItem("token")
+    if (token) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
+    }
+
+  }, [])
+
+
+
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {
       const response: ISignInResponse = await AuthService.signIn(credentials);
@@ -75,9 +88,9 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     setAuthenticated(false);
   }, []);
 
-  useEffect(() => {
-    dispatch(UserThunk.fetchProfile());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(UserThunk.fetchProfile());
+  // }, [dispatch]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, signIn, signOut, signUp }}>
