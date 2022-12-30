@@ -13,17 +13,18 @@ import { InputBox, Label } from "components";
 
 import SignUpController from "./sign-up-controller";
 import { AuthRoutePathEnum } from "enum";
+import OtpBox from "./otpBox";
 
 export function SignUp() {
   const { getters, handlers } = SignUpController();
-  const { theme, value, errors } = getters;
-  const { changeHandler, submitHandler } = handlers;
+  const { theme, value, errors, open } = getters;
+  const { changeHandler, submitHandler, handleClose } = handlers;
 
   return (
     <Container maxWidth="xs" sx={{ p: 4 }}>
       <Box sx={{ my: 1, textAlign: "center" }}>
         <Typography variant="alternet"> Sign up </Typography>
-        <Form onSubmit={submitHandler}>
+        <Form>
           <FormGroup sx={{ textAlign: "left" }}>
             <InputBox>
               <Label> Email </Label>
@@ -49,7 +50,7 @@ export function SignUp() {
             {errors.password && (
               <span style={{ color: "red" }}>{errors.password}</span>
             )}
-            <Button variant="contained" sx={{ mt: 4 }} type="submit">
+            <Button variant="contained" sx={{ mt: 4 }} onClick={submitHandler}>
               <Typography
                 variant="alternet"
                 fontSize={theme.typography.pxToRem(20)}
@@ -80,6 +81,7 @@ export function SignUp() {
           </Box>
         </Box>
       </Box>
+      <OtpBox open={open} handleClose={handleClose} />
     </Container>
   );
 }
