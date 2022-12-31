@@ -33,7 +33,6 @@ export const NewReferralPriceController =
     };
 
     const submitHandler = (): void => {
-      console.log("kkksdsdskkk");
       dispatch(
         AdminThunk.newReferralPrice({
           mileStoneName: milestoneName,

@@ -53,7 +53,6 @@ export const AddSubCategoryController =
           addedBy: userId ? parseInt(userId) : 0,
         })
       );
-      console.log(response);
       if (response.payload.data) {
         naviagate(AdminRoutePathEnum.ADMIN_SUBCATEGORY);
       }
