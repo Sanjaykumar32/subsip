@@ -31,4 +31,15 @@ export class AuthenticationThunk {
       return response;
     }
   );
+
+  /**
+   * Send OTP
+   */
+  public static sendOtp = createAsyncThunk(
+    "auth/send-otp",
+    async (payload: any): Promise<void> => {
+      const response = await AuthService.OtpSend(payload);
+      return response;
+    }
+  );
 }

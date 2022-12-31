@@ -8,6 +8,7 @@ import {
   ISignInResponse,
   ISignUpRequest,
   ISignUpResponse,
+  IOTpRequest,
 } from "interface";
 
 /**
@@ -46,6 +47,21 @@ export class AuthService {
         method: "POST",
         data: credentials,
       });
+
+    return res.data;
+  }
+
+  /**
+   * OTP Send
+   * @param {IOTpRequest} credentials
+   * @return {Promise<any>}
+   */
+  public static async OtpSend(credentials: IOTpRequest): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/auth/send-otp",
+      method: "POST",
+      data: credentials,
+    });
 
     return res.data;
   }

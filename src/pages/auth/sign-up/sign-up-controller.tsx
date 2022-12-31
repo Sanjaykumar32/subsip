@@ -1,5 +1,8 @@
 import { Theme, useTheme } from "@mui/material";
 import { useAuth } from "context/auth.context";
+import { useAppDispatch } from "data";
+import { AuthenticationThunk } from "data/thunk";
+import { UserThunk } from "data/thunk/user.thunk";
 import { ChangeEvent, useState } from "react";
 
 interface IInitialValue {
@@ -39,9 +42,15 @@ const SignUpController = (): ISignUpControllerReturns => {
   const [errorCount, setErrorCount] = useState<number>(0);
 
   const [open, setOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
-  const handleClickOpen = () => {
+  const handleClickOpen = async () => {
     setOpen(true);
+    await dispatch(
+      AuthenticationThunk.sendOtp({
+        email: value.email,
+      })
+    );
   };
 
   const handleClose = () => {
