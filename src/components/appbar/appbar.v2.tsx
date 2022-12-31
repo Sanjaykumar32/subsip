@@ -32,6 +32,12 @@ import "./appBar-v2-style.css";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { SearchField } from "./component/search-field/search-field";
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 export const UserAppBar = () => {
   const theme = useTheme();
@@ -39,6 +45,7 @@ export const UserAppBar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [menuItem, setMenuItem] = useState<any>([]);
+  const [locationPopUp, setLocationPopUP] = useState<any>(false)
 
   const opens = Boolean(anchorEl);
 
@@ -48,6 +55,18 @@ export const UserAppBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const showLocationPopUp = () => {
+    setLocationPopUP(true)
+  }
+
+  const handleLocationClose = ()=> {
+    setLocationPopUP(false)
+  }
+
+  const handleLocation = (event:any)=> {
+  console.log(event.target.value ,'location value')
+  }
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -197,6 +216,7 @@ export const UserAppBar = () => {
           <SearchField />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button
+              onClick={showLocationPopUp}
               disableRipple
               sx={{ minWidth: "120px", color: "text.primary" }}
             >
@@ -342,6 +362,27 @@ export const UserAppBar = () => {
         sx={{ zIndex: theme.zIndex.appBar - 1 }}
         onClick={() => setOpen(false)}
       />
+
+      <Dialog open={locationPopUp} onClose={handleLocationClose} maxWidth='lg'>
+        <DialogTitle>Search Location</DialogTitle>
+        <DialogContent>
+          
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Address"
+            type="email"
+            fullWidth
+            variant="standard"
+            onChange={handleLocation}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleLocationClose}>Cancel</Button>
+          <Button onClick={handleLocationClose}>Search</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

@@ -27,6 +27,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NewlistingController } from "./admin-new-listing-controller";
 import { Form } from "react-router-dom";
+import Switch from "@mui/material/Switch";
 
 interface ListFormItem {
   id: string;
@@ -48,66 +49,72 @@ export function AdminNewlisting() {
     step7,
     step8,
     step9,
+    step10,
   ]: ListFormItem[] = [
-    {
-      id: "q1",
-      label: "What's your business called?",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q2",
-      label: "Step 2: Tag your product in that category ",
-      type: InputTypeEnum.SELECT,
-      required: true,
-    },
-    {
-      id: "q3",
-      label: "Tagline",
-      type: InputTypeEnum.INPUT,
-      required: true,
-      caption:
-        "What's your pitch? Tell buyers about your product in 100 characters or less.",
-    },
-    {
-      id: "q4",
-      label: "Tell us about your buisness?",
-      type: InputTypeEnum.TEXT_AREA,
-      required: true,
-      caption:
-        "Share a high-level introduction to your product. Check out our copy guidelines for inspiration.",
-    },
-    {
-      id: "q5",
-      label: "Support Email?",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q6",
-      label: "Featured Image?",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q7",
-      label: "Step 1: Pick a business category ",
-      type: InputTypeEnum.SELECT,
-      required: true,
-    },
-    {
-      id: "q8",
-      label: "Buisness Location",
-      type: InputTypeEnum.SELECT,
-      required: true,
-    },
-    {
-      id: "q9",
-      label: " Step 2: Pick subcategory ",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-  ];
+      {
+        id: "q1",
+        label: "What's your business called?",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q2",
+        label: "Step 2: Tag your product in that category ",
+        type: InputTypeEnum.SELECT,
+        required: true,
+      },
+      {
+        id: "q3",
+        label: "Tagline",
+        type: InputTypeEnum.INPUT,
+        required: true,
+        caption:
+          "What's your pitch? Tell buyers about your product in 100 characters or less.",
+      },
+      {
+        id: "q4",
+        label: "Tell us about your buisness?",
+        type: InputTypeEnum.TEXT_AREA,
+        required: true,
+        caption:
+          "Share a high-level introduction to your product. Check out our copy guidelines for inspiration.",
+      },
+      {
+        id: "q5",
+        label: "Support Email?",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q6",
+        label: "Featured Image?",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q7",
+        label: "Step 1: Pick a business category ",
+        type: InputTypeEnum.SELECT,
+        required: true,
+      },
+      {
+        id: "q8",
+        label: "Buisness Location",
+        type: InputTypeEnum.SELECT,
+        required: true,
+      },
+      {
+        id: "q9",
+        label: " Step 2: Pick subcategory ",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q10",
+        label: "On Banner",
+        type: InputTypeEnum.SWITCH_DEMO,
+      },
+    ];
 
   const { getters, handlers } = NewlistingController();
   const {
@@ -135,6 +142,7 @@ export function AdminNewlisting() {
     handleEmailChange,
     handleProductChange,
     handleImageChange,
+    handleBanner,
   } = handlers;
 
   const ref = useRef<HTMLInputElement>(null);
@@ -260,19 +268,22 @@ export function AdminNewlisting() {
                     />
                   </FormControl>
                 </Box>
-                <Box sx={{ my: 4 }}>
-                  <Label> {step6.label} </Label>
-                  <Typography variant="body2"> {step6.caption} </Typography>
 
-                  <input
-                    // value={image}
-                    type="file"
-                    onChange={(e: any) => {
-                      handleImageChange(e);
-                    }}
-                  />
+                <Grid container >
+                  <Grid xs={6} md={4} >
+                    <Box  >
+                      <Label> {step6.label} </Label>
+                      <Typography variant="body2"> {step6.caption} </Typography>
 
-                  {/* <FormControl fullWidth >
+                      <input
+                        // value={image}
+                        type="file"
+                        onChange={(e: any) => {
+                          handleImageChange(e);
+                        }}
+                      />
+
+                      {/* <FormControl fullWidth >
                     <input
                       // ref={ref}
                       type="file"
@@ -297,7 +308,20 @@ export function AdminNewlisting() {
                       <FontAwesomeIcon icon={faUpload} size="lg" />
                     </IconButton>
                   </FormControl> */}
-                </Box>
+                    </Box>
+                  </Grid>
+                  <Grid xs={6} md={4} >
+                    <Box >
+                      <Label> {step10.label} </Label>
+                      <Typography variant="body2"> {step10.caption} </Typography>
+                      <Switch
+                        onClick={handleBanner}
+                      />
+                    </Box>
+                  </Grid>
+                </Grid>
+
+
                 <Box sx={{ my: 4 }}>
                   <Label> {step8.label} </Label>
                   <Typography variant="body2"> {step8.caption} </Typography>

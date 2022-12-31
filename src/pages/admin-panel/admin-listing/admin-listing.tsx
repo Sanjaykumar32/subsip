@@ -96,6 +96,8 @@ export function AdminListing() {
     },
   ];
 
+ 
+
   const businessData = useAppSelector(GET_BUSINESS);
 
   const allBusiness = useCallback(async () => {
@@ -120,6 +122,7 @@ export function AdminListing() {
       Actions: ["Edit", "Delete", item?.iBusinessId],
     };
   });
+  console.log(businessData ,'businessData')
 
   const naviagate = useNavigate();
   return (

@@ -4,6 +4,7 @@ import { GET_CATEGORY, GET_SUB_CATEGORY, GET_BUSINESS } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { UserThunk } from "data/thunk/user.thunk";
 import { IBusiness, ICategoryData, ISubCategoryData } from "interface";
+import Switch from '@mui/material/Switch';
 import {
   ChangeEvent,
   SetStateAction,
@@ -43,6 +44,7 @@ interface INewlistingControllerReturns {
       target: { files: SetStateAction<any>[] };
     }) => void;
     submitHandler: () => void;
+    handleBanner:(event: any) => void;
   };
 }
 
@@ -63,6 +65,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const categoryData = useAppSelector(GET_CATEGORY);
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const businessData = useAppSelector(GET_BUSINESS);
+  const [banner , setBanner] = useState<string>('false')
   const dispatch = useAppDispatch();
 
   const handleHeadlineChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -89,6 +92,10 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     setImage(event.target.files[0]);
   };
 
+  const handleBanner = (event: any ): void => {
+    setBanner(event.target.checked)
+  }
+
   const handleCategoryChange = (event: SelectChangeEvent): void => {
     setCategory(event.target.value as string);
   };
@@ -108,6 +115,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   ): void => {
     setBusinessLocation(event.target.value as string);
   };
+  console.log(banner ,'banner state')
 
   const navigate = useNavigate();
 
@@ -124,7 +132,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("country", "1");
     form.append("state", "2");
     form.append("city", "2");
-    form.append("onBanner", "true");
+    form.append("onBanner", banner);
     form.append("image", image, image?.name);
     form.append("email", email);
     form.append("category", category);
@@ -203,6 +211,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       handleEmailChange,
       handleProductChange,
       handleImageChange,
+      handleBanner,
     },
   };
 };
