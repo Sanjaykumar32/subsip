@@ -149,8 +149,6 @@ export const NewNotificationButtonController =
       navigate(AdminRoutePathEnum.ADMIN_NOTIFICATION);
     };
 
-    console.log(categoryData, "categoryData");
-
     return {
       getters: {
         headline,

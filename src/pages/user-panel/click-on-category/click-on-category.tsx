@@ -20,9 +20,6 @@ import { GET_CATEGORY } from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
 
-
-
-
 export function ClickOnCategory() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -38,10 +35,8 @@ export function ClickOnCategory() {
       "Claim FREE gift cards as they become available from the business listed above ",
   };
 
-
   const categoryData = useAppSelector(GET_CATEGORY);
   const dispatch = useAppDispatch();
-  console.log(categoryData, "categoryData");
 
   const getcategory = useCallback(async () => {
     try {
@@ -54,7 +49,6 @@ export function ClickOnCategory() {
   useEffect(() => {
     getcategory();
   }, [getcategory]);
-
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
@@ -86,14 +80,18 @@ export function ClickOnCategory() {
           </Drawer>
         )}
         {!isMobile && (
-          <Grid item xs={12} md={2.1} >
+          <Grid item xs={12} md={2.1}>
             <Box sx={{ overflow: "auto", my: 1 }} className="pl-[18px]">
               <Typography variant="body1" fontWeight="600">
                 Listings by Category:
               </Typography>
-              <List >
+              <List>
                 {categoryData.map((item, index) => (
-                  <ListItem key={index} sx={{ px: 0 }} className='font-normal text-[16px] leading-[24px] text-[#434d59]'>
+                  <ListItem
+                    key={index}
+                    sx={{ px: 0 }}
+                    className="font-normal text-[16px] leading-[24px] text-[#434d59]"
+                  >
                     {item.vName}
                   </ListItem>
                 ))}
@@ -121,7 +119,7 @@ export function ClickOnCategory() {
                 display: "flex",
                 alignItems: "baseline",
                 justifyContent: "space-between",
-                paddingBottom: '20px',
+                paddingBottom: "20px",
               }}
             >
               <Typography variant="body2" fontWeight="600">
@@ -162,25 +160,24 @@ export function ClickOnCategory() {
               {Array(12)
                 .fill(data)
                 .map((data) => (
-                  <Grid key={data.title} item sm={4} className='pb-[20px] ' >
+                  <Grid key={data.title} item sm={4} className="pb-[20px] ">
                     <Card
                       sx={{
                         maxWidth: "330px",
                         minHeight: "350px",
                       }}
                       elevation={0}
-                      className='border-[1px] border-[#dadde5] '
-                      style={{ boxShadow: '0 0 20px #0100001a' }}
-
+                      className="border-[1px] border-[#dadde5] "
+                      style={{ boxShadow: "0 0 20px #0100001a" }}
                     >
                       <img
                         src={data.image}
                         alt={data.title}
                         width="100%"
                         height="100px"
-                        style={{ objectFit: "cover", height: '215px', }}
+                        style={{ objectFit: "cover", height: "215px" }}
                       />
-                      <Box sx={{ py: 1.5, pl: '12px' }}>
+                      <Box sx={{ py: 1.5, pl: "12px" }}>
                         <Typography variant="body1" fontWeight={600}>
                           {data.title}
                         </Typography>

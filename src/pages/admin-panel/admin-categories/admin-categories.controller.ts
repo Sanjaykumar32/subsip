@@ -28,7 +28,6 @@ interface IcategoryControllerReturns {
 export const CategoryController = (): IcategoryControllerReturns => {
   const categoryData = useAppSelector(GET_CATEGORY);
   const dispatch = useAppDispatch();
-  console.log(categoryData, "categoryData");
 
   const getcategory = useCallback(async () => {
     try {

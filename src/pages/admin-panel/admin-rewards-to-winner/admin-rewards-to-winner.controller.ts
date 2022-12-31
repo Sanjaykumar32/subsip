@@ -26,7 +26,6 @@ export const RewardToWinnerController =
     const categoryData = useAppSelector(GET_CATEGORY);
     const dispatch = useAppDispatch();
     const rewardToWinner = useAppSelector(GET_RWARD_TO_WINNER_LIST);
-    console.log(rewardToWinner, "rewardToWinner");
 
     const rewardToWinnerList = useCallback(async () => {
       try {

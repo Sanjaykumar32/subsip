@@ -24,7 +24,6 @@ interface IReferralControllerReturns {
 export const ReferralController = (): IReferralControllerReturns => {
   const categoryData = useAppSelector(GET_CATEGORY);
   const dispatch = useAppDispatch();
-  console.log(categoryData, "categoryData");
   const referralData = useAppSelector(GET_REFERRAL_LIST);
 
   const referralList = useCallback(async () => {

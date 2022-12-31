@@ -128,8 +128,6 @@ export function AdminListingToSubscribers() {
 
   const allSubscriberOfBussiness = useAppSelector(GET_SUBSCRIBER_OF_BUSSINESS);
 
-  console.log(allSubscriberOfBussiness, "allSubscriberOfBussiness");
-
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
       <Box

@@ -25,7 +25,6 @@ export const AdminNotificationController =
     const notificationData = useAppSelector(GET_NOTIFICATION);
     const dispatch = useAppDispatch();
     const userId = localStorage.getItem("userId");
-    console.log(notificationData, "notificationData");
 
     const getNotification = useCallback(async () => {
       try {

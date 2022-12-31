@@ -366,7 +366,6 @@ export function ResponsiveAppBar() {
     ),
     [menu]
   );
-  console.log(menu);
 
   const ActionMenuMobile = useMemo(
     () => (

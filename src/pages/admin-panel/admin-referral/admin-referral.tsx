@@ -109,7 +109,6 @@ export function AdminReferral() {
   const dispatch = useAppDispatch();
 
   const refferalCodeData = useAppSelector(GET_REFFERRAL_CODE);
-  console.log(refferalCodeData, "refferalCodeData");
 
   const refferalCode = useCallback(async () => {
     const userId = "11";

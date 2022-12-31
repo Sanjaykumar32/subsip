@@ -38,7 +38,7 @@ export const UserAppBar = () => {
   const auth = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [menuItem, setMenuItem] = useState<any>([])
+  const [menuItem, setMenuItem] = useState<any>([]);
 
   const opens = Boolean(anchorEl);
 
@@ -49,13 +49,9 @@ export const UserAppBar = () => {
     setAnchorEl(null);
   };
 
-
-
   useEffect(() => {
-
-    const userId = localStorage.getItem("userId")
-    if (userId === '4') {
-
+    const userId = localStorage.getItem("userId");
+    if (userId === "4") {
       const data = [
         {
           title: "DashBoard",
@@ -81,10 +77,8 @@ export const UserAppBar = () => {
           title: "Logout",
           route: AuthRoutePathEnum.SIGN_IN,
         },
-      ]
-      setMenuItem(data)
-
-
+      ];
+      setMenuItem(data);
     } else {
       // setAuthenticated(false);
       const data = [
@@ -108,16 +102,10 @@ export const UserAppBar = () => {
           title: "Logout",
           route: AuthRoutePathEnum.SIGN_IN,
         },
-      ]
-      setMenuItem(data)
-
-
+      ];
+      setMenuItem(data);
     }
-
-  }, [])
-
-  console.log(menuItem, 'admin here')
-
+  }, []);
 
   const settings = [
     {
@@ -271,17 +259,14 @@ export const UserAppBar = () => {
               >
                 {menuItem.map((setting: any) => (
                   <MenuItem
-
                     key={setting.route}
                     onClick={() => {
                       setting.title === "Logout" && auth.signOut();
                       handleClose();
                     }}
                   >
-
-
                     <Link key="profile-menu" href={setting.route}>
-                      <Typography textAlign="center" className='text-black ' >
+                      <Typography textAlign="center" className="text-black ">
                         {setting.title}
                       </Typography>
                     </Link>

@@ -108,7 +108,6 @@ export function Home() {
     <div className="w-full overflow-x-hidden">
       <div className="py-5 md:py-20 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
-          {console.log(bannerData, "bannerData")}
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
               <div className="max-w-[100%] mt-[130px] lg:max-w-[80%] xl:max-w-[70%] gap-5  min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
@@ -139,7 +138,11 @@ export function Home() {
                 </div>
                 <div className=" relative min-h-[353px] max-h-[calc(100vh-25rem)] w-full  md:w-1/2 flex justify-center items-center">
                   <img
-                    src={ele?.vImage ? "http://159.223.194.50:8000/" + ele?.vImage : 'http://159.223.194.50:8000/public/uploads/1672076769972.png'}
+                    src={
+                      ele?.vImage
+                        ? "http://159.223.194.50:8000/" + ele?.vImage
+                        : "http://159.223.194.50:8000/public/uploads/1672076769972.png"
+                    }
                     className="h-full w-full object-contain"
                   />
                 </div>
@@ -208,7 +211,6 @@ export function Home() {
         <div className="relative my-10 w-full">
           <Slider ref={cardRef3} {...cardSettings}>
             {businessData?.map((ele, index) => {
-              console.log(ele, "hhhh");
               return (
                 <div
                   style={{

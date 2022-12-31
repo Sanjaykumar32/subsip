@@ -37,10 +37,6 @@ const PasswordResetController = (): IPasswordResetControllerReturns => {
    * @return {void}
    */
   const submitHandler = (): void => {
-    console.log({
-      password: value.password,
-      confirmPassword: value.confirmPassword,
-    });
     setValue({ password: "", confirmPassword: "" });
   };
 

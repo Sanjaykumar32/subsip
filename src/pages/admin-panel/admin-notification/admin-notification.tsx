@@ -22,7 +22,6 @@ export function AdminNotification() {
   const navigate = useNavigate();
   const { getters } = AdminNotificationController();
   const { attributes, notificationData } = getters;
-  console.log(notificationData, "notificationData");
 
   const columns: GridColDef[] = [
     {

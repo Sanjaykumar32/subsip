@@ -63,10 +63,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const categoryData = useAppSelector(GET_CATEGORY);
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const businessData = useAppSelector(GET_BUSINESS);
-
-  // console.log(image, 'image')
-  // console.log(image.name, 'image name')
-
   const dispatch = useAppDispatch();
 
   const handleHeadlineChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -135,7 +131,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("subCategory", subCategory);
 
     const res = await dispatch(AdminThunk.createListing(form));
-    // console.log(res, 'res ')
     navigate(AdminRoutePathEnum.ADMIN_LISTING);
     toast.success("Create Listing SuccessFully");
   };
