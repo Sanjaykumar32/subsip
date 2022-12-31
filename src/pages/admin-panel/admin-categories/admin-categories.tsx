@@ -57,7 +57,7 @@ export function AdminCategories() {
       width: 110,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value}>
+          <Tooltip title={params.value[0]}>
             <FontAwesomeIcon icon={faPen} />
           </Tooltip>
           <Tooltip title={params.value[1]}>
