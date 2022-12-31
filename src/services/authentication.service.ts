@@ -9,6 +9,7 @@ import {
   ISignUpRequest,
   ISignUpResponse,
   IOTpRequest,
+  ISendOTpRequest,
 } from "interface";
 
 /**
@@ -54,11 +55,26 @@ export class AuthService {
   /**
    * OTP Send
    * @param {IOTpRequest} credentials
-   * @return {Promise<any>}
+   * @return {Promise<>}
    */
   public static async OtpSend(credentials: IOTpRequest): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: "/auth/send-otp",
+      method: "POST",
+      data: credentials,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * check OTP Send
+   * @param {ISendOTpRequest} credentials
+   * @return {Promise<any>}
+   */
+  public static async checkOtpSend(credentials: ISendOTpRequest): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/auth/check-otp",
       method: "POST",
       data: credentials,
     });

@@ -128,6 +128,18 @@ export class AdminThunk {
   );
 
   /**
+   * category
+   */
+  public static updateCategory = createAsyncThunk(
+    "admin/update/category",
+    async (payload: ICategoryRequest): Promise<ICategoryDataResponse> => {
+      console.log(payload, "payload");
+      const response = await AdminService.updateCategory(payload);
+      return response;
+    }
+  );
+
+  /**
    * subCategory
    */
   public static subCategory = createAsyncThunk(
@@ -209,7 +221,7 @@ export class AdminThunk {
   );
 
   /**
-   * New Notification
+   * New category
    */
   public static getCategory = createAsyncThunk(
     "admin/newNotification",

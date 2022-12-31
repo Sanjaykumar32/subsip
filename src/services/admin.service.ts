@@ -154,7 +154,7 @@ export class AdminService {
   }
 
   /**
-   * category
+   * create category
    * @param {ICategoryRequest} credentials
    * @return {Promise<ICategoryDataResponse>}
    */
@@ -172,7 +172,25 @@ export class AdminService {
   }
 
   /**
-   * category
+   * update category
+   * @param {ICategoryRequest} credentials
+   * @return {Promise<ICategoryDataResponse>}
+   */
+  public static async updateCategory(
+    credentials: ICategoryRequest
+  ): Promise<ICategoryDataResponse> {
+    const res: AxiosResponse<ICategoryDataResponse> =
+      await ApiHelper.send<ICategoryDataResponse>({
+        url: "/category",
+        method: "PUT",
+        data: credentials,
+      });
+
+    return res.data;
+  }
+
+  /**
+   * get category
    * @return {Promise<IGetCategoryResponse>}
    */
   public static async getcategory(): Promise<IGetCategoryResponse> {

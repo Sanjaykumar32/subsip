@@ -21,3 +21,7 @@ export interface IResetPasswordRequest {
 export interface IOTpRequest {
   email: string;
 }
+
+export interface ISendOTpRequest {
+  otp: string;
+}
