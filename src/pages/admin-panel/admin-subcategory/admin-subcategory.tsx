@@ -12,7 +12,7 @@ import {
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminBackButton } from "components";
 import { AdminRoutePathEnum } from "enum";
@@ -20,6 +20,10 @@ import { useNavigate } from "react-router-dom";
 import { SubCategoryController } from "./admin-subcategory-controller";
 
 export function AdminSubCategory() {
+  const naviagate = useNavigate();
+  const { getters, handlers } = SubCategoryController();
+  const { attributes } = getters;
+  const { deleteSubCategorylist } = handlers;
   const columns: GridColDef[] = [
     {
       field: "vName",
@@ -35,14 +39,19 @@ export function AdminSubCategory() {
           <Tooltip title={params.value}>
             <FontAwesomeIcon icon={faPen} />
           </Tooltip>
+          <Tooltip title={params.value[1]}>
+            <FontAwesomeIcon
+              icon={faTrash}
+              onClick={() => {
+                deleteSubCategorylist(params.value[2]);
+              }}
+              className="ml-[25px]"
+            />
+          </Tooltip>
         </Box>
       ),
     },
   ];
-
-  const naviagate = useNavigate();
-  const { getters } = SubCategoryController();
-  const { attributes } = getters;
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>

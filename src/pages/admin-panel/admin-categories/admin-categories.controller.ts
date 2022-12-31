@@ -54,7 +54,7 @@ export const CategoryController = (): IcategoryControllerReturns => {
   });
 
   function deleteCategorylist(ID: number) {
-    dispatch(AdminThunk.deleteCategory({ category: ID }));
+    dispatch(AdminThunk.deleteCategory({ categoryId: ID }));
     toast.success("Category Delete SuccessFully");
     getcategory();
   }

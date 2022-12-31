@@ -71,14 +71,15 @@ export const NewRewardController = (): INewRewardControllerReturns => {
     }
   );
 
-  const form = new FormData();
-  form.append("name", name);
-  form.append("availibility", "4");
-  form.append("category", category);
-  form.append("subCategory", subCategory);
-
   const submitHandler = (): void => {
-    dispatch(AdminThunk.newReward(form));
+    dispatch(
+      AdminThunk.newReward({
+        name: name,
+        availability: "4",
+        category: category,
+        subCategory: subCategory,
+      })
+    );
     setName("");
     setAvailibility(0);
     setSubCategory("");
