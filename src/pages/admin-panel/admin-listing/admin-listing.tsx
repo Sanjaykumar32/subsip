@@ -30,9 +30,9 @@ export function AdminListing() {
   const dispatch = useAppDispatch();
   const [loader, setLoader] = useState(false);
 
-  function deleteDatalist(ID: number) {
+  async function deleteDatalist(ID: number) {
     setLoader(true);
-    dispatch(AdminThunk.deleteBusiness(ID));
+    await dispatch(AdminThunk.deleteBusiness(ID));
     allBusiness();
     toast.success("Listing Delete SuccessFully");
     setLoader(false);
@@ -100,7 +100,7 @@ export function AdminListing() {
 
   const allBusiness = useCallback(async () => {
     try {
-      dispatch(UserThunk.business());
+      await dispatch(UserThunk.business());
     } catch (error) {
       console.log(error);
     }
@@ -110,7 +110,7 @@ export function AdminListing() {
     allBusiness();
   }, [allBusiness]);
 
-  const rows = businessData.map(function (item) {
+  const rows = businessData.map((item) => {
     return {
       id: item.iBusinessId,
       Profile: item.vImage,

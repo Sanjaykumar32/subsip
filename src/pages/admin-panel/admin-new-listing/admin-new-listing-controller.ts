@@ -137,7 +137,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
   const allBusiness = useCallback(async () => {
     try {
-      dispatch(UserThunk.business());
+      await dispatch(UserThunk.business());
     } catch (error) {
       console.log(error);
     }
@@ -149,7 +149,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
   const getcategory = useCallback(async () => {
     try {
-      dispatch(AdminThunk.getCategory());
+      await dispatch(AdminThunk.getCategory());
     } catch (error) {
       console.log(error);
     }
@@ -167,7 +167,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
   const getSubCategory = useCallback(async () => {
     try {
-      dispatch(AdminThunk.getSubCategory());
+      await dispatch(AdminThunk.getSubCategory());
     } catch (error) {
       console.log(error);
     }

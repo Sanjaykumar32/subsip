@@ -28,7 +28,9 @@ export const AdminNotificationController =
 
     const getReward = useCallback(async () => {
       try {
-        dispatch(AdminThunk.notificationList({ userId: userId ? userId : "" }));
+        await dispatch(
+          AdminThunk.notificationList({ userId: userId ? userId : "" })
+        );
       } catch (error) {
         console.log(error);
       }

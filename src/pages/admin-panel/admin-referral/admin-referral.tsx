@@ -112,9 +112,8 @@ export function AdminReferral() {
 
   const refferalCode = useCallback(async () => {
     const userId = "11";
-
     try {
-      dispatch(AdminThunk.refferralCode({ userId: userId }));
+      await dispatch(AdminThunk.refferralCode({ userId: userId }));
     } catch (error) {
       console.log(error);
     }

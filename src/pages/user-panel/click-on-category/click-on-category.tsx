@@ -40,7 +40,7 @@ export function ClickOnCategory() {
 
   const getcategory = useCallback(async () => {
     try {
-      dispatch(AdminThunk.getCategory());
+      await dispatch(AdminThunk.getCategory());
     } catch (error) {
       console.log(error);
     }

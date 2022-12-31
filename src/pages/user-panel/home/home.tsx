@@ -82,7 +82,7 @@ export function Home() {
 
   const bannerList = useCallback(async () => {
     try {
-      dispatch(UserThunk.bannerList());
+      await dispatch(UserThunk.bannerList());
     } catch (error) {
       console.log(error);
     }
@@ -92,9 +92,10 @@ export function Home() {
     bannerList();
   }, [bannerList]);
   const businessData = useAppSelector(GET_BUSINESS);
+
   const allBusiness = useCallback(async () => {
     try {
-      dispatch(UserThunk.business());
+      await dispatch(UserThunk.business());
     } catch (error) {
       console.log(error);
     }
@@ -263,7 +264,7 @@ const SliderCard = (props: any) => {
   async function onButtonClick(): Promise<void> {
     !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
     try {
-      dispatch(
+      await dispatch(
         UserThunk.addSubscriberToBusiness({
           businessId: id,
           userId: userId ? userId : "",

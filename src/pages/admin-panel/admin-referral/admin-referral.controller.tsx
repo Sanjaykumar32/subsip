@@ -28,7 +28,7 @@ export const ReferralController = (): IReferralControllerReturns => {
 
   const referralList = useCallback(async () => {
     try {
-      dispatch(AdminThunk.refferalDetail());
+      await dispatch(AdminThunk.refferalDetail());
     } catch (error) {
       console.log(error);
     }
