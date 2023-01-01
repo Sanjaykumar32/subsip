@@ -80,7 +80,7 @@ export function AdminCategories() {
       iCategoryId: res.iCategoryId,
       vName: res.vName ? res.vName : "",
       subCategoryName: [
-        res.subCategoryName ? res.subCategoryName : "",
+        res.subCategoryCount ? res.subCategoryCount : 0,
         res.iCategoryId,
       ],
       Actions: ["Edit", "Delete", res?.iCategoryId],

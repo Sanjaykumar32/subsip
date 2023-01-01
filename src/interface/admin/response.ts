@@ -100,6 +100,7 @@ export interface ICategoryData {
   iModifiedBy: string;
   subCategoryName: string;
   iSubCategoryId: string;
+  subCategoryCount: number;
 }
 
 export interface IGetSubCategoryResponse {
