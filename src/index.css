@@ -40,6 +40,18 @@
     width: 46%;
 }
 
+    
+    
+.MuiFormControl-root.css-r47a1p-MuiFormControl-root{
+ margin: 0px;
+}
+
+button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+    padding: 0px !important;
+}
+.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-f56clz-MuiInputBase-root-MuiInput-root {
+    width: 80%;
+}
 
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {

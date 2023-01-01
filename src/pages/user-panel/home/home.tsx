@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "data";
 import { GET_BANNER_LIST, GET_BUSINESS } from "data/selectors";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { IBannerData, IBusiness } from "interface";
 import { UserThunk } from "data/thunk/user.thunk";
 
@@ -16,6 +16,9 @@ import { UserThunk } from "data/thunk/user.thunk";
  *
  */
 export function Home() {
+
+  const location = useLocation();
+  
   const settings: any = {
     infinite: true,
     slidesToShow: 1,
@@ -80,6 +83,7 @@ export function Home() {
   const navigate = useNavigate();
   const bannerData = useAppSelector(GET_BANNER_LIST);
 
+
   const bannerList = useCallback(async () => {
     try {
       await dispatch(UserThunk.bannerList());
@@ -91,8 +95,15 @@ export function Home() {
   useEffect(() => {
     bannerList();
   }, [bannerList]);
+
   const businessData = useAppSelector(GET_BUSINESS);
 
+  const filterBanner = businessData.filter((item) => {
+      return Object.values(item.vLocation).join('').toLowerCase().includes(location.search.toString().slice(1, 19).toLowerCase())
+    })
+
+
+  console.log(businessData, 'businessData')
   const allBusiness = useCallback(async () => {
     try {
       await dispatch(UserThunk.business());
@@ -159,7 +170,7 @@ export function Home() {
 
         <div className="relative">
           <Slider ref={cardRef} {...cardSettings}>
-            {businessData?.map((ele: IBusiness, index: number) => {
+            {filterBanner?.map((ele: IBusiness, index: number) => {
               return (
                 <div
                   style={{
@@ -180,12 +191,12 @@ export function Home() {
               );
             })}
           </Slider>
-          {businessData.length > 0 && <SliderArrow refVal={cardRef} />}
+          {filterBanner.length > 0 && <SliderArrow refVal={cardRef} />}
         </div>
 
         <div className="relative mt-10 w-full">
           <Slider ref={cardRef2} {...cardSettings}>
-            {businessData?.map((ele: IBusiness, index: number) => {
+            {filterBanner?.map((ele: IBusiness, index: number) => {
               return (
                 <div
                   style={{
@@ -206,12 +217,12 @@ export function Home() {
               );
             })}
           </Slider>
-          {businessData.length > 0 && <SliderArrow refVal={cardRef2} />}
+          {filterBanner.length > 0 && <SliderArrow refVal={cardRef2} />}
         </div>
 
         <div className="relative my-10 w-full">
           <Slider ref={cardRef3} {...cardSettings}>
-            {businessData?.map((ele, index) => {
+            {filterBanner?.map((ele, index) => {
               return (
                 <div
                   style={{
@@ -232,7 +243,7 @@ export function Home() {
               );
             })}
           </Slider>
-          {businessData.length > 0 && <SliderArrow refVal={cardRef3} />}
+          {filterBanner.length > 0 && <SliderArrow refVal={cardRef3} />}
         </div>
       </div>
     </div>
