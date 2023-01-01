@@ -25,7 +25,7 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 
 export function AdminCategories() {
   const categoryData = useAppSelector(GET_CATEGORY);
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
   const { getters, handlers } = CategoryController();
   const { attributes } = getters;
   const { deleteCategorylist } = handlers;
@@ -61,8 +61,9 @@ export function AdminCategories() {
             <FontAwesomeIcon
               icon={faPen}
               onClick={() => {
-                // naviagate(`/admin/new-category?{state:{ edit:true ,id :params?.row?.iCategoryId}}`);
-                naviagate('/admin/new-category',{state:{id: params?.row?.iCategoryId,edit:true}});
+                navigate(AdminRoutePathEnum.ADMIN_NEW_CATEGORY, {
+                  state: { id: params?.row?.iCategoryId, edit: true },
+                });
               }}
             />
           </Tooltip>
@@ -112,7 +113,7 @@ export function AdminCategories() {
             color="info"
             variant="contained"
             onClick={() => {
-              naviagate(AdminRoutePathEnum.ADMIN_NEW_CATEGORY);
+              navigate(AdminRoutePathEnum.ADMIN_NEW_CATEGORY);
             }}
           >
             New Category

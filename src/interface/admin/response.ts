@@ -134,13 +134,13 @@ export interface INotificationResponse {
 
 export interface INotificationdata {
   iNotificationId: number;
-  vHeadline?: string;
-  vDesc?: string;
-  dDate?: string;
-  vBusinessLocation?: string;
-  iCategoryId?: string;
-  iSubCategoryId?: number;
-  iBusinessId?: number;
+  vHeadline: string;
+  vDesc: string;
+  dDate: string;
+  vBusinessLocation: string;
+  iCategoryId: number;
+  iSubCategoryId: number;
+  iBusinessId: number;
 }
 
 export interface IRewardResponse {

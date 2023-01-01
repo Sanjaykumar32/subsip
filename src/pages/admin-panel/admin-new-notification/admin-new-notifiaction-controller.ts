@@ -1,13 +1,18 @@
 import { SelectChangeEvent } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
+import {
+  GET_BUSINESS,
+  GET_CATEGORY,
+  GET_NOTIFICATION,
+  GET_SUB_CATEGORY,
+} from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { UserThunk } from "data/thunk/user.thunk";
 import { AdminRoutePathEnum } from "enum";
 import { IBusiness, ICategoryData, ISubCategoryData } from "interface";
 import moment, { Moment } from "moment";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface INewNotificationButtonControllerReturns {
   getters: {
@@ -43,15 +48,37 @@ export const NewNotificationButtonController =
     const [headline, setHeadline] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [date, setDate] = useState<Moment>(moment());
-    const [category, setCategory] = useState<string>("");
+    const [category, setCategory] = useState<any>("");
     const [businessName, setBuisnessName] = useState<string>("");
     const [subCategory, setSubCategory] = useState<string>("");
     const [businessLocation, setBusinessLocation] = useState<string>("");
     const categoryData = useAppSelector(GET_CATEGORY);
     const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
     const businessData = useAppSelector(GET_BUSINESS);
+    const editScreen = useLocation();
+    console.log(editScreen, "helo");
+    const notificationData = useAppSelector(GET_NOTIFICATION);
 
     const dispatch = useAppDispatch();
+
+    // useEffect(() => {
+    //   if (editScreen?.state?.edit === true) {
+    //     const filter = notificationData?.filter((item) => {
+    //       // console.log(categoryData, "dddddddd");
+    //       console.log("item", item.iCategoryId);
+    //       const categoryId = item.iCategoryId;
+
+    //       // if (item?.iNotificationId === editScreen.state?.id) {
+    //       // setCategory(item?.iCategoryId);
+    //       const categoryFilter = categoryData?.filter((item: any) => {
+    //         if (item?.iCategoryId === categoryId) {
+    //           setCategory(item.vName);
+    //         }
+    //       });
+    //       // }
+    //     });
+    //   }
+    // }, [editScreen]);
 
     const handleDateChange = (date: Moment | null): void => {
       if (!date) {
@@ -81,7 +108,7 @@ export const NewNotificationButtonController =
     };
 
     const handleSubCategoryChange = (event: SelectChangeEvent): void => {
-      setSubCategory(event.target.value as string);
+      setSubCategory(event.target.value as any);
     };
 
     const handleBusinessLocationhange = (

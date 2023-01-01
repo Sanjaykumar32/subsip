@@ -43,7 +43,15 @@ export function AdminNotification() {
       renderCell: (params) => (
         <Box>
           <Tooltip title={params.value[0]}>
-            <FontAwesomeIcon icon={faPen} />
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={() => {
+                console.log(params?.row, "param");
+                navigate(AdminRoutePathEnum.ADMIN_NEW_NOTIFICTAION, {
+                  state: { id: params?.row?.id, edit: true },
+                });
+              }}
+            />
           </Tooltip>
           <Tooltip title={params.value[1]}>
             <FontAwesomeIcon
