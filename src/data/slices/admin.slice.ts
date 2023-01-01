@@ -12,6 +12,7 @@ import {
   ISubscribeByBussinessIDResponse,
   ISubscriberData,
   ISubscriberOfBussinessResponse,
+  IUserReward,
 } from "interface";
 
 export interface IAdminState {
@@ -27,6 +28,7 @@ export interface IAdminState {
   referralList: any;
   rewardToWinnerList: any;
   rewardData: IReward[];
+  userRewardData: IUserReward[];
 }
 
 const initialState: IAdminState = {
@@ -42,6 +44,7 @@ const initialState: IAdminState = {
   referralList: [],
   rewardToWinnerList: [],
   rewardData: [],
+  userRewardData: [],
 };
 
 export const adminSlice = createSlice({
@@ -117,6 +120,11 @@ export const adminSlice = createSlice({
     builder.addCase(AdminThunk.getReward.fulfilled, (state, action) => {
       if (action.payload) {
         state.rewardData = action.payload.data;
+      }
+    });
+    builder.addCase(AdminThunk.getuserReward.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.userRewardData = action.payload.data;
       }
     });
   },

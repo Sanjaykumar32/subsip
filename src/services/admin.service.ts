@@ -31,6 +31,8 @@ import {
   IDeleteNotificationRequest,
   IRewardResponse,
   IUpdateCategoryRequest,
+  IGetAllUsetRequest,
+  IUserRewardresponse,
 } from "interface";
 
 /**
@@ -312,6 +314,20 @@ export class AdminService {
   public static async getReward(): Promise<IRewardResponse> {
     const res: AxiosResponse<IRewardResponse> = await ApiHelper.send<any>({
       url: `/reward`,
+      method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
+   * user Reward
+   * @return {Promise<IUserRewardresponse>}
+   */
+  public static async getUserReward(
+    payload: IGetAllUsetRequest
+  ): Promise<IUserRewardresponse> {
+    const res: AxiosResponse<IUserRewardresponse> = await ApiHelper.send<any>({
+      url: `user/reward?userId=${payload.userId}`,
       method: "GET",
     });
     return res.data;

@@ -25,6 +25,8 @@ import {
   IDeleteNotificationRequest,
   IRewardResponse,
   IUpdateCategoryRequest,
+  IUserRewardresponse,
+  IGetAllUsetRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -208,6 +210,17 @@ export class AdminThunk {
     "admin/getReward",
     async (): Promise<IRewardResponse> => {
       const response = await AdminService.getReward();
+      return response;
+    }
+  );
+
+  /**
+   * Get Reward
+   */
+  public static getuserReward = createAsyncThunk(
+    "admin/userGetReward",
+    async (payload: IGetAllUsetRequest): Promise<IUserRewardresponse> => {
+      const response = await AdminService.getUserReward(payload);
       return response;
     }
   );

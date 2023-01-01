@@ -101,3 +101,7 @@ export interface IDeleteRewardRequest {
 export interface IDeleteNotificationRequest {
   notificationId: number;
 }
+
+export interface IGetAllUsetRequest {
+  userId: number;
+}

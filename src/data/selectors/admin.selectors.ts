@@ -31,3 +31,6 @@ export const GET_RWARD_TO_WINNER_LIST = (state: RootState) =>
   state.admin.rewardToWinnerList;
 
 export const GET_REWARDS = (state: RootState) => state.admin.rewardData;
+
+export const GET_USER_REWARDS = (state: RootState) =>
+  state.admin.userRewardData;

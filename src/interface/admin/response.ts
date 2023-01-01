@@ -154,3 +154,17 @@ export interface IReward {
   businessName: string;
   rewardCount: number;
 }
+
+export interface IUserRewardresponse {
+  success: number;
+  message: string;
+  data: IUserReward[];
+}
+
+export interface IUserReward {
+  userId: number;
+  rewardName: string;
+  rewardId: number;
+  businessName: string;
+  redeemedId?: number;
+}
