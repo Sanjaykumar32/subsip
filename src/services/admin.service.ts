@@ -29,6 +29,7 @@ import {
   IDeleteRewardRequest,
   INotificationResponse,
   IDeleteNotificationRequest,
+  IRewardResponse,
 } from "interface";
 
 /**
@@ -75,7 +76,6 @@ export class AdminService {
 
   /**
    * admin Notification List
-   
    * @return {Promise<INotificationResponse>}
    */
   public static async getNotoification(): Promise<INotificationResponse> {
@@ -301,6 +301,18 @@ export class AdminService {
       data: payload,
     });
 
+    return res.data;
+  }
+
+  /**
+   * admin Reward
+   * @return {Promise<IRewardResponse>}
+   */
+  public static async getReward(): Promise<IRewardResponse> {
+    const res: AxiosResponse<IRewardResponse> = await ApiHelper.send<any>({
+      url: `/notification`,
+      method: "GET",
+    });
     return res.data;
   }
 

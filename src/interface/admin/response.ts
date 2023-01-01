@@ -142,3 +142,17 @@ export interface INotificationdata {
   iSubCategoryId?: number;
   iBusinessId?: number;
 }
+
+export interface IRewardResponse {
+  success: number;
+  message: string;
+  data: IReward[];
+}
+
+export interface IReward {
+  userId: number;
+  rewardName: string;
+  rewardId: number;
+  businessName: string;
+  redeemedId?: number;
+}

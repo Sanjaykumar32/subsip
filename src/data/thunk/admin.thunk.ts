@@ -23,6 +23,7 @@ import {
   INotificationRequest,
   INotificationResponse,
   IDeleteNotificationRequest,
+  IRewardResponse,
 } from "interface";
 import { AdminService } from "services";
 
@@ -200,6 +201,17 @@ export class AdminThunk {
   );
 
   /**
+   * Get Reward
+   */
+  public static getReward = createAsyncThunk(
+    "admin/getReward",
+    async (): Promise<IRewardResponse> => {
+      const response = await AdminService.getReward();
+      return response;
+    }
+  );
+
+  /**
    * New Notify Button
    */
   public static newNotifyButton = createAsyncThunk(
@@ -323,7 +335,7 @@ export class AdminThunk {
   );
 
   /**
-   * Reward Business
+   * delete Reward
    */
   public static deleteReward = createAsyncThunk(
     "admin/deleteReward",
