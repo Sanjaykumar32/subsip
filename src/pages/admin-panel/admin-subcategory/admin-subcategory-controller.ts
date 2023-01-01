@@ -25,6 +25,7 @@ interface ISubcategoryControllerReturns {
  */
 export const SubCategoryController = (): ISubcategoryControllerReturns => {
   const categoryData = useAppSelector(GET_SUB_CATEGORY);
+   
   const dispatch = useAppDispatch();
 
   const getSubCategory = useCallback(async () => {

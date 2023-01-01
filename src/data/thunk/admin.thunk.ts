@@ -23,6 +23,7 @@ import {
   INotificationRequest,
   INotificationResponse,
   IDeleteNotificationRequest,
+  IUpdateCategoryRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -134,8 +135,8 @@ export class AdminThunk {
    */
   public static updateCategory = createAsyncThunk(
     "admin/update/category",
-    async (payload: ICategoryRequest): Promise<ICategoryDataResponse> => {
-      console.log(payload, "payload");
+    async (payload: IUpdateCategoryRequest): Promise<ICategoryDataResponse> => {
+      console.log(payload, "payload update category");
       const response = await AdminService.updateCategory(payload);
       return response;
     }
@@ -144,14 +145,14 @@ export class AdminThunk {
   /**
    * update subCategory
    */
-  public static updateSubCategory = createAsyncThunk(
-    "admin/update/category",
-    async (payload: ICategoryRequest): Promise<ICategoryDataResponse> => {
-      console.log(payload, "payload");
-      const response = await AdminService.updateCategory(payload);
-      return response;
-    }
-  );
+  // public static updateSubCategory = createAsyncThunk(
+  //   "admin/update/category",
+  //   async (payload: IUpdateCategoryRequest): Promise<ICategoryDataResponse> => {
+  //     console.log(payload, "payload");
+  //     const response = await AdminService.updateCategory(payload);
+  //     return response;
+  //   }
+  // );
 
   /**
    * subCategory

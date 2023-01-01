@@ -3,12 +3,19 @@ import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { AdminBackButton } from "components";
 import { theme } from "theme";
 import CategoryController from "./admin-new-category.controller";
-import { Form } from "react-router-dom";
+import { Form , useLocation } from "react-router-dom";
+import { useAppSelector } from "data";
+import {  useState ,useEffect } from "react";
+import { GET_CATEGORY } from "data/selectors";
 
 export function AdminNewCategory() {
   const { getters, handlers } = CategoryController();
   const { category } = getters;
   const { submitHandler, handleCategoryChange } = handlers;
+  
+ 
+
+
   return (
     <Container maxWidth="lg">
       <AdminBackButton />

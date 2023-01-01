@@ -61,7 +61,8 @@ export function AdminCategories() {
             <FontAwesomeIcon
               icon={faPen}
               onClick={() => {
-                // deleteCategorylist(params.value[2]);
+                // naviagate(`/admin/new-category?{state:{ edit:true ,id :params?.row?.iCategoryId}}`);
+                naviagate('/admin/new-category',{state:{id: params?.row?.iCategoryId,edit:true}});
               }}
             />
           </Tooltip>
