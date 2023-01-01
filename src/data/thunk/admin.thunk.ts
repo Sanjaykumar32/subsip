@@ -21,6 +21,7 @@ import {
   ISubscribeByBussinessIDResponse,
   ISubscriberOfBussinessResponse,
   INotificationRequest,
+  INotificationResponse,
 } from "interface";
 import { AdminService } from "services";
 
@@ -59,8 +60,8 @@ export class AdminThunk {
    */
   public static notificationList = createAsyncThunk(
     "admin/notification-list",
-    async (payload: INotificationRequest): Promise<any> => {
-      const response = await AdminService.getNotoification(payload);
+    async (): Promise<INotificationResponse> => {
+      const response = await AdminService.getNotoification();
       return response;
     }
   );

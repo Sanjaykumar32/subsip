@@ -24,17 +24,14 @@ export const AdminNotificationController =
   (): IAdminNotificationControllerReturns => {
     const notificationData = useAppSelector(GET_NOTIFICATION);
     const dispatch = useAppDispatch();
-    const userId = localStorage.getItem("userId");
 
     const getNotification = useCallback(async () => {
       try {
-        await dispatch(
-          AdminThunk.notificationList({ userId: userId ? userId : "" })
-        );
+        await dispatch(AdminThunk.notificationList());
       } catch (error) {
         console.log(error);
       }
-    }, [dispatch, userId]);
+    }, [dispatch]);
 
     useEffect(() => {
       getNotification();

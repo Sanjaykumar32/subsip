@@ -124,3 +124,20 @@ export interface ICategoryDataResponse {
   message: string;
   data: number[];
 }
+
+export interface INotificationResponse {
+  success: number;
+  message: string;
+  data: INotificationdata[];
+}
+
+export interface INotificationdata {
+  iNotificationId: number;
+  vHeadline?: string;
+  vDesc?: string;
+  dDate?: string;
+  vBusinessLocation?: string;
+  iCategoryId?: string;
+  iSubCategoryId?: number;
+  iBusinessId?: number;
+}

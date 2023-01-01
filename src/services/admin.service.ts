@@ -27,6 +27,7 @@ import {
   IDeleteListingRequest,
   IDeleteCategoryRequest,
   IDeleteRewardRequest,
+  INotificationResponse,
 } from "interface";
 
 /**
@@ -72,19 +73,17 @@ export class AdminService {
   }
 
   /**
-   * Notification List
-   * @param {INotificationRequest} payload
-   * @return {Promise<any>}
+   * admin Notification List
+   
+   * @return {Promise<INotificationResponse>}
    */
-  public static async getNotoification(
-    payload: INotificationRequest
-  ): Promise<any> {
-    console.log(payload);
-
-    const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `/user/notification/${payload.userId}`,
-      method: "GET",
-    });
+  public static async getNotoification(): Promise<INotificationResponse> {
+    const res: AxiosResponse<INotificationResponse> = await ApiHelper.send<any>(
+      {
+        url: `/notification`,
+        method: "GET",
+      }
+    );
 
     return res.data;
   }
