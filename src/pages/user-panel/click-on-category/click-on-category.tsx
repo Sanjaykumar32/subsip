@@ -65,16 +65,6 @@ export function ClickOnCategory() {
                     {item.vName}
                   </ListItem>
                 ))}
-
-                {/* {Array(30)
-                  .fill({
-                    name: "Sandwiches",
-                  })
-                  .map((element, index: number) => (
-                    <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }}>
-                      {element.name}
-                    </ListItem>
-                  ))} */}
               </List>
             </Box>
           </Drawer>
@@ -95,16 +85,6 @@ export function ClickOnCategory() {
                     {item.vName}
                   </ListItem>
                 ))}
-
-                {/* {Array(30)
-                  .fill({
-                    name: "Sandwiches",
-                  })
-                  .map((element, index: number) => (
-                    <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }} className='font-normal text-[16px] leading-[24px] text-[#434d59]'>
-                      {element.name}
-                    </ListItem>
-                  ))} */}
               </List>
             </Box>
           </Grid>
