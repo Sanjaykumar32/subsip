@@ -1,5 +1,9 @@
 import { Dayjs } from "dayjs";
 
+export interface IUpdateCategoryRequest {
+  name: string;
+  categoryId: number;
+}
 export interface ICategoryRequest {
   name: string;
   addedBy: number;

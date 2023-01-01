@@ -30,6 +30,7 @@ import {
   INotificationResponse,
   IDeleteNotificationRequest,
   IRewardResponse,
+  IUpdateCategoryRequest,
 } from "interface";
 
 /**
@@ -173,11 +174,11 @@ export class AdminService {
 
   /**
    * update category
-   * @param {ICategoryRequest} credentials
+   * @param {IUpdateCategoryRequest} credentials
    * @return {Promise<ICategoryDataResponse>}
    */
   public static async updateCategory(
-    credentials: ICategoryRequest
+    credentials: IUpdateCategoryRequest
   ): Promise<ICategoryDataResponse> {
     const res: AxiosResponse<ICategoryDataResponse> =
       await ApiHelper.send<ICategoryDataResponse>({
