@@ -58,7 +58,12 @@ export function AdminCategories() {
       renderCell: (params) => (
         <Box>
           <Tooltip title={params.value[0]}>
-            <FontAwesomeIcon icon={faPen} />
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={() => {
+                // deleteCategorylist(params.value[2]);
+              }}
+            />
           </Tooltip>
           <Tooltip title={params.value[1]}>
             <FontAwesomeIcon
