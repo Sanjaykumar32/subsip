@@ -128,9 +128,21 @@ export class AdminThunk {
   );
 
   /**
-   * category
+   * update category
    */
   public static updateCategory = createAsyncThunk(
+    "admin/update/category",
+    async (payload: ICategoryRequest): Promise<ICategoryDataResponse> => {
+      console.log(payload, "payload");
+      const response = await AdminService.updateCategory(payload);
+      return response;
+    }
+  );
+
+  /**
+   * update subCategory
+   */
+  public static updateSubCategory = createAsyncThunk(
     "admin/update/category",
     async (payload: ICategoryRequest): Promise<ICategoryDataResponse> => {
       console.log(payload, "payload");
