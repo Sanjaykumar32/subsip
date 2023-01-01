@@ -4,7 +4,7 @@ import { GET_CATEGORY, GET_SUB_CATEGORY, GET_BUSINESS } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { UserThunk } from "data/thunk/user.thunk";
 import { IBusiness, ICategoryData, ISubCategoryData } from "interface";
-import Switch from '@mui/material/Switch';
+import Switch from "@mui/material/Switch";
 import {
   ChangeEvent,
   SetStateAction,
@@ -25,7 +25,7 @@ interface INewlistingControllerReturns {
     category: string;
     businessLocation: string;
     email: string;
-    productCategory: string;
+    tagLine: string;
     image: any;
     businessData: IBusiness[];
     categoryData: ICategoryData[];
@@ -39,12 +39,12 @@ interface INewlistingControllerReturns {
     handleBusinessNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleBusinessLocationhange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    handleProductChange: (event: SelectChangeEvent) => void;
+    handleProductChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleImageChange: (event: {
       target: { files: SetStateAction<any>[] };
     }) => void;
     submitHandler: () => void;
-    handleBanner:(event: any) => void;
+    handleBanner: (event: any) => void;
   };
 }
 
@@ -57,7 +57,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const [headline, setHeadline] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [category, setCategory] = useState<string>("");
-  const [productCategory, setProductCategory] = useState<string>("");
+  const [tagLine, setTagLine] = useState<string>("");
   const [image, setImage] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -65,7 +65,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const categoryData = useAppSelector(GET_CATEGORY);
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const businessData = useAppSelector(GET_BUSINESS);
-  const [banner , setBanner] = useState<string>('false')
+  const [banner, setBanner] = useState<string>("false");
   const dispatch = useAppDispatch();
 
   const handleHeadlineChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -83,7 +83,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   };
 
   const handleProductChange = (event: SelectChangeEvent): void => {
-    setProductCategory(event.target.value as string);
+    setTagLine(event.target.value as string);
   };
 
   const handleImageChange = (event: {
@@ -92,9 +92,9 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     setImage(event.target.files[0]);
   };
 
-  const handleBanner = (event: any ): void => {
-    setBanner(event.target.checked)
-  }
+  const handleBanner = (event: any): void => {
+    setBanner(event.target.checked);
+  };
 
   const handleCategoryChange = (event: SelectChangeEvent): void => {
     setCategory(event.target.value as string);
@@ -115,7 +115,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   ): void => {
     setBusinessLocation(event.target.value as string);
   };
-  console.log(banner ,'banner state')
+  console.log(banner, "banner state");
 
   const navigate = useNavigate();
 
@@ -137,6 +137,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("email", email);
     form.append("category", category);
     form.append("subCategory", subCategory);
+    form.append("tagLine", tagLine);
 
     const res = await dispatch(AdminThunk.createListing(form));
     navigate(AdminRoutePathEnum.ADMIN_LISTING);
@@ -194,7 +195,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       category,
       businessLocation,
       email,
-      productCategory,
+      tagLine,
       businessData,
       categoryData,
       filteredSubCategory,
