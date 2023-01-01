@@ -22,6 +22,7 @@ import {
   ISubscriberOfBussinessResponse,
   INotificationRequest,
   INotificationResponse,
+  IDeleteNotificationRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -295,6 +296,17 @@ export class AdminThunk {
     "admin/deleteCategory",
     async (payload: any): Promise<void> => {
       const response = await AdminService.deleteCategory(payload);
+      return response;
+    }
+  );
+
+  /**
+   * delete Notification
+   */
+  public static deleteNotification = createAsyncThunk(
+    "admin/deleteNotification",
+    async (payload: IDeleteNotificationRequest): Promise<void> => {
+      const response = await AdminService.deleteNotification(payload);
       return response;
     }
   );

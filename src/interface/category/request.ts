@@ -93,3 +93,7 @@ export interface IDeleteSubCategoryRequest {
 export interface IDeleteRewardRequest {
   rewardId: number;
 }
+
+export interface IDeleteNotificationRequest {
+  notificationId: number;
+}

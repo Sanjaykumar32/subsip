@@ -1,18 +1,16 @@
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_NOTIFICATION } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import { INotificationdata } from "interface";
 import { useCallback, useEffect } from "react";
-
-type attributeType = {
-  id: number;
-  iCategoryId: number;
-  vName: string;
-};
+import toast from "react-hot-toast";
 
 interface IAdminNotificationControllerReturns {
   getters: {
-    attributes: attributeType[];
-    notificationData: any;
+    notificationData: INotificationdata[];
+  };
+  handlers: {
+    deleteNotification: (ID: number) => Promise<void>;
   };
 }
 
@@ -37,20 +35,18 @@ export const AdminNotificationController =
       getNotification();
     }, [getNotification]);
 
-    const attributes: attributeType[] = [];
-
-    const category = notificationData.forEach((res: any, index: number) => {
-      attributes.push({
-        id: index + 1,
-        iCategoryId: res.iCategoryId,
-        vName: res.vName ? res.vName : "",
-      });
-    });
+    async function deleteNotification(ID: number): Promise<void> {
+      await dispatch(AdminThunk.deleteNotification({ notificationId: ID }));
+      getNotification();
+      toast.success("Notification Deleted SuccessFully");
+    }
 
     return {
       getters: {
-        attributes,
         notificationData,
+      },
+      handlers: {
+        deleteNotification,
       },
     };
   };

@@ -12,21 +12,38 @@ import {
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { AdminNotificationController } from "./admin-notification-controller";
+import { INotificationdata } from "interface";
 
 export function AdminNotification() {
   const navigate = useNavigate();
-  const { getters } = AdminNotificationController();
-  const { attributes, notificationData } = getters;
+  const { getters, handlers } = AdminNotificationController();
+  const { notificationData } = getters;
+  const { deleteNotification } = handlers;
 
   const columns: GridColDef[] = [
     {
-      field: "Name",
+      field: "vHeadline",
       headerName: "Name",
+      width: 200,
+    },
+    {
+      field: "vDesc",
+      headerName: "Description",
+      width: 200,
+    },
+    {
+      field: "vBusinessLocation",
+      headerName: "Loaction",
+      width: 200,
+    },
+    {
+      field: "dDate",
+      headerName: "Created Date",
       width: 200,
     },
     {
@@ -35,61 +52,33 @@ export function AdminNotification() {
       width: 110,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value}>
+          <Tooltip title={params.value[0]}>
             <FontAwesomeIcon icon={faPen} />
+          </Tooltip>
+          <Tooltip title={params.value[1]}>
+            <FontAwesomeIcon
+              icon={faTrash}
+              onClick={() => {
+                deleteNotification(params.value[2]);
+              }}
+              className="ml-[25px]"
+            />
           </Tooltip>
         </Box>
       ),
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      Name: "Notification 1",
-      Actions: "Edit",
-    },
-    {
-      id: 2,
-      Name: "Notification 1",
-      Actions: "Edit",
-    },
-    {
-      id: 3,
-      Name: "Notification 1",
-      Actions: "Edit",
-    },
-    {
-      id: 4,
-      Name: "Notification 1",
-      Actions: "Edit",
-    },
-    {
-      id: 5,
-      Name: "Notification 1",
-      Actions: "Edit",
-    },
-    {
-      id: 6,
-      Name: "Notification 1",
-      Actions: "Edit",
-    },
-    {
-      id: 7,
-      Name: "Notification 1",
-      Actions: "Edit",
-    },
-    {
-      id: 8,
-      Name: "Notification 1",
-      Actions: "Edit",
-    },
-    {
-      id: 9,
-      Name: "Notification 1",
-      Actions: "Edit",
-    },
-  ];
+  const rows = notificationData.map((item: INotificationdata) => {
+    return {
+      id: item.iNotificationId,
+      vHeadline: item.vHeadline,
+      vDesc: item.vDesc,
+      vBusinessLocation: item.vBusinessLocation,
+      dDate: item.dDate,
+      Actions: ["Edit", "Delete", item?.iNotificationId],
+    };
+  });
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>

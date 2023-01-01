@@ -28,6 +28,7 @@ import {
   IDeleteCategoryRequest,
   IDeleteRewardRequest,
   INotificationResponse,
+  IDeleteNotificationRequest,
 } from "interface";
 
 /**
@@ -397,6 +398,21 @@ export class AdminService {
       url: `/sub-category`,
       method: "DELETE",
       data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * Delete Notification
+   * @return {Promise<any>}
+   */
+  public static async deleteNotification(
+    payload: IDeleteNotificationRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/notification/${payload.notificationId}`,
+      method: "DELETE",
     });
 
     return res.data;
