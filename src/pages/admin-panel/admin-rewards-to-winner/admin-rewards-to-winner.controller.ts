@@ -29,7 +29,7 @@ export const RewardToWinnerController =
 
     const rewardToWinnerList = useCallback(async () => {
       try {
-        dispatch(AdminThunk.getRewardToWinner());
+        await dispatch(AdminThunk.getRewardToWinner());
       } catch (error) {
         console.log(error);
       }

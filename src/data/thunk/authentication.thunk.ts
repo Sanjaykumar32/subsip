@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   IForgetPasswordRequest,
+  IOTpRequest,
   IResetPasswordRequest,
   ISignInResponse,
 } from "interface";
@@ -28,6 +29,28 @@ export class AuthenticationThunk {
     "auth/resetPassword",
     async (credentials: IResetPasswordRequest): Promise<ISignInResponse> => {
       const response = await AuthService.resetpassword(credentials);
+      return response;
+    }
+  );
+
+  /**
+   * Send OTP
+   */
+  public static sendOtp = createAsyncThunk(
+    "auth/send-otp",
+    async (payload: IOTpRequest): Promise<void> => {
+      const response = await AuthService.OtpSend(payload);
+      return response;
+    }
+  );
+
+  /**
+   * check Send OTP
+   */
+  public static checkSendOtp = createAsyncThunk(
+    "auth/check-send-otp",
+    async (payload: any): Promise<void> => {
+      const response = await AuthService.checkOtpSend(payload);
       return response;
     }
   );

@@ -21,6 +21,10 @@ import {
   ISubscribeByBussinessIDResponse,
   ISubscriberOfBussinessResponse,
   INotificationRequest,
+  INotificationResponse,
+  IDeleteNotificationRequest,
+  IRewardResponse,
+  IUpdateCategoryRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -59,8 +63,8 @@ export class AdminThunk {
    */
   public static notificationList = createAsyncThunk(
     "admin/notification-list",
-    async (payload: INotificationRequest): Promise<any> => {
-      const response = await AdminService.getNotoification(payload);
+    async (): Promise<INotificationResponse> => {
+      const response = await AdminService.getNotoification();
       return response;
     }
   );
@@ -128,6 +132,30 @@ export class AdminThunk {
   );
 
   /**
+   * update category
+   */
+  public static updateCategory = createAsyncThunk(
+    "admin/update/category",
+    async (payload: IUpdateCategoryRequest): Promise<ICategoryDataResponse> => {
+      console.log(payload, "payload update category");
+      const response = await AdminService.updateCategory(payload);
+      return response;
+    }
+  );
+
+  /**
+   * update subCategory
+   */
+  // public static updateSubCategory = createAsyncThunk(
+  //   "admin/update/category",
+  //   async (payload: IUpdateCategoryRequest): Promise<ICategoryDataResponse> => {
+  //     console.log(payload, "payload");
+  //     const response = await AdminService.updateCategory(payload);
+  //     return response;
+  //   }
+  // );
+
+  /**
    * subCategory
    */
   public static subCategory = createAsyncThunk(
@@ -174,6 +202,17 @@ export class AdminThunk {
   );
 
   /**
+   * Get Reward
+   */
+  public static getReward = createAsyncThunk(
+    "admin/getReward",
+    async (): Promise<IRewardResponse> => {
+      const response = await AdminService.getReward();
+      return response;
+    }
+  );
+
+  /**
    * New Notify Button
    */
   public static newNotifyButton = createAsyncThunk(
@@ -209,7 +248,7 @@ export class AdminThunk {
   );
 
   /**
-   * New Notification
+   * New category
    */
   public static getCategory = createAsyncThunk(
     "admin/newNotification",
@@ -275,6 +314,17 @@ export class AdminThunk {
   );
 
   /**
+   * delete Notification
+   */
+  public static deleteNotification = createAsyncThunk(
+    "admin/deleteNotification",
+    async (payload: IDeleteNotificationRequest): Promise<void> => {
+      const response = await AdminService.deleteNotification(payload);
+      return response;
+    }
+  );
+
+  /**
    * SubCategory Business
    */
   public static deleteSubCategory = createAsyncThunk(
@@ -286,7 +336,7 @@ export class AdminThunk {
   );
 
   /**
-   * Reward Business
+   * delete Reward
    */
   public static deleteReward = createAsyncThunk(
     "admin/deleteReward",

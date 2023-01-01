@@ -100,6 +100,7 @@ export interface ICategoryData {
   iModifiedBy: string;
   subCategoryName: string;
   iSubCategoryId: string;
+  subCategoryCount: number;
 }
 
 export interface IGetSubCategoryResponse {
@@ -123,4 +124,35 @@ export interface ICategoryDataResponse {
   success: number;
   message: string;
   data: number[];
+}
+
+export interface INotificationResponse {
+  success: number;
+  message: string;
+  data: INotificationdata[];
+}
+
+export interface INotificationdata {
+  iNotificationId: number;
+  vHeadline?: string;
+  vDesc?: string;
+  dDate?: string;
+  vBusinessLocation?: string;
+  iCategoryId?: string;
+  iSubCategoryId?: number;
+  iBusinessId?: number;
+}
+
+export interface IRewardResponse {
+  success: number;
+  message: string;
+  data: IReward[];
+}
+
+export interface IReward {
+  userId: number;
+  rewardName: string;
+  rewardId: number;
+  businessName: string;
+  redeemedId?: number;
 }

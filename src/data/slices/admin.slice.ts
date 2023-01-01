@@ -4,6 +4,7 @@ import { ReducerEnum } from "enum";
 
 import {
   ICategoryData,
+  INotificationdata,
   IReferralCountResponse,
   IRefferralCode,
   ISubCategoryData,
@@ -21,7 +22,7 @@ export interface IAdminState {
   subCategory: ISubCategoryData[];
   refferralCode: IRefferralCode;
   refferralCount: IReferralCountResponse;
-  noticationList: any;
+  noticationList: INotificationdata[];
   referralList: any;
   rewardToWinnerList: any;
 }

@@ -62,7 +62,7 @@ export const AddSubCategoryController =
 
     const category = useCallback(async () => {
       try {
-        dispatch(AdminThunk.getCategory());
+        await dispatch(AdminThunk.getCategory());
       } catch (error) {
         console.log(error);
       }

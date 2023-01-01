@@ -27,6 +27,10 @@ import {
   IDeleteListingRequest,
   IDeleteCategoryRequest,
   IDeleteRewardRequest,
+  INotificationResponse,
+  IDeleteNotificationRequest,
+  IRewardResponse,
+  IUpdateCategoryRequest,
 } from "interface";
 
 /**
@@ -72,19 +76,16 @@ export class AdminService {
   }
 
   /**
-   * Notification List
-   * @param {INotificationRequest} payload
-   * @return {Promise<any>}
+   * admin Notification List
+   * @return {Promise<INotificationResponse>}
    */
-  public static async getNotoification(
-    payload: INotificationRequest
-  ): Promise<any> {
-    console.log(payload);
-
-    const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `/user/notification/${payload.userId}`,
-      method: "GET",
-    });
+  public static async getNotoification(): Promise<INotificationResponse> {
+    const res: AxiosResponse<INotificationResponse> = await ApiHelper.send<any>(
+      {
+        url: `/notification`,
+        method: "GET",
+      }
+    );
 
     return res.data;
   }
@@ -154,7 +155,7 @@ export class AdminService {
   }
 
   /**
-   * category
+   * create category
    * @param {ICategoryRequest} credentials
    * @return {Promise<ICategoryDataResponse>}
    */
@@ -172,7 +173,25 @@ export class AdminService {
   }
 
   /**
-   * category
+   * update category
+   * @param {IUpdateCategoryRequest} credentials
+   * @return {Promise<ICategoryDataResponse>}
+   */
+  public static async updateCategory(
+    credentials: IUpdateCategoryRequest
+  ): Promise<ICategoryDataResponse> {
+    const res: AxiosResponse<ICategoryDataResponse> =
+      await ApiHelper.send<ICategoryDataResponse>({
+        url: "/category",
+        method: "PUT",
+        data: credentials,
+      });
+
+    return res.data;
+  }
+
+  /**
+   * get category
    * @return {Promise<IGetCategoryResponse>}
    */
   public static async getcategory(): Promise<IGetCategoryResponse> {
@@ -287,6 +306,18 @@ export class AdminService {
   }
 
   /**
+   * admin Reward
+   * @return {Promise<IRewardResponse>}
+   */
+  public static async getReward(): Promise<IRewardResponse> {
+    const res: AxiosResponse<IRewardResponse> = await ApiHelper.send<any>({
+      url: `/notification`,
+      method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
    * New NotifyButton
    * @param {INewNotifyButtonRequest} payload
    * @return {Promise<any>}
@@ -380,6 +411,21 @@ export class AdminService {
       url: `/sub-category`,
       method: "DELETE",
       data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
+   * Delete Notification
+   * @return {Promise<any>}
+   */
+  public static async deleteNotification(
+    payload: IDeleteNotificationRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/notification/${payload.notificationId}`,
+      method: "DELETE",
     });
 
     return res.data;

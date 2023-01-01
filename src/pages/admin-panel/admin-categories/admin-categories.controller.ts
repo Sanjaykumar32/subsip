@@ -31,7 +31,7 @@ export const CategoryController = (): IcategoryControllerReturns => {
 
   const getcategory = useCallback(async () => {
     try {
-      dispatch(AdminThunk.getCategory());
+      await dispatch(AdminThunk.getCategory());
     } catch (error) {
       console.log(error);
     }
@@ -52,8 +52,8 @@ export const CategoryController = (): IcategoryControllerReturns => {
     });
   });
 
-  function deleteCategorylist(ID: number) {
-    dispatch(AdminThunk.deleteCategory({ categoryId: ID }));
+  async function deleteCategorylist(ID: number) {
+    await dispatch(AdminThunk.deleteCategory({ categoryId: ID }));
     toast.success("Category Delete SuccessFully");
     getcategory();
   }

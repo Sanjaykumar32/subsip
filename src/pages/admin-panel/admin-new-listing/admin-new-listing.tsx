@@ -27,6 +27,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NewlistingController } from "./admin-new-listing-controller";
 import { Form } from "react-router-dom";
+import Switch from "@mui/material/Switch";
 
 interface ListFormItem {
   id: string;
@@ -48,6 +49,7 @@ export function AdminNewlisting() {
     step7,
     step8,
     step9,
+    step10,
   ]: ListFormItem[] = [
     {
       id: "q1",
@@ -57,7 +59,7 @@ export function AdminNewlisting() {
     },
     {
       id: "q2",
-      label: "Step 2: Tag your product in that category ",
+      label: "Pick  Business Category  ",
       type: InputTypeEnum.SELECT,
       required: true,
     },
@@ -91,8 +93,8 @@ export function AdminNewlisting() {
     },
     {
       id: "q7",
-      label: "Step 1: Pick a business category ",
-      type: InputTypeEnum.SELECT,
+      label: "Tagline",
+      type: InputTypeEnum.INPUT,
       required: true,
     },
     {
@@ -103,9 +105,14 @@ export function AdminNewlisting() {
     },
     {
       id: "q9",
-      label: " Step 2: Pick subcategory ",
+      label: "Pick Subcategory ",
       type: InputTypeEnum.INPUT,
       required: true,
+    },
+    {
+      id: "q10",
+      label: "On Banner",
+      type: InputTypeEnum.SWITCH_DEMO,
     },
   ];
 
@@ -118,7 +125,7 @@ export function AdminNewlisting() {
     category,
     businessLocation,
     email,
-    productCategory,
+    tagLine,
     filteredSubCategory,
     categoryData,
     businessData,
@@ -135,6 +142,7 @@ export function AdminNewlisting() {
     handleEmailChange,
     handleProductChange,
     handleImageChange,
+    handleBanner,
   } = handlers;
 
   const ref = useRef<HTMLInputElement>(null);
@@ -185,25 +193,7 @@ export function AdminNewlisting() {
                     />
                   </FormControl>
                 </Box>
-                <Box sx={{ my: 4 }}>
-                  <Label id={`${step7.id}-label`}> {step7.label} </Label>
-                  <Typography variant="body2"> {step7.caption} </Typography>
-                  <FormControl fullWidth>
-                    <Select
-                      fullWidth
-                      id={`${step7.id}-select`}
-                      labelId={`${step7.id}-label`}
-                      value={productCategory}
-                      onChange={handleProductChange}
-                    >
-                      {businessData.map((res, i) => (
-                        <MenuItem value={res.iBusinessId} key={i}>
-                          {res.vName}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Box>
+
                 <Box sx={{ my: 4 }}>
                   <Label id={`${step2.id}-label`}> {step2.label} </Label>
                   <Typography variant="body2"> {step2.caption} </Typography>
@@ -223,10 +213,6 @@ export function AdminNewlisting() {
                     </Select>
                   </FormControl>
                 </Box>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box sx={{ px: 3, py: 1 }}>
                 <Box sx={{ my: 4 }}>
                   <Label id={`${step9.id}-label`}> {step9.label} </Label>
                   <Typography variant="body2"> {step9.caption} </Typography>
@@ -246,6 +232,23 @@ export function AdminNewlisting() {
                     </Select>
                   </FormControl>
                 </Box>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ px: 3, py: 1 }}>
+                <Box sx={{ my: 4 }}>
+                  <Label id={`${step7.id}-label`}> {step7.label} </Label>
+                  <Typography variant="body2"> {step7.caption} </Typography>
+                  <FormControl fullWidth>
+                    <TextField
+                      multiline
+                      value={tagLine}
+                      onChange={handleProductChange}
+                      required
+                      fullWidth
+                    />
+                  </FormControl>
+                </Box>
                 <Box sx={{ my: 4 }}>
                   <Label> {step4.label} </Label>
                   <Typography variant="body2"> {step4.caption} </Typography>
@@ -260,19 +263,22 @@ export function AdminNewlisting() {
                     />
                   </FormControl>
                 </Box>
-                <Box sx={{ my: 4 }}>
-                  <Label> {step6.label} </Label>
-                  <Typography variant="body2"> {step6.caption} </Typography>
 
-                  <input
-                    // value={image}
-                    type="file"
-                    onChange={(e: any) => {
-                      handleImageChange(e);
-                    }}
-                  />
+                <Grid container>
+                  <Grid xs={6} md={4}>
+                    <Box>
+                      <Label> {step6.label} </Label>
+                      <Typography variant="body2"> {step6.caption} </Typography>
 
-                  {/* <FormControl fullWidth >
+                      <input
+                        // value={image}
+                        type="file"
+                        onChange={(e: any) => {
+                          handleImageChange(e);
+                        }}
+                      />
+
+                      {/* <FormControl fullWidth >
                     <input
                       // ref={ref}
                       type="file"
@@ -297,7 +303,20 @@ export function AdminNewlisting() {
                       <FontAwesomeIcon icon={faUpload} size="lg" />
                     </IconButton>
                   </FormControl> */}
-                </Box>
+                    </Box>
+                  </Grid>
+                  <Grid xs={6} md={4}>
+                    <Box>
+                      <Label> {step10.label} </Label>
+                      <Typography variant="body2">
+                        {" "}
+                        {step10.caption}{" "}
+                      </Typography>
+                      <Switch onClick={handleBanner} />
+                    </Box>
+                  </Grid>
+                </Grid>
+
                 <Box sx={{ my: 4 }}>
                   <Label> {step8.label} </Label>
                   <Typography variant="body2"> {step8.caption} </Typography>

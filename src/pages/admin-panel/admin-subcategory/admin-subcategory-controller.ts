@@ -25,11 +25,12 @@ interface ISubcategoryControllerReturns {
  */
 export const SubCategoryController = (): ISubcategoryControllerReturns => {
   const categoryData = useAppSelector(GET_SUB_CATEGORY);
+   
   const dispatch = useAppDispatch();
 
   const getSubCategory = useCallback(async () => {
     try {
-      dispatch(AdminThunk.getSubCategory());
+      await dispatch(AdminThunk.getSubCategory());
     } catch (error) {
       console.log(error);
     }
@@ -49,8 +50,8 @@ export const SubCategoryController = (): ISubcategoryControllerReturns => {
     return item.iCategoryId == id;
   });
 
-  function deleteSubCategorylist(ID: number): void {
-    dispatch(AdminThunk.deleteSubCategory({ subCategoryId: ID }));
+  async function deleteSubCategorylist(ID: number): Promise<void> {
+    await dispatch(AdminThunk.deleteSubCategory({ subCategoryId: ID }));
     toast.success("Category Delete SuccessFully");
     getSubCategory();
   }

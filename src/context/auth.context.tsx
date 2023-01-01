@@ -50,17 +50,13 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     if (token) {
       setAuthenticated(true);
     } else {
       setAuthenticated(false);
     }
-
-  }, [])
-
-
+  }, []);
 
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {

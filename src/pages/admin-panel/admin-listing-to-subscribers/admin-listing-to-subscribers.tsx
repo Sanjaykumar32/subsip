@@ -114,9 +114,10 @@ export function AdminListingToSubscribers() {
 
   const AllBusiness = useCallback(async () => {
     const businessId = "1";
-
     try {
-      dispatch(AdminThunk.subscribeOfBussiness({ businessId: businessId }));
+      await dispatch(
+        AdminThunk.subscribeOfBussiness({ businessId: businessId })
+      );
     } catch (error) {
       console.log(error);
     }

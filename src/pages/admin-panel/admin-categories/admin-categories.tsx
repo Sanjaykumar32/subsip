@@ -57,8 +57,14 @@ export function AdminCategories() {
       width: 110,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value}>
-            <FontAwesomeIcon icon={faPen} />
+          <Tooltip title={params.value[0]}>
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={() => {
+                // naviagate(`/admin/new-category?{state:{ edit:true ,id :params?.row?.iCategoryId}}`);
+                naviagate('/admin/new-category',{state:{id: params?.row?.iCategoryId,edit:true}});
+              }}
+            />
           </Tooltip>
           <Tooltip title={params.value[1]}>
             <FontAwesomeIcon
@@ -80,7 +86,7 @@ export function AdminCategories() {
       iCategoryId: res.iCategoryId,
       vName: res.vName ? res.vName : "",
       subCategoryName: [
-        res.subCategoryName ? res.subCategoryName : "",
+        res.subCategoryCount ? res.subCategoryCount : 0,
         res.iCategoryId,
       ],
       Actions: ["Edit", "Delete", res?.iCategoryId],

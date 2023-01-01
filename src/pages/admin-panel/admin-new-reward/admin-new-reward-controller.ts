@@ -33,7 +33,7 @@ interface INewRewardControllerReturns {
  */
 export const NewRewardController = (): INewRewardControllerReturns => {
   const [name, setName] = useState<string>("");
-  const [availibility, setAvailibility] = useState<number>(0);
+  const [availibility, setAvailibility] = useState<any>(null);
   const [category, setCategory] = useState<string>("");
   const [businessName, setBuisnessName] = useState<string>("");
   const [subCategory, setSubCategory] = useState<string>("");
@@ -75,13 +75,13 @@ export const NewRewardController = (): INewRewardControllerReturns => {
     dispatch(
       AdminThunk.newReward({
         name: name,
-        availability: "4",
+        availability: availibility,
         category: category,
         subCategory: subCategory,
       })
     );
     setName("");
-    setAvailibility(0);
+    setAvailibility("");
     setSubCategory("");
     setBuisnessName("");
     setCategory("");
