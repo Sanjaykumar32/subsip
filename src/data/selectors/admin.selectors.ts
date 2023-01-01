@@ -29,3 +29,5 @@ export const GET_REFERRAL_LIST = (state: RootState) => state.admin.referralList;
 
 export const GET_RWARD_TO_WINNER_LIST = (state: RootState) =>
   state.admin.rewardToWinnerList;
+
+export const GET_REWARDS = (state: RootState) => state.admin.rewardData;

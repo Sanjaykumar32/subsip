@@ -311,7 +311,7 @@ export class AdminService {
    */
   public static async getReward(): Promise<IRewardResponse> {
     const res: AxiosResponse<IRewardResponse> = await ApiHelper.send<any>({
-      url: `/notification`,
+      url: `/reward`,
       method: "GET",
     });
     return res.data;

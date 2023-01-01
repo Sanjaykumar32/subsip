@@ -75,6 +75,7 @@ export function AdminNewReward() {
               </Box>
               <TextField
                 fullWidth
+                type="number"
                 value={availibility}
                 onChange={handleAvailibityChange}
               />

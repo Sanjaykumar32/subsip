@@ -89,7 +89,7 @@ export function AdminLayout(props: Props) {
       {
         title: "Rewards",
         icon: faTrophy,
-        route: AdminRoutePathEnum.ADMIN_REWARDS_TO_DETAILS,
+        route: AdminRoutePathEnum.ADMIN_MILESTONES,
       },
 
       {

@@ -150,9 +150,7 @@ export interface IRewardResponse {
 }
 
 export interface IReward {
-  userId: number;
-  rewardName: string;
   rewardId: number;
   businessName: string;
-  redeemedId?: number;
+  rewardCount: number;
 }
