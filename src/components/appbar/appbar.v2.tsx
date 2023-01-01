@@ -32,20 +32,31 @@ import "./appBar-v2-style.css";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { SearchField } from "./component/search-field/search-field";
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Input from '@mui/material/Input';
+import FilledInput from '@mui/material/FilledInput';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 
 export const UserAppBar = () => {
   const theme = useTheme();
   const auth = useAuth();
+ 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [menuItem, setMenuItem] = useState<any>([]);
   const [locationPopUp, setLocationPopUP] = useState<any>(false)
+  const [searchLocation , setLocation] = useState<any>('')
+  const navigate = useNavigate();
 
   const opens = Boolean(anchorEl);
 
@@ -61,11 +72,19 @@ export const UserAppBar = () => {
   }
 
   const handleLocationClose = ()=> {
+    setLocation('')
     setLocationPopUP(false)
+    navigate(`/?`);
   }
 
   const handleLocation = (event:any)=> {
-  console.log(event.target.value ,'location value')
+  setLocation(event.target.value)
+  navigate(`/?${event.target.value}`);
+  }
+  
+  const handleLocationSearch = () => {
+    navigate(`/?${searchLocation}`);
+    setLocationPopUP(false)
   }
 
   useEffect(() => {
@@ -155,7 +174,7 @@ export const UserAppBar = () => {
     from: { height: "0px" },
     to: { height: !isMobile ? "60px" : open ? "250px" : "0px" },
   });
-  const navigate = useNavigate();
+ 
 
   return (
     <>
@@ -215,18 +234,48 @@ export const UserAppBar = () => {
 
           <SearchField />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button
-              onClick={showLocationPopUp}
-              disableRipple
-              sx={{ minWidth: "120px", color: "text.primary" }}
-            >
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                size="sm"
-                style={{ marginRight: "8px" }}
-              />
-              Seattle, WA
-            </Button>
+          {!locationPopUp ?
+          <Button
+          onClick={showLocationPopUp}
+          disableRipple
+          sx={{ minWidth: "120px", color: "text.primary" }}
+        >
+          <FontAwesomeIcon
+            icon={faLocationDot}
+            size="sm"
+            style={{ marginRight: "8px" }}
+          />
+          Seattle, WA
+        </Button>
+        :
+        // <Box className="search">
+        //   <TextField id="standard-basic" label="Standard" variant="standard" />
+        //   <DialogActions>
+        //   <Button onClick={handleLocationClose}>Cancel</Button>
+        // </DialogActions>
+        // </Box>
+        <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+        <InputLabel htmlFor="standard-adornment-password">Search</InputLabel>
+        <Input
+          id="standard-adornment-password"
+          type={'text'}
+          onChange={handleLocation}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                // onClick={handleClickShowPassword}
+                // onMouseDown={handleMouseDownPassword}
+              >
+               <Button onClick={handleLocationClose}>Cancel</Button>
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+        }  
+
+           
             {/* <Divider
               flexItem
               orientation="vertical"
@@ -363,7 +412,7 @@ export const UserAppBar = () => {
         onClick={() => setOpen(false)}
       />
 
-      <Dialog open={locationPopUp} onClose={handleLocationClose} maxWidth='lg'>
+      {/* <Dialog open={locationPopUp} onClose={handleLocationClose} maxWidth='lg'>
         <DialogTitle>Search Location</DialogTitle>
         <DialogContent>
           
@@ -380,9 +429,9 @@ export const UserAppBar = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleLocationClose}>Cancel</Button>
-          <Button onClick={handleLocationClose}>Search</Button>
+          <Button onClick={handleLocationSearch}>Search</Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };
