@@ -18,7 +18,7 @@ import { UserThunk } from "data/thunk/user.thunk";
 export function Home() {
 
   const location = useLocation();
-  
+
   const settings: any = {
     infinite: true,
     slidesToShow: 1,
@@ -99,8 +99,13 @@ export function Home() {
   const businessData = useAppSelector(GET_BUSINESS);
 
   const filterBanner = businessData.filter((item) => {
-      return Object.values(item.vLocation).join('').toLowerCase().includes(location.search.toString().slice(1, 19).toLowerCase())
-    })
+    return Object.values(item.vLocation).join('').toLowerCase().includes(location.search.toString().slice(1, 19).toLowerCase())
+  })
+
+
+  console.log(filterBanner, 'filterBanner')
+
+
 
 
   console.log(businessData, 'businessData')
@@ -114,7 +119,7 @@ export function Home() {
 
   useEffect(() => {
     allBusiness();
-  }, [allBusiness]);
+  }, [allBusiness])
 
   return (
     <div className="w-full overflow-x-hidden">
@@ -245,6 +250,72 @@ export function Home() {
           </Slider>
           {filterBanner.length > 0 && <SliderArrow refVal={cardRef3} />}
         </div>
+
+
+        {/* <div className="relative my-10 w-full">
+          <Slider ref={cardRef3} {...cardSettings}>
+            {filterBanner?.map((ele, index) => {
+              return (
+                <div
+                  style={{
+                    boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
+                  }}
+                  key={`${ele.categoryName}+${index}`}
+                  className="relative overflow-x-auto md:overflow-x-hidden "
+                >
+                  <SliderCard
+                    imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
+                    name={ele?.vName}
+                    tagLine={ele?.vTagLine}
+                    des={ele?.tDescription}
+                    location={ele?.vLocation}
+                    id={ele.iBusinessId}
+                  />
+                </div>
+              );
+            })}
+          </Slider>
+          {filterBanner.length > 0 && <SliderArrow refVal={cardRef3} />}
+        </div> */}
+
+        {/* <div className="relative my-10 w-full">
+          <Slider ref={cardRef3} {...cardSettings}>
+            {filterBanner?.map((ele, index) => {
+              return (
+                <div
+                  style={{
+                    boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
+                  }}
+                  key={`${ele.categoryName}+${index}`}
+                  className="relative overflow-x-auto md:overflow-x-hidden "
+                >
+                  <SliderCard
+                    imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
+                    name={ele?.vName}
+                    tagLine={ele?.vTagLine}
+                    des={ele?.tDescription}
+                    location={ele?.vLocation}
+                    id={ele.iBusinessId}
+                  />
+                </div>
+              );
+            })}
+          </Slider>
+          {filterBanner.length > 0 && <SliderArrow refVal={cardRef3} />}
+        </div> */}
+
+
+        {/* <div className='text-center '>
+          <button
+            className="bg-[#D32F3F] text-[0.9rem] cursor-pointer w-36 rounded-[10px]  py-2 px-1 font-normal text-white mb-5 "
+          >
+            Load More
+          </button>
+
+        </div> */}
+
+
+
       </div>
     </div>
   );
@@ -287,14 +358,14 @@ const SliderCard = (props: any) => {
   }
 
   return (
-    <div className="w-full mx-auto  md:mx-5 relative max-w-[350px] bg-white  border-[1px] border-[#DADDE5] ">
+    <div className="w-full mx-auto  md:mx-5 relative max-w-[307px] bg-white  border-[1px] border-[#DADDE5] ">
       <img
         src={imgSrc}
         alt="image"
-        className="w-full h-full object-cover min-h-[215px]"
+        className="w-full object-cover h-[215px]"
         onClick={onImageClick}
       />
-      <div className="p-3">
+      <div className=" pl-3 py-3  ">
         <p className="text-[1.3rem] font-semibold text-[#021414] leading-[22px] py-2">
           {name}
         </p>
@@ -309,12 +380,20 @@ const SliderCard = (props: any) => {
             <span className="text-[20px] text-black pr-2"> 46.2k </span>
             subscribers
           </p>
+
+          <div className="raletive cursor-pointer " onClick={onButtonClick}>
+            <div className="subscribeLebalListing">
+              <span className=" text-white">Subscribe</span>
+            </div>
+          </div>
+
+          {/* 
           <button
             className="bg-[#D32F3F] text-[0.9rem] w-36 rounded-full  py-2 px-1 font-normal text-white"
             onClick={onButtonClick}
           >
             {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

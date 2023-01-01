@@ -57,11 +57,12 @@ export interface IBusiness {
   vAddress: string;
   onBanner: number;
   vImage?: string;
-  iCategory: number;
+  iCategory: string;
   iSubCategory: number;
   categoryName: string;
   subCategoryName: string;
   subscriberCount: number;
+  vEmail: any;
 }
 
 export interface IReferralCountResponse {

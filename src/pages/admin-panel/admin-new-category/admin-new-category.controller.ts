@@ -37,7 +37,6 @@ const CategoryController = (): ICategoryControllerReturns => {
         if (item?.iCategoryId === editScreen?.state?.id) {
           setCategory(item.vName)
         }
-
       })
     }
   }, [editScreen])
@@ -52,21 +51,21 @@ const CategoryController = (): ICategoryControllerReturns => {
           categoryId: editScreen?.state?.id ? parseInt(editScreen?.state?.id) : 0,
         })
       );
-      console.log(response , 'response edit category')
+      console.log(response, 'response edit category')
       if (response.payload.data) {
         naviagate(AdminRoutePathEnum.ADMIN_CATEGORY);
       }
       setCategory("");
 
     } else {
-       // create category
+      // create category
       const response: any = await dispatch(
         AdminThunk.category({
           name: category,
           addedBy: userId ? parseInt(userId) : 0,
         })
       );
-    console.log(response , 'res create category')
+      console.log(response, 'res create category')
       if (response.payload.data) {
         naviagate(AdminRoutePathEnum.ADMIN_CATEGORY);
       }
@@ -76,7 +75,7 @@ const CategoryController = (): ICategoryControllerReturns => {
 
   };
 
-   console.log(categoryData , 'categoryData ')
+  console.log(categoryData, 'categoryData ')
 
 
   const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>): void => {

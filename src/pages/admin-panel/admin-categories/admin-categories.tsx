@@ -62,7 +62,7 @@ export function AdminCategories() {
               icon={faPen}
               onClick={() => {
                 // naviagate(`/admin/new-category?{state:{ edit:true ,id :params?.row?.iCategoryId}}`);
-                naviagate('/admin/new-category',{state:{id: params?.row?.iCategoryId,edit:true}});
+                naviagate('/admin/new-category', { state: { id: params?.row?.iCategoryId, edit: true } });
               }}
             />
           </Tooltip>

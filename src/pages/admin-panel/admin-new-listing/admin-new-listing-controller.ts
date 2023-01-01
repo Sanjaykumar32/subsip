@@ -12,7 +12,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { AdminRoutePathEnum } from "enum";
 
@@ -67,6 +67,60 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const businessData = useAppSelector(GET_BUSINESS);
   const [banner, setBanner] = useState<string>("false");
   const dispatch = useAppDispatch();
+
+  // const businessData = useAppSelector(GET_BUSINESS);
+  const editScreen = useLocation()
+  // console.log(categoryData, 'editScreen?.state?.id')
+
+  useEffect(() => {
+    if (editScreen?.state?.edit === true) {
+
+      // console.log(editScreen.state, 'item')
+
+      const filter = businessData?.filter((item) => {
+        // console.log(item?.iBusinessId, 'item')
+
+
+        if (item?.iBusinessId === editScreen?.state?.id) {
+          console.log(item, 'item')
+          // item
+          setBuisnessName(item?.vName)
+          setBusinessLocation(item?.vLocation)
+          setDescription(item?.tDescription)
+          setBanner(item.onBanner == 1 ? 'true' : 'false')
+          setEmail(item?.vEmail)
+
+          console.log(item?.iCountry)
+
+          const filterCategory = categoryData?.filter((item: any) => {
+            // console.log(item, 'cateitem')
+            if (item?.iCategoryId === item?.iCountry) {
+              // setCategory(item.vName)
+            }
+          })
+
+          // if (cateitem.iCategoryId === item?.iCountry) {
+          //   console.log(cateitem)
+          // }
+          // );
+
+
+          // setCategory('')
+          // setSubCategory('')
+          setTagLine('asdfdsf asdfasdf assad')
+        }
+      })
+
+
+
+
+    }
+  }, [editScreen])
+
+
+
+
+
 
   const handleHeadlineChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setHeadline(event.target.value as string);
