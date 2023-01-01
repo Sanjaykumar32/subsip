@@ -77,7 +77,8 @@ export const Subscribe = ({
   );
 };
 
-export const CardFooter = () => {
+export const CardFooter = (props: { vTagLine: string }) => {
+  const { vTagLine } = props;
   const theme = useTheme();
   return (
     <Box
@@ -94,8 +95,7 @@ export const CardFooter = () => {
           textAlign: "center",
         }}
       >
-        Claim FREE gift cards as they become available from the business listed
-        above
+        {vTagLine}
       </Typography>
     </Box>
   );
@@ -106,6 +106,7 @@ export function Location({
   vLocation,
   tDescription,
   subscriberCount,
+  vTagLine,
 }: IBusiness) {
   const auth = useAuth();
   return (
@@ -143,7 +144,7 @@ export function Location({
         <Info>{tDescription}</Info>
         <Subscribe subsctibers={subscriberCount} auth={auth} />
       </Box>
-      <CardFooter />
+      <CardFooter vTagLine={vTagLine} />
     </Card>
   );
 }
