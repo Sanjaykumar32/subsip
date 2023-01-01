@@ -37,16 +37,6 @@ export function AdminNotification() {
       width: 200,
     },
     {
-      field: "vBusinessLocation",
-      headerName: "Loaction",
-      width: 200,
-    },
-    {
-      field: "dDate",
-      headerName: "Created Date",
-      width: 200,
-    },
-    {
       field: "Actions",
       headerName: "Actions",
       width: 110,
@@ -74,8 +64,6 @@ export function AdminNotification() {
       id: item.iNotificationId,
       vHeadline: item.vHeadline,
       vDesc: item.vDesc,
-      vBusinessLocation: item.vBusinessLocation,
-      dDate: item.dDate,
       Actions: ["Edit", "Delete", item?.iNotificationId],
     };
   });
