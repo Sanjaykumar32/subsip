@@ -68,19 +68,13 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const [banner, setBanner] = useState<string>("false");
   const [editrue, setEditure] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-
-  // const businessData = useAppSelector(GET_BUSINESS);
   const editScreen = useLocation();
-  // console.log(categoryData, 'editScreen?.state?.id')
 
   useEffect(() => {
     if (editScreen?.state?.edit === true) {
       setEditure(true);
-      // console.log(editScreen.state, 'item')
 
       const filter = businessData?.filter((item) => {
-        // console.log(item?.iBusinessId, 'item')
-
         if (item?.iBusinessId === editScreen?.state?.id) {
           console.log(item, "item");
           // item

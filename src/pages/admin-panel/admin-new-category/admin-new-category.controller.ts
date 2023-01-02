@@ -22,11 +22,8 @@ const CategoryController = (): ICategoryControllerReturns => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [category, setCategory] = useState<any>("");
-
   const userId = localStorage.getItem("userId");
-
   const editScreen = useLocation();
-  console.log(editScreen?.state?.id, "editScreen?.state?.id");
   const categoryData = useAppSelector(GET_CATEGORY);
 
   useEffect(() => {
@@ -37,7 +34,7 @@ const CategoryController = (): ICategoryControllerReturns => {
         }
       });
     }
-  }, [editScreen]);
+  }, [categoryData, editScreen]);
 
   const submitHandler = async (): Promise<void> => {
     if (editScreen?.state?.edit === true) {
