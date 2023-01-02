@@ -29,6 +29,7 @@ import { toast } from "react-hot-toast";
 export function AdminListing() {
   const dispatch = useAppDispatch();
   const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
 
   async function deleteDatalist(ID: number) {
     setLoader(true);
@@ -80,7 +81,14 @@ export function AdminListing() {
       renderCell: (params) => (
         <Box>
           <Tooltip title={params.value[0]}>
-            <FontAwesomeIcon icon={faPen} />
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={() => {
+                navigate("/admin/new-listing", {
+                  state: { id: params.value[2], edit: true },
+                });
+              }}
+            />
           </Tooltip>
           <Tooltip title={params.value[1]}>
             <FontAwesomeIcon
@@ -95,8 +103,6 @@ export function AdminListing() {
       ),
     },
   ];
-
- 
 
   const businessData = useAppSelector(GET_BUSINESS);
 
@@ -122,9 +128,11 @@ export function AdminListing() {
       Actions: ["Edit", "Delete", item?.iBusinessId],
     };
   });
-  console.log(businessData ,'businessData')
 
-  const naviagate = useNavigate();
+  console.log(businessData, 'businessData')
+
+
+
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
       {/* {loader && */}
@@ -138,7 +146,7 @@ export function AdminListing() {
         <Box>
           <Button
             onClick={() => {
-              naviagate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
+              navigate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
             }}
             size="large"
             sx={{

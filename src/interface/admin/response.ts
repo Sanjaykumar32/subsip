@@ -51,7 +51,7 @@ export interface IBusiness {
   dtModifiedDate: string;
   eStatus: string;
   eType: string;
-  iCountry: number;
+  iCountry: string;
   iState: number;
   iCity: number;
   vAddress: string;
@@ -62,6 +62,7 @@ export interface IBusiness {
   categoryName: string;
   subCategoryName: string;
   subscriberCount: number;
+  vEmail: any;
 }
 
 export interface IReferralCountResponse {
@@ -134,11 +135,37 @@ export interface INotificationResponse {
 
 export interface INotificationdata {
   iNotificationId: number;
-  vHeadline?: string;
-  vDesc?: string;
-  dDate?: string;
-  vBusinessLocation?: string;
-  iCategoryId?: string;
-  iSubCategoryId?: number;
-  iBusinessId?: number;
+  vHeadline: string;
+  vDesc: string;
+  dDate: string;
+  vBusinessLocation: string;
+  iCategoryId: number;
+  iSubCategoryId: number;
+  iBusinessId: number;
+}
+
+export interface IRewardResponse {
+  success: number;
+  message: string;
+  data: IReward[];
+}
+
+export interface IReward {
+  rewardId: number;
+  businessName: string;
+  rewardCount: number;
+}
+
+export interface IUserRewardresponse {
+  success: number;
+  message: string;
+  data: IUserReward[];
+}
+
+export interface IUserReward {
+  userId: number;
+  rewardName: string;
+  rewardId: number;
+  businessName: string;
+  redeemedId?: number;
 }

@@ -23,7 +23,10 @@ import {
   INotificationRequest,
   INotificationResponse,
   IDeleteNotificationRequest,
+  IRewardResponse,
   IUpdateCategoryRequest,
+  IUserRewardresponse,
+  IGetAllUsetRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -201,6 +204,28 @@ export class AdminThunk {
   );
 
   /**
+   * Get Reward
+   */
+  public static getReward = createAsyncThunk(
+    "admin/getReward",
+    async (): Promise<IRewardResponse> => {
+      const response = await AdminService.getReward();
+      return response;
+    }
+  );
+
+  /**
+   * Get Reward
+   */
+  public static getuserReward = createAsyncThunk(
+    "admin/userGetReward",
+    async (payload: IGetAllUsetRequest): Promise<IUserRewardresponse> => {
+      const response = await AdminService.getUserReward(payload);
+      return response;
+    }
+  );
+
+  /**
    * New Notify Button
    */
   public static newNotifyButton = createAsyncThunk(
@@ -229,11 +254,24 @@ export class AdminThunk {
   public static createListing = createAsyncThunk(
     "admin/createListing",
     async (payload: any): Promise<void> => {
-      console.log(payload, "payload");
+      // console.log(payload, "payload");
       const response = await AdminService.craeteListing(payload);
       return response;
     }
   );
+
+  /**
+   * Create Listing
+   */
+  public static updateListing = createAsyncThunk(
+    "admin/update/createListing",
+    async (payload: any): Promise<void> => {
+      // console.log(payload, "payload");
+      const response = await AdminService.updateListing(payload);
+      return response;
+    }
+  );
+
 
   /**
    * New category
@@ -324,7 +362,7 @@ export class AdminThunk {
   );
 
   /**
-   * Reward Business
+   * delete Reward
    */
   public static deleteReward = createAsyncThunk(
     "admin/deleteReward",

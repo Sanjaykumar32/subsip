@@ -92,16 +92,6 @@ const naviagate =  useNavigate()
                     {item.vName}
                   </ListItem>
                 ))}
-
-                {/* {Array(30)
-                  .fill({
-                    name: "Sandwiches",
-                  })
-                  .map((element, index: number) => (
-                    <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }}>
-                      {element.name}
-                    </ListItem>
-                  ))} */}
               </List>
             </Box>
           </Drawer>
@@ -124,16 +114,6 @@ const naviagate =  useNavigate()
                  
                   </ListItem>
                 ))}
-
-                {/* {Array(30)
-                  .fill({
-                    name: "Sandwiches",
-                  })
-                  .map((element, index: number) => (
-                    <ListItem key={`${element.name}-${index}`} sx={{ px: 0 }} className='font-normal text-[16px] leading-[24px] text-[#434d59]'>
-                      {element.name}
-                    </ListItem>
-                  ))} */}
               </List>
             </Box>
           </Grid>

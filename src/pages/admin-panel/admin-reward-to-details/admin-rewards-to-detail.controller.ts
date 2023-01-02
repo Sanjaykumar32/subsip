@@ -25,18 +25,6 @@ export const AdminNotificationController =
     const notificationData = useAppSelector(GET_NOTIFICATION);
     const dispatch = useAppDispatch();
 
-    const getReward = useCallback(async () => {
-      try {
-        await dispatch(AdminThunk.notificationList());
-      } catch (error) {
-        console.log(error);
-      }
-    }, [dispatch]);
-
-    useEffect(() => {
-      getReward();
-    }, [getReward]);
-
     const attributes: attributeType[] = [];
 
     const category = notificationData.forEach((res: any, index: number) => {

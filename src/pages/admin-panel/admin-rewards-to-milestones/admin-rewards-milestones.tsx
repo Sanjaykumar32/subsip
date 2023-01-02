@@ -1,20 +1,58 @@
-import React from "react";
-import { Box, Button, Chip, Container, Tooltip } from "@mui/material";
+import React, { useCallback, useEffect } from "react";
+import { Box, Button, Chip, Container, Link, Tooltip } from "@mui/material";
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AdminRoutePathEnum } from "enum";
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { useAppDispatch, useAppSelector } from "data";
+import { useNavigate } from "react-router-dom";
+import { GET_REWARDS } from "data/selectors";
 
 export function AdminRewardsMileStones() {
+  const dispatch = useAppDispatch();
+  const rewardData = useAppSelector(GET_REWARDS);
+  const navigate = useNavigate();
+
+
+  console.log(rewardData, 'rewardData')
+
+  const getReward = useCallback(async () => {
+    try {
+      await dispatch(AdminThunk.getReward());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  const rows = rewardData.map((item, index) => {
+    return {
+      id: index,
+      businessName: item.businessName,
+      rewardCount: item.rewardCount,
+      Actions: ["Edit", "Delete", item?.rewardId],
+    };
+  });
+
+  useEffect(() => {
+    getReward();
+  }, [getReward]);
+
   const columns: GridColDef[] = [
     {
-      field: "Name",
+      field: "businessName",
       headerName: "Name",
       width: 200,
+      renderCell: (params) => (
+        <Link href={AdminRoutePathEnum.ADMIN_REWARDS_TO_DETAILS}>
+          {params.value}
+        </Link>
+      ),
     },
     {
-      field: "Reward",
+      field: "rewardCount",
       headerName: "Rewards",
       width: 200,
       renderCell: (params) => <Chip label={params.value} color="info" />,
@@ -28,63 +66,6 @@ export function AdminRewardsMileStones() {
           <FontAwesomeIcon icon={faPen} />
         </Tooltip>
       ),
-    },
-  ];
-
-  const rows = [
-    {
-      id: 1,
-      Name: "50 Gift Card",
-      Reward: "1 reward",
-      Actions: "Edit",
-    },
-    {
-      id: 2,
-      Name: "50 Gift Card",
-      Reward: "1 reward",
-      Actions: "Edit",
-    },
-    {
-      id: 3,
-      Name: "50 Gift Card",
-      Reward: "1 reward",
-      Actions: "Edit",
-    },
-    {
-      id: 4,
-      Name: "50 Gift Card",
-      Reward: "1 reward",
-      Actions: "Edit",
-    },
-    {
-      id: 5,
-      Name: "50 Gift Card",
-      Reward: "1 reward",
-      Actions: "Edit",
-    },
-    {
-      id: 6,
-      Name: "50 Gift Card",
-      Reward: "1 reward",
-      Actions: "Edit",
-    },
-    {
-      id: 7,
-      Name: "50 Gift Card",
-      Reward: "1 reward",
-      Actions: "Edit",
-    },
-    {
-      id: 8,
-      Name: "50 Gift Card",
-      Reward: "1 reward",
-      Actions: "Edit",
-    },
-    {
-      id: 9,
-      Name: "50 Gift Card",
-      Reward: "1 reward",
-      Actions: "Edit",
     },
   ];
 
@@ -106,6 +87,7 @@ export function AdminRewardsMileStones() {
           }}
           color="info"
           variant="contained"
+          onClick={() => navigate(AdminRoutePathEnum.ADMIN_NEW_REWARDS)}
         >
           New Reward
         </Button>

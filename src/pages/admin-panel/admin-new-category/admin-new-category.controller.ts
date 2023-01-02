@@ -20,70 +20,62 @@ interface ICategoryControllerReturns {
  */
 const CategoryController = (): ICategoryControllerReturns => {
   const dispatch = useAppDispatch();
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
   const [category, setCategory] = useState<any>("");
 
   const userId = localStorage.getItem("userId");
 
-  // const [editCtegory ,setCategoryEdit] = useState<any>('')
-
-  const editScreen = useLocation()
-  console.log(editScreen?.state?.id, 'editScreen?.state?.id')
+  const editScreen = useLocation();
+  console.log(editScreen?.state?.id, "editScreen?.state?.id");
   const categoryData = useAppSelector(GET_CATEGORY);
 
   useEffect(() => {
     if (editScreen?.state?.edit === true) {
       const filter = categoryData?.filter((item) => {
         if (item?.iCategoryId === editScreen?.state?.id) {
-          setCategory(item.vName)
+          setCategory(item.vName);
         }
-
-      })
+      });
     }
-  }, [editScreen])
+  }, [editScreen]);
 
   const submitHandler = async (): Promise<void> => {
-
     if (editScreen?.state?.edit === true) {
       // Edit category
       const response: any = await dispatch(
         AdminThunk.updateCategory({
           name: category,
-          categoryId: editScreen?.state?.id ? parseInt(editScreen?.state?.id) : 0,
+          categoryId: editScreen?.state?.id
+            ? parseInt(editScreen?.state?.id)
+            : 0,
         })
       );
-      console.log(response , 'response edit category')
+      console.log(response, "response edit category");
       if (response.payload.data) {
-        naviagate(AdminRoutePathEnum.ADMIN_CATEGORY);
+        navigate(AdminRoutePathEnum.ADMIN_CATEGORY);
       }
       setCategory("");
-
     } else {
-       // create category
+      // create category
       const response: any = await dispatch(
         AdminThunk.category({
           name: category,
           addedBy: userId ? parseInt(userId) : 0,
         })
       );
-    console.log(response , 'res create category')
+      console.log(response, "res create category");
       if (response.payload.data) {
-        naviagate(AdminRoutePathEnum.ADMIN_CATEGORY);
+        navigate(AdminRoutePathEnum.ADMIN_CATEGORY);
       }
       setCategory("");
-
     }
-
   };
 
-   console.log(categoryData , 'categoryData ')
-
+  console.log(categoryData, "categoryData ");
 
   const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setCategory(event.target.value as string);
   };
-
-
 
   return {
     getters: { category },

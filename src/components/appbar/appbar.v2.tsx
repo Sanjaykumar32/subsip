@@ -50,12 +50,12 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export const UserAppBar = () => {
   const theme = useTheme();
   const auth = useAuth();
- 
+
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [menuItem, setMenuItem] = useState<any>([]);
   const [locationPopUp, setLocationPopUP] = useState<any>(false)
-  const [searchLocation , setLocation] = useState<any>('')
+  const [searchLocation, setLocation] = useState<any>('')
   const navigate = useNavigate();
 
   const opens = Boolean(anchorEl);
@@ -71,17 +71,17 @@ export const UserAppBar = () => {
     setLocationPopUP(true)
   }
 
-  const handleLocationClose = ()=> {
+  const handleLocationClose = () => {
     setLocation('')
     setLocationPopUP(false)
     navigate(`/?`);
   }
 
-  const handleLocation = (event:any)=> {
-  setLocation(event.target.value)
-  navigate(`/?${event.target.value}`);
+  const handleLocation = (event: any) => {
+    setLocation(event.target.value)
+    navigate(`/?${event.target.value}`);
   }
-  
+
   const handleLocationSearch = () => {
     navigate(`/?${searchLocation}`);
     setLocationPopUP(false)
@@ -174,7 +174,7 @@ export const UserAppBar = () => {
     from: { height: "0px" },
     to: { height: !isMobile ? "60px" : open ? "250px" : "0px" },
   });
- 
+
 
   return (
     <>
@@ -182,7 +182,7 @@ export const UserAppBar = () => {
         color="default"
         elevation={0}
         sx={{
-          zIndex: theme.zIndex.appBar,
+          zIndex: theme.zIndex.appBar, backgroundColor: 'white', boxShadow: '0 1px 20px 0 #91919175',
         }}
       >
         <Toolbar
@@ -234,48 +234,47 @@ export const UserAppBar = () => {
 
           <SearchField />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          {!locationPopUp ?
-          <Button
-          onClick={showLocationPopUp}
-          disableRipple
-          sx={{ minWidth: "120px", color: "text.primary" }}
-        >
-          <FontAwesomeIcon
-            icon={faLocationDot}
-            size="sm"
-            style={{ marginRight: "8px" }}
-          />
-          Seattle, WA
-        </Button>
-        :
-        // <Box className="search">
-        //   <TextField id="standard-basic" label="Standard" variant="standard" />
-        //   <DialogActions>
-        //   <Button onClick={handleLocationClose}>Cancel</Button>
-        // </DialogActions>
-        // </Box>
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-        <InputLabel htmlFor="standard-adornment-password">Search</InputLabel>
-        <Input
-          id="standard-adornment-password"
-          type={'text'}
-          onChange={handleLocation}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                // onClick={handleClickShowPassword}
-                // onMouseDown={handleMouseDownPassword}
+            {!locationPopUp ?
+              <Button
+                onClick={showLocationPopUp}
+                disableRipple
+                sx={{ minWidth: "120px", color: "text.primary" }}
               >
-               <Button onClick={handleLocationClose}>Cancel</Button>
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-      </FormControl>
-        }  
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  size="sm"
+                  style={{ marginRight: "8px" }}
+                />Location
+              </Button>
+              :
+              // <Box className="search">
+              //   <TextField id="standard-basic" label="Standard" variant="standard" />
+              //   <DialogActions>
+              //   <Button onClick={handleLocationClose}>Cancel</Button>
+              // </DialogActions>
+              // </Box>
+              <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+                <InputLabel htmlFor="standard-adornment-password">Search</InputLabel>
+                <Input
+                  id="standard-adornment-password"
+                  type={'text'}
+                  onChange={handleLocation}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                      // onClick={handleClickShowPassword}
+                      // onMouseDown={handleMouseDownPassword}
+                      >
+                        <Button onClick={handleLocationClose}>Cancel</Button>
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            }
 
-           
+
             {/* <Divider
               flexItem
               orientation="vertical"

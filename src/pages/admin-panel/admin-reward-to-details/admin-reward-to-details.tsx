@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   Box,
   Button,
@@ -17,10 +17,40 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminBackButton } from "components";
 import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_USER_REWARDS } from "data/selectors";
 
 export function AdminRewardToDetails() {
   const label = { inputProps: { "aria-label": "Size switch demo" } };
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const userId = localStorage.getItem("userId");
+
+  const userRewardData = useAppSelector(GET_USER_REWARDS);
+
+  const getUserReward = useCallback(async () => {
+    try {
+      await dispatch(
+        AdminThunk.getuserReward({ userId: userId ? parseInt(userId) : 0 })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, userId]);
+
+  // const rows = userRewardData.map((item) => {
+  //   return {
+  //     id: item.rewardId,
+  //     businessName: item.businessName,
+  //     rewardCount: item.rewardCount,
+  //     Actions: ["Edit", "Delete", item?.rewardId],
+  //   };
+  // });
+
+  useEffect(() => {
+    getUserReward();
+  }, [getUserReward]);
 
   const columns: GridColDef[] = [
     {

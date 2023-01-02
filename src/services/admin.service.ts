@@ -29,7 +29,10 @@ import {
   IDeleteRewardRequest,
   INotificationResponse,
   IDeleteNotificationRequest,
+  IRewardResponse,
   IUpdateCategoryRequest,
+  IGetAllUsetRequest,
+  IUserRewardresponse,
 } from "interface";
 
 /**
@@ -76,7 +79,6 @@ export class AdminService {
 
   /**
    * admin Notification List
-   
    * @return {Promise<INotificationResponse>}
    */
   public static async getNotoification(): Promise<INotificationResponse> {
@@ -306,6 +308,32 @@ export class AdminService {
   }
 
   /**
+   * admin Reward
+   * @return {Promise<IRewardResponse>}
+   */
+  public static async getReward(): Promise<IRewardResponse> {
+    const res: AxiosResponse<IRewardResponse> = await ApiHelper.send<any>({
+      url: `/reward`,
+      method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
+   * user Reward
+   * @return {Promise<IUserRewardresponse>}
+   */
+  public static async getUserReward(
+    payload: IGetAllUsetRequest
+  ): Promise<IUserRewardresponse> {
+    const res: AxiosResponse<IUserRewardresponse> = await ApiHelper.send<any>({
+      url: `user/reward?userId=${payload.userId}`,
+      method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
    * New NotifyButton
    * @param {INewNotifyButtonRequest} payload
    * @return {Promise<any>}
@@ -350,7 +378,21 @@ export class AdminService {
       method: "POST",
       data: payload,
     });
+    return res.data;
+  }
 
+
+  /**
+ * Update listing
+ * @param {ICreateListingRequest} payload
+ * @return {Promise<any>}
+ */
+  public static async updateListing(payload: any): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/business/${payload?.iBusinessId}`,
+      method: "PUT",
+      data: payload?.data,
+    });
     return res.data;
   }
 

@@ -37,23 +37,21 @@ export function AdminNotification() {
       width: 200,
     },
     {
-      field: "vBusinessLocation",
-      headerName: "Loaction",
-      width: 200,
-    },
-    {
-      field: "dDate",
-      headerName: "Created Date",
-      width: 200,
-    },
-    {
       field: "Actions",
       headerName: "Actions",
       width: 110,
       renderCell: (params) => (
         <Box>
           <Tooltip title={params.value[0]}>
-            <FontAwesomeIcon icon={faPen} />
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={() => {
+                console.log(params?.row, "param");
+                navigate(AdminRoutePathEnum.ADMIN_NEW_NOTIFICTAION, {
+                  state: { id: params?.row?.id, edit: true },
+                });
+              }}
+            />
           </Tooltip>
           <Tooltip title={params.value[1]}>
             <FontAwesomeIcon
@@ -74,8 +72,6 @@ export function AdminNotification() {
       id: item.iNotificationId,
       vHeadline: item.vHeadline,
       vDesc: item.vDesc,
-      vBusinessLocation: item.vBusinessLocation,
-      dDate: item.dDate,
       Actions: ["Edit", "Delete", item?.iNotificationId],
     };
   });

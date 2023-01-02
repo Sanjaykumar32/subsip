@@ -4,6 +4,7 @@ export interface IUpdateCategoryRequest {
   name: string;
   categoryId: number;
 }
+
 export interface ICategoryRequest {
   name: string;
   addedBy: number;
@@ -100,4 +101,8 @@ export interface IDeleteRewardRequest {
 
 export interface IDeleteNotificationRequest {
   notificationId: number;
+}
+
+export interface IGetAllUsetRequest {
+  userId: number;
 }
