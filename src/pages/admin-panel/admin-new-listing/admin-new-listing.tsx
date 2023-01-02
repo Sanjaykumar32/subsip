@@ -51,70 +51,70 @@ export function AdminNewlisting() {
     step9,
     step10,
   ]: ListFormItem[] = [
-    {
-      id: "q1",
-      label: "What's your business called?",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q2",
-      label: "Pick  Business Category  ",
-      type: InputTypeEnum.SELECT,
-      required: true,
-    },
-    {
-      id: "q3",
-      label: "Tagline",
-      type: InputTypeEnum.INPUT,
-      required: true,
-      caption:
-        "What's your pitch? Tell buyers about your product in 100 characters or less.",
-    },
-    {
-      id: "q4",
-      label: "Tell us about your buisness?",
-      type: InputTypeEnum.TEXT_AREA,
-      required: true,
-      caption:
-        "Share a high-level introduction to your product. Check out our copy guidelines for inspiration.",
-    },
-    {
-      id: "q5",
-      label: "Support Email?",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q6",
-      label: "Featured Image?",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q7",
-      label: "Tagline",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q8",
-      label: "Buisness Location",
-      type: InputTypeEnum.SELECT,
-      required: true,
-    },
-    {
-      id: "q9",
-      label: "Pick Subcategory ",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q10",
-      label: "On Banner",
-      type: InputTypeEnum.SWITCH_DEMO,
-    },
-  ];
+      {
+        id: "q1",
+        label: "What's your business called?",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q2",
+        label: "Pick  Business Category  ",
+        type: InputTypeEnum.SELECT,
+        required: true,
+      },
+      {
+        id: "q3",
+        label: "Tagline",
+        type: InputTypeEnum.INPUT,
+        required: true,
+        caption:
+          "What's your pitch? Tell buyers about your product in 100 characters or less.",
+      },
+      {
+        id: "q4",
+        label: "Tell us about your buisness?",
+        type: InputTypeEnum.TEXT_AREA,
+        required: true,
+        caption:
+          "Share a high-level introduction to your product. Check out our copy guidelines for inspiration.",
+      },
+      {
+        id: "q5",
+        label: "Support Email?",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q6",
+        label: "Featured Image?",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q7",
+        label: "Tagline",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q8",
+        label: "Buisness Location",
+        type: InputTypeEnum.SELECT,
+        required: true,
+      },
+      {
+        id: "q9",
+        label: "Pick Subcategory ",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q10",
+        label: "On Banner",
+        type: InputTypeEnum.SWITCH_DEMO,
+      },
+    ];
 
   const { getters, handlers } = NewlistingController();
   const {
@@ -144,6 +144,8 @@ export function AdminNewlisting() {
     handleImageChange,
     handleBanner,
   } = handlers;
+
+
 
   const ref = useRef<HTMLInputElement>(null);
 
@@ -279,30 +281,30 @@ export function AdminNewlisting() {
                       />
 
                       {/* <FormControl fullWidth >
-                    <input
-                      // ref={ref}
-                      type="file"
-                      // value={image}
-                      onChange={(e: any) => { handleImageChange(e) }}
-                      hidden
-                    />
+                        <input
+                          // ref={ref}
+                          type="file"
+                          // value={image}
+                          onChange={(e: any) => { handleImageChange(e) }}
+                          hidden
+                        />
 
-                    <IconButton
-                      sx={{
-                        width: "100%",
-                        height: "100%",
-                        backgroundColor: theme.palette.grey[300],
-                        borderRadius: "4px",
-                        p: 4,
-                      }}
-                      onClick={(e: any) => {
-                        ref.current?.click();
-                        // handleImageChange(e);
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faUpload} size="lg" />
-                    </IconButton>
-                  </FormControl> */}
+                        <IconButton
+                          sx={{
+                            width: "100%",
+                            height: "100%",
+                            backgroundColor: theme.palette.grey[300],
+                            borderRadius: "4px",
+                            p: 4,
+                          }}
+                          onClick={(e: any) => {
+                            ref.current?.click();
+                            handleImageChange(e);
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faUpload} size="lg" />
+                        </IconButton>
+                      </FormControl> */}
                     </Box>
                   </Grid>
                   <Grid xs={6} md={4}>
@@ -312,7 +314,7 @@ export function AdminNewlisting() {
                         {" "}
                         {step10.caption}{" "}
                       </Typography>
-                      <Switch onClick={handleBanner} />
+                      <Switch value={'true'} onClick={handleBanner} />
                     </Box>
                   </Grid>
                 </Grid>

@@ -51,13 +51,13 @@ export interface IBusiness {
   dtModifiedDate: string;
   eStatus: string;
   eType: string;
-  iCountry: number;
+  iCountry: string;
   iState: number;
   iCity: number;
   vAddress: string;
   onBanner: number;
   vImage?: string;
-  iCategory: string;
+  iCategory: number;
   iSubCategory: number;
   categoryName: string;
   subCategoryName: string;

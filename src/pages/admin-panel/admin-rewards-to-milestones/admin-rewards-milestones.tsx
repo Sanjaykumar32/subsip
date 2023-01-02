@@ -16,6 +16,9 @@ export function AdminRewardsMileStones() {
   const rewardData = useAppSelector(GET_REWARDS);
   const navigate = useNavigate();
 
+
+  console.log(rewardData, 'rewardData')
+
   const getReward = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getReward());
@@ -24,9 +27,9 @@ export function AdminRewardsMileStones() {
     }
   }, [dispatch]);
 
-  const rows = rewardData.map((item) => {
+  const rows = rewardData.map((item, index) => {
     return {
-      id: item.rewardId,
+      id: index,
       businessName: item.businessName,
       rewardCount: item.rewardCount,
       Actions: ["Edit", "Delete", item?.rewardId],

@@ -29,7 +29,7 @@ import { toast } from "react-hot-toast";
 export function AdminListing() {
   const dispatch = useAppDispatch();
   const [loader, setLoader] = useState(false);
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
 
   async function deleteDatalist(ID: number) {
     setLoader(true);
@@ -84,7 +84,7 @@ export function AdminListing() {
             <FontAwesomeIcon
               icon={faPen}
               onClick={() => {
-                naviagate("/admin/new-listing", {
+                navigate("/admin/new-listing", {
                   state: { id: params.value[2], edit: true },
                 });
               }}
@@ -129,6 +129,10 @@ export function AdminListing() {
     };
   });
 
+  console.log(businessData, 'businessData')
+
+
+
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
       {/* {loader && */}
@@ -142,7 +146,7 @@ export function AdminListing() {
         <Box>
           <Button
             onClick={() => {
-              naviagate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
+              navigate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
             }}
             size="large"
             sx={{

@@ -254,11 +254,24 @@ export class AdminThunk {
   public static createListing = createAsyncThunk(
     "admin/createListing",
     async (payload: any): Promise<void> => {
-      console.log(payload, "payload");
+      // console.log(payload, "payload");
       const response = await AdminService.craeteListing(payload);
       return response;
     }
   );
+
+  /**
+   * Create Listing
+   */
+  public static updateListing = createAsyncThunk(
+    "admin/update/createListing",
+    async (payload: any): Promise<void> => {
+      // console.log(payload, "payload");
+      const response = await AdminService.updateListing(payload);
+      return response;
+    }
+  );
+
 
   /**
    * New category

@@ -378,7 +378,21 @@ export class AdminService {
       method: "POST",
       data: payload,
     });
+    return res.data;
+  }
 
+
+  /**
+ * Update listing
+ * @param {ICreateListingRequest} payload
+ * @return {Promise<any>}
+ */
+  public static async updateListing(payload: any): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/business/${payload?.iBusinessId}`,
+      method: "PUT",
+      data: payload?.data,
+    });
     return res.data;
   }
 

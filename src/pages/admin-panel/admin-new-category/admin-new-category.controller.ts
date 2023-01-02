@@ -20,7 +20,7 @@ interface ICategoryControllerReturns {
  */
 const CategoryController = (): ICategoryControllerReturns => {
   const dispatch = useAppDispatch();
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
   const [category, setCategory] = useState<any>("");
 
   const userId = localStorage.getItem("userId");
@@ -52,7 +52,7 @@ const CategoryController = (): ICategoryControllerReturns => {
       );
       console.log(response, "response edit category");
       if (response.payload.data) {
-        naviagate(AdminRoutePathEnum.ADMIN_CATEGORY);
+        navigate(AdminRoutePathEnum.ADMIN_CATEGORY);
       }
       setCategory("");
     } else {
@@ -65,7 +65,7 @@ const CategoryController = (): ICategoryControllerReturns => {
       );
       console.log(response, "res create category");
       if (response.payload.data) {
-        naviagate(AdminRoutePathEnum.ADMIN_CATEGORY);
+        navigate(AdminRoutePathEnum.ADMIN_CATEGORY);
       }
       setCategory("");
     }
