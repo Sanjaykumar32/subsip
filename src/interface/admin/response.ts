@@ -57,8 +57,8 @@ export interface IBusiness {
   vAddress: string;
   onBanner: number;
   vImage?: string;
-  iCategory: number;
-  iSubCategory: number;
+  iCategory: string;
+  iSubCategory: string;
   categoryName: string;
   subCategoryName: string;
   subscriberCount: number;

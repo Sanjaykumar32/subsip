@@ -35,8 +35,9 @@ export interface Filter {
 }
 
 export interface IReferralPriceRequest {
-  mileStoneName: string;
-  referralAmount: string;
+  name: string;
+  amount: number;
+  milestoneID?: number;
 }
 
 export interface INewRewardRequest {
@@ -84,6 +85,10 @@ export interface ICreateListingRequest {
 }
 
 export interface IDeleteListingRequest {
+  userID: number;
+}
+
+export interface IDeleteReferralRequest {
   userID: number;
 }
 

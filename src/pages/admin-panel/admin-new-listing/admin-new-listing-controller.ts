@@ -88,19 +88,22 @@ export const NewlistingController = (): INewlistingControllerReturns => {
           setBuisnessName(item?.vName)
           setBusinessLocation(item?.vLocation)
           setDescription(item?.tDescription)
-          setBanner(item.onBanner == 1 ? "true" : "false")
-          setEmail(item?.vEmail)
 
+          if (item.onBanner == 1) {
+            // setBanner("true")
+            console.log(item.onBanner, 'item.onBanner true')
+          } else {
+            // setBanner([...banner, "false"])
+            console.log(item.onBanner, 'item.onBanner false')
+          }
+          // setBanner(item.onBanner === 1 ? "true" : "false")
+          setEmail(item?.vEmail)
           // console.log(item?.iCountry)
-          setCategory('44')
-          setSubCategory('34')
+          setCategory(item?.iCategory)
+          setSubCategory(item?.iSubCategory)
           setTagLine('asdfdsf asdfasdf assad')
         }
       })
-
-
-
-
     }
   }, [editScreen])
 
@@ -190,9 +193,32 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     // form
     // console.log(form, 'form data on edit')
 
+    const updatedata = {
+      "name": businessName,
+      "tagLine": tagLine,
+      "latitude": '56789',
+      "longitude": '6789',
+      "location": businessLocation,
+      "description": description,
+      "addedBy": '7',
+      "status": "Active",
+      "type": "Pending",
+      "country": '1',
+      "state": '2',
+      "city": '3',
+      "address": "avxa ajhak -xca 789",
+      "onBanner": banner,
+      "email": email,
+      "category": category,
+      "subCategory": subCategory
+    }
+
+
+
+
     if (editrue == true) {
       const res = await dispatch(AdminThunk.updateListing({
-        data: form,
+        data: updatedata,
         iBusinessId: editScreen?.state?.id
           ? parseInt(editScreen?.state?.id)
           : 0,
