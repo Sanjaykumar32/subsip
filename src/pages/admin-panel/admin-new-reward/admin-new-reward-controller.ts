@@ -78,6 +78,7 @@ export const NewRewardController = (): INewRewardControllerReturns => {
         availability: availibility,
         category: category,
         subCategory: subCategory,
+        businessId: businessName,
       })
     );
     setName("");
