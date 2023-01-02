@@ -60,7 +60,7 @@ export function AdminNewReferralPrice() {
                 *required
               </Typography>
             </Box>
-            <Select
+            {/* <Select
               fullWidth
               variant="outlined"
               labelId="sort-by-select-label"
@@ -72,7 +72,15 @@ export function AdminNewReferralPrice() {
             >
               <MenuItem value={"Newest"}>Newest</MenuItem>
               <MenuItem value={"Oldest"}>Oldest</MenuItem>
-            </Select>
+            </Select> */}
+
+            <TextField
+              fullWidth
+              sx={{ my: 1, borderRadius: "30px", mr: 1 }}
+              value={referralAmount}
+              name="milestonelAmount"
+              onChange={handleReferralAmount}
+            />
           </FormControl>
           <Box
             sx={{
@@ -91,7 +99,7 @@ export function AdminNewReferralPrice() {
               }}
               type="submit"
               variant="rounded"
-              // onClick={() => navigate(AdminRoutePathEnum.ADMIN_MILESTONES)}
+            // onClick={() => navigate(AdminRoutePathEnum.ADMIN_MILESTONES)}
             >
               Add Milestone
             </Button>

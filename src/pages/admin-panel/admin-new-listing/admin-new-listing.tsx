@@ -145,9 +145,12 @@ export function AdminNewlisting() {
     handleBanner,
   } = handlers;
 
-
-
   const ref = useRef<HTMLInputElement>(null);
+
+
+
+
+
 
   return (
     <Container maxWidth="lg">

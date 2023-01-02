@@ -229,7 +229,7 @@ export class AdminService {
    */
   public static async getRefferal(): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/category/list",
+      url: "/milestone",
       method: "GET",
     });
     return res.data;
@@ -290,9 +290,27 @@ export class AdminService {
     payload: IReferralPriceRequest
   ): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/referralPrice",
+      url: "/milestone",
       method: "POST",
       data: payload,
+    });
+
+    return res.data;
+  }
+
+
+  /**
+  * Update Referral Price
+  * @param {IReferralPriceRequest} payload
+  * @return {Promise<any>}
+  */
+  public static async updateReferralPrice(
+    payload: any
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/milestone/${payload?.milestoneID}`,
+      method: "PUT",
+      data: payload.data,
     });
 
     return res.data;
@@ -428,7 +446,23 @@ export class AdminService {
       url: `business/${payload}`,
       method: "DELETE",
     });
+    return res.data;
+  }
 
+
+
+  /**
+   * Delete Referral
+   * @return {Promise<any>}
+   */
+  public static async deleteReferral(
+    payload: any
+  ): Promise<any> {
+    console.log(payload);
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `milestone/${payload}`,
+      method: "DELETE",
+    });
     return res.data;
   }
 

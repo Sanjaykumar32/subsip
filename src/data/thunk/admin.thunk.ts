@@ -191,8 +191,31 @@ export class AdminThunk {
     "admin/newReferralPrice",
     async (payload: IReferralPriceRequest): Promise<void> => {
       console.log(payload, "payloaddddd");
-      // const response = await AdminService.newReferralPrice(payload);
-      // return response;
+      const response = await AdminService.newReferralPrice(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Update Referral Price
+   */
+  public static updateReferralPrice = createAsyncThunk(
+    "admin/updateReferralPrice",
+    async (payload: any): Promise<void> => {
+      console.log(payload, "payloaddddd");
+      const response = await AdminService.updateReferralPrice(payload);
+      return response;
+    }
+  );
+
+  /**
+ * Delete Business
+ */
+  public static deleteReferralPrice = createAsyncThunk(
+    "admin/deleteReferralPrice",
+    async (payload: any): Promise<void> => {
+      const response = await AdminService.deleteReferral(payload);
+      return response;
     }
   );
 

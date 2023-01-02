@@ -70,44 +70,41 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const dispatch = useAppDispatch();
 
   // const businessData = useAppSelector(GET_BUSINESS);
-  const editScreen = useLocation()
+  const editScreen = useLocation();
   // console.log(categoryData, 'editScreen?.state?.id')
 
   useEffect(() => {
     if (editScreen?.state?.edit === true) {
-      setEditure(true)
+      setEditure(true);
       // console.log(editScreen.state, 'item')
 
       const filter = businessData?.filter((item) => {
         // console.log(item?.iBusinessId, 'item')
 
-
         if (item?.iBusinessId === editScreen?.state?.id) {
-          console.log(item, 'item')
+          console.log(item, "item");
           // item
-          setBuisnessName(item?.vName)
-          setBusinessLocation(item?.vLocation)
-          setDescription(item?.tDescription)
-          setBanner(item.onBanner == 1 ? "true" : "false")
-          setEmail(item?.vEmail)
+          setBuisnessName(item?.vName);
+          setBusinessLocation(item?.vLocation);
+          setDescription(item?.tDescription);
 
+          if (item.onBanner == 1) {
+            // setBanner("true")
+            console.log(item.onBanner, "item.onBanner true");
+          } else {
+            // setBanner([...banner, "false"])
+            console.log(item.onBanner, "item.onBanner false");
+          }
+          // setBanner(item.onBanner === 1 ? "true" : "false")
+          setEmail(item?.vEmail);
           // console.log(item?.iCountry)
-          setCategory('44')
-          setSubCategory('34')
-          setTagLine('asdfdsf asdfasdf assad')
+          setCategory(item?.iCategory);
+          setSubCategory(item?.iSubCategory);
+          setTagLine("asdfdsf asdfasdf assad");
         }
-      })
-
-
-
-
+      });
     }
-  }, [editScreen])
-
-
-
-
-
+  }, [editScreen]);
 
   const handleHeadlineChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setHeadline(event.target.value as string);
@@ -135,7 +132,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
   const handleBanner = (event: any): void => {
     setBanner(event.target.checked);
-    console.log(event.target.checked + " select category data")
+    console.log(event.target.checked + " select category data");
   };
 
   const handleCategoryChange = (event: SelectChangeEvent): void => {
@@ -143,7 +140,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     setCategory(event.target.value as string);
 
     // console.log(event.target.value)
-
   };
 
   const handleBusinessNameChange = (
@@ -166,7 +162,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const navigate = useNavigate();
 
   const submitHandler = async (): Promise<void> => {
-
     const form = new FormData();
     form.append("name", businessName);
     form.append("latitude", "56789");
@@ -186,22 +181,42 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("subCategory", subCategory);
     form.append("tagLine", tagLine);
 
-
     // form
     // console.log(form, 'form data on edit')
 
-    if (editrue == true) {
-      const res = await dispatch(AdminThunk.updateListing({
-        data: form,
-        iBusinessId: editScreen?.state?.id
-          ? parseInt(editScreen?.state?.id)
-          : 0,
-      }));
-      console.log(res, 'editrue lisiting successFully')
-      toast.success("Update Listing SuccessFully");
+    const updatedata = {
+      name: businessName,
+      tagLine: tagLine,
+      latitude: "56789",
+      longitude: "6789",
+      location: businessLocation,
+      description: description,
+      addedBy: "7",
+      status: "Active",
+      type: "Pending",
+      country: "1",
+      state: "2",
+      city: "3",
+      address: "avxa ajhak -xca 789",
+      onBanner: banner,
+      email: email,
+      category: category,
+      subCategory: subCategory,
+    };
 
+    if (editrue == true) {
+      const res = await dispatch(
+        AdminThunk.updateListing({
+          data: updatedata,
+          iBusinessId: editScreen?.state?.id
+            ? parseInt(editScreen?.state?.id)
+            : 0,
+        })
+      );
+      console.log(res, "editrue lisiting successFully");
+      toast.success("Update Listing SuccessFully");
     } else {
-      console.log('Create lisiting successFully')
+      console.log("Create lisiting successFully");
       const res = await dispatch(AdminThunk.createListing(form));
       toast.success("Create Listing SuccessFully");
     }
