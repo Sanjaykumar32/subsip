@@ -30,6 +30,7 @@ import {
   IGetBusinesRewardRequest,
   IBusinessRewardResponse,
   IGetUserRewardRequest,
+  IDeleteRewardRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -381,7 +382,7 @@ export class AdminThunk {
    */
   public static deleteReward = createAsyncThunk(
     "admin/deleteReward",
-    async (payload: any): Promise<void> => {
+    async (payload: IDeleteRewardRequest): Promise<void> => {
       const response = await AdminService.deleteReward(payload);
       return response;
     }

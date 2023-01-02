@@ -114,3 +114,7 @@ export interface IGetBusinesRewardRequest {
 export interface IGetUserRewardRequest {
   userId: number;
 }
+
+export interface IDeleteRewardRequest {
+  rewardId: number;
+}

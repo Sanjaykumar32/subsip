@@ -492,7 +492,6 @@ export class AdminService {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/user/reward?rewardId=${payload.rewardId}`,
       method: "DELETE",
-      data: payload,
     });
 
     return res.data;

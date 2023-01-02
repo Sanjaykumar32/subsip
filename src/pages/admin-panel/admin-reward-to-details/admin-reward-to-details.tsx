@@ -12,7 +12,7 @@ import {
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminBackButton } from "components";
 import { AdminRoutePathEnum } from "enum";
@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from "data";
 import { GET_BUSINESS_REWARDS } from "data/selectors";
 import { useSearchParams } from "react-router-dom";
 import { IBusinessReward } from "interface";
+import toast from "react-hot-toast";
 
 export function AdminRewardToDetails() {
   const label = { inputProps: { "aria-label": "Size switch demo" } };
@@ -55,6 +56,12 @@ export function AdminRewardToDetails() {
     businessReward();
   }, [businessReward]);
 
+  async function deleteRewardlist(ID: number) {
+    await dispatch(AdminThunk.deleteReward({ rewardId: ID }));
+    toast.success("Reward Delete SuccessFully");
+    businessReward();
+  }
+
   const columns: GridColDef[] = [
     {
       field: "rewardName",
@@ -81,6 +88,15 @@ export function AdminRewardToDetails() {
         <Box>
           <Tooltip title={params.value}>
             <FontAwesomeIcon icon={faPen} />
+          </Tooltip>
+          <Tooltip title={params.value[1]}>
+            <FontAwesomeIcon
+              icon={faTrash}
+              onClick={() => {
+                deleteRewardlist(params.value[2]);
+              }}
+              className="ml-[25px]"
+            />
           </Tooltip>
         </Box>
       ),
