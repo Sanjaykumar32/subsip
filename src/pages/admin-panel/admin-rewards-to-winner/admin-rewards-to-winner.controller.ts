@@ -3,6 +3,7 @@ import { GET_CATEGORY, GET_RWARD_TO_WINNER_LIST } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { ICategoryData } from "interface";
 import { useCallback, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 type attributeType = {
   id: number;
@@ -26,14 +27,20 @@ export const RewardToWinnerController =
     const categoryData = useAppSelector(GET_CATEGORY);
     const dispatch = useAppDispatch();
     const rewardToWinner = useAppSelector(GET_RWARD_TO_WINNER_LIST);
+    const [searchParams] = useSearchParams();
+    const userId = searchParams.get("userId");
 
     const rewardToWinnerList = useCallback(async () => {
       try {
-        await dispatch(AdminThunk.getRewardToWinner());
+        await dispatch(
+          AdminThunk.getRewardToWinner({
+            userId: userId ? parseInt(userId) : 0,
+          })
+        );
       } catch (error) {
         console.log(error);
       }
-    }, [dispatch]);
+    }, [dispatch, userId]);
 
     useEffect(() => {
       rewardToWinnerList();

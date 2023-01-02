@@ -33,6 +33,9 @@ import {
   IUpdateCategoryRequest,
   IGetAllUsetRequest,
   IUserRewardresponse,
+  IBusinessRewardResponse,
+  IGetBusinesRewardRequest,
+  IGetUserRewardRequest,
 } from "interface";
 
 /**
@@ -207,13 +210,16 @@ export class AdminService {
 
   /**
    * Reward To Winner
-   * @return {Promise<any>}
+   * @return {Promise<IUserRewardresponse>}
    */
-  public static async getRewardToWinner(): Promise<any> {
-    const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/reward",
-      method: "GET",
-    });
+  public static async getRewardToWinner(
+    payload: IGetUserRewardRequest
+  ): Promise<IUserRewardresponse> {
+    const res: AxiosResponse<IUserRewardresponse> =
+      await ApiHelper.send<IUserRewardresponse>({
+        url: `/user/reward?userId=${payload.userId}`,
+        method: "GET",
+      });
     return res.data;
   }
 
@@ -334,6 +340,21 @@ export class AdminService {
   }
 
   /**
+   * get Business Reward
+   * @return {Promise<IBusinessRewardResponse>}
+   */
+  public static async getBusinessReward(
+    payload: IGetBusinesRewardRequest
+  ): Promise<IBusinessRewardResponse> {
+    const res: AxiosResponse<IBusinessRewardResponse> =
+      await ApiHelper.send<any>({
+        url: `/user/reward/business?businessId=${payload.businessId}`,
+        method: "GET",
+      });
+    return res.data;
+  }
+
+  /**
    * New NotifyButton
    * @param {INewNotifyButtonRequest} payload
    * @return {Promise<any>}
@@ -381,12 +402,11 @@ export class AdminService {
     return res.data;
   }
 
-
   /**
- * Update listing
- * @param {ICreateListingRequest} payload
- * @return {Promise<any>}
- */
+   * Update listing
+   * @param {ICreateListingRequest} payload
+   * @return {Promise<any>}
+   */
   public static async updateListing(payload: any): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/business/${payload?.iBusinessId}`,

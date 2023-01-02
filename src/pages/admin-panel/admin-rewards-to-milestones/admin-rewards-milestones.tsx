@@ -31,7 +31,6 @@ export function AdminRewardsMileStones() {
       id: item.iBusinessId,
       businessName: item?.businessName,
       rewardCount: item.rewardCount,
-      Actions: ["Edit", "Delete", item?.iBusinessId],
     };
   });
 
@@ -57,16 +56,6 @@ export function AdminRewardsMileStones() {
       headerName: "Rewards",
       width: 200,
       renderCell: (params) => <Chip label={params.value} color="info" />,
-    },
-    {
-      field: "Actions",
-      headerName: "Actions",
-      width: 150,
-      renderCell: (params) => (
-        <Tooltip title={params.value}>
-          <FontAwesomeIcon icon={faPen} />
-        </Tooltip>
-      ),
     },
   ];
 

@@ -106,3 +106,11 @@ export interface IDeleteNotificationRequest {
 export interface IGetAllUsetRequest {
   userId: number;
 }
+
+export interface IGetBusinesRewardRequest {
+  businessId: number;
+}
+
+export interface IGetUserRewardRequest {
+  userId: number;
+}

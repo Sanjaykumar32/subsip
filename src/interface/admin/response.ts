@@ -170,3 +170,17 @@ export interface IUserReward {
   businessName: string;
   redeemedId?: number;
 }
+
+export interface IBusinessRewardResponse {
+  success: number;
+  message: string;
+  data: IBusinessReward[];
+}
+
+export interface IBusinessReward {
+  userId: number;
+  rewardName: string;
+  rewardId: number;
+  userName: string;
+  redeemedId?: number;
+}
