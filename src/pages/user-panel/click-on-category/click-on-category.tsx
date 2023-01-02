@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import {
   Box,
   Button,
@@ -16,13 +16,18 @@ import {
   useTheme,
 } from "@mui/material";
 // import { ICategoryData } from "interface";
-import { GET_CATEGORY } from "data/selectors";
+import { GET_BUSINESS, GET_CATEGORY } from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import { useNavigate } from "react-router-dom";
+import { UserThunk } from "data/thunk/user.thunk";
 
 export function ClickOnCategory() {
+
+  const [ids , setId] = useState<any>()
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+const naviagate =  useNavigate()
 
   const data = {
     image:
@@ -36,6 +41,7 @@ export function ClickOnCategory() {
   };
 
   const categoryData = useAppSelector(GET_CATEGORY);
+ console.log(categoryData ,'cate')
   const dispatch = useAppDispatch();
 
   const getcategory = useCallback(async () => {
@@ -50,6 +56,27 @@ export function ClickOnCategory() {
     getcategory();
   }, [getcategory]);
 
+  const handleList = (id : any)=> {
+   
+    // naviagate(`/listing?${id?.iCategoryId}`);
+    setId(id?.iCategoryId)
+  }
+
+  const businessData = useAppSelector(GET_BUSINESS);
+
+  const allBusiness = useCallback(async () => {
+    try {
+      await dispatch(UserThunk.business());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    allBusiness();
+  }, [allBusiness]);
+
+  console.log(businessData ,'businessData')
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
@@ -60,7 +87,7 @@ export function ClickOnCategory() {
                 Listings by subcategory:
               </Typography>
               <List>
-                {categoryData.map((item, index) => (
+                {categoryData.map((item: any, index) => (
                   <ListItem key={index} sx={{ px: 0 }}>
                     {item.vName}
                   </ListItem>
@@ -88,11 +115,13 @@ export function ClickOnCategory() {
               <List>
                 {categoryData.map((item, index) => (
                   <ListItem
-                    key={index}
-                    sx={{ px: 0 }}
-                    className="font-normal text-[16px] leading-[24px] text-[#434d59]"
+                  key={index}
+                  sx={{ px: 0 }}
+                  onClick={()=>  handleList(item)}
+                  className="font-normal text-[16px] leading-[24px] text-[#434d59]"
                   >
                     {item.vName}
+                 
                   </ListItem>
                 ))}
 
@@ -157,10 +186,11 @@ export function ClickOnCategory() {
             </Box>
 
             <Grid container className=" pb-[20px] ">
-              {Array(12)
-                .fill(data)
-                .map((data) => (
-                  <Grid key={data.title} item sm={4} className="pb-[20px] ">
+              
+                {businessData.length > 0 && 
+                businessData.filter(el=> el.iCategory === ids)
+                .map((data , index) => (
+                  <Grid key={index} item sm={4} className="pb-[20px] ">
                     <Card
                       sx={{
                         maxWidth: "330px",
@@ -169,29 +199,34 @@ export function ClickOnCategory() {
                       elevation={0}
                       className="border-[1px] border-[#dadde5] "
                       style={{ boxShadow: "0 0 20px #0100001a" }}
-                    >
+                      >
                       <img
-                        src={data.image}
-                        alt={data.title}
+                    
+                        src={
+                          data.vImage
+                            ? "http://159.223.194.50:8000/" + data.vImage
+                            : ''
+                        }
+                        // alt={data.eStatus}
                         width="100%"
                         height="100px"
                         style={{ objectFit: "cover", height: "215px" }}
                       />
                       <Box sx={{ py: 1.5, pl: "12px" }}>
                         <Typography variant="body1" fontWeight={600}>
-                          {data.title}
+                          {data.categoryName}
                         </Typography>
                         <Typography
                           variant="caption"
                           fontWeight={600}
                           color={theme.palette.grey[500]}
                         >
-                          {data.location}
+                          {data.vLocation}
                         </Typography>
 
                         <Box sx={{ my: 1, lineHeight: 0 }}>
                           <Typography fontSize={11} fontWeight={600}>
-                            {data.desc}
+                            {data.tDescription}
                           </Typography>
                         </Box>
                         <Box
@@ -206,11 +241,11 @@ export function ClickOnCategory() {
                             fontWeight={600}
                             color={theme.palette.grey[500]}
                           >
-                            {data.subscribers}
+                            {data.subscriberCount}
                           </Typography>
-                          {/* <Button color="error" variant="rounded" size="small">
+                          <Button color="error" variant="rounded" size="small">
                             Subscribe
-                          </Button> */}
+                          </Button>
                           <div className="raletive">
                             <div className="subscribeLebalListing">
                               <span className=" text-white  ">Subscribe</span>
@@ -226,12 +261,13 @@ export function ClickOnCategory() {
                         }}
                       >
                         <Typography fontSize={11} fontWeight={600}>
-                          {data.footer}
+                          {/* {data.footer} */}
                         </Typography>
                       </Box>
                     </Card>
                   </Grid>
-                ))}
+                )) 
+                }
             </Grid>
           </Box>
         </Grid>

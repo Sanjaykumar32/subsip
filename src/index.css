@@ -33,13 +33,27 @@
 
 .MuiGrid-root.MuiGrid-container.css-11lq3yg-MuiGrid-root {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
+
 
 .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthLg.css-1fu2e3p-MuiPaper-root-MuiDialog-paper {
     width: 46%;
 }
 
+.moreBtn{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+    font-size: 16px;
+}
+
+.noData{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+}
     
     
 .MuiFormControl-root.css-r47a1p-MuiFormControl-root{
