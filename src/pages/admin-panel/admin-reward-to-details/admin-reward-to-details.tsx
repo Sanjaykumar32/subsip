@@ -42,7 +42,7 @@ export function AdminRewardToDetails() {
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, [bussinessId, dispatch]);
 
   const rows = businessRewardData.map((item: IBusinessReward) => {
     return {

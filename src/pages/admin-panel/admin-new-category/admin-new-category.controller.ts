@@ -50,7 +50,7 @@ const CategoryController = (): ICategoryControllerReturns => {
             : 0,
         })
       );
-      console.log(response, "response edit category");
+
       if (response.payload.data) {
         navigate(AdminRoutePathEnum.ADMIN_CATEGORY);
       }
@@ -70,8 +70,6 @@ const CategoryController = (): ICategoryControllerReturns => {
       setCategory("");
     }
   };
-
-  console.log(categoryData, "categoryData ");
 
   const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setCategory(event.target.value as string);
