@@ -151,8 +151,9 @@ export interface IRewardResponse {
 }
 
 export interface IReward {
-  rewardId: number;
+  iBusinessId: number;
   businessName: string;
+  rewardNames: string;
   rewardCount: number;
 }
 

@@ -16,8 +16,7 @@ export function AdminRewardsMileStones() {
   const rewardData = useAppSelector(GET_REWARDS);
   const navigate = useNavigate();
 
-
-  console.log(rewardData, 'rewardData')
+  console.log(rewardData, "rewardData");
 
   const getReward = useCallback(async () => {
     try {
@@ -27,12 +26,12 @@ export function AdminRewardsMileStones() {
     }
   }, [dispatch]);
 
-  const rows = rewardData.map((item, index) => {
+  const rows = rewardData.map((item) => {
     return {
-      id: index,
-      businessName: item.businessName,
+      id: item.iBusinessId,
+      businessName: item?.businessName,
       rewardCount: item.rewardCount,
-      Actions: ["Edit", "Delete", item?.rewardId],
+      Actions: ["Edit", "Delete", item?.iBusinessId],
     };
   });
 
@@ -46,7 +45,9 @@ export function AdminRewardsMileStones() {
       headerName: "Name",
       width: 200,
       renderCell: (params) => (
-        <Link href={AdminRoutePathEnum.ADMIN_REWARDS_TO_DETAILS}>
+        <Link
+          href={`${AdminRoutePathEnum.ADMIN_REWARDS_TO_DETAILS}/?businessId=${params.id}`}
+        >
           {params.value}
         </Link>
       ),
