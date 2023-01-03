@@ -66,61 +66,39 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const businessData = useAppSelector(GET_BUSINESS);
   const [banner, setBanner] = useState<string>("false");
+  const [editrue, setEditure] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-
-  // const businessData = useAppSelector(GET_BUSINESS);
-  const editScreen = useLocation()
-  // console.log(categoryData, 'editScreen?.state?.id')
+  const editScreen = useLocation();
 
   useEffect(() => {
     if (editScreen?.state?.edit === true) {
-
-      // console.log(editScreen.state, 'item')
+      setEditure(true);
 
       const filter = businessData?.filter((item) => {
-        // console.log(item?.iBusinessId, 'item')
-
-
         if (item?.iBusinessId === editScreen?.state?.id) {
-          console.log(item, 'item')
+          console.log(item, "item");
           // item
-          setBuisnessName(item?.vName)
-          setBusinessLocation(item?.vLocation)
-          setDescription(item?.tDescription)
-          setBanner(item.onBanner == 1 ? 'true' : 'false')
-          setEmail(item?.vEmail)
+          setBuisnessName(item?.vName);
+          setBusinessLocation(item?.vLocation);
+          setDescription(item?.tDescription);
 
-          console.log(item?.iCountry)
-
-          const filterCategory = categoryData?.filter((item: any) => {
-            // console.log(item, 'cateitem')
-            if (item?.iCategoryId === item?.iCountry) {
-              // setCategory(item.vName)
-            }
-          })
-
-          // if (cateitem.iCategoryId === item?.iCountry) {
-          //   console.log(cateitem)
-          // }
-          // );
-
-
-          // setCategory('')
-          // setSubCategory('')
-          setTagLine('asdfdsf asdfasdf assad')
+          if (item.onBanner == 1) {
+            // setBanner("true")
+            console.log(item.onBanner, "item.onBanner true");
+          } else {
+            // setBanner([...banner, "false"])
+            console.log(item.onBanner, "item.onBanner false");
+          }
+          // setBanner(item.onBanner === 1 ? "true" : "false")
+          setEmail(item?.vEmail);
+          // console.log(item?.iCountry)
+          setCategory(item?.iCategory);
+          setSubCategory(item?.iSubCategory);
+          setTagLine("asdfdsf asdfasdf assad");
         }
-      })
-
-
-
-
+      });
     }
-  }, [editScreen])
-
-
-
-
-
+  }, [editScreen]);
 
   const handleHeadlineChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setHeadline(event.target.value as string);
@@ -148,10 +126,14 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
   const handleBanner = (event: any): void => {
     setBanner(event.target.checked);
+    console.log(event.target.checked + " select category data");
   };
 
   const handleCategoryChange = (event: SelectChangeEvent): void => {
+    // setCategory(event.target.value as string);
     setCategory(event.target.value as string);
+
+    // console.log(event.target.value)
   };
 
   const handleBusinessNameChange = (
@@ -169,7 +151,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   ): void => {
     setBusinessLocation(event.target.value as string);
   };
-  console.log(banner, "banner state");
+  // console.log(banner, "banner state");
 
   const navigate = useNavigate();
 
@@ -193,9 +175,49 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("subCategory", subCategory);
     form.append("tagLine", tagLine);
 
-    const res = await dispatch(AdminThunk.createListing(form));
+    // form
+    // console.log(form, 'form data on edit')
+
+    const updatedata = {
+      name: businessName,
+      tagLine: tagLine,
+      latitude: "56789",
+      longitude: "6789",
+      location: businessLocation,
+      description: description,
+      addedBy: "7",
+      status: "Active",
+      type: "Pending",
+      country: "1",
+      state: "2",
+      city: "3",
+      address: "avxa ajhak -xca 789",
+      onBanner: banner,
+      email: email,
+      category: category,
+      subCategory: subCategory,
+    };
+
+    if (editrue == true) {
+      const res = await dispatch(
+        AdminThunk.updateListing({
+          data: updatedata,
+          iBusinessId: editScreen?.state?.id
+            ? parseInt(editScreen?.state?.id)
+            : 0,
+        })
+      );
+      console.log(res, "editrue lisiting successFully");
+      toast.success("Update Listing SuccessFully");
+    } else {
+      console.log("Create lisiting successFully");
+      const res = await dispatch(AdminThunk.createListing(form));
+      toast.success("Create Listing SuccessFully");
+    }
+
     navigate(AdminRoutePathEnum.ADMIN_LISTING);
-    toast.success("Create Listing SuccessFully");
+
+    // const res = await dispatch(AdminThunk.createListing(form));
   };
 
   const allBusiness = useCallback(async () => {

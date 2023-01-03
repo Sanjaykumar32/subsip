@@ -51,14 +51,14 @@ export interface IBusiness {
   dtModifiedDate: string;
   eStatus: string;
   eType: string;
-  iCountry: number;
+  iCountry: string;
   iState: number;
   iCity: number;
   vAddress: string;
   onBanner: number;
   vImage?: string;
   iCategory: string;
-  iSubCategory: number;
+  iSubCategory: string;
   categoryName: string;
   subCategoryName: string;
   subscriberCount: number;
@@ -151,8 +151,9 @@ export interface IRewardResponse {
 }
 
 export interface IReward {
-  rewardId: number;
+  iBusinessId: number;
   businessName: string;
+  rewardNames: string;
   rewardCount: number;
 }
 
@@ -167,5 +168,19 @@ export interface IUserReward {
   rewardName: string;
   rewardId: number;
   businessName: string;
+  redeemedId?: number;
+}
+
+export interface IBusinessRewardResponse {
+  success: number;
+  message: string;
+  data: IBusinessReward[];
+}
+
+export interface IBusinessReward {
+  userId: number;
+  rewardName: string;
+  rewardId: number;
+  userName: string;
   redeemedId?: number;
 }

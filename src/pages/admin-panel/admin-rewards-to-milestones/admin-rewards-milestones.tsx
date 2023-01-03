@@ -16,6 +16,8 @@ export function AdminRewardsMileStones() {
   const rewardData = useAppSelector(GET_REWARDS);
   const navigate = useNavigate();
 
+  console.log(rewardData, "rewardData");
+
   const getReward = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getReward());
@@ -26,10 +28,9 @@ export function AdminRewardsMileStones() {
 
   const rows = rewardData.map((item) => {
     return {
-      id: item.rewardId,
-      businessName: item.businessName,
+      id: item.iBusinessId,
+      businessName: item?.businessName,
       rewardCount: item.rewardCount,
-      Actions: ["Edit", "Delete", item?.rewardId],
     };
   });
 
@@ -43,7 +44,9 @@ export function AdminRewardsMileStones() {
       headerName: "Name",
       width: 200,
       renderCell: (params) => (
-        <Link href={AdminRoutePathEnum.ADMIN_REWARDS_TO_DETAILS}>
+        <Link
+          href={`${AdminRoutePathEnum.ADMIN_REWARDS_TO_DETAILS}/?businessId=${params.id}`}
+        >
           {params.value}
         </Link>
       ),
@@ -53,16 +56,6 @@ export function AdminRewardsMileStones() {
       headerName: "Rewards",
       width: 200,
       renderCell: (params) => <Chip label={params.value} color="info" />,
-    },
-    {
-      field: "Actions",
-      headerName: "Actions",
-      width: 150,
-      renderCell: (params) => (
-        <Tooltip title={params.value}>
-          <FontAwesomeIcon icon={faPen} />
-        </Tooltip>
-      ),
     },
   ];
 

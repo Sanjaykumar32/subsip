@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   Box,
   Button,
@@ -16,8 +16,33 @@ import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import { AdminBackButton } from "components";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_RWARD_TO_WINNER_LIST } from "data/selectors";
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { useSearchParams } from "react-router-dom";
 
 export function AdminRewardsToWinner() {
+  const dispatch = useAppDispatch();
+  const rewardToWinner = useAppSelector(GET_RWARD_TO_WINNER_LIST);
+  const [searchParams] = useSearchParams();
+  const userId = searchParams.get("userId");
+
+  const rewardToWinnerList = useCallback(async () => {
+    try {
+      await dispatch(
+        AdminThunk.getRewardToWinner({
+          userId: userId ? parseInt(userId) : 0,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, userId]);
+
+  useEffect(() => {
+    rewardToWinnerList();
+  }, [rewardToWinnerList]);
+
   const columns: GridColDef[] = [
     {
       field: "Email",

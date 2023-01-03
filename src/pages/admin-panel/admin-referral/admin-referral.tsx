@@ -13,15 +13,25 @@ import {
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { GET_REFFERRAL_CODE } from "data/selectors";
+import { GET_REFERRAL_LIST, GET_REFFERRAL_CODE } from "data/selectors";
 import { useNavigate } from "react-router-dom";
 import { AdminRoutePathEnum } from "enum";
+import toast from "react-hot-toast";
 
 export function AdminReferral() {
+
+  const navigate = useNavigate();
+
+  async function deleteDataReferral(ID: number) {
+    await dispatch(AdminThunk.deleteReferralPrice(ID));
+    referralList();
+    toast.success("Listing Delete SuccessFully");
+  }
+
   const columns: GridColDef[] = [
     {
       field: "MilestoneName",
@@ -30,8 +40,8 @@ export function AdminReferral() {
     },
 
     {
-      field: "Achieved",
-      headerName: "Achieved",
+      field: "Amount",
+      headerName: "Amount",
       width: 200,
       renderCell: (params) => <Chip label={params.value} color="info" />,
     },
@@ -41,88 +51,133 @@ export function AdminReferral() {
       width: 110,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value}>
-            <FontAwesomeIcon icon={faPen} />
+          <Tooltip title={params.value[0]}>
+            <FontAwesomeIcon icon={faPen}
+              onClick={() => {
+                navigate("/admin/referral-price", {
+                  state: { id: params.value[2], edit: true },
+                });
+              }}
+            />
+
           </Tooltip>
-        </Box>
+          <Tooltip title={params.value[1]}>
+            <FontAwesomeIcon icon={faTrash}
+              onClick={() => {
+                deleteDataReferral(params.value[2]);
+              }}
+              className="ml-[25px]"
+            />
+          </Tooltip>
+        </Box >
       ),
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      MilestoneName: "India Gate Restaurant",
-      Achieved: "17 subscribers",
-      Actions: "Edit",
-    },
-    {
-      id: 2,
-      MilestoneName: "India Gate Restaurant",
-      Achieved: "17 subscribers",
-      Actions: "Edit",
-    },
-    {
-      id: 3,
-      MilestoneName: "India Gate Restaurant",
-      Achieved: "17 subscribers",
-      Actions: "Edit",
-    },
-    {
-      id: 4,
-      MilestoneName: "India Gate Restaurant",
-      Achieved: "17 subscribers",
-      Actions: "Edit",
-    },
-    {
-      id: 5,
-      MilestoneName: "India Gate Restaurant",
-      Achieved: "17 subscribers",
-      Actions: "Edit",
-    },
-    {
-      id: 6,
-      MilestoneName: "India Gate Restaurant",
-      Achieved: "17 subscribers",
-      Actions: "Edit",
-    },
-    {
-      id: 7,
-      MilestoneName: "India Gate Restaurant",
-      Achieved: "17 subscribers",
-      Actions: "Edit",
-    },
-    {
-      id: 8,
-      MilestoneName: "India Gate Restaurant",
-      Achieved: "17 subscribers",
-      Actions: "Edit",
-    },
-    {
-      id: 9,
-      MilestoneName: "India Gate Restaurant",
-      Achieved: "17 subscribers",
-      Actions: "Edit",
-    },
-  ];
+  // const rows = [
+  //   {
+  //     id: 1,
+  //     MilestoneName: "India Gate Restaurant",
+  //     Achieved: "17 subscribers",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 2,
+  //     MilestoneName: "India Gate Restaurant",
+  //     Achieved: "17 subscribers",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 3,
+  //     MilestoneName: "India Gate Restaurant",
+  //     Achieved: "17 subscribers",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 4,
+  //     MilestoneName: "India Gate Restaurant",
+  //     Achieved: "17 subscribers",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 5,
+  //     MilestoneName: "India Gate Restaurant",
+  //     Achieved: "17 subscribers",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 6,
+  //     MilestoneName: "India Gate Restaurant",
+  //     Achieved: "17 subscribers",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 7,
+  //     MilestoneName: "India Gate Restaurant",
+  //     Achieved: "17 subscribers",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 8,
+  //     MilestoneName: "India Gate Restaurant",
+  //     Achieved: "17 subscribers",
+  //     Actions: "Edit",
+  //   },
+  //   {
+  //     id: 9,
+  //     MilestoneName: "India Gate Restaurant",
+  //     Achieved: "17 subscribers",
+  //     Actions: "Edit",
+  //   },
+  // ];
 
   const dispatch = useAppDispatch();
 
   const refferalCodeData = useAppSelector(GET_REFFERRAL_CODE);
 
-  const refferalCode = useCallback(async () => {
-    const userId = "11";
+  // const refferalCode = useCallback(async () => {
+  //   const userId = "11";
+  //   try {
+  //     await dispatch(AdminThunk.refferralCode({ userId: userId }));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   refferalCode();
+  // }, [refferalCode]);
+
+
+  // const categoryData = useAppSelector(GET_CATEGORY);
+
+
+
+  const referralData = useAppSelector(GET_REFERRAL_LIST);
+
+  const referralList = useCallback(async () => {
     try {
-      await dispatch(AdminThunk.refferralCode({ userId: userId }));
+      await dispatch(AdminThunk.refferalDetail());
     } catch (error) {
       console.log(error);
     }
   }, [dispatch]);
 
   useEffect(() => {
-    refferalCode();
-  }, [refferalCode]);
-  const navigate = useNavigate();
+    referralList();
+  }, [referralList]);
+
+  console.log(referralData, 'referralData')
+
+  const rows = referralData.map((item: any) => {
+    return {
+      id: item?.iMilestoneId,
+      MilestoneName: item?.vName,
+      Amount: item?.iamount,
+      Actions: ['Edit', 'Dalete', item?.iMilestoneId],
+    };
+  });
+
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>

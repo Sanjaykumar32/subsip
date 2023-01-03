@@ -4,6 +4,7 @@ export interface IUpdateCategoryRequest {
   name: string;
   categoryId: number;
 }
+
 export interface ICategoryRequest {
   name: string;
   addedBy: number;
@@ -34,8 +35,9 @@ export interface Filter {
 }
 
 export interface IReferralPriceRequest {
-  mileStoneName: string;
-  referralAmount: string;
+  name: string;
+  amount: number;
+  milestoneID?: number;
 }
 
 export interface INewRewardRequest {
@@ -86,6 +88,10 @@ export interface IDeleteListingRequest {
   userID: number;
 }
 
+export interface IDeleteReferralRequest {
+  userID: number;
+}
+
 export interface IDeleteCategoryRequest {
   categoryId: number;
 }
@@ -104,4 +110,16 @@ export interface IDeleteNotificationRequest {
 
 export interface IGetAllUsetRequest {
   userId: number;
+}
+
+export interface IGetBusinesRewardRequest {
+  businessId: number;
+}
+
+export interface IGetUserRewardRequest {
+  userId: number;
+}
+
+export interface IDeleteRewardRequest {
+  rewardId: number;
 }
