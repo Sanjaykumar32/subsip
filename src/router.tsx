@@ -38,6 +38,7 @@ import {
 } from "pages";
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button/admin-notify-button";
 import { createBrowserRouter } from "react-router-dom";
+import { About } from "about/about";
 
 export const router = createBrowserRouter([
   {
@@ -108,6 +109,10 @@ export const router = createBrowserRouter([
       {
         path: RoutePathEnum.SUBSCRIPTIONS,
         element: <Subscriptions />,
+      },
+      {
+        path: RoutePathEnum.ABOUT,
+        element: <About />
       },
     ],
   },
