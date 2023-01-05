@@ -30,8 +30,6 @@ export function AdminCategories() {
   const { attributes } = getters;
   const { deleteCategorylist } = handlers;
 
-  console.log(categoryData, 'categoryData')
-
   const columns: GridColDef[] = [
     {
       field: "vName",
@@ -63,7 +61,9 @@ export function AdminCategories() {
             <FontAwesomeIcon
               icon={faPen}
               onClick={() => {
-                navigate('/admin/new-category',{state:{id: params?.row?.iCategoryId,edit:true}});
+                navigate("/admin/new-category", {
+                  state: { id: params?.row?.iCategoryId, edit: true },
+                });
               }}
             />
           </Tooltip>

@@ -166,7 +166,7 @@ export const NewNotificationButtonController =
         AdminThunk.newNotification({
           headline: headline,
           desc: description,
-          date: "12-13-20202",
+          date: date,
           businessLocation: businessLocation,
           categoryId: category,
           subCategoryId: subCategory,

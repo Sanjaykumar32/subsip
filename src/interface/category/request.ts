@@ -57,7 +57,7 @@ export interface INewNotifyButtonRequest {
 export interface INewNotificationRequest {
   headline: string;
   desc: string;
-  date: string;
+  date: any;
   businessLocation: string;
   categoryId: string;
   subCategoryId: string;

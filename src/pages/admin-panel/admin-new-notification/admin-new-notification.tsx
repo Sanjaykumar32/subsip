@@ -50,7 +50,6 @@ export function AdminNewNotifictaion() {
     handleBusinessNameChange,
     handleBusinessLocationhange,
   } = handlers;
-  console.log(businessLocation, "businessLocation");
   return (
     <Container maxWidth="lg">
       <AdminBackButton />
