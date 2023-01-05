@@ -184,3 +184,16 @@ export interface IBusinessReward {
   userName: string;
   redeemedId?: number;
 }
+
+export interface IDashboardResponse {
+  success: number;
+  message: string;
+  data: IDashboard[];
+}
+
+export interface IDashboard {
+  rewardCount: number;
+  categoryCount: number;
+  listingCount: number;
+  subCategoryCount: number;
+}

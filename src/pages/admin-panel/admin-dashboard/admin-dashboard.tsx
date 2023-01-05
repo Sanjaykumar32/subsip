@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import { theme } from "theme";
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_DASHBOARD_COUNT } from "data/selectors";
 
 export function AdminDashboard() {
   const data = [
@@ -21,6 +24,22 @@ export function AdminDashboard() {
       count: "77",
     },
   ];
+  const dispatch = useAppDispatch();
+  const dasboardCount = useAppSelector(GET_DASHBOARD_COUNT);
+  console.log(dasboardCount, "dasboardCount ");
+
+  const gatDasboardCount = useCallback(async () => {
+    try {
+      await dispatch(AdminThunk.getdashboardCount());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    gatDasboardCount();
+  }, [gatDasboardCount]);
+
   return (
     <Container maxWidth="sm" disableGutters sx={{ m: 0 }}>
       <Grid container spacing={2}>
