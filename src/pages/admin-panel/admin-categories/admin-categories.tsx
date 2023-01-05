@@ -44,7 +44,7 @@ export function AdminCategories() {
         <Link
           href={
             AdminRoutePathEnum.ADMIN_SUBCATEGORY +
-            `?subCategory=${params.value[1]}`
+            `?category=${params.value[1]}`
           }
         >
           {params.value[0]}

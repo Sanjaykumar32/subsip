@@ -6,7 +6,7 @@ import { AdminRoutePathEnum } from "enum";
 import { ICategoryData } from "interface";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 interface IAddSubCategoryControllerReturns {
   getters: {
@@ -34,6 +34,8 @@ export const AddSubCategoryController =
     const naviagate = useNavigate();
     const editScreen = useLocation();
     const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get("category");
 
     useEffect(() => {
       if (editScreen?.state?.edit === true) {
@@ -66,7 +68,7 @@ export const AddSubCategoryController =
         })
       );
       if (response.payload.data) {
-        naviagate(AdminRoutePathEnum.ADMIN_SUBCATEGORY);
+        naviagate(`${AdminRoutePathEnum.ADMIN_SUBCATEGORY}/?category=${id}`);
       }
       setSubCategory("");
       setBuisnessName("");
