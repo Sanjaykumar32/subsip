@@ -55,13 +55,13 @@ export interface INewNotifyButtonRequest {
 }
 
 export interface INewNotificationRequest {
-  Headline: string;
-  Desc: string;
-  Date: string;
-  BusinessLocation: string;
-  CategoryId: string;
-  SubCategoryId: string;
-  BusinessId: string;
+  headline: string;
+  desc: string;
+  date: any;
+  businessLocation: string;
+  categoryId: string;
+  subCategoryId: string;
+  businessId: string;
 }
 
 export interface ICreateListingRequest {

@@ -36,6 +36,7 @@ import {
   IBusinessRewardResponse,
   IGetBusinesRewardRequest,
   IGetUserRewardRequest,
+  IDashboardResponse,
 } from "interface";
 
 /**
@@ -298,15 +299,12 @@ export class AdminService {
     return res.data;
   }
 
-
   /**
-  * Update Referral Price
-  * @param {IReferralPriceRequest} payload
-  * @return {Promise<any>}
-  */
-  public static async updateReferralPrice(
-    payload: any
-  ): Promise<any> {
+   * Update Referral Price
+   * @param {IReferralPriceRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async updateReferralPrice(payload: any): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/milestone/${payload?.milestoneID}`,
       method: "PUT",
@@ -449,15 +447,11 @@ export class AdminService {
     return res.data;
   }
 
-
-
   /**
    * Delete Referral
    * @return {Promise<any>}
    */
-  public static async deleteReferral(
-    payload: any
-  ): Promise<any> {
+  public static async deleteReferral(payload: any): Promise<any> {
     console.log(payload);
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `milestone/${payload}`,
@@ -528,6 +522,18 @@ export class AdminService {
       method: "DELETE",
     });
 
+    return res.data;
+  }
+
+  /**
+   * dashboard Response
+   * @return {Promise<IDashboardResponse>}
+   */
+  public static async getDashboardCount(): Promise<IDashboardResponse> {
+    const res: AxiosResponse<IDashboardResponse> = await ApiHelper.send<any>({
+      url: `/dashboard`,
+      method: "GET",
+    });
     return res.data;
   }
 
