@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 
-.css-1x9yojm-MuiContainer-root {
+/* .css-1x9yojm-MuiContainer-root {
     padding-top: 145px !important;
-}
+} */
 
 .subscribeLebalListing {
     text-align: center;
@@ -41,30 +41,75 @@
     width: 46%;
 }
 
-.moreBtn{
+.moreBtn {
     display: flex;
     justify-content: center;
     margin: 20px 0px;
     font-size: 16px;
 }
 
-.noData{
+.noData {
     display: flex;
     justify-content: center;
     align-items: center;
     /* height: 100vh; */
 }
-    
-    
-.MuiFormControl-root.css-r47a1p-MuiFormControl-root{
- margin: 0px;
+
+
+.MuiFormControl-root.css-r47a1p-MuiFormControl-root {
+    margin: 0px;
 }
 
 button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
     padding: 0px !important;
 }
+
 .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-f56clz-MuiInputBase-root-MuiInput-root {
     width: 80%;
+}
+
+
+.non-sticky {
+    position: relative !important;
+}
+
+.is-sticky {
+    position: fixed !important;
+    top: 0px !important;
+    left: 0px !important;
+    animation: smoothScroll 1s forwards !important;
+    z-index: 99 !important;
+}
+
+@keyframes smoothScroll {
+    0% {
+        transform: translateY(-150px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+
+.activeCate {
+    font-weight: 700;
+}
+
+.activeCate {
+    font-weight: 700;
+    background: #ff9800 !important;
+    color: #000 !important;
+    box-shadow: 0 0 30px 0 #58585870;
+}
+
+.nan {
+    padding: 10px 20px !important;
+    margin-right: 10px !important;
+    border-radius: 8px;
+    color: #5e5e5e;
+    background: transparent;
+    transition: all 0.3s;
 }
 
 /* mobile mode css */
