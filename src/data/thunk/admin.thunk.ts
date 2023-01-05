@@ -27,6 +27,10 @@ import {
   IUpdateCategoryRequest,
   IUserRewardresponse,
   IGetAllUsetRequest,
+  IGetBusinesRewardRequest,
+  IBusinessRewardResponse,
+  IGetUserRewardRequest,
+  IDeleteRewardRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -187,8 +191,31 @@ export class AdminThunk {
     "admin/newReferralPrice",
     async (payload: IReferralPriceRequest): Promise<void> => {
       console.log(payload, "payloaddddd");
-      // const response = await AdminService.newReferralPrice(payload);
-      // return response;
+      const response = await AdminService.newReferralPrice(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Update Referral Price
+   */
+  public static updateReferralPrice = createAsyncThunk(
+    "admin/updateReferralPrice",
+    async (payload: any): Promise<void> => {
+      console.log(payload, "payloaddddd");
+      const response = await AdminService.updateReferralPrice(payload);
+      return response;
+    }
+  );
+
+  /**
+ * Delete Business
+ */
+  public static deleteReferralPrice = createAsyncThunk(
+    "admin/deleteReferralPrice",
+    async (payload: any): Promise<void> => {
+      const response = await AdminService.deleteReferral(payload);
+      return response;
     }
   );
 
@@ -215,12 +242,25 @@ export class AdminThunk {
   );
 
   /**
-   * Get Reward
+   * Get User Reward
    */
   public static getuserReward = createAsyncThunk(
     "admin/userGetReward",
     async (payload: IGetAllUsetRequest): Promise<IUserRewardresponse> => {
       const response = await AdminService.getUserReward(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Get Business Reward
+   */
+  public static getBusinessReward = createAsyncThunk(
+    "admin/getBusinessReward",
+    async (
+      payload: IGetBusinesRewardRequest
+    ): Promise<IBusinessRewardResponse> => {
+      const response = await AdminService.getBusinessReward(payload);
       return response;
     }
   );
@@ -272,7 +312,6 @@ export class AdminThunk {
     }
   );
 
-
   /**
    * New category
    */
@@ -285,12 +324,12 @@ export class AdminThunk {
   );
 
   /**
-   * Reward To Winner
+   * UserReward To Winner
    */
   public static getRewardToWinner = createAsyncThunk(
     "admin/reward-to-winner",
-    async (): Promise<any> => {
-      const response = await AdminService.getRewardToWinner();
+    async (payload: IGetUserRewardRequest): Promise<IUserRewardresponse> => {
+      const response = await AdminService.getRewardToWinner(payload);
       return response;
     }
   );
@@ -366,7 +405,7 @@ export class AdminThunk {
    */
   public static deleteReward = createAsyncThunk(
     "admin/deleteReward",
-    async (payload: any): Promise<void> => {
+    async (payload: IDeleteRewardRequest): Promise<void> => {
       const response = await AdminService.deleteReward(payload);
       return response;
     }

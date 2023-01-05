@@ -2,7 +2,8 @@ import { useAppDispatch, useAppSelector } from "data";
 import { GET_CATEGORY, GET_REFERRAL_LIST } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { ICategoryData } from "interface";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 type attributeType = {
   id: number;
@@ -26,6 +27,9 @@ export const ReferralController = (): IReferralControllerReturns => {
   const dispatch = useAppDispatch();
   const referralData = useAppSelector(GET_REFERRAL_LIST);
 
+
+
+
   const referralList = useCallback(async () => {
     try {
       await dispatch(AdminThunk.refferalDetail());
@@ -37,6 +41,15 @@ export const ReferralController = (): IReferralControllerReturns => {
   useEffect(() => {
     referralList();
   }, [referralList]);
+
+  console.log(referralData, 'referralData')
+
+
+
+
+
+
+
 
   const attributes: attributeType[] = [];
 

@@ -3,6 +3,7 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 import { ReducerEnum } from "enum";
 
 import {
+  IBusinessReward,
   ICategoryData,
   INotificationdata,
   IReferralCountResponse,
@@ -26,8 +27,9 @@ export interface IAdminState {
   refferralCount: IReferralCountResponse;
   noticationList: INotificationdata[];
   referralList: any;
-  rewardToWinnerList: any;
+  userRewardList: IUserReward[];
   rewardData: IReward[];
+  bussinessRewardData: IBusinessReward[];
   userRewardData: IUserReward[];
 }
 
@@ -42,9 +44,10 @@ const initialState: IAdminState = {
   subCategory: [],
   noticationList: [],
   referralList: [],
-  rewardToWinnerList: [],
+  userRewardList: [],
   rewardData: [],
   userRewardData: [],
+  bussinessRewardData: [],
 };
 
 export const adminSlice = createSlice({
@@ -114,7 +117,7 @@ export const adminSlice = createSlice({
     });
     builder.addCase(AdminThunk.getRewardToWinner.fulfilled, (state, action) => {
       if (action.payload.data) {
-        state.rewardToWinnerList = action.payload.data;
+        state.userRewardList = action.payload.data;
       }
     });
     builder.addCase(AdminThunk.getReward.fulfilled, (state, action) => {
@@ -125,6 +128,11 @@ export const adminSlice = createSlice({
     builder.addCase(AdminThunk.getuserReward.fulfilled, (state, action) => {
       if (action.payload) {
         state.userRewardData = action.payload.data;
+      }
+    });
+    builder.addCase(AdminThunk.getBusinessReward.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.bussinessRewardData = action.payload.data;
       }
     });
   },

@@ -33,6 +33,9 @@ import {
   IUpdateCategoryRequest,
   IGetAllUsetRequest,
   IUserRewardresponse,
+  IBusinessRewardResponse,
+  IGetBusinesRewardRequest,
+  IGetUserRewardRequest,
 } from "interface";
 
 /**
@@ -207,13 +210,16 @@ export class AdminService {
 
   /**
    * Reward To Winner
-   * @return {Promise<any>}
+   * @return {Promise<IUserRewardresponse>}
    */
-  public static async getRewardToWinner(): Promise<any> {
-    const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/reward",
-      method: "GET",
-    });
+  public static async getRewardToWinner(
+    payload: IGetUserRewardRequest
+  ): Promise<IUserRewardresponse> {
+    const res: AxiosResponse<IUserRewardresponse> =
+      await ApiHelper.send<IUserRewardresponse>({
+        url: `/user/reward?userId=${payload.userId}`,
+        method: "GET",
+      });
     return res.data;
   }
 
@@ -223,7 +229,7 @@ export class AdminService {
    */
   public static async getRefferal(): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/category/list",
+      url: "/milestone",
       method: "GET",
     });
     return res.data;
@@ -284,9 +290,27 @@ export class AdminService {
     payload: IReferralPriceRequest
   ): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/referralPrice",
+      url: "/milestone",
       method: "POST",
       data: payload,
+    });
+
+    return res.data;
+  }
+
+
+  /**
+  * Update Referral Price
+  * @param {IReferralPriceRequest} payload
+  * @return {Promise<any>}
+  */
+  public static async updateReferralPrice(
+    payload: any
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/milestone/${payload?.milestoneID}`,
+      method: "PUT",
+      data: payload.data,
     });
 
     return res.data;
@@ -330,6 +354,21 @@ export class AdminService {
       url: `user/reward?userId=${payload.userId}`,
       method: "GET",
     });
+    return res.data;
+  }
+
+  /**
+   * get Business Reward
+   * @return {Promise<IBusinessRewardResponse>}
+   */
+  public static async getBusinessReward(
+    payload: IGetBusinesRewardRequest
+  ): Promise<IBusinessRewardResponse> {
+    const res: AxiosResponse<IBusinessRewardResponse> =
+      await ApiHelper.send<any>({
+        url: `/user/reward/business?businessId=${payload.businessId}`,
+        method: "GET",
+      });
     return res.data;
   }
 
@@ -381,12 +420,11 @@ export class AdminService {
     return res.data;
   }
 
-
   /**
- * Update listing
- * @param {ICreateListingRequest} payload
- * @return {Promise<any>}
- */
+   * Update listing
+   * @param {ICreateListingRequest} payload
+   * @return {Promise<any>}
+   */
   public static async updateListing(payload: any): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/business/${payload?.iBusinessId}`,
@@ -408,7 +446,23 @@ export class AdminService {
       url: `business/${payload}`,
       method: "DELETE",
     });
+    return res.data;
+  }
 
+
+
+  /**
+   * Delete Referral
+   * @return {Promise<any>}
+   */
+  public static async deleteReferral(
+    payload: any
+  ): Promise<any> {
+    console.log(payload);
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `milestone/${payload}`,
+      method: "DELETE",
+    });
     return res.data;
   }
 
@@ -472,7 +526,6 @@ export class AdminService {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/user/reward?rewardId=${payload.rewardId}`,
       method: "DELETE",
-      data: payload,
     });
 
     return res.data;

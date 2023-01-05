@@ -15,12 +15,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminBackButton } from "components";
-import { AdminRoutePathEnum } from "enum";
+import { AdminRoutePathEnum, AuthRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { SubCategoryController } from "./admin-subcategory-controller";
 
 export function AdminSubCategory() {
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
   const { getters, handlers } = SubCategoryController();
   const { attributes } = getters;
   const { deleteSubCategorylist } = handlers;
@@ -36,8 +36,16 @@ export function AdminSubCategory() {
       width: 110,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value}>
-            <FontAwesomeIcon icon={faPen} />
+          <Tooltip title={params.value[0]}>
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={() => {
+                console.log(params.value[2]);
+                navigate(AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY, {
+                  state: { id: params.value[2], edit: true },
+                });
+              }}
+            />
           </Tooltip>
           <Tooltip title={params.value[1]}>
             <FontAwesomeIcon
@@ -74,7 +82,7 @@ export function AdminSubCategory() {
             color="info"
             variant="contained"
             onClick={() => {
-              naviagate(AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY);
+              navigate(AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY);
             }}
           >
             New subcategory

@@ -24,10 +24,11 @@ import { UserThunk } from "data/thunk/user.thunk";
 
 export function ClickOnCategory() {
 
-  const [ids , setId] = useState<any>()
+  const [ids, setId] = useState<any>()
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-const naviagate =  useNavigate()
+  const naviagate = useNavigate()
+  const [activeCate, setActiveCate] = useState<any>(false);
 
   const data = {
     image:
@@ -41,7 +42,7 @@ const naviagate =  useNavigate()
   };
 
   const categoryData = useAppSelector(GET_CATEGORY);
- console.log(categoryData ,'cate')
+  console.log(categoryData, 'cate')
   const dispatch = useAppDispatch();
 
   const getcategory = useCallback(async () => {
@@ -56,10 +57,11 @@ const naviagate =  useNavigate()
     getcategory();
   }, [getcategory]);
 
-  const handleList = (id : any)=> {
-   
+  const handleList = (id: any) => {
+
     // naviagate(`/listing?${id?.iCategoryId}`);
     setId(id?.iCategoryId)
+    // setActiveCate(id?.iCategoryId)
   }
 
   const businessData = useAppSelector(GET_BUSINESS);
@@ -76,7 +78,7 @@ const naviagate =  useNavigate()
     allBusiness();
   }, [allBusiness]);
 
-  console.log(businessData ,'businessData')
+  console.log(businessData, 'businessData')
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
@@ -88,7 +90,7 @@ const naviagate =  useNavigate()
               </Typography>
               <List>
                 {categoryData.map((item: any, index) => (
-                  <ListItem key={index} sx={{ px: 0 }}>
+                  <ListItem key={index} sx={{ px: 0 }} className={` ${activeCate && ' activeCate '}  cursor-pointer `} >
                     {item.vName}
                   </ListItem>
                 ))}
@@ -97,7 +99,7 @@ const naviagate =  useNavigate()
           </Drawer>
         )}
         {!isMobile && (
-          <Grid item xs={12} md={2.1}>
+          <Grid item xs={12} md={2.1} sx={{ paddingRight: '20px' }} >
             <Box sx={{ overflow: "auto", my: 1 }} className="pl-[18px]">
               <Typography variant="body1" fontWeight="600">
                 Listings by Category:
@@ -105,13 +107,13 @@ const naviagate =  useNavigate()
               <List>
                 {categoryData.map((item, index) => (
                   <ListItem
-                  key={index}
-                  sx={{ px: 0 }}
-                  onClick={()=>  handleList(item)}
-                  className="font-normal text-[16px] leading-[24px] text-[#434d59]"
+                    key={index}
+                    sx={{ px: 0 }}
+                    onClick={() => { handleList(item), setActiveCate(item?.iCategoryId) }}
+                    className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId ? ' activeCate' : 'nan'}  `}
                   >
                     {item.vName}
-                 
+
                   </ListItem>
                 ))}
               </List>
@@ -166,88 +168,92 @@ const naviagate =  useNavigate()
             </Box>
 
             <Grid container className=" pb-[20px] ">
-              
-                {businessData.length > 0 && 
-                businessData.filter(el=> el.iCategory === ids)
-                .map((data , index) => (
-                  <Grid key={index} item sm={4} className="pb-[20px] ">
-                    <Card
-                      sx={{
-                        maxWidth: "330px",
-                        minHeight: "350px",
-                      }}
-                      elevation={0}
-                      className="border-[1px] border-[#dadde5] "
-                      style={{ boxShadow: "0 0 20px #0100001a" }}
-                      >
-                      <img
-                    
-                        src={
-                          data.vImage
-                            ? "http://159.223.194.50:8000/" + data.vImage
-                            : ''
-                        }
-                        // alt={data.eStatus}
-                        width="100%"
-                        height="100px"
-                        style={{ objectFit: "cover", height: "215px" }}
-                      />
-                      <Box sx={{ py: 1.5, pl: "12px" }}>
-                        <Typography variant="body1" fontWeight={600}>
-                          {data.categoryName}
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          fontWeight={600}
-                          color={theme.palette.grey[500]}
-                        >
-                          {data.vLocation}
-                        </Typography>
 
-                        <Box sx={{ my: 1, lineHeight: 0 }}>
-                          <Typography fontSize={11} fontWeight={600}>
-                            {data.tDescription}
-                          </Typography>
-                        </Box>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "baseline",
-                          }}
-                        >
-                          <Typography
-                            variant="caption"
-                            fontWeight={600}
-                            color={theme.palette.grey[500]}
-                          >
-                            {data.subscriberCount}
-                          </Typography>
-                          <Button color="error" variant="rounded" size="small">
-                            Subscribe
-                          </Button>
-                          <div className="raletive">
-                            <div className="subscribeLebalListing">
-                              <span className=" text-white  ">Subscribe</span>
-                            </div>
-                          </div>
-                        </Box>
-                      </Box>
-                      <Box
+              {businessData.length > 0 &&
+                businessData.filter(el => el.iCategory === ids)
+                  .map((data, index) => (
+                    <Grid key={index} item sm={4} className="pb-[20px] ">
+
+                      <Card
                         sx={{
-                          textAlign: "center",
-                          backgroundColor: theme.palette.grey[300],
-                          p: 1,
+                          maxWidth: "330px",
+                          minHeight: "350px",
                         }}
+                        elevation={0}
+                        className="border-[1px] border-[#dadde5] "
+                        style={{ boxShadow: "0 0 20px #0100001a" }}
                       >
-                        <Typography fontSize={11} fontWeight={600}>
-                          {/* {data.footer} */}
-                        </Typography>
-                      </Box>
-                    </Card>
-                  </Grid>
-                )) 
-                }
+                        <>
+                          {/* {setActiveCate(true)} */}
+                          <img
+
+                            src={
+                              data.vImage
+                                ? "http://159.223.194.50:8000/" + data.vImage
+                                : ''
+                            }
+                            // alt={data.eStatus}
+                            width="100%"
+                            height="100px"
+                            style={{ objectFit: "cover", height: "215px" }}
+                          />
+                          <Box sx={{ py: 1.5, pl: "12px" }}>
+                            <Typography variant="body1" fontWeight={600}>
+                              {data.categoryName}
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              fontWeight={600}
+                              color={theme.palette.grey[500]}
+                            >
+                              {data.vLocation}
+                            </Typography>
+
+                            <Box sx={{ my: 1, lineHeight: 0 }}>
+                              <Typography fontSize={11} fontWeight={600}>
+                                {data.tDescription}
+                              </Typography>
+                            </Box>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "baseline",
+                              }}
+                            >
+                              <Typography
+                                variant="caption"
+                                fontWeight={600}
+                                color={theme.palette.grey[500]}
+                              >
+                                {data.subscriberCount}
+                              </Typography>
+                              <Button color="error" variant="rounded" size="small">
+                                Subscribe
+                              </Button>
+                              <div className="raletive">
+                                <div className="subscribeLebalListing">
+                                  <span className=" text-white  ">Subscribe</span>
+                                </div>
+                              </div>
+                            </Box>
+                          </Box>
+                          <Box
+                            sx={{
+                              textAlign: "center",
+                              backgroundColor: theme.palette.grey[300],
+                              p: 1,
+                            }}
+                          >
+                            <Typography fontSize={11} fontWeight={600}>
+                              {/* {data.footer} */}
+                            </Typography>
+                          </Box>
+                        </>
+                      </Card>
+                    </Grid>
+                  ))
+              }
             </Grid>
           </Box>
         </Grid>

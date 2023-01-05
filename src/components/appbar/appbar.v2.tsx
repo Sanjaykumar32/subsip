@@ -176,14 +176,36 @@ export const UserAppBar = () => {
   });
 
 
+
+  const [sticky, setSticky] = useState("");
+
+  // on render, set listener
+  useEffect(() => {
+    // console.log("hello");
+    window.addEventListener("scroll", isSticky);
+    return () => {
+      window.removeEventListener("scroll", isSticky);
+    };
+  }, []);
+
+  const isSticky = () => {
+    /* Method that will fix header after a specific scrollable */
+    const scrollTop = window.scrollY;
+    const stickyClass = scrollTop >= 50 ? "is-sticky" : "non-sticky";
+    setSticky(stickyClass);
+    // console.log(stickyClass);
+  };
+
+
   return (
     <>
       <AppBar
         color="default"
         elevation={0}
         sx={{
-          zIndex: theme.zIndex.appBar, backgroundColor: 'white', boxShadow: '0 1px 20px 0 #91919175',
+          zIndex: theme.zIndex.appBar, backgroundColor: 'white', boxShadow: '0 1px 20px 0 #91919175', position: 'relative '
         }}
+        className={sticky}
       >
         <Toolbar
           sx={{

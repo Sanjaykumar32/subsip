@@ -1,12 +1,12 @@
 import { SelectChangeEvent } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_CATEGORY } from "data/selectors";
+import { GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { AdminRoutePathEnum } from "enum";
 import { ICategoryData } from "interface";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface IAddSubCategoryControllerReturns {
   getters: {
@@ -32,6 +32,18 @@ export const AddSubCategoryController =
     const userId = localStorage.getItem("userId");
     const categoryData = useAppSelector(GET_CATEGORY);
     const naviagate = useNavigate();
+    const editScreen = useLocation();
+    const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
+
+    useEffect(() => {
+      if (editScreen?.state?.edit === true) {
+        const filter = subCategoryData?.filter((item) => {
+          if (item?.iSubCategoryId === editScreen?.state?.id) {
+            setSubCategory(item.vName);
+          }
+        });
+      }
+    }, [categoryData, editScreen, subCategoryData]);
 
     const dispatch = useAppDispatch();
 

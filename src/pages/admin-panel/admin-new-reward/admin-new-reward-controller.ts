@@ -3,8 +3,10 @@ import { useAppDispatch, useAppSelector } from "data";
 import { GET_CATEGORY, GET_SUB_CATEGORY, GET_BUSINESS } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { UserThunk } from "data/thunk/user.thunk";
+import { AdminRoutePathEnum } from "enum";
 import { IBusiness, ICategoryData, ISubCategoryData } from "interface";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface INewRewardControllerReturns {
   getters: {
@@ -42,6 +44,7 @@ export const NewRewardController = (): INewRewardControllerReturns => {
   const businessData = useAppSelector(GET_BUSINESS);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleCategoryChange = (event: SelectChangeEvent): void => {
     setCategory(event.target.value as string);
@@ -71,15 +74,19 @@ export const NewRewardController = (): INewRewardControllerReturns => {
     }
   );
 
-  const submitHandler = (): void => {
-    dispatch(
+  const submitHandler = async (): Promise<void> => {
+    await dispatch(
       AdminThunk.newReward({
         name: name,
         availability: availibility,
         category: category,
         subCategory: subCategory,
+        businessId: businessName,
       })
     );
+
+    navigate(AdminRoutePathEnum.ADMIN_MILESTONES);
+
     setName("");
     setAvailibility("");
     setSubCategory("");
