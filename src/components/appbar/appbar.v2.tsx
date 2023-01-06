@@ -375,6 +375,8 @@ export const UserAppBar = () => {
           <Toolbar>
             <div className="moblieMenu">
               <List
+
+                className="categoryListing"
                 sx={{
                   display: "flex",
                   flexDirection: { xs: "column", md: "row" },

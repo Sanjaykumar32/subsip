@@ -6,23 +6,23 @@
 
 
 
-.css-xhk8t5-MuiList-root li {
+.categoryListing li {
     padding: 0 !important;
 }
 
-.css-xhk8t5-MuiList-root li a {
+.categoryListing li a {
     font-weight: 400;
     color: #000;
 }
 
-.css-xhk8t5-MuiList-root li a {
+.categoryListing li a {
     font-weight: 400;
     color: #000;
     border-bottom: 2px solid transparent;
     padding: 10px 10px !important;
 }
 
-.css-xhk8t5-MuiList-root li a:hover {
+.categoryListing li a:hover {
     border-color: #f39516 !important;
 }
 
@@ -56,9 +56,7 @@
         padding-bottom: 15px;
     }
 
-    ul.MuiList-root.MuiList-padding.css-xhk8t5-MuiList-root,
-    li.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.css-okkh7g-MuiListItem-root,
-    .css-xhk8t5-MuiList-root li a {
+    ul.categoryListing li a {
         width: 100%;
         padding: 0;
     }
