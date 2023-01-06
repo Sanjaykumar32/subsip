@@ -22,7 +22,7 @@ import { SubCategoryController } from "./admin-subcategory-controller";
 export function AdminSubCategory() {
   const navigate = useNavigate();
   const { getters, handlers } = SubCategoryController();
-  const { attributes } = getters;
+  const { attributes, id } = getters;
   const { deleteSubCategorylist } = handlers;
   const columns: GridColDef[] = [
     {
@@ -82,7 +82,9 @@ export function AdminSubCategory() {
             color="info"
             variant="contained"
             onClick={() => {
-              navigate(AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY);
+              navigate(
+                `${AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY}/?category=${id}`
+              );
             }}
           >
             New subcategory

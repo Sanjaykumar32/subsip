@@ -164,13 +164,13 @@ export const NewNotificationButtonController =
     const submitHandler = async (): Promise<void> => {
       await dispatch(
         AdminThunk.newNotification({
-          Headline: headline,
-          Desc: description,
-          Date: "12-13-20202",
-          BusinessLocation: businessLocation,
-          CategoryId: category,
-          SubCategoryId: subCategory,
-          BusinessId: businessName,
+          headline: headline,
+          desc: description,
+          date: date,
+          businessLocation: businessLocation,
+          categoryId: category,
+          subCategoryId: subCategory,
+          businessId: businessName,
         })
       );
       navigate(AdminRoutePathEnum.ADMIN_NOTIFICATION);

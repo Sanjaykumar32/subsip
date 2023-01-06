@@ -31,6 +31,7 @@ import {
   IBusinessRewardResponse,
   IGetUserRewardRequest,
   IDeleteRewardRequest,
+  IDashboardResponse,
 } from "interface";
 import { AdminService } from "services";
 
@@ -209,8 +210,8 @@ export class AdminThunk {
   );
 
   /**
- * Delete Business
- */
+   * Delete Business
+   */
   public static deleteReferralPrice = createAsyncThunk(
     "admin/deleteReferralPrice",
     async (payload: any): Promise<void> => {
@@ -407,6 +408,17 @@ export class AdminThunk {
     "admin/deleteReward",
     async (payload: IDeleteRewardRequest): Promise<void> => {
       const response = await AdminService.deleteReward(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Get DashBoardData
+   */
+  public static getdashboardCount = createAsyncThunk(
+    "admin/dashboard",
+    async (): Promise<IDashboardResponse> => {
+      const response = await AdminService.getDashboardCount();
       return response;
     }
   );

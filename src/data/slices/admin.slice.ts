@@ -5,6 +5,7 @@ import { ReducerEnum } from "enum";
 import {
   IBusinessReward,
   ICategoryData,
+  IDashboard,
   INotificationdata,
   IReferralCountResponse,
   IRefferralCode,
@@ -31,6 +32,7 @@ export interface IAdminState {
   rewardData: IReward[];
   bussinessRewardData: IBusinessReward[];
   userRewardData: IUserReward[];
+  dashboardCount: IDashboard[];
 }
 
 const initialState: IAdminState = {
@@ -48,6 +50,7 @@ const initialState: IAdminState = {
   rewardData: [],
   userRewardData: [],
   bussinessRewardData: [],
+  dashboardCount: [],
 };
 
 export const adminSlice = createSlice({
@@ -93,6 +96,11 @@ export const adminSlice = createSlice({
     builder.addCase(AdminThunk.getCategory.fulfilled, (state, action) => {
       if (action.payload) {
         state.category = action.payload.data;
+      }
+    });
+    builder.addCase(AdminThunk.getdashboardCount.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.dashboardCount = action.payload.data;
       }
     });
     builder.addCase(AdminThunk.notificationList.fulfilled, (state, action) => {
