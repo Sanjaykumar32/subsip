@@ -27,17 +27,17 @@ export function Links() {
         title: "Account",
         subTitle: [
           {
-            title: "Account",
-            link: "/account",
+            title: "Sign in",
+            link: "/auth/sign-in",
           },
           {
-            title: "Privacy",
-            link: "/privacy",
+            title: "Sign up",
+            link: "/auth/sign-un",
           },
-          {
-            title: "Terms",
-            link: "/terms",
-          },
+          // {
+          //   title: "Terms",
+          //   link: "/terms",
+          // },
         ],
       },
       {
@@ -54,15 +54,15 @@ export function Links() {
         ],
       },
       {
-        title: "List",
+        title: "Business",
         subTitle: [
           {
-            title: "List your Buisness",
+            title: "List your Business",
             link: "/join",
           },
           {
-            title: "Remove your Buisness",
-            link: "/leave",
+            title: "Contact Us",
+            link: "/",
           },
         ],
       },

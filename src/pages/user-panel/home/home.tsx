@@ -129,7 +129,7 @@ export function Home() {
   };
   return (
     <div className="w-full overflow-x-hidden">
-      <div className="py-5 md:py-20 bg-white md:bg-black relative  w-full">
+      <div className="pt-5 pb-10 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
