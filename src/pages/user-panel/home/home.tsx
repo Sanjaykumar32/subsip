@@ -5,13 +5,14 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_BANNER_LIST, GET_BUSINESS } from "data/selectors";
+import { GET_BANNER_LIST, GET_BUSINESS, GET_CATEGORY } from "data/selectors";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate, useLocation } from "react-router-dom";
 import { IBannerData, IBusiness } from "interface";
 import { UserThunk } from "data/thunk/user.thunk";
 import { Button } from "@mui/material";
+import { AdminThunk } from "data/thunk/admin.thunk";
 
 /**
  *
@@ -84,6 +85,8 @@ export function Home() {
   const navigate = useNavigate();
   const bannerData = useAppSelector(GET_BANNER_LIST);
 
+
+
   const bannerList = useCallback(async () => {
     try {
       await dispatch(UserThunk.bannerList());
@@ -108,9 +111,35 @@ export function Home() {
   console.log(filterBanner, "filterBanner");
 
   console.log(filterBanner, "filterBanner");
+
+  const categoryData = useAppSelector(GET_CATEGORY);
+
+  const CateFirst = categoryData.map((item: any) => item?.iCategoryId)
+
+  console.log(CateFirst[0], 'CateFirst')
+
+
+  console.log(categoryData, 'categoryData')
+
+  const getcategory = useCallback(async () => {
+    try {
+      await dispatch(AdminThunk.getCategory());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getcategory();
+  }, [getcategory]);
+
+
+
   const allBusiness = useCallback(async () => {
     try {
+
       await dispatch(UserThunk.business());
+
     } catch (error) {
       console.log(error);
     }
@@ -129,7 +158,7 @@ export function Home() {
   };
   return (
     <div className="w-full overflow-x-hidden">
-      <div className="py-5 md:py-20 bg-white md:bg-black relative  w-full">
+      <div className="pt-5 pb-10 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
@@ -182,7 +211,7 @@ export function Home() {
         <div className="relative">
           <Slider ref={cardRef} {...cardSettings}>
             {filterBanner
-              .filter((el) => parseInt(el.iCategory) == 33)
+              .filter((el) => parseInt(el.iCategory) == 50)
               .map((ele: IBusiness, index: number) => {
                 return (
                   <div
@@ -204,14 +233,14 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el) => parseInt(el.iCategory) == 33).length >
+          {filterBanner.filter((el: any) => parseInt(el.iCategory) == 50).length >
             0 && <SliderArrow refVal={cardRef} />}
         </div>
 
         <div className="relative mt-10 w-full">
           <Slider ref={cardRef2} {...cardSettings}>
             {filterBanner
-              .filter((el) => parseInt(el.iCategory) == 34)
+              .filter((el) => parseInt(el.iCategory) == CateFirst[0])
               .map((ele: IBusiness, index: number) => {
                 return (
                   <div
@@ -233,14 +262,14 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el) => parseInt(el.iCategory) == 34).length >
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[0]).length >
             0 && <SliderArrow refVal={cardRef2} />}
         </div>
 
         <div className="relative my-10 w-full">
           <Slider ref={cardRef3} {...cardSettings}>
             {filterBanner
-              .filter((el) => parseInt(el.iCategory) == 44)
+              .filter((el) => parseInt(el.iCategory) == CateFirst[1])
               .map((ele, index) => {
                 return (
                   <div
@@ -262,7 +291,7 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el) => parseInt(el.iCategory) == 44).length >
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1]).length >
             0 && <SliderArrow refVal={cardRef3} />}
         </div>
 
@@ -272,7 +301,7 @@ export function Home() {
             <div className="relative my-10 w-full">
               <Slider ref={cardRef3} {...cardSettings}>
                 {filterBanner
-                  .filter((el) => parseInt(el.iCategory) == 47)
+                  .filter((el) => parseInt(el.iCategory) == CateFirst[2])
                   .map((ele, index) => {
                     return (
                       <div
@@ -294,14 +323,14 @@ export function Home() {
                     );
                   })}
               </Slider>
-              {filterBanner.filter((el) => parseInt(el.iCategory) == 47)
+              {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[2])
                 .length > 0 && <SliderArrow refVal={cardRef3} />}
             </div>
 
             <div className="relative my-10 w-full">
               <Slider ref={cardRef3} {...cardSettings}>
                 {filterBanner
-                  .filter((el) => parseInt(el.iCategory) == 48)
+                  .filter((el) => parseInt(el.iCategory) == CateFirst[3])
                   .map((ele, index) => {
                     return (
                       <div
@@ -323,7 +352,7 @@ export function Home() {
                     );
                   })}
               </Slider>
-              {filterBanner.filter((el) => parseInt(el.iCategory) == 48)
+              {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[3])
                 .length > 0 && <SliderArrow refVal={cardRef3} />}
             </div>
           </>
@@ -457,7 +486,7 @@ const SliderCard = (props: any) => {
         <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold py-2">
           {location}
         </p>
-        <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434D59] py-2">
+        <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434D59] textLimit2 py-2 pl-3 ">
           {des}
         </p>
         <div className="flex justify-between">
