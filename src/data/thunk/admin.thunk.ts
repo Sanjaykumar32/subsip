@@ -316,6 +316,7 @@ export class AdminThunk {
   /**
    * New category
    */
+
   public static getCategory = createAsyncThunk(
     "admin/newNotification",
     async (): Promise<IGetCategoryResponse> => {

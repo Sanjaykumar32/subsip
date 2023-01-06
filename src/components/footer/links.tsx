@@ -27,17 +27,13 @@ export function Links() {
         title: "Account",
         subTitle: [
           {
-            title: "Sign in",
+            title: "Login",
             link: "/auth/sign-in",
           },
           {
             title: "Sign up",
             link: "/auth/sign-un",
           },
-          // {
-          //   title: "Terms",
-          //   link: "/terms",
-          // },
         ],
       },
       {
@@ -57,7 +53,7 @@ export function Links() {
         title: "Business",
         subTitle: [
           {
-            title: "List your Business",
+            title: "Advertisement",
             link: "/join",
           },
           {

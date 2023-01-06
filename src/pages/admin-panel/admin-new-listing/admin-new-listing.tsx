@@ -55,19 +55,19 @@ export function AdminNewlisting() {
         id: "q1",
         label: "What's your business called?",
         type: InputTypeEnum.INPUT,
-        required: true,
+        required: false,
       },
       {
         id: "q2",
         label: "Pick  Business Category  ",
         type: InputTypeEnum.SELECT,
-        required: true,
+        required: false,
       },
       {
         id: "q3",
         label: "Tagline",
         type: InputTypeEnum.INPUT,
-        required: true,
+        required: false,
         caption:
           "What's your pitch? Tell buyers about your product in 100 characters or less.",
       },
@@ -75,7 +75,7 @@ export function AdminNewlisting() {
         id: "q4",
         label: "Tell us about your buisness?",
         type: InputTypeEnum.TEXT_AREA,
-        required: true,
+        required: false,
         caption:
           "Share a high-level introduction to your product. Check out our copy guidelines for inspiration.",
       },
@@ -83,31 +83,31 @@ export function AdminNewlisting() {
         id: "q5",
         label: "Support Email?",
         type: InputTypeEnum.INPUT,
-        required: true,
+        required: false,
       },
       {
         id: "q6",
         label: "Featured Image?",
         type: InputTypeEnum.INPUT,
-        required: true,
+        required: false,
       },
       {
         id: "q7",
         label: "Tagline",
         type: InputTypeEnum.INPUT,
-        required: true,
+        required: false,
       },
       {
         id: "q8",
         label: "Buisness Location",
         type: InputTypeEnum.SELECT,
-        required: true,
+        required: false,
       },
       {
         id: "q9",
         label: "Pick Subcategory ",
         type: InputTypeEnum.INPUT,
-        required: true,
+        required: false,
       },
       {
         id: "q10",
@@ -168,7 +168,7 @@ export function AdminNewlisting() {
                       size="small"
                       value={businessName}
                       onChange={handleBusinessNameChange}
-                      required
+                    // required
                     />
                   </FormControl>
                 </Box>
@@ -180,7 +180,7 @@ export function AdminNewlisting() {
                       size="small"
                       value={headline}
                       onChange={handleHeadlineChange}
-                      required
+                      // required
                       fullWidth
                     />
                   </FormControl>
@@ -249,7 +249,7 @@ export function AdminNewlisting() {
                       multiline
                       value={tagLine}
                       onChange={handleProductChange}
-                      required
+                      // required
                       fullWidth
                     />
                   </FormControl>
@@ -263,7 +263,7 @@ export function AdminNewlisting() {
                       minRows={5}
                       value={description}
                       onChange={handleDescriptionChange}
-                      required
+                      // required
                       fullWidth
                     />
                   </FormControl>

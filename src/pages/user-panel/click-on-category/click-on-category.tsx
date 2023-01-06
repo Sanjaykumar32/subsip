@@ -226,11 +226,11 @@ export function ClickOnCategory() {
                                 fontWeight={600}
                                 color={theme.palette.grey[500]}
                               >
-                                {data.subscriberCount}
+                                {data.subscriberCount + ' Subscribe'}
                               </Typography>
-                              <Button color="error" variant="rounded" size="small">
+                              {/* <Button color="error" variant="rounded" size="small">
                                 Subscribe
-                              </Button>
+                              </Button> */}
                               <div className="raletive">
                                 <div className="subscribeLebalListing">
                                   <span className=" text-white  ">Subscribe</span>
