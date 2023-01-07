@@ -556,17 +556,4 @@ export class AdminService {
     });
     return res.data;
   }
-
-  /**
-   * Delete Subscribers
-   * @return {Promise<any>}
-   */
-  // public static async deleteSubscribers(payload: any): Promise<any> {
-  //   const res: AxiosResponse<any> = await ApiHelper.send<any>({
-  //     url: `/subscriber/2`,
-  //     method: "DELETE",
-  //   });
-
-  //   return res.data;
-  // }
 }

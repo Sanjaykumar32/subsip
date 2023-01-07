@@ -107,12 +107,8 @@ export function Home() {
   });
 
   const categoryData = useAppSelector(GET_CATEGORY);
-
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
-
-  console.log(CateFirst[0], "CateFirst");
-
-  console.log(categoryData, "categoryData");
+  const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
     try {
@@ -159,23 +155,18 @@ export function Home() {
     } catch (error) {
       console.log(error);
     }
+    !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
+    try {
+      await dispatch(
+        UserThunk.addSubscriberToBusiness({
+          businessId: id,
+          userId: userId ? userId : "",
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  // async function AddSubscriberToBusiness(id: number): Promise<void> {
-  //   try {
-  //     await dispatch(
-  //       UserThunk.addSubscriberToBusiness({
-  //         businessId: ,
-  //         userId: userId,
-  //       })
-  //     );
-
-  //   } catch (error) {
-  //     console.log(error)
-
-  //   }
-
-  // }
 
   return (
     <div className="w-full overflow-x-hidden">

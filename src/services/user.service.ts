@@ -6,6 +6,8 @@ import {
   IBussinessRequest,
   IAddSubscriberTobussinessRequest,
   IAddSubcriberToBuisnessResponse,
+  IDeleteSubscriberRequest,
+  IDeleteSubscriberResponse,
 } from "interface";
 
 /**
@@ -81,6 +83,22 @@ export class UserService {
         url: `business/subscribe`,
         method: "POST",
         data: payload,
+      });
+
+    return res.data;
+  }
+
+  /**
+   * Delete Subscribers
+   * @return {Promise<IDeleteSubscriberResponse>}
+   */
+  public static async deleteSubscribers(
+    payload: IDeleteSubscriberRequest
+  ): Promise<IDeleteSubscriberResponse> {
+    const res: AxiosResponse<IDeleteSubscriberResponse> =
+      await ApiHelper.send<IDeleteSubscriberResponse>({
+        url: `/subscriber/${payload.iSubscriberId}`,
+        method: "DELETE",
       });
 
     return res.data;

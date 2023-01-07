@@ -21,11 +21,36 @@ import { AdminRoutePathEnum } from "enum";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
+import { UserThunk } from "data/thunk/user.thunk";
+import toast from "react-hot-toast";
 
 export function AdminSubscribers() {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const userId = localStorage.getItem("userId");
+  const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
+
+  const allsubscriberOfBussiness = useCallback(async () => {
+    try {
+      await dispatch(
+        AdminThunk.allSubscriberOfBussiness({
+          userId: userId ? parseInt(userId) : 0,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, userId]);
+
+  async function deleteSubscriber(ID: string) {
+    await dispatch(UserThunk.deleteSubscriber({ iSubscriberId: ID }));
+    toast.success("Subscriber Delete SuccessFully");
+    allsubscriberOfBussiness();
+  }
+
   const columns: GridColDef[] = [
     {
-      field: "Email",
+      field: "vEmail",
       headerName: "Email",
       width: 200,
     },
@@ -41,7 +66,7 @@ export function AdminSubscribers() {
       ),
     },
     {
-      field: "Location",
+      field: "location",
       headerName: "Location",
       width: 150,
     },
@@ -51,102 +76,32 @@ export function AdminSubscribers() {
       width: 110,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value}>
-            <FontAwesomeIcon icon={faTrash} />
+          <Tooltip title={params.value[0]}>
+            <FontAwesomeIcon
+              icon={faTrash}
+              onClick={() => {
+                deleteSubscriber(params.value[1]);
+              }}
+            />
           </Tooltip>
         </Box>
       ),
     },
   ];
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const userId = localStorage.getItem("userId");
-
-  const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
-
-  const allsubscriberOfBussiness = useCallback(async () => {
-    try {
-      await dispatch(
-        AdminThunk.allSubscriberOfBussiness({
-          userId: userId ? parseInt(userId) : 0,
-        })
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch, userId]);
 
   useEffect(() => {
     allsubscriberOfBussiness();
   }, [allsubscriberOfBussiness]);
 
-  console.log(subscribeBusiness, "subscribeBusiness");
-
-  const rows = [
-    {
-      id: 1,
-      Email: "Jake@gmail.com",
+  const rows = subscribeBusiness.map((item) => {
+    return {
+      id: item.iBusinessId,
+      vEmail: item.vEmail,
       Verified: "Verified",
-      Actions: "Delete",
-      Location: "Seattle, WA",
-    },
-    {
-      id: 2,
-      Email: "Hik@hik.com",
-      Verified: "Verified",
-      Actions: "Delete",
-      Location: "Seattle, WA",
-    },
-    {
-      id: 3,
-      Email: "Abi@abi.com",
-      Verified: "Verified",
-      Actions: "Delete",
-      Location: "Seattle, WA",
-    },
-    {
-      id: 4,
-      Email: "Abe@abe.com",
-      Verified: "Verified",
-      Actions: "Delete",
-      Location: "Seattle, WA",
-    },
-    {
-      id: 5,
-      Email: "Jake@gmail.com",
-      Verified: "Verified",
-      Actions: "Delete",
-      Location: "Seattle, WA",
-    },
-    {
-      id: 6,
-      Email: "Abe@abe.com",
-      Verified: "Verified",
-      Actions: "Delete",
-      Location: "Seattle, WA",
-    },
-    {
-      id: 7,
-      Email: "Jake@gmail.com",
-      Verified: "Verified",
-      Actions: "Delete",
-      Location: "Seattle, WA",
-    },
-    {
-      id: 8,
-      Email: "Hik@hik.com",
-      Verified: "Verified",
-      Actions: "Delete",
-      Location: "Seattle, WA",
-    },
-    {
-      id: 9,
-      Email: "Abe@abe.com",
-      Verified: "Verified",
-      Actions: "Delete",
-      Location: "Seattle, WA",
-    },
-  ];
+      location: "-",
+      Actions: ["Delete", item.iSubscriberId],
+    };
+  });
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
