@@ -7,7 +7,7 @@ export interface ISubscribeByAdminIdRequest {
 }
 
 export interface IAllBusinessSubscribersRequest {
-  userId: string;
+  userId: number;
 }
 
 export interface IBussinessRequest {

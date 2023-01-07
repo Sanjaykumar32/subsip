@@ -19,7 +19,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { Search } from "@mui/icons-material";
 import { useAppSelector, useAppDispatch } from "data";
-import { GET_USER_REWARDS } from "data/selectors";
+import {
+  GET_ALL_SUBSCRIBER_OF_BUSINESS,
+  GET_USER_REWARDS,
+} from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { RewardStatusEnum } from "enum";
 import { MuiColor } from "type";
@@ -41,6 +44,8 @@ export function Rewards() {
   };
 
   const rewardData = useAppSelector(GET_USER_REWARDS);
+  const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
+
   const dispatch = useAppDispatch();
 
   const getUserReward = useCallback(async () => {
@@ -55,7 +60,19 @@ export function Rewards() {
     getUserReward();
   }, [getUserReward]);
 
-  console.log(rewardData, "rewardData");
+  const allsubscriberOfBussiness = useCallback(async () => {
+    try {
+      await dispatch(AdminThunk.allSubscriberOfBussiness({ userId: 5 }));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    allsubscriberOfBussiness();
+  }, [allsubscriberOfBussiness]);
+
+  console.log(subscribeBusiness, "subscribeBusiness");
 
   const columns: GridColDef[] = [
     // {
