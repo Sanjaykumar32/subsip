@@ -19,7 +19,7 @@ import {
 import { GET_BUSINESS, GET_CATEGORY } from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
 
 export function ClickOnCategory() {
@@ -29,6 +29,14 @@ export function ClickOnCategory() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const naviagate = useNavigate()
   const [activeCate, setActiveCate] = useState<any>(false);
+
+  const location = useLocation();
+
+  const getCateID = location.pathname.split('/')[2]
+
+
+
+
 
   const data = {
     image:
@@ -42,7 +50,7 @@ export function ClickOnCategory() {
   };
 
   const categoryData = useAppSelector(GET_CATEGORY);
-  console.log(categoryData, 'cate')
+  // console.log(categoryData, 'cate')
   const dispatch = useAppDispatch();
 
   const getcategory = useCallback(async () => {
@@ -60,7 +68,7 @@ export function ClickOnCategory() {
   const handleList = (id: any) => {
 
     // naviagate(`/listing?${id?.iCategoryId}`);
-    setId(id?.iCategoryId)
+    setId(id)
     // setActiveCate(id?.iCategoryId)
   }
 
@@ -78,7 +86,31 @@ export function ClickOnCategory() {
     allBusiness();
   }, [allBusiness]);
 
-  console.log(businessData, 'businessData')
+  // console.log(businessData, 'businessData')
+
+  const totalLenght = businessData.filter((item: any) => item.iCategory === ids)
+
+  // console.log(totalLenght, 'totalLenght')
+
+  // useEffect(() => {
+  //   if (getCateID) {
+  //     console.log(getCateID, 'getCateID')
+  //     handleList(getCateID)
+  //     setActiveCate(getCateID)
+  //   }
+  // }, [getCateID, location])
+
+
+  function onQueryClick() {
+    if (getCateID) {
+      console.log(getCateID, 'getCateID')
+      handleList(getCateID)
+      setActiveCate(getCateID)
+    }
+
+  }
+
+
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
@@ -89,7 +121,7 @@ export function ClickOnCategory() {
                 Listings by subcategory:
               </Typography>
               <List>
-                {categoryData.map((item: any, index) => (
+                {categoryData.map((item: any, index: any) => (
                   <ListItem key={index} sx={{ px: 0 }} className={` ${activeCate && ' activeCate '}  cursor-pointer `} >
                     {item.vName}
                   </ListItem>
@@ -104,12 +136,12 @@ export function ClickOnCategory() {
               <Typography variant="body1" fontWeight="600">
                 Listings by Category:
               </Typography>
-              <List>
+              <List sx={{ paddingRight: '20px !important', paddingBottom: '28px !important' }} >
                 {categoryData.map((item, index) => (
                   <ListItem
                     key={index}
                     sx={{ px: 0 }}
-                    onClick={() => { handleList(item), setActiveCate(item?.iCategoryId) }}
+                    onClick={() => { handleList(item?.iCategoryId), setActiveCate(item?.iCategoryId) }}
                     className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId ? ' activeCate' : 'nan'}  `}
                   >
                     {item.vName}
@@ -133,9 +165,13 @@ export function ClickOnCategory() {
                 paddingBottom: "20px",
               }}
             >
-              <Typography variant="body2" fontWeight="600">
-                61 listings
-              </Typography>
+              {totalLenght.length > 0 ?
+                <Typography variant="body2" fontWeight="600">
+                  {totalLenght.length} listings
+                </Typography> :
+                <Typography variant="body2" fontWeight="600">
+                  No listings Here
+                </Typography>}
               <Box
                 sx={{
                   display: "flex",
@@ -171,9 +207,8 @@ export function ClickOnCategory() {
 
               {businessData.length > 0 &&
                 businessData.filter(el => el.iCategory === ids)
-                  .map((data, index) => (
+                  .map((data: any, index: any) => (
                     <Grid key={index} item sm={4} className="pb-[20px] ">
-
                       <Card
                         sx={{
                           maxWidth: "330px",
@@ -185,6 +220,7 @@ export function ClickOnCategory() {
                       >
                         <>
                           {/* {setActiveCate(true)} */}
+
                           <img
 
                             src={
@@ -258,6 +294,6 @@ export function ClickOnCategory() {
           </Box>
         </Grid>
       </Grid>
-    </Container>
+    </Container >
   );
 }

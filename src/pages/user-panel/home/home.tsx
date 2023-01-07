@@ -110,9 +110,9 @@ export function Home() {
 
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
 
-  console.log(CateFirst[0], "CateFirst");
+  // console.log(CateFirst[0], "CateFirst");
 
-  console.log(categoryData, "categoryData");
+  // console.log(categoryData, "categoryData");
 
   const getcategory = useCallback(async () => {
     try {
@@ -472,13 +472,13 @@ const SliderArrow = (props: any) => {
     >
       <SlArrowLeft
         onClick={() => props?.refVal?.current?.slickPrev()}
-        className={`text-3xl md:text-5xl p-2 rounded-full bg-[#09292b] font-normal relative pointer-events-auto z-50 cursor-pointer `}
+        className={`text-3xl md:text-4xl p-2 rounded-full bg-[#09292b] font-normal relative pointer-events-auto z-50 cursor-pointer `}
       />
       <SlArrowRight
         onClick={() => {
           props?.refVal?.current?.slickNext();
         }}
-        className="text-3xl md:text-5xl p-2 rounded-full bg-[#09292b] font-normal relative z-50 pointer-events-auto cursor-pointer"
+        className="text-3xl md:text-4xl p-2 rounded-full bg-[#09292b] font-normal relative z-50 pointer-events-auto cursor-pointer"
       />
     </div>
   );

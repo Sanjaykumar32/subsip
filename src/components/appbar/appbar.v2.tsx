@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Menu,
   MenuItem,
@@ -45,6 +45,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_CATEGORY } from "data/selectors";
 
 
 export const UserAppBar = () => {
@@ -58,6 +61,31 @@ export const UserAppBar = () => {
   const [locationPopUp, setLocationPopUP] = useState<any>(false)
   const [searchLocation, setLocation] = useState<any>('')
   const navigate = useNavigate();
+
+
+  const categoryData = useAppSelector(GET_CATEGORY);
+  const dispatch = useAppDispatch();
+
+  const getcategory = useCallback(async () => {
+    try {
+      await dispatch(AdminThunk.getCategory());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getcategory();
+  }, [getcategory]);
+
+  // console.log(categoryData, 'categoryData');
+
+  const CateName = categoryData.map((item: any) => item?.vName);
+
+  // console.log(CateName, 'CateName');
+
+
+
 
   const opens = Boolean(anchorEl);
   const openNotification = Boolean(anchorNoticationEl);
@@ -492,18 +520,22 @@ export const UserAppBar = () => {
                   },
                 }}
               >
-                <ListItem>
-                  <Link href={RoutePathEnum.LISTING}>Restaurant</Link>
-                </ListItem>
-                <ListItem>
-                  <Link href={RoutePathEnum.HOME}>Home Services</Link>
-                </ListItem>
-                <ListItem>
-                  <Link>Auto Services</Link>
-                </ListItem>
-                <ListItem>
-                  <Link>More</Link>
-                </ListItem>
+                {categoryData.map((item: any, index: any) => (
+                  index === 0 ?
+                    <ListItem key={index}>
+                      <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
+                    </ListItem> : index === 1 ?
+                      <ListItem key={index}>
+                        <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
+                      </ListItem> : index === 2 ?
+                        <ListItem key={index}>
+                          <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
+                        </ListItem> :
+                        // index === 0 &&
+                        <ListItem >
+                          <Link href={`/category/all`}>{'More'}</Link>
+                        </ListItem>
+                ))}
               </List>
 
               {!auth.isAuthenticated ? (
