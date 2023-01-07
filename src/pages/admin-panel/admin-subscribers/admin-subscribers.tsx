@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   Box,
   Button,
@@ -18,6 +18,9 @@ import { theme } from "theme";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import { useNavigate } from "react-router-dom";
 import { AdminRoutePathEnum } from "enum";
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
 
 export function AdminSubscribers() {
   const columns: GridColDef[] = [
@@ -56,6 +59,22 @@ export function AdminSubscribers() {
     },
   ];
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
+
+  const allsubscriberOfBussiness = useCallback(async () => {
+    try {
+      await dispatch(AdminThunk.allSubscriberOfBussiness({ userId: 5 }));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    allsubscriberOfBussiness();
+  }, [allsubscriberOfBussiness]);
+
+  console.log(subscribeBusiness, "subscribeBusiness");
 
   const rows = [
     {
@@ -122,16 +141,6 @@ export function AdminSubscribers() {
       Location: "Seattle, WA",
     },
   ];
-
-
-
-
-
-
-
-
-
-
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
