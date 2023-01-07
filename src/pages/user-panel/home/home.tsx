@@ -85,8 +85,6 @@ export function Home() {
   const navigate = useNavigate();
   const bannerData = useAppSelector(GET_BANNER_LIST);
 
-
-
   const bannerList = useCallback(async () => {
     try {
       await dispatch(UserThunk.bannerList());
@@ -108,18 +106,13 @@ export function Home() {
       .includes(location.search.toString().slice(1, 19).toLowerCase());
   });
 
-  console.log(filterBanner, "filterBanner");
-
-  console.log(filterBanner, "filterBanner");
-
   const categoryData = useAppSelector(GET_CATEGORY);
 
-  const CateFirst = categoryData.map((item: any) => item?.iCategoryId)
+  const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
 
-  console.log(CateFirst[0], 'CateFirst')
+  console.log(CateFirst[0], "CateFirst");
 
-
-  console.log(categoryData, 'categoryData')
+  console.log(categoryData, "categoryData");
 
   const getcategory = useCallback(async () => {
     try {
@@ -133,13 +126,9 @@ export function Home() {
     getcategory();
   }, [getcategory]);
 
-
-
   const allBusiness = useCallback(async () => {
     try {
-
       await dispatch(UserThunk.business());
-
     } catch (error) {
       console.log(error);
     }
@@ -156,6 +145,21 @@ export function Home() {
   const handleLessData = () => {
     setMoreData(false);
   };
+  async function onImageClick(id: number): Promise<void> {
+    try {
+      const response: any = await dispatch(
+        UserThunk.business({ businessId: id })
+      );
+      if (response.payload.data.length > 0) {
+        navigate(`/listing/${id}`);
+      } else {
+        console.log("nodata");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="w-full overflow-x-hidden">
       <div className="pt-5 pb-10 bg-white md:bg-black relative  w-full">
@@ -186,7 +190,7 @@ export function Home() {
                     className="bg-[#d32f3f] text-[1rem] w-36 rounded-full  py-4 px-2 font-normal text-white"
                     onClick={() => {
                       auth?.isAuthenticated
-                        ? navigate(RoutePathEnum.LISTING_PRODUCT)
+                        ? onImageClick(ele.iBusinessId)
                         : navigate(AuthRoutePathEnum.SIGN_IN);
                     }}
                   >
@@ -239,8 +243,8 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el: any) => parseInt(el.iCategory) == 50).length >
-            0 && <SliderArrow refVal={cardRef} />}
+          {filterBanner.filter((el: any) => parseInt(el.iCategory) == 50)
+            .length > 0 && <SliderArrow refVal={cardRef} />}
         </div>
 
         <div className="relative mt-10 w-full">
@@ -268,8 +272,8 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[0]).length >
-            0 && <SliderArrow refVal={cardRef2} />}
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[0])
+            .length > 0 && <SliderArrow refVal={cardRef2} />}
         </div>
 
         <div className="relative my-10 w-full">
@@ -297,8 +301,8 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1]).length >
-            0 && <SliderArrow refVal={cardRef3} />}
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1])
+            .length > 0 && <SliderArrow refVal={cardRef3} />}
         </div>
 
         {/* More data show */}
@@ -329,8 +333,9 @@ export function Home() {
                     );
                   })}
               </Slider>
-              {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[2])
-                .length > 0 && <SliderArrow refVal={cardRef3} />}
+              {filterBanner.filter(
+                (el) => parseInt(el.iCategory) == CateFirst[2]
+              ).length > 0 && <SliderArrow refVal={cardRef3} />}
             </div>
 
             <div className="relative my-10 w-full">
@@ -358,8 +363,9 @@ export function Home() {
                     );
                   })}
               </Slider>
-              {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[3])
-                .length > 0 && <SliderArrow refVal={cardRef3} />}
+              {filterBanner.filter(
+                (el) => parseInt(el.iCategory) == CateFirst[3]
+              ).length > 0 && <SliderArrow refVal={cardRef3} />}
             </div>
           </>
         ) : null}
@@ -375,67 +381,6 @@ export function Home() {
             </Button>
           )}
         </div>
-
-        {/* <div className="relative my-10 w-full">
-          <Slider ref={cardRef3} {...cardSettings}>
-            {filterBanner?.map((ele, index) => {
-              return (
-                <div
-                  style={{
-                    boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
-                  }}
-                  key={`${ele.categoryName}+${index}`}
-                  className="relative overflow-x-auto md:overflow-x-hidden "
-                >
-                  <SliderCard
-                    imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
-                    name={ele?.vName}
-                    tagLine={ele?.vTagLine}
-                    des={ele?.tDescription}
-                    location={ele?.vLocation}
-                    id={ele.iBusinessId}
-                  />
-                </div>
-              );
-            })}
-          </Slider>
-          {filterBanner.length > 0 && <SliderArrow refVal={cardRef3} />}
-        </div> */}
-
-        {/* <div className="relative my-10 w-full">
-          <Slider ref={cardRef3} {...cardSettings}>
-            {filterBanner?.map((ele, index) => {
-              return (
-                <div
-                  style={{
-                    boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
-                  }}
-                  key={`${ele.categoryName}+${index}`}
-                  className="relative overflow-x-auto md:overflow-x-hidden "
-                >
-                  <SliderCard
-                    imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
-                    name={ele?.vName}
-                    tagLine={ele?.vTagLine}
-                    des={ele?.tDescription}
-                    location={ele?.vLocation}
-                    id={ele.iBusinessId}
-                  />
-                </div>
-              );
-            })}
-          </Slider>
-          {filterBanner.length > 0 && <SliderArrow refVal={cardRef3} />}
-        </div> */}
-
-        {/* <div className='text-center '>
-          <button
-            className="bg-[#D32F3F] text-[0.9rem] cursor-pointer w-36 rounded-[10px]  py-2 px-1 font-normal text-white mb-5 "
-          >
-            Load More
-          </button>
-
-        </div> */}
       </div>
     </div>
   );

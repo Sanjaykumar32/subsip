@@ -11,6 +11,8 @@ import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { AuthRoutePathEnum } from "enum";
+import { toast } from "react-hot-toast";
 
 export default function ResponsiveDialog({
   open,
@@ -22,8 +24,14 @@ export default function ResponsiveDialog({
    * @return {void}
    */
   const appIdCopy = (): void => {
-    navigator.clipboard.writeText(refferralCode.referralCode);
+    navigator.clipboard.writeText(
+      `${hostName}${AuthRoutePathEnum.SIGN_UP}/?referralCode=${refferralCode.referralCode}`
+    );
+    handleClose();
+    toast.success("Copied SuccessFully");
   };
+
+  const hostName = window.location.origin;
 
   return (
     <Dialog

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { ColoredLabel, PageHeader } from "components";
 import {
   Box,
@@ -18,53 +18,101 @@ import TableContainer from "@mui/material/TableContainer";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { Search } from "@mui/icons-material";
+import { useAppSelector, useAppDispatch } from "data";
+import {
+  GET_ALL_SUBSCRIBER_OF_BUSINESS,
+  GET_USER_REWARDS,
+} from "data/selectors";
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { RewardStatusEnum } from "enum";
+import { MuiColor } from "type";
 
 export function Rewards() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  const chipStatusColor = (): MuiColor => {
+    switch (status) {
+      case RewardStatusEnum.CLAIM:
+        return "success";
+      case RewardStatusEnum.CLAIMED:
+        return "warning";
+      case RewardStatusEnum.MISSED:
+      default:
+        return "error";
+    }
+  };
+
+  const rewardData = useAppSelector(GET_USER_REWARDS);
+  const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
+
+  const dispatch = useAppDispatch();
+
+  const getUserReward = useCallback(async () => {
+    try {
+      await dispatch(AdminThunk.getuserReward({ userId: 4 }));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getUserReward();
+  }, [getUserReward]);
+
+  const allsubscriberOfBussiness = useCallback(async () => {
+    try {
+      await dispatch(AdminThunk.allSubscriberOfBussiness({ userId: 5 }));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    allsubscriberOfBussiness();
+  }, [allsubscriberOfBussiness]);
+
+  console.log(subscribeBusiness, "subscribeBusiness");
+
   const columns: GridColDef[] = [
+    // {
+    //   field: "id",
+    //   headerName: "",
+    //   width: 100,
+    //   renderCell: () => <Avatar sx={{ mx: "auto", width: 35, height: 35 }} />,
+    // },
+    // {
+    //   field: "actions",
+    //   headerName: "Actions",
+    //   width: 150,
+    //   renderCell: () => <Button variant="contained"> Claim </Button>,
+    // },
+
     {
-      field: "id",
-      headerName: "",
-      width: 100,
-      renderCell: () => <Avatar sx={{ mx: "auto", width: 35, height: 35 }} />,
-    },
-    {
-      field: "name",
-      headerName: "Name",
-      width: 200,
-    },
-    {
-      field: "amount",
-      headerName: "Amount",
-      type: "number",
+      field: "rewardName",
+      headerName: "Reward Name",
       width: 150,
     },
     {
-      field: "status",
-      headerName: "Status",
+      field: "businessName",
+      headerName: "Business Name",
       width: 150,
     },
     {
-      field: "actions",
-      headerName: "Actions",
+      field: "redeemedCount",
+      headerName: "Redeemed Count",
       width: 150,
-      renderCell: () => <Button variant="contained"> Claim </Button>,
     },
   ];
 
-  const rows = [
-    { id: 1, name: "India Gate Restaurant", amount: "50$", status: "Claimed" },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
+  const rows = rewardData.map((item) => {
+    return {
+      id: item.rewardId,
+      rewardName: item.rewardName,
+      businessName: item.businessName,
+      redeemedCount: item.redeemedCount,
+    };
+  });
 
   const subscribedList = useMemo(
     () => (
