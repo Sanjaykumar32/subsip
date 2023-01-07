@@ -60,15 +60,21 @@ export function AdminSubscribers() {
   ];
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const userId = localStorage.getItem("userId");
+
   const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
 
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
-      await dispatch(AdminThunk.allSubscriberOfBussiness({ userId: 5 }));
+      await dispatch(
+        AdminThunk.allSubscriberOfBussiness({
+          userId: userId ? parseInt(userId) : 0,
+        })
+      );
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     allsubscriberOfBussiness();
