@@ -192,8 +192,6 @@ export interface IDashboardResponse {
 }
 
 export interface IDashboard {
-  rewardCount: number;
-  categoryCount: number;
-  listingCount: number;
-  subCategoryCount: number;
+  title: string;
+  count: number;
 }
