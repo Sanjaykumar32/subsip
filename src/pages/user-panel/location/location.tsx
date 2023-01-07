@@ -21,6 +21,7 @@ export function LocationPage() {
   const bussinessByName = useAppSelector(GET_BUSINESS);
   const [open, setOpen] = React.useState(false);
   const userId = localStorage.getItem("userId");
+
   const handleClickOpen = () => {
     try {
       dispatch(AdminThunk.refferralCode({ userId: userId ? userId : "" }));
@@ -29,7 +30,9 @@ export function LocationPage() {
     }
     setOpen(true);
   };
+
   const dispatch = useAppDispatch();
+
   const handleClose = () => {
     setOpen(false);
   };
