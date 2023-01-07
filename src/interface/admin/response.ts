@@ -68,7 +68,7 @@ export interface IBusiness {
 export interface IReferralCountResponse {
   success: number;
   message: string;
-  data: IRefferralCount;
+  data: IRefferralCount[];
 }
 
 export interface IRefferralCount {
@@ -78,7 +78,7 @@ export interface IRefferralCount {
 export interface IReferralCodeResponse {
   success: number;
   message: string;
-  data: IRefferralCode;
+  data: IRefferralCode[];
 }
 
 export interface IRefferralCode {
@@ -168,7 +168,7 @@ export interface IUserReward {
   rewardName: string;
   rewardId: number;
   businessName: string;
-  redeemedId?: number;
+  redeemedCount: number;
 }
 
 export interface IBusinessRewardResponse {

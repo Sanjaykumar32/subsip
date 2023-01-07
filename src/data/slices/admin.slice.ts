@@ -9,6 +9,7 @@ import {
   INotificationdata,
   IReferralCountResponse,
   IRefferralCode,
+  IRefferralCount,
   IReward,
   ISubCategoryData,
   ISubscribeByBussinessIDResponse,
@@ -24,8 +25,8 @@ export interface IAdminState {
   AllsubscriberOfBussiness: ISubscriberOfBussinessResponse;
   category: ICategoryData[];
   subCategory: ISubCategoryData[];
-  refferralCode: IRefferralCode;
-  refferralCount: IReferralCountResponse;
+  refferralCode: IRefferralCode[];
+  refferralCount: IRefferralCount[];
   noticationList: INotificationdata[];
   referralList: any;
   userRewardList: IUserReward[];
@@ -40,8 +41,8 @@ const initialState: IAdminState = {
   bussinessSubscribers: {} as ISubscribeByBussinessIDResponse,
   subscriberOfBussiness: [],
   AllsubscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
-  refferralCode: {} as IRefferralCode,
-  refferralCount: {} as IReferralCountResponse,
+  refferralCode: [],
+  refferralCount: [],
   category: [],
   subCategory: [],
   noticationList: [],
@@ -120,8 +121,10 @@ export const adminSlice = createSlice({
         state.subCategory = action.payload.data;
       }
     });
-    builder.addCase(AdminThunk.refferralCount.fulfilled, (_state, action) => {
-      action.payload;
+    builder.addCase(AdminThunk.refferralCount.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.refferralCount = action.payload.data;
+      }
     });
     builder.addCase(AdminThunk.getRewardToWinner.fulfilled, (state, action) => {
       if (action.payload.data) {

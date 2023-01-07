@@ -16,7 +16,7 @@ export interface IBussinessRequest {
 }
 
 export interface IRefferralCountRequest {
-  userId: string;
+  userId: number;
 }
 
 export interface INotificationRequest {

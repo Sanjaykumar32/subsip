@@ -1,5 +1,4 @@
 import React from "react";
-import { Subscriptions } from "@mui/icons-material";
 import { GuestGuard } from "components/guard";
 import { AdminGuard } from "components/guard/admin.guard";
 import { AuthRoutePathEnum, RoutePathEnum, AdminRoutePathEnum } from "enum";
@@ -35,6 +34,7 @@ import {
   AdminRewardsMileStones,
   AdminSubCategory,
   AdminSubscribers,
+  Subscriptions,
 } from "pages";
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button/admin-notify-button";
 import { createBrowserRouter } from "react-router-dom";
@@ -112,7 +112,7 @@ export const router = createBrowserRouter([
       },
       {
         path: RoutePathEnum.ABOUT,
-        element: <About />
+        element: <About />,
       },
     ],
   },
