@@ -12,7 +12,7 @@ export interface IAllBusinessSubscribersRequest {
 
 export interface IBussinessRequest {
   businessName?: string;
-  businessId?: string;
+  businessId?: number;
 }
 
 export interface IRefferralCountRequest {
