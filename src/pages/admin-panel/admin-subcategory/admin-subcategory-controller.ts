@@ -68,7 +68,7 @@ export const SubCategoryController = (): ISubcategoryControllerReturns => {
     attributes.push({
       id: index + 1,
       vName: res.vName ? res.vName : "",
-      Actions: ["Edit", "Delete", res?.iSubCategoryId],
+      Actions: ["Edit", "Delete", res?.iCategoryId, res?.iSubCategoryId],
     });
   });
 

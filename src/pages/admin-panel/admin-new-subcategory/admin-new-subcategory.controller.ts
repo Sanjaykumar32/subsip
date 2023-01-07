@@ -32,20 +32,23 @@ export const AddSubCategoryController =
     const userId = localStorage.getItem("userId");
     const categoryData = useAppSelector(GET_CATEGORY);
     const naviagate = useNavigate();
-    const editScreen = useLocation();
     const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
     const [searchParams] = useSearchParams();
-    const id = searchParams.get("category");
+    const subCategrory = searchParams.get("subCategoryId");
+    const categrory = searchParams.get("category");
 
     useEffect(() => {
-      if (editScreen?.state?.edit === true) {
-        const filter = subCategoryData?.filter((item) => {
-          if (item?.iSubCategoryId === editScreen?.state?.id) {
-            setSubCategory(item.vName);
+      if (subCategrory) {
+        const filter = subCategoryData?.filter((item: any) => {
+          if (item?.iSubCategoryId == subCategrory) {
+            setSubCategory(item?.vName);
           }
         });
       }
-    }, [categoryData, editScreen, subCategoryData]);
+      if (categrory) {
+        setBuisnessName(categrory);
+      }
+    }, [categrory, subCategoryData, subCategrory]);
 
     const dispatch = useAppDispatch();
 
@@ -68,7 +71,9 @@ export const AddSubCategoryController =
         })
       );
       if (response.payload.data) {
-        naviagate(`${AdminRoutePathEnum.ADMIN_SUBCATEGORY}/?category=${id}`);
+        naviagate(
+          `${AdminRoutePathEnum.ADMIN_SUBCATEGORY}/?category=${subCategrory}`
+        );
       }
       setSubCategory("");
       setBuisnessName("");
@@ -85,6 +90,18 @@ export const AddSubCategoryController =
     useEffect(() => {
       category();
     }, [category]);
+
+    const getSubCategory = useCallback(async () => {
+      try {
+        await dispatch(AdminThunk.getSubCategory());
+      } catch (error) {
+        console.log(error);
+      }
+    }, [dispatch]);
+
+    useEffect(() => {
+      getSubCategory();
+    }, [getSubCategory]);
 
     return {
       getters: { subCategory, businessName, categoryData },

@@ -40,9 +40,9 @@ export function AdminSubCategory() {
             <FontAwesomeIcon
               icon={faPen}
               onClick={() => {
-                navigate(AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY, {
-                  state: { id: params.value[2], edit: true },
-                });
+                navigate(
+                  `${AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY}?category=${params.value[2]}&subCategoryId=${params.value[3]}`
+                );
               }}
             />
           </Tooltip>
@@ -100,7 +100,7 @@ export function AdminSubCategory() {
           }}
         >
           <Typography variant="body1" sx={{ fontWeight: 800 }}>
-            Category: {CategoryName.vName}
+            Category: {CategoryName?.vName}
           </Typography>
 
           <Box>
