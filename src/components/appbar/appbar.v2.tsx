@@ -53,16 +53,27 @@ export const UserAppBar = () => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorNoticationEl, setAnchorNoticationEl] = React.useState<null | HTMLElement>(null);
   const [menuItem, setMenuItem] = useState<any>([]);
   const [locationPopUp, setLocationPopUP] = useState<any>(false)
   const [searchLocation, setLocation] = useState<any>('')
   const navigate = useNavigate();
 
   const opens = Boolean(anchorEl);
+  const openNotification = Boolean(anchorNoticationEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleNotificationClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorNoticationEl(event.currentTarget);
+  };
+
+  const handleNotificationClose = () => {
+    setAnchorNoticationEl(null);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -191,7 +202,7 @@ export const UserAppBar = () => {
   const isSticky = () => {
     /* Method that will fix header after a specific scrollable */
     const scrollTop = window.scrollY;
-    const stickyClass = scrollTop >= 50 ? "is-sticky" : "non-sticky";
+    const stickyClass = scrollTop >= 50 ? "is-sticky" : " ";
     setSticky(stickyClass);
     // console.log(stickyClass);
   };
@@ -205,7 +216,7 @@ export const UserAppBar = () => {
         sx={{
           zIndex: theme.zIndex.appBar, backgroundColor: 'white', boxShadow: '0 1px 20px 0 #91919175', position: 'relative '
         }}
-        className={sticky}
+        className={`${sticky} non-sticky `}
       >
         <Toolbar
           sx={{
@@ -214,6 +225,8 @@ export const UserAppBar = () => {
             justifyContent: "space-between",
             alignItems: "center",
           }}
+
+
         >
           <div className=" absolute  left-4 top-[3px] ">
             <IconButton onClick={() => setOpen(!open)}>
@@ -249,8 +262,9 @@ export const UserAppBar = () => {
             justifyContent: "space-between",
             flexGrow: 1,
           }}
+          className='topheader'
         >
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
+          <Box sx={{ display: { xs: "none", md: "block" } }} >
             <Logo variant="dark" />
           </Box>
 
@@ -343,6 +357,36 @@ export const UserAppBar = () => {
                 anchorEl={anchorEl}
                 open={opens}
                 onClose={handleClose}
+                className="Account-popup"
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    mt: 1.5,
+                    '& .MuiAvatar-root': {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    '&:before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translateY(-50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
+                }}
+
                 MenuListProps={{
                   "aria-labelledby": "basic-button",
                 }}
@@ -363,11 +407,73 @@ export const UserAppBar = () => {
                   </MenuItem>
                 ))}
               </Menu>
-              <IconButton sx={{ mx: 1 }}>
+              <IconButton
+                sx={{ mx: 1 }}
+                onClick={handleNotificationClick}
+                id="basic-button"
+                aria-controls={openNotification ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={openNotification ? "true" : undefined}
+              >
                 <Badge badgeContent={2} color="error">
                   <FontAwesomeIcon icon={faBell} />
                 </Badge>
               </IconButton>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorNoticationEl}
+                open={openNotification}
+                onClose={handleNotificationClose}
+                className="Notification-popup"
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    mt: 1.5,
+                    '& .MuiAvatar-root': {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    '&:before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translateY(-50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
+                }}
+
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                {/* {menuItem.map((setting: any) => ( */}
+                <MenuItem
+                  // key={setting.route}
+                  onClick={() => {
+                    // setting.title === "Logout" && auth.signOut();
+                    handleNotificationClose();
+                  }}
+                >
+                  <div className="Notification list w-[250px] " >
+                    <div className="flex w-full gap-[15px] ">
+                      <li className="w-[70%] text-black cursor-pointer text-[16px] " >This is Dummy text</li>
+                      <span className="w-[30%] text-center text-[15px] " >Read</span>
+                    </div>
+                  </div>
+                </MenuItem>
+              </Menu>
             </Box>
           )}
         </Toolbar>
@@ -434,27 +540,6 @@ export const UserAppBar = () => {
         sx={{ zIndex: theme.zIndex.appBar - 1 }}
         onClick={() => setOpen(false)}
       />
-
-      {/* <Dialog open={locationPopUp} onClose={handleLocationClose} maxWidth='lg'>
-        <DialogTitle>Search Location</DialogTitle>
-        <DialogContent>
-          
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Address"
-            type="email"
-            fullWidth
-            variant="standard"
-            onChange={handleLocation}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleLocationClose}>Cancel</Button>
-          <Button onClick={handleLocationSearch}>Search</Button>
-        </DialogActions>
-      </Dialog> */}
     </>
   );
 };

@@ -1,9 +1,8 @@
-.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-1aara5h-MuiToolbar-root {
-    padding-top: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
+.topheader {
+    padding-top: 25px;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
 }
-
 
 
 .categoryListing li {
@@ -33,7 +32,7 @@
     font-weight: 600 !important;
 }
 
-.css-1fii6rv-MuiFormControl-root-MuiTextField-root {
+.searchH {
     margin: 0 4rem !important;
 }
 
@@ -45,11 +44,11 @@
 
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
-    .css-1fii6rv-MuiFormControl-root-MuiTextField-root {
+    .searchH {
         margin: 0 0rem !important;
     }
 
-    .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-1aara5h-MuiToolbar-root {
+    .topheader {
         padding-top: 10px;
         padding-left: 20px;
         padding-right: 20px;
