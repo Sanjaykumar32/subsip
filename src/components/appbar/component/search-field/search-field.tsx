@@ -12,6 +12,7 @@ export const SearchField = () => {
     <TextField
       label="Search Listing"
       size="small"
+      className="searchH"
       fullWidth
       onChange={changeHandler}
       sx={{ mx: { xs: 0, md: 4 } }}
