@@ -195,3 +195,9 @@ export interface IDashboard {
   title: string;
   count: number;
 }
+
+export interface IAddSubcriberToBuisnessResponse {
+  success: number;
+  message: string;
+  data: [];
+}

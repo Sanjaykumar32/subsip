@@ -123,3 +123,9 @@ export interface IGetUserRewardRequest {
 export interface IDeleteRewardRequest {
   rewardId: number;
 }
+
+export interface IAddSubcriberToBuinessRequest {
+  userId: number;
+  businessId: number;
+  referredCode: string;
+}

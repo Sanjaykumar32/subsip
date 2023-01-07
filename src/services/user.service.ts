@@ -5,6 +5,7 @@ import {
   IBussinessResponse,
   IBussinessRequest,
   IAddSubscriberTobussinessRequest,
+  IAddSubcriberToBuisnessResponse,
 } from "interface";
 
 /**
@@ -70,16 +71,17 @@ export class UserService {
 
   /**
    * add subscriber-to-business
-   * @return {Promise<any>}
+   * @return {Promise<IAddSubcriberToBuisnessResponse>}
    */
   public static async addSubscriberToBussiness(
     payload: IAddSubscriberTobussinessRequest
-  ): Promise<any> {
-    const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `business/subscribe`,
-      method: "POST",
-      data: payload,
-    });
+  ): Promise<IAddSubcriberToBuisnessResponse> {
+    const res: AxiosResponse<IAddSubcriberToBuisnessResponse> =
+      await ApiHelper.send<IAddSubcriberToBuisnessResponse>({
+        url: `business/subscribe`,
+        method: "POST",
+        data: payload,
+      });
 
     return res.data;
   }

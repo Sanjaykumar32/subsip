@@ -4,6 +4,7 @@ import {
   IBussinessResponse,
   IBussinessRequest,
   IAddSubscriberTobussinessRequest,
+  IAddSubcriberToBuisnessResponse,
 } from "interface";
 import { UserService } from "services";
 
@@ -45,16 +46,15 @@ export class UserThunk {
   );
 
   /**
-   * Add Subscribers to Business Thunk
+   * Add Subscribers to Business
    */
   public static addSubscriberToBusiness = createAsyncThunk(
     "user/addSubscriberstoBusiness",
-    async (payload: IAddSubscriberTobussinessRequest): Promise<any> => {
+    async (
+      payload: IAddSubscriberTobussinessRequest
+    ): Promise<IAddSubcriberToBuisnessResponse> => {
       const response = await UserService.addSubscriberToBussiness(payload);
       return response;
     }
   );
 }
-
-
-

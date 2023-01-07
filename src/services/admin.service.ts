@@ -37,6 +37,8 @@ import {
   IGetBusinesRewardRequest,
   IGetUserRewardRequest,
   IDashboardResponse,
+  IAddSubcriberToBuinessRequest,
+  IAddSubcriberToBuisnessResponse,
 } from "interface";
 
 /**
@@ -171,6 +173,24 @@ export class AdminService {
     const res: AxiosResponse<ICategoryDataResponse> =
       await ApiHelper.send<ICategoryDataResponse>({
         url: "/category",
+        method: "POST",
+        data: credentials,
+      });
+
+    return res.data;
+  }
+
+  /**
+   * Add Subcriber To Business
+   * @param {IAddSubcriberToBuinessRequest} credentials
+   * @return {Promise<IAddSubcriberToBuisnessResponse>}
+   */
+  public static async AddSubscriberToBusiness(
+    credentials: IAddSubcriberToBuinessRequest
+  ): Promise<IAddSubcriberToBuisnessResponse> {
+    const res: AxiosResponse<IAddSubcriberToBuisnessResponse> =
+      await ApiHelper.send<IAddSubcriberToBuisnessResponse>({
+        url: "/business/subscribe",
         method: "POST",
         data: credentials,
       });
