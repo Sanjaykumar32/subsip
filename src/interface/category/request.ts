@@ -50,7 +50,7 @@ export interface INewRewardRequest {
 
 export interface INewNotifyButtonRequest {
   headline: string;
-  date: Dayjs | null;
+  date: any;
   description: string;
 }
 
