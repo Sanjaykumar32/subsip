@@ -107,12 +107,8 @@ export function Home() {
   });
 
   const categoryData = useAppSelector(GET_CATEGORY);
-
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
-
-  // console.log(CateFirst[0], "CateFirst");
-
-  // console.log(categoryData, "categoryData");
+  const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
     try {
@@ -145,6 +141,7 @@ export function Home() {
   const handleLessData = () => {
     setMoreData(false);
   };
+
   async function onImageClick(id: number): Promise<void> {
     try {
       const response: any = await dispatch(
@@ -155,6 +152,17 @@ export function Home() {
       } else {
         console.log("nodata");
       }
+    } catch (error) {
+      console.log(error);
+    }
+    !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
+    try {
+      await dispatch(
+        UserThunk.addSubscriberToBusiness({
+          businessId: id,
+          userId: userId ? userId : "",
+        })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -196,7 +204,6 @@ export function Home() {
                   >
                     {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
                   </button>
-
                 </div>
                 <div className=" relative min-h-[353px] max-h-[calc(100vh-25rem)] w-full  md:w-1/2 flex justify-center items-center">
                   <img

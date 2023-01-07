@@ -4,6 +4,9 @@ import {
   IBussinessResponse,
   IBussinessRequest,
   IAddSubscriberTobussinessRequest,
+  IAddSubcriberToBuisnessResponse,
+  IDeleteSubscriberRequest,
+  IDeleteSubscriberResponse,
 } from "interface";
 import { UserService } from "services";
 
@@ -45,16 +48,28 @@ export class UserThunk {
   );
 
   /**
-   * Add Subscribers to Business Thunk
+   * Add Subscribers to Business
    */
   public static addSubscriberToBusiness = createAsyncThunk(
     "user/addSubscriberstoBusiness",
-    async (payload: IAddSubscriberTobussinessRequest): Promise<any> => {
+    async (
+      payload: IAddSubscriberTobussinessRequest
+    ): Promise<IAddSubcriberToBuisnessResponse> => {
       const response = await UserService.addSubscriberToBussiness(payload);
       return response;
     }
   );
+
+  /**
+   * delete Subscriber
+   */
+  public static deleteSubscriber = createAsyncThunk(
+    "admin/deleteSubscriber",
+    async (
+      payload: IDeleteSubscriberRequest
+    ): Promise<IDeleteSubscriberResponse> => {
+      const response = await UserService.deleteSubscribers(payload);
+      return response;
+    }
+  );
 }
-
-
-

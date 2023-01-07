@@ -118,7 +118,7 @@ export function AdminNotifyButton() {
               variant="rounded"
               type="submit"
             >
-              Add Milestone
+              Send Notification
             </Button>
           </Box>
         </Form>

@@ -60,7 +60,6 @@ const CategoryController = (): ICategoryControllerReturns => {
           addedBy: userId ? parseInt(userId) : 0,
         })
       );
-      console.log(response, "res create category");
       if (response.payload.data) {
         navigate(AdminRoutePathEnum.ADMIN_CATEGORY);
       }

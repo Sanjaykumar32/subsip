@@ -37,6 +37,8 @@ import {
   IGetBusinesRewardRequest,
   IGetUserRewardRequest,
   IDashboardResponse,
+  IAddSubcriberToBuinessRequest,
+  IAddSubcriberToBuisnessResponse,
 } from "interface";
 
 /**
@@ -171,6 +173,24 @@ export class AdminService {
     const res: AxiosResponse<ICategoryDataResponse> =
       await ApiHelper.send<ICategoryDataResponse>({
         url: "/category",
+        method: "POST",
+        data: credentials,
+      });
+
+    return res.data;
+  }
+
+  /**
+   * Add Subcriber To Business
+   * @param {IAddSubcriberToBuinessRequest} credentials
+   * @return {Promise<IAddSubcriberToBuisnessResponse>}
+   */
+  public static async AddSubscriberToBusiness(
+    credentials: IAddSubcriberToBuinessRequest
+  ): Promise<IAddSubcriberToBuisnessResponse> {
+    const res: AxiosResponse<IAddSubcriberToBuisnessResponse> =
+      await ApiHelper.send<IAddSubcriberToBuisnessResponse>({
+        url: "/business/subscribe",
         method: "POST",
         data: credentials,
       });
@@ -536,17 +556,4 @@ export class AdminService {
     });
     return res.data;
   }
-
-  /**
-   * Delete Subscribers
-   * @return {Promise<any>}
-   */
-  // public static async deleteSubscribers(payload: any): Promise<any> {
-  //   const res: AxiosResponse<any> = await ApiHelper.send<any>({
-  //     url: `/subscriber/2`,
-  //     method: "DELETE",
-  //   });
-
-  //   return res.data;
-  // }
 }

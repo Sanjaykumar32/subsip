@@ -18,18 +18,13 @@ export interface ISubscriberOfBussinessResponse {
 }
 
 export interface ISubscriberData {
-  iSubscriberId: number;
+  businessName: string;
+  dtAddedDate: string;
   iAdminId: number;
   iBusinessId: number;
-  dtAddedDate: string;
-  vName: string;
+  iSubscriberId: number;
   vEmail: string;
-  vPassword: string;
-  iGroupId: string;
-  eStatus: string;
-  vAuthCode: string;
-  eEmailVerified: string;
-  vReferralCode: string;
+  vName: string;
 }
 
 export interface IBussinessResponse {
@@ -194,4 +189,16 @@ export interface IDashboardResponse {
 export interface IDashboard {
   title: string;
   count: number;
+}
+
+export interface IAddSubcriberToBuisnessResponse {
+  success: number;
+  message: string;
+  data: [];
+}
+
+export interface IDeleteSubscriberResponse {
+  success: number;
+  message: string;
+  data: number;
 }

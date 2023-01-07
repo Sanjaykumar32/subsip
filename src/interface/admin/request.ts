@@ -28,6 +28,10 @@ export interface IRefferralCodeRequest {
 }
 
 export interface IAddSubscriberTobussinessRequest {
-  businessId: string;
+  businessId: number;
   userId: string;
+}
+
+export interface IDeleteSubscriberRequest {
+  iSubscriberId: string;
 }

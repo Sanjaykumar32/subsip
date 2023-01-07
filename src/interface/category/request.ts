@@ -50,7 +50,7 @@ export interface INewRewardRequest {
 
 export interface INewNotifyButtonRequest {
   headline: string;
-  date: Dayjs | null;
+  date: any;
   description: string;
 }
 
@@ -122,4 +122,10 @@ export interface IGetUserRewardRequest {
 
 export interface IDeleteRewardRequest {
   rewardId: number;
+}
+
+export interface IAddSubcriberToBuinessRequest {
+  userId: number;
+  businessId: number;
+  referredCode: string;
 }
