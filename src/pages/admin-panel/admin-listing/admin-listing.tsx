@@ -129,10 +129,6 @@ export function AdminListing() {
     };
   });
 
-  console.log(businessData, 'businessData')
-
-
-
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
       {/* {loader && */}
