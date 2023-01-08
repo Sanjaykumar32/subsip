@@ -160,7 +160,6 @@ export const UserAppBar = (props: any) => {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (userId === "4") {
-<<<<<<< HEAD
       if (homepage.split('/')[1] === 'admin') {
         const data = [
           {
@@ -221,39 +220,6 @@ export const UserAppBar = (props: any) => {
 
       }
 
-=======
-      const data = [
-        {
-          title: "DashBoard",
-          route: AdminRoutePathEnum.ADMIN,
-        },
-        {
-          title: "Profile",
-          route: RoutePathEnum.PROFILE,
-        },
-        {
-          title: "Subscription",
-          route: RoutePathEnum.SUBSCRIPTIONS,
-        },
-        {
-          title: "Rewards",
-          route: RoutePathEnum.REWARDS,
-        },
-        {
-          title: "Refferal Program",
-          route: RoutePathEnum.REFER,
-        },
-        {
-          title: "Change Password",
-          route: AuthRoutePathEnum.CHANGE_PASSWORD,
-        },
-        {
-          title: "Logout",
-          route: AuthRoutePathEnum.SIGN_IN,
-        },
-      ];
-      setMenuItem(data);
->>>>>>> 4902dc2cf8e927a88a97fdc532b1188549bd54ce
     } else {
       const data = [
         {
@@ -318,11 +284,10 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${
-          props.display ? props.display : sticky ? sticky : "non-sticky"
-        } `}
+        className={`${props.display ? props.display : sticky ? sticky : "non-sticky"
+          } `}
 
-        // style={{ position: props.display && 'fixed' }}
+      // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -412,8 +377,8 @@ export const UserAppBar = (props: any) => {
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          // onClick={handleClickShowPassword}
-                          // onMouseDown={handleMouseDownPassword}
+                        // onClick={handleClickShowPassword}
+                        // onMouseDown={handleMouseDownPassword}
                         >
                           <Button onClick={handleLocationClose}>Cancel</Button>
                         </IconButton>
