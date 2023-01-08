@@ -276,8 +276,8 @@ export class AdminThunk {
     "admin/newNotifyButton",
     async (payload: INewNotifyButtonRequest): Promise<void> => {
       console.log(payload, "payload");
-      // const response = await AdminService.newReward(payload);
-      // return response;
+      const response = await AdminService.newReward(payload);
+      return response;
     }
   );
 

@@ -57,6 +57,7 @@ export interface INewNotifyButtonRequest {
   headline: string;
   date: any;
   description: string;
+  userIds: [];
 }
 
 export interface INewNotificationRequest {

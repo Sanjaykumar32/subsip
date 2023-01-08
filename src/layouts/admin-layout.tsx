@@ -256,7 +256,6 @@ export function AdminLayout(props: Props) {
       <Box
         component="main"
         className='headerTop'
-        // style={{ paddingTop: '4rem !important' }}
         sx={{
           flexGrow: 1,
           p: 3,

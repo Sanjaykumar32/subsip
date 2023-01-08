@@ -132,35 +132,67 @@ export const UserAppBar = (props: any) => {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (userId === "4") {
-      const data = [
-        {
-          title: "DashBoard",
-          route: AdminRoutePathEnum.ADMIN,
-        },
-        {
-          title: "Profile",
-          route: RoutePathEnum.PROFILE,
-        },
-        {
-          title: "Subscription",
-          route: RoutePathEnum.SUBSCRIPTIONS,
-        },
-        {
-          title: "Rewards",
-          route: RoutePathEnum.REWARDS,
-        },
-        {
-          title: "Refferal Program",
-          route: RoutePathEnum.REFER,
-        },
-        {
-          title: "Logout",
-          route: AuthRoutePathEnum.SIGN_IN,
-        },
-      ];
-      setMenuItem(data);
+      if (homepage.split('/')[1] === 'admin') {
+        const data = [
+          {
+            title: "Go To Home Page",
+            route: RoutePathEnum.HOME,
+          },
+          {
+            title: "Profile",
+            route: RoutePathEnum.PROFILE,
+          },
+          {
+            title: "Subscription",
+            route: RoutePathEnum.SUBSCRIPTIONS,
+          },
+          {
+            title: "Rewards",
+            route: RoutePathEnum.REWARDS,
+          },
+          {
+            title: "Refferal Program",
+            route: RoutePathEnum.REFER,
+          },
+          {
+            title: "Logout",
+            route: AuthRoutePathEnum.SIGN_IN,
+          },
+        ];
+        setMenuItem(data);
+      } else if (homepage === '/') {
+
+        const data = [
+          {
+            title: "DashBoard",
+            route: AdminRoutePathEnum.ADMIN,
+          },
+          {
+            title: "Profile",
+            route: RoutePathEnum.PROFILE,
+          },
+          {
+            title: "Subscription",
+            route: RoutePathEnum.SUBSCRIPTIONS,
+          },
+          {
+            title: "Rewards",
+            route: RoutePathEnum.REWARDS,
+          },
+          {
+            title: "Refferal Program",
+            route: RoutePathEnum.REFER,
+          },
+          {
+            title: "Logout",
+            route: AuthRoutePathEnum.SIGN_IN,
+          },
+        ];
+        setMenuItem(data);
+
+      }
+
     } else {
-      // setAuthenticated(false);
       const data = [
         {
           title: "Profile",
@@ -221,9 +253,7 @@ export const UserAppBar = (props: any) => {
 
   const [sticky, setSticky] = useState("");
 
-  // on render, set listener
   useEffect(() => {
-    // console.log("hello");
     window.addEventListener("scroll", isSticky);
     return () => {
       window.removeEventListener("scroll", isSticky);
@@ -231,11 +261,9 @@ export const UserAppBar = (props: any) => {
   }, []);
 
   const isSticky = () => {
-    /* Method that will fix header after a specific scrollable */
     const scrollTop = window.scrollY;
     const stickyClass = scrollTop >= 50 ? "is-sticky" : "";
     setSticky(stickyClass);
-    // console.log(stickyClass);
   };
 
 
@@ -420,7 +448,6 @@ export const UserAppBar = (props: any) => {
                   <MenuItem
                     key={setting.route}
                     onClick={() => {
-                      // setting.route()
                       setting.title === "Logout" && auth.signOut();
                       handleClose();
                     }}

@@ -361,7 +361,7 @@ export class AdminService {
    */
   public static async newReward(payload: any): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/user/reward",
+      url: "/user/notification",
       method: "POST",
       data: payload,
     });

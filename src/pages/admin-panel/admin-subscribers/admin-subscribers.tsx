@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { GridColDef } from "@mui/x-data-grid";
+import { GridColDef, GridSelectionModel } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
 import { faSliders, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,6 +29,9 @@ export function AdminSubscribers() {
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem("userId");
   const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
+
+
+
 
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
@@ -93,15 +96,23 @@ export function AdminSubscribers() {
     allsubscriberOfBussiness();
   }, [allsubscriberOfBussiness]);
 
-  const rows = subscribeBusiness.map((item) => {
+  const rowsData = subscribeBusiness.map((item: any) => {
     return {
-      id: item.iBusinessId,
+      id: item.iAdminId,
       vEmail: item.vEmail,
+      userID: item.iAdminId,
       Verified: "Verified",
       location: "-",
       Actions: ["Delete", item.iSubscriberId],
     };
   });
+
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>
+    (() => rowsData.map((r) => r.userID));
+  const [selectedRows, setSelectedRows] = useState<any>([]);
+
+  console.log(selectionModel, 'itemsss')
+
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -121,6 +132,7 @@ export function AdminSubscribers() {
             46,200 Subscribers
           </Typography>
         </Box>
+        {/* notification */}
         <Box>
           <Button
             size="large"
@@ -132,7 +144,9 @@ export function AdminSubscribers() {
             }}
             color="info"
             variant="contained"
-            onClick={() => navigate(AdminRoutePathEnum.ADMIN_NOTIFY_BUTTON)}
+            onClick={() => navigate(AdminRoutePathEnum.ADMIN_NOTIFY_BUTTON, {
+              state: { id: selectionModel, Notify: true },
+            })}
           >
             Notify
           </Button>
@@ -187,12 +201,22 @@ export function AdminSubscribers() {
           }}
         >
           <DataGrid
-            rows={rows}
+            rows={rowsData}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
             checkboxSelection
+            selectionModel={selectionModel}
+            onSelectionModelChange={(e) => {
+              setSelectionModel(e);
+              const selectedIDs = new Set(e);
+              const selectedRows = rowsData.filter((r) => selectedIDs.has(r.userID));
+              setSelectedRows(selectedRows);
+            }}
+          // onSelectionModelChange={setSelectionModel}
           />
+
+          {/* <pre>{JSON.stringify(selectedRows, null, 4)}</pre> */}
         </Box>
       </Container>
     </Container>
