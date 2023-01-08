@@ -95,7 +95,6 @@ const SignUpController = (): ISignUpControllerReturns => {
       await auth.signUp({
         email: value.email,
         password: value.password,
-        referralCode: referralCode ? referralCode : "",
       });
       setValue({ email: "", password: "" });
       handleClickOpen();
