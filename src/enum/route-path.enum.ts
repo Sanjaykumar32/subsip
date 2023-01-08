@@ -4,6 +4,7 @@ export enum AuthRoutePathEnum {
   SIGN_UP = "/auth/sign-up",
   PASSWORD_RESET = "/auth/password-reset",
   FORGET_PASSWORD = "/auth/forget-password",
+  CHANGE_PASSWORD = "/auth/change-password",
 }
 
 export enum AdminRoutePathEnum {
@@ -31,7 +32,7 @@ export enum AdminRoutePathEnum {
 
 export enum RoutePathEnum {
   HOME = "/",
-  LISTING = '/category/:id',
+  LISTING = "/category/:id",
   REWARDS = "/rewards",
   SUBSCRIPTIONS = "/subscriptions",
   REFER = "/refer",

@@ -1,6 +1,11 @@
 import { useAppDispatch } from "data";
 import { UserThunk } from "data/thunk/user.thunk";
-import { ICredentials, ISignInResponse, ISignUpRequest } from "interface";
+import {
+  ICredentials,
+  ISendOTpRequest,
+  ISignInResponse,
+  ISignUpRequest,
+} from "interface";
 import React, {
   createContext,
   ReactElement,
@@ -20,6 +25,7 @@ export interface IAuthContext {
   signIn: (credentials: ICredentials) => Promise<void>;
   signOut: () => Promise<void>;
   signUp: (credentials: ISignUpRequest) => Promise<void>;
+  checkOtp: (credentials: ISendOTpRequest) => Promise<void>;
 }
 
 const initState: IAuthContext = {
@@ -32,6 +38,10 @@ const initState: IAuthContext = {
   },
 
   signOut: async () => {
+    return;
+  },
+
+  checkOtp: async () => {
     return;
   },
 };
@@ -47,9 +57,14 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     initState.isAuthenticated
   );
 
-  const dispatch = useAppDispatch();
-
-
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
+    }
+  }, []);
 
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {
@@ -66,6 +81,14 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   const signUp = useCallback(async (credentials: ISignUpRequest) => {
     try {
       await AuthService.signUp(credentials);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const checkOtp = useCallback(async (credentials: ISendOTpRequest) => {
+    try {
+      await AuthService.checkOtpSend(credentials);
       setAuthenticated(true);
     } catch (error) {
       console.log(error);
@@ -86,12 +109,10 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     }
   }, [signOut, signIn, signUp]);
 
-  // useEffect(() => {
-  //   dispatch(UserThunk.fetchProfile());
-  // }, [dispatch]);
-
   return (
-    <AuthContext.Provider value={{ isAuthenticated, signIn, signOut, signUp }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, signIn, signOut, signUp, checkOtp }}
+    >
       {children}
     </AuthContext.Provider>
   );

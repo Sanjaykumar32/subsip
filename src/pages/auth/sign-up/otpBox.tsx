@@ -5,8 +5,8 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { AuthenticationThunk } from "data/thunk";
-import { useAppDispatch } from "data";
+
+import { useAuth } from "context/auth.context";
 
 interface IOtpBox {
   open: boolean;
@@ -16,14 +16,12 @@ interface IOtpBox {
 export default function OtpBox(props: IOtpBox) {
   const { open, handleClose } = props;
   const [otp, setOtp] = useState<string>("");
-  const dispatch = useAppDispatch();
+  const auth = useAuth();
 
   const verifyOtp = async () => {
-    await dispatch(
-      AuthenticationThunk.checkSendOtp({
-        otp: otp,
-      })
-    );
+    await auth.checkOtp({
+      otp: otp,
+    });
   };
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
