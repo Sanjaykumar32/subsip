@@ -14,6 +14,11 @@ export interface ISubCategoryRequest {
   name: string;
   addedBy: number;
 }
+
+export interface IUpdateSubCategoryRequest {
+  subCategoryId: number;
+  name: string;
+}
 export interface Filter {
   key: string;
   value: string;
@@ -52,6 +57,7 @@ export interface INewNotifyButtonRequest {
   headline: string;
   date: any;
   description: string;
+  userIds: [];
 }
 
 export interface INewNotificationRequest {
@@ -128,4 +134,15 @@ export interface IAddSubcriberToBuinessRequest {
   userId: number;
   businessId: number;
   referredCode: string;
+}
+
+export interface IGetNotificationRequest {
+  userID: number;
+}
+
+export interface IReadNotificationRequest {
+  notificationId: number;
+  read: {
+    read: number;
+  };
 }

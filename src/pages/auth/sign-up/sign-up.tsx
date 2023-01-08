@@ -21,7 +21,7 @@ export function SignUp() {
   const { changeHandler, submitHandler, handleClose } = handlers;
 
   return (
-    <Container maxWidth="xs" sx={{ p: 4 }}>
+    <Container maxWidth="xs" sx={{ p: 0 }}>
       <Box sx={{ my: 1, textAlign: "center" }}>
         <Typography variant="alternet"> Sign up </Typography>
         <Form>
@@ -42,6 +42,7 @@ export function SignUp() {
               <Label> Password </Label>
               <TextField
                 fullWidth
+                type="password"
                 name="password"
                 value={value.password}
                 onChange={changeHandler}

@@ -35,6 +35,7 @@ import {
   AdminSubCategory,
   AdminSubscribers,
   Subscriptions,
+  PasswordChange,
 } from "pages";
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button/admin-notify-button";
 import { createBrowserRouter } from "react-router-dom";
@@ -113,6 +114,10 @@ export const router = createBrowserRouter([
       {
         path: RoutePathEnum.ABOUT,
         element: <About />,
+      },
+      {
+        path: AuthRoutePathEnum.CHANGE_PASSWORD,
+        element: <PasswordChange />,
       },
     ],
   },

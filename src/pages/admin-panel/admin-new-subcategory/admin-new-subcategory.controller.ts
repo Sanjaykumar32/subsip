@@ -63,20 +63,37 @@ export const AddSubCategoryController =
     };
 
     const submitHandler = async (): Promise<void> => {
-      const response: any = await dispatch(
-        AdminThunk.subCategory({
-          categoryId: businessName,
-          name: subCategory,
-          addedBy: userId ? parseInt(userId) : 0,
-        })
-      );
-      if (response.payload.data) {
-        naviagate(
-          `${AdminRoutePathEnum.ADMIN_SUBCATEGORY}/?category=${subCategrory}`
+      if (subCategory) {
+        // Edit category
+        const response: any = await dispatch(
+          AdminThunk.updateSubCategory({
+            subCategoryId: subCategrory ? parseInt(subCategrory) : 0,
+            name: subCategory,
+          })
         );
+
+        if (response.payload.data) {
+          naviagate(`/admin/subcategory/?category=${categrory}`);
+        }
+        setSubCategory("");
+        setBuisnessName("");
+      } else {
+        // create category
+        const response: any = await dispatch(
+          AdminThunk.subCategory({
+            categoryId: businessName,
+            name: subCategory,
+            addedBy: userId ? parseInt(userId) : 0,
+          })
+        );
+        if (response.payload.data) {
+          naviagate(
+            `${AdminRoutePathEnum.ADMIN_SUBCATEGORY}/?category=${categrory}`
+          );
+        }
+        setSubCategory("");
+        setBuisnessName("");
       }
-      setSubCategory("");
-      setBuisnessName("");
     };
 
     const category = useCallback(async () => {

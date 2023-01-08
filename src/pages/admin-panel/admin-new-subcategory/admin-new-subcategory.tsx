@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { AdminBackButton } from "components";
 import { AddSubCategoryController } from "./admin-new-subcategory.controller";
-import { Form } from "react-router-dom";
+import { Form, useSearchParams } from "react-router-dom";
 
 export function AdminNewSubCategory() {
   const theme = useTheme();
@@ -22,6 +22,9 @@ export function AdminNewSubCategory() {
   const { subCategory, businessName, categoryData } = getters;
   const { submitHandler, handleCategoryChange, handleBusinessNameChange } =
     handlers;
+  const [searchParams] = useSearchParams();
+  const subCategoryId = searchParams.get("subCategoryId");
+
 
   return (
     <Container maxWidth="lg">
@@ -107,7 +110,7 @@ export function AdminNewSubCategory() {
               variant="rounded"
               type="submit"
             >
-              Add Subcategory
+              {subCategoryId ? 'Update Subcategory' : 'Add Subcategory'}
             </Button>
           </Box>
         </Form>

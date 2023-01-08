@@ -24,7 +24,7 @@ export function SignIn(): ReactElement {
   const { changeHandler, submitHandler } = handlers;
 
   return (
-    <Container maxWidth="xs" sx={{ p: 4, my: 3 }}>
+    <Container maxWidth="xs" sx={{ p: 0, my: 3 }} className="loginPage" >
       <Box sx={{ my: 1, textAlign: "center" }}>
         <Typography variant="alternet"> Log in </Typography>
         <Box

@@ -10,6 +10,7 @@ import {
   ISignUpResponse,
   IOTpRequest,
   ISendOTpRequest,
+  IChangePasswordRequest,
 } from "interface";
 
 /**
@@ -93,6 +94,24 @@ export class AuthService {
     const res: AxiosResponse<ISignInResponse> =
       await ApiHelper.send<ISignInResponse>({
         url: "/auth/forgot-password",
+        method: "POST",
+        data: credentials,
+      });
+
+    return res.data;
+  }
+
+  /**
+   * Change Password
+   * @param {IChangePasswordRequest} credentials
+   * @return {Promise<SignInResponse>}
+   */
+  public static async changePasword(
+    credentials: IChangePasswordRequest
+  ): Promise<ISignInResponse> {
+    const res: AxiosResponse<ISignInResponse> =
+      await ApiHelper.send<ISignInResponse>({
+        url: "/auth/change-password",
         method: "POST",
         data: credentials,
       });

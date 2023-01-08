@@ -40,3 +40,6 @@ export const GET_BUSINESS_REWARDS = (state: RootState) =>
 
 export const GET_DASHBOARD_COUNT = (state: RootState) =>
   state.admin.dashboardCount;
+
+export const GET_USER_NOTIFICTAION = (state: RootState) =>
+  state.admin.userNotification;
