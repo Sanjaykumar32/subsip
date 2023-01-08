@@ -505,36 +505,42 @@ export const UserAppBar = (props: any) => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                {/* {menuItem.map((setting: any) => ( */}
-                <MenuItem
-                  // key={setting.route}
-                  onClick={() => {
-                    // setting.title === "Logout" && auth.signOut();
-                    handleNotificationClose();
-                  }}
-                >
-                  {userNotificationData.length > 0
-                    ? userNotificationData.map((res: any, i: number) => {
-                        return (
-                          <div className="Notification list w-[250px]" key={i}>
-                            <div className="flex w-full gap-[15px] ">
-                              <li className="w-[70%] text-black cursor-pointer text-[16px] ">
-                                {res.vHeadline}
-                              </li>
-                              <span
-                                className="w-[30%] text-center text-[15px]"
-                                onClick={() => {
-                                  readNotification(res.iNotificationId);
-                                }}
-                              >
-                                Read
-                              </span>
-                            </div>
+                {userNotificationData.length > 0 ? (
+                  userNotificationData.map((res: any, i: number) => {
+                    return (
+                      <MenuItem
+                        key={i}
+                        onClick={() => {
+                          handleNotificationClose();
+                        }}
+                      >
+                        <div className="Notification list w-[250px]">
+                          <div className="flex w-full gap-[15px] ">
+                            <li className="w-[70%] text-black cursor-pointer text-[16px] ">
+                              {res.vHeadline}
+                            </li>
+                            <span
+                              className="w-[30%] text-center text-[15px]"
+                              onClick={() => {
+                                readNotification(res.iNotificationId);
+                              }}
+                            >
+                              Read
+                            </span>
                           </div>
-                        );
-                      })
-                    : "No Notification"}
-                </MenuItem>
+                        </div>
+                      </MenuItem>
+                    );
+                  })
+                ) : (
+                  <MenuItem
+                    onClick={() => {
+                      handleNotificationClose();
+                    }}
+                  >
+                    No Notification
+                  </MenuItem>
+                )}
               </Menu>
             </Box>
           )}
