@@ -18,18 +18,13 @@ export interface ISubscriberOfBussinessResponse {
 }
 
 export interface ISubscriberData {
-  iSubscriberId: number;
+  businessName: string;
+  dtAddedDate: string;
   iAdminId: number;
   iBusinessId: number;
-  dtAddedDate: string;
-  vName: string;
+  iSubscriberId: number;
   vEmail: string;
-  vPassword: string;
-  iGroupId: string;
-  eStatus: string;
-  vAuthCode: string;
-  eEmailVerified: string;
-  vReferralCode: string;
+  vName: string;
 }
 
 export interface IBussinessResponse {
@@ -68,7 +63,7 @@ export interface IBusiness {
 export interface IReferralCountResponse {
   success: number;
   message: string;
-  data: IRefferralCount;
+  data: IRefferralCount[];
 }
 
 export interface IRefferralCount {
@@ -78,7 +73,7 @@ export interface IRefferralCount {
 export interface IReferralCodeResponse {
   success: number;
   message: string;
-  data: IRefferralCode;
+  data: IRefferralCode[];
 }
 
 export interface IRefferralCode {
@@ -168,7 +163,7 @@ export interface IUserReward {
   rewardName: string;
   rewardId: number;
   businessName: string;
-  redeemedId?: number;
+  redeemedCount: number;
 }
 
 export interface IBusinessRewardResponse {
@@ -192,8 +187,18 @@ export interface IDashboardResponse {
 }
 
 export interface IDashboard {
-  rewardCount: number;
-  categoryCount: number;
-  listingCount: number;
-  subCategoryCount: number;
+  title: string;
+  count: number;
+}
+
+export interface IAddSubcriberToBuisnessResponse {
+  success: number;
+  message: string;
+  data: [];
+}
+
+export interface IDeleteSubscriberResponse {
+  success: number;
+  message: string;
+  data: number;
 }

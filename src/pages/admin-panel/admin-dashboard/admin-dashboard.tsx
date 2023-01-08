@@ -1,32 +1,14 @@
 import React, { useCallback, useEffect } from "react";
 import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import { theme } from "theme";
+
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_DASHBOARD_COUNT } from "data/selectors";
 
 export function AdminDashboard() {
-  const data = [
-    {
-      title: "Total listings",
-      count: "150",
-    },
-    {
-      title: "Total subscribers",
-      count: "1,500,000 ",
-    },
-    {
-      title: "Unverified subscribers",
-      count: "22,577",
-    },
-    {
-      title: "Pending listings ",
-      count: "77",
-    },
-  ];
   const dispatch = useAppDispatch();
   const dasboardCount = useAppSelector(GET_DASHBOARD_COUNT);
-  console.log(dasboardCount, "dasboardCount ");
 
   const gatDasboardCount = useCallback(async () => {
     try {
@@ -43,7 +25,7 @@ export function AdminDashboard() {
   return (
     <Container maxWidth="sm" disableGutters sx={{ m: 0 }}>
       <Grid container spacing={2}>
-        {data.map((data) => (
+        {dasboardCount.map((data) => (
           <Grid item key={data.title} xs={12} md={6}>
             <Box
               sx={{

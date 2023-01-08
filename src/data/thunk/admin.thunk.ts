@@ -423,15 +423,4 @@ export class AdminThunk {
       return response;
     }
   );
-
-  /**
-   * Delete Subscribers
-   */
-  // public static deleteSubscribers = createAsyncThunk(
-  //   "admin/deleteSubscribers",
-  //   async (payload: any): Promise<void> => {
-  //     const response = await AdminService.deleteSubscribers(payload);
-  //     return response;
-  //   }
-  // );
 }

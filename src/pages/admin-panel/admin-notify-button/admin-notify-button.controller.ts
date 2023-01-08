@@ -1,19 +1,18 @@
-import { SelectChangeEvent } from "@mui/material";
 import { useAppDispatch } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import dayjs, { Dayjs } from "dayjs";
+import moment, { Moment } from "moment";
 import { ChangeEvent, useState } from "react";
 
 interface INewNotifyButtonControllerReturns {
   getters: {
     headline: string;
-    date: Dayjs | null;
+    date: Moment;
     description: string;
   };
   handlers: {
     handleHeadlineChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleDescriptionChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    handleDateChange: (ate: Dayjs | null) => void;
+    handleDateChange: (date: Moment | null) => void;
     submitHandler: () => void;
   };
 }
@@ -26,12 +25,13 @@ export const NewNotifyButtonController =
   (): INewNotifyButtonControllerReturns => {
     const [headline, setHeadline] = useState<string>("");
     const [description, setDescription] = useState<string>("");
-
-    const [date, setDate] = useState<Dayjs | null>(dayjs());
-
+    const [date, setDate] = useState<Moment>(moment());
     const dispatch = useAppDispatch();
 
-    const handleDateChange = (date: Dayjs | null): void => {
+    const handleDateChange = (date: Moment | null): void => {
+      if (!date) {
+        return;
+      }
       setDate(date);
     };
 

@@ -31,7 +31,7 @@ export enum AdminRoutePathEnum {
 
 export enum RoutePathEnum {
   HOME = "/",
-  LISTING = "/category/detail/1",
+  LISTING = '/category/:id',
   REWARDS = "/rewards",
   SUBSCRIPTIONS = "/subscriptions",
   REFER = "/refer",
@@ -39,5 +39,5 @@ export enum RoutePathEnum {
   LISTING_ADD = "/listing/add",
   LISTING_PRODUCT = "/listing/:id",
   NONE = "",
-  ABOUT = '/about'
+  ABOUT = "/about",
 }

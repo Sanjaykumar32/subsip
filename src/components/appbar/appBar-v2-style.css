@@ -1,28 +1,27 @@
-.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-1aara5h-MuiToolbar-root {
-    padding-top: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
+.topheader {
+    padding-top: 15px;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
 }
 
 
-
-.css-xhk8t5-MuiList-root li {
+.categoryListing li {
     padding: 0 !important;
 }
 
-.css-xhk8t5-MuiList-root li a {
+.categoryListing li a {
     font-weight: 400;
     color: #000;
 }
 
-.css-xhk8t5-MuiList-root li a {
+.categoryListing li a {
     font-weight: 400;
     color: #000;
     border-bottom: 2px solid transparent;
     padding: 10px 10px !important;
 }
 
-.css-xhk8t5-MuiList-root li a:hover {
+.categoryListing li a:hover {
     border-color: #f39516 !important;
 }
 
@@ -33,7 +32,7 @@
     font-weight: 600 !important;
 }
 
-.css-1fii6rv-MuiFormControl-root-MuiTextField-root {
+.searchH {
     margin: 0 4rem !important;
 }
 
@@ -45,20 +44,18 @@
 
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
-    .css-1fii6rv-MuiFormControl-root-MuiTextField-root {
+    .searchH {
         margin: 0 0rem !important;
     }
 
-    .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-1aara5h-MuiToolbar-root {
+    .topheader {
         padding-top: 10px;
         padding-left: 20px;
         padding-right: 20px;
         padding-bottom: 15px;
     }
 
-    ul.MuiList-root.MuiList-padding.css-xhk8t5-MuiList-root,
-    li.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.css-okkh7g-MuiListItem-root,
-    .css-xhk8t5-MuiList-root li a {
+    ul.categoryListing li a {
         width: 100%;
         padding: 0;
     }

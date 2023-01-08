@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_SUB_CATEGORY } from "data/selectors";
+import { GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { ISubCategoryData } from "interface";
+import { ICategoryData, ISubCategoryData } from "interface";
 import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Navigate, useParams, useSearchParams } from "react-router-dom";
@@ -16,6 +16,7 @@ interface ISubcategoryControllerReturns {
   getters: {
     attributes: attributeType[];
     id: string | null;
+    CategoryName: any;
   };
   handlers: { deleteSubCategorylist: (ID: number) => void };
 }
@@ -25,9 +26,13 @@ interface ISubcategoryControllerReturns {
  * @return {ISubcategoryControllerReturns}
  */
 export const SubCategoryController = (): ISubcategoryControllerReturns => {
-  const categoryData = useAppSelector(GET_SUB_CATEGORY);
-
+  const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
+  const categoryData = useAppSelector(GET_CATEGORY);
   const dispatch = useAppDispatch();
+  const attributes: attributeType[] = [];
+  const [data, setData] = useState<any>([]);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("category");
 
   const getSubCategory = useCallback(async () => {
     try {
@@ -41,20 +46,17 @@ export const SubCategoryController = (): ISubcategoryControllerReturns => {
     getSubCategory();
   }, [getSubCategory]);
 
-  const attributes: attributeType[] = [];
-
-  const [searchParams] = useSearchParams();
-
-  const id = searchParams.get("category");
-
-  const [data, setData] = useState<any>([]);
+  const CategoryName = categoryData?.filter((item: any) => {
+    return item.iCategoryId == id;
+  })[0];
 
   useEffect(() => {
-    const filteredSubCategory = categoryData?.filter((item) => {
+    const filteredSubCategory = subCategoryData?.filter((item) => {
       return item.iCategoryId == id;
     });
+
     setData(filteredSubCategory);
-  }, [categoryData, id]);
+  }, [subCategoryData, id, categoryData]);
 
   async function deleteSubCategorylist(ID: number): Promise<void> {
     await dispatch(AdminThunk.deleteSubCategory({ subCategoryId: ID }));
@@ -66,7 +68,7 @@ export const SubCategoryController = (): ISubcategoryControllerReturns => {
     attributes.push({
       id: index + 1,
       vName: res.vName ? res.vName : "",
-      Actions: ["Edit", "Delete", res?.iSubCategoryId],
+      Actions: ["Edit", "Delete", res?.iCategoryId, res?.iSubCategoryId],
     });
   });
 
@@ -74,6 +76,7 @@ export const SubCategoryController = (): ISubcategoryControllerReturns => {
     getters: {
       attributes,
       id,
+      CategoryName,
     },
     handlers: { deleteSubCategorylist },
   };

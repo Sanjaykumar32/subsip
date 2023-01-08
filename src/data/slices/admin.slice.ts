@@ -9,6 +9,7 @@ import {
   INotificationdata,
   IReferralCountResponse,
   IRefferralCode,
+  IRefferralCount,
   IReward,
   ISubCategoryData,
   ISubscribeByBussinessIDResponse,
@@ -21,11 +22,11 @@ export interface IAdminState {
   adminSubscribers: ISubscribeByBussinessIDResponse;
   bussinessSubscribers: ISubscribeByBussinessIDResponse;
   subscriberOfBussiness: ISubscriberData[];
-  AllsubscriberOfBussiness: ISubscriberOfBussinessResponse;
+  AllsubscriberOfBussiness: ISubscriberData[];
   category: ICategoryData[];
   subCategory: ISubCategoryData[];
-  refferralCode: IRefferralCode;
-  refferralCount: IReferralCountResponse;
+  refferralCode: IRefferralCode[];
+  refferralCount: IRefferralCount[];
   noticationList: INotificationdata[];
   referralList: any;
   userRewardList: IUserReward[];
@@ -39,9 +40,9 @@ const initialState: IAdminState = {
   adminSubscribers: {} as ISubscribeByBussinessIDResponse,
   bussinessSubscribers: {} as ISubscribeByBussinessIDResponse,
   subscriberOfBussiness: [],
-  AllsubscriberOfBussiness: {} as ISubscriberOfBussinessResponse,
-  refferralCode: {} as IRefferralCode,
-  refferralCount: {} as IReferralCountResponse,
+  AllsubscriberOfBussiness: [],
+  refferralCode: [],
+  refferralCount: [],
   category: [],
   subCategory: [],
   noticationList: [],
@@ -83,8 +84,10 @@ export const adminSlice = createSlice({
     );
     builder.addCase(
       AdminThunk.allSubscriberOfBussiness.fulfilled,
-      (_state, action) => {
-        action.payload;
+      (state, action) => {
+        if (action.payload.data) {
+          state.AllsubscriberOfBussiness = action.payload.data;
+        }
       }
     );
 
@@ -120,8 +123,10 @@ export const adminSlice = createSlice({
         state.subCategory = action.payload.data;
       }
     });
-    builder.addCase(AdminThunk.refferralCount.fulfilled, (_state, action) => {
-      action.payload;
+    builder.addCase(AdminThunk.refferralCount.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.refferralCount = action.payload.data;
+      }
     });
     builder.addCase(AdminThunk.getRewardToWinner.fulfilled, (state, action) => {
       if (action.payload.data) {

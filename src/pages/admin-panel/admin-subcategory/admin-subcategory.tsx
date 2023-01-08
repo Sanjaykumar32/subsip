@@ -15,14 +15,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AdminBackButton } from "components";
-import { AdminRoutePathEnum, AuthRoutePathEnum } from "enum";
+import { AdminRoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { SubCategoryController } from "./admin-subcategory-controller";
 
 export function AdminSubCategory() {
   const navigate = useNavigate();
   const { getters, handlers } = SubCategoryController();
-  const { attributes, id } = getters;
+  const { attributes, id, CategoryName } = getters;
   const { deleteSubCategorylist } = handlers;
   const columns: GridColDef[] = [
     {
@@ -40,10 +40,9 @@ export function AdminSubCategory() {
             <FontAwesomeIcon
               icon={faPen}
               onClick={() => {
-                console.log(params.value[2]);
-                navigate(AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY, {
-                  state: { id: params.value[2], edit: true },
-                });
+                navigate(
+                  `${AdminRoutePathEnum.ADMIN_NEW_SUBCATEGORY}?category=${params.value[2]}&subCategoryId=${params.value[3]}`
+                );
               }}
             />
           </Tooltip>
@@ -101,7 +100,7 @@ export function AdminSubCategory() {
           }}
         >
           <Typography variant="body1" sx={{ fontWeight: 800 }}>
-            Category: Home services
+            Category: {CategoryName?.vName}
           </Typography>
 
           <Box>

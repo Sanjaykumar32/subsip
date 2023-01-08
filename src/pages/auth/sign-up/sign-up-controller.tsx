@@ -4,6 +4,7 @@ import { useAppDispatch } from "data";
 import { AuthenticationThunk } from "data/thunk";
 import { UserThunk } from "data/thunk/user.thunk";
 import { ChangeEvent, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 interface IInitialValue {
   email: string;
@@ -43,6 +44,8 @@ const SignUpController = (): ISignUpControllerReturns => {
 
   const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("referralCode");
 
   const handleClickOpen = async () => {
     setOpen(true);
@@ -89,7 +92,11 @@ const SignUpController = (): ISignUpControllerReturns => {
     setErrors(validate(value));
     setErrorCount(errorCount + 1);
     if (!errors.email && !errors.password) {
-      await auth.signUp({ email: value.email, password: value.password });
+      await auth.signUp({
+        email: value.email,
+        password: value.password,
+        referralCode: referralCode ? referralCode : "",
+      });
       setValue({ email: "", password: "" });
       handleClickOpen();
     }

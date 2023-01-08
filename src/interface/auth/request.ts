@@ -6,6 +6,7 @@ export interface ICredentials {
 export interface ISignUpRequest {
   email: string;
   password: string;
+  referralCode?: string;
 }
 
 export interface IForgetPasswordRequest {

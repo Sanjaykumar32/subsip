@@ -7,16 +7,16 @@ export interface ISubscribeByAdminIdRequest {
 }
 
 export interface IAllBusinessSubscribersRequest {
-  userId: string;
+  userId: number;
 }
 
 export interface IBussinessRequest {
   businessName?: string;
-  businessId?: string;
+  businessId?: number;
 }
 
 export interface IRefferralCountRequest {
-  userId: string;
+  userId: number;
 }
 
 export interface INotificationRequest {
@@ -28,6 +28,10 @@ export interface IRefferralCodeRequest {
 }
 
 export interface IAddSubscriberTobussinessRequest {
-  businessId: string;
+  businessId: number;
   userId: string;
+}
+
+export interface IDeleteSubscriberRequest {
+  iSubscriberId: string;
 }
