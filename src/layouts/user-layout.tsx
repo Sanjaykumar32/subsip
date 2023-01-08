@@ -7,7 +7,7 @@ import { UserAppBar } from "components/appbar/appbar.v2";
 export function NavigationBar() {
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
-      <UserAppBar />
+      <UserAppBar userMenu={true} />
       <Outlet />
       <ScrollToTop />
       <FooterMain />

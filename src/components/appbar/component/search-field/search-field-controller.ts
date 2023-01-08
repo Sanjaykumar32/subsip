@@ -27,6 +27,7 @@ export const SearchFieldController = () => {
   /**
    * @return {Promise<void>}
    */
+
   async function submitHandler(): Promise<void> {
     try {
       const response: any = await dispatch(

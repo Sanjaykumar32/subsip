@@ -100,6 +100,15 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     setAuthenticated(false);
   }, []);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
+    }
+  }, [signOut, signIn, signUp]);
+
   return (
     <AuthContext.Provider
       value={{ isAuthenticated, signIn, signOut, signUp, checkOtp }}

@@ -10,6 +10,7 @@ import {
 import { ScrollToTop, FooterMain } from "components";
 import { Link, Outlet } from "react-router-dom";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { UserAppBar } from "components/appbar/appbar.v2";
 
 export function AuthLayout() {
   return (
@@ -23,7 +24,7 @@ export function AuthLayout() {
       }}
     >
       <ScrollToTop />
-      <AppBar
+      {/* <AppBar
         position="static"
         color="transparent"
         elevation={0}
@@ -59,7 +60,9 @@ export function AuthLayout() {
             </Link>
           </Button>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
+
+      <UserAppBar userMenu={true} />
       <Box sx={{ py: 12 }}>
         <Outlet />
       </Box>

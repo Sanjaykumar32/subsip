@@ -73,7 +73,7 @@ export const AddSubCategoryController =
         );
 
         if (response.payload.data) {
-          naviagate(AdminRoutePathEnum.ADMIN_SUBCATEGORY);
+          naviagate(`/admin/subcategory/?category=${categrory}`);
         }
         setSubCategory("");
         setBuisnessName("");
@@ -88,7 +88,7 @@ export const AddSubCategoryController =
         );
         if (response.payload.data) {
           naviagate(
-            `${AdminRoutePathEnum.ADMIN_SUBCATEGORY}/?category=${subCategrory}`
+            `${AdminRoutePathEnum.ADMIN_SUBCATEGORY}/?category=${categrory}`
           );
         }
         setSubCategory("");

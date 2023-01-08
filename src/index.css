@@ -70,18 +70,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 }
 
 
-.non-sticky {
-    position: relative !important;
-    padding: 0px !important;
-}
 
-.is-sticky {
-    position: fixed !important;
-    top: 0px !important;
-    left: 0px !important;
-    animation: smoothScroll 1s forwards !important;
-    z-index: 99 !important;
-}
 
 .sliderTitle:hover {
     border-bottom: 2px solid #5e5e5e;
@@ -192,4 +181,8 @@ h2 {
     -webkit-box-orient: vertical;
     margin-bottom: 30px;
     padding: 0
+}
+
+.headerTop {
+    padding-top: 4rem !important;
 }
