@@ -42,6 +42,7 @@ export function SignUp() {
               <Label> Password </Label>
               <TextField
                 fullWidth
+                type="password"
                 name="password"
                 value={value.password}
                 onChange={changeHandler}
