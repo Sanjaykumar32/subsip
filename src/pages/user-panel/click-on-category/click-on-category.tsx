@@ -90,25 +90,17 @@ export function ClickOnCategory() {
 
   const totalLenght = businessData.filter((item: any) => item.iCategory === ids)
 
-  // console.log(totalLenght, 'totalLenght')
+  console.log(totalLenght, 'totalLenght getCateID')
 
-  // useEffect(() => {
-  //   if (getCateID) {
-  //     console.log(getCateID, 'getCateID')
-  //     handleList(getCateID)
-  //     setActiveCate(getCateID)
-  //   }
-  // }, [getCateID, location])
-
-
-  function onQueryClick() {
+  useEffect(() => {
     if (getCateID) {
       console.log(getCateID, 'getCateID')
       handleList(getCateID)
       setActiveCate(getCateID)
+      setId(getCateID)
+      setActiveCate(getCateID)
     }
-
-  }
+  }, [getCateID, location])
 
 
   return (
@@ -142,7 +134,7 @@ export function ClickOnCategory() {
                     key={index}
                     sx={{ px: 0 }}
                     onClick={() => { handleList(item?.iCategoryId), setActiveCate(item?.iCategoryId) }}
-                    className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId ? ' activeCate' : 'nan'}  `}
+                    className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId ? ' activeCate' : ''}  `}
                   >
                     {item.vName}
 

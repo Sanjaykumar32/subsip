@@ -49,14 +49,7 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setAuthenticated(true);
-    } else {
-      setAuthenticated(false);
-    }
-  }, []);
+
 
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {
@@ -83,6 +76,15 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     localStorage.clear();
     setAuthenticated(false);
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
+    }
+  }, [signOut, signIn, signUp]);
 
   // useEffect(() => {
   //   dispatch(UserThunk.fetchProfile());

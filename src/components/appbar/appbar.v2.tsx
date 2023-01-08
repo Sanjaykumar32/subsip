@@ -30,7 +30,7 @@ import { useAuth } from "context/auth.context";
 import { useSpring, animated } from "@react-spring/web";
 import "./appBar-v2-style.css";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { SearchField } from "./component/search-field/search-field";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -50,7 +50,7 @@ import { useAppDispatch, useAppSelector } from "data";
 import { GET_CATEGORY } from "data/selectors";
 
 
-export const UserAppBar = () => {
+export const UserAppBar = (props: any) => {
   const theme = useTheme();
   const auth = useAuth();
 
@@ -65,6 +65,9 @@ export const UserAppBar = () => {
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const homepage = location.pathname
+  console.log(homepage.split('/'), ' location ')
 
   const getcategory = useCallback(async () => {
     try {
@@ -230,10 +233,12 @@ export const UserAppBar = () => {
   const isSticky = () => {
     /* Method that will fix header after a specific scrollable */
     const scrollTop = window.scrollY;
-    const stickyClass = scrollTop >= 50 ? "is-sticky" : " ";
+    const stickyClass = scrollTop >= 50 ? "is-sticky" : "";
     setSticky(stickyClass);
     // console.log(stickyClass);
   };
+
+
 
 
   return (
@@ -242,9 +247,11 @@ export const UserAppBar = () => {
         color="default"
         elevation={0}
         sx={{
-          zIndex: theme.zIndex.appBar, backgroundColor: 'white', boxShadow: '0 1px 20px 0 #91919175', position: 'relative '
+          zIndex: theme.zIndex.appBar, backgroundColor: 'white', position: 'relative '
         }}
-        className={`${sticky} non-sticky `}
+        className={`${props.display ? props.display : sticky ? sticky : 'non-sticky'} `}
+
+      // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -292,72 +299,62 @@ export const UserAppBar = () => {
           }}
           className='topheader'
         >
-          <Box sx={{ display: { xs: "none", md: "block" } }} >
+          {homepage.split('/')[1] === 'admin' ? <h1></h1> : (<Box sx={{ display: { xs: "none", md: "block" } }} >
             <Logo variant="dark" />
-          </Box>
+          </Box>)}
 
-          <SearchField />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {!locationPopUp ?
-              <Button
-                onClick={showLocationPopUp}
-                disableRipple
-                sx={{ minWidth: "120px", color: "text.primary" }}
-              >
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  size="sm"
-                  style={{ marginRight: "8px" }}
-                />Location
-              </Button>
-              :
-              // <Box className="search">
-              //   <TextField id="standard-basic" label="Standard" variant="standard" />
-              //   <DialogActions>
-              //   <Button onClick={handleLocationClose}>Cancel</Button>
-              // </DialogActions>
-              // </Box>
-              <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-                <InputLabel htmlFor="standard-adornment-password">Search</InputLabel>
-                <Input
-                  id="standard-adornment-password"
-                  type={'text'}
-                  onChange={handleLocation}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                      // onClick={handleClickShowPassword}
-                      // onMouseDown={handleMouseDownPassword}
-                      >
-                        <Button onClick={handleLocationClose}>Cancel</Button>
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            }
+          {homepage.split('/')[1] === 'admin' ?
+            <Box sx={{ display: { xs: "none", md: "block" } }} >
+              <Logo variant="dark" />
+            </Box>
+            : <SearchField />}
 
 
-            {/* <Divider
-              flexItem
-              orientation="vertical"
-              variant="middle"
-              sx={{ mx: 1, height: "30px", my: "auto" }}
-            />
-            <Button
-              disableRipple
-              sx={{ minWidth: "120px", color: "text.primary" }}
-            >
-              List on Poshhub
-            </Button> */}
-            <Divider
-              flexItem
-              orientation="vertical"
-              variant="middle"
-              sx={{ mx: 1, height: "30px", my: "auto" }}
-            />
-          </Box>
+          {homepage === '/' &&
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+
+              {!locationPopUp ?
+                <Button
+                  onClick={showLocationPopUp}
+                  disableRipple
+                  sx={{ minWidth: "120px", color: "text.primary" }}
+                >
+                  <FontAwesomeIcon
+                    icon={faLocationDot}
+                    size="sm"
+                    style={{ marginRight: "8px" }}
+                  />Location
+                </Button>
+                :
+                (<FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+                  <InputLabel htmlFor="standard-adornment-password">Search</InputLabel>
+                  <Input
+                    id="standard-adornment-password"
+                    type={'text'}
+                    onChange={handleLocation}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                        // onClick={handleClickShowPassword}
+                        // onMouseDown={handleMouseDownPassword}
+                        >
+                          <Button onClick={handleLocationClose}>Cancel</Button>
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>)
+              }
+
+
+              <Divider
+                flexItem
+                orientation="vertical"
+                variant="middle"
+                sx={{ mx: 1, height: "30px", my: "auto" }}
+              />
+            </Box>}
           {!auth.isAuthenticated ? (
             <Button
               variant="contained"
@@ -423,12 +420,13 @@ export const UserAppBar = () => {
                   <MenuItem
                     key={setting.route}
                     onClick={() => {
+                      // setting.route()
                       setting.title === "Logout" && auth.signOut();
                       handleClose();
                     }}
                   >
-                    <Link key="profile-menu" href={setting.route}>
-                      <Typography textAlign="center" className="text-black ">
+                    <Link key="profile-menu" href={setting.route}  >
+                      <Typography textAlign="left" className="text-black ">
                         {setting.title}
                       </Typography>
                     </Link>
@@ -505,67 +503,69 @@ export const UserAppBar = () => {
             </Box>
           )}
         </Toolbar>
-        <animated.div style={{ overflow: "hidden", ...spring }}>
-          <Toolbar>
-            <div className="moblieMenu">
-              <List
+        {props?.userMenu == true &&
+          <animated.div style={{ overflow: "hidden", ...spring }}>
+            <Toolbar>
+              <div className="moblieMenu">
+                <List
 
-                className="categoryListing"
-                sx={{
-                  display: "flex",
-                  flexDirection: { xs: "column", md: "row" },
-                  ".MuiListItem-root": {
-                    minWidth: "fit-content",
-                    cursor: "pointer",
-                  },
-                }}
-              >
-                {categoryData.map((item: any, index: any) => (
-                  index === 0 ?
-                    <ListItem key={index}>
-                      <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
-                    </ListItem> : index === 1 ?
-                      <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
-                      </ListItem> : index === 2 ?
-                        <ListItem key={index}>
-                          <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
-                        </ListItem> :
-                        // index === 0 &&
-                        <ListItem >
-                          <Link href={`/category/all`}>{'More'}</Link>
-                        </ListItem>
-                ))}
-              </List>
-
-              {!auth.isAuthenticated ? (
-                <Button
-                  variant="contained"
+                  className="categoryListing"
                   sx={{
-                    minWidth: "100px",
-                    display: { xs: "block", md: "none" },
-                  }}
-                  onClick={() => {
-                    navigate(AuthRoutePathEnum.SIGN_IN);
+                    display: "flex",
+                    flexDirection: { xs: "column", md: "row" },
+                    ".MuiListItem-root": {
+                      minWidth: "fit-content",
+                      cursor: "pointer",
+                    },
                   }}
                 >
-                  Log In
-                </Button>
-              ) : (
-                <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                  <IconButton sx={{ mx: 1 }}>
-                    <FontAwesomeIcon icon={faUserCircle} />
-                  </IconButton>
-                  <IconButton sx={{ mx: 1 }}>
-                    <Badge badgeContent={2} color="error">
-                      <FontAwesomeIcon icon={faBell} />
-                    </Badge>
-                  </IconButton>
-                </Box>
-              )}
-            </div>
-          </Toolbar>
-        </animated.div>
+                  {categoryData.map((item: any, index: any) => (
+                    index === 0 ?
+                      <ListItem key={index}>
+                        <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
+                      </ListItem> : index === 1 ?
+                        <ListItem key={index}>
+                          <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
+                        </ListItem> : index === 2 ?
+                          <ListItem key={index}>
+                            <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
+                          </ListItem> :
+                          index === 3 &&
+                          <ListItem >
+                            <Link href={`/category/all`}>{'More'}</Link>
+                          </ListItem>
+                  ))}
+                </List>
+
+                {!auth.isAuthenticated ? (
+                  <Button
+                    variant="contained"
+                    sx={{
+                      minWidth: "100px",
+                      display: { xs: "block", md: "none" },
+                    }}
+                    onClick={() => {
+                      navigate(AuthRoutePathEnum.SIGN_IN);
+                    }}
+                  >
+                    Log In
+                  </Button>
+                ) : (
+                  <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                    <IconButton sx={{ mx: 1 }}>
+                      <FontAwesomeIcon icon={faUserCircle} />
+                    </IconButton>
+                    <IconButton sx={{ mx: 1 }}>
+                      <Badge badgeContent={2} color="error">
+                        <FontAwesomeIcon icon={faBell} />
+                      </Badge>
+                    </IconButton>
+                  </Box>
+                )}
+              </div>
+            </Toolbar>
+          </animated.div>
+        }
       </AppBar>
       <Backdrop
         open={open}

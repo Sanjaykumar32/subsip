@@ -32,7 +32,7 @@ export function Links() {
           },
           {
             title: "Sign up",
-            link: "/auth/sign-un",
+            link: "/auth/sign-up",
           },
         ],
       },

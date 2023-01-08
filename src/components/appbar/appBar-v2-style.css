@@ -34,13 +34,38 @@
 
 .searchH {
     margin: 0 4rem !important;
+    width: 680px !important;
+    margin-right: auto !important;
 }
 
 .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-hyum1k-MuiToolbar-root {
     padding: 0 2rem;
 }
 
+.adminHeader {
+    position: fixed !important;
+    z-index: 1 !important;
+    border-bottom: 1px solid #00000047;
+    padding-bottom: 10px;
+}
 
+
+.is-sticky {
+    position: fixed !important;
+    top: 0px !important;
+    left: 0px !important;
+    animation: smoothScroll 1s forwards !important;
+    z-index: 99 !important;
+    box-shadow: 0 1px 20px 0 #91919175 !important;
+}
+
+
+
+.non-sticky {
+    position: relative !important;
+    padding: 0px !important;
+    box-shadow: 0 1px 20px 0 #91919175 !important;
+}
 
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
