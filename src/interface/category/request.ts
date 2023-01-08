@@ -134,3 +134,16 @@ export interface IAddSubcriberToBuinessRequest {
   businessId: number;
   referredCode: string;
 }
+
+export interface IGetNotificationRequest {
+  userID: number;
+}
+
+export interface IReadNotificationRequest {
+  notificationId: number;
+  read: IRead;
+}
+
+export interface IRead {
+  read: number;
+}

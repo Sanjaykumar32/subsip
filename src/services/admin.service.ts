@@ -41,6 +41,8 @@ import {
   IAddSubcriberToBuisnessResponse,
   IUpdateSubCategoryResponse,
   IUpdateSubCategoryRequest,
+  IGetNotificationRequest,
+  IReadNotificationRequest,
 } from "interface";
 
 /**
@@ -96,6 +98,39 @@ export class AdminService {
         method: "GET",
       }
     );
+
+    return res.data;
+  }
+
+  /**
+   * User update Notification
+   * @param {IGetNotificationRequest} payload
+   * @return {Promise<any>}
+   */
+  public static async getNotification(
+    payload: IGetNotificationRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/user/notification/${payload.userID}`,
+      method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
+   * read Notification
+   * @param {IUpdateCategoryRequest} credentials
+   * @return {Promise<ICategoryDataResponse>}
+   */
+  public static async updateCategory(
+    credentials: IUpdateCategoryRequest
+  ): Promise<ICategoryDataResponse> {
+    const res: AxiosResponse<ICategoryDataResponse> =
+      await ApiHelper.send<ICategoryDataResponse>({
+        url: "/category",
+        method: "PUT",
+        data: credentials,
+      });
 
     return res.data;
   }
@@ -201,19 +236,18 @@ export class AdminService {
   }
 
   /**
-   * update category
-   * @param {IUpdateCategoryRequest} credentials
-   * @return {Promise<ICategoryDataResponse>}
+   * read Notification
+   * @param {IReadNotificationRequest} payload
+   * @return {Promise<any>}
    */
-  public static async updateCategory(
-    credentials: IUpdateCategoryRequest
-  ): Promise<ICategoryDataResponse> {
-    const res: AxiosResponse<ICategoryDataResponse> =
-      await ApiHelper.send<ICategoryDataResponse>({
-        url: "/category",
-        method: "PUT",
-        data: credentials,
-      });
+  public static async readNotification(
+    payload: IReadNotificationRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/user/notification/${payload.notificationId}`,
+      method: "PUT",
+      data: payload.read,
+    });
 
     return res.data;
   }

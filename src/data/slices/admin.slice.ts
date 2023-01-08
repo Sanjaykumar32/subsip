@@ -34,6 +34,7 @@ export interface IAdminState {
   bussinessRewardData: IBusinessReward[];
   userRewardData: IUserReward[];
   dashboardCount: IDashboard[];
+  userNotification: any;
 }
 
 const initialState: IAdminState = {
@@ -52,6 +53,7 @@ const initialState: IAdminState = {
   userRewardData: [],
   bussinessRewardData: [],
   dashboardCount: [],
+  userNotification: [],
 };
 
 export const adminSlice = createSlice({
@@ -101,6 +103,14 @@ export const adminSlice = createSlice({
         state.category = action.payload.data;
       }
     });
+    builder.addCase(
+      AdminThunk.getUserNotification.fulfilled,
+      (state, action) => {
+        if (action.payload) {
+          state.userNotification = action.payload.data;
+        }
+      }
+    );
     builder.addCase(AdminThunk.getdashboardCount.fulfilled, (state, action) => {
       if (action.payload) {
         state.dashboardCount = action.payload.data;

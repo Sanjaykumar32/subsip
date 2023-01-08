@@ -34,6 +34,8 @@ import {
   IDashboardResponse,
   IUpdateSubCategoryResponse,
   IUpdateSubCategoryRequest,
+  IGetNotificationRequest,
+  IReadNotificationRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -134,7 +136,6 @@ export class AdminThunk {
   public static category = createAsyncThunk(
     "admin/category",
     async (payload: ICategoryRequest): Promise<ICategoryDataResponse> => {
-      console.log(payload, "payload");
       const response = await AdminService.category(payload);
       return response;
     }
@@ -146,7 +147,6 @@ export class AdminThunk {
   public static updateCategory = createAsyncThunk(
     "admin/update/category",
     async (payload: IUpdateCategoryRequest): Promise<ICategoryDataResponse> => {
-      console.log(payload, "payload update category");
       const response = await AdminService.updateCategory(payload);
       return response;
     }
@@ -171,7 +171,6 @@ export class AdminThunk {
   public static subCategory = createAsyncThunk(
     "admin/subCategory",
     async (payload: ISubCategoryRequest): Promise<ICategoryDataResponse> => {
-      console.log(payload, "payload");
       const response = await AdminService.subCategory(payload);
       return response;
     }
@@ -194,7 +193,6 @@ export class AdminThunk {
   public static newReferralPrice = createAsyncThunk(
     "admin/newReferralPrice",
     async (payload: IReferralPriceRequest): Promise<void> => {
-      console.log(payload, "payloaddddd");
       const response = await AdminService.newReferralPrice(payload);
       return response;
     }
@@ -206,7 +204,6 @@ export class AdminThunk {
   public static updateReferralPrice = createAsyncThunk(
     "admin/updateReferralPrice",
     async (payload: any): Promise<void> => {
-      console.log(payload, "payloaddddd");
       const response = await AdminService.updateReferralPrice(payload);
       return response;
     }
@@ -257,6 +254,17 @@ export class AdminThunk {
   );
 
   /**
+   * Get User Notification
+   */
+  public static getUserNotification = createAsyncThunk(
+    "admin/getuserNotification",
+    async (payload: IGetNotificationRequest): Promise<any> => {
+      const response = await AdminService.getNotification(payload);
+      return response;
+    }
+  );
+
+  /**
    * Get Business Reward
    */
   public static getBusinessReward = createAsyncThunk(
@@ -298,7 +306,7 @@ export class AdminThunk {
   public static createListing = createAsyncThunk(
     "admin/createListing",
     async (payload: any): Promise<void> => {
-      // console.log(payload, "payload");
+      console.log(payload, "payload");
       const response = await AdminService.craeteListing(payload);
       return response;
     }
@@ -310,7 +318,7 @@ export class AdminThunk {
   public static updateListing = createAsyncThunk(
     "admin/update/createListing",
     async (payload: any): Promise<void> => {
-      // console.log(payload, "payload");
+      console.log(payload, "payload");
       const response = await AdminService.updateListing(payload);
       return response;
     }
@@ -321,7 +329,7 @@ export class AdminThunk {
    */
 
   public static getCategory = createAsyncThunk(
-    "admin/newNotification",
+    "admin/getCategory",
     async (): Promise<IGetCategoryResponse> => {
       const response = await AdminService.getcategory();
       return response;
@@ -423,6 +431,17 @@ export class AdminThunk {
     "admin/dashboard",
     async (): Promise<IDashboardResponse> => {
       const response = await AdminService.getDashboardCount();
+      return response;
+    }
+  );
+
+  /**
+   * Read user Notification
+   */
+  public static readUserNotification = createAsyncThunk(
+    "admin/read/UserNotification",
+    async (payload: IReadNotificationRequest): Promise<any> => {
+      const response = await AdminService.readNotification(payload);
       return response;
     }
   );
