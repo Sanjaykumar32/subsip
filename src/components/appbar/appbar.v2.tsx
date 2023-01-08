@@ -32,27 +32,22 @@ import "./appBar-v2-style.css";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate, useLocation } from "react-router-dom";
 import { SearchField } from "./component/search-field/search-field";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Input from "@mui/material/Input";
-import FilledInput from "@mui/material/FilledInput";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_CATEGORY } from "data/selectors";
+import { GET_CATEGORY, GET_USER_NOTIFICTAION } from "data/selectors";
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
   const auth = useAuth();
-
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const categoryData = useAppSelector(GET_CATEGORY);
+  const userNotificationData = useAppSelector(GET_USER_NOTIFICTAION);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorNoticationEl, setAnchorNoticationEl] =
@@ -60,13 +55,8 @@ export const UserAppBar = (props: any) => {
   const [menuItem, setMenuItem] = useState<any>([]);
   const [locationPopUp, setLocationPopUP] = useState<any>(false);
   const [searchLocation, setLocation] = useState<any>("");
-  const navigate = useNavigate();
-
-  const categoryData = useAppSelector(GET_CATEGORY);
-  const dispatch = useAppDispatch();
-  const location = useLocation();
   const homepage = location.pathname;
-  console.log(homepage.split("/"), " location ");
+  const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
     try {
@@ -80,11 +70,51 @@ export const UserAppBar = (props: any) => {
     getcategory();
   }, [getcategory]);
 
+  const getUserNotification = useCallback(async () => {
+    try {
+      if (userId) {
+        await dispatch(
+          AdminThunk.getUserNotification({
+            userID: parseInt(userId),
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, userId]);
+
+  const readNotification = useCallback(
+    async (id: number) => {
+      const data = {
+        read: userId ? parseInt(userId) : 0,
+      };
+      try {
+        if (userId) {
+          await dispatch(
+            AdminThunk.readUserNotification({
+              notificationId: id,
+              read: data,
+            })
+          );
+        }
+        await getUserNotification();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch, getUserNotification, userId]
+  );
+
+  useEffect(() => {
+    setInterval(() => {
+      getUserNotification();
+    }, 10000);
+  }, [getUserNotification]);
+
   // console.log(categoryData, 'categoryData');
 
   const CateName = categoryData.map((item: any) => item?.vName);
-
-  // console.log(CateName, 'CateName');
 
   const opens = Boolean(anchorEl);
   const openNotification = Boolean(anchorNoticationEl);
@@ -426,7 +456,14 @@ export const UserAppBar = (props: any) => {
                 aria-haspopup="true"
                 aria-expanded={openNotification ? "true" : undefined}
               >
-                <Badge badgeContent={2} color="error">
+                <Badge
+                  badgeContent={
+                    userNotificationData.length > 0
+                      ? userNotificationData.length
+                      : ""
+                  }
+                  color={userNotificationData.length > 0 ? "error" : undefined}
+                >
                   <FontAwesomeIcon icon={faBell} />
                 </Badge>
               </IconButton>
@@ -476,16 +513,27 @@ export const UserAppBar = (props: any) => {
                     handleNotificationClose();
                   }}
                 >
-                  <div className="Notification list w-[250px] ">
-                    <div className="flex w-full gap-[15px] ">
-                      <li className="w-[70%] text-black cursor-pointer text-[16px] ">
-                        This is Dummy text
-                      </li>
-                      <span className="w-[30%] text-center text-[15px] ">
-                        Read
-                      </span>
-                    </div>
-                  </div>
+                  {userNotificationData.length > 0
+                    ? userNotificationData.map((res: any, i: number) => {
+                        return (
+                          <div className="Notification list w-[250px]" key={i}>
+                            <div className="flex w-full gap-[15px] ">
+                              <li className="w-[70%] text-black cursor-pointer text-[16px] ">
+                                {res.vHeadline}
+                              </li>
+                              <span
+                                className="w-[30%] text-center text-[15px]"
+                                onClick={() => {
+                                  readNotification(res.iNotificationId);
+                                }}
+                              >
+                                Read
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })
+                    : "No Notification"}
                 </MenuItem>
               </Menu>
             </Box>

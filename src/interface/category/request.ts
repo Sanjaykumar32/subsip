@@ -141,9 +141,7 @@ export interface IGetNotificationRequest {
 
 export interface IReadNotificationRequest {
   notificationId: number;
-  read: IRead;
-}
-
-export interface IRead {
-  read: number;
+  read: {
+    read: number;
+  };
 }

@@ -5,7 +5,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_BANNER_LIST, GET_BUSINESS, GET_CATEGORY } from "data/selectors";
+import {
+  GET_BANNER_LIST,
+  GET_BUSINESS,
+  GET_CATEGORY,
+  GET_USER_NOTIFICTAION,
+} from "data/selectors";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -109,7 +114,6 @@ export function Home() {
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
   const userId = localStorage.getItem("userId");
-
   const getcategory = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getCategory());
