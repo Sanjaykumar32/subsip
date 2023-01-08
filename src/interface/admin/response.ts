@@ -202,3 +202,9 @@ export interface IDeleteSubscriberResponse {
   message: string;
   data: number;
 }
+
+export interface IUpdateSubCategoryResponse {
+  success: number;
+  message: string;
+  data: number;
+}

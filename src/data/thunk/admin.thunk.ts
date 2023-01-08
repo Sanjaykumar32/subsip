@@ -32,6 +32,8 @@ import {
   IGetUserRewardRequest,
   IDeleteRewardRequest,
   IDashboardResponse,
+  IUpdateSubCategoryResponse,
+  IUpdateSubCategoryRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -153,14 +155,15 @@ export class AdminThunk {
   /**
    * update subCategory
    */
-  // public static updateSubCategory = createAsyncThunk(
-  //   "admin/update/category",
-  //   async (payload: IUpdateCategoryRequest): Promise<ICategoryDataResponse> => {
-  //     console.log(payload, "payload");
-  //     const response = await AdminService.updateCategory(payload);
-  //     return response;
-  //   }
-  // );
+  public static updateSubCategory = createAsyncThunk(
+    "admin/update/subcategory",
+    async (
+      payload: IUpdateSubCategoryRequest
+    ): Promise<IUpdateSubCategoryResponse> => {
+      const response = await AdminService.updateSubCategory(payload);
+      return response;
+    }
+  );
 
   /**
    * subCategory

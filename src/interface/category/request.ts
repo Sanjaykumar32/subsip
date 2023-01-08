@@ -14,6 +14,11 @@ export interface ISubCategoryRequest {
   name: string;
   addedBy: number;
 }
+
+export interface IUpdateSubCategoryRequest {
+  subCategoryId: number;
+  name: string;
+}
 export interface Filter {
   key: string;
   value: string;

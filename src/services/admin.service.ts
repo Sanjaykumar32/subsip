@@ -39,6 +39,8 @@ import {
   IDashboardResponse,
   IAddSubcriberToBuinessRequest,
   IAddSubcriberToBuisnessResponse,
+  IUpdateSubCategoryResponse,
+  IUpdateSubCategoryRequest,
 } from "interface";
 
 /**
@@ -209,6 +211,24 @@ export class AdminService {
     const res: AxiosResponse<ICategoryDataResponse> =
       await ApiHelper.send<ICategoryDataResponse>({
         url: "/category",
+        method: "PUT",
+        data: credentials,
+      });
+
+    return res.data;
+  }
+
+  /**
+   * update subcategory
+   * @param {IUpdateSubCategoryRequest} credentials
+   * @return {Promise<IUpdateSubCategoryResponse>}
+   */
+  public static async updateSubCategory(
+    credentials: IUpdateSubCategoryRequest
+  ): Promise<IUpdateSubCategoryResponse> {
+    const res: AxiosResponse<IUpdateSubCategoryResponse> =
+      await ApiHelper.send<IUpdateSubCategoryResponse>({
+        url: "/sub-category/",
         method: "PUT",
         data: credentials,
       });
