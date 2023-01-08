@@ -12,6 +12,11 @@ export interface IForgetPasswordRequest {
   email: string;
 }
 
+export interface IChangePasswordRequest {
+  oldPassword: string;
+  newPassword: string;
+}
+
 export interface IResetPasswordRequest {
   token: string;
   otp: string;

@@ -32,23 +32,22 @@ import "./appBar-v2-style.css";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate } from "react-router-dom";
 import { SearchField } from "./component/search-field/search-field";
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Input from "@mui/material/Input";
+import FilledInput from "@mui/material/FilledInput";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_CATEGORY } from "data/selectors";
-
 
 export const UserAppBar = () => {
   const theme = useTheme();
@@ -56,12 +55,12 @@ export const UserAppBar = () => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [anchorNoticationEl, setAnchorNoticationEl] = React.useState<null | HTMLElement>(null);
+  const [anchorNoticationEl, setAnchorNoticationEl] =
+    React.useState<null | HTMLElement>(null);
   const [menuItem, setMenuItem] = useState<any>([]);
-  const [locationPopUp, setLocationPopUP] = useState<any>(false)
-  const [searchLocation, setLocation] = useState<any>('')
+  const [locationPopUp, setLocationPopUP] = useState<any>(false);
+  const [searchLocation, setLocation] = useState<any>("");
   const navigate = useNavigate();
-
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const dispatch = useAppDispatch();
@@ -84,9 +83,6 @@ export const UserAppBar = () => {
 
   // console.log(CateName, 'CateName');
 
-
-
-
   const opens = Boolean(anchorEl);
   const openNotification = Boolean(anchorNoticationEl);
 
@@ -94,7 +90,9 @@ export const UserAppBar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleNotificationClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleNotificationClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     setAnchorNoticationEl(event.currentTarget);
   };
 
@@ -107,24 +105,24 @@ export const UserAppBar = () => {
   };
 
   const showLocationPopUp = () => {
-    setLocationPopUP(true)
-  }
+    setLocationPopUP(true);
+  };
 
   const handleLocationClose = () => {
-    setLocation('')
-    setLocationPopUP(false)
+    setLocation("");
+    setLocationPopUP(false);
     navigate(`/?`);
-  }
+  };
 
   const handleLocation = (event: any) => {
-    setLocation(event.target.value)
+    setLocation(event.target.value);
     navigate(`/?${event.target.value}`);
-  }
+  };
 
   const handleLocationSearch = () => {
     navigate(`/?${searchLocation}`);
-    setLocationPopUP(false)
-  }
+    setLocationPopUP(false);
+  };
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -149,6 +147,10 @@ export const UserAppBar = () => {
         {
           title: "Refferal Program",
           route: RoutePathEnum.REFER,
+        },
+        {
+          title: "Change Password",
+          route: AuthRoutePathEnum.CHANGE_PASSWORD,
         },
         {
           title: "Logout",
@@ -176,6 +178,10 @@ export const UserAppBar = () => {
           route: RoutePathEnum.REFER,
         },
         {
+          title: "Change Password",
+          route: AuthRoutePathEnum.CHANGE_PASSWORD,
+        },
+        {
           title: "Logout",
           route: AuthRoutePathEnum.SIGN_IN,
         },
@@ -184,28 +190,6 @@ export const UserAppBar = () => {
     }
   }, []);
 
-  const settings = [
-    {
-      title: "Profile",
-      route: RoutePathEnum.PROFILE,
-    },
-    {
-      title: "Subscription",
-      route: RoutePathEnum.SUBSCRIPTIONS,
-    },
-    {
-      title: "Rewards",
-      route: RoutePathEnum.REWARDS,
-    },
-    {
-      title: "Refferal Program",
-      route: RoutePathEnum.REFER,
-    },
-    {
-      title: "Logout",
-      route: AuthRoutePathEnum.SIGN_IN,
-    },
-  ];
   // );
 
   const [open, setOpen] = useState<boolean>(false);
@@ -214,13 +198,10 @@ export const UserAppBar = () => {
     to: { height: !isMobile ? "60px" : open ? "250px" : "0px" },
   });
 
-
-
   const [sticky, setSticky] = useState("");
 
   // on render, set listener
   useEffect(() => {
-    // console.log("hello");
     window.addEventListener("scroll", isSticky);
     return () => {
       window.removeEventListener("scroll", isSticky);
@@ -232,9 +213,7 @@ export const UserAppBar = () => {
     const scrollTop = window.scrollY;
     const stickyClass = scrollTop >= 50 ? "is-sticky" : " ";
     setSticky(stickyClass);
-    // console.log(stickyClass);
   };
-
 
   return (
     <>
@@ -242,7 +221,10 @@ export const UserAppBar = () => {
         color="default"
         elevation={0}
         sx={{
-          zIndex: theme.zIndex.appBar, backgroundColor: 'white', boxShadow: '0 1px 20px 0 #91919175', position: 'relative '
+          zIndex: theme.zIndex.appBar,
+          backgroundColor: "white",
+          boxShadow: "0 1px 20px 0 #91919175",
+          position: "relative ",
         }}
         className={`${sticky} non-sticky `}
       >
@@ -253,8 +235,6 @@ export const UserAppBar = () => {
             justifyContent: "space-between",
             alignItems: "center",
           }}
-
-
         >
           <div className=" absolute  left-4 top-[3px] ">
             <IconButton onClick={() => setOpen(!open)}>
@@ -290,15 +270,15 @@ export const UserAppBar = () => {
             justifyContent: "space-between",
             flexGrow: 1,
           }}
-          className='topheader'
+          className="topheader"
         >
-          <Box sx={{ display: { xs: "none", md: "block" } }} >
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
             <Logo variant="dark" />
           </Box>
 
           <SearchField />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {!locationPopUp ?
+            {!locationPopUp ? (
               <Button
                 onClick={showLocationPopUp}
                 disableRipple
@@ -308,27 +288,30 @@ export const UserAppBar = () => {
                   icon={faLocationDot}
                   size="sm"
                   style={{ marginRight: "8px" }}
-                />Location
+                />
+                Location
               </Button>
-              :
+            ) : (
               // <Box className="search">
               //   <TextField id="standard-basic" label="Standard" variant="standard" />
               //   <DialogActions>
               //   <Button onClick={handleLocationClose}>Cancel</Button>
               // </DialogActions>
               // </Box>
-              <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-                <InputLabel htmlFor="standard-adornment-password">Search</InputLabel>
+              <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+                <InputLabel htmlFor="standard-adornment-password">
+                  Search
+                </InputLabel>
                 <Input
                   id="standard-adornment-password"
-                  type={'text'}
+                  type={"text"}
                   onChange={handleLocation}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                      // onClick={handleClickShowPassword}
-                      // onMouseDown={handleMouseDownPassword}
+                        // onClick={handleClickShowPassword}
+                        // onMouseDown={handleMouseDownPassword}
                       >
                         <Button onClick={handleLocationClose}>Cancel</Button>
                       </IconButton>
@@ -336,8 +319,7 @@ export const UserAppBar = () => {
                   }
                 />
               </FormControl>
-            }
-
+            )}
 
             {/* <Divider
               flexItem
@@ -386,35 +368,34 @@ export const UserAppBar = () => {
                 open={opens}
                 onClose={handleClose}
                 className="Account-popup"
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 PaperProps={{
                   elevation: 0,
                   sx: {
-                    overflow: 'visible',
-                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                     mt: 1.5,
-                    '& .MuiAvatar-root': {
+                    "& .MuiAvatar-root": {
                       width: 32,
                       height: 32,
                       ml: -0.5,
                       mr: 1,
                     },
-                    '&:before': {
+                    "&:before": {
                       content: '""',
-                      display: 'block',
-                      position: 'absolute',
+                      display: "block",
+                      position: "absolute",
                       top: 0,
                       right: 14,
                       width: 10,
                       height: 10,
-                      bgcolor: 'background.paper',
-                      transform: 'translateY(-50%) rotate(45deg)',
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
                       zIndex: 0,
                     },
                   },
                 }}
-
                 MenuListProps={{
                   "aria-labelledby": "basic-button",
                 }}
@@ -453,35 +434,34 @@ export const UserAppBar = () => {
                 open={openNotification}
                 onClose={handleNotificationClose}
                 className="Notification-popup"
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 PaperProps={{
                   elevation: 0,
                   sx: {
-                    overflow: 'visible',
-                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                     mt: 1.5,
-                    '& .MuiAvatar-root': {
+                    "& .MuiAvatar-root": {
                       width: 32,
                       height: 32,
                       ml: -0.5,
                       mr: 1,
                     },
-                    '&:before': {
+                    "&:before": {
                       content: '""',
-                      display: 'block',
-                      position: 'absolute',
+                      display: "block",
+                      position: "absolute",
                       top: 0,
                       right: 14,
                       width: 10,
                       height: 10,
-                      bgcolor: 'background.paper',
-                      transform: 'translateY(-50%) rotate(45deg)',
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
                       zIndex: 0,
                     },
                   },
                 }}
-
                 MenuListProps={{
                   "aria-labelledby": "basic-button",
                 }}
@@ -494,10 +474,14 @@ export const UserAppBar = () => {
                     handleNotificationClose();
                   }}
                 >
-                  <div className="Notification list w-[250px] " >
+                  <div className="Notification list w-[250px] ">
                     <div className="flex w-full gap-[15px] ">
-                      <li className="w-[70%] text-black cursor-pointer text-[16px] " >This is Dummy text</li>
-                      <span className="w-[30%] text-center text-[15px] " >Read</span>
+                      <li className="w-[70%] text-black cursor-pointer text-[16px] ">
+                        This is Dummy text
+                      </li>
+                      <span className="w-[30%] text-center text-[15px] ">
+                        Read
+                      </span>
                     </div>
                   </div>
                 </MenuItem>
@@ -509,7 +493,6 @@ export const UserAppBar = () => {
           <Toolbar>
             <div className="moblieMenu">
               <List
-
                 className="categoryListing"
                 sx={{
                   display: "flex",
@@ -520,22 +503,32 @@ export const UserAppBar = () => {
                   },
                 }}
               >
-                {categoryData.map((item: any, index: any) => (
-                  index === 0 ?
+                {categoryData.map((item: any, index: any) =>
+                  index === 0 ? (
                     <ListItem key={index}>
-                      <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
-                    </ListItem> : index === 1 ?
-                      <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
-                      </ListItem> : index === 2 ?
-                        <ListItem key={index}>
-                          <Link href={`/category/${item?.iCategoryId}`}>{item?.vName}</Link>
-                        </ListItem> :
-                        // index === 0 &&
-                        <ListItem >
-                          <Link href={`/category/all`}>{'More'}</Link>
-                        </ListItem>
-                ))}
+                      <Link href={`/category/${item?.iCategoryId}`}>
+                        {item?.vName}
+                      </Link>
+                    </ListItem>
+                  ) : index === 1 ? (
+                    <ListItem key={index}>
+                      <Link href={`/category/${item?.iCategoryId}`}>
+                        {item?.vName}
+                      </Link>
+                    </ListItem>
+                  ) : index === 2 ? (
+                    <ListItem key={index}>
+                      <Link href={`/category/${item?.iCategoryId}`}>
+                        {item?.vName}
+                      </Link>
+                    </ListItem>
+                  ) : (
+                    // index === 0 &&
+                    <ListItem>
+                      <Link href={`/category/all`}>{"More"}</Link>
+                    </ListItem>
+                  )
+                )}
               </List>
 
               {!auth.isAuthenticated ? (

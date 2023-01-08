@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  IChangePasswordRequest,
   IForgetPasswordRequest,
   IOTpRequest,
   IResetPasswordRequest,
@@ -18,6 +19,17 @@ export class AuthenticationThunk {
     "auth/forgetPassword",
     async (credentials: IForgetPasswordRequest): Promise<ISignInResponse> => {
       const response = await AuthService.forgetpassword(credentials);
+      return response;
+    }
+  );
+
+  /**
+   * change password
+   */
+  public static changePassword = createAsyncThunk(
+    "auth/changePassword",
+    async (credentials: IChangePasswordRequest): Promise<ISignInResponse> => {
+      const response = await AuthService.changePasword(credentials);
       return response;
     }
   );
