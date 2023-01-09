@@ -59,12 +59,13 @@ export function SocialIcons() {
   );
 
   return (
-    <IconList container spacing={{ xs: 2, sm: 3, md: 4 }}>
+    <IconList container spacing={{ xs: 2, sm: 3, md: 4 }} className="footerIconDP" >
       {socialIcons.map((data, index: number) => (
         <Grid item key={`Social-${data.link}-${index}`}>
           <IconButton onClick={() => (window.location.href = data.link)}>
             <FontAwesomeIcon
               style={{ width: "20px", height: "20px" }}
+              className="IconColor"
               fixedWidth
               inverse
               icon={data.icon}

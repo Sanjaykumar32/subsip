@@ -108,6 +108,39 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
     transition: all 0.3s;
 }
 
+/* footer css */
+
+.footerIconDP>div {
+    padding: 10px 12px !important;
+    background: #fff;
+    border-radius: 10px;
+    /* color: #000; */
+    transition: all .3s;
+}
+
+.IconColor {
+    color: #4e4e4e;
+}
+
+.footerIconDP>div:hover {
+    padding: 10px 12px !important;
+    background: #0A2647;
+    border-radius: 20px;
+    transform: translateY(-10px);
+}
+
+.footerIconDP>div:hover .IconColor {
+    color: #fff;
+}
+
+
+.footerIconDP {
+    display: flex;
+    padding: 35px 21px;
+    gap: 20px;
+}
+
+
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
 
