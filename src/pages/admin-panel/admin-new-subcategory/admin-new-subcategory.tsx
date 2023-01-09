@@ -25,9 +25,8 @@ export function AdminNewSubCategory() {
   const [searchParams] = useSearchParams();
   const subCategoryId = searchParams.get("subCategoryId");
 
-
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ my: 2 }}>
       <AdminBackButton />
       <Container maxWidth="xs" sx={{ my: 1, ml: 0.5 }}>
         <Form onSubmit={submitHandler}>
@@ -110,7 +109,7 @@ export function AdminNewSubCategory() {
               variant="rounded"
               type="submit"
             >
-              {subCategoryId ? 'Update Subcategory' : 'Add Subcategory'}
+              {subCategoryId ? "Update Subcategory" : "Add Subcategory"}
             </Button>
           </Box>
         </Form>

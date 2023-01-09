@@ -214,10 +214,15 @@ export function AdminLayout(props: Props) {
           </Box>
         </Toolbar>
       </AppBar> */}
-      <UserAppBar userMenu={false} display={'adminHeader'} />
+      <UserAppBar userMenu={false} display={"adminHeader"} />
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, zIndex: '-0 ', position: "sticky" }}
+        sx={{
+          width: { sm: drawerWidth },
+          flexShrink: { sm: 0 },
+          zIndex: "-0 ",
+          position: "sticky",
+        }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -255,7 +260,7 @@ export function AdminLayout(props: Props) {
       </Box>
       <Box
         component="main"
-        className='headerTop'
+        className="headerTop"
         sx={{
           flexGrow: 1,
           p: 3,
@@ -265,9 +270,6 @@ export function AdminLayout(props: Props) {
         <Toolbar />
         <Outlet />
       </Box>
-    </Box >
-
-
-
+    </Box>
   );
 }
