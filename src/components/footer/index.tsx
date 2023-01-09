@@ -24,6 +24,7 @@ export const FooterContainer = styled(Paper)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  borderRedius: '0px',
 }));
 
 export function FooterMain() {
@@ -31,31 +32,47 @@ export function FooterMain() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <FooterContainer>
-      <Container maxWidth="lg" disableGutters>
-        <Grid container>
-          {isMobile && (
-            <Grid item>
-              <Box>
-                <Logo />
-                <Typography> Reawrds on Subscription </Typography>
-              </Box>
-            </Grid>
-          )}
-          <Grid item xs={12} md={4} order={{ xs: 2, md: 0 }}>
-            {!isMobile && (
-              <Box sx={{ mb: 2 }}>
-                <Logo />
-                <Typography> Reawrds on Subscription </Typography>
-              </Box>
+    <div>
+      <FooterContainer>
+        <Container maxWidth="lg" disableGutters>
+          <Grid container>
+            {isMobile && (
+              <Grid item>
+                <Box>
+                  <Logo />
+                  <Typography> Free certificates from businesses you love </Typography>
+                </Box>
+              </Grid>
             )}
-            <SocialIcons />
+            <Grid item xs={12} md={4} order={{ xs: 2, md: 0 }}>
+              {!isMobile && (
+                <Box sx={{ mb: 2 }}>
+                  <Logo />
+                  <Typography> Free certificates from businesses you love  </Typography>
+                </Box>
+              )}
+              <SocialIcons />
+            </Grid>
+            <Grid item xs={12} md={8} order={{ xs: 1, md: 1 }}>
+              <Links />
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={8} order={{ xs: 1, md: 1 }}>
-            <Links />
-          </Grid>
-        </Grid>
-      </Container>
-    </FooterContainer>
+        </Container>
+      </FooterContainer>
+
+      <div className="grid grid-cols-2 px-[60px] py-[10px] bg-[#898989d9]">
+        <div className="flex justify-start">
+          <p>Copyright  2023. All rights reserved.</p>
+        </div>
+        <div className="flex justify-end">
+          <ul className="flex gap-[15px] ">
+            <li>Terms and Conditions</li>
+            <li>Privacy Policy</li>
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
   );
 }

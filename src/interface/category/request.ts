@@ -56,7 +56,7 @@ export interface INewRewardRequest {
 export interface INewNotifyButtonRequest {
   headline: string;
   date: any;
-  description: string;
+  desc: string;
   userIds: [];
 }
 

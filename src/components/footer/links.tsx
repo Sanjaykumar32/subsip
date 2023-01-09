@@ -20,7 +20,15 @@ const ListBox = styled(Box)(({ theme }) => ({
   },
 }));
 
+
+
 export function Links() {
+
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0)
+  }
+
   const links = useMemo(
     () => [
       {
@@ -44,7 +52,7 @@ export function Links() {
             link: "/about",
           },
           {
-            title: "Referal",
+            title: "Blog",
             link: "/referal",
           },
         ],
@@ -77,21 +85,23 @@ export function Links() {
                   {data.title}
                 </Typography>
                 {data.subTitle.map((subData) => (
-                  <Link
-                    href={subData.link}
-                    key={`Sub-Links-${subData.title}-${index}}`}
-                  >
-                    <Typography
-                      sx={{
-                        fontSize: "17px",
-                        color: "#fff",
-                        mt: 1,
-                        whiteSpace: "nowrap",
-                      }}
+                  <li onClick={scrollToTop} key={`Sub-Links-${subData.title}-${index}}`}>
+                    <Link
+                      href={subData.link}
+
                     >
-                      {subData.title}
-                    </Typography>
-                  </Link>
+                      <Typography
+                        sx={{
+                          fontSize: "17px",
+                          color: "#fff",
+                          mt: 1,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {subData.title}
+                      </Typography>
+                    </Link>
+                  </li>
                 ))}
               </ListBox>
             </List>

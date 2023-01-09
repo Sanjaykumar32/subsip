@@ -64,7 +64,7 @@ export const NewNotifyButtonController =
         AdminThunk.newNotifyButton({
           headline: headline,
           date: date,
-          description: description,
+          desc: description,
           userIds: userID
         })
       );

@@ -1,5 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material";
+import LogoImage from "../images/Poshsub_logo.png"
 
 const LogoCss = styled("svg", {
   shouldForwardProp: (props) => props !== "color",
@@ -24,29 +25,30 @@ export function PoshSubLogo(props: PoshSubLogoProps) {
   const color = props.variant === "light" ? "#ffffff" : "#343d45";
 
   return (
-    <LogoCss
-      color={color}
-      id="Layer_1"
-      data-name="Layer 1"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 500 136.74"
-    >
-      <text className="cls-1" transform="translate(0 98)">
-        P
-        <tspan className="cls-2" x="74.16" y="0">
-          O
-        </tspan>
-        <tspan className="cls-3" x="152.76" y="0">
-          SH
-        </tspan>
-        <tspan className="cls-4" x="290.09" y="0">
-          S
-        </tspan>
-        <tspan className="cls-5" x="362.96" y="0">
-          UB
-        </tspan>
-      </text>
-    </LogoCss>
+    // <LogoCss
+    //   color={color}
+    //   id="Layer_1"
+    //   data-name="Layer 1"
+    //   xmlns="http://www.w3.org/2000/svg"
+    //   viewBox="0 0 500 136.74"
+    // >
+    //   <text className="cls-1" transform="translate(0 98)">
+    //     P
+    //     <tspan className="cls-2" x="74.16" y="0">
+    //       O
+    //     </tspan>
+    //     <tspan className="cls-3" x="152.76" y="0">
+    //       SH
+    //     </tspan>
+    //     <tspan className="cls-4" x="290.09" y="0">
+    //       S
+    //     </tspan>
+    //     <tspan className="cls-5" x="362.96" y="0">
+    //       UB
+    //     </tspan>
+    //   </text>
+    // </LogoCss>
+    <img src={LogoImage} className={props.variant === "light" ? 'Logo LightVariant' : 'Logo darkVariant'} />
   );
 }
 

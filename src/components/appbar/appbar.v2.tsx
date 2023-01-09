@@ -256,7 +256,7 @@ export const UserAppBar = (props: any) => {
   const [open, setOpen] = useState<boolean>(false);
   const spring = useSpring({
     from: { height: "0px" },
-    to: { height: !isMobile ? "60px" : open ? "250px" : "0px" },
+    to: { height: !isMobile ? "auto" : open ? "250px" : "0px" },
   });
 
   const [sticky, setSticky] = useState("");
@@ -541,7 +541,8 @@ export const UserAppBar = (props: any) => {
                         <div className="Notification list w-[250px]">
                           <div className="flex w-full gap-[15px] ">
                             <li className="w-[70%] text-black cursor-pointer text-[16px] ">
-                              {res.vHeadline}
+                              <h1>{res.vHeadline}</h1>
+                              <p>{res.vDesc}</p>
                             </li>
                             <span
                               className="w-[30%] text-center text-[15px]"
@@ -570,77 +571,53 @@ export const UserAppBar = (props: any) => {
           )}
         </Toolbar>
         {props?.userMenu == true && (
-          <animated.div style={{ overflow: "hidden", ...spring }}>
-            <Toolbar>
-              <div className="moblieMenu">
-                <List
-                  className="categoryListing"
-                  sx={{
-                    display: "flex",
-                    flexDirection: { xs: "column", md: "row" },
-                    ".MuiListItem-root": {
-                      minWidth: "fit-content",
-                      cursor: "pointer",
-                    },
-                  }}
-                >
-                  {categoryData.map((item: any, index: any) =>
-                    index === 0 ? (
-                      <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`}>
-                          {item?.vName}
-                        </Link>
-                      </ListItem>
-                    ) : index === 1 ? (
-                      <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`}>
-                          {item?.vName}
-                        </Link>
-                      </ListItem>
-                    ) : index === 2 ? (
-                      <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`}>
-                          {item?.vName}
-                        </Link>
-                      </ListItem>
-                    ) : (
-                      index === 3 && (
-                        <ListItem>
-                          <Link href={`/category/all`}>{"More"}</Link>
-                        </ListItem>
-                      )
-                    )
-                  )}
-                </List>
-
-                {!auth.isAuthenticated ? (
-                  <Button
-                    variant="contained"
+          categoryData.length > 0 && (
+            <animated.div style={{ overflow: "hidden", ...spring }}>
+              <Toolbar>
+                <div className="moblieMenu">
+                  <List
+                    className="categoryListing"
                     sx={{
-                      minWidth: "100px",
-                      display: { xs: "block", md: "none" },
-                    }}
-                    onClick={() => {
-                      navigate(AuthRoutePathEnum.SIGN_IN);
+                      display: "flex",
+                      flexDirection: { xs: "column", md: "row" },
+                      ".MuiListItem-root": {
+                        minWidth: "fit-content",
+                        cursor: "pointer",
+                      },
                     }}
                   >
-                    Log In
-                  </Button>
-                ) : (
-                  <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                    <IconButton sx={{ mx: 1 }}>
-                      <FontAwesomeIcon icon={faUserCircle} />
-                    </IconButton>
-                    <IconButton sx={{ mx: 1 }}>
-                      <Badge badgeContent={2} color="error">
-                        <FontAwesomeIcon icon={faBell} />
-                      </Badge>
-                    </IconButton>
-                  </Box>
-                )}
-              </div>
-            </Toolbar>
-          </animated.div>
+                    {categoryData.map((item: any, index: any) =>
+                      index === 0 ? (
+                        <ListItem key={index}>
+                          <Link href={`/category/${item?.iCategoryId}`}>
+                            {item?.vName}
+                          </Link>
+                        </ListItem>
+                      ) : index === 1 ? (
+                        <ListItem key={index}>
+                          <Link href={`/category/${item?.iCategoryId}`}>
+                            {item?.vName}
+                          </Link>
+                        </ListItem>
+                      ) : index === 2 ? (
+                        <ListItem key={index}>
+                          <Link href={`/category/${item?.iCategoryId}`}>
+                            {item?.vName}
+                          </Link>
+                        </ListItem>
+                      ) : (
+                        index === 3 && (
+                          <ListItem>
+                            <Link href={`/category/all`}>{"More"}</Link>
+                          </ListItem>
+                        )
+                      )
+                    )}
+                  </List>
+                </div>
+              </Toolbar>
+            </animated.div>
+          )
         )}
       </AppBar>
       <Backdrop
