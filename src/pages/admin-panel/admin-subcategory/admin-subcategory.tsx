@@ -50,7 +50,7 @@ export function AdminSubCategory() {
             <FontAwesomeIcon
               icon={faTrash}
               onClick={() => {
-                deleteSubCategorylist(params.value[2]);
+                deleteSubCategorylist(params.value[3]);
               }}
               className="ml-[25px]"
             />
