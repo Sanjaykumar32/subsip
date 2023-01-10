@@ -187,7 +187,14 @@ export function Home() {
                   </div>
 
                   <div>
-                    <span className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle">
+                    <span
+                      className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle"
+                      onClick={() => {
+                        auth?.isAuthenticated
+                          ? onImageClick(ele.iBusinessId)
+                          : navigate(AuthRoutePathEnum.SIGN_IN);
+                      }}
+                    >
                       {ele.vName}
                     </span>
                   </div>
@@ -442,9 +449,16 @@ const SliderCard = (props: any) => {
         onClick={onImageClick}
       />
       <div className=" pl-3 py-3  ">
-        <p className="text-[1.3rem] font-semibold text-[#021414] leading-[22px] py-2">
+        <span
+          className="text-black text-[1.3rem] font-semibold cursor-pointer sliderTitle"
+          onClick={() => {
+            auth?.isAuthenticated
+              ? onImageClick()
+              : navigate(AuthRoutePathEnum.SIGN_IN);
+          }}
+        >
           {name}
-        </p>
+        </span>
         <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold py-2">
           {location}
         </p>

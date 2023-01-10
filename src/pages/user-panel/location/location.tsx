@@ -15,6 +15,8 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import ResponsiveDialog from "./component/referral";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAuth } from "context/auth.context";
+import { useNavigate } from "react-router-dom";
+import { RoutePathEnum, AuthRoutePathEnum } from "enum";
 
 export function LocationPage() {
   const theme = useTheme();
@@ -48,6 +50,7 @@ export function LocationPage() {
   // const obj = { name, location, description, subscribers } as ILocationProps;
 
   const refferralCode = useAppSelector(GET_REFFERRAL_CODE);
+  const navigate = useNavigate();
 
   return (
     <Container maxWidth="lg" sx={{ my: 8 }}>
@@ -58,7 +61,15 @@ export function LocationPage() {
       <Grid container spacing={2}>
         <Grid item sm={12} md={8}>
           {bussinessByName.map((res: IBusiness, index: number) => (
-            <Card sx={{ width: "100%", maxHeight: "500px" }} key={index}>
+            <Card
+              sx={{ width: "100%", maxHeight: "500px" }}
+              key={index}
+              onClick={() => {
+                auth?.isAuthenticated
+                  ? navigate(RoutePathEnum.LISTING_PRODUCT)
+                  : navigate(AuthRoutePathEnum.SIGN_IN);
+              }}
+            >
               <img
                 alt={name}
                 style={{
