@@ -152,6 +152,11 @@ export function AdminLayout(props: Props) {
 
   return (
     <Box sx={{ display: "flex" }}>
+<<<<<<< HEAD
+
+      <UserAppBar userMenu={false} display={'adminHeader'} />
+      {/* <div className="pt-[200px]"> */}
+=======
       {/* <AppBar
         elevation={0}
         color="default"
@@ -215,6 +220,7 @@ export function AdminLayout(props: Props) {
         </Toolbar>
       </AppBar> */}
       <UserAppBar userMenu={false} display={"adminHeader"} />
+>>>>>>> 89db68f762506f6169a99fad8bdf958bc8fcd75f
       <Box
         component="nav"
         sx={{
@@ -239,6 +245,7 @@ export function AdminLayout(props: Props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              // top: '75px !important'
             },
           }}
         >
@@ -247,10 +254,12 @@ export function AdminLayout(props: Props) {
         <Drawer
           variant="permanent"
           sx={{
+
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              top: '75px',
             },
           }}
           open
@@ -270,6 +279,14 @@ export function AdminLayout(props: Props) {
         <Toolbar />
         <Outlet />
       </Box>
+<<<<<<< HEAD
+      {/* </div> */}
+    </Box >
+
+
+
+=======
     </Box>
+>>>>>>> 89db68f762506f6169a99fad8bdf958bc8fcd75f
   );
 }
