@@ -192,7 +192,7 @@ export const UserAppBar = (props: any) => {
 
         const data = [
           {
-            title: "DashBoard",
+            title: "Dashboard",
             route: AdminRoutePathEnum.ADMIN,
           },
           {
@@ -200,7 +200,7 @@ export const UserAppBar = (props: any) => {
             route: RoutePathEnum.PROFILE,
           },
           {
-            title: "Subscription",
+            title: "Subscriptions",
             route: RoutePathEnum.SUBSCRIPTIONS,
           },
           {
@@ -208,7 +208,36 @@ export const UserAppBar = (props: any) => {
             route: RoutePathEnum.REWARDS,
           },
           {
-            title: "Refferal Program",
+            title: "Referrals",
+            route: RoutePathEnum.REFER,
+          },
+          {
+            title: "Logout",
+            route: AuthRoutePathEnum.SIGN_IN,
+          },
+        ];
+        setMenuItem(data);
+
+      } else {
+        const data = [
+          {
+            title: "Dashboard",
+            route: AdminRoutePathEnum.ADMIN,
+          },
+          {
+            title: "Profile",
+            route: RoutePathEnum.PROFILE,
+          },
+          {
+            title: "Subscriptions",
+            route: RoutePathEnum.SUBSCRIPTIONS,
+          },
+          {
+            title: "Rewards",
+            route: RoutePathEnum.REWARDS,
+          },
+          {
+            title: "Referrals",
             route: RoutePathEnum.REFER,
           },
           {
@@ -563,7 +592,7 @@ export const UserAppBar = (props: any) => {
                       handleNotificationClose();
                     }}
                   >
-                    No Notification
+                    No Notifications
                   </MenuItem>
                 )}
               </Menu>

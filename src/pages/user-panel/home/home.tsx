@@ -178,8 +178,8 @@ export function Home() {
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
-              <div className="max-w-[100%] mt-[78px] lg:max-w-[80%] xl:max-w-[70%] gap-5  min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
-                <div className="w-full md:w-1/2 gap-5 flex flex-col px-2 md:px-10">
+              <div className="max-w-[100%] mt-[78px] lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
+                <div className="w-[80%] md:w-[45%] gap-5 flex flex-col px-2 pt-10 md:px-10">
                   <div>
                     <span className="bg-[#0275d8] rounded-md text-[0.9rem] py-[5px] px-[10px] font-normal text-white">
                       Featured
@@ -194,29 +194,31 @@ export function Home() {
                   <p className=" text-black md:text-[#bdbdbd] text-[0.8rem] ">
                     {ele.vLocation}
                   </p>
-                  <p className="text-black md:text-white text-[0.95rem] font-normal">
+                  <p className="text-black md:text-white text-[0.95rem] textLimit2 font-normal">
                     {ele?.tDescription}
                   </p>
                   {/* <p className="text-[#0275d8]">{ele?.subscribers}</p> */}
-                  <button
-                    className="bg-[#d32f3f] text-[1rem] w-36 rounded-full  py-4 px-2 font-normal text-white"
-                    onClick={() => {
-                      auth?.isAuthenticated
-                        ? onImageClick(ele.iBusinessId)
-                        : navigate(AuthRoutePathEnum.SIGN_IN);
-                    }}
-                  >
-                    {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
-                  </button>
+                  <span>
+                    <button
+                      className="bg-[#d32f3f] text-[1rem] w-36 rounded-full  py-4 px-2 font-normal text-white"
+                      onClick={() => {
+                        auth?.isAuthenticated
+                          ? onImageClick(ele.iBusinessId)
+                          : navigate(AuthRoutePathEnum.SIGN_IN);
+                      }}
+                    >
+                      {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
+                    </button>
+                  </span>
                 </div>
-                <div className=" relative min-h-[353px] max-h-[calc(100vh-25rem)] w-full  md:w-1/2 flex justify-center items-center">
+                <div className=" relative min-h-[353px] max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
                   <img
                     src={
                       ele?.vImage
                         ? "http://159.223.194.50:8000/" + ele?.vImage
                         : "http://159.223.194.50:8000/public/uploads/1672076769972.png"
                     }
-                    className="h-full w-full object-contain object-left-top "
+                    className="h-full w-full object-cover object-center rounded-[7px] "
                   />
                 </div>
               </div>
@@ -232,7 +234,7 @@ export function Home() {
         <div className="relative">
           <Slider ref={cardRef} {...cardSettings}>
             {filterBanner
-              .filter((el) => parseInt(el.iCategory) == 50)
+              .filter((el) => parseInt(el.iCategory) == CateFirst[0])
               .map((ele: IBusiness, index: number) => {
                 return (
                   <div
@@ -254,14 +256,14 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el: any) => parseInt(el.iCategory) == 50)
+          {filterBanner.filter((el: any) => parseInt(el.iCategory) == CateFirst[0])
             .length > 0 && <SliderArrow refVal={cardRef} />}
         </div>
 
         <div className="relative mt-10 w-full">
           <Slider ref={cardRef2} {...cardSettings}>
             {filterBanner
-              .filter((el) => parseInt(el.iCategory) == CateFirst[0])
+              .filter((el) => parseInt(el.iCategory) == CateFirst[1])
               .map((ele: IBusiness, index: number) => {
                 return (
                   <div
@@ -283,14 +285,14 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[0])
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1])
             .length > 0 && <SliderArrow refVal={cardRef2} />}
         </div>
 
         <div className="relative my-10 w-full">
           <Slider ref={cardRef3} {...cardSettings}>
             {filterBanner
-              .filter((el) => parseInt(el.iCategory) == CateFirst[1])
+              .filter((el) => parseInt(el.iCategory) == CateFirst[2])
               .map((ele, index) => {
                 return (
                   <div
@@ -312,43 +314,13 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1])
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[2])
             .length > 0 && <SliderArrow refVal={cardRef3} />}
         </div>
 
         {/* More data show */}
         {showMoreData ? (
           <>
-            <div className="relative my-10 w-full">
-              <Slider ref={cardRef3} {...cardSettings}>
-                {filterBanner
-                  .filter((el) => parseInt(el.iCategory) == CateFirst[2])
-                  .map((ele, index) => {
-                    return (
-                      <div
-                        style={{
-                          boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
-                        }}
-                        key={`${ele.categoryName}+${index}`}
-                        className="relative overflow-x-auto md:overflow-x-hidden "
-                      >
-                        <SliderCard
-                          imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
-                          name={ele?.vName}
-                          tagLine={ele?.vTagLine}
-                          des={ele?.tDescription}
-                          location={ele?.vLocation}
-                          id={ele.iBusinessId}
-                        />
-                      </div>
-                    );
-                  })}
-              </Slider>
-              {filterBanner.filter(
-                (el) => parseInt(el.iCategory) == CateFirst[2]
-              ).length > 0 && <SliderArrow refVal={cardRef3} />}
-            </div>
-
             <div className="relative my-10 w-full">
               <Slider ref={cardRef3} {...cardSettings}>
                 {filterBanner
@@ -378,20 +350,54 @@ export function Home() {
                 (el) => parseInt(el.iCategory) == CateFirst[3]
               ).length > 0 && <SliderArrow refVal={cardRef3} />}
             </div>
+
+            <div className="relative my-10 w-full">
+              <Slider ref={cardRef3} {...cardSettings}>
+                {filterBanner
+                  .filter((el) => parseInt(el.iCategory) == CateFirst[4])
+                  .map((ele, index) => {
+                    return (
+                      <div
+                        style={{
+                          boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
+                        }}
+                        key={`${ele.categoryName}+${index}`}
+                        className="relative overflow-x-auto md:overflow-x-hidden "
+                      >
+                        <SliderCard
+                          imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
+                          name={ele?.vName}
+                          tagLine={ele?.vTagLine}
+                          des={ele?.tDescription}
+                          location={ele?.vLocation}
+                          id={ele.iBusinessId}
+                        />
+                      </div>
+                    );
+                  })}
+              </Slider>
+              {filterBanner.filter(
+                (el) => parseInt(el.iCategory) == CateFirst[4]
+              ).length > 0 && <SliderArrow refVal={cardRef3} />}
+            </div>
           </>
         ) : null}
 
-        <div className="moreBtn">
-          {showMoreData ? (
-            <Button variant="contained" onClick={handleLessData}>
-              Less...
-            </Button>
-          ) : (
-            <Button variant="contained" onClick={handleMoreData}>
-              Load More...
-            </Button>
-          )}
-        </div>
+        {/* { && */}
+        {filterBanner
+          .filter((el) => parseInt(el.iCategory) == CateFirst[2]) &&
+          <div className="moreBtn">
+            {/* {console.log(CateFirst[3])} */}
+            {showMoreData ? (
+              <Button variant="contained" onClick={handleLessData}>
+                Less...
+              </Button>
+            ) : (
+              <Button variant="contained" onClick={handleMoreData}>
+                Load More...
+              </Button>
+            )}
+          </div>}
       </div>
     </div>
   );

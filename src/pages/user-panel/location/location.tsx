@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Container, useTheme } from "@mui/material";
 import { Card, Grid, Typography } from "@mui/material";
 import {
@@ -15,12 +15,22 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import ResponsiveDialog from "./component/referral";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAuth } from "context/auth.context";
+import { useLocation } from "react-router-dom";
+import { UserThunk } from "data/thunk/user.thunk";
 
 export function LocationPage() {
   const theme = useTheme();
   const bussinessByName = useAppSelector(GET_BUSINESS);
   const [open, setOpen] = React.useState(false);
   const userId = localStorage.getItem("userId");
+
+  const locations = useLocation();
+
+  const getListID = locations.pathname.split('/')[2]
+
+  console.log(getListID, 'Get getListID ID')
+
+
 
   const handleClickOpen = () => {
     try {
@@ -30,6 +40,21 @@ export function LocationPage() {
     }
     setOpen(true);
   };
+
+
+  async function getDatalist() {
+    if (getListID) {
+      const response: any = await dispatch(
+        UserThunk.business({ businessId: Number(getListID) })
+      );
+    }
+  }
+
+  useEffect(() => {
+
+    getDatalist()
+  }, [getListID, locations])
+
 
   const dispatch = useAppDispatch();
 
@@ -71,10 +96,10 @@ export function LocationPage() {
             </Card>
           ))}
         </Grid>
-        <Grid item sm={12} md={4} sx={{ px: 2 }}>
+        <Grid item sm={12} md={4} sx={{ px: 2, mt: '-35px' }}>
           {isAuthenticated && (
-            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-              <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end", paddingBottom: '10px' }}>
+              <Typography variant="body1" fontWeight={600} sx={{ mr: 2, }}>
                 <FontAwesomeIcon
                   icon={faArrowUpRightFromSquare}
                   style={{ marginRight: 4 }}

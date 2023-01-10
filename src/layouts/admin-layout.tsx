@@ -152,69 +152,9 @@ export function AdminLayout(props: Props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      {/* <AppBar
-        elevation={0}
-        color="default"
-        position="fixed"
-        sx={{
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-        }}
-      >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h5"
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              fontFamily: "Kessel",
-              fontWeight: 700,
-              letterSpacing: ".2rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            PoshSub
-          </Typography>
-          {!isMobile && (
-            <TextField
-              size="small"
-              sx={{ width: "50%" }}
-              label="Search Listings"
-              InputProps={{
-                sx: { borderRadius: "60px" },
-                endAdornment: (
-                  <InputAdornment position="end" sx={{ mx: 1 }}>
-                    <FontAwesomeIcon icon={faSearch} />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          )}
-          <Box>
-            <Badge badgeContent={5} color="primary" sx={{ mx: 2 }}>
-              <FontAwesomeIcon icon={faBell} size="lg" />
-            </Badge>
-            {!isMobile && (
-              <FontAwesomeIcon
-                icon={faUserCircle}
-                size="xl"
-                style={{ margin: theme.spacing(0, 2) }}
-              />
-            )}
-          </Box>
-        </Toolbar>
-      </AppBar> */}
+
       <UserAppBar userMenu={false} display={'adminHeader'} />
+      {/* <div className="pt-[200px]"> */}
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, zIndex: '-0 ', position: "sticky" }}
@@ -234,6 +174,7 @@ export function AdminLayout(props: Props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              // top: '75px !important'
             },
           }}
         >
@@ -242,10 +183,12 @@ export function AdminLayout(props: Props) {
         <Drawer
           variant="permanent"
           sx={{
+
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              top: '75px',
             },
           }}
           open
@@ -265,6 +208,7 @@ export function AdminLayout(props: Props) {
         <Toolbar />
         <Outlet />
       </Box>
+      {/* </div> */}
     </Box >
 
 
