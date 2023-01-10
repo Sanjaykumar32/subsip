@@ -152,12 +152,83 @@ export function AdminLayout(props: Props) {
 
   return (
     <Box sx={{ display: "flex" }}>
+<<<<<<< HEAD
 
       <UserAppBar userMenu={false} display={'adminHeader'} />
       {/* <div className="pt-[200px]"> */}
+=======
+      {/* <AppBar
+        elevation={0}
+        color="default"
+        position="fixed"
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+      >
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h5"
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              fontFamily: "Kessel",
+              fontWeight: 700,
+              letterSpacing: ".2rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            PoshSub
+          </Typography>
+          {!isMobile && (
+            <TextField
+              size="small"
+              sx={{ width: "50%" }}
+              label="Search Listings"
+              InputProps={{
+                sx: { borderRadius: "60px" },
+                endAdornment: (
+                  <InputAdornment position="end" sx={{ mx: 1 }}>
+                    <FontAwesomeIcon icon={faSearch} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          )}
+          <Box>
+            <Badge badgeContent={5} color="primary" sx={{ mx: 2 }}>
+              <FontAwesomeIcon icon={faBell} size="lg" />
+            </Badge>
+            {!isMobile && (
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                size="xl"
+                style={{ margin: theme.spacing(0, 2) }}
+              />
+            )}
+          </Box>
+        </Toolbar>
+      </AppBar> */}
+      <UserAppBar userMenu={false} display={"adminHeader"} />
+>>>>>>> 89db68f762506f6169a99fad8bdf958bc8fcd75f
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, zIndex: '-0 ', position: "sticky" }}
+        sx={{
+          width: { sm: drawerWidth },
+          flexShrink: { sm: 0 },
+          zIndex: "-0 ",
+          position: "sticky",
+        }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -198,7 +269,7 @@ export function AdminLayout(props: Props) {
       </Box>
       <Box
         component="main"
-        className='headerTop'
+        className="headerTop"
         sx={{
           flexGrow: 1,
           p: 3,
@@ -208,10 +279,14 @@ export function AdminLayout(props: Props) {
         <Toolbar />
         <Outlet />
       </Box>
+<<<<<<< HEAD
       {/* </div> */}
     </Box >
 
 
 
+=======
+    </Box>
+>>>>>>> 89db68f762506f6169a99fad8bdf958bc8fcd75f
   );
 }
