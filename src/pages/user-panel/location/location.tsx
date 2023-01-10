@@ -88,29 +88,6 @@ export function LocationPage() {
             return <Location {...res} key={index} />;
           })}
         </Grid>
-        <Grid item xs={12}>
-          <Box>
-            <Typography
-              variant="body1"
-              fontWeight={400}
-              sx={{ my: 2, color: theme.palette.grey[600] }}
-            >
-              Scheduling a meeting shouldn’t require endless rounds of email tag
-              just to find a time that works for all your stakeholders. (“Next
-              month is a no-go, too. Should we try for 3 p.m. CT next year?”)
-              It’s hard enough to find work-life balance when you’re manually
-              coordinating across time zones and merging details from your work
-              and personal calendars. You need a stress-free way to manage
-              meetings across all your calendars.
-            </Typography>
-            <Typography variant="h6">
-              Introducing
-              <span style={{ color: theme.palette.info.main, fontWeight: 900 }}>
-                {name}
-              </span>
-            </Typography>
-          </Box>
-        </Grid>
       </Grid>
       {open && (
         <ResponsiveDialog
