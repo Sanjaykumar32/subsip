@@ -239,6 +239,7 @@ export function AdminLayout(props: Props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              // top: '75px !important'
             },
           }}
         >
@@ -251,6 +252,7 @@ export function AdminLayout(props: Props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              top: "75px",
             },
           }}
           open

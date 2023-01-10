@@ -34,6 +34,8 @@ export function ClickOnCategory() {
 
   const getCateID = location.pathname.split('/')[2]
 
+  console.log(getCateID, 'Get Category ID')
+
 
 
 
@@ -50,7 +52,6 @@ export function ClickOnCategory() {
   };
 
   const categoryData = useAppSelector(GET_CATEGORY);
-  // console.log(categoryData, 'cate')
   const dispatch = useAppDispatch();
 
   const getcategory = useCallback(async () => {
@@ -95,12 +96,11 @@ export function ClickOnCategory() {
   useEffect(() => {
     if (getCateID) {
       console.log(getCateID, 'getCateID')
-      handleList(getCateID)
-      setActiveCate(getCateID)
-      setId(getCateID)
-      setActiveCate(getCateID)
+      handleList(Number(getCateID))
+      setActiveCate(Number(getCateID))
     }
   }, [getCateID, location])
+
 
 
   return (
@@ -112,6 +112,8 @@ export function ClickOnCategory() {
               <Typography variant="body1" fontWeight="600">
                 Listings by subcategory:
               </Typography>
+
+
               <List>
                 {categoryData.map((item: any, index: any) => (
                   <ListItem key={index} sx={{ px: 0 }} className={` ${activeCate && ' activeCate '}  cursor-pointer `} >
@@ -128,6 +130,7 @@ export function ClickOnCategory() {
               <Typography variant="body1" fontWeight="600">
                 Listings by Category:
               </Typography>
+
               <List sx={{ paddingRight: '20px !important', paddingBottom: '28px !important' }} >
                 {categoryData.map((item, index) => (
                   <ListItem
@@ -238,7 +241,7 @@ export function ClickOnCategory() {
                             </Typography>
 
                             <Box sx={{ my: 1, lineHeight: 0 }}>
-                              <Typography fontSize={11} fontWeight={600}>
+                              <Typography fontSize={11} fontWeight={600} className={'textLimit2'} >
                                 {data.tDescription}
                               </Typography>
                             </Box>

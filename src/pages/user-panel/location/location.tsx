@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Container, useTheme } from "@mui/material";
 import { Card, Grid, Typography } from "@mui/material";
 import {
@@ -15,12 +15,22 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import ResponsiveDialog from "./component/referral";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAuth } from "context/auth.context";
+import { useNavigate } from "react-router-dom";
+import { RoutePathEnum, AuthRoutePathEnum } from "enum";
+import { useLocation } from "react-router-dom";
+import { UserThunk } from "data/thunk/user.thunk";
 
 export function LocationPage() {
   const theme = useTheme();
   const bussinessByName = useAppSelector(GET_BUSINESS);
   const [open, setOpen] = React.useState(false);
   const userId = localStorage.getItem("userId");
+
+  const locations = useLocation();
+
+  const getListID = locations.pathname.split("/")[2];
+
+  console.log(getListID, "Get getListID ID");
 
   const handleClickOpen = () => {
     try {
@@ -30,6 +40,18 @@ export function LocationPage() {
     }
     setOpen(true);
   };
+
+  async function getDatalist() {
+    if (getListID) {
+      const response: any = await dispatch(
+        UserThunk.business({ businessId: Number(getListID) })
+      );
+    }
+  }
+
+  useEffect(() => {
+    getDatalist();
+  }, [getListID, locations]);
 
   const dispatch = useAppDispatch();
 
@@ -48,6 +70,7 @@ export function LocationPage() {
   // const obj = { name, location, description, subscribers } as ILocationProps;
 
   const refferralCode = useAppSelector(GET_REFFERRAL_CODE);
+  const navigate = useNavigate();
 
   return (
     <Container maxWidth="lg" sx={{ my: 8 }}>
@@ -58,7 +81,15 @@ export function LocationPage() {
       <Grid container spacing={2}>
         <Grid item sm={12} md={8}>
           {bussinessByName.map((res: IBusiness, index: number) => (
-            <Card sx={{ width: "100%", maxHeight: "500px" }} key={index}>
+            <Card
+              sx={{ width: "100%", maxHeight: "500px" }}
+              key={index}
+              onClick={() => {
+                auth?.isAuthenticated
+                  ? navigate(RoutePathEnum.LISTING_PRODUCT)
+                  : navigate(AuthRoutePathEnum.SIGN_IN);
+              }}
+            >
               <img
                 alt={name}
                 style={{
@@ -71,9 +102,15 @@ export function LocationPage() {
             </Card>
           ))}
         </Grid>
-        <Grid item sm={12} md={4} sx={{ px: 2 }}>
+        <Grid item sm={12} md={4} sx={{ px: 2, mt: "-35px" }}>
           {isAuthenticated && (
-            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                paddingBottom: "10px",
+              }}
+            >
               <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}>
                 <FontAwesomeIcon
                   icon={faArrowUpRightFromSquare}
@@ -87,29 +124,6 @@ export function LocationPage() {
           {bussinessByName.map((res: IBusiness, index: number) => {
             return <Location {...res} key={index} />;
           })}
-        </Grid>
-        <Grid item xs={12}>
-          <Box>
-            <Typography
-              variant="body1"
-              fontWeight={400}
-              sx={{ my: 2, color: theme.palette.grey[600] }}
-            >
-              Scheduling a meeting shouldn’t require endless rounds of email tag
-              just to find a time that works for all your stakeholders. (“Next
-              month is a no-go, too. Should we try for 3 p.m. CT next year?”)
-              It’s hard enough to find work-life balance when you’re manually
-              coordinating across time zones and merging details from your work
-              and personal calendars. You need a stress-free way to manage
-              meetings across all your calendars.
-            </Typography>
-            <Typography variant="h6">
-              Introducing
-              <span style={{ color: theme.palette.info.main, fontWeight: 900 }}>
-                {name}
-              </span>
-            </Typography>
-          </Box>
         </Grid>
       </Grid>
       {open && (
