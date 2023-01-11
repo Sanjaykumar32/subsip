@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -17,8 +17,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export function Subscriptions() {
-  const [subscribe , setSubscribe ] =  useState(false)
-  const [search , setSearch ] =  useState('')
+  const [subscribe, setSubscribe] = useState(false);
+  const [search, setSearch] = useState("");
   const list = [
     {
       name: "India Gate Restaurent",
@@ -31,30 +31,36 @@ export function Subscriptions() {
     {
       name: "India list",
       subscribed: false,
-    }
-  ]
-  const array = list.filter((el)=>{
-    return Object.values(el.name).join('').toLowerCase().includes(search.toString().toLowerCase())
+    },
+  ];
+  const array = list.filter((el) => {
+    return Object.values(el.name)
+      .join("")
+      .toLowerCase()
+      .includes(search.toString().toLowerCase());
   });
 
+  console.log(array, "array");
 
-  console.log(array ,'array')
+  const handleSubs = () => {
+    setSubscribe(true);
+  };
+  const handleUnsub = () => {
+    setSubscribe(false);
+  };
 
-  const handleSubs = () =>{
-    setSubscribe(true)
-  }
-  const handleUnsub = ( )=> {
-    setSubscribe(false)
-  }
-
-  const handleSearch = (e:any)=> {
+  const handleSearch = (e: any) => {
     setSearch(e.target.value);
-  }
+  };
   return (
     <Container maxWidth={false} sx={{ p: 2 }}>
       <PageHeader
         name="Subscriptions"
-        icon={{ icon: faCircleQuestion, tooltip: "These are the listings you are subscribed to. If you would like to stop receiving emails or notifications regarding the listing, then simply unsubscribe ?" }}
+        icon={{
+          icon: faCircleQuestion,
+          tooltip:
+            "These are the listings you are subscribed to. If you would like to stop receiving emails or notifications regarding the listing, then simply unsubscribe ?",
+        }}
       />
 
       <Container maxWidth="xs">
@@ -114,24 +120,26 @@ export function Subscriptions() {
               }}
             >
               <Typography variant="body2"> {element.name} :</Typography>
-             {!subscribe ?    <Button
-              onClick={handleSubs}
-                variant="contained"
-                size="small"
-                sx={{ borderRadius: "30px", px: 3 }}
-              >
-                Subscribe
-              </Button> :
-              <Button
-              onClick={handleUnsub}
-                variant="contained"
-                color="inherit"
-                size="small"
-                sx={{ borderRadius: "30px", px: 3 }}
-              >
-                Unsubscribe
-              </Button>}
-              
+              {!subscribe ? (
+                <Button
+                  onClick={handleSubs}
+                  variant="contained"
+                  size="small"
+                  sx={{ borderRadius: "30px", px: 3 }}
+                >
+                  Subscribe
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleUnsub}
+                  variant="contained"
+                  color="inherit"
+                  size="small"
+                  sx={{ borderRadius: "30px", px: 3 }}
+                >
+                  Unsubscribe
+                </Button>
+              )}
             </Box>
             <Divider sx={{ mt: 1 }} />
           </>
@@ -146,7 +154,9 @@ export function Subscriptions() {
             mt: 5,
           }}
         >
-          <Button variant="rounded">Load More</Button>
+          <Button variant="rounded" color="inherit">
+            Load More
+          </Button>
         </Box>
       </Container>
     </Container>

@@ -232,6 +232,17 @@ export class AdminThunk {
   );
 
   /**
+   * New Rewards
+   */
+  public static adminNewReward = createAsyncThunk(
+    "admin/adminNewReward",
+    async (payload: any): Promise<void> => {
+      const response = await AdminService.adminNewReward(payload);
+      return response;
+    }
+  );
+
+  /**
    * Get Reward
    */
   public static getReward = createAsyncThunk(

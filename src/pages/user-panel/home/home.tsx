@@ -26,6 +26,8 @@ export function Home() {
   const location = useLocation();
   const [showMoreData, setMoreData] = useState(false);
 
+  console.log(location, "dhskdshdk");
+
   const settings: any = {
     infinite: true,
     slidesToShow: 1,
@@ -114,6 +116,7 @@ export function Home() {
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
   const userId = localStorage.getItem("userId");
+
   const getcategory = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getCategory());
@@ -145,6 +148,9 @@ export function Home() {
   const handleLessData = () => {
     setMoreData(false);
   };
+  const locatiosn = useLocation();
+  // const businessId = location.id;
+  console.log(locatiosn, "location");
 
   async function onImageClick(id: number): Promise<void> {
     try {
@@ -165,6 +171,7 @@ export function Home() {
         UserThunk.addSubscriberToBusiness({
           businessId: id,
           userId: userId ? userId : "",
+          referredCode: "djgsddj",
         })
       );
     } catch (error) {
@@ -214,7 +221,7 @@ export function Home() {
                           : navigate(AuthRoutePathEnum.SIGN_IN);
                       }}
                     >
-                      {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
+                      Subscribe Now
                     </button>
                   </span>
                 </div>
@@ -263,8 +270,9 @@ export function Home() {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el: any) => parseInt(el.iCategory) == CateFirst[0])
-            .length > 0 && <SliderArrow refVal={cardRef} />}
+          {filterBanner.filter(
+            (el: any) => parseInt(el.iCategory) == CateFirst[0]
+          ).length > 0 && <SliderArrow refVal={cardRef} />}
         </div>
 
         <div className="relative mt-10 w-full">
@@ -391,8 +399,9 @@ export function Home() {
         ) : null}
 
         {/* { && */}
-        {filterBanner
-          .filter((el) => parseInt(el.iCategory) == CateFirst[2]) &&
+        {filterBanner.filter(
+          (el) => parseInt(el.iCategory) == CateFirst[2]
+        ) && (
           <div className="moreBtn">
             {/* {console.log(CateFirst[3])} */}
             {showMoreData ? (
@@ -404,7 +413,8 @@ export function Home() {
                 Load More...
               </Button>
             )}
-          </div>}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -416,7 +426,6 @@ const SliderCard = (props: any) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem("userId");
-
   async function onImageClick(): Promise<void> {
     try {
       const response: any = await dispatch(
@@ -439,6 +448,7 @@ const SliderCard = (props: any) => {
         UserThunk.addSubscriberToBusiness({
           businessId: id,
           userId: userId ? userId : "",
+          referredCode: "dkfdhfjkh",
         })
       );
     } catch (error) {

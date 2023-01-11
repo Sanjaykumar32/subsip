@@ -35,7 +35,9 @@ export function PageHeader({
               alignItems: "center",
             }}
           >
-            <Typography variant="alternet"> {name} </Typography>
+            <Typography variant="alternet" color="black">
+              {name}
+            </Typography>
             <Tooltip title={icon.tooltip}>
               <IconButton sx={{ ml: 0.5 }}>
                 <FontAwesomeIcon icon={icon.icon} />

@@ -1,37 +1,37 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { AuthRoutePathEnum } from "enum";
 import { toast } from "react-hot-toast";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function ResponsiveDialog({
   open,
   handleClose,
   refferralCode,
 }: any) {
+  const location = useParams();
+  const businessId = location.id;
+  const userId = localStorage.getItem("userId");
+  const hostName = window.location.origin;
+
   /**
    * copy referral code
    * @return {void}
    */
   const appIdCopy = (): void => {
     navigator.clipboard.writeText(
-      `${hostName}${AuthRoutePathEnum.SIGN_UP}/?referralCode=${refferralCode.referralCode}`
+      `${hostName}/listing/${businessId}/?referralCode=${refferralCode.referralCode}&useId=${userId}`
     );
     handleClose();
     toast.success("Copied SuccessFully");
   };
-
-  const hostName = window.location.origin;
 
   return (
     <Dialog

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { theme } from "theme";
 import {
   Card,
@@ -12,8 +12,10 @@ import {
 } from "@mui/material";
 import { IAuthContext, useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IBusiness } from "interface";
+import { useAppDispatch } from "data";
+import { UserThunk } from "data/thunk/user.thunk";
 
 export const Title = ({ children, ...props }: TypographyProps) => (
   <Typography variant="h5" fontWeight={900} sx={{ mt: 2, mb: 1 }} {...props}>
@@ -48,6 +50,33 @@ export const Subscribe = ({
   auth?: IAuthContext;
 }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const userId = localStorage.getItem("userId");
+  const location = useParams();
+  const businessId = location.id;
+  const referralcode = localStorage.getItem("referralCode");
+  const [disableButton, setDisableButton] = useState<boolean>(false);
+
+  async function onButtonClick(): Promise<void> {
+    if (auth?.isAuthenticated) {
+      try {
+        const response = await dispatch(
+          UserThunk.addSubscriberToBusiness({
+            businessId: businessId ? parseInt(businessId) : 0,
+            userId: userId ? userId : "",
+            referredCode: referralcode,
+          })
+        );
+        setDisableButton(true);
+        console.log(response, "response");
+        navigate(RoutePathEnum.LISTING_PRODUCT);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      navigate(AuthRoutePathEnum.SIGN_IN);
+    }
+  }
   return (
     <>
       <Box sx={{ my: 3 }}>
@@ -60,19 +89,31 @@ export const Subscribe = ({
         </Typography>
       </Box>
 
-      <Button
-        size="large"
-        variant="contained"
-        color="error"
-        onClick={() => {
-          auth?.isAuthenticated
-            ? navigate(RoutePathEnum.LISTING_PRODUCT)
-            : navigate(AuthRoutePathEnum.SIGN_IN);
-        }}
-        sx={{ fontWeight: 800, borderRadius: "24px" }}
-      >
-        {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
-      </Button>
+      {!disableButton ? (
+        <Button
+          size="large"
+          variant="contained"
+          color="error"
+          onClick={() => {
+            onButtonClick();
+          }}
+          sx={{ fontWeight: 800, borderRadius: "24px" }}
+        >
+          Subscribe Now
+        </Button>
+      ) : (
+        <Button
+          size="large"
+          variant="contained"
+          color="error"
+          onClick={() => {
+            onButtonClick();
+          }}
+          sx={{ fontWeight: 800, borderRadius: "24px" }}
+        >
+          Subscribed
+        </Button>
+      )}
     </>
   );
 };

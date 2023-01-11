@@ -76,7 +76,7 @@ export const NewRewardController = (): INewRewardControllerReturns => {
 
   const submitHandler = async (): Promise<void> => {
     await dispatch(
-      AdminThunk.newReward({
+      AdminThunk.adminNewReward({
         name: name,
         availability: availibility,
         category: category,

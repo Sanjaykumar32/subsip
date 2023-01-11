@@ -23,22 +23,17 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
 
 export function ClickOnCategory() {
-
-  const [ids, setId] = useState<any>()
+  const [ids, setId] = useState<any>();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const naviagate = useNavigate()
+  const naviagate = useNavigate();
   const [activeCate, setActiveCate] = useState<any>(false);
 
   const location = useLocation();
 
-  const getCateID = location.pathname.split('/')[2]
+  const getCateID = location.pathname.split("/")[2];
 
-  console.log(getCateID, 'Get Category ID')
-
-
-
-
+  console.log(getCateID, "Get Category ID");
 
   const data = {
     image:
@@ -67,11 +62,10 @@ export function ClickOnCategory() {
   }, [getcategory]);
 
   const handleList = (id: any) => {
-
     // naviagate(`/listing?${id?.iCategoryId}`);
-    setId(id)
+    setId(id);
     // setActiveCate(id?.iCategoryId)
-  }
+  };
 
   const businessData = useAppSelector(GET_BUSINESS);
 
@@ -89,19 +83,19 @@ export function ClickOnCategory() {
 
   // console.log(businessData, 'businessData')
 
-  const totalLenght = businessData.filter((item: any) => item.iCategory === ids)
+  const totalLenght = businessData.filter(
+    (item: any) => item.iCategory === ids
+  );
 
-  console.log(totalLenght, 'totalLenght getCateID')
+  console.log(totalLenght, "totalLenght getCateID");
 
   useEffect(() => {
     if (getCateID) {
-      console.log(getCateID, 'getCateID')
-      handleList(Number(getCateID))
-      setActiveCate(Number(getCateID))
+      console.log(getCateID, "getCateID");
+      handleList(Number(getCateID));
+      setActiveCate(Number(getCateID));
     }
-  }, [getCateID, location])
-
-
+  }, [getCateID, location]);
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
@@ -113,10 +107,15 @@ export function ClickOnCategory() {
                 Listings by subcategory:
               </Typography>
 
-
               <List>
                 {categoryData.map((item: any, index: any) => (
-                  <ListItem key={index} sx={{ px: 0 }} className={` ${activeCate && ' activeCate '}  cursor-pointer `} >
+                  <ListItem
+                    key={index}
+                    sx={{ px: 0 }}
+                    className={` ${
+                      activeCate && " activeCate "
+                    }  cursor-pointer `}
+                  >
                     {item.vName}
                   </ListItem>
                 ))}
@@ -125,22 +124,31 @@ export function ClickOnCategory() {
           </Drawer>
         )}
         {!isMobile && (
-          <Grid item xs={12} md={2.1} sx={{ paddingRight: '20px' }} >
+          <Grid item xs={12} md={2.1} sx={{ paddingRight: "20px" }}>
             <Box sx={{ overflow: "auto", my: 1 }} className="pl-[18px]">
               <Typography variant="body1" fontWeight="600">
                 Listings by Category:
               </Typography>
 
-              <List sx={{ paddingRight: '20px !important', paddingBottom: '28px !important' }} >
+              <List
+                sx={{
+                  paddingRight: "20px !important",
+                  paddingBottom: "28px !important",
+                }}
+              >
                 {categoryData.map((item, index) => (
                   <ListItem
                     key={index}
                     sx={{ px: 0 }}
-                    onClick={() => { handleList(item?.iCategoryId), setActiveCate(item?.iCategoryId) }}
-                    className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId ? ' activeCate' : ''}  `}
+                    onClick={() => {
+                      handleList(item?.iCategoryId),
+                        setActiveCate(item?.iCategoryId);
+                    }}
+                    className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${
+                      activeCate === item?.iCategoryId ? " activeCate" : ""
+                    }  `}
                   >
                     {item.vName}
-
                   </ListItem>
                 ))}
               </List>
@@ -160,13 +168,15 @@ export function ClickOnCategory() {
                 paddingBottom: "20px",
               }}
             >
-              {totalLenght.length > 0 ?
+              {totalLenght.length > 0 ? (
                 <Typography variant="body2" fontWeight="600">
                   {totalLenght.length} listings
-                </Typography> :
+                </Typography>
+              ) : (
                 <Typography variant="body2" fontWeight="600">
                   No listings Here
-                </Typography>}
+                </Typography>
+              )}
               <Box
                 sx={{
                   display: "flex",
@@ -199,9 +209,9 @@ export function ClickOnCategory() {
             </Box>
 
             <Grid container className=" pb-[20px] ">
-
               {businessData.length > 0 &&
-                businessData.filter(el => el.iCategory === ids)
+                businessData
+                  .filter((el) => el.iCategory === ids)
                   .map((data: any, index: any) => (
                     <Grid key={index} item sm={4} className="pb-[20px] ">
                       <Card
@@ -217,11 +227,10 @@ export function ClickOnCategory() {
                           {/* {setActiveCate(true)} */}
 
                           <img
-
                             src={
                               data.vImage
                                 ? "http://159.223.194.50:8000/" + data.vImage
-                                : ''
+                                : ""
                             }
                             // alt={data.eStatus}
                             width="100%"
@@ -241,7 +250,11 @@ export function ClickOnCategory() {
                             </Typography>
 
                             <Box sx={{ my: 1, lineHeight: 0 }}>
-                              <Typography fontSize={11} fontWeight={600} className={'textLimit2'} >
+                              <Typography
+                                fontSize={11}
+                                fontWeight={600}
+                                className={"textLimit2"}
+                              >
                                 {data.tDescription}
                               </Typography>
                             </Box>
@@ -257,19 +270,21 @@ export function ClickOnCategory() {
                                 fontWeight={600}
                                 color={theme.palette.grey[500]}
                               >
-                                {data.subscriberCount + ' Subscribe'}
+                                {data.subscriberCount + " Subscribe"}
                               </Typography>
                               {/* <Button color="error" variant="rounded" size="small">
                                 Subscribe
                               </Button> */}
                               <div className="raletive">
                                 <div className="subscribeLebalListing">
-                                  <span className=" text-white  ">Subscribe</span>
+                                  <span className=" text-white  ">
+                                    Subscribe
+                                  </span>
                                 </div>
                               </div>
                             </Box>
                           </Box>
-                          <Box
+                          {/* <Box
                             sx={{
                               textAlign: "center",
                               backgroundColor: theme.palette.grey[300],
@@ -277,18 +292,17 @@ export function ClickOnCategory() {
                             }}
                           >
                             <Typography fontSize={11} fontWeight={600}>
-                              {/* {data.footer} */}
+                              {data.footer}
                             </Typography>
-                          </Box>
+                          </Box> */}
                         </>
                       </Card>
                     </Grid>
-                  ))
-              }
+                  ))}
             </Grid>
           </Box>
         </Grid>
       </Grid>
-    </Container >
+    </Container>
   );
 }

@@ -30,6 +30,7 @@ export interface IRefferralCodeRequest {
 export interface IAddSubscriberTobussinessRequest {
   businessId: number;
   userId: string;
+  referredCode: string;
 }
 
 export interface IDeleteSubscriberRequest {
