@@ -48,6 +48,7 @@ export function AdminRewardToDetails() {
     return {
       id: item.userId,
       rewardName: item.rewardName,
+      Status: "Claimed",
       Actions: ["Edit", "Delete", item?.rewardId],
     };
   });

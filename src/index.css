@@ -94,9 +94,15 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 
 .activeCate {
     font-weight: 700;
-    background: #ff9800 !important;
-    color: #000 !important;
+    /* background: #ff9800 !important; */
+    background: #0A2647 !important;
+    color: #ffffff !important;
+    /* color: #000 !important; */
     box-shadow: 0 0 30px 0 #58585870;
+}
+.activeCate:hover{
+    background: #144272 !important;
+    /* color: #ffffff !important; */
 }
 
 .nan {
@@ -108,6 +114,30 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
     transition: all 0.3s;
 }
 
+.css-rt4894-MuiButtonBase-root-MuiButton-root {
+    background-color: #0A2647 !important;
+    color: #fff !important;
+}
+
+.css-rt4894-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: #144272 !important;
+    color: #fff;
+}
+.css-xbhskc-MuiButtonBase-root-MuiButton-root{
+    background-color: #0A2647 !important;
+    color: #fff !important;
+}
+.css-xbhskc-MuiButtonBase-root-MuiButton-root:hover{
+    background-color: #144272 !important;
+    color: #fff;
+}
+
+.claimbtn {
+    padding: 2px 20px !important;
+    border-radius: 6px !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+}
 /* footer css */
 
 .footerIconDP>div {

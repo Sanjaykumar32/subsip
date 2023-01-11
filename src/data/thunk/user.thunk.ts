@@ -52,9 +52,7 @@ export class UserThunk {
    */
   public static addSubscriberToBusiness = createAsyncThunk(
     "user/addSubscriberstoBusiness",
-    async (
-      payload: IAddSubscriberTobussinessRequest
-    ): Promise<IAddSubcriberToBuisnessResponse> => {
+    async (payload: any): Promise<IAddSubcriberToBuisnessResponse> => {
       const response = await UserService.addSubscriberToBussiness(payload);
       return response;
     }

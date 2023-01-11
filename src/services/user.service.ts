@@ -76,7 +76,7 @@ export class UserService {
    * @return {Promise<IAddSubcriberToBuisnessResponse>}
    */
   public static async addSubscriberToBussiness(
-    payload: IAddSubscriberTobussinessRequest
+    payload: any
   ): Promise<IAddSubcriberToBuisnessResponse> {
     const res: AxiosResponse<IAddSubcriberToBuisnessResponse> =
       await ApiHelper.send<IAddSubcriberToBuisnessResponse>({

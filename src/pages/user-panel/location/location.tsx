@@ -25,16 +25,24 @@ export function LocationPage() {
   const bussinessByName = useAppSelector(GET_BUSINESS);
   const [open, setOpen] = React.useState(false);
   const userId = localStorage.getItem("userId");
-
+  const refferralCode = useAppSelector(GET_REFFERRAL_CODE);
   const locations = useLocation();
 
   const getListID = locations.pathname.split("/")[2];
 
   console.log(getListID, "Get getListID ID");
 
-  const handleClickOpen = () => {
+  const handleClickOpen = async () => {
     try {
-      dispatch(AdminThunk.refferralCode({ userId: userId ? userId : "" }));
+      const response: any = await dispatch(
+        AdminThunk.refferralCode({ userId: userId ? userId : "" })
+      );
+      if (response?.payload?.data?.referralCode) {
+        localStorage.setItem(
+          "referralCode",
+          response?.payload?.data?.referralCode
+        );
+      }
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +77,6 @@ export function LocationPage() {
   const subscribers = 42.2;
   // const obj = { name, location, description, subscribers } as ILocationProps;
 
-  const refferralCode = useAppSelector(GET_REFFERRAL_CODE);
   const navigate = useNavigate();
 
   return (

@@ -404,6 +404,21 @@ export class AdminService {
   }
 
   /**
+   * New Reward
+   * @param {any} payload
+   * @return {Promise<any>}
+   */
+  public static async adminNewReward(payload: any): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/user/reward",
+      method: "POST",
+      data: payload,
+    });
+
+    return res.data;
+  }
+
+  /**
    * admin Reward
    * @return {Promise<IRewardResponse>}
    */
