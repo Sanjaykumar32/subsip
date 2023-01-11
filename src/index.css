@@ -108,6 +108,24 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
     transition: all 0.3s;
 }
 
+.css-rt4894-MuiButtonBase-root-MuiButton-root {
+    background-color: #0A2647 !important;
+    color: #fff !important;
+}
+
+.css-rt4894-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: #144272 !important;
+    color: #fff;
+}
+.css-xbhskc-MuiButtonBase-root-MuiButton-root{
+    background-color: #0A2647 !important;
+    color: #fff !important;
+}
+.css-xbhskc-MuiButtonBase-root-MuiButton-root:hover{
+    background-color: #144272 !important;
+    color: #fff;
+}
+
 /* footer css */
 
 .footerIconDP>div {
