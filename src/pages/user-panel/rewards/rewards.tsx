@@ -152,9 +152,9 @@ export function Rewards() {
         name="Rewards"
         icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
       >
-        <Box sx={{ display: "flex" }}>
-          {[
-            { title: "Availabel", color: theme.palette.success.light },
+        <Box sx={{ display: "flex" }} className='gap-4'>
+          {/* {[
+            { title: "Available", color: theme.palette.success.light },
             { title: "Claimed", color: theme.palette.warning.light },
             { title: "Missed", color: theme.palette.error.main },
           ].map((res, i) => (
@@ -163,7 +163,10 @@ export function Rewards() {
               color={res.color}
               key={`${res.title}-${i}`}
             />
-          ))}
+          ))} */}
+          <Button style={{ background: theme.palette.success.light  }} className='claimbtn' >Available</Button>
+          <Button style={{ background: theme.palette.warning.light  }}  className='claimbtn'>Claimed</Button>
+          <Button style={{ background: theme.palette.error.main }}  className='claimbtn'>Missed</Button>
         </Box>
       </PageHeader>
 
