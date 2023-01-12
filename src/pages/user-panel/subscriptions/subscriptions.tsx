@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -15,26 +15,46 @@ import { PageHeader } from "components";
 import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { AdminThunk } from "data/thunk/admin.thunk";
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
+
 
 export function Subscriptions() {
   const [subscribe, setSubscribe] = useState(false);
   const [search, setSearch] = useState("");
-  const list = [
-    {
-      name: "India Gate Restaurent",
-      subscribed: false,
-    },
-    {
-      name: "Restaurent",
-      subscribed: false,
-    },
-    {
-      name: "India list",
-      subscribed: false,
-    },
-  ];
-  const array = list.filter((el) => {
-    return Object.values(el.name)
+  const dispatch = useAppDispatch();
+
+
+
+
+
+
+
+  const allsubscriberOfBussiness = useCallback(async () => {
+    try {
+
+      const UserID = localStorage.getItem("userId");
+
+      console.log(UserID, 'UserID')
+
+      await dispatch(AdminThunk.allSubscriberOfBussiness({ userId: Number(UserID) }));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    allsubscriberOfBussiness();
+  }, [allsubscriberOfBussiness]);
+
+  const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
+
+  console.log(subscribeBusiness, 'subscribeBusiness')
+
+
+  const array = subscribeBusiness.filter((el) => {
+    return Object.values(el?.businessName)
       .join("")
       .toLowerCase()
       .includes(search.toString().toLowerCase());
@@ -42,8 +62,11 @@ export function Subscriptions() {
 
   console.log(array, "array");
 
-  const handleSubs = () => {
-    setSubscribe(true);
+
+
+  const handleSubs = (id: any) => {
+    // setSubscribe(id);
+    console.log(id, 'numbersss')
   };
   const handleUnsub = () => {
     setSubscribe(false);
@@ -111,7 +134,7 @@ export function Subscriptions() {
         {array.map((element, index: number) => (
           <>
             <Box
-              key={`${element.name}-${index}`}
+              key={`${element.businessName}-${index}`}
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -119,10 +142,10 @@ export function Subscriptions() {
                 alignItems: "baseline",
               }}
             >
-              <Typography variant="body2"> {element.name} :</Typography>
+              <Typography variant="body2"> {element.businessName} :</Typography>
               {!subscribe ? (
                 <Button
-                  onClick={handleSubs}
+                  onClick={() => handleSubs(element?.iAdminId)}
                   variant="contained"
                   size="small"
                   sx={{ borderRadius: "30px", px: 3 }}
@@ -131,7 +154,7 @@ export function Subscriptions() {
                 </Button>
               ) : (
                 <Button
-                  onClick={handleUnsub}
+                  // onClick={handleUnsub()}
                   variant="contained"
                   color="inherit"
                   size="small"
@@ -162,3 +185,5 @@ export function Subscriptions() {
     </Container>
   );
 }
+
+

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { ColoredLabel, PageHeader } from "components";
 import {
   Box,
@@ -31,6 +31,8 @@ import { MuiColor } from "type";
 export function Rewards() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [filter, setFilter] = useState('')
+  const [businessSearch, setSearchBusiness] = useState('')
 
   const chipStatusColor = (): MuiColor => {
     switch (status) {
@@ -112,6 +114,7 @@ export function Rewards() {
     },
   ];
 
+  console.log(rewardData, 'rewardData ');
   const rows = rewardData.map((item) => {
     return {
       id: item.rewardId,
@@ -122,6 +125,25 @@ export function Rewards() {
     };
   });
 
+  const handleSearch = (value: any) => {
+    setFilter(value)
+  }
+
+  const handleBusinessSearch = (el: any) => {
+    setSearchBusiness(el.target.value)
+  }
+
+
+  const list = rows.filter((el) => {
+    return Object.values(el?.Status).join('').toLowerCase().includes(filter.toString().toLowerCase())
+  })
+
+  const filterBusiness = rewardData.filter((el) => {
+    return Object.values(el.businessName).join('').toLowerCase().includes(businessSearch.toString().toLowerCase())
+  })
+
+  console.log(businessSearch, 'businessSearch')
+  console.log(filterBusiness, 'filterBusiness')
   const subscribedList = useMemo(
     () => (
       <Box sx={{ p: 2 }}>
@@ -129,29 +151,22 @@ export function Rewards() {
         <TextField
           sx={{ my: 2 }}
           label="Search Subscriptions"
+          onChange={handleBusinessSearch}
           InputProps={{ endAdornment: <Search /> }}
         />
-        <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>
-          <ListItem> All </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-          <ListItem> India Gate Restaurant </ListItem>
-        </List>
+        {filterBusiness.map((item) => {
+          console.log(item, 'item map ')
+          return (
+            <div key={item.userId}>
+              <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>
+                <ListItem>{item?.businessName}</ListItem>
+              </List>
+            </div>
+          )
+        })}
       </Box>
     ),
-    []
+    [filterBusiness]
   );
 
   return (
@@ -175,18 +190,21 @@ export function Rewards() {
           <Button
             style={{ background: theme.palette.success.light }}
             className="claimbtn"
+            onClick={() => handleSearch('Available')}
           >
             Available
           </Button>
           <Button
             style={{ background: theme.palette.warning.light }}
             className="claimbtn"
+            onClick={() => handleSearch('Claimed')}
           >
             Claimed
           </Button>
           <Button
             style={{ background: theme.palette.error.main }}
             className="claimbtn"
+            onClick={() => handleSearch('Missed')}
           >
             Missed
           </Button>
@@ -205,7 +223,7 @@ export function Rewards() {
         <Grid item xs={12} md={8}>
           <TableContainer sx={{ height: 400, width: "100%" }}>
             <DataGrid
-              rows={rows}
+              rows={list}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}

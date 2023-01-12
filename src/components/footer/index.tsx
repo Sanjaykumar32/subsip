@@ -60,12 +60,12 @@ export function FooterMain() {
         </Container>
       </FooterContainer>
 
-      <div className="grid grid-cols-2 px-[60px] py-[10px] bg-[#898989d9]">
+      <div className="grid grid-cols-2 px-[60px] py-[10px] bg-[#2C2E30]">
         <div className="flex justify-start">
-          <p>Copyright  2023. All rights reserved.</p>
+          <p className="text-[#ffffff]">Copyright  2023. All rights reserved.</p>
         </div>
         <div className="flex justify-end">
-          <ul className="flex gap-[15px] ">
+          <ul className="flex gap-[15px]  text-[#ffffff]">
             <li>Terms and Conditions</li>
             <li>Privacy Policy</li>
           </ul>

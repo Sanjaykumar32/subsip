@@ -35,7 +35,7 @@ export function AdminListing() {
     setLoader(true);
     await dispatch(AdminThunk.deleteBusiness(ID));
     allBusiness();
-    toast.success("Listing Delete SuccessFully");
+    toast.success(" Listing Deleted Successfully");
     setLoader(false);
   }
 
@@ -130,77 +130,84 @@ export function AdminListing() {
   });
 
   return (
-    <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
-      {/* {loader && */}
-      {/* } */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-        }}
-      >
-        <Box>
-          <Button
-            onClick={() => {
-              navigate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
-            }}
-            size="large"
+    <>
+      {loader ?
+        <div className="flex justify-center">
+          <CircularProgress />
+        </div>
+        :
+        <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
+          {/* {loader && */}
+          {/* } */}
+          <Box
             sx={{
-              fontWeight: 800,
-              textAlign: "center",
-              height: "35px",
+              display: "flex",
+              justifyContent: "flex-end",
             }}
-            color="info"
-            variant="contained"
           >
-            New Listing
-          </Button>
-        </Box>
-      </Box>
-      <Container maxWidth="md" sx={{ my: 4 }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            my: 1,
-          }}
-        >
-          <Box>
-            <Typography variant="caption" sx={{ mr: 1 }}>
-              Sort By:
-            </Typography>
-            <FormControl variant="standard">
-              <Select
-                labelId="sort-by-select-label"
-                id="sort-by-simple-select"
-                value="Recommended"
-                size="small"
-                sx={{ fontWeight: 500 }}
+            <Box>
+              <Button
+                onClick={() => {
+                  navigate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
+                }}
+                size="large"
+                sx={{
+                  fontWeight: 800,
+                  textAlign: "center",
+                  height: "35px",
+                }}
+                color="info"
+                variant="contained"
               >
-                <MenuItem value={"Recommended"}>
-                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                    Recommended
-                  </Typography>
-                </MenuItem>
-                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                  <Typography variant="body2">Oldest</Typography>
-                </MenuItem>
-              </Select>
-            </FormControl>
+                New Listing
+              </Button>
+            </Box>
           </Box>
-        </Box>
+          <Container maxWidth="md" sx={{ my: 4 }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                my: 1,
+              }}
+            >
+              <Box>
+                <Typography variant="caption" sx={{ mr: 1 }}>
+                  Sort By:
+                </Typography>
+                <FormControl variant="standard">
+                  <Select
+                    labelId="sort-by-select-label"
+                    id="sort-by-simple-select"
+                    value="Recommended"
+                    size="small"
+                    sx={{ fontWeight: 500 }}
+                  >
+                    <MenuItem value={"Recommended"}>
+                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                        Recommended
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
+                      <Typography variant="body2">Oldest</Typography>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Box>
 
-        <Box style={{ height: 400, width: "100%" }}>
-          {loader && <CircularProgress />}
+            <Box style={{ height: 400, width: "100%" }}>
 
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-        </Box>
-      </Container>
-    </Container>
+
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+              />
+            </Box>
+          </Container>
+        </Container>}
+    </>
   );
 }

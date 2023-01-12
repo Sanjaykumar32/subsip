@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Box, Container, useTheme } from "@mui/material";
 import { Card, Grid, Typography } from "@mui/material";
 import {
@@ -7,7 +7,11 @@ import {
   Info,
   Title,
 } from "components/location/location-card";
-import { GET_BUSINESS, GET_REFFERRAL_CODE } from "data/selectors";
+import {
+  GET_ALL_SUBSCRIBER_OF_BUSINESS,
+  GET_BUSINESS,
+  GET_REFFERRAL_CODE,
+} from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { IBusiness } from "interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,41 +31,48 @@ export function LocationPage() {
   const userId = localStorage.getItem("userId");
   const refferralCode = useAppSelector(GET_REFFERRAL_CODE);
   const locations = useLocation();
-
-  const getListID = locations.pathname.split("/")[2];
-
-  console.log(getListID, "Get getListID ID");
+  const dispatch = useAppDispatch();
+  const businessId = locations.pathname.split("/")[2];
 
   const handleClickOpen = async () => {
     try {
-      const response: any = await dispatch(
+      await dispatch(
         AdminThunk.refferralCode({ userId: userId ? userId : "" })
       );
-      if (response?.payload?.data?.referralCode) {
-        localStorage.setItem(
-          "referralCode",
-          response?.payload?.data?.referralCode
-        );
-      }
     } catch (error) {
       console.log(error);
     }
     setOpen(true);
   };
 
+  const allsubscriberOfBussinesss = useCallback(async () => {
+    try {
+      await dispatch(
+        AdminThunk.allSubscriberOfBussiness({
+          userId: userId ? parseInt(userId) : 0,
+          businessId: businessId ? parseInt(businessId) : 0,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [businessId, dispatch, userId]);
+
+  useEffect(() => {
+    allsubscriberOfBussinesss();
+  }, [allsubscriberOfBussinesss]);
+
   async function getDatalist() {
-    if (getListID) {
+    if (businessId) {
       const response: any = await dispatch(
-        UserThunk.business({ businessId: Number(getListID) })
+        UserThunk.business({ businessId: Number(businessId) })
       );
     }
   }
 
   useEffect(() => {
     getDatalist();
-  }, [getListID, locations]);
-
-  const dispatch = useAppDispatch();
+  }, [businessId, locations]);
 
   const handleClose = () => {
     setOpen(false);
