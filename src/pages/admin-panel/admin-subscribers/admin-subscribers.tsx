@@ -30,9 +30,6 @@ export function AdminSubscribers() {
   const userId = localStorage.getItem("userId");
   const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
 
-
-
-
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
       await dispatch(
@@ -107,12 +104,12 @@ export function AdminSubscribers() {
     };
   });
 
-  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>
-    (() => rowsData.map((r) => r.userID));
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>(() =>
+    rowsData.map((r) => r.userID)
+  );
   const [selectedRows, setSelectedRows] = useState<any>([]);
 
-  console.log(selectionModel, 'itemsss')
-
+  console.log(selectionModel, "itemsss");
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -144,9 +141,11 @@ export function AdminSubscribers() {
             }}
             color="info"
             variant="contained"
-            onClick={() => navigate(AdminRoutePathEnum.ADMIN_NOTIFY_BUTTON, {
-              state: { id: selectionModel, Notify: true },
-            })}
+            onClick={() =>
+              navigate(AdminRoutePathEnum.ADMIN_NOTIFY_BUTTON, {
+                state: { id: selectionModel, Notify: true },
+              })
+            }
           >
             Notify
           </Button>
@@ -210,10 +209,12 @@ export function AdminSubscribers() {
             onSelectionModelChange={(e) => {
               setSelectionModel(e);
               const selectedIDs = new Set(e);
-              const selectedRows = rowsData.filter((r) => selectedIDs.has(r.userID));
+              const selectedRows = rowsData.filter((r) =>
+                selectedIDs.has(r.userID)
+              );
               setSelectedRows(selectedRows);
             }}
-          // onSelectionModelChange={setSelectionModel}
+            // onSelectionModelChange={setSelectionModel}
           />
 
           {/* <pre>{JSON.stringify(selectedRows, null, 4)}</pre> */}
