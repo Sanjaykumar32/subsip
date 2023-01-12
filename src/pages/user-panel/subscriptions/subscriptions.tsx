@@ -18,6 +18,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
+import { UserThunk } from "data/thunk/user.thunk";
 
 
 export function Subscriptions() {
@@ -64,12 +65,19 @@ export function Subscriptions() {
 
 
 
-  const handleSubs = (id: any) => {
+  const handleSubs = async (item: any) => {
     // setSubscribe(id);
-    console.log(id, 'numbersss')
-  };
-  const handleUnsub = () => {
-    setSubscribe(false);
+    console.log(item, 'numbersss')
+
+    const response = await dispatch(
+      UserThunk.addSubscriberToBusiness({
+        businessId: item?.iBusinessId ? parseInt(item?.iBusinessId) : 0,
+        userId: item?.iAdminId ? parseInt(item?.iAdminId) : 0,
+      })
+    );
+
+    console.log(response, 'response')
+
   };
 
   const handleSearch = (e: any) => {
@@ -145,7 +153,7 @@ export function Subscriptions() {
               <Typography variant="body2"> {element.businessName} :</Typography>
               {!subscribe ? (
                 <Button
-                  onClick={() => handleSubs(element?.iAdminId)}
+                  onClick={() => handleSubs(element)}
                   variant="contained"
                   size="small"
                   sx={{ borderRadius: "30px", px: 3 }}
