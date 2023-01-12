@@ -95,7 +95,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 .activeCate {
     font-weight: 700;
     /* background: #ff9800 !important; */
-    background: #0A2647 !important;
+    background: #ACCF02 !important;
     color: #ffffff !important;
     /* color: #000 !important; */
     box-shadow: 0 0 30px 0 #58585870;
@@ -103,6 +103,10 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 .activeCate:hover{
     background: #144272 !important;
     /* color: #ffffff !important; */
+}
+
+.css-1ke8n8-MuiButtonBase-root-MuiButton-root{
+    color: #ffff !important;
 }
 
 .nan {
