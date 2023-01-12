@@ -12,7 +12,12 @@ import {
 } from "@mui/material";
 import { IAuthContext, useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { IBusiness } from "interface";
 import { useAppDispatch, useAppSelector } from "data";
 import { UserThunk } from "data/thunk/user.thunk";
@@ -54,14 +59,14 @@ export const Subscribe = ({
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem("userId");
   const location = useParams();
+  const [searchParams] = useSearchParams();
+  const referralcode = searchParams.get("referralCode");
   const businessId = location.id;
-  const referralcode = localStorage.getItem("referralCode");
   const [disableButton, setDisableButton] = useState<boolean>(false);
-
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
-  console.log(isSubscribed, "isSubscribed");
 
   async function onButtonClick(): Promise<void> {
+    localStorage.setItem("referralcode", referralcode ? referralcode : "");
     if (auth?.isAuthenticated) {
       try {
         const response = await dispatch(
@@ -71,7 +76,6 @@ export const Subscribe = ({
             referredCode: referralcode,
           })
         );
-        console.log(response, "response");
         navigate(RoutePathEnum.LISTING_PRODUCT);
       } catch (error) {
         console.log(error);

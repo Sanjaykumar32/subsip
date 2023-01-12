@@ -15,8 +15,15 @@ export function GuestGuard({ children }: IAuthGuardProps): ReactElement {
   const auth = useAuth();
   const isAuthenticated = auth.isAuthenticated;
   const navigate = useNavigate();
+  const referralcode = localStorage.getItem("referralcode");
+  console.log("kkkkk", referralcode, isAuthenticated);
+
   if (isAuthenticated) {
-    navigate(RoutePathEnum.HOME);
+    if (referralcode) {
+      navigate(RoutePathEnum.LISTING);
+    } else {
+      navigate(RoutePathEnum.HOME);
+    }
     return <> </>;
   }
 
