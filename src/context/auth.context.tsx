@@ -71,7 +71,6 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
       const response: ISignInResponse = await AuthService.signIn(credentials);
       localStorage.setItem("token", response.token.token);
       localStorage.setItem("userId", response.data.userId);
-
       setAuthenticated(true);
     } catch (error) {
       console.log(error);

@@ -26,7 +26,7 @@ export default function ResponsiveDialog({
    */
   const appIdCopy = (): void => {
     navigator.clipboard.writeText(
-      `${hostName}/listing/${businessId}/?referralCode=${refferralCode.referralCode}`
+      `${hostName}/listing/${businessId}?referralCode=${refferralCode.referralCode}`
     );
     handleClose();
     toast.success("Copied SuccessFully");
