@@ -8,6 +8,7 @@ export interface ISubscribeByAdminIdRequest {
 
 export interface IAllBusinessSubscribersRequest {
   userId: number;
+  businessId?: number;
 }
 
 export interface IBussinessRequest {

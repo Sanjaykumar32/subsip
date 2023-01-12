@@ -14,8 +14,9 @@ import { IAuthContext, useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate, useParams } from "react-router-dom";
 import { IBusiness } from "interface";
-import { useAppDispatch } from "data";
+import { useAppDispatch, useAppSelector } from "data";
 import { UserThunk } from "data/thunk/user.thunk";
+import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
 
 export const Title = ({ children, ...props }: TypographyProps) => (
   <Typography variant="h5" fontWeight={900} sx={{ mt: 2, mb: 1 }} {...props}>
@@ -57,6 +58,9 @@ export const Subscribe = ({
   const referralcode = localStorage.getItem("referralCode");
   const [disableButton, setDisableButton] = useState<boolean>(false);
 
+  const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
+  console.log(isSubscribed, "isSubscribed");
+
   async function onButtonClick(): Promise<void> {
     if (auth?.isAuthenticated) {
       try {
@@ -67,7 +71,6 @@ export const Subscribe = ({
             referredCode: referralcode,
           })
         );
-        setDisableButton(true);
         console.log(response, "response");
         navigate(RoutePathEnum.LISTING_PRODUCT);
       } catch (error) {
@@ -89,17 +92,15 @@ export const Subscribe = ({
         </Typography>
       </Box>
 
-      {!disableButton ? (
+      {isSubscribed.length > 0 ? (
         <Button
           size="large"
           variant="contained"
-          color="error"
-          onClick={() => {
-            onButtonClick();
-          }}
+          color="inherit"
           sx={{ fontWeight: 800, borderRadius: "24px" }}
+          disabled={true}
         >
-          Subscribe Now
+          Subscribed
         </Button>
       ) : (
         <Button
@@ -111,7 +112,7 @@ export const Subscribe = ({
           }}
           sx={{ fontWeight: 800, borderRadius: "24px" }}
         >
-          Subscribed
+          Subscribe Now
         </Button>
       )}
     </>

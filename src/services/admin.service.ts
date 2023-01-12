@@ -160,7 +160,7 @@ export class AdminService {
   ): Promise<ISubscriberOfBussinessResponse> {
     const res: AxiosResponse<ISubscriberOfBussinessResponse> =
       await ApiHelper.send<ISubscriberOfBussinessResponse>({
-        url: `/business/subscriber?userId=${payload.userId}`,
+        url: `/business/subscriber?userId=${payload.userId}&businessId=${payload.businessId}`,
         method: "GET",
       });
 
