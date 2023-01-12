@@ -18,7 +18,6 @@ export default function ResponsiveDialog({
 }: any) {
   const location = useParams();
   const businessId = location.id;
-  const userId = localStorage.getItem("userId");
   const hostName = window.location.origin;
 
   /**
@@ -27,7 +26,7 @@ export default function ResponsiveDialog({
    */
   const appIdCopy = (): void => {
     navigator.clipboard.writeText(
-      `${hostName}/listing/${businessId}/?referralCode=${refferralCode.referralCode}&useId=${userId}`
+      `${hostName}/listing/${businessId}/?referralCode=${refferralCode.referralCode}`
     );
     handleClose();
     toast.success("Copied SuccessFully");
