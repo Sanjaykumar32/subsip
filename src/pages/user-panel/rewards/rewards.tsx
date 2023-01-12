@@ -155,7 +155,7 @@ export function Rewards() {
           InputProps={{ endAdornment: <Search /> }}
         />
         {filterBusiness.map((item) => {
-          console.log(item ,'item map ')
+          console.log(item, 'item map ')
           return (
             <div key={item.userId}>
               <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>
