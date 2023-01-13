@@ -69,14 +69,14 @@ export function Subscriptions() {
     // setSubscribe(id);
     console.log(item, 'numbersss')
 
-    const response = await dispatch(
-      UserThunk.addSubscriberToBusiness({
-        businessId: item?.iBusinessId ? parseInt(item?.iBusinessId) : 0,
-        userId: item?.iAdminId ? parseInt(item?.iAdminId) : 0,
-      })
-    );
+    // const response = await dispatch(
+    //   UserThunk.addSubscriberToBusiness({
+    //     businessId: item?.iBusinessId ? parseInt(item?.iBusinessId) : 0,
+    //     userId: item?.iAdminId ? parseInt(item?.iAdminId) : 0,
+    //   })
+    // );
 
-    console.log(response, 'response')
+    // console.log(response, 'response')
 
   };
 
@@ -84,7 +84,7 @@ export function Subscriptions() {
     setSearch(e.target.value);
   };
   return (
-    <Container maxWidth={false} sx={{ p: 2 }}>
+    <Container maxWidth={false} sx={{ px: 5, py: 10 }}>
       <PageHeader
         name="Subscriptions"
         icon={{
@@ -153,12 +153,12 @@ export function Subscriptions() {
               <Typography variant="body2"> {element.businessName} :</Typography>
               {!subscribe ? (
                 <Button
-                  onClick={() => handleSubs(element)}
+                  // onClick={() => handleSubs(element)}
                   variant="contained"
                   size="small"
                   sx={{ borderRadius: "30px", px: 3 }}
                 >
-                  Subscribe
+                  Unsubscribe
                 </Button>
               ) : (
                 <Button
@@ -166,7 +166,7 @@ export function Subscriptions() {
                   variant="contained"
                   color="inherit"
                   size="small"
-                  sx={{ borderRadius: "30px", px: 3 }}
+                  sx={{ borderRadius: "30px", px: 3, }}
                 >
                   Unsubscribe
                 </Button>
@@ -176,19 +176,6 @@ export function Subscriptions() {
           </>
         ))}
 
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            mt: 5,
-          }}
-        >
-          <Button variant="rounded" color="inherit">
-            Load More
-          </Button>
-        </Box>
       </Container>
     </Container>
   );
