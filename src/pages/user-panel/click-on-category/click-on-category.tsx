@@ -239,7 +239,7 @@ export function ClickOnCategory() {
                           />
                           <Box sx={{ py: 1.5, pl: "12px" }}>
                             <Typography variant="body1" fontWeight={600}>
-                              {data.categoryName}
+                              {data.vName}
                             </Typography>
                             <Typography
                               variant="caption"
