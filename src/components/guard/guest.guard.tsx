@@ -15,12 +15,20 @@ export function GuestGuard({ children }: IAuthGuardProps): ReactElement {
   const auth = useAuth();
   const isAuthenticated = auth.isAuthenticated;
   const navigate = useNavigate();
+  const referralcode = localStorage.getItem("referralcode");
+  const businessId = localStorage.getItem("businessId");
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate(RoutePathEnum.HOME);
-    }
-  }, [isAuthenticated, navigate]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     if (referralcode) {
+  //       console.log(referralcode, 'referralcode')
+  //       navigate(`/listing/${businessId}`);
+  //     } else {
+  //       navigate(RoutePathEnum.HOME);
+  //     }
+  //     return <> </>;
+  //   }
+  // }, [isAuthenticated, navigate]);
 
   if (isAuthenticated) {
     navigate(RoutePathEnum.HOME);

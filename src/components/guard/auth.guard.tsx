@@ -1,7 +1,7 @@
 import { useAuth } from "context/auth.context";
 import { RoutePathEnum } from "enum";
-import React, { ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { ReactElement, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface IAuthGuardProps {
   children: ReactElement;
@@ -16,16 +16,30 @@ export function GuestGuard({ children }: IAuthGuardProps): ReactElement {
   const isAuthenticated = auth.isAuthenticated;
   const navigate = useNavigate();
   const referralcode = localStorage.getItem("referralcode");
+  const businessId = localStorage.getItem("businessId");
+
+
   console.log("kkkkk", referralcode, isAuthenticated);
+  // const location = useLocation();
+
+  // console.log(location?.state?.businessId, location?.state?.referralcode)
+
+  // const url = `/listing/${businessId}`
+
+  // useEffect(() => {
 
   if (isAuthenticated) {
     if (referralcode) {
-      navigate(RoutePathEnum.LISTING);
+
+      console.log(referralcode, 'referralcode')
+      // navigate(url);
     } else {
       navigate(RoutePathEnum.HOME);
     }
     return <> </>;
   }
+
+  // }, []);
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>;
