@@ -21,12 +21,13 @@ import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useNavigate, useLocation } from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
+import { useAuth } from "context/auth.context";
+import { AuthRoutePathEnum } from "enum";
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const naviagate = useNavigate();
   const [activeCate, setActiveCate] = useState<any>(false);
 
   const location = useLocation();
@@ -68,6 +69,9 @@ export function ClickOnCategory() {
   };
 
   const businessData = useAppSelector(GET_BUSINESS);
+  console.log(businessData, "llllljj");
+
+  const auth = useAuth();
 
   const allBusiness = useCallback(async () => {
     try {
@@ -96,6 +100,7 @@ export function ClickOnCategory() {
       setActiveCate(Number(getCateID));
     }
   }, [getCateID, location]);
+  const navigate = useNavigate();
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
@@ -207,7 +212,6 @@ export function ClickOnCategory() {
                 </FormControl>
               </Box>
             </Box>
-
             <Grid container className=" pb-[20px] ">
               {businessData.length > 0 &&
                 businessData
@@ -248,7 +252,6 @@ export function ClickOnCategory() {
                             >
                               {data.vLocation}
                             </Typography>
-
                             <Box sx={{ my: 1, lineHeight: 0 }}>
                               <Typography
                                 fontSize={11}
@@ -277,7 +280,16 @@ export function ClickOnCategory() {
                               </Button> */}
                               <div className="raletive">
                                 <div className="subscribeLebalListing">
-                                  <span className=" text-white  ">
+                                  <span
+                                    className=" text-white  "
+                                    onClick={() => {
+                                      auth?.isAuthenticated
+                                        ? navigate(
+                                            `/listing/${data.iBusinessId}`
+                                          )
+                                        : navigate(AuthRoutePathEnum.SIGN_IN);
+                                    }}
+                                  >
                                     Subscribe
                                   </span>
                                 </div>

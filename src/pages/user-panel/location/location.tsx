@@ -64,9 +64,7 @@ export function LocationPage() {
 
   async function getDatalist() {
     if (businessId) {
-      const response: any = await dispatch(
-        UserThunk.business({ businessId: Number(businessId) })
-      );
+      await dispatch(UserThunk.business({ businessId: Number(businessId) }));
     }
   }
 
@@ -99,15 +97,7 @@ export function LocationPage() {
       <Grid container spacing={2}>
         <Grid item sm={12} md={8}>
           {bussinessByName.map((res: IBusiness, index: number) => (
-            <Card
-              sx={{ width: "100%", maxHeight: "500px" }}
-              key={index}
-              onClick={() => {
-                auth?.isAuthenticated
-                  ? navigate(RoutePathEnum.LISTING_PRODUCT)
-                  : navigate(AuthRoutePathEnum.SIGN_IN);
-              }}
-            >
+            <Card sx={{ width: "100%", maxHeight: "500px" }} key={index}>
               <img
                 alt={name}
                 style={{
