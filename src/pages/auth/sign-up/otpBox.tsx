@@ -7,6 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import { useAuth } from "context/auth.context";
+import { RoutePathEnum } from "enum";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface IOtpBox {
   open: boolean;
@@ -26,6 +28,16 @@ export default function OtpBox(props: IOtpBox) {
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
     setOtp(event.target.value);
+  };
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location, "location");
+
+  const submit = () => {
+    if (location.state.referralcode && location.state.businessId) {
+      navigate(`/listing/?${location.state.businessId}`);
+    }
   };
 
   return (
@@ -50,6 +62,7 @@ export default function OtpBox(props: IOtpBox) {
             onClick={() => {
               verifyOtp();
               handleClose();
+              submit();
             }}
           >
             Submit

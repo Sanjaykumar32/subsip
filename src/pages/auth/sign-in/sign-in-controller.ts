@@ -20,6 +20,7 @@ interface ISignInControllerReturns {
  * @return {ISignInControllerReturns}
  */
 const SignInController = (): ISignInControllerReturns => {
+  // const location = useLocation();
   const auth = useAuth();
   const theme = useTheme();
   const [value, setValue] = useState<IInitialValue>({
@@ -62,6 +63,10 @@ const SignInController = (): ISignInControllerReturns => {
    * @return {void}
    */
   const submitHandler = (): void => {
+
+    // console.log(location.state.businessId, location.state.referralcode)
+
+
     setErrors(validate(value));
     setErrorCount(errorCount + 1);
     if (!errors.email && !errors.password) {
