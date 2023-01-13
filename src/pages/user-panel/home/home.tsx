@@ -165,18 +165,6 @@ export function Home() {
     } catch (error) {
       console.log(error);
     }
-    !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
-    try {
-      await dispatch(
-        UserThunk.addSubscriberToBusiness({
-          businessId: id,
-          userId: userId ? userId : "",
-          referredCode: "djgsddj",
-        })
-      );
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   return (
