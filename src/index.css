@@ -109,6 +109,11 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
     color: #ffff !important;
 }
 
+.MuiGrid-root.MuiGrid-container.css-11lq3yg-MuiGrid-root {
+    display: flex;
+    justify-content: space-between !important;
+}
+
 .nan {
     padding: 10px 20px !important;
     margin-right: 10px !important;

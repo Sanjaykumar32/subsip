@@ -18,6 +18,7 @@ export const SearchFieldController = () => {
   function changeHandler(event: ChangeEvent<HTMLInputElement>): void {
     event.preventDefault();
     setSearch(event.target.value);
+    console.log(event.target.value ,'event search')
   }
 
   const Conid = BussinessByName?.filter((item) => {

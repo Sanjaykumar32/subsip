@@ -150,7 +150,7 @@ export function Home() {
   };
   const locatiosn = useLocation();
   // const businessId = location.id;
-  console.log(locatiosn, "location");
+  console.log(locatiosn, "location home ");
 
   async function onImageClick(id: number): Promise<void> {
     try {

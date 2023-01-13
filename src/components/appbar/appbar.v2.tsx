@@ -38,7 +38,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_CATEGORY, GET_USER_NOTIFICTAION } from "data/selectors";
+import { GET_BUSINESS, GET_CATEGORY, GET_USER_NOTIFICTAION } from "data/selectors";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -57,7 +60,7 @@ export const UserAppBar = (props: any) => {
   const [searchLocation, setLocation] = useState<any>("");
   const homepage = location.pathname;
   const userId = localStorage.getItem("userId");
-
+ 
   const getcategory = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getCategory());
@@ -141,11 +144,21 @@ export const UserAppBar = (props: any) => {
     setLocationPopUP(true);
   };
 
-  const handleLocationClose = () => {
-    setLocation("");
-    setLocationPopUP(false);
-    navigate(`/?`);
-  };
+  // const disableCloseOnSelect = () => {
+  //   setLocation("");
+  //   setLocationPopUP(false);
+  //   navigate(`/?`);
+  // };
+  const handlevalue = (el:any)=>{
+      if(el == undefined){
+        setLocation("");
+          setLocationPopUP(false);
+          navigate(`/?`);
+      }else{
+        setLocation(el);
+        navigate(`/?${el}`);
+      }
+   }
 
   const handleLocation = (event: any) => {
     setLocation(event.target.value);
@@ -302,6 +315,21 @@ export const UserAppBar = (props: any) => {
     const stickyClass = scrollTop >= 50 ? "is-sticky" : "";
     setSticky(stickyClass);
   };
+  const businessData = useAppSelector(GET_BUSINESS);
+
+  // console.log(businessData  ,'businessData')
+
+  const defaultProps = {
+    options: businessData,
+    getOptionLabel: (option : any) => option.vLocation,
+  };
+  const flatProps = {
+    options: businessData.map((option) => option.vLocation),
+  };
+
+ 
+
+ 
 
   return (
     <>
@@ -394,27 +422,43 @@ export const UserAppBar = (props: any) => {
                   Location
                 </Button>
               ) : (
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-                  <InputLabel htmlFor="standard-adornment-password">
-                    Search
-                  </InputLabel>
-                  <Input
-                    id="standard-adornment-password"
-                    type={"text"}
-                    onChange={handleLocation}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                        // onClick={handleClickShowPassword}
-                        // onMouseDown={handleMouseDownPassword}
-                        >
-                          <Button onClick={handleLocationClose}>Cancel</Button>
-                        </IconButton>
-                      </InputAdornment>
-                    }
+                // <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+                //   <InputLabel htmlFor="standard-adornment-password">
+                //     Search
+                //   </InputLabel>
+                //   <Input
+                //     id="standard-adornment-password"
+                //     type={"text"}
+                //     onChange={handleLocation}
+                //     endAdornment={
+                //       <InputAdornment position="end">
+                //         <IconButton
+                //           aria-label="toggle password visibility"
+                //         // onClick={handleClickShowPassword}
+                //         // onMouseDown={handleMouseDownPassword}
+                //         >
+                //           <Button onClick={handleLocationClose}>Cancel</Button>
+                //         </IconButton>
+                //       </InputAdornment>
+                //     }
+                //   />
+                // </FormControl>
+
+                <Stack spacing={1}  sx={{ m: 1, width: "25ch" }}>
+                  <Autocomplete
+                    {...defaultProps}
+                    id="disable-close-on-select"
+                    //  onClick={disableCloseOnSelect}  
+                    onChange={(event, newValue : any) => {
+                      console.log(event ,'event onchange');
+                      handlevalue(newValue?.vLocation);
+                      
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params}     onChange={handleLocation}   label="Search" variant="standard" />
+                    )}
                   />
-                </FormControl>
+                </Stack>
               )}
 
               <Divider
