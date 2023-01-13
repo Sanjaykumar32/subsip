@@ -107,10 +107,12 @@ export const UserAppBar = (props: any) => {
   );
 
   useEffect(() => {
-    setInterval(() => {
-      getUserNotification();
-    }, 10000);
-  }, [getUserNotification]);
+    if (auth.isAuthenticated) {
+      setInterval(() => {
+        getUserNotification();
+      }, 10000);
+    }
+  }, [auth.isAuthenticated, getUserNotification]);
 
   // console.log(categoryData, 'categoryData');
 
@@ -160,7 +162,7 @@ export const UserAppBar = (props: any) => {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (userId === "4") {
-      if (homepage.split('/')[1] === 'admin') {
+      if (homepage.split("/")[1] === "admin") {
         const data = [
           {
             title: "Go To Home Page",
@@ -188,8 +190,7 @@ export const UserAppBar = (props: any) => {
           },
         ];
         setMenuItem(data);
-      } else if (homepage === '/') {
-
+      } else if (homepage === "/") {
         const data = [
           {
             title: "Dashboard",
@@ -217,7 +218,6 @@ export const UserAppBar = (props: any) => {
           },
         ];
         setMenuItem(data);
-
       } else {
         const data = [
           {
@@ -246,9 +246,7 @@ export const UserAppBar = (props: any) => {
           },
         ];
         setMenuItem(data);
-
       }
-
     } else {
       const data = [
         {
@@ -313,10 +311,11 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${props.display ? props.display : sticky ? sticky : "non-sticky"
-          } `}
+        className={`${
+          props.display ? props.display : sticky ? sticky : "non-sticky"
+        } `}
 
-      // style={{ position: props.display && 'fixed' }}
+        // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -406,8 +405,8 @@ export const UserAppBar = (props: any) => {
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                        // onClick={handleClickShowPassword}
-                        // onMouseDown={handleMouseDownPassword}
+                          // onClick={handleClickShowPassword}
+                          // onMouseDown={handleMouseDownPassword}
                         >
                           <Button onClick={handleLocationClose}>Cancel</Button>
                         </IconButton>
@@ -599,54 +598,52 @@ export const UserAppBar = (props: any) => {
             </Box>
           )}
         </Toolbar>
-        {props?.userMenu == true && (
-          categoryData.length > 0 && (
-            <animated.div style={{ overflow: "hidden", ...spring }}>
-              <Toolbar>
-                <div className="moblieMenu">
-                  <List
-                    className="categoryListing"
-                    sx={{
-                      display: "flex",
-                      flexDirection: { xs: "column", md: "row" },
-                      ".MuiListItem-root": {
-                        minWidth: "fit-content",
-                        cursor: "pointer",
-                      },
-                    }}
-                  >
-                    {categoryData.map((item: any, index: any) =>
-                      index === 0 ? (
-                        <ListItem key={index}>
-                          <Link href={`/category/${item?.iCategoryId}`}>
-                            {item?.vName}
-                          </Link>
+        {props?.userMenu == true && categoryData.length > 0 && (
+          <animated.div style={{ overflow: "hidden", ...spring }}>
+            <Toolbar>
+              <div className="moblieMenu">
+                <List
+                  className="categoryListing"
+                  sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", md: "row" },
+                    ".MuiListItem-root": {
+                      minWidth: "fit-content",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  {categoryData.map((item: any, index: any) =>
+                    index === 0 ? (
+                      <ListItem key={index}>
+                        <Link href={`/category/${item?.iCategoryId}`}>
+                          {item?.vName}
+                        </Link>
+                      </ListItem>
+                    ) : index === 1 ? (
+                      <ListItem key={index}>
+                        <Link href={`/category/${item?.iCategoryId}`}>
+                          {item?.vName}
+                        </Link>
+                      </ListItem>
+                    ) : index === 2 ? (
+                      <ListItem key={index}>
+                        <Link href={`/category/${item?.iCategoryId}`}>
+                          {item?.vName}
+                        </Link>
+                      </ListItem>
+                    ) : (
+                      index === 3 && (
+                        <ListItem>
+                          <Link href={`/category/all`}>{"More"}</Link>
                         </ListItem>
-                      ) : index === 1 ? (
-                        <ListItem key={index}>
-                          <Link href={`/category/${item?.iCategoryId}`}>
-                            {item?.vName}
-                          </Link>
-                        </ListItem>
-                      ) : index === 2 ? (
-                        <ListItem key={index}>
-                          <Link href={`/category/${item?.iCategoryId}`}>
-                            {item?.vName}
-                          </Link>
-                        </ListItem>
-                      ) : (
-                        index === 3 && (
-                          <ListItem>
-                            <Link href={`/category/all`}>{"More"}</Link>
-                          </ListItem>
-                        )
                       )
-                    )}
-                  </List>
-                </div>
-              </Toolbar>
-            </animated.div>
-          )
+                    )
+                  )}
+                </List>
+              </div>
+            </Toolbar>
+          </animated.div>
         )}
       </AppBar>
       <Backdrop
