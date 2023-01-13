@@ -67,6 +67,8 @@ export const Subscribe = ({
 
   async function onButtonClick(): Promise<void> {
     localStorage.setItem("referralcode", referralcode ? referralcode : "");
+    localStorage.setItem("businessId", businessId ? businessId : "");
+
     if (auth?.isAuthenticated) {
       try {
         const response = await dispatch(
@@ -81,9 +83,7 @@ export const Subscribe = ({
         console.log(error);
       }
     } else {
-      navigate("/auth/sign-up", {
-        state: { businessId: businessId, referralcode: referralcode },
-      });
+      navigate("/auth/sign-in");
     }
   }
   return (
