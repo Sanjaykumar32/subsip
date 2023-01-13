@@ -81,7 +81,9 @@ export const Subscribe = ({
         console.log(error);
       }
     } else {
-      navigate(AuthRoutePathEnum.SIGN_IN);
+      navigate("/auth/sign-up", {
+        state: { businessId: businessId, referralcode: referralcode },
+      });
     }
   }
   return (
