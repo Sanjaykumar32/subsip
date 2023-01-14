@@ -26,7 +26,7 @@ export interface IAdminState {
   category: ICategoryData[];
   subCategory: ISubCategoryData[];
   refferralCode: IRefferralCode[];
-  refferralCount: IRefferralCount[];
+  refferralCount: any;
   noticationList: INotificationdata[];
   referralList: any;
   userRewardList: IUserReward[];

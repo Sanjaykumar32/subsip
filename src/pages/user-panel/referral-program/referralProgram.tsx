@@ -9,14 +9,17 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 export function ReferralProgram() {
   const refferralCount = useAppSelector(GET_REFERRAL_COUNT);
   const dispatch = useAppDispatch();
+  const userId = localStorage.getItem("userId");
 
   const refferalCount = useCallback(async () => {
     try {
-      await dispatch(AdminThunk.refferralCount({ userId: 4 }));
+      await dispatch(
+        AdminThunk.refferralCount({ userId: userId ? parseInt(userId) : 0 })
+      );
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     refferalCount();
@@ -43,25 +46,29 @@ export function ReferralProgram() {
 
       <Container maxWidth="xs" sx={{ my: 4 }}>
         <Typography variant="h6"> Milestones : </Typography>
-
-        <>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mt: 2,
-              alignItems: "baseline",
-            }}
-          >
-            <Typography variant="body2"> Reward One:</Typography>
-            <Chip
-              label={`9/10`}
-              size="small"
-              sx={{ minWidth: "100px", ml: 2 }}
-            />
-          </Box>
-          <Divider sx={{ mt: 1 }} />
-        </>
+        {refferralCount.map((res: any, i: number) => {
+          return (
+            <>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  mt: 2,
+                  alignItems: "baseline",
+                }}
+                key={i}
+              >
+                <Typography variant="body2"> {res.milestoneName}</Typography>
+                <Chip
+                  label={`${res?.userCount}/${res?.iAmount}`}
+                  size="small"
+                  sx={{ minWidth: "100px", ml: 2 }}
+                />
+              </Box>
+              <Divider sx={{ mt: 1 }} />
+            </>
+          );
+        })}
       </Container>
     </Container>
   );

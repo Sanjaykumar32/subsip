@@ -31,8 +31,9 @@ import { MuiColor } from "type";
 export function Rewards() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const [filter, setFilter] = useState('')
-  const [businessSearch, setSearchBusiness] = useState('')
+  const [filter, setFilter] = useState("");
+  const [businessSearch, setSearchBusiness] = useState("");
+  const userId = localStorage.getItem("userId");
 
   const chipStatusColor = (): MuiColor => {
     switch (status) {
@@ -53,11 +54,13 @@ export function Rewards() {
 
   const getUserReward = useCallback(async () => {
     try {
-      await dispatch(AdminThunk.getuserReward({ userId: 4 }));
+      await dispatch(
+        AdminThunk.getuserReward({ userId: userId ? parseInt(userId) : 0 })
+      );
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     getUserReward();
@@ -65,11 +68,15 @@ export function Rewards() {
 
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
-      await dispatch(AdminThunk.allSubscriberOfBussiness({ userId: 5 }));
+      await dispatch(
+        AdminThunk.allSubscriberOfBussiness({
+          userId: userId ? parseInt(userId) : 0,
+        })
+      );
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     allsubscriberOfBussiness();
@@ -114,7 +121,7 @@ export function Rewards() {
     },
   ];
 
-  console.log(rewardData, 'rewardData ');
+  console.log(rewardData, "rewardData ");
   const rows = rewardData.map((item) => {
     return {
       id: item.rewardId,
@@ -126,24 +133,29 @@ export function Rewards() {
   });
 
   const handleSearch = (value: any) => {
-    setFilter(value)
-  }
+    setFilter(value);
+  };
 
   const handleBusinessSearch = (el: any) => {
-    setSearchBusiness(el.target.value)
-  }
-
+    setSearchBusiness(el.target.value);
+  };
 
   const list = rows.filter((el) => {
-    return Object.values(el?.Status).join('').toLowerCase().includes(filter.toString().toLowerCase())
-  })
+    return Object.values(el?.Status)
+      .join("")
+      .toLowerCase()
+      .includes(filter.toString().toLowerCase());
+  });
 
   const filterBusiness = rewardData.filter((el) => {
-    return Object.values(el.businessName).join('').toLowerCase().includes(businessSearch.toString().toLowerCase())
-  })
+    return Object.values(el.businessName)
+      .join("")
+      .toLowerCase()
+      .includes(businessSearch.toString().toLowerCase());
+  });
 
-  console.log(businessSearch, 'businessSearch')
-  console.log(filterBusiness, 'filterBusiness')
+  console.log(businessSearch, "businessSearch");
+  console.log(filterBusiness, "filterBusiness");
   const subscribedList = useMemo(
     () => (
       <Box sx={{ p: 2 }}>
@@ -155,14 +167,14 @@ export function Rewards() {
           InputProps={{ endAdornment: <Search /> }}
         />
         {filterBusiness.map((item) => {
-          console.log(item, 'item map ')
+          console.log(item, "item map ");
           return (
             <div key={item.userId}>
               <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>
                 <ListItem>{item?.businessName}</ListItem>
               </List>
             </div>
-          )
+          );
         })}
       </Box>
     ),
@@ -190,21 +202,21 @@ export function Rewards() {
           <Button
             style={{ background: theme.palette.success.light }}
             className="claimbtn"
-            onClick={() => handleSearch('Available')}
+            onClick={() => handleSearch("Available")}
           >
             Available
           </Button>
           <Button
             style={{ background: theme.palette.warning.light }}
             className="claimbtn"
-            onClick={() => handleSearch('Claimed')}
+            onClick={() => handleSearch("Claimed")}
           >
             Claimed
           </Button>
           <Button
             style={{ background: theme.palette.error.main }}
             className="claimbtn"
-            onClick={() => handleSearch('Missed')}
+            onClick={() => handleSearch("Missed")}
           >
             Missed
           </Button>
