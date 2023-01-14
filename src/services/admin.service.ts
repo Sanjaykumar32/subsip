@@ -304,7 +304,7 @@ export class AdminService {
    */
   public static async getRefferal(): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/milestone",
+      url: "/user/milestone/4",
       method: "GET",
     });
     return res.data;

@@ -26,7 +26,7 @@ export function Home() {
   const location = useLocation();
   const [showMoreData, setMoreData] = useState(false);
 
-  console.log(location, "dhskdshdk");
+  // console.log(location, "dhskdshdk");
 
   const settings: any = {
     infinite: true,
@@ -253,6 +253,8 @@ export function Home() {
                       des={ele?.tDescription}
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
+                      subscriberCount={ele.subscriberCount}
+
                     />
                   </div>
                 );
@@ -283,6 +285,8 @@ export function Home() {
                       des={ele?.tDescription}
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
+                      subscriberCount={ele.subscriberCount}
+
                     />
                   </div>
                 );
@@ -312,6 +316,8 @@ export function Home() {
                       des={ele?.tDescription}
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
+                      subscriberCount={ele.subscriberCount}
+
                     />
                   </div>
                 );
@@ -344,6 +350,7 @@ export function Home() {
                           des={ele?.tDescription}
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
+                          subscriberCount={ele.subscriberCount}
                         />
                       </div>
                     );
@@ -374,6 +381,7 @@ export function Home() {
                           des={ele?.tDescription}
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
+                          subscriberCount={ele.subscriberCount}
                         />
                       </div>
                     );
@@ -390,26 +398,26 @@ export function Home() {
         {filterBanner.filter(
           (el) => parseInt(el.iCategory) == CateFirst[2]
         ) && (
-          <div className="moreBtn">
-            {/* {console.log(CateFirst[3])} */}
-            {showMoreData ? (
-              <Button variant="contained" onClick={handleLessData}>
-                Less...
-              </Button>
-            ) : (
-              <Button variant="contained" onClick={handleMoreData}>
-                Load More...
-              </Button>
-            )}
-          </div>
-        )}
+            <div className="moreBtn">
+              {/* {console.log(CateFirst[3])} */}
+              {showMoreData ? (
+                <Button variant="contained" onClick={handleLessData}>
+                  Less...
+                </Button>
+              ) : (
+                <Button variant="contained" onClick={handleMoreData}>
+                  Load More...
+                </Button>
+              )}
+            </div>
+          )}
       </div>
     </div>
   );
 }
 
 const SliderCard = (props: any) => {
-  const { des, imgSrc, location, name, id } = props;
+  const { des, imgSrc, location, name, id, subscriberCount } = props;
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -464,15 +472,15 @@ const SliderCard = (props: any) => {
           {name}
         </span>
         <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold py-2">
-          {location}
+          {location ? location : ' '}
         </p>
         <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434D59] textLimit2 py-2 pl-3 ">
-          {des}
+          {des ? des : '--'}
         </p>
         <div className="flex justify-between">
           <p className="text-[0.9rem] text-[#CDCDCD]">
-            <span className="text-[20px] text-black pr-2"> 46.2k </span>
-            subscribers
+            <span className="text-[20px] text-black pr-2"> {subscriberCount ? subscriberCount : ' '} </span>
+            {subscriberCount ? "subscribers" : ' '}
           </p>
 
           <div className="raletive cursor-pointer " onClick={onButtonClick}>

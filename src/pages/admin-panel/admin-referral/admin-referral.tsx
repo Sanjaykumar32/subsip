@@ -25,6 +25,8 @@ import toast from "react-hot-toast";
 export function AdminReferral() {
 
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
+
 
   async function deleteDataReferral(ID: number) {
     await dispatch(AdminThunk.deleteReferralPrice(ID));
@@ -43,7 +45,7 @@ export function AdminReferral() {
       field: "Amount",
       headerName: "Amount",
       width: 200,
-      renderCell: (params) => <Chip label={params.value} color="info" />,
+      renderCell: (params) => <Chip label={params.value[1] + ' / ' + params.value[0]} color="info" />,
     },
     {
       field: "Actions",
@@ -135,23 +137,6 @@ export function AdminReferral() {
 
   const refferalCodeData = useAppSelector(GET_REFFERRAL_CODE);
 
-  // const refferalCode = useCallback(async () => {
-  //   const userId = "11";
-  //   try {
-  //     await dispatch(AdminThunk.refferralCode({ userId: userId }));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   refferalCode();
-  // }, [refferalCode]);
-
-
-  // const categoryData = useAppSelector(GET_CATEGORY);
-
-
 
   const referralData = useAppSelector(GET_REFERRAL_LIST);
 
@@ -172,8 +157,8 @@ export function AdminReferral() {
   const rows = referralData.map((item: any) => {
     return {
       id: item?.iMilestoneId,
-      MilestoneName: item?.vName,
-      Amount: item?.iamount,
+      MilestoneName: item?.milestoneName,
+      Amount: [item?.iAmount, item?.userCount],
       Actions: ['Edit', 'Dalete', item?.iMilestoneId],
     };
   });
