@@ -22,12 +22,16 @@ export function AdminGuard({ children }: IAuthGuardProps): ReactElement {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
+
   useEffect(() => {
     if (userId === "4") {
       AccountTypeEnum.ADMIN
     } else {
       navigate(RoutePathEnum.HOME);
     }
+
+
+
 
   }, [navigate, isAuthenticated, userId]);
 

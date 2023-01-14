@@ -27,6 +27,9 @@ export function GuestGuard({ children }: IAuthGuardProps) {
         navigate(RoutePathEnum.HOME);
       }
     }
+
+
+
   }, [businessId, isAuthenticated, navigate, referralcode]);
 
   if (isAuthenticated) {

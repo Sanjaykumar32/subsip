@@ -80,7 +80,7 @@ export const UserAppBar = (props: any) => {
         );
       }
     } catch (error) {
-      console.log(error);
+      console.log(error, 'this is  err res');
     }
   }, [dispatch, userId]);
 
@@ -311,11 +311,10 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${
-          props.display ? props.display : sticky ? sticky : "non-sticky"
-        } `}
+        className={`${props.display ? props.display : sticky ? sticky : "non-sticky"
+          } `}
 
-        // style={{ position: props.display && 'fixed' }}
+      // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -405,8 +404,8 @@ export const UserAppBar = (props: any) => {
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          // onClick={handleClickShowPassword}
-                          // onMouseDown={handleMouseDownPassword}
+                        // onClick={handleClickShowPassword}
+                        // onMouseDown={handleMouseDownPassword}
                         >
                           <Button onClick={handleLocationClose}>Cancel</Button>
                         </IconButton>

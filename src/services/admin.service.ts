@@ -110,11 +110,16 @@ export class AdminService {
   public static async getNotification(
     payload: IGetNotificationRequest
   ): Promise<any> {
-    const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `/user/notification/${payload.userID}`,
-      method: "GET",
-    });
-    return res.data;
+    try {
+      const res: AxiosResponse<any> = await ApiHelper.send<any>({
+        url: `/user/notification/${payload.userID}`,
+        method: "GET",
+      });
+      return res.data;
+    } catch (err: any) {
+      localStorage.clear()
+      // console.log(err?.response?.status, 'this is catch err')
+    }
   }
 
   /**
@@ -160,9 +165,8 @@ export class AdminService {
   ): Promise<ISubscriberOfBussinessResponse> {
     const res: AxiosResponse<ISubscriberOfBussinessResponse> =
       await ApiHelper.send<ISubscriberOfBussinessResponse>({
-        url: `/business/subscriber?userId=${payload.userId}${
-          payload?.businessId ? `&businessId=${payload.businessId}` : ""
-        }`,
+        url: `/business/subscriber?userId=${payload.userId}${payload?.businessId ? `&businessId=${payload.businessId}` : ""
+          }`,
         method: "GET",
       });
 
