@@ -28,18 +28,17 @@ export function AdminGuard({ children }: IAuthGuardProps): ReactElement {
     } else {
       navigate(RoutePathEnum.HOME);
     }
-  }, []);
+  }, [navigate, userId]);
 
-  // useEffect(() => {
-  //   if (isAuthenticated && accountType !== AccountTypeEnum.ADMIN) {
-  //     navigate(RoutePathEnum.HOME);
-  //   }
-  // }, [accountType, isAuthenticated, navigate]);
+  useEffect(() => {
+    if (isAuthenticated && accountType !== AccountTypeEnum.ADMIN) {
+      navigate(RoutePathEnum.HOME);
+    }
+  }, [accountType, isAuthenticated, navigate]);
 
-  // if (isAuthenticated && accountType !== AccountTypeEnum.ADMIN) {
-  //   navigate(RoutePathEnum.HOME);
-  //   return <> </>;
-  // }
+  if (isAuthenticated && accountType !== AccountTypeEnum.ADMIN) {
+    navigate(RoutePathEnum.HOME);
+  }
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>;
