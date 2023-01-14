@@ -6,29 +6,25 @@ import { SearchFieldController } from "./search-field-controller";
 import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import { GET_BUSINESS } from "data/selectors";
-import {  useAppSelector } from "data";
+import { useAppSelector } from "data";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import { useNavigate } from "react-router-dom";
 
 export const SearchField = () => {
   const { getters, handlers } = SearchFieldController();
   const { search } = getters;
-  const { changeHandler, submitHandler } = handlers;
- 
+  const { changeHandler, submitHandler , setSearch } = handlers;
 
+  const navigate = useNavigate();
   const businessData = useAppSelector(GET_BUSINESS);
 
-  // console.log(businessData  ,'businessData')
+  console.log(businessData  ,'businessData sea')
 
-  const defaultProps = {
-    options: businessData,
-    getOptionLabel: (option : any) => option.vLocation,
-  };
-  const flatProps = {
-    options: businessData.map((option) => option.vLocation),
-  };
- 
- 
-  const handlevalue = (el:any)=>{
-    console.log(el ,'el')
+
+
+  const handleClear = () => {
+    setSearch('')
+    navigate(`/`)
     // if(el == undefined){
     //   setLocation("");
     //     setLocationPopUP(false);
@@ -37,47 +33,105 @@ export const SearchField = () => {
     //   setLocation(el);
     //   navigate(`/?${el}`);
     // }
- }
- 
+  }
+
+
+  const handleOnSearch = (string: any, results: any) => {
+    console.log(string, results, 'serach and results')
+  }
+
+  const handleOnSelect = (item: any) => {
+    console.log(item , 'select vlaue')
+    // submitHandler(item.name)
+  }
+
+ const list = businessData.map((el : any)=>{
+    return (
+      {
+        id:el.iCategory,
+        name:el.vName
+      }
+    )
+ })
+
+
+
   return (
 
-  //   <Stack spacing={1}  sx={{ m: 1, width: "25ch" }}>
-  //   <Autocomplete
-  //     {...defaultProps}
-  //     id="disable-close-on-select"
-  //     //  onClick={disableCloseOnSelect}  
-  //     onChange={(event, newValue : any) => {
-  //       console.log(event ,'event onchange');
-  //       handlevalue(newValue);
-        
-  //     }}
-  //     renderInput={(params : any) => (
-  //       <TextField {...params}     onChange={changeHandler}   label="Search" variant="standard" />
-     
-  //     )}
-  //   />
-  // </Stack>
-     <TextField
-        label="Search Listing"
-        size="small"
-        className="searchH"
-        fullWidth
-        onChange={changeHandler}
-        sx={{ mx: { xs: 0, md: 4 } }}
-        InputProps={{
-          sx: { borderRadius: "60px" },
-          endAdornment: (
-            <IconButton>
-              <FontAwesomeIcon
-                icon={faSearch}
-                size="sm"
-                onClick={submitHandler}
-              />
-            </IconButton>
-          ),
-        }}
-      />
+    // <Stack spacing={1}>
+    //   <Autocomplete
+    //     {...defaultProps}
+    //     id="disable-close-on-select"
+    //     //  onClick={disableCloseOnSelect}  
+    //     onChange={(event, newValue: any) => {
+    //       console.log(event, 'event onchange');
+    //       handlevalue(newValue);
 
+    //     }}
+    //     renderInput={(params: any) => (
+    //       <TextField
+    //         size="small"
+    //         className="searchH"
+    //         fullWidth
+    //         onChange={changeHandler}
+    //         sx={{ mx: { xs: 0, md: 4 } }}
+    //         {...params}
+    //         label="Search"
+    //         variant="standard"
+    //         InputProps={{
+
+    //                 endAdornment: (
+    //                   <IconButton>
+    //                     <FontAwesomeIcon
+    //                       icon={faSearch}
+    //                       size="sm"
+    //                       onClick={submitHandler}
+    //                     />
+    //                   </IconButton>
+    //                 ),
+    //               }}
+
+    //         />
+
+    //     )}
+    //   />
+    // </Stack>
+
+    //  <TextField
+    //     label="Search Listing"
+    //     size="small"
+    //     className="searchH"
+    //     fullWidth
+    //     onChange={changeHandler}
+    //     sx={{ mx: { xs: 0, md: 4 } }}
+    //     InputProps={{
+    //       sx: { borderRadius: "60px" },
+    //       endAdornment: (
+    //         <IconButton>
+    //           <FontAwesomeIcon
+    //             icon={faSearch}
+    //             size="sm"
+    //             onClick={submitHandler}
+    //           />
+    //         </IconButton>
+    //       ),
+    //     }}
+    //   />
+
+    <div className="App">
+      <header className="App-header">
+        <div style={{ width: 625 }}>
+          <ReactSearchAutocomplete
+            items={list}
+            onSearch={(el)=> changeHandler(el)}
+            onSelect={(el)=> submitHandler(el)}
+            onClear={handleClear}
+            // autoFocus
+          // formatResult={formatResult}
+          />
+        </div>
+      </header>
+    </div>
 
   );
 };

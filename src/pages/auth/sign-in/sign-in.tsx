@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useLocation } from "react-router-dom";
 import {
   Box,
   Button,
@@ -23,8 +23,10 @@ export function SignIn(): ReactElement {
   const { theme, value, errors } = getters;
   const { changeHandler, submitHandler } = handlers;
 
+
+
   return (
-    <Container maxWidth="xs" sx={{ p: 0, my: 3 }} className="loginPage" >
+    <Container maxWidth="xs" sx={{ p: 0, my: 3 }} className="loginPage">
       <Box sx={{ my: 1, textAlign: "center" }}>
         <Typography variant="alternet"> Log in </Typography>
         <Box
@@ -46,7 +48,7 @@ export function SignIn(): ReactElement {
             </Typography>
           </Link>
         </Box>
-        <Form onSubmit={submitHandler} >
+        <Form onSubmit={submitHandler}>
           <FormGroup sx={{ textAlign: "left", my: 2 }}>
             <InputBox>
               <Label> Email </Label>

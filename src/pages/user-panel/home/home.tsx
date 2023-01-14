@@ -13,7 +13,7 @@ import {
 } from "data/selectors";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { IBannerData, IBusiness } from "interface";
 import { UserThunk } from "data/thunk/user.thunk";
 import { Button } from "@mui/material";
@@ -26,7 +26,6 @@ export function Home() {
   const location = useLocation();
   const [showMoreData, setMoreData] = useState(false);
 
-  console.log(location, "dhskdshdk");
 
   const settings: any = {
     infinite: true,
@@ -107,11 +106,13 @@ export function Home() {
   const businessData = useAppSelector(GET_BUSINESS);
 
   const filterBanner = businessData.filter((item) => {
-    return Object.values(item.vLocation)
+    return Object.values(item.vLocation.toString().toLowerCase())
       .join("")
       .toLowerCase()
       .includes(location.search.toString().slice(1, 19).toLowerCase());
   });
+
+  console.log(filterBanner , 'location.search.toString().slice(1, 19)')
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
@@ -162,18 +163,6 @@ export function Home() {
       } else {
         console.log("nodata");
       }
-    } catch (error) {
-      console.log(error);
-    }
-    !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
-    try {
-      await dispatch(
-        UserThunk.addSubscriberToBusiness({
-          businessId: id,
-          userId: userId ? userId : "",
-          referredCode: "djgsddj",
-        })
-      );
     } catch (error) {
       console.log(error);
     }

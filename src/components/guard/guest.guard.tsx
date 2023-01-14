@@ -11,16 +11,23 @@ interface IAuthGuardProps {
  * @param {IAuthGuardProps} props
  * @return {ReactElement}
  */
-export function GuestGuard({ children }: IAuthGuardProps): ReactElement {
+export function GuestGuard({ children }: IAuthGuardProps) {
   const auth = useAuth();
   const isAuthenticated = auth.isAuthenticated;
   const navigate = useNavigate();
+  const referralcode = localStorage.getItem("referralcode");
+  const businessId = localStorage.getItem("businessId");
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(RoutePathEnum.HOME);
+      if (referralcode) {
+        console.log(referralcode, "referralcode");
+        navigate(`/listing/${businessId}`);
+      } else {
+        navigate(RoutePathEnum.HOME);
+      }
     }
-  }, [isAuthenticated, navigate]);
+  }, [businessId, isAuthenticated, navigate, referralcode]);
 
   if (isAuthenticated) {
     navigate(RoutePathEnum.HOME);

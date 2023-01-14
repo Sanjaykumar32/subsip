@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -12,7 +12,7 @@ import {
 import { InputBox, Label } from "components";
 
 import SignUpController from "./sign-up-controller";
-import { AuthRoutePathEnum } from "enum";
+import { AuthRoutePathEnum, RoutePathEnum } from "enum";
 import OtpBox from "./otpBox";
 
 export function SignUp() {
@@ -68,8 +68,7 @@ export function SignUp() {
             Privacy Policy.
           </Typography>
           <Box sx={{ mt: 2 }}>
-            <Link
-              to={AuthRoutePathEnum.SIGN_IN}
+            <Button
               style={{
                 textDecoration: "none",
                 color: theme.palette.info.main,
@@ -78,7 +77,7 @@ export function SignUp() {
               <Typography fontWeight={500} variant="body1">
                 Already have an account ?
               </Typography>
-            </Link>
+            </Button>
           </Box>
         </Box>
       </Box>

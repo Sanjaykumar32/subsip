@@ -19,21 +19,24 @@ import {
 import { GET_BUSINESS, GET_CATEGORY } from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
+import { useAuth } from "context/auth.context";
+import { AuthRoutePathEnum } from "enum";
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const naviagate = useNavigate();
   const [activeCate, setActiveCate] = useState<any>(false);
 
   const location = useLocation();
+   const link =   useParams()
+
+    
 
   const getCateID = location.pathname.split("/")[2];
 
-  console.log(getCateID, "Get Category ID");
 
   const data = {
     image:
@@ -69,6 +72,8 @@ export function ClickOnCategory() {
 
   const businessData = useAppSelector(GET_BUSINESS);
 
+  const auth = useAuth();
+
   const allBusiness = useCallback(async () => {
     try {
       await dispatch(UserThunk.business());
@@ -81,7 +86,16 @@ export function ClickOnCategory() {
     allBusiness();
   }, [allBusiness]);
 
-  // console.log(businessData, 'businessData')
+   const listFilter  =  businessData.filter((el)=> {
+      // console.log(el ,'el business');
+      //  return Object.values(el.vName.toString().toLowerCase().includes(location.search.slice(1 ,20).toString().toLowerCase()))
+       return Object.values(el.vName.toString().toLowerCase())
+       .join("")
+       .toLowerCase()
+       .includes(location.search.toString().slice(1, 19).toLowerCase());
+   })
+
+  console.log(listFilter, 'listFilter')
 
   const totalLenght = businessData.filter(
     (item: any) => item.iCategory === ids
@@ -96,6 +110,7 @@ export function ClickOnCategory() {
       setActiveCate(Number(getCateID));
     }
   }, [getCateID, location]);
+  const navigate = useNavigate();
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
@@ -207,13 +222,20 @@ export function ClickOnCategory() {
                 </FormControl>
               </Box>
             </Box>
-
             <Grid container className=" pb-[20px] ">
-              {businessData.length > 0 &&
-                businessData
+              {listFilter.length > 0 &&
+                listFilter
                   .filter((el) => el.iCategory === ids)
                   .map((data: any, index: any) => (
-                    <Grid key={index} item sm={4} className="pb-[20px] ">
+                    <Grid key={index} item sm={4} className="pb-[20px] " 
+                    onClick={() => {
+                      auth?.isAuthenticated
+                        ? navigate(
+                            `/listing/${data.iBusinessId}`
+                          )
+                        : navigate(AuthRoutePathEnum.SIGN_IN);
+                    }}
+                    >
                       <Card
                         sx={{
                           maxWidth: "330px",
@@ -239,7 +261,7 @@ export function ClickOnCategory() {
                           />
                           <Box sx={{ py: 1.5, pl: "12px" }}>
                             <Typography variant="body1" fontWeight={600}>
-                              {data.categoryName}
+                              {data.vName}
                             </Typography>
                             <Typography
                               variant="caption"
@@ -248,7 +270,6 @@ export function ClickOnCategory() {
                             >
                               {data.vLocation}
                             </Typography>
-
                             <Box sx={{ my: 1, lineHeight: 0 }}>
                               <Typography
                                 fontSize={11}
@@ -277,7 +298,10 @@ export function ClickOnCategory() {
                               </Button> */}
                               <div className="raletive">
                                 <div className="subscribeLebalListing">
-                                  <span className=" text-white  ">
+                                  <span
+                                    className=" text-white  "
+                                   
+                                  >
                                     Subscribe
                                   </span>
                                 </div>

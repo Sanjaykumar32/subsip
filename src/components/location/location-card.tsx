@@ -60,13 +60,15 @@ export const Subscribe = ({
   const userId = localStorage.getItem("userId");
   const location = useParams();
   const [searchParams] = useSearchParams();
-  const referralcode = searchParams.get("referralCode");
-  const businessId = location.id;
+  const referralcode = localStorage.getItem("referralcode");
+  const businessId = localStorage.getItem("businessId");
   const [disableButton, setDisableButton] = useState<boolean>(false);
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
 
   async function onButtonClick(): Promise<void> {
     localStorage.setItem("referralcode", referralcode ? referralcode : "");
+    localStorage.setItem("businessId", businessId ? businessId : "");
+
     if (auth?.isAuthenticated) {
       try {
         const response = await dispatch(
@@ -81,7 +83,7 @@ export const Subscribe = ({
         console.log(error);
       }
     } else {
-      navigate(AuthRoutePathEnum.SIGN_IN);
+      navigate("/auth/sign-in");
     }
   }
   return (

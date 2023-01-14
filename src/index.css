@@ -179,7 +179,22 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
     gap: 20px;
 }
 
+.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-hyum1k-MuiToolbar-root {
+    padding: 0 2rem;
+    /* z-index: -1; */
+}
 
+.sc-gswNZR.hCpHso {
+    cursor: pointer !important;
+     z-index: 999;
+}
+.cmyNjn > .wrapper{
+    z-index: 99 !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation0.MuiCard-root.border-\[1px\].border-\[\#dadde5\].css-ill3aq-MuiPaper-root-MuiCard-root {
+    cursor: pointer !important;
+}
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
 
