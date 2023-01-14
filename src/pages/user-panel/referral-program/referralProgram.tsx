@@ -28,7 +28,7 @@ export function ReferralProgram() {
   console.log(refferralCount, "refferralCount");
 
   return (
-    <Container maxWidth={false} sx={{ p: 2 }}>
+    <Container maxWidth="xl" sx={{ p: 2 }}>
       <PageHeader
         name="Referral program"
         icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
@@ -36,7 +36,7 @@ export function ReferralProgram() {
         <Box sx={{ display: "flex", alignItems: "baseline" }}>
           <Typography variant="body1">My referrals</Typography>
           <Chip
-            label={0}
+            label={refferralCount.length}
             color="primary"
             size="small"
             sx={{ minWidth: "100px", ml: 2 }}
@@ -44,7 +44,7 @@ export function ReferralProgram() {
         </Box>
       </PageHeader>
 
-      <Container maxWidth="xs" sx={{ my: 4 }}>
+      <Container maxWidth="xs" sx={{ my: 20 }}>
         <Typography variant="h6"> Milestones : </Typography>
         {refferralCount.map((res: any, i: number) => {
           return (
@@ -60,7 +60,7 @@ export function ReferralProgram() {
               >
                 <Typography variant="body2"> {res.milestoneName}</Typography>
                 <Chip
-                  label={`${res?.userCount}/${res?.iAmount}`}
+                  label={`${res?.iAmount}/${res?.userCount}`}
                   size="small"
                   sx={{ minWidth: "100px", ml: 2 }}
                 />
