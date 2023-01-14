@@ -122,9 +122,7 @@ export class AdminThunk {
    */
   public static refferralCount = createAsyncThunk(
     "admin/refferalcount",
-    async (
-      payload: IRefferralCountRequest
-    ): Promise<IReferralCountResponse> => {
+    async (payload: IRefferralCountRequest): Promise<any> => {
       const response = await AdminService.refferralCount(payload);
       return response;
     }

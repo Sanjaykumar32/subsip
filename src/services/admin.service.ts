@@ -110,11 +110,16 @@ export class AdminService {
   public static async getNotification(
     payload: IGetNotificationRequest
   ): Promise<any> {
-    const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `/user/notification/${payload.userID}`,
-      method: "GET",
-    });
-    return res.data;
+    try {
+      const res: AxiosResponse<any> = await ApiHelper.send<any>({
+        url: `/user/notification/${payload.userID}`,
+        method: "GET",
+      });
+      return res.data;
+    } catch (err: any) {
+      localStorage.clear()
+      // console.log(err?.response?.status, 'this is catch err')
+    }
   }
 
   /**
@@ -160,7 +165,8 @@ export class AdminService {
   ): Promise<ISubscriberOfBussinessResponse> {
     const res: AxiosResponse<ISubscriberOfBussinessResponse> =
       await ApiHelper.send<ISubscriberOfBussinessResponse>({
-        url: `/business/subscriber?userId=${payload.userId}${payload?.businessId ? `&businessId=${payload.businessId}` : ''}`,
+        url: `/business/subscriber?userId=${payload.userId}${payload?.businessId ? `&businessId=${payload.businessId}` : ""
+          }`,
         method: "GET",
       });
 
@@ -185,16 +191,15 @@ export class AdminService {
 
   /**
    * refferral count
-   * @return {Promise<IReferralCountResponse>}
+   * @return {Promise<any>}
    */
   public static async refferralCount(
     payload: IRefferralCountRequest
-  ): Promise<IReferralCountResponse> {
-    const res: AxiosResponse<IReferralCountResponse> =
-      await ApiHelper.send<IReferralCountResponse>({
-        url: `/user/referral-count?userId=${payload.userId}`,
-        method: "GET",
-      });
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/user/milestone/${payload.userId}`,
+      method: "GET",
+    });
 
     return res.data;
   }
@@ -304,7 +309,7 @@ export class AdminService {
    */
   public static async getRefferal(): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/milestone",
+      url: "/user/milestone/4",
       method: "GET",
     });
     return res.data;

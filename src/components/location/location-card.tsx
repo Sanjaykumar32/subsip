@@ -60,8 +60,8 @@ export const Subscribe = ({
   const userId = localStorage.getItem("userId");
   const location = useParams();
   const [searchParams] = useSearchParams();
-  const referralcode = localStorage.getItem("referralcode");
-  const businessId = localStorage.getItem("businessId");
+  const referralcode = searchParams.get("referralCode");
+  const businessId = location.id;
   const [disableButton, setDisableButton] = useState<boolean>(false);
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
 

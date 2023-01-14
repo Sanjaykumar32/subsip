@@ -14,6 +14,8 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
+import toast from "react-hot-toast";
+// import { useNavigate } from "react-router-dom";
 import { AuthService } from "services";
 
 interface IAuthProvider {
@@ -53,18 +55,23 @@ const AuthContext = createContext<IAuthContext>(initState);
  * @returns {ReactElement}
  */
 export function AuthProvider({ children }: IAuthProvider): ReactElement {
+  const token = localStorage.getItem("token");
+  // const navigate = useNavigate();
   const [isAuthenticated, setAuthenticated] = useState<boolean>(
     initState.isAuthenticated
   );
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (token) {
       setAuthenticated(true);
+      console.log('token here')
     } else {
       setAuthenticated(false);
+      // navigate('/auth/sign-in')
+      toast.success("Log Out SuccessFully")
+      console.log('token false here')
     }
-  }, []);
+  }, [token]);
 
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {
@@ -99,14 +106,14 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     setAuthenticated(false);
   }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setAuthenticated(true);
-    } else {
-      setAuthenticated(false);
-    }
-  }, [signOut, signIn, signUp]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     setAuthenticated(true);
+  //   } else {
+  //     setAuthenticated(false);
+  //   }
+  // }, [signOut, signIn, signUp]);
 
   return (
     <AuthContext.Provider

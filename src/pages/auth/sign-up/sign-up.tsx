@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Link, useLocation, useNavigate } from "react-router-dom";
+import { Form, Link, useLocation } from "react-router-dom";
 import {
   Box,
   Button,
@@ -12,13 +12,20 @@ import {
 import { InputBox, Label } from "components";
 
 import SignUpController from "./sign-up-controller";
-import { AuthRoutePathEnum, RoutePathEnum } from "enum";
+import { AuthRoutePathEnum } from "enum";
 import OtpBox from "./otpBox";
 
 export function SignUp() {
   const { getters, handlers } = SignUpController();
   const { theme, value, errors, open } = getters;
   const { changeHandler, submitHandler, handleClose } = handlers;
+  const location = useLocation();
+  console.log(location, "location");
+
+  // const submit = () => {
+  //   if (location.state.referralcode && location.state.businessId) {
+  //   }
+  // };
 
   return (
     <Container maxWidth="xs" sx={{ p: 0 }}>
@@ -68,7 +75,8 @@ export function SignUp() {
             Privacy Policy.
           </Typography>
           <Box sx={{ mt: 2 }}>
-            <Button
+            <Link
+              to={AuthRoutePathEnum.SIGN_IN}
               style={{
                 textDecoration: "none",
                 color: theme.palette.info.main,
@@ -77,7 +85,7 @@ export function SignUp() {
               <Typography fontWeight={500} variant="body1">
                 Already have an account ?
               </Typography>
-            </Button>
+            </Link>
           </Box>
         </Box>
       </Box>

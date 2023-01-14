@@ -9,14 +9,17 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 export function ReferralProgram() {
   const refferralCount = useAppSelector(GET_REFERRAL_COUNT);
   const dispatch = useAppDispatch();
+  const userId = localStorage.getItem("userId");
 
   const refferalCount = useCallback(async () => {
     try {
-      await dispatch(AdminThunk.refferralCount({ userId: 4 }));
+      await dispatch(
+        AdminThunk.refferralCount({ userId: userId ? parseInt(userId) : 0 })
+      );
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     refferalCount();
@@ -25,7 +28,7 @@ export function ReferralProgram() {
   console.log(refferralCount, "refferralCount");
 
   return (
-    <Container maxWidth={false} sx={{ p: 2 }}>
+    <Container maxWidth="xl" sx={{ p: 2 }}>
       <PageHeader
         name="Referral program"
         icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
@@ -33,7 +36,7 @@ export function ReferralProgram() {
         <Box sx={{ display: "flex", alignItems: "baseline" }}>
           <Typography variant="body1">My referrals</Typography>
           <Chip
-            label={0}
+            label={refferralCount.length}
             color="primary"
             size="small"
             sx={{ minWidth: "100px", ml: 2 }}
@@ -41,27 +44,31 @@ export function ReferralProgram() {
         </Box>
       </PageHeader>
 
-      <Container maxWidth="xs" sx={{ my: 4 }}>
+      <Container maxWidth="xs" sx={{ my: 20 }}>
         <Typography variant="h6"> Milestones : </Typography>
-
-        <>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mt: 2,
-              alignItems: "baseline",
-            }}
-          >
-            <Typography variant="body2"> Reward One:</Typography>
-            <Chip
-              label={`9/10`}
-              size="small"
-              sx={{ minWidth: "100px", ml: 2 }}
-            />
-          </Box>
-          <Divider sx={{ mt: 1 }} />
-        </>
+        {refferralCount.map((res: any, i: number) => {
+          return (
+            <>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  mt: 2,
+                  alignItems: "baseline",
+                }}
+                key={i}
+              >
+                <Typography variant="body2"> {res.milestoneName}</Typography>
+                <Chip
+                  label={`${res?.iAmount}/${res?.userCount}`}
+                  size="small"
+                  sx={{ minWidth: "100px", ml: 2 }}
+                />
+              </Box>
+              <Divider sx={{ mt: 1 }} />
+            </>
+          );
+        })}
       </Container>
     </Container>
   );

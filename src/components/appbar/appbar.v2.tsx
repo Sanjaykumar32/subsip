@@ -83,7 +83,7 @@ export const UserAppBar = (props: any) => {
         );
       }
     } catch (error) {
-      console.log(error);
+      console.log(error, 'this is  err res');
     }
   }, [dispatch, userId]);
 
@@ -339,11 +339,10 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${
-          props.display ? props.display : sticky ? sticky : "non-sticky"
-        } `}
+        className={`${props.display ? props.display : sticky ? sticky : "non-sticky"
+          } `}
 
-        // style={{ position: props.display && 'fixed' }}
+      // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -421,6 +420,7 @@ export const UserAppBar = (props: any) => {
                   Location
                 </Button>
               ) : (
+<<<<<<< HEAD
                 // <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
                 //   <InputLabel htmlFor="standard-adornment-password">
                 //     Search
@@ -456,6 +456,27 @@ export const UserAppBar = (props: any) => {
                     renderInput={(params) => (
                       <TextField {...params}     onChange={handleLocation}   label="Search" variant="standard" />
                     )}
+=======
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+                  <InputLabel htmlFor="standard-adornment-password">
+                    Search
+                  </InputLabel>
+                  <Input
+                    id="standard-adornment-password"
+                    type={"text"}
+                    onChange={handleLocation}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                        // onClick={handleClickShowPassword}
+                        // onMouseDown={handleMouseDownPassword}
+                        >
+                          <Button onClick={handleLocationClose}>Cancel</Button>
+                        </IconButton>
+                      </InputAdornment>
+                    }
+>>>>>>> 1e611e3db6c8fe39a6afeacd4fca4db9365b05d2
                   />
                 </Stack>
               )}
