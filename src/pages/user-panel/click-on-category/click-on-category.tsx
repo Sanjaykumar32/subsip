@@ -171,30 +171,36 @@ export function ClickOnCategory() {
 
               <div>
                 {categoryData.map((item, index) => (
-                  <Accordion key={index}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                      className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${
-                        activeCate === item?.iCategoryId ? " activeCate" : ""
-                      }  `}
-                      onClick={() => {
-                        handleList(item?.iCategoryId),
-                          setActiveCate(item?.iCategoryId);
-                        setSubData(filteredSubCategory);
-                      }}
-                    >
-                      <Link href={`/category/${item?.iCategoryId}`}>
+                  <Link href={`/category/${item?.iCategoryId}`} key={index}>
+                    <Accordion>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${
+                          activeCate === item?.iCategoryId ? " activeCate" : ""
+                        }  `}
+                        onClick={() => {
+                          handleList(item?.iCategoryId),
+                            setActiveCate(item?.iCategoryId);
+                          setSubData(filteredSubCategory);
+                        }}
+                      >
                         {item?.vName}
-                      </Link>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      {subCatdata.map((res: any, i: number) => (
-                        <Typography key={i}>{res.vName}</Typography>
-                      ))}
-                    </AccordionDetails>
-                  </Accordion>
+                      </AccordionSummary>
+
+                      <AccordionDetails>
+                        {subCatdata.map((res: any, i: number) => (
+                          <Link
+                            href={`/category/subCategory=${res?.iSubCategoryId}`}
+                            key={index}
+                          >
+                            <Typography key={i}>{res.vName}</Typography>
+                          </Link>
+                        ))}
+                      </AccordionDetails>
+                    </Accordion>
+                  </Link>
                 ))}
               </div>
             </Box>
