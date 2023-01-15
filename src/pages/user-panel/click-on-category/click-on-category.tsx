@@ -10,6 +10,7 @@ import {
   Drawer,
   FormControl,
   Grid,
+  Link,
   List,
   ListItem,
   MenuItem,
@@ -184,7 +185,9 @@ export function ClickOnCategory() {
                         setSubData(filteredSubCategory);
                       }}
                     >
-                      <Typography> {item.vName}</Typography>
+                      <Link href={`/category/${item?.iCategoryId}`}>
+                        {item?.vName}
+                      </Link>
                     </AccordionSummary>
                     <AccordionDetails>
                       {subCatdata.map((res: any, i: number) => (
