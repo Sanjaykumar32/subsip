@@ -12,6 +12,7 @@ import {
 import { Links } from "./links";
 import { SocialIcons } from "./social";
 import { Logo } from "components/logo";
+import {  useNavigate } from "react-router-dom";
 
 export * from "./links";
 export * from "./social";
@@ -27,10 +28,20 @@ export const FooterContainer = styled(Paper)(({ theme }) => ({
   borderRedius: '0px',
 }));
 
+
+
 export function FooterMain() {
+    const navigate = useNavigate()
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+
+  const handleRoute = ()=>{
+    navigate('/terms')
+  }
+  const handleRoutes = ()=> {
+    navigate('/privacy')
+  }
   return (
     <div>
       <FooterContainer>
@@ -66,8 +77,8 @@ export function FooterMain() {
         </div>
         <div className="flex justify-end">
           <ul className="flex gap-[15px]  text-[#ffffff]">
-            <li>Terms and Conditions</li>
-            <li>Privacy Policy</li>
+            <li onClick={handleRoute}  className='cursor-pointer '>Terms and Conditions</li>
+            <li onClick={handleRoutes} className='cursor-pointer '> Privacy Policy</li>
           </ul>
 
         </div>

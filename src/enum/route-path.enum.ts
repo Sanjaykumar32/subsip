@@ -41,4 +41,6 @@ export enum RoutePathEnum {
   LISTING_PRODUCT = "/listing/:id",
   NONE = "",
   ABOUT = "/about",
+  TERMS = '/terms',
+  PRIVACY = '/privacy'
 }

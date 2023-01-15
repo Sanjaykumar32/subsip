@@ -34,6 +34,7 @@ export function Rewards() {
   const [filter, setFilter] = useState("");
   const [businessSearch, setSearchBusiness] = useState("");
   const userId = localStorage.getItem("userId");
+  const [datas  ,  setDuplecate] = useState<any>([])
 
   const chipStatusColor = (): MuiColor => {
     switch (status) {
@@ -154,8 +155,13 @@ export function Rewards() {
       .includes(businessSearch.toString().toLowerCase());
   });
 
-  console.log(businessSearch, "businessSearch");
-  console.log(filterBusiness, "filterBusiness");
+
+    const filterData =  filterBusiness.map((el)=>{
+        return el.businessName
+    })
+     
+    const listBusiness = [...new Set(filterData)]
+
   const subscribedList = useMemo(
     () => (
       <Box sx={{ p: 2 }}>
@@ -166,19 +172,18 @@ export function Rewards() {
           onChange={handleBusinessSearch}
           InputProps={{ endAdornment: <Search /> }}
         />
-        {filterBusiness.map((item) => {
-          console.log(item, "item map ");
+        {listBusiness.map((item , index) => {
           return (
-            <div key={item.userId}>
+            <div key={index}>
               <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>
-                <ListItem>{item?.businessName}</ListItem>
+                <ListItem>{item}</ListItem>
               </List>
             </div>
           );
         })}
       </Box>
     ),
-    [filterBusiness]
+    [listBusiness]
   );
 
   return (

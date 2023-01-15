@@ -40,6 +40,9 @@ import {
 import { AdminNotifyButton } from "pages/admin-panel/admin-notify-button/admin-notify-button";
 import { createBrowserRouter } from "react-router-dom";
 import { About } from "about/about";
+import TermConditions from "termsConditions/termConditions";
+import { PrivacyPolicy } from "privacyPolicy/privacyPolicy";
+
 
 export const router = createBrowserRouter([
   {
@@ -114,6 +117,14 @@ export const router = createBrowserRouter([
       {
         path: RoutePathEnum.ABOUT,
         element: <About />,
+      },
+      {
+        path: RoutePathEnum.TERMS,
+        element: <TermConditions/>
+      },
+      {
+        path:RoutePathEnum.PRIVACY,
+        element:<PrivacyPolicy/>
       },
       {
         path: AuthRoutePathEnum.CHANGE_PASSWORD,
