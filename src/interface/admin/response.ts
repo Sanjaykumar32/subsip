@@ -41,6 +41,8 @@ export interface IBusiness {
   dLongitude: number;
   vLocation: string;
   tDescription: string;
+  vPreview: string;
+  vBodyDescription: string;
   dtAddedDate: string;
   iAddedBy: number;
   dtModifiedDate: string;

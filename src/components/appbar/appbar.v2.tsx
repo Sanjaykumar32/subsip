@@ -119,7 +119,7 @@ export const UserAppBar = (props: any) => {
     if (auth.isAuthenticated) {
       setInterval(() => {
         getUserNotification();
-      }, 10000);
+      }, 100000);
     }
   }, [auth.isAuthenticated, getUserNotification]);
 
@@ -345,7 +345,7 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${props.display ? props.display : sticky ? sticky : "non-sticky"
+        className={`${props.display ? props.display : sticky ? '' : "non-sticky"
           } `}
 
       // style={{ position: props.display && 'fixed' }}
@@ -609,7 +609,7 @@ export const UserAppBar = (props: any) => {
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
                     return (
-                      <div className="Notification list w-[250px] px-3 " key={i} >
+                      <div className="Notification list w-[350px] px-3 " key={i} >
                         <div className="grid w-full gap-[5px] ">
                           {/* <li className="text-black cursor-pointer text-[16px] "> */}
                           <div className="flex gap-[5px] items-center ">

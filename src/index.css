@@ -7,6 +7,16 @@
     padding-top: 145px !important;
 } */
 
+
+/* admin css here*/
+
+.listingSelect>div {
+    padding: 12px;
+}
+
+
+
+
 .subscribeLebalListing {
     text-align: center;
     padding: 5px 18px 5px 45px;
@@ -114,7 +124,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
     background: #ACCF02 !important;
     color: #ffffff !important;
     /* color: #000 !important; */
-    box-shadow: 0 0 30px 0 #58585870;
+    /* box-shadow: 0 0 30px 0 #58585870; */
 }
 
 .activeCate:hover {
@@ -132,8 +142,8 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 }
 
 .nan {
-    padding: 10px 20px !important;
-    margin-right: 10px !important;
+    padding: 0px 10px !important;
+    margin-right: 0px !important;
     border-radius: 8px;
     color: #5e5e5e;
     background: transparent;
