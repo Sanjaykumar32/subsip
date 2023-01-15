@@ -26,7 +26,6 @@ export function Home() {
   const location = useLocation();
   const [showMoreData, setMoreData] = useState(false);
 
-
   const settings: any = {
     infinite: true,
     slidesToShow: 1,
@@ -112,7 +111,7 @@ export function Home() {
       .includes(location.search.toString().slice(1, 19).toLowerCase());
   });
 
-  console.log(filterBanner , 'location.search.toString().slice(1, 19)')
+  console.log(filterBanner, "location.search.toString().slice(1, 19)");
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
@@ -174,7 +173,7 @@ export function Home() {
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
-              <div className="max-w-[100%] mt-[78px] lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
+              <div className="max-w-[100%] mt-[-38px] lg:mt-[78px] lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
                 <div className="w-[80%] md:w-[45%] gap-5 flex flex-col px-2 pt-10 md:px-10">
                   <div>
                     <span className="bg-[#0275d8] rounded-md text-[0.9rem] py-[5px] px-[10px] font-normal text-white">
@@ -255,7 +254,6 @@ export function Home() {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
-
                     />
                   </div>
                 );
@@ -287,7 +285,6 @@ export function Home() {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
-
                     />
                   </div>
                 );
@@ -318,7 +315,6 @@ export function Home() {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
-
                     />
                   </div>
                 );
@@ -399,19 +395,19 @@ export function Home() {
         {filterBanner.filter(
           (el) => parseInt(el.iCategory) == CateFirst[2]
         ) && (
-            <div className="moreBtn">
-              {/* {console.log(CateFirst[3])} */}
-              {showMoreData ? (
-                <Button variant="contained" onClick={handleLessData}>
-                  Less...
-                </Button>
-              ) : (
-                <Button variant="contained" onClick={handleMoreData}>
-                  Load More...
-                </Button>
-              )}
-            </div>
-          )}
+          <div className="moreBtn">
+            {/* {console.log(CateFirst[3])} */}
+            {showMoreData ? (
+              <Button variant="contained" onClick={handleLessData}>
+                Less...
+              </Button>
+            ) : (
+              <Button variant="contained" onClick={handleMoreData}>
+                Load More...
+              </Button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -473,15 +469,18 @@ const SliderCard = (props: any) => {
           {name}
         </span>
         <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold py-2">
-          {location ? location : ' '}
+          {location ? location : " "}
         </p>
         <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434D59] textLimit2 py-2 pl-3 ">
-          {des ? des : '--'}
+          {des ? des : "--"}
         </p>
         <div className="flex justify-between">
           <p className="text-[0.9rem] text-[#CDCDCD]">
-            <span className="text-[20px] text-black pr-2"> {subscriberCount ? subscriberCount : ' '} </span>
-            {subscriberCount ? "subscribers" : ' '}
+            <span className="text-[20px] text-black pr-2">
+              {" "}
+              {subscriberCount ? subscriberCount : " "}{" "}
+            </span>
+            {subscriberCount ? "subscribers" : " "}
           </p>
 
           <div className="raletive cursor-pointer " onClick={onButtonClick}>
