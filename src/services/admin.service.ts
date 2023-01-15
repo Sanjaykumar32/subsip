@@ -117,7 +117,7 @@ export class AdminService {
       });
       return res.data;
     } catch (err: any) {
-      localStorage.clear()
+      localStorage.clear();
       // console.log(err?.response?.status, 'this is catch err')
     }
   }
@@ -165,8 +165,9 @@ export class AdminService {
   ): Promise<ISubscriberOfBussinessResponse> {
     const res: AxiosResponse<ISubscriberOfBussinessResponse> =
       await ApiHelper.send<ISubscriberOfBussinessResponse>({
-        url: `/business/subscriber?userId=${payload.userId}${payload?.businessId ? `&businessId=${payload.businessId}` : ""
-          }`,
+        url: `/business/subscriber?userId=${payload.userId}${
+          payload?.businessId ? `&businessId=${payload.businessId}` : ""
+        }`,
         method: "GET",
       });
 
@@ -317,14 +318,13 @@ export class AdminService {
 
   /**
    * sub category
-   * @return {Promise<IGetSubCategoryResponse>}
+   * @return {Promise<any>}
    */
-  public static async getSubcategory(): Promise<IGetSubCategoryResponse> {
-    const res: AxiosResponse<IGetSubCategoryResponse> =
-      await ApiHelper.send<IGetSubCategoryResponse>({
-        url: "sub-category/list",
-        method: "GET",
-      });
+  public static async getSubcategory(): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "sub-category/list",
+      method: "GET",
+    });
     return res.data;
   }
 

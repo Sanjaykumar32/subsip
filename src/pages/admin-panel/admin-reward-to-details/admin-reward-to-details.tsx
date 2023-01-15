@@ -46,10 +46,10 @@ export function AdminRewardToDetails() {
 
   const rows = businessRewardData.map((item: IBusinessReward) => {
     return {
-      id: item.userId,
+      id: item.iRewardId,
       rewardName: item.rewardName,
-      Status: "Claimed",
-      Actions: ["Edit", "Delete", item?.rewardId],
+      redeemedUserCount: item.redeemedUserCount,
+      Actions: ["Edit", "Delete", item.iRewardId],
     };
   });
 
@@ -67,6 +67,12 @@ export function AdminRewardToDetails() {
     {
       field: "rewardName",
       headerName: "Name",
+      width: 200,
+    },
+
+    {
+      field: "redeemedUserCount",
+      headerName: "Redeemed Count",
       width: 200,
     },
     // {
@@ -87,7 +93,7 @@ export function AdminRewardToDetails() {
       width: 150,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value}>
+          <Tooltip title={params.value[0]}>
             <FontAwesomeIcon icon={faPen} />
           </Tooltip>
           <Tooltip title={params.value[1]}>

@@ -60,7 +60,13 @@ export const UserAppBar = (props: any) => {
   const [searchLocation, setLocation] = useState<any>("");
   const homepage = location.pathname;
   const userId = localStorage.getItem("userId");
- 
+  const [readMoreNotification, setReadMoreNotification] = useState<any>(false);
+
+
+
+
+
+
   const getcategory = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getCategory());
@@ -151,16 +157,16 @@ export const UserAppBar = (props: any) => {
   //   setLocationPopUP(false);
   //   navigate(`/?`);
   // };
-  const handlevalue = (el:any)=>{
-      if(el == undefined){
-        setLocation("");
-          setLocationPopUP(false);
-          navigate(`/?`);
-      }else{
-        setLocation(el);
-        navigate(`/?${el}`);
-      }
-   }
+  const handlevalue = (el: any) => {
+    if (el == undefined) {
+      setLocation("");
+      setLocationPopUP(false);
+      navigate(`/?`);
+    } else {
+      setLocation(el);
+      navigate(`/?${el}`);
+    }
+  }
 
   const handleLocation = (event: any) => {
     setLocation(event.target.value);
@@ -319,15 +325,15 @@ export const UserAppBar = (props: any) => {
 
   const defaultProps = {
     options: businessData,
-    getOptionLabel: (option : any) => option.vLocation,
+    getOptionLabel: (option: any) => option.vLocation,
   };
   const flatProps = {
     options: businessData.map((option) => option.vLocation),
   };
 
- 
 
- 
+
+
 
   return (
     <>
@@ -442,18 +448,18 @@ export const UserAppBar = (props: any) => {
                 //   />
                 // </FormControl>
 
-                <Stack spacing={1}  sx={{ m: 1, width: "25ch" }}>
+                <Stack spacing={1} sx={{ m: 1, width: "25ch" }}>
                   <Autocomplete
                     {...defaultProps}
                     id="disable-close-on-select"
                     //  onClick={disableCloseOnSelect}  
-                    onChange={(event, newValue : any) => {
-                      console.log(event ,'event onchange');
+                    onChange={(event, newValue: any) => {
+                      console.log(event, 'event onchange');
                       handlevalue(newValue?.vLocation);
-                      
+
                     }}
                     renderInput={(params) => (
-                      <TextField {...params}     onChange={handleLocation}   label="Search" variant="standard" />
+                      <TextField {...params} onChange={handleLocation} label="Search" variant="standard" />
                     )}
                   />
                 </Stack>
@@ -603,29 +609,32 @@ export const UserAppBar = (props: any) => {
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
                     return (
-                      <MenuItem
-                        key={i}
-                        onClick={() => {
-                          handleNotificationClose();
-                        }}
-                      >
-                        <div className="Notification list w-[250px]">
-                          <div className="flex w-full gap-[15px] ">
-                            <li className="w-[70%] text-black cursor-pointer text-[16px] ">
-                              <h1>{res.vHeadline}</h1>
-                              <p>{res.vDesc}</p>
-                            </li>
-                            <span
-                              className="w-[30%] text-center text-[15px]"
-                              onClick={() => {
-                                readNotification(res.iNotificationId);
-                              }}
-                            >
-                              Read
-                            </span>
+                      <div className="Notification list w-[250px] px-3 " key={i} >
+                        <div className="grid w-full gap-[5px] ">
+                          {/* <li className="text-black cursor-pointer text-[16px] "> */}
+                          <div className="flex gap-[5px] items-center ">
+                            <div className="bg-red-500 px-[13px] py-[5px] text-[12px] rounded-[30px] text-white "> Announcement</div>
+                            <div className=" text-[14px] font-[400] text-[#a3a3a3] "> 25/02/2025</div>
                           </div>
+                          <h1 className="text-[18px] font-[900] text-[#252525]" >{res.vHeadline}</h1>
+                          {/* <div className="flex "> */}
+                          <p className="text-[14px] flex font-[400] text-[#a3a3a3]">{readMoreNotification ? <span>{res.vDesc}</span> :
+                            <span className="NotextLimit2" >{res.vDesc}</span>}
+                            {!readMoreNotification ?
+                              <span className="text-[14px] w-[50px] font-[400] text-[#2196F3] cursor-pointer " onClick={() => setReadMoreNotification(true)} >Read More</span>
+                              : <span className="text-[14px] w-[50px] font-[400] text-[#2196F3] cursor-pointer " onClick={() => setReadMoreNotification(false)} >Read Less</span>}
+                          </p>
+                          {/* </div> */}
+                          {/* <span
+                            className="w-[30%] text-center text-[15px]"
+                            onClick={() => {
+                              readNotification(res.iNotificationId);
+                            }}
+                          >
+                            Read
+                          </span> */}
                         </div>
-                      </MenuItem>
+                      </div>
                     );
                   })
                 ) : (
