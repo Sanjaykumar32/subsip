@@ -18,8 +18,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-// import { ICategoryData } from "interface";
-import { GET_BUSINESS, GET_CATEGORY } from "data/selectors";
+import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
@@ -33,6 +32,7 @@ export function ClickOnCategory() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [activeCate, setActiveCate] = useState<any>(false);
+  const [subCatdata, setSubData] = useState<any>([]);
 
   const location = useLocation();
   const link = useParams();
@@ -51,6 +51,8 @@ export function ClickOnCategory() {
   };
 
   const categoryData = useAppSelector(GET_CATEGORY);
+  const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
+
   const dispatch = useAppDispatch();
 
   const getcategory = useCallback(async () => {
@@ -60,6 +62,24 @@ export function ClickOnCategory() {
       console.log(error);
     }
   }, [dispatch]);
+
+  console.log(subCategoryData, "subCategoryData");
+
+  const filteredSubCategory = subCategoryData?.filter((item) => {
+    return item.iCategoryId == getCateID;
+  });
+
+  const getSubCategory = useCallback(async () => {
+    try {
+      await dispatch(AdminThunk.getSubCategory());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getSubCategory();
+  }, [getSubCategory]);
 
   useEffect(() => {
     getcategory();
@@ -87,14 +107,16 @@ export function ClickOnCategory() {
     allBusiness();
   }, [allBusiness]);
 
-  const listFilter = businessData.filter((el) => {
-    // console.log(el ,'el business');
-    //  return Object.values(el.vName.toString().toLowerCase().includes(location.search.slice(1 ,20).toString().toLowerCase()))
-    return Object.values(el.vName.toString().toLowerCase())
-      .join("")
-      .toLowerCase()
-      .includes(location.search.toString().slice(1, 19).toLowerCase());
-  });
+  const listFilter = businessData.filter(
+    (el: { vName: { toString: () => string } }) => {
+      // console.log(el ,'el business');
+      //  return Object.values(el.vName.toString().toLowerCase().includes(location.search.slice(1 ,20).toString().toLowerCase()))
+      return Object.values(el.vName.toString().toLowerCase())
+        .join("")
+        .toLowerCase()
+        .includes(location.search.toString().slice(1, 19).toLowerCase());
+    }
+  );
 
   console.log(listFilter, "listFilter");
 
@@ -159,16 +181,15 @@ export function ClickOnCategory() {
                       onClick={() => {
                         handleList(item?.iCategoryId),
                           setActiveCate(item?.iCategoryId);
+                        setSubData(filteredSubCategory);
                       }}
                     >
                       <Typography> {item.vName}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse malesuada lacus ex, sit amet blandit leo
-                        lobortis eget.
-                      </Typography>
+                      {subCatdata.map((res: any, i: number) => (
+                        <Typography key={i}>{res.vName}</Typography>
+                      ))}
                     </AccordionDetails>
                   </Accordion>
                 ))}

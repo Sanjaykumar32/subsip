@@ -372,7 +372,7 @@ export class AdminThunk {
    */
   public static getSubCategory = createAsyncThunk(
     "admin/createListing",
-    async (): Promise<IGetSubCategoryResponse> => {
+    async (): Promise<any> => {
       const response = await AdminService.getSubcategory();
       return response;
     }
