@@ -1,5 +1,8 @@
 import React, { useEffect, useCallback, useState } from "react";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   Card,
@@ -23,6 +26,7 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum } from "enum";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
@@ -31,12 +35,9 @@ export function ClickOnCategory() {
   const [activeCate, setActiveCate] = useState<any>(false);
 
   const location = useLocation();
-   const link =   useParams()
-
-    
+  const link = useParams();
 
   const getCateID = location.pathname.split("/")[2];
-
 
   const data = {
     image:
@@ -86,16 +87,16 @@ export function ClickOnCategory() {
     allBusiness();
   }, [allBusiness]);
 
-   const listFilter  =  businessData.filter((el)=> {
-      // console.log(el ,'el business');
-      //  return Object.values(el.vName.toString().toLowerCase().includes(location.search.slice(1 ,20).toString().toLowerCase()))
-       return Object.values(el.vName.toString().toLowerCase())
-       .join("")
-       .toLowerCase()
-       .includes(location.search.toString().slice(1, 19).toLowerCase());
-   })
+  const listFilter = businessData.filter((el) => {
+    // console.log(el ,'el business');
+    //  return Object.values(el.vName.toString().toLowerCase().includes(location.search.slice(1 ,20).toString().toLowerCase()))
+    return Object.values(el.vName.toString().toLowerCase())
+      .join("")
+      .toLowerCase()
+      .includes(location.search.toString().slice(1, 19).toLowerCase());
+  });
 
-  console.log(listFilter, 'listFilter')
+  console.log(listFilter, "listFilter");
 
   const totalLenght = businessData.filter(
     (item: any) => item.iCategory === ids
@@ -145,28 +146,33 @@ export function ClickOnCategory() {
                 Listings by Category:
               </Typography>
 
-              <List
-                sx={{
-                  paddingRight: "20px !important",
-                  paddingBottom: "28px !important",
-                }}
-              >
+              <div>
                 {categoryData.map((item, index) => (
-                  <ListItem
-                    key={index}
-                    sx={{ px: 0 }}
-                    onClick={() => {
-                      handleList(item?.iCategoryId),
-                        setActiveCate(item?.iCategoryId);
-                    }}
-                    className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${
-                      activeCate === item?.iCategoryId ? " activeCate" : ""
-                    }  `}
-                  >
-                    {item.vName}
-                  </ListItem>
+                  <Accordion key={index}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                      className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${
+                        activeCate === item?.iCategoryId ? " activeCate" : ""
+                      }  `}
+                      onClick={() => {
+                        handleList(item?.iCategoryId),
+                          setActiveCate(item?.iCategoryId);
+                      }}
+                    >
+                      <Typography> {item.vName}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Suspendisse malesuada lacus ex, sit amet blandit leo
+                        lobortis eget.
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
                 ))}
-              </List>
+              </div>
             </Box>
           </Grid>
         )}
@@ -227,14 +233,16 @@ export function ClickOnCategory() {
                 listFilter
                   .filter((el) => el.iCategory === ids)
                   .map((data: any, index: any) => (
-                    <Grid key={index} item sm={4} className="pb-[20px] " 
-                    onClick={() => {
-                      auth?.isAuthenticated
-                        ? navigate(
-                            `/listing/${data.iBusinessId}`
-                          )
-                        : navigate(AuthRoutePathEnum.SIGN_IN);
-                    }}
+                    <Grid
+                      key={index}
+                      item
+                      sm={4}
+                      className="pb-[20px] "
+                      onClick={() => {
+                        auth?.isAuthenticated
+                          ? navigate(`/listing/${data.iBusinessId}`)
+                          : navigate(AuthRoutePathEnum.SIGN_IN);
+                      }}
                     >
                       <Card
                         sx={{
@@ -298,10 +306,7 @@ export function ClickOnCategory() {
                               </Button> */}
                               <div className="raletive">
                                 <div className="subscribeLebalListing">
-                                  <span
-                                    className=" text-white  "
-                                   
-                                  >
+                                  <span className=" text-white  ">
                                     Subscribe
                                   </span>
                                 </div>
