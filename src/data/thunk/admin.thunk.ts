@@ -36,6 +36,7 @@ import {
   IUpdateSubCategoryRequest,
   IGetNotificationRequest,
   IReadNotificationRequest,
+  IRewardClaimedRequest,
 } from "interface";
 import { AdminService } from "services";
 
@@ -374,6 +375,17 @@ export class AdminThunk {
     "admin/createListing",
     async (): Promise<any> => {
       const response = await AdminService.getSubcategory();
+      return response;
+    }
+  );
+
+  /**
+   * Reward Claimed
+   */
+  public static rewardClaimed = createAsyncThunk(
+    "admin/rewardClaimed",
+    async (payload: IRewardClaimedRequest): Promise<any> => {
+      const response = await AdminService.rewardClaimed(payload);
       return response;
     }
   );

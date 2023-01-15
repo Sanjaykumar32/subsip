@@ -34,7 +34,7 @@ export function Rewards() {
   const [filter, setFilter] = useState("");
   const [businessSearch, setSearchBusiness] = useState("");
   const userId = localStorage.getItem("userId");
-  const [datas  ,  setDuplecate] = useState<any>([])
+  const [datas, setDuplecate] = useState<any>([]);
 
   const chipStatusColor = (): MuiColor => {
     switch (status) {
@@ -85,6 +85,21 @@ export function Rewards() {
 
   console.log(subscribeBusiness, "subscribeBusiness");
 
+  const rewardClaimed = useCallback(
+    async (id: any) => {
+      try {
+        await dispatch(
+          AdminThunk.rewardClaimed({
+            rewardId: id,
+          })
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch]
+  );
+
   const columns: GridColDef[] = [
     {
       field: "rewardName",
@@ -117,6 +132,9 @@ export function Rewards() {
               ? "successColor"
               : "warningColor"
           }
+          onClick={() => {
+            params.value == "Claimed" && rewardClaimed(params.id);
+          }}
         />
       ),
     },
@@ -128,7 +146,7 @@ export function Rewards() {
       id: item.rewardId,
       rewardName: item.rewardName,
       businessName: item.businessName,
-      Status: "Missed",
+      Status: "Claimed",
     };
   });
 
@@ -154,12 +172,12 @@ export function Rewards() {
       .includes(businessSearch.toString().toLowerCase());
   });
 
+  const filterData = filterBusiness.map((el) => {
+    return el.businessName;
+  });
 
-    const filterData =  filterBusiness.map((el)=>{
-        return el.businessName
-    })
-     
-    const listBusiness = [...new Set(filterData)]
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const listBusiness = [...new Set(filterData)];
 
   const subscribedList = useMemo(
     () => (
@@ -171,7 +189,7 @@ export function Rewards() {
           onChange={handleBusinessSearch}
           InputProps={{ endAdornment: <Search /> }}
         />
-        {listBusiness.map((item , index) => {
+        {listBusiness.map((item, index) => {
           return (
             <div key={index}>
               <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>

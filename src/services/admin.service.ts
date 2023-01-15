@@ -43,6 +43,7 @@ import {
   IUpdateSubCategoryRequest,
   IGetNotificationRequest,
   IReadNotificationRequest,
+  IRewardClaimedRequest,
 } from "interface";
 
 /**
@@ -322,8 +323,23 @@ export class AdminService {
    */
   public static async getSubcategory(): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "sub-category/list",
+      url: "/sub-category/list",
       method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
+   * reward Claimed
+   * @return {Promise<any>}
+   */
+  public static async rewardClaimed(
+    payload: IRewardClaimedRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/user/reward-redeem",
+      method: "POST",
+      data: payload,
     });
     return res.data;
   }
