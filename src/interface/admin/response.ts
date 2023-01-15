@@ -166,6 +166,7 @@ export interface IUserReward {
   rewardId: number;
   businessName: string;
   redeemedCount: number;
+  status: string;
 }
 
 export interface IBusinessRewardResponse {
@@ -175,11 +176,11 @@ export interface IBusinessRewardResponse {
 }
 
 export interface IBusinessReward {
-  userId: number;
-  rewardName: string;
-  rewardId: number;
-  userName: string;
+  iRewardId: number;
+  redeemedUserCount: number;
   redeemedId?: number;
+  rewardCount: number;
+  rewardName: string;
 }
 
 export interface IDashboardResponse {

@@ -36,6 +36,22 @@
     transform: rotate(45deg);
 }
 
+.successColor{
+    background: rgb(76, 175, 80) !important;
+    color: #ffff !important;
+
+}
+
+.warningColor{
+    background: rgb(255, 152, 0) !important;
+    color: #ffff !important;
+}
+
+.errorColor{
+    background: rgb(211, 47, 47) !important;
+    color: #ffff !important;
+}
+
 
 
 /* .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
@@ -211,6 +227,10 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
     cursor: pointer !important;
 }
 
+.grid-about {
+    grid-template-columns: 1fr 1fr;
+}
+
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
 
@@ -218,7 +238,9 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
         padding-top: 145px !important;
     } */
 
-
+    .grid-about {
+        grid-template-columns: 1fr;
+    }
 
 
 

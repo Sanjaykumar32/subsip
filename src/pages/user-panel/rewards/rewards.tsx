@@ -34,6 +34,7 @@ export function Rewards() {
   const [filter, setFilter] = useState("");
   const [businessSearch, setSearchBusiness] = useState("");
   const userId = localStorage.getItem("userId");
+  const [datas  ,  setDuplecate] = useState<any>([])
 
   const chipStatusColor = (): MuiColor => {
     switch (status) {
@@ -85,19 +86,6 @@ export function Rewards() {
   console.log(subscribeBusiness, "subscribeBusiness");
 
   const columns: GridColDef[] = [
-    // {
-    //   field: "id",
-    //   headerName: "",
-    //   width: 100,
-    //   renderCell: () => <Avatar sx={{ mx: "auto", width: 35, height: 35 }} />,
-    // },
-    // {
-    //   field: "actions",
-    //   headerName: "Actions",
-    //   width: 150,
-    //   renderCell: () => <Button variant="contained"> Claim </Button>,
-    // },
-
     {
       field: "rewardName",
       headerName: "Reward Name",
@@ -109,15 +97,28 @@ export function Rewards() {
       width: 150,
     },
     {
-      field: "redeemedCount",
-      headerName: "Redeemed Count",
-      width: 150,
-    },
-    {
       field: "Status",
       headerName: "Status",
       width: 200,
-      renderCell: (params) => <Chip label={params.value} color="success" />,
+      renderCell: (params) => (
+        <Chip
+          label={params.value}
+          // color={
+          //   params.value == "Missed"
+          //     ? "error"
+          //     : params.value == "Available"
+          //     ? "success"
+          //     : "warning"
+          // }
+          className={
+            params.value == "Missed"
+              ? "errorColor"
+              : params.value == "Available"
+              ? "successColor"
+              : "warningColor"
+          }
+        />
+      ),
     },
   ];
 
@@ -127,8 +128,7 @@ export function Rewards() {
       id: item.rewardId,
       rewardName: item.rewardName,
       businessName: item.businessName,
-      redeemedCount: item.redeemedCount,
-      Status: "Claimed",
+      Status: "Missed",
     };
   });
 
@@ -154,8 +154,13 @@ export function Rewards() {
       .includes(businessSearch.toString().toLowerCase());
   });
 
-  console.log(businessSearch, "businessSearch");
-  console.log(filterBusiness, "filterBusiness");
+
+    const filterData =  filterBusiness.map((el)=>{
+        return el.businessName
+    })
+     
+    const listBusiness = [...new Set(filterData)]
+
   const subscribedList = useMemo(
     () => (
       <Box sx={{ p: 2 }}>
@@ -166,19 +171,18 @@ export function Rewards() {
           onChange={handleBusinessSearch}
           InputProps={{ endAdornment: <Search /> }}
         />
-        {filterBusiness.map((item) => {
-          console.log(item, "item map ");
+        {listBusiness.map((item , index) => {
           return (
-            <div key={item.userId}>
+            <div key={index}>
               <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>
-                <ListItem>{item?.businessName}</ListItem>
+                <ListItem>{item}</ListItem>
               </List>
             </div>
           );
         })}
       </Box>
     ),
-    [filterBusiness]
+    [listBusiness]
   );
 
   return (

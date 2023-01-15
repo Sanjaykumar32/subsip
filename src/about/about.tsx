@@ -27,9 +27,9 @@ export const About = () => {
         </div>
 
        
-          <div className=" grid grid-cols-2">
+          <div className=" grid grid-about">
             <div className="bg-[#39cd62]">
-              <div className="w-[62%] m-auto my-10">
+              <div className=" mx-10 my-10  overflow-auto">
                 <div className="">
                   <h2 className="text-[#021414] text-[48px] font-bold leading-[48px] font-sans">We’re on a mission <br /> to bust open
                     <span className="text-[#ffffff]">

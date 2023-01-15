@@ -34,25 +34,28 @@ export const SearchFieldController = () => {
    */
 
   async function submitHandler(el:any) {
-   
     console.log(el ,'elment submit')
 
-     navigate(`/category/${el.id}?${el.name.trim()}`)
-   
-    try {
-      const response: any = await dispatch(
-        UserThunk.business({ businessName: search })
-      );
-      console.log(response ,'response')
-      if (response.payload.data.length > 0) {
-        navigate(`/listing/${Conid.iBusinessId}`);
-      } else {
-        console.log("nodata");
-      }
-    } catch (error) {
-      console.log(error);
+    if(el.iBusinessid){
+        navigate(`/listing/${el.iBusinessid}`)
+    }else{
+        navigate(`/category/${el.iCategoryid}`)
     }
-    setSearch("");
+   
+    // try {
+    //   const response: any = await dispatch(
+    //     UserThunk.business({ businessName: search })
+    //   );
+    //   console.log(response ,'response')
+    //   if (response.payload.data.length > 0) {
+    //     navigate(`/listing/${Conid.iBusinessId}`);
+    //   } else {
+    //     console.log("nodata");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    // setSearch("");
   }
 
   return {
