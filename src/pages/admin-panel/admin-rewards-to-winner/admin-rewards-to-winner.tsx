@@ -1,37 +1,24 @@
 import React, { useCallback, useEffect } from "react";
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  MenuItem,
-  Select,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import { AdminBackButton } from "components";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_RWARD_TO_WINNER_LIST } from "data/selectors";
+import { GET_USER } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useSearchParams } from "react-router-dom";
 
 export function AdminRewardsToWinner() {
   const dispatch = useAppDispatch();
-  const rewardToWinner = useAppSelector(GET_RWARD_TO_WINNER_LIST);
   const [searchParams] = useSearchParams();
   const userId = searchParams.get("userId");
-
+  const userdata = useAppSelector(GET_USER);
   const rewardToWinnerList = useCallback(async () => {
     try {
       await dispatch(
-        AdminThunk.getRewardToWinner({
-          userId: userId ? parseInt(userId) : 0,
+        AdminThunk.getUser({
+          userId: userId,
         })
       );
     } catch (error) {
@@ -45,91 +32,19 @@ export function AdminRewardsToWinner() {
 
   const columns: GridColDef[] = [
     {
-      field: "Email",
+      field: "email",
       headerName: "Email",
       width: 200,
     },
-    {
-      field: "Contacted",
-      headerName: "Contacted",
-      width: 200,
-      renderCell: (params) => (
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <VerifiedUserIcon color="success" sx={{ mr: 1 }} />
-          {params.value}
-        </Box>
-      ),
-    },
-    {
-      field: "Actions",
-      headerName: "Actions",
-      width: 110,
-      renderCell: (params) => (
-        <Box>
-          <Tooltip title={params.value}>
-            <FontAwesomeIcon icon={faTrash} />
-          </Tooltip>
-        </Box>
-      ),
-    },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      Email: "Jake@gmail.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 2,
-      Email: "Hik@hik.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 3,
-      Email: "Abi@abi.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 4,
-      Email: "Abe@abe.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 5,
-      Email: "Jake@gmail.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 6,
-      Email: "Abe@abe.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 7,
-      Email: "Jake@gmail.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 8,
-      Email: "Hik@hik.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 9,
-      Email: "Abe@abe.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-  ];
+  const rows = userdata.map((item) => {
+    return {
+      id: item.userId,
+      email: item?.email,
+      Contacted: item.emailVerified,
+    };
+  });
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -141,59 +56,8 @@ export function AdminRewardsToWinner() {
         }}
       >
         <AdminBackButton />
-        <Box>
-          <Button
-            size="large"
-            sx={{
-              fontWeight: 800,
-              width: "120px",
-              textAlign: "center",
-              height: "35px",
-            }}
-            color="info"
-            variant="contained"
-          >
-            Notify
-          </Button>
-        </Box>
       </Box>
       <Container maxWidth="md" sx={{ my: 4 }}>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "baseline",
-            justifyContent: "space-between",
-            my: 1,
-          }}
-        >
-          <Typography variant="body1" sx={{ fontWeight: 800 }}>
-            India Gate Restaurant Rewards Winners
-          </Typography>
-
-          <Box>
-            <Typography variant="caption" sx={{ mr: 1 }}>
-              Sort By:
-            </Typography>
-            <FormControl variant="standard">
-              <Select
-                labelId="sort-by-select-label"
-                id="sort-by-simple-select"
-                value="Newest"
-                size="small"
-                sx={{ fontWeight: 500 }}
-              >
-                <MenuItem value={"Newest"}>
-                  <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                    Newest
-                  </Typography>
-                </MenuItem>
-                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                  <Typography variant="body2">Oldest</Typography>
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </Box>
         <Box
           style={{
             height: 400,
@@ -206,7 +70,6 @@ export function AdminRewardsToWinner() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
-            checkboxSelection
           />
         </Box>
       </Container>

@@ -43,3 +43,5 @@ export const GET_DASHBOARD_COUNT = (state: RootState) =>
 
 export const GET_USER_NOTIFICTAION = (state: RootState) =>
   state.admin.userNotification;
+
+export const GET_USER = (state: RootState) => state.admin.getUser;

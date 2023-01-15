@@ -36,6 +36,8 @@ import {
   IUpdateSubCategoryRequest,
   IGetNotificationRequest,
   IReadNotificationRequest,
+  IRewardClaimedRequest,
+  IUserResponse,
 } from "interface";
 import { AdminService } from "services";
 
@@ -122,9 +124,7 @@ export class AdminThunk {
    */
   public static refferralCount = createAsyncThunk(
     "admin/refferalcount",
-    async (
-      payload: IRefferralCountRequest
-    ): Promise<IReferralCountResponse> => {
+    async (payload: IRefferralCountRequest): Promise<any> => {
       const response = await AdminService.refferralCount(payload);
       return response;
     }
@@ -374,8 +374,19 @@ export class AdminThunk {
    */
   public static getSubCategory = createAsyncThunk(
     "admin/createListing",
-    async (): Promise<IGetSubCategoryResponse> => {
+    async (): Promise<any> => {
       const response = await AdminService.getSubcategory();
+      return response;
+    }
+  );
+
+  /**
+   * Reward Claimed
+   */
+  public static rewardClaimed = createAsyncThunk(
+    "admin/rewardClaimed",
+    async (payload: IRewardClaimedRequest): Promise<any> => {
+      const response = await AdminService.rewardClaimed(payload);
       return response;
     }
   );
@@ -453,6 +464,17 @@ export class AdminThunk {
     "admin/read/UserNotification",
     async (payload: IReadNotificationRequest): Promise<any> => {
       const response = await AdminService.readNotification(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Get User
+   */
+  public static getUser = createAsyncThunk(
+    "admin/getUser",
+    async (payload: any): Promise<IUserResponse> => {
+      const response = await AdminService.getUser(payload);
       return response;
     }
   );

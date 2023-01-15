@@ -38,7 +38,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_CATEGORY, GET_USER_NOTIFICTAION } from "data/selectors";
+import { GET_BUSINESS, GET_CATEGORY, GET_USER_NOTIFICTAION } from "data/selectors";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -57,6 +60,12 @@ export const UserAppBar = (props: any) => {
   const [searchLocation, setLocation] = useState<any>("");
   const homepage = location.pathname;
   const userId = localStorage.getItem("userId");
+  const [readMoreNotification, setReadMoreNotification] = useState<any>(false);
+
+
+
+
+
 
   const getcategory = useCallback(async () => {
     try {
@@ -80,7 +89,7 @@ export const UserAppBar = (props: any) => {
         );
       }
     } catch (error) {
-      console.log(error);
+      console.log(error, 'this is  err res');
     }
   }, [dispatch, userId]);
 
@@ -110,7 +119,7 @@ export const UserAppBar = (props: any) => {
     if (auth.isAuthenticated) {
       setInterval(() => {
         getUserNotification();
-      }, 10000);
+      }, 100000);
     }
   }, [auth.isAuthenticated, getUserNotification]);
 
@@ -143,11 +152,21 @@ export const UserAppBar = (props: any) => {
     setLocationPopUP(true);
   };
 
-  const handleLocationClose = () => {
-    setLocation("");
-    setLocationPopUP(false);
-    navigate(`/?`);
-  };
+  // const disableCloseOnSelect = () => {
+  //   setLocation("");
+  //   setLocationPopUP(false);
+  //   navigate(`/?`);
+  // };
+  const handlevalue = (el: any) => {
+    if (el == undefined) {
+      setLocation("");
+      setLocationPopUP(false);
+      navigate(`/?`);
+    } else {
+      setLocation(el);
+      navigate(`/?${el}`);
+    }
+  }
 
   const handleLocation = (event: any) => {
     setLocation(event.target.value);
@@ -300,6 +319,21 @@ export const UserAppBar = (props: any) => {
     const stickyClass = scrollTop >= 50 ? "is-sticky" : "";
     setSticky(stickyClass);
   };
+  const businessData = useAppSelector(GET_BUSINESS);
+
+  // console.log(businessData  ,'businessData')
+
+  const defaultProps = {
+    options: businessData,
+    getOptionLabel: (option: any) => option.vLocation,
+  };
+  const flatProps = {
+    options: businessData.map((option) => option.vLocation),
+  };
+
+
+
+
 
   return (
     <>
@@ -311,11 +345,10 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${
-          props.display ? props.display : sticky ? sticky : "non-sticky"
-        } `}
+        className={`${props.display ? props.display : sticky ? '' : "non-sticky"
+          } `}
 
-        // style={{ position: props.display && 'fixed' }}
+      // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -393,27 +426,43 @@ export const UserAppBar = (props: any) => {
                   Location
                 </Button>
               ) : (
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-                  <InputLabel htmlFor="standard-adornment-password">
-                    Search
-                  </InputLabel>
-                  <Input
-                    id="standard-adornment-password"
-                    type={"text"}
-                    onChange={handleLocation}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          // onClick={handleClickShowPassword}
-                          // onMouseDown={handleMouseDownPassword}
-                        >
-                          <Button onClick={handleLocationClose}>Cancel</Button>
-                        </IconButton>
-                      </InputAdornment>
-                    }
+                // <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+                //   <InputLabel htmlFor="standard-adornment-password">
+                //     Search
+                //   </InputLabel>
+                //   <Input
+                //     id="standard-adornment-password"
+                //     type={"text"}
+                //     onChange={handleLocation}
+                //     endAdornment={
+                //       <InputAdornment position="end">
+                //         <IconButton
+                //           aria-label="toggle password visibility"
+                //         // onClick={handleClickShowPassword}
+                //         // onMouseDown={handleMouseDownPassword}
+                //         >
+                //           <Button onClick={handleLocationClose}>Cancel</Button>
+                //         </IconButton>
+                //       </InputAdornment>
+                //     }
+                //   />
+                // </FormControl>
+
+                <Stack spacing={1} sx={{ m: 1, width: "25ch" }}>
+                  <Autocomplete
+                    {...defaultProps}
+                    id="disable-close-on-select"
+                    //  onClick={disableCloseOnSelect}  
+                    onChange={(event, newValue: any) => {
+                      console.log(event, 'event onchange');
+                      handlevalue(newValue?.vLocation);
+
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} onChange={handleLocation} label="Search" variant="standard" />
+                    )}
                   />
-                </FormControl>
+                </Stack>
               )}
 
               <Divider
@@ -560,29 +609,32 @@ export const UserAppBar = (props: any) => {
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
                     return (
-                      <MenuItem
-                        key={i}
-                        onClick={() => {
-                          handleNotificationClose();
-                        }}
-                      >
-                        <div className="Notification list w-[250px]">
-                          <div className="flex w-full gap-[15px] ">
-                            <li className="w-[70%] text-black cursor-pointer text-[16px] ">
-                              <h1>{res.vHeadline}</h1>
-                              <p>{res.vDesc}</p>
-                            </li>
-                            <span
-                              className="w-[30%] text-center text-[15px]"
-                              onClick={() => {
-                                readNotification(res.iNotificationId);
-                              }}
-                            >
-                              Read
-                            </span>
+                      <div className="Notification list w-[350px] px-3 " key={i} >
+                        <div className="grid w-full gap-[5px] ">
+                          {/* <li className="text-black cursor-pointer text-[16px] "> */}
+                          <div className="flex gap-[5px] items-center ">
+                            <div className="bg-red-500 px-[13px] py-[5px] text-[12px] rounded-[30px] text-white "> Announcement</div>
+                            <div className=" text-[14px] font-[400] text-[#a3a3a3] "> 25/02/2025</div>
                           </div>
+                          <h1 className="text-[18px] font-[900] text-[#252525]" >{res.vHeadline}</h1>
+                          {/* <div className="flex "> */}
+                          <p className="text-[14px] flex font-[400] text-[#a3a3a3]">{readMoreNotification ? <span>{res.vDesc}</span> :
+                            <span className="NotextLimit2" >{res.vDesc}</span>}
+                            {!readMoreNotification ?
+                              <span className="text-[14px] w-[50px] font-[400] text-[#2196F3] cursor-pointer " onClick={() => setReadMoreNotification(true)} >Read More</span>
+                              : <span className="text-[14px] w-[50px] font-[400] text-[#2196F3] cursor-pointer " onClick={() => setReadMoreNotification(false)} >Read Less</span>}
+                          </p>
+                          {/* </div> */}
+                          {/* <span
+                            className="w-[30%] text-center text-[15px]"
+                            onClick={() => {
+                              readNotification(res.iNotificationId);
+                            }}
+                          >
+                            Read
+                          </span> */}
                         </div>
-                      </MenuItem>
+                      </div>
                     );
                   })
                 ) : (

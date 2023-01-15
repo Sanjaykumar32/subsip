@@ -41,6 +41,8 @@ export interface IBusiness {
   dLongitude: number;
   vLocation: string;
   tDescription: string;
+  vPreview: string;
+  vBodyDescription: string;
   dtAddedDate: string;
   iAddedBy: number;
   dtModifiedDate: string;
@@ -53,7 +55,7 @@ export interface IBusiness {
   onBanner: number;
   vImage?: string;
   iCategory: string;
-  iSubCategory: string;
+  iSubCategory: any;
   categoryName: string;
   subCategoryName: string;
   subscriberCount: number;
@@ -164,6 +166,7 @@ export interface IUserReward {
   rewardId: number;
   businessName: string;
   redeemedCount: number;
+  status: string;
 }
 
 export interface IBusinessRewardResponse {
@@ -173,11 +176,12 @@ export interface IBusinessRewardResponse {
 }
 
 export interface IBusinessReward {
-  userId: number;
-  rewardName: string;
-  rewardId: number;
-  userName: string;
+  iRewardId: number;
+  redeemedUserCount: number;
   redeemedId?: number;
+  rewardCount: number;
+  rewardName: string;
+  redeemedUserId: string;
 }
 
 export interface IDashboardResponse {
@@ -203,8 +207,30 @@ export interface IDeleteSubscriberResponse {
   data: number;
 }
 
+export interface IUnSubscriberResponse {
+  success: number;
+  message: string;
+  data: number;
+}
+
 export interface IUpdateSubCategoryResponse {
   success: number;
   message: string;
   data: number;
+}
+
+export interface IUserResponse {
+  success: number;
+  message: string;
+  data: IUser[];
+}
+
+export interface IUser {
+  userId: number;
+  name: string;
+  email: string;
+  groupId?: number;
+  addedDate: any;
+  emailVerified: string;
+  referralCode: string;
 }

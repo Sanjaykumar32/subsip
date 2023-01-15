@@ -20,26 +20,22 @@ export function AdminGuard({ children }: IAuthGuardProps): ReactElement {
   const navigate = useNavigate();
   const accountType = useAppSelector(GET_ACCOUNT_TYPE);
   const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
 
   useEffect(() => {
     if (userId === "4") {
-      // navigate(RoutePathEnum.HOME);
-      // console.log('admin ')
+      AccountTypeEnum.ADMIN
     } else {
       navigate(RoutePathEnum.HOME);
     }
-  }, []);
 
-  // useEffect(() => {
-  //   if (isAuthenticated && accountType !== AccountTypeEnum.ADMIN) {
-  //     navigate(RoutePathEnum.HOME);
-  //   }
-  // }, [accountType, isAuthenticated, navigate]);
 
-  // if (isAuthenticated && accountType !== AccountTypeEnum.ADMIN) {
-  //   navigate(RoutePathEnum.HOME);
-  //   return <> </>;
-  // }
+
+
+  }, [navigate, isAuthenticated, userId]);
+
+
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>;

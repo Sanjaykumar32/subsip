@@ -37,3 +37,6 @@ export interface IAddSubscriberTobussinessRequest {
 export interface IDeleteSubscriberRequest {
   iSubscriberId: string;
 }
+export interface IUNSubscriberRequest {
+  businessId: string;
+}

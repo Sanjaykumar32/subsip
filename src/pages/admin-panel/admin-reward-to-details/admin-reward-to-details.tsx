@@ -46,10 +46,10 @@ export function AdminRewardToDetails() {
 
   const rows = businessRewardData.map((item: IBusinessReward) => {
     return {
-      id: item.userId,
+      id: item.redeemedUserId,
       rewardName: item.rewardName,
-      Status: "Claimed",
-      Actions: ["Edit", "Delete", item?.rewardId],
+      redeemedUserCount: item.redeemedUserCount,
+      Actions: ["Edit", "Delete", item.iRewardId],
     };
   });
 
@@ -69,25 +69,27 @@ export function AdminRewardToDetails() {
       headerName: "Name",
       width: 200,
     },
-    // {
-    //   field: "Reward",
-    //   headerName: "Rewards",
-    //   width: 200,
-    //   renderCell: (params) => <Chip label={params.value} color="info" />,
-    // },
-    // {
-    //   field: "Status",
-    //   headerName: "Status",
-    //   width: 200,
-    //   renderCell: (params) => <Chip label={params.value} color="success" />,
-    // },
+
+    {
+      field: "redeemedUserCount",
+      headerName: "Redeemed Count",
+      width: 200,
+      renderCell: (params) => (
+        <Link
+          href={`${AdminRoutePathEnum.ADMIN_REWARDS_TO_WINNERS}?userId=${params.id}`}
+        >
+          {params.value}
+        </Link>
+      ),
+    },
+
     {
       field: "Actions",
       headerName: "Actions",
       width: 150,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value}>
+          <Tooltip title={params.value[0]}>
             <FontAwesomeIcon icon={faPen} />
           </Tooltip>
           <Tooltip title={params.value[1]}>
@@ -102,18 +104,6 @@ export function AdminRewardToDetails() {
         </Box>
       ),
     },
-    // {
-    //   field: "Active",
-    //   headerName: "Active",
-    //   width: 150,
-    //   renderCell: (params) => (
-    //     <Box>
-    //       <Tooltip title={params.value}>
-    //         <Switch {...label} defaultChecked size="small" color="info" />
-    //       </Tooltip>
-    //     </Box>
-    //   ),
-    // },
   ];
 
   return (

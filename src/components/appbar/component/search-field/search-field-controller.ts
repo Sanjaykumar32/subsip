@@ -1,47 +1,61 @@
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
-import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent, useState , useEffect } from "react";
+import { useNavigate, useRoutes } from "react-router-dom";
 
 export const SearchFieldController = () => {
   const [search, setSearch] = useState<string>("");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const BussinessByName = useAppSelector(GET_BUSINESS);
-
   /**
    *
    * @param {ChangeEvent<HTMLInputElement>} event
    * @return {void}
    */
-  function changeHandler(event: ChangeEvent<HTMLInputElement>): void {
-    event.preventDefault();
-    setSearch(event.target.value);
+  function changeHandler(event: any): void {
+    // event.preventDefault();
+    setSearch(event);
+   
   }
+
+  // useEffect(()=>{
+  //   navigate(`/?${search.trim()}`)
+  // },[search])
 
   const Conid = BussinessByName?.filter((item) => {
     return item.vName === search;
   })[0];
 
+   console.log(Conid ,'conid');
   /**
    * @return {Promise<void>}
    */
 
-  async function submitHandler(): Promise<void> {
-    try {
-      const response: any = await dispatch(
-        UserThunk.business({ businessName: search })
-      );
-      if (response.payload.data.length > 0) {
-        navigate(`/listing/${Conid.iBusinessId}`);
-      } else {
-        console.log("nodata");
-      }
-    } catch (error) {
-      console.log(error);
+  async function submitHandler(el:any) {
+    console.log(el ,'elment submit')
+
+    if(el.iBusinessid){
+        navigate(`/listing/${el.iBusinessid}`)
+    }else{
+        navigate(`/category/${el.iCategoryid}`)
     }
-    setSearch("");
+   
+    // try {
+    //   const response: any = await dispatch(
+    //     UserThunk.business({ businessName: search })
+    //   );
+    //   console.log(response ,'response')
+    //   if (response.payload.data.length > 0) {
+    //     navigate(`/listing/${Conid.iBusinessId}`);
+    //   } else {
+    //     console.log("nodata");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    // setSearch("");
   }
 
   return {
@@ -51,6 +65,7 @@ export const SearchFieldController = () => {
       BussinessByName,
     },
     handlers: {
+      setSearch,
       changeHandler,
       submitHandler,
     },

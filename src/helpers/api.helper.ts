@@ -52,7 +52,7 @@ export class ApiHelper {
         // Do something before request is sent
         return config;
       },
-      (error) => Promise.resolve(error)
+      (error) => Promise.resolve(console.log(error, 'this is catch message'))
     );
   }
 

@@ -26,7 +26,7 @@ import {
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { NewlistingController } from "./admin-new-listing-controller";
-import { Form } from "react-router-dom";
+import { Form, useSearchParams } from "react-router-dom";
 import Switch from "@mui/material/Switch";
 
 interface ListFormItem {
@@ -50,10 +50,12 @@ export function AdminNewlisting() {
     step8,
     step9,
     step10,
+    step11,
+    step12,
   ]: ListFormItem[] = [
       {
         id: "q1",
-        label: "What's your business called?",
+        label: "Name",
         type: InputTypeEnum.INPUT,
         required: false,
       },
@@ -113,6 +115,19 @@ export function AdminNewlisting() {
         id: "q10",
         label: "On Banner",
         type: InputTypeEnum.SWITCH_DEMO,
+        required: false,
+      },
+      {
+        id: "q11",
+        label: "Preview",
+        type: InputTypeEnum.TEXT_AREA,
+        required: false,
+      },
+      {
+        id: "q12",
+        label: "Body Description",
+        type: InputTypeEnum.TEXT_AREA,
+        required: false,
       },
     ];
 
@@ -130,6 +145,9 @@ export function AdminNewlisting() {
     categoryData,
     businessData,
     image,
+    preview,
+    bodyDescription,
+
   } = getters;
   const {
     handleHeadlineChange,
@@ -140,12 +158,18 @@ export function AdminNewlisting() {
     handleBusinessNameChange,
     handleBusinessLocationhange,
     handleEmailChange,
-    handleProductChange,
+    handleTaglineChange,
     handleImageChange,
     handleBanner,
+    handlePreviewChange,
+    handleBodyDescriptionChange,
   } = handlers;
 
   const ref = useRef<HTMLInputElement>(null);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const edit = searchParams.get("edit");
+
 
 
 
@@ -178,13 +202,36 @@ export function AdminNewlisting() {
                   <FormControl fullWidth>
                     <TextField
                       size="small"
-                      value={headline}
-                      onChange={handleHeadlineChange}
+                      value={tagLine}
+                      onChange={handleTaglineChange}
                       // required
                       fullWidth
                     />
                   </FormControl>
                 </Box>
+
+
+
+                <Box sx={{ my: 4 }}>
+                  <Label> {step8.label} </Label>
+                  <Typography variant="body2"> {step8.caption} </Typography>
+                  <FormControl fullWidth>
+                    <TextField
+                      value={businessLocation}
+                      onChange={handleBusinessLocationhange}
+                      // required
+                      fullWidth
+                      InputProps={{
+                        endAdornment: (
+                          <IconButton>
+                            <FontAwesomeIcon icon={faLocationDot} size="xs" />
+                          </IconButton>
+                        ),
+                      }}
+                    />
+                  </FormControl>
+                </Box>
+
                 <Box sx={{ my: 4 }}>
                   <Label> {step5.label} </Label>
                   <Typography variant="body2"> {step5.caption} </Typography>
@@ -209,6 +256,7 @@ export function AdminNewlisting() {
                       labelId={`${step2.id}-label`}
                       value={category}
                       onChange={handleCategoryChange}
+                      className="listingSelect"
                     >
                       {categoryData?.map((res, i: number) => (
                         <MenuItem value={res.iCategoryId} key={i}>
@@ -228,6 +276,7 @@ export function AdminNewlisting() {
                       labelId={`${step9.id}-label`}
                       value={subCategory}
                       onChange={handleSubCategoryChange}
+                      className="listingSelect"
                     >
                       {filteredSubCategory.map((res, i: number) => (
                         <MenuItem value={res.iSubCategoryId} key={i}>
@@ -241,35 +290,7 @@ export function AdminNewlisting() {
             </Grid>
             <Grid item xs={12} md={6}>
               <Box sx={{ px: 3, py: 1 }}>
-                <Box sx={{ my: 4 }}>
-                  <Label id={`${step7.id}-label`}> {step7.label} </Label>
-                  <Typography variant="body2"> {step7.caption} </Typography>
-                  <FormControl fullWidth>
-                    <TextField
-                      multiline
-                      value={tagLine}
-                      onChange={handleProductChange}
-                      // required
-                      fullWidth
-                    />
-                  </FormControl>
-                </Box>
-                <Box sx={{ my: 4 }}>
-                  <Label> {step4.label} </Label>
-                  <Typography variant="body2"> {step4.caption} </Typography>
-                  <FormControl fullWidth>
-                    <TextField
-                      multiline
-                      minRows={5}
-                      value={description}
-                      onChange={handleDescriptionChange}
-                      // required
-                      fullWidth
-                    />
-                  </FormControl>
-                </Box>
-
-                <Grid container>
+                <Grid container className=' justify-between ' >
                   <Grid xs={6} md={4}>
                     <Box>
                       <Label> {step6.label} </Label>
@@ -285,7 +306,7 @@ export function AdminNewlisting() {
 
                       {/* <FormControl fullWidth >
                         <input
-                          // ref={ref}
+                          ref={ref}
                           type="file"
                           // value={image}
                           onChange={(e: any) => { handleImageChange(e) }}
@@ -323,24 +344,51 @@ export function AdminNewlisting() {
                 </Grid>
 
                 <Box sx={{ my: 4 }}>
-                  <Label> {step8.label} </Label>
-                  <Typography variant="body2"> {step8.caption} </Typography>
+                  <Label> {step11.label} </Label>
+                  <Typography variant="body2"> {step12.caption} </Typography>
                   <FormControl fullWidth>
                     <TextField
-                      value={businessLocation}
-                      onChange={handleBusinessLocationhange}
+                      size="small"
+                      value={preview}
+                      onChange={handlePreviewChange}
                       // required
                       fullWidth
-                      InputProps={{
-                        endAdornment: (
-                          <IconButton>
-                            <FontAwesomeIcon icon={faLocationDot} size="xs" />
-                          </IconButton>
-                        ),
-                      }}
+                    // required
+
                     />
                   </FormControl>
                 </Box>
+
+                <Box sx={{ my: 4 }}>
+                  <Label> {step4.label} </Label>
+                  <Typography variant="body2"> {step4.caption} </Typography>
+                  <FormControl fullWidth>
+                    <TextField
+                      multiline
+                      minRows={5}
+                      value={description}
+                      onChange={handleDescriptionChange}
+                      // required
+                      fullWidth
+                    />
+                  </FormControl>
+                </Box>
+
+                <Box sx={{ my: 4 }}>
+                  <Label> {step12.label} </Label>
+                  <Typography variant="body2"> {step12.caption} </Typography>
+                  <FormControl fullWidth>
+                    <TextField
+                      multiline
+                      minRows={5}
+                      value={bodyDescription}
+                      onChange={handleBodyDescriptionChange}
+                      // required
+                      fullWidth
+                    />
+                  </FormControl>
+                </Box>
+
               </Box>
             </Grid>
           </Grid>
@@ -357,7 +405,7 @@ export function AdminNewlisting() {
           }}
         >
           <Button variant="rounded" type="submit">
-            Add listing
+            {edit ? 'Update listing' : 'Add listing'}
           </Button>
         </Box>
       </Form>

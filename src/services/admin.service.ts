@@ -43,6 +43,8 @@ import {
   IUpdateSubCategoryRequest,
   IGetNotificationRequest,
   IReadNotificationRequest,
+  IRewardClaimedRequest,
+  IUserResponse,
 } from "interface";
 
 /**
@@ -110,11 +112,16 @@ export class AdminService {
   public static async getNotification(
     payload: IGetNotificationRequest
   ): Promise<any> {
-    const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `/user/notification/${payload.userID}`,
-      method: "GET",
-    });
-    return res.data;
+    try {
+      const res: AxiosResponse<any> = await ApiHelper.send<any>({
+        url: `/user/notification/${payload.userID}`,
+        method: "GET",
+      });
+      return res.data;
+    } catch (err: any) {
+      localStorage.clear();
+      // console.log(err?.response?.status, 'this is catch err')
+    }
   }
 
   /**
@@ -160,7 +167,9 @@ export class AdminService {
   ): Promise<ISubscriberOfBussinessResponse> {
     const res: AxiosResponse<ISubscriberOfBussinessResponse> =
       await ApiHelper.send<ISubscriberOfBussinessResponse>({
-        url: `/business/subscriber?userId=${payload.userId}${payload?.businessId ? `&businessId=${payload.businessId}` : ''}`,
+        url: `/business/subscriber?userId=${payload.userId}${
+          payload?.businessId ? `&businessId=${payload.businessId}` : ""
+        }`,
         method: "GET",
       });
 
@@ -185,16 +194,15 @@ export class AdminService {
 
   /**
    * refferral count
-   * @return {Promise<IReferralCountResponse>}
+   * @return {Promise<any>}
    */
   public static async refferralCount(
     payload: IRefferralCountRequest
-  ): Promise<IReferralCountResponse> {
-    const res: AxiosResponse<IReferralCountResponse> =
-      await ApiHelper.send<IReferralCountResponse>({
-        url: `/user/referral-count?userId=${payload.userId}`,
-        method: "GET",
-      });
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/user/milestone/${payload.userId}`,
+      method: "GET",
+    });
 
     return res.data;
   }
@@ -304,7 +312,7 @@ export class AdminService {
    */
   public static async getRefferal(): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "/milestone",
+      url: "/user/milestone/4",
       method: "GET",
     });
     return res.data;
@@ -312,14 +320,28 @@ export class AdminService {
 
   /**
    * sub category
-   * @return {Promise<IGetSubCategoryResponse>}
+   * @return {Promise<any>}
    */
-  public static async getSubcategory(): Promise<IGetSubCategoryResponse> {
-    const res: AxiosResponse<IGetSubCategoryResponse> =
-      await ApiHelper.send<IGetSubCategoryResponse>({
-        url: "sub-category/list",
-        method: "GET",
-      });
+  public static async getSubcategory(): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/sub-category/list",
+      method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
+   * reward Claimed
+   * @return {Promise<any>}
+   */
+  public static async rewardClaimed(
+    payload: IRewardClaimedRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/user/reward-redeem",
+      method: "POST",
+      data: payload,
+    });
     return res.data;
   }
 
@@ -514,8 +536,8 @@ export class AdminService {
    */
   public static async updateListing(payload: any): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `/business/${payload?.iBusinessId}`,
-      method: "PUT",
+      url: `/business/update?businessId=${payload?.iBusinessId}`,
+      method: "POST",
       data: payload?.data,
     });
     return res.data;
@@ -623,6 +645,19 @@ export class AdminService {
       url: `/dashboard`,
       method: "GET",
     });
+    return res.data;
+  }
+
+  /**
+   * Reward To Winner
+   * @return {Promise<IUserResponse>}
+   */
+  public static async getUser(payload: any): Promise<IUserResponse> {
+    const res: AxiosResponse<IUserResponse> =
+      await ApiHelper.send<IUserResponse>({
+        url: `/user?id=${payload.userId}`,
+        method: "GET",
+      });
     return res.data;
   }
 }

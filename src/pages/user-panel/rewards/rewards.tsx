@@ -31,20 +31,9 @@ import { MuiColor } from "type";
 export function Rewards() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const [filter, setFilter] = useState('')
-  const [businessSearch, setSearchBusiness] = useState('')
-
-  const chipStatusColor = (): MuiColor => {
-    switch (status) {
-      case RewardStatusEnum.CLAIM:
-        return "success";
-      case RewardStatusEnum.CLAIMED:
-        return "warning";
-      case RewardStatusEnum.MISSED:
-      default:
-        return "error";
-    }
-  };
+  const [filter, setFilter] = useState("");
+  const [businessSearch, setSearchBusiness] = useState("");
+  const userId = localStorage.getItem("userId");
 
   const rewardData = useAppSelector(GET_USER_REWARDS);
   const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
@@ -53,11 +42,13 @@ export function Rewards() {
 
   const getUserReward = useCallback(async () => {
     try {
-      await dispatch(AdminThunk.getuserReward({ userId: 4 }));
+      await dispatch(
+        AdminThunk.getuserReward({ userId: userId ? parseInt(userId) : 0 })
+      );
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     getUserReward();
@@ -65,11 +56,15 @@ export function Rewards() {
 
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
-      await dispatch(AdminThunk.allSubscriberOfBussiness({ userId: 5 }));
+      await dispatch(
+        AdminThunk.allSubscriberOfBussiness({
+          userId: userId ? parseInt(userId) : 0,
+        })
+      );
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     allsubscriberOfBussiness();
@@ -77,20 +72,23 @@ export function Rewards() {
 
   console.log(subscribeBusiness, "subscribeBusiness");
 
-  const columns: GridColDef[] = [
-    // {
-    //   field: "id",
-    //   headerName: "",
-    //   width: 100,
-    //   renderCell: () => <Avatar sx={{ mx: "auto", width: 35, height: 35 }} />,
-    // },
-    // {
-    //   field: "actions",
-    //   headerName: "Actions",
-    //   width: 150,
-    //   renderCell: () => <Button variant="contained"> Claim </Button>,
-    // },
+  const rewardClaimed = useCallback(
+    async (id: any) => {
+      try {
+        await dispatch(
+          AdminThunk.rewardClaimed({
+            rewardId: id,
+          })
+        );
+        getUserReward();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch]
+  );
 
+  const columns: GridColDef[] = [
     {
       field: "rewardName",
       headerName: "Reward Name",
@@ -102,48 +100,65 @@ export function Rewards() {
       width: 150,
     },
     {
-      field: "redeemedCount",
-      headerName: "Redeemed Count",
-      width: 150,
-    },
-    {
       field: "Status",
       headerName: "Status",
       width: 200,
-      renderCell: (params) => <Chip label={params.value} color="success" />,
+      renderCell: (params) => (
+        <Chip
+          label={params.value}
+          className={
+            params.value == "Missed"
+              ? "errorColor"
+              : params.value == "Available"
+              ? "successColor"
+              : "warningColor"
+          }
+          onClick={() => {
+            params.value == "Available" && rewardClaimed(params.id);
+          }}
+        />
+      ),
     },
   ];
 
-  console.log(rewardData, 'rewardData ');
   const rows = rewardData.map((item) => {
     return {
       id: item.rewardId,
       rewardName: item.rewardName,
       businessName: item.businessName,
-      redeemedCount: item.redeemedCount,
-      Status: "Claimed",
+      Status: item.status,
     };
   });
 
   const handleSearch = (value: any) => {
-    setFilter(value)
-  }
+    setFilter(value);
+  };
 
   const handleBusinessSearch = (el: any) => {
-    setSearchBusiness(el.target.value)
-  }
-
+    setSearchBusiness(el.target.value);
+  };
 
   const list = rows.filter((el) => {
-    return Object.values(el?.Status).join('').toLowerCase().includes(filter.toString().toLowerCase())
-  })
+    return Object.values(el?.Status)
+      .join("")
+      .toLowerCase()
+      .includes(filter.toString().toLowerCase());
+  });
 
   const filterBusiness = rewardData.filter((el) => {
-    return Object.values(el.businessName).join('').toLowerCase().includes(businessSearch.toString().toLowerCase())
-  })
+    return Object.values(el.businessName)
+      .join("")
+      .toLowerCase()
+      .includes(businessSearch.toString().toLowerCase());
+  });
 
-  console.log(businessSearch, 'businessSearch')
-  console.log(filterBusiness, 'filterBusiness')
+  const filterData = filterBusiness.map((el) => {
+    return el.businessName;
+  });
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const listBusiness = [...new Set(filterData)];
+
   const subscribedList = useMemo(
     () => (
       <Box sx={{ p: 2 }}>
@@ -154,19 +169,18 @@ export function Rewards() {
           onChange={handleBusinessSearch}
           InputProps={{ endAdornment: <Search /> }}
         />
-        {filterBusiness.map((item) => {
-          console.log(item, 'item map ')
+        {listBusiness.map((item, index) => {
           return (
-            <div key={item.userId}>
+            <div key={index}>
               <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>
-                <ListItem>{item?.businessName}</ListItem>
+                <ListItem>{item}</ListItem>
               </List>
             </div>
-          )
+          );
         })}
       </Box>
     ),
-    [filterBusiness]
+    [listBusiness]
   );
 
   return (
@@ -190,21 +204,21 @@ export function Rewards() {
           <Button
             style={{ background: theme.palette.success.light }}
             className="claimbtn"
-            onClick={() => handleSearch('Available')}
+            onClick={() => handleSearch("Available")}
           >
             Available
           </Button>
           <Button
             style={{ background: theme.palette.warning.light }}
             className="claimbtn"
-            onClick={() => handleSearch('Claimed')}
+            onClick={() => handleSearch("Claimed")}
           >
             Claimed
           </Button>
           <Button
             style={{ background: theme.palette.error.main }}
             className="claimbtn"
-            onClick={() => handleSearch('Missed')}
+            onClick={() => handleSearch("Missed")}
           >
             Missed
           </Button>

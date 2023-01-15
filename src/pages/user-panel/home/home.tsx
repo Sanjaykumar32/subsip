@@ -13,7 +13,7 @@ import {
 } from "data/selectors";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum, RoutePathEnum } from "enum";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { IBannerData, IBusiness } from "interface";
 import { UserThunk } from "data/thunk/user.thunk";
 import { Button } from "@mui/material";
@@ -25,8 +25,6 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 export function Home() {
   const location = useLocation();
   const [showMoreData, setMoreData] = useState(false);
-
-  console.log(location, "dhskdshdk");
 
   const settings: any = {
     infinite: true,
@@ -107,11 +105,13 @@ export function Home() {
   const businessData = useAppSelector(GET_BUSINESS);
 
   const filterBanner = businessData.filter((item) => {
-    return Object.values(item.vLocation)
+    return Object.values(item.vLocation.toString().toLowerCase())
       .join("")
       .toLowerCase()
       .includes(location.search.toString().slice(1, 19).toLowerCase());
   });
+
+  console.log(filterBanner, "location.search.toString().slice(1, 19)");
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
@@ -150,7 +150,7 @@ export function Home() {
   };
   const locatiosn = useLocation();
   // const businessId = location.id;
-  console.log(locatiosn, "location");
+  console.log(locatiosn, "location home ");
 
   async function onImageClick(id: number): Promise<void> {
     try {
@@ -173,7 +173,7 @@ export function Home() {
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
-              <div className="max-w-[100%] mt-[78px] lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
+              <div className="max-w-[100%] mt-[-38px] lg:mt-[78px] lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
                 <div className="w-[80%] md:w-[45%] gap-5 flex flex-col px-2 pt-10 md:px-10">
                   <div>
                     <span className="bg-[#0275d8] rounded-md text-[0.9rem] py-[5px] px-[10px] font-normal text-white">
@@ -253,6 +253,7 @@ export function Home() {
                       des={ele?.tDescription}
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
+                      subscriberCount={ele.subscriberCount}
                     />
                   </div>
                 );
@@ -283,6 +284,7 @@ export function Home() {
                       des={ele?.tDescription}
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
+                      subscriberCount={ele.subscriberCount}
                     />
                   </div>
                 );
@@ -312,6 +314,7 @@ export function Home() {
                       des={ele?.tDescription}
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
+                      subscriberCount={ele.subscriberCount}
                     />
                   </div>
                 );
@@ -344,6 +347,7 @@ export function Home() {
                           des={ele?.tDescription}
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
+                          subscriberCount={ele.subscriberCount}
                         />
                       </div>
                     );
@@ -374,6 +378,7 @@ export function Home() {
                           des={ele?.tDescription}
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
+                          subscriberCount={ele.subscriberCount}
                         />
                       </div>
                     );
@@ -409,7 +414,7 @@ export function Home() {
 }
 
 const SliderCard = (props: any) => {
-  const { des, imgSrc, location, name, id } = props;
+  const { des, imgSrc, location, name, id, subscriberCount } = props;
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -464,15 +469,18 @@ const SliderCard = (props: any) => {
           {name}
         </span>
         <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold py-2">
-          {location}
+          {location ? location : " "}
         </p>
         <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434D59] textLimit2 py-2 pl-3 ">
-          {des}
+          {des ? des : "--"}
         </p>
         <div className="flex justify-between">
           <p className="text-[0.9rem] text-[#CDCDCD]">
-            <span className="text-[20px] text-black pr-2"> 46.2k </span>
-            subscribers
+            <span className="text-[20px] text-black pr-2">
+              {" "}
+              {subscriberCount ? subscriberCount : " "}{" "}
+            </span>
+            {subscriberCount ? "subscribers" : " "}
           </p>
 
           <div className="raletive cursor-pointer " onClick={onButtonClick}>
