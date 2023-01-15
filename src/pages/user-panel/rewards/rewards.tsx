@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { ColoredLabel, PageHeader } from "components";
+import { PageHeader } from "components";
 import {
   Box,
   Grid,
@@ -16,7 +16,6 @@ import {
 import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import TableContainer from "@mui/material/TableContainer";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { Search } from "@mui/icons-material";
 import { useAppSelector, useAppDispatch } from "data";
@@ -25,8 +24,6 @@ import {
   GET_USER_REWARDS,
 } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { RewardStatusEnum } from "enum";
-import { MuiColor } from "type";
 
 export function Rewards() {
   const theme = useTheme();
@@ -34,19 +31,6 @@ export function Rewards() {
   const [filter, setFilter] = useState("");
   const [businessSearch, setSearchBusiness] = useState("");
   const userId = localStorage.getItem("userId");
-  const [datas, setDuplecate] = useState<any>([]);
-
-  const chipStatusColor = (): MuiColor => {
-    switch (status) {
-      case RewardStatusEnum.CLAIM:
-        return "success";
-      case RewardStatusEnum.CLAIMED:
-        return "warning";
-      case RewardStatusEnum.MISSED:
-      default:
-        return "error";
-    }
-  };
 
   const rewardData = useAppSelector(GET_USER_REWARDS);
   const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
@@ -93,11 +77,12 @@ export function Rewards() {
             rewardId: id,
           })
         );
+        getUserReward();
       } catch (error) {
         console.log(error);
       }
     },
-    [dispatch]
+    [dispatch, getUserReward]
   );
 
   const columns: GridColDef[] = [
@@ -118,13 +103,6 @@ export function Rewards() {
       renderCell: (params) => (
         <Chip
           label={params.value}
-          // color={
-          //   params.value == "Missed"
-          //     ? "error"
-          //     : params.value == "Available"
-          //     ? "success"
-          //     : "warning"
-          // }
           className={
             params.value == "Missed"
               ? "errorColor"
@@ -133,20 +111,19 @@ export function Rewards() {
               : "warningColor"
           }
           onClick={() => {
-            params.value == "Claimed" && rewardClaimed(params.id);
+            params.value == "Available" && rewardClaimed(params.id);
           }}
         />
       ),
     },
   ];
 
-  console.log(rewardData, "rewardData ");
   const rows = rewardData.map((item) => {
     return {
       id: item.rewardId,
       rewardName: item.rewardName,
       businessName: item.businessName,
-      Status: "Claimed",
+      Status: item.status,
     };
   });
 
@@ -210,17 +187,6 @@ export function Rewards() {
         icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
       >
         <Box sx={{ display: "flex" }} className="gap-4">
-          {/* {[
-            { title: "Available", color: theme.palette.success.light },
-            { title: "Claimed", color: theme.palette.warning.light },
-            { title: "Missed", color: theme.palette.error.main },
-          ].map((res, i) => (
-            <ColoredLabel
-              title={res.title}
-              color={res.color}
-              key={`${res.title}-${i}`}
-            />
-          ))} */}
           <Button
             style={{ background: theme.palette.success.light }}
             className="claimbtn"
