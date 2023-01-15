@@ -33,6 +33,7 @@ export function Rewards() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [filter, setFilter] = useState("");
   const [businessSearch, setSearchBusiness] = useState("");
+  const [datas, setFilterData] = useState<any>([]);
   const userId = localStorage.getItem("userId");
 
   const chipStatusColor = (): MuiColor => {
@@ -85,19 +86,6 @@ export function Rewards() {
   console.log(subscribeBusiness, "subscribeBusiness");
 
   const columns: GridColDef[] = [
-    // {
-    //   field: "id",
-    //   headerName: "",
-    //   width: 100,
-    //   renderCell: () => <Avatar sx={{ mx: "auto", width: 35, height: 35 }} />,
-    // },
-    // {
-    //   field: "actions",
-    //   headerName: "Actions",
-    //   width: 150,
-    //   renderCell: () => <Button variant="contained"> Claim </Button>,
-    // },
-
     {
       field: "rewardName",
       headerName: "Reward Name",
@@ -109,15 +97,28 @@ export function Rewards() {
       width: 150,
     },
     {
-      field: "redeemedCount",
-      headerName: "Redeemed Count",
-      width: 150,
-    },
-    {
       field: "Status",
       headerName: "Status",
       width: 200,
-      renderCell: (params) => <Chip label={params.value} color="success" />,
+      renderCell: (params) => (
+        <Chip
+          label={params.value}
+          // color={
+          //   params.value == "Missed"
+          //     ? "error"
+          //     : params.value == "Available"
+          //     ? "success"
+          //     : "warning"
+          // }
+          className={
+            params.value == "Missed"
+              ? "errorColor"
+              : params.value == "Available"
+              ? "successColor"
+              : "warningColor"
+          }
+        />
+      ),
     },
   ];
 
@@ -127,8 +128,7 @@ export function Rewards() {
       id: item.rewardId,
       rewardName: item.rewardName,
       businessName: item.businessName,
-      redeemedCount: item.redeemedCount,
-      Status: "Claimed",
+      Status: "Missed",
     };
   });
 
@@ -154,8 +154,19 @@ export function Rewards() {
       .includes(businessSearch.toString().toLowerCase());
   });
 
+  filterBusiness.map((item: any) => {
+    return setFilterData({ ...datas, list: [...item.businessName] });
+  });
+
+  console.log(datas, "datas");
+
+  // const data = [...new Set(filterBusiness[0].businessName)];
+
+  // console.log(data, "data");
+
   console.log(businessSearch, "businessSearch");
   console.log(filterBusiness, "filterBusiness");
+
   const subscribedList = useMemo(
     () => (
       <Box sx={{ p: 2 }}>
