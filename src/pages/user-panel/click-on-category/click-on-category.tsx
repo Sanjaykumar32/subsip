@@ -22,7 +22,12 @@ import {
 import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import {
+  useNavigate,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum } from "enum";
@@ -30,29 +35,21 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
+  const [subcatId, setSubCatIdData] = useState<any>();
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [activeCate, setActiveCate] = useState<any>(false);
   const [subCatdata, setSubData] = useState<any>([]);
 
   const location = useLocation();
-  const locationData = useParams();
-  const link = useParams();
 
-  console.log(locationData.id, "locationssd");
+  const [searchParams] = useSearchParams();
+  const subCatId = searchParams.get("subCategory");
+
+  console.log("subCatId", subCatId);
 
   const getCateID = location.pathname.split("/")[2];
-
-  const data = {
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2881&q=80",
-    title: "India Gate Restaurant",
-    location: "Seattle,WA",
-    desc: "Welcome to the India Gate Restaurant where we offer unique food.",
-    subscribers: "46.2K subscribers",
-    footer:
-      "Claim FREE gift cards as they become available from the business listed above ",
-  };
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
@@ -95,6 +92,12 @@ export function ClickOnCategory() {
     // setActiveCate(id?.iCategoryId)
   };
 
+  const handleSubList = (id: any) => {
+    // naviagate(`/listing?${id?.iCategoryId}`);
+    setSubCatIdData(id);
+    // setActiveCate(id?.iCategoryId)
+  };
+
   const businessData = useAppSelector(GET_BUSINESS);
 
   const auth = useAuth();
@@ -122,9 +125,17 @@ export function ClickOnCategory() {
     }
   );
 
+  console.log(listFilter, "listFilter");
+
   const totalLenght = businessData.filter(
     (item: any) => item.iCategory === ids
   );
+
+  // const filerData = subCategoryData.filter((item) => {
+  //   return item.iSubCategoryId == subCatId.id;
+  // });
+
+  // console.log(filerData, "filerData");
 
   useEffect(() => {
     if (getCateID) {
@@ -181,7 +192,8 @@ export function ClickOnCategory() {
                         }  `}
                         onClick={() => {
                           handleList(item?.iCategoryId),
-                            setActiveCate(item?.iCategoryId);
+                            handleSubList(item?.iSubCategoryId);
+                          setActiveCate(item?.iCategoryId);
                           setSubData(filteredSubCategory);
                         }}
                       >
@@ -191,11 +203,20 @@ export function ClickOnCategory() {
                       <AccordionDetails>
                         {subCatdata.map((res: any, i: number) => (
                           <Link
-                            href={`/category/subCategory=${res?.iSubCategoryId}`}
+                            href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
                             key={index}
                           >
                             <Typography key={i}>{res.vName}</Typography>
                           </Link>
+                          // <Link
+                          //   href={{
+                          //     pathname: "/category",
+                          //     query: { subCategory: res?.iSubCategoryId },
+                          //   }}
+                          //   key={index}
+                          // >
+                          //   Some Text
+                          // </Link>
                         ))}
                       </AccordionDetails>
                     </Accordion>
@@ -207,9 +228,7 @@ export function ClickOnCategory() {
         )}
         <Grid item xs={12} md={9.8}>
           <Box>
-            <Typography variant="alternet">
-              Browse restaurants in Seattle, WA
-            </Typography>
+            <Typography variant="alternet">Browse restaurants</Typography>
             <Box
               sx={{
                 display: "flex",
@@ -260,7 +279,9 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {listFilter.length > 0 &&
                 listFilter
-                  .filter((el) => el.iCategory === ids)
+                  .filter(
+                    (el) => el.iCategory === ids || el.iSubCategory === subcatId
+                  )
                   .map((data: any, index: any) => (
                     <Grid
                       key={index}
