@@ -165,9 +165,8 @@ export class AdminService {
   ): Promise<ISubscriberOfBussinessResponse> {
     const res: AxiosResponse<ISubscriberOfBussinessResponse> =
       await ApiHelper.send<ISubscriberOfBussinessResponse>({
-        url: `/business/subscriber?userId=${payload.userId}${
-          payload?.businessId ? `&businessId=${payload.businessId}` : ""
-        }`,
+        url: `/business/subscriber?userId=${payload.userId}${payload?.businessId ? `&businessId=${payload.businessId}` : ""
+          }`,
         method: "GET",
       });
 
@@ -519,8 +518,8 @@ export class AdminService {
    */
   public static async updateListing(payload: any): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `/business/${payload?.iBusinessId}`,
-      method: "PUT",
+      url: `/business?businessId=${payload?.iBusinessId}`,
+      method: "POST",
       data: payload?.data,
     });
     return res.data;

@@ -20,6 +20,8 @@ interface INewlistingControllerReturns {
   getters: {
     headline: string;
     description: string;
+    preview: string;
+    bodyDescription: string;
     subCategory: string;
     businessName: string;
     category: string;
@@ -34,6 +36,8 @@ interface INewlistingControllerReturns {
   handlers: {
     handleHeadlineChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleDescriptionChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    handlePreviewChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    handleBodyDescriptionChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleCategoryChange: (event: SelectChangeEvent) => void;
     handleSubCategoryChange: (event: SelectChangeEvent) => void;
     handleBusinessNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -61,6 +65,9 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const [image, setImage] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [preview, setPreview] = useState<string>("");
+  const [bodyDescription, setBodyDescription] = useState<string>("");
+
   const [businessLocation, setBusinessLocation] = useState<string>("");
   const categoryData = useAppSelector(GET_CATEGORY);
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
@@ -81,6 +88,10 @@ export const NewlistingController = (): INewlistingControllerReturns => {
           setBuisnessName(item?.vName);
           setBusinessLocation(item?.vLocation);
           setDescription(item?.tDescription);
+          setPreview(item?.vPreview);
+          setBodyDescription(item?.vBodyDescription);
+          setTagLine(item?.vTagLine)
+
 
           if (item.onBanner == 1) {
             // setBanner("true")
@@ -108,6 +119,19 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     event: ChangeEvent<HTMLInputElement>
   ): void => {
     setDescription(event.target.value as string);
+  };
+
+  const handlePreviewChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setPreview(event.target.value as string);
+  };
+
+
+  const handleBodyDescriptionChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setBodyDescription(event.target.value as string);
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -174,34 +198,36 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("category", category);
     form.append("subCategory", subCategory);
     form.append("tagLine", tagLine);
+    form.append("preview", preview);
+    form.append("bodyDescription", bodyDescription);
 
     // form
     // console.log(form, 'form data on edit')
 
-    const updatedata = {
-      name: businessName,
-      tagLine: tagLine,
-      latitude: "56789",
-      longitude: "6789",
-      location: businessLocation,
-      description: description,
-      addedBy: "7",
-      status: "Active",
-      type: "Pending",
-      country: "1",
-      state: "2",
-      city: "3",
-      address: "avxa ajhak -xca 789",
-      onBanner: banner,
-      email: email,
-      category: category,
-      subCategory: subCategory,
-    };
+    // const updatedata = {
+    //   name: businessName,
+    //   tagLine: tagLine,
+    //   latitude: "56789",
+    //   longitude: "6789",
+    //   location: businessLocation,
+    //   description: description,
+    //   addedBy: "7",
+    //   status: "Active",
+    //   type: "Pending",
+    //   country: "1",
+    //   state: "2",
+    //   city: "3",
+    //   address: "avxa ajhak -xca 789",
+    //   onBanner: banner,
+    //   email: email,
+    //   category: category,
+    //   subCategory: subCategory,
+    // };
 
     if (editrue == true) {
       const res = await dispatch(
         AdminThunk.updateListing({
-          data: updatedata,
+          data: form,
           iBusinessId: editScreen?.state?.id
             ? parseInt(editScreen?.state?.id)
             : 0,
@@ -266,6 +292,8 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     getters: {
       headline,
       description,
+      preview,
+      bodyDescription,
       subCategory,
       businessName,
       category,
@@ -281,6 +309,8 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       handleHeadlineChange,
       submitHandler,
       handleDescriptionChange,
+      handlePreviewChange,
+      handleBodyDescriptionChange,
       handleCategoryChange,
       handleSubCategoryChange,
       handleBusinessNameChange,

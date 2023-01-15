@@ -35,7 +35,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
-  const [subcatId, setSubCatIdData] = useState<any>();
+  const [subcatIdss, setSubCatIdData] = useState<any>();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -47,7 +47,7 @@ export function ClickOnCategory() {
   const [searchParams] = useSearchParams();
   const subCatId = searchParams.get("subCategory");
 
-  console.log("subCatId", subCatId);
+  console.log("subCatId", subcatIdss);
 
   const getCateID = location.pathname.split("/")[2];
 
@@ -186,11 +186,12 @@ export function ClickOnCategory() {
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
-                        className={`font-normal text-[16px] leading-[24px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId ? " activeCate" : ""
+                        className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId ? " activeCate" : ""
                           }  `}
                         onClick={() => {
                           handleList(item?.iCategoryId),
-                            handleSubList(item?.iSubCategoryId);
+                            // handleSubList(item?.iSubCategoryId);
+                            handleSubList(null)
                           setActiveCate(item?.iCategoryId);
                           setSubData(filteredSubCategory);
                         }}
@@ -201,15 +202,16 @@ export function ClickOnCategory() {
                       <AccordionDetails>
                         {subCatdata.map((res: any, i: number) => (
                           <Link
-                            href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
-                            key={index}
+                            // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
+                            key={i}
+                            onClick={() => handleSubList(res?.iSubCategoryId)}
                           >
                             <Typography key={i}>{res.vName}</Typography>
                           </Link>
                           // <Link
                           //   href={{
                           //     pathname: "/category",
-                          //     query: { subCategory: res?.iSubCategoryId },
+                          //     query: {subCategory: res?.iSubCategoryId },
                           //   }}
                           //   key={index}
                           // >
@@ -222,8 +224,9 @@ export function ClickOnCategory() {
                 ))}
               </div>
             </Box>
-          </Grid>
-        )}
+          </Grid >
+        )
+        }
         <Grid item xs={12} md={9.8}>
           <Box>
             <Typography variant="alternet">Browse restaurants</Typography>
@@ -235,9 +238,15 @@ export function ClickOnCategory() {
                 paddingBottom: "20px",
               }}
             >
-              {totalLenght.length > 0 ? (
+              {listFilter
+                .filter(
+                  (el) => subcatIdss ? el.iCategory === ids && el.iSubCategory === subcatIdss : el.iCategory === ids
+                ).length > 0 ? (
                 <Typography variant="body2" fontWeight="600">
-                  {totalLenght.length} listings
+                  {listFilter
+                    .filter(
+                      (el) => subcatIdss ? el.iCategory === ids && el.iSubCategory === subcatIdss : el.iCategory === ids
+                    ).length} listings
                 </Typography>
               ) : (
                 <Typography variant="body2" fontWeight="600">
@@ -275,93 +284,96 @@ export function ClickOnCategory() {
               </Box>
             </Box>
             <Grid container className=" pb-[20px] ">
+              {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
                 listFilter
                   .filter(
-                    (el) => el.iCategory === ids || el.iSubCategory === subcatId
-                  )
-                  .map((data: any, index: any) => (
-                    <Grid
-                      key={index}
-                      item
-                      sm={4}
-                      className="pb-[20px] "
-                      onClick={() => {
-                        auth?.isAuthenticated
-                          ? navigate(`/listing/${data.iBusinessId}`)
-                          : navigate(AuthRoutePathEnum.SIGN_IN);
+                    (el) => subcatIdss ? el.iCategory === ids && el.iSubCategory === subcatIdss : el.iCategory === ids
+                  ).length > 0 ?
+                listFilter.filter(
+                  (el) => subcatIdss ? el.iCategory === ids && el.iSubCategory === subcatIdss : el.iCategory === ids
+                ).map((data: any, index: any) => (
+                  <Grid
+                    key={index}
+                    item
+                    sm={4}
+                    className="pb-[20px] "
+                    onClick={() => {
+                      auth?.isAuthenticated
+                        ? navigate(`/listing/${data.iBusinessId}`)
+                        : navigate(AuthRoutePathEnum.SIGN_IN);
+                    }}
+                  >
+                    <Card
+                      sx={{
+                        maxWidth: "330px",
+                        minHeight: "350px",
                       }}
+                      elevation={0}
+                      className="border-[1px] border-[#dadde5] "
+                      style={{ boxShadow: "0 0 20px #0100001a" }}
                     >
-                      <Card
-                        sx={{
-                          maxWidth: "330px",
-                          minHeight: "350px",
-                        }}
-                        elevation={0}
-                        className="border-[1px] border-[#dadde5] "
-                        style={{ boxShadow: "0 0 20px #0100001a" }}
-                      >
-                        <>
-                          {/* {setActiveCate(true)} */}
+                      <>
+                        {/* {setActiveCate(true)} */}
 
-                          <img
-                            src={
-                              data.vImage
-                                ? "http://159.223.194.50:8000/" + data.vImage
-                                : ""
-                            }
-                            // alt={data.eStatus}
-                            width="100%"
-                            height="100px"
-                            style={{ objectFit: "cover", height: "215px" }}
-                          />
-                          <Box sx={{ py: 1.5, pl: "12px" }}>
-                            <Typography variant="body1" fontWeight={600}>
-                              {data.vName}
+                        <img
+                          src={
+                            data.vImage
+                              ? "http://159.223.194.50:8000/" + data.vImage
+                              : ""
+                          }
+                          // alt={data.eStatus}
+                          width="100%"
+                          height="100px"
+                          style={{ objectFit: "cover", height: "215px" }}
+                        />
+                        <Box sx={{ py: 1.5, pl: "12px" }}>
+                          <Typography variant="body1" fontWeight={600}>
+                            {data.vName}
+                          </Typography>
+                          <Typography
+                            variant="caption"
+                            fontWeight={600}
+                            color={theme.palette.grey[500]}
+                          >
+                            {data.vLocation}
+                          </Typography>
+                          <Box sx={{ my: 1, lineHeight: 0 }}>
+                            <Typography
+                              fontSize={11}
+                              fontWeight={600}
+                              className={"textLimit2"}
+                            >
+                              {data.tDescription}
                             </Typography>
+                          </Box>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "baseline",
+                            }}
+                          >
                             <Typography
                               variant="caption"
                               fontWeight={600}
                               color={theme.palette.grey[500]}
                             >
-                              {data.vLocation}
+                              {data.subscriberCount + " Subscribe"}
                             </Typography>
-                            <Box sx={{ my: 1, lineHeight: 0 }}>
-                              <Typography
-                                fontSize={11}
-                                fontWeight={600}
-                                className={"textLimit2"}
-                              >
-                                {data.tDescription}
-                              </Typography>
-                            </Box>
-                            <Box
-                              sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "baseline",
-                              }}
-                            >
-                              <Typography
-                                variant="caption"
-                                fontWeight={600}
-                                color={theme.palette.grey[500]}
-                              >
-                                {data.subscriberCount + " Subscribe"}
-                              </Typography>
-                              {/* <Button color="error" variant="rounded" size="small">
+                            {/* <Button color="error" variant="rounded" size="small">
                                 Subscribe
                               </Button> */}
-                              <div className="raletive">
-                                <div className="subscribeLebalListing">
-                                  <span className=" text-white  ">
-                                    Subscribe
-                                  </span>
-                                </div>
+                            <div className="raletive">
+                              <div className="subscribeLebalListing">
+                                <span className=" text-white  ">
+                                  Subscribe
+                                </span>
                               </div>
-                            </Box>
+                            </div>
                           </Box>
-                          {/* <Box
+                        </Box>
+                        {/* <Box
                             sx={{
                               textAlign: "center",
                               backgroundColor: theme.palette.grey[300],
@@ -372,14 +384,17 @@ export function ClickOnCategory() {
                               {data.footer}
                             </Typography>
                           </Box> */}
-                        </>
-                      </Card>
-                    </Grid>
-                  ))}
+                      </>
+                    </Card>
+                  </Grid>
+                ))
+                : <div className="grid w-full justify-center py-4 ">
+                  <span>{subcatIdss ? 'This Subcatogery No listing Here ' : "This Category no listing Here "} </span>
+                </div>}
             </Grid>
           </Box>
         </Grid>
-      </Grid>
-    </Container>
+      </Grid >
+    </Container >
   );
 }

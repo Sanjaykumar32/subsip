@@ -94,7 +94,7 @@ export const Subscribe = ({
           color={color || theme.palette.grey[600]}
           fontWeight={900}
         >
-          {`${subsctibers}k Subscribers`}
+          {`${subsctibers} Subscribers`}
         </Typography>
       </Box>
 
@@ -152,9 +152,9 @@ export const CardFooter = (props: { vTagLine: string }) => {
 export function Location({
   vName,
   vLocation,
-  tDescription,
   subscriberCount,
   vTagLine,
+  vPreview
 }: IBusiness) {
   const auth = useAuth();
   return (
@@ -189,7 +189,7 @@ export function Location({
         </Box>
         <Title>{vName}</Title>
         <Address>{vLocation}</Address>
-        <Info>{tDescription}</Info>
+        <Info>{vPreview}</Info>
         <Subscribe subsctibers={subscriberCount} auth={auth} />
       </Box>
       <CardFooter vTagLine={vTagLine} />

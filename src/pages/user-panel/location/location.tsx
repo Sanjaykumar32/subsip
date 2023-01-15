@@ -79,68 +79,78 @@ export function LocationPage() {
   const auth = useAuth();
   const isAuthenticated = auth.isAuthenticated;
 
-  const name = `India Gate Restaurant`;
-  const location = "Seattle, WA";
-  const description =
-    "Welcome to the India Gate Restaurant where we offer unique food.";
-  const subscribers = 42.2;
+  // const name = `India Gate Restaurant`;
+  // const location = "Seattle, WA";
+  // const description =
+  //   "Welcome to the India Gate Restaurant where we offer unique food.";
+  // const subscribers = 42.2;
   // const obj = { name, location, description, subscribers } as ILocationProps;
 
   const navigate = useNavigate();
 
   return (
     <Container maxWidth="lg" sx={{ my: 8 }}>
-      <Title>{name}</Title>
-      <Address>{location}</Address>
-      <Info>{description}</Info>
+      <>
+        {bussinessByName.map((res: IBusiness, index: number) => (
+          <div key={index}>
+            <Title>{res?.vName}</Title>
+            <Address>{res?.vLocation}</Address>
+            <Info>{res?.tDescription}</Info>
 
-      <Grid container spacing={2}>
-        <Grid item sm={12} md={8}>
-          {bussinessByName.map((res: IBusiness, index: number) => (
-            <Card sx={{ width: "100%", maxHeight: "500px" }} key={index}>
-              <img
-                alt={name}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  objectFit: "cover",
-                }}
-                src={"http://159.223.194.50:8000/" + res.vImage}
+            <Grid container spacing={2}>
+              <Grid item sm={12} md={8}>
+                {/* {bussinessByName.map((res: IBusiness, index: number) => ( */}
+                <Card sx={{ width: "100%", maxHeight: "500px" }}>
+                  <img
+                    alt={res.vImage}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      objectFit: "cover",
+                    }}
+                    src={"http://159.223.194.50:8000/" + res.vImage}
+                  />
+                </Card>
+                {/* ))} */}
+              </Grid>
+
+
+              <Grid item sm={12} md={4} sx={{ px: 2, mt: "-35px" }}>
+                {isAuthenticated && (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}>
+                      <FontAwesomeIcon
+                        icon={faArrowUpRightFromSquare}
+                        style={{ marginRight: 4 }}
+                        onClick={handleClickOpen}
+                      />
+                      Referral
+                    </Typography>
+                  </Box>
+                )}
+                {bussinessByName.map((res: IBusiness, index: number) => {
+                  return <Location {...res} key={index} />;
+                })}
+              </Grid>
+            </Grid>
+
+            <span className="text-[14px] py-[20px] flex font-[400] text-[#252525]">{res?.vBodyDescription}</span>
+            {open && (
+              <ResponsiveDialog
+                open={open}
+                handleClose={handleClose}
+                refferralCode={refferralCode}
               />
-            </Card>
-          ))}
-        </Grid>
-        <Grid item sm={12} md={4} sx={{ px: 2, mt: "-35px" }}>
-          {isAuthenticated && (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-                paddingBottom: "10px",
-              }}
-            >
-              <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}>
-                <FontAwesomeIcon
-                  icon={faArrowUpRightFromSquare}
-                  style={{ marginRight: 4 }}
-                  onClick={handleClickOpen}
-                />
-                Referral
-              </Typography>
-            </Box>
-          )}
-          {bussinessByName.map((res: IBusiness, index: number) => {
-            return <Location {...res} key={index} />;
-          })}
-        </Grid>
-      </Grid>
-      {open && (
-        <ResponsiveDialog
-          open={open}
-          handleClose={handleClose}
-          refferralCode={refferralCode}
-        />
-      )}
+            )}
+          </div>
+        ))}
+      </>
     </Container>
   );
 }
