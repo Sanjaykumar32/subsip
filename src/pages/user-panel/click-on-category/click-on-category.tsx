@@ -36,7 +36,10 @@ export function ClickOnCategory() {
   const [subCatdata, setSubData] = useState<any>([]);
 
   const location = useLocation();
+  const locationData = useParams();
   const link = useParams();
+
+  console.log(locationData.id, "locationssd");
 
   const getCateID = location.pathname.split("/")[2];
 
@@ -119,13 +122,9 @@ export function ClickOnCategory() {
     }
   );
 
-  console.log(listFilter, "listFilter");
-
   const totalLenght = businessData.filter(
     (item: any) => item.iCategory === ids
   );
-
-  console.log(totalLenght, "totalLenght getCateID");
 
   useEffect(() => {
     if (getCateID) {
