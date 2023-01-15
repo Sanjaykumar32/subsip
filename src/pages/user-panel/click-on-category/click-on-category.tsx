@@ -200,13 +200,13 @@ export function ClickOnCategory() {
                       </AccordionSummary>
 
                       <AccordionDetails>
-                        {subCatdata.map((res: any, i: number) => (
+                        {subCatdata.length > 0 ? subCatdata.map((res: any, i: number) => (
                           <Link
                             // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
                             key={i}
                             onClick={() => handleSubList(res?.iSubCategoryId)}
                           >
-                            <Typography key={i}>{res.vName}</Typography>
+                            <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
                           </Link>
                           // <Link
                           //   href={{
@@ -217,7 +217,9 @@ export function ClickOnCategory() {
                           // >
                           //   Some Text
                           // </Link>
-                        ))}
+                        )) : <Link>
+                          <Typography className="text-[#252525]" >No Sub category Here</Typography>
+                        </Link>}
                       </AccordionDetails>
                     </Accordion>
                   </Link>

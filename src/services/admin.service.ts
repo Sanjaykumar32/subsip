@@ -518,7 +518,7 @@ export class AdminService {
    */
   public static async updateListing(payload: any): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: `/business?businessId=${payload?.iBusinessId}`,
+      url: `/business/update?businessId=${payload?.iBusinessId}`,
       method: "POST",
       data: payload?.data,
     });

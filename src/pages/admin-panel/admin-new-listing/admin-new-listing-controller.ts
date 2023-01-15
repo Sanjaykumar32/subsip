@@ -12,7 +12,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { AdminRoutePathEnum } from "enum";
 
@@ -43,7 +43,7 @@ interface INewlistingControllerReturns {
     handleBusinessNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleBusinessLocationhange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    handleProductChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    handleTaglineChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleImageChange: (event: {
       target: { files: SetStateAction<any>[] };
     }) => void;
@@ -75,14 +75,24 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const [banner, setBanner] = useState<string>("false");
   const [editrue, setEditure] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const editScreen = useLocation();
+  const [searchParams] = useSearchParams();
+  const ListId = searchParams.get("id");
+  const edit = searchParams.get("edit");
+
+
+
+
+  console.log(businessData, 'editScreen')
 
   useEffect(() => {
-    if (editScreen?.state?.edit === true) {
+    if (edit) {
       setEditure(true);
+      allBusiness();
+
+
 
       const filter = businessData?.filter((item) => {
-        if (item?.iBusinessId === editScreen?.state?.id) {
+        if (item?.iBusinessId === Number(ListId)) {
           console.log(item, "item");
           // item
           setBuisnessName(item?.vName);
@@ -94,10 +104,10 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
 
           if (item.onBanner == 1) {
-            // setBanner("true")
+            setBanner("true")
             console.log(item.onBanner, "item.onBanner true");
           } else {
-            // setBanner([...banner, "false"])
+            setBanner("false")
             console.log(item.onBanner, "item.onBanner false");
           }
           // setBanner(item.onBanner === 1 ? "true" : "false")
@@ -105,11 +115,10 @@ export const NewlistingController = (): INewlistingControllerReturns => {
           // console.log(item?.iCountry)
           setCategory(item?.iCategory);
           setSubCategory(item?.iSubCategory);
-          setTagLine("asdfdsf asdfasdf assad");
         }
       });
     }
-  }, [editScreen]);
+  }, [edit, ListId]);
 
   const handleHeadlineChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setHeadline(event.target.value as string);
@@ -138,7 +147,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     setEmail(event.target.value as string);
   };
 
-  const handleProductChange = (event: SelectChangeEvent): void => {
+  const handleTaglineChange = (event: SelectChangeEvent): void => {
     setTagLine(event.target.value as string);
   };
 
@@ -175,7 +184,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   ): void => {
     setBusinessLocation(event.target.value as string);
   };
-  // console.log(banner, "banner state");
 
   const navigate = useNavigate();
 
@@ -204,32 +212,34 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     // form
     // console.log(form, 'form data on edit')
 
-    // const updatedata = {
-    //   name: businessName,
-    //   tagLine: tagLine,
-    //   latitude: "56789",
-    //   longitude: "6789",
-    //   location: businessLocation,
-    //   description: description,
-    //   addedBy: "7",
-    //   status: "Active",
-    //   type: "Pending",
-    //   country: "1",
-    //   state: "2",
-    //   city: "3",
-    //   address: "avxa ajhak -xca 789",
-    //   onBanner: banner,
-    //   email: email,
-    //   category: category,
-    //   subCategory: subCategory,
-    // };
+    const updatedata = new FormData();
+    updatedata.append("name", businessName);
+    updatedata.append("latitude", "56789");
+    updatedata.append("longitute", "6789");
+    updatedata.append("location", businessLocation);
+    updatedata.append("description", description);
+    updatedata.append("addedBy", "7");
+    updatedata.append("status", "Active");
+    updatedata.append("type", "Pending");
+    updatedata.append("country", "1");
+    updatedata.append("state", "2");
+    updatedata.append("city", "2");
+    updatedata.append("onBanner", banner ? "1" : '0');
+    updatedata.append("image", image, image?.name);
+    updatedata.append("email", email);
+    updatedata.append("category", category);
+    updatedata.append("subCategory", subCategory);
+    updatedata.append("tagLine", tagLine);
+    updatedata.append("preview", preview);
+    updatedata.append("bodyDescription", bodyDescription);
+
 
     if (editrue == true) {
       const res = await dispatch(
         AdminThunk.updateListing({
-          data: form,
-          iBusinessId: editScreen?.state?.id
-            ? parseInt(editScreen?.state?.id)
+          data: updatedata,
+          iBusinessId: ListId
+            ? parseInt(ListId)
             : 0,
         })
       );
@@ -316,7 +326,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       handleBusinessNameChange,
       handleBusinessLocationhange,
       handleEmailChange,
-      handleProductChange,
+      handleTaglineChange,
       handleImageChange,
       handleBanner,
     },

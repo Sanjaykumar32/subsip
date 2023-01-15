@@ -78,7 +78,7 @@ export const Subscribe = ({
             referredCode: referralcode,
           })
         );
-        navigate(RoutePathEnum.LISTING_PRODUCT);
+        navigate('');
       } catch (error) {
         console.log(error);
       }
@@ -190,8 +190,10 @@ export function Location({
         <Title>{vName}</Title>
         <Address>{vLocation}</Address>
         <Info>{vPreview}</Info>
+
         <Subscribe subsctibers={subscriberCount} auth={auth} />
       </Box>
+
       <CardFooter vTagLine={vTagLine} />
     </Card>
   );

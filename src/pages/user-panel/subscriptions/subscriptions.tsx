@@ -19,6 +19,7 @@ import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
+import { toast } from "react-hot-toast";
 
 
 export function Subscriptions() {
@@ -37,7 +38,7 @@ export function Subscriptions() {
 
       const UserID = localStorage.getItem("userId");
 
-      console.log(UserID, 'UserID')
+      // console.log(UserID, 'UserID')
 
       await dispatch(AdminThunk.allSubscriberOfBussiness({ userId: Number(UserID) }));
     } catch (error) {
@@ -54,6 +55,7 @@ export function Subscriptions() {
   console.log(subscribeBusiness, 'subscribeBusiness')
 
 
+
   const array = subscribeBusiness.filter((el) => {
     return Object.values(el?.businessName)
       .join("")
@@ -66,19 +68,38 @@ export function Subscriptions() {
 
 
   const handleSubs = async (item: any) => {
-    // setSubscribe(id);
     console.log(item, 'numbersss')
 
-    // const response = await dispatch(
-    //   UserThunk.addSubscriberToBusiness({
-    //     businessId: item?.iBusinessId ? parseInt(item?.iBusinessId) : 0,
-    //     userId: item?.iAdminId ? parseInt(item?.iAdminId) : 0,
-    //   })
-    // );
+    const response = await dispatch(
+      UserThunk.addSubscriberToBusiness({
+        businessId: item?.iBusinessId ? parseInt(item?.iBusinessId) : 0,
+        userId: item?.iAdminId ? parseInt(item?.iAdminId) : 0,
+      })
+    );
 
-    // console.log(response, 'response')
+    console.log(response, 'response')
+    toast.success("Subsriber To Business Successfully")
+    allsubscriberOfBussiness();
 
-  };
+
+
+  }
+
+  const handleUnsub = async (item: any) => {
+    console.log(item, 'numbersss')
+
+    const response = await dispatch(
+      UserThunk.UNSubscriberToBusiness({
+        businessId: item?.iBusinessId ? '' + item?.iBusinessId : '0'
+      })
+    );
+
+    console.log(response, 'response')
+    toast.success("UnSubsriber To Business Successfully")
+
+    allsubscriberOfBussiness();
+
+  }
 
   const handleSearch = (e: any) => {
     setSearch(e.target.value);
@@ -153,7 +174,7 @@ export function Subscriptions() {
               <Typography variant="body2"> {element.businessName} :</Typography>
               {!subscribe ? (
                 <Button
-                  // onClick={() => handleSubs(element)}
+                  onClick={() => handleUnsub(element)}
                   variant="contained"
                   size="small"
                   sx={{ borderRadius: "30px", px: 3 }}
@@ -162,13 +183,13 @@ export function Subscriptions() {
                 </Button>
               ) : (
                 <Button
-                  // onClick={handleUnsub()}
+                  onClick={() => handleSubs(element)}
                   variant="contained"
                   color="inherit"
                   size="small"
                   sx={{ borderRadius: "30px", px: 3, }}
                 >
-                  Unsubscribe
+                  subscribe
                 </Button>
               )}
             </Box>
