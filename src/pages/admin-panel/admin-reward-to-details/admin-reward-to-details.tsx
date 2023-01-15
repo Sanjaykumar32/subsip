@@ -46,7 +46,7 @@ export function AdminRewardToDetails() {
 
   const rows = businessRewardData.map((item: IBusinessReward) => {
     return {
-      id: item.iRewardId,
+      id: item.redeemedUserId,
       rewardName: item.rewardName,
       redeemedUserCount: item.redeemedUserCount,
       Actions: ["Edit", "Delete", item.iRewardId],

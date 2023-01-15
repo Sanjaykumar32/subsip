@@ -181,6 +181,7 @@ export interface IBusinessReward {
   redeemedId?: number;
   rewardCount: number;
   rewardName: string;
+  redeemedUserId: string;
 }
 
 export interface IDashboardResponse {
