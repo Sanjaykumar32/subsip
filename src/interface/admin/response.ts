@@ -53,7 +53,7 @@ export interface IBusiness {
   onBanner: number;
   vImage?: string;
   iCategory: string;
-  iSubCategory: string;
+  iSubCategory: any;
   categoryName: string;
   subCategoryName: string;
   subscriberCount: number;

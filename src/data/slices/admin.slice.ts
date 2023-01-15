@@ -24,7 +24,7 @@ export interface IAdminState {
   subscriberOfBussiness: ISubscriberData[];
   AllsubscriberOfBussiness: ISubscriberData[];
   category: ICategoryData[];
-  subCategory: ISubCategoryData[];
+  subCategory: any[];
   refferralCode: IRefferralCode[];
   refferralCount: any;
   noticationList: INotificationdata[];
