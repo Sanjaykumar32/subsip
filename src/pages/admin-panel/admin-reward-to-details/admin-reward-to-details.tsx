@@ -74,19 +74,15 @@ export function AdminRewardToDetails() {
       field: "redeemedUserCount",
       headerName: "Redeemed Count",
       width: 200,
+      renderCell: (params) => (
+        <Link
+          href={`${AdminRoutePathEnum.ADMIN_REWARDS_TO_WINNERS}?userId=${params.id}`}
+        >
+          {params.value}
+        </Link>
+      ),
     },
-    // {
-    //   field: "Reward",
-    //   headerName: "Rewards",
-    //   width: 200,
-    //   renderCell: (params) => <Chip label={params.value} color="info" />,
-    // },
-    // {
-    //   field: "Status",
-    //   headerName: "Status",
-    //   width: 200,
-    //   renderCell: (params) => <Chip label={params.value} color="success" />,
-    // },
+
     {
       field: "Actions",
       headerName: "Actions",
@@ -108,18 +104,6 @@ export function AdminRewardToDetails() {
         </Box>
       ),
     },
-    // {
-    //   field: "Active",
-    //   headerName: "Active",
-    //   width: 150,
-    //   renderCell: (params) => (
-    //     <Box>
-    //       <Tooltip title={params.value}>
-    //         <Switch {...label} defaultChecked size="small" color="info" />
-    //       </Tooltip>
-    //     </Box>
-    //   ),
-    // },
   ];
 
   return (

@@ -15,6 +15,10 @@ export interface ISubCategoryRequest {
   addedBy: number;
 }
 
+export interface IRewardClaimedRequest {
+  rewardId: number;
+}
+
 export interface IUpdateSubCategoryRequest {
   subCategoryId: number;
   name: string;

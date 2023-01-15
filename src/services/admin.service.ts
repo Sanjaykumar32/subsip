@@ -43,6 +43,8 @@ import {
   IUpdateSubCategoryRequest,
   IGetNotificationRequest,
   IReadNotificationRequest,
+  IRewardClaimedRequest,
+  IUserResponse,
 } from "interface";
 
 /**
@@ -165,8 +167,9 @@ export class AdminService {
   ): Promise<ISubscriberOfBussinessResponse> {
     const res: AxiosResponse<ISubscriberOfBussinessResponse> =
       await ApiHelper.send<ISubscriberOfBussinessResponse>({
-        url: `/business/subscriber?userId=${payload.userId}${payload?.businessId ? `&businessId=${payload.businessId}` : ""
-          }`,
+        url: `/business/subscriber?userId=${payload.userId}${
+          payload?.businessId ? `&businessId=${payload.businessId}` : ""
+        }`,
         method: "GET",
       });
 
@@ -321,8 +324,23 @@ export class AdminService {
    */
   public static async getSubcategory(): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
-      url: "sub-category/list",
+      url: "/sub-category/list",
       method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
+   * reward Claimed
+   * @return {Promise<any>}
+   */
+  public static async rewardClaimed(
+    payload: IRewardClaimedRequest
+  ): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/user/reward-redeem",
+      method: "POST",
+      data: payload,
     });
     return res.data;
   }
@@ -627,6 +645,19 @@ export class AdminService {
       url: `/dashboard`,
       method: "GET",
     });
+    return res.data;
+  }
+
+  /**
+   * Reward To Winner
+   * @return {Promise<IUserResponse>}
+   */
+  public static async getUser(payload: any): Promise<IUserResponse> {
+    const res: AxiosResponse<IUserResponse> =
+      await ApiHelper.send<IUserResponse>({
+        url: `/user?id=${payload.userId}`,
+        method: "GET",
+      });
     return res.data;
   }
 }

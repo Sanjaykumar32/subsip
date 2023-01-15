@@ -34,19 +34,6 @@ export function Rewards() {
   const [filter, setFilter] = useState("");
   const [businessSearch, setSearchBusiness] = useState("");
   const userId = localStorage.getItem("userId");
-  const [datas  ,  setDuplecate] = useState<any>([])
-
-  const chipStatusColor = (): MuiColor => {
-    switch (status) {
-      case RewardStatusEnum.CLAIM:
-        return "success";
-      case RewardStatusEnum.CLAIMED:
-        return "warning";
-      case RewardStatusEnum.MISSED:
-      default:
-        return "error";
-    }
-  };
 
   const rewardData = useAppSelector(GET_USER_REWARDS);
   const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
@@ -85,6 +72,22 @@ export function Rewards() {
 
   console.log(subscribeBusiness, "subscribeBusiness");
 
+  const rewardClaimed = useCallback(
+    async (id: any) => {
+      try {
+        await dispatch(
+          AdminThunk.rewardClaimed({
+            rewardId: id,
+          })
+        );
+        getUserReward();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch]
+  );
+
   const columns: GridColDef[] = [
     {
       field: "rewardName",
@@ -103,13 +106,6 @@ export function Rewards() {
       renderCell: (params) => (
         <Chip
           label={params.value}
-          // color={
-          //   params.value == "Missed"
-          //     ? "error"
-          //     : params.value == "Available"
-          //     ? "success"
-          //     : "warning"
-          // }
           className={
             params.value == "Missed"
               ? "errorColor"
@@ -117,18 +113,20 @@ export function Rewards() {
               ? "successColor"
               : "warningColor"
           }
+          onClick={() => {
+            params.value == "Available" && rewardClaimed(params.id);
+          }}
         />
       ),
     },
   ];
 
-  console.log(rewardData, "rewardData ");
   const rows = rewardData.map((item) => {
     return {
       id: item.rewardId,
       rewardName: item.rewardName,
       businessName: item.businessName,
-      Status: "Missed",
+      Status: item.status,
     };
   });
 
@@ -154,12 +152,12 @@ export function Rewards() {
       .includes(businessSearch.toString().toLowerCase());
   });
 
+  const filterData = filterBusiness.map((el) => {
+    return el.businessName;
+  });
 
-    const filterData =  filterBusiness.map((el)=>{
-        return el.businessName
-    })
-     
-    const listBusiness = [...new Set(filterData)]
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const listBusiness = [...new Set(filterData)];
 
   const subscribedList = useMemo(
     () => (
@@ -171,7 +169,7 @@ export function Rewards() {
           onChange={handleBusinessSearch}
           InputProps={{ endAdornment: <Search /> }}
         />
-        {listBusiness.map((item , index) => {
+        {listBusiness.map((item, index) => {
           return (
             <div key={index}>
               <List sx={{ maxHeight: "calc(100vh - 200px)", overflow: "auto" }}>
