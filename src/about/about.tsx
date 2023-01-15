@@ -26,6 +26,53 @@ export const About = () => {
           </div>
         </div>
 
+       
+          <div className=" grid grid-cols-2">
+            <div className="bg-[#39cd62]">
+              <div className="w-[62%] m-auto my-10">
+                <div className="">
+                  <h2 className="text-[#021414] text-[48px] font-bold leading-[48px] font-sans">We’re on a mission <br /> to bust open
+                    <span className="text-[#ffffff]">
+                      <br />the doors of entrepreneurship<br />
+                      ‍</span>for everyone.
+                  </h2>
+                  <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cc6a7aec847695fa23b4_Vector%2035.svg"
+                    loading="lazy"
+                    alt=""
+                    className="w-[150px] m-auto my-3"
+                  />
+                </div>
+                <p className="text-[22px] leading-8 text-[#ffffff] font-sans">AppSumo is the platform 1.25M+ <br />entrepreneurs trust for everything they need to create fulfilling businesses. We’ve got all the tools you need to grow and scale.</p>
+              </div>
+            </div>
+            <div className="  grid grid-cols-1">
+              <div className="">
+
+                <img
+                  src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61d63834f499ea37ac0f7061_aboutus-lo.png"
+                  loading="lazy"
+                  id="video-overlay-img"
+                  alt=""
+                  className=""
+                />
+
+              </div>
+            </div>
+          </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div className="container-12 w-container m-auto my-[80px]">
           <div className="about-wrk-head mb-5">
@@ -84,10 +131,10 @@ export const About = () => {
         <div className=" bg-[#39cd62]">
           <div className="  py-[140px] px-5  m-auto ">
             <div className="flex justify-evenly gap-4">
-                <div className="">
-                  <div className=" relative">
-                    <h2 className="text-[46px] text-[#021414] font-extrabold ">Sell with us
-                  {/* <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cec933dc41cd50d18ff0_star1.svg"
+              <div className="">
+                <div className=" relative">
+                  <h2 className="text-[46px] text-[#021414] font-extrabold ">Sell with us
+                    {/* <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cec933dc41cd50d18ff0_star1.svg"
                       loading="lazy"
                       alt=""
                       className="absolute top-[-40px] left-[250px]" />
@@ -95,29 +142,29 @@ export const About = () => {
                       loading="lazy"
                       alt=""
                       className=" absolute top-[38px]" />  */}
-                      </h2>
-                  </div>
-                  <p className="text-[20px] text-[#ffffff] mt-5">List your digital products.<br />Apply for AppSumo Select.</p>
-                
+                  </h2>
+                </div>
+                <p className="text-[20px] text-[#ffffff] mt-5">List your digital products.<br />Apply for AppSumo Select.</p>
+
               </div>
+              <div className="">
                 <div className="">
-                  <div className="">
-                    <h2 className="text-[46px] text-[#021414] font-extrabold">Grow with us</h2>
-                    {/* <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cec933dc412143d18fee_sell-ar.svg"
+                  <h2 className="text-[46px] text-[#021414] font-extrabold">Grow with us</h2>
+                  {/* <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cec933dc412143d18fee_sell-ar.svg"
                       loading="lazy"
                       alt=""
                       className="absolute top-[58px] " /> */}
-                  </div>
-                  {/* <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cec933dc41d9d8d18ff1_star2.svg"
+                </div>
+                {/* <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cec933dc41d9d8d18ff1_star2.svg"
                     loading="lazy"
                     alt=""
                     className="absolute top-[110px] right-[320px]" /> */}
-                  <p className="text-[20px] text-[#ffffff]">Work doesn’t have to suck.<br />Join our fast-growing team.</p>
-                  {/* <a href="https://appsumo.com/careers/"
+                <p className="text-[20px] text-[#ffffff]">Work doesn’t have to suck.<br />Join our fast-growing team.</p>
+                {/* <a href="https://appsumo.com/careers/"
                         target="_blank"
                         className="button-4 sell-sec-btn w-button">Explore roles
                       </a> */}
-                </div>
+              </div>
             </div>
           </div>
         </div>
