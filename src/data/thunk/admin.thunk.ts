@@ -37,6 +37,7 @@ import {
   IGetNotificationRequest,
   IReadNotificationRequest,
   IRewardClaimedRequest,
+  IUserResponse,
 } from "interface";
 import { AdminService } from "services";
 
@@ -463,6 +464,17 @@ export class AdminThunk {
     "admin/read/UserNotification",
     async (payload: IReadNotificationRequest): Promise<any> => {
       const response = await AdminService.readNotification(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Get User
+   */
+  public static getUser = createAsyncThunk(
+    "admin/getUser",
+    async (payload: any): Promise<IUserResponse> => {
+      const response = await AdminService.getUser(payload);
       return response;
     }
   );

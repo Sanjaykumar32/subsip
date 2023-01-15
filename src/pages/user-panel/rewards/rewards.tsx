@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { PageHeader } from "components";
+import { ColoredLabel, PageHeader } from "components";
 import {
   Box,
   Grid,
@@ -16,6 +16,7 @@ import {
 import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import TableContainer from "@mui/material/TableContainer";
+import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { Search } from "@mui/icons-material";
 import { useAppSelector, useAppDispatch } from "data";
@@ -24,6 +25,8 @@ import {
   GET_USER_REWARDS,
 } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import { RewardStatusEnum } from "enum";
+import { MuiColor } from "type";
 
 export function Rewards() {
   const theme = useTheme();
@@ -82,7 +85,7 @@ export function Rewards() {
         console.log(error);
       }
     },
-    [dispatch, getUserReward]
+    [dispatch]
   );
 
   const columns: GridColDef[] = [
@@ -187,6 +190,17 @@ export function Rewards() {
         icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
       >
         <Box sx={{ display: "flex" }} className="gap-4">
+          {/* {[
+            { title: "Available", color: theme.palette.success.light },
+            { title: "Claimed", color: theme.palette.warning.light },
+            { title: "Missed", color: theme.palette.error.main },
+          ].map((res, i) => (
+            <ColoredLabel
+              title={res.title}
+              color={res.color}
+              key={`${res.title}-${i}`}
+            />
+          ))} */}
           <Button
             style={{ background: theme.palette.success.light }}
             className="claimbtn"

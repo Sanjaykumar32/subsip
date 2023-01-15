@@ -6,38 +6,36 @@ import {
   FormControl,
   MenuItem,
   Select,
-  Tooltip,
   Typography,
 } from "@mui/material";
 
 import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import { AdminBackButton } from "components";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_RWARD_TO_WINNER_LIST } from "data/selectors";
+import { GET_USER } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useSearchParams } from "react-router-dom";
 
 export function AdminRewardsToWinner() {
   const dispatch = useAppDispatch();
-  const rewardToWinner = useAppSelector(GET_RWARD_TO_WINNER_LIST);
   const [searchParams] = useSearchParams();
   const userId = searchParams.get("userId");
+  const userdata = useAppSelector(GET_USER);
+
+  console.log(userdata, "userdata");
 
   const rewardToWinnerList = useCallback(async () => {
     try {
       await dispatch(
-        AdminThunk.getRewardToWinner({
-          userId: userId ? parseInt(userId) : 0,
+        AdminThunk.getUser({
+          userId: 4,
         })
       );
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch, userId]);
+  }, [dispatch]);
 
   useEffect(() => {
     rewardToWinnerList();
@@ -45,91 +43,19 @@ export function AdminRewardsToWinner() {
 
   const columns: GridColDef[] = [
     {
-      field: "Email",
+      field: "email",
       headerName: "Email",
       width: 200,
     },
-    {
-      field: "Contacted",
-      headerName: "Contacted",
-      width: 200,
-      renderCell: (params) => (
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <VerifiedUserIcon color="success" sx={{ mr: 1 }} />
-          {params.value}
-        </Box>
-      ),
-    },
-    {
-      field: "Actions",
-      headerName: "Actions",
-      width: 110,
-      renderCell: (params) => (
-        <Box>
-          <Tooltip title={params.value}>
-            <FontAwesomeIcon icon={faTrash} />
-          </Tooltip>
-        </Box>
-      ),
-    },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      Email: "Jake@gmail.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 2,
-      Email: "Hik@hik.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 3,
-      Email: "Abi@abi.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 4,
-      Email: "Abe@abe.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 5,
-      Email: "Jake@gmail.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 6,
-      Email: "Abe@abe.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 7,
-      Email: "Jake@gmail.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 8,
-      Email: "Hik@hik.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-    {
-      id: 9,
-      Email: "Abe@abe.com",
-      Contacted: "Contacted",
-      Actions: "Delete",
-    },
-  ];
+  const rows = userdata.map((item) => {
+    return {
+      id: item.userId,
+      email: item?.email,
+      Contacted: item.emailVerified,
+    };
+  });
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -206,7 +132,6 @@ export function AdminRewardsToWinner() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
-            checkboxSelection
           />
         </Box>
       </Container>

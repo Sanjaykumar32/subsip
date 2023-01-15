@@ -211,3 +211,19 @@ export interface IUpdateSubCategoryResponse {
   message: string;
   data: number;
 }
+
+export interface IUserResponse {
+  success: number;
+  message: string;
+  data: IUser[];
+}
+
+export interface IUser {
+  userId: number;
+  name: string;
+  email: string;
+  groupId?: number;
+  addedDate: any;
+  emailVerified: string;
+  referralCode: string;
+}
