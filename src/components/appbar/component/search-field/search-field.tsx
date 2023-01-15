@@ -57,7 +57,7 @@ export const SearchField = () => {
   })
 
 
-  const list2:any = categoryData.map((el: any) => {
+  const list2: any = categoryData.map((el: any) => {
     return (
       {
         iCategoryid: el.iCategoryId,
@@ -132,9 +132,9 @@ export const SearchField = () => {
     //     }}
     //   />
 
-    <div className="App">
-      <header className="App-header">
-        <div style={{ width: 625 }}>
+    <div className="App w-full ">
+      <header className="App-header w-full">
+        <div className=" w-full xl:w-[80%] mx-[auto]  " >
           <ReactSearchAutocomplete
             items={data}
             onSearch={(el) => changeHandler(el)}

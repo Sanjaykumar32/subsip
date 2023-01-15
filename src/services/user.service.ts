@@ -8,6 +8,8 @@ import {
   IAddSubcriberToBuisnessResponse,
   IDeleteSubscriberRequest,
   IDeleteSubscriberResponse,
+  IUNSubscriberRequest,
+  IUnSubscriberResponse,
 } from "interface";
 
 /**
@@ -72,9 +74,9 @@ export class UserService {
   }
 
   /**
-   * add subscriber-to-business
-   * @return {Promise<IAddSubcriberToBuisnessResponse>}
-   */
+  * add subscriber-to-business
+  * @return {Promise<IAddSubcriberToBuisnessResponse>}
+  */
   public static async addSubscriberToBussiness(
     payload: any
   ): Promise<IAddSubcriberToBuisnessResponse> {
@@ -87,6 +89,25 @@ export class UserService {
 
     return res.data;
   }
+
+  /**
+    * add subscriber-to-business
+    * @return {Promise<IUnSubscriberResponse>}
+    */
+  public static async UNSubscriberToBussiness(
+    payload: IUNSubscriberRequest
+  ): Promise<IUnSubscriberResponse> {
+    const res: AxiosResponse<IUnSubscriberResponse> =
+      await ApiHelper.send<IUnSubscriberResponse>({
+        url: `business/unsubscribe`,
+        method: "POST",
+        data: payload,
+      });
+
+    return res.data;
+  }
+
+
 
   /**
    * Delete Subscribers
@@ -104,3 +125,5 @@ export class UserService {
     return res.data;
   }
 }
+
+

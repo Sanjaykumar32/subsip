@@ -207,6 +207,12 @@ export interface IDeleteSubscriberResponse {
   data: number;
 }
 
+export interface IUnSubscriberResponse {
+  success: number;
+  message: string;
+  data: number;
+}
+
 export interface IUpdateSubCategoryResponse {
   success: number;
   message: string;

@@ -36,18 +36,18 @@
     transform: rotate(45deg);
 }
 
-.successColor{
+.successColor {
     background: rgb(76, 175, 80) !important;
     color: #ffff !important;
 
 }
 
-.warningColor{
+.warningColor {
     background: rgb(255, 152, 0) !important;
     color: #ffff !important;
 }
 
-.errorColor{
+.errorColor {
     background: rgb(211, 47, 47) !important;
     color: #ffff !important;
 }
@@ -138,7 +138,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 
 .MuiGrid-root.MuiGrid-container.css-11lq3yg-MuiGrid-root {
     display: flex;
-    justify-content: space-between !important;
+    /* justify-content: space-between !important; */
 }
 
 .nan {

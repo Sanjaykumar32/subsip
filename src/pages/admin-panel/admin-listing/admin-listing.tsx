@@ -84,9 +84,7 @@ export function AdminListing() {
             <FontAwesomeIcon
               icon={faPen}
               onClick={() => {
-                navigate("/admin/new-listing", {
-                  state: { id: params.value[2], edit: true },
-                });
+                navigate(`/admin/new-listing?id=${params.value[2]}&edit=${true}`);
               }}
             />
           </Tooltip>

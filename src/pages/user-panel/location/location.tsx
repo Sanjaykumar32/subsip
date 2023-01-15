@@ -78,14 +78,6 @@ export function LocationPage() {
 
   const auth = useAuth();
   const isAuthenticated = auth.isAuthenticated;
-
-  // const name = `India Gate Restaurant`;
-  // const location = "Seattle, WA";
-  // const description =
-  //   "Welcome to the India Gate Restaurant where we offer unique food.";
-  // const subscribers = 42.2;
-  // const obj = { name, location, description, subscribers } as ILocationProps;
-
   const navigate = useNavigate();
 
   return (
@@ -135,6 +127,7 @@ export function LocationPage() {
                   </Box>
                 )}
                 {bussinessByName.map((res: IBusiness, index: number) => {
+                  console.log(res, 'res')
                   return <Location {...res} key={index} />;
                 })}
               </Grid>

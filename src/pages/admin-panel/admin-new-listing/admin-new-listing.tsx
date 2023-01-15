@@ -26,7 +26,7 @@ import {
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { NewlistingController } from "./admin-new-listing-controller";
-import { Form } from "react-router-dom";
+import { Form, useSearchParams } from "react-router-dom";
 import Switch from "@mui/material/Switch";
 
 interface ListFormItem {
@@ -158,7 +158,7 @@ export function AdminNewlisting() {
     handleBusinessNameChange,
     handleBusinessLocationhange,
     handleEmailChange,
-    handleProductChange,
+    handleTaglineChange,
     handleImageChange,
     handleBanner,
     handlePreviewChange,
@@ -166,6 +166,10 @@ export function AdminNewlisting() {
   } = handlers;
 
   const ref = useRef<HTMLInputElement>(null);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const edit = searchParams.get("edit");
+
 
 
 
@@ -198,8 +202,8 @@ export function AdminNewlisting() {
                   <FormControl fullWidth>
                     <TextField
                       size="small"
-                      value={headline}
-                      onChange={handleHeadlineChange}
+                      value={tagLine}
+                      onChange={handleTaglineChange}
                       // required
                       fullWidth
                     />
@@ -286,7 +290,7 @@ export function AdminNewlisting() {
             </Grid>
             <Grid item xs={12} md={6}>
               <Box sx={{ px: 3, py: 1 }}>
-                <Grid container>
+                <Grid container className=' justify-between ' >
                   <Grid xs={6} md={4}>
                     <Box>
                       <Label> {step6.label} </Label>
@@ -401,7 +405,7 @@ export function AdminNewlisting() {
           }}
         >
           <Button variant="rounded" type="submit">
-            Add listing
+            {edit ? 'Update listing' : 'Add listing'}
           </Button>
         </Box>
       </Form>
