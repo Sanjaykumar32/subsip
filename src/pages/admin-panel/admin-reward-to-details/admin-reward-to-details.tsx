@@ -32,6 +32,10 @@ export function AdminRewardToDetails() {
   const [searchParams] = useSearchParams();
   const bussinessId = searchParams.get("businessId");
 
+  console.log(bussinessId, 'bussinessId');
+
+
+
   const businessReward = useCallback(async () => {
     try {
       await dispatch(
@@ -46,10 +50,10 @@ export function AdminRewardToDetails() {
 
   const rows = businessRewardData.map((item: IBusinessReward) => {
     return {
-      id: item.redeemedUserId,
-      rewardName: item.rewardName,
-      redeemedUserCount: item.redeemedUserCount,
-      Actions: ["Edit", "Delete", item.iRewardId],
+      id: item?.iRewardId,
+      rewardName: item?.rewardName,
+      redeemedUserCount: [item?.redeemedUserCount, item?.redeemedUserId],
+      Actions: ["Edit", "Delete", item?.iRewardId],
     };
   });
 
@@ -76,9 +80,9 @@ export function AdminRewardToDetails() {
       width: 200,
       renderCell: (params) => (
         <Link
-          href={`${AdminRoutePathEnum.ADMIN_REWARDS_TO_WINNERS}?userId=${params.id}`}
+          href={`${AdminRoutePathEnum.ADMIN_REWARDS_TO_WINNERS}?userId=${params?.value[1]}`}
         >
-          {params.value}
+          {params?.value[0]}
         </Link>
       ),
     },
