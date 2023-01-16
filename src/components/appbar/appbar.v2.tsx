@@ -610,7 +610,7 @@ export const UserAppBar = (props: any) => {
                     console.log(res.iNotificationId, 'res')
 
                     return (
-                      <div className="Notification list w-[350px] bg-[#cbc8c8] mx-2 px-2 py-2  shadow-md rounded-[6px] border-solid   my-2 " key={i} >
+                      <div className="Notification list w-[350px] bg-[#fff] mx-2 px-2 py-2  shadow-lg rounded-[6px] border-solid   my-2 " key={i} >
                         <div className="">
                           <div className="grid w-full gap-[5px]">
                             {/* <li className="text-black cursor-pointer text-[16px] "> */}
