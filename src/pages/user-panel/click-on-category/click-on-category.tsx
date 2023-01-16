@@ -47,7 +47,7 @@ export function ClickOnCategory() {
   const [searchParams] = useSearchParams();
   const subCatId = searchParams.get("subCategory");
 
-  console.log("subCatId", subcatIdss);
+  console.log(subCatdata ,"subCatdata");
 
   const getCateID = location.pathname.split("/")[2];
 
@@ -193,19 +193,22 @@ export function ClickOnCategory() {
                             // handleSubList(item?.iSubCategoryId);
                             handleSubList(null)
                           setActiveCate(item?.iCategoryId);
-                          setSubData(filteredSubCategory);
+                          // setSubData(filteredSubCategory);
                         }}
                       >
                         {item?.vName}
                       </AccordionSummary>
 
                       <AccordionDetails>
-                        {subCatdata.length > 0 ? subCatdata.map((res: any, i: number) => (
+                        {filteredSubCategory.length > 0 ? filteredSubCategory.map((res: any, i: number) => (
+                          
                           <Link
                             // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
                             key={i}
                             onClick={() => handleSubList(res?.iSubCategoryId)}
+                            
                           >
+                            
                             <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
                           </Link>
                           // <Link

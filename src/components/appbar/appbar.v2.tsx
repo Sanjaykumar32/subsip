@@ -42,6 +42,8 @@ import { GET_BUSINESS, GET_CATEGORY, GET_USER_NOTIFICTAION } from "data/selector
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
+import { format } from "date-fns";
+
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -60,12 +62,9 @@ export const UserAppBar = (props: any) => {
   const [searchLocation, setLocation] = useState<any>("");
   const homepage = location.pathname;
   const userId = localStorage.getItem("userId");
-  const [readMoreNotification, setReadMoreNotification] = useState<any>(false);
+  const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
-
-
-
-
+  console.log(readMoreNotification, 'readMoreNotification')
 
   const getcategory = useCallback(async () => {
     try {
@@ -119,7 +118,7 @@ export const UserAppBar = (props: any) => {
     if (auth.isAuthenticated) {
       setInterval(() => {
         getUserNotification();
-      }, 100000);
+      }, 1000);
     }
   }, [auth.isAuthenticated, getUserNotification]);
 
@@ -608,24 +607,62 @@ export const UserAppBar = (props: any) => {
               >
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
+                    console.log(res.iNotificationId, 'res')
+
                     return (
-                      <div className="Notification list w-[350px] px-3 " key={i} >
-                        <div className="grid w-full gap-[5px] ">
-                          {/* <li className="text-black cursor-pointer text-[16px] "> */}
-                          <div className="flex gap-[5px] items-center ">
-                            <div className="bg-red-500 px-[13px] py-[5px] text-[12px] rounded-[30px] text-white "> Announcement</div>
-                            <div className=" text-[14px] font-[400] text-[#a3a3a3] "> 25/02/2025</div>
-                          </div>
-                          <h1 className="text-[18px] font-[900] text-[#252525]" >{res.vHeadline}</h1>
-                          {/* <div className="flex "> */}
-                          <p className="text-[14px] flex font-[400] text-[#a3a3a3]">{readMoreNotification ? <span>{res.vDesc}</span> :
-                            <span className="NotextLimit2" >{res.vDesc}</span>}
-                            {!readMoreNotification ?
-                              <span className="text-[14px] w-[50px] font-[400] text-[#2196F3] cursor-pointer " onClick={() => setReadMoreNotification(true)} >Read More</span>
-                              : <span className="text-[14px] w-[50px] font-[400] text-[#2196F3] cursor-pointer " onClick={() => setReadMoreNotification(false)} >Read Less</span>}
-                          </p>
-                          {/* </div> */}
-                          {/* <span
+                      <div className="Notification list w-[350px] bg-[#cbc8c8] mx-2 px-2 py-2  shadow-md rounded-[6px] border-solid   my-2 " key={i} >
+                        <div className="">
+                          <div className="grid w-full gap-[5px]">
+                            {/* <li className="text-black cursor-pointer text-[16px] "> */}
+                            <div className="flex gap-[5px] items-center ">
+                              <div className="bg-red-500 px-[13px] py-[5px] text-[12px] rounded-[30px] text-white "> Announcement</div>
+                              <div className=" text-[14px] font-[400] text-[#262626] ">
+                                {res.dDate && format(new Date(res.dDate),
+                                  'dd-MM-yyyy'
+                                )}
+                              </div>
+                            </div>
+                            <h1 className="text-[18px] font-[900] text-[#252525]" >{res.vHeadline}</h1>
+                            {/* <div className="flex "> */}
+                            <p className="text-[14px] flex font-[400] text-[#262626]">
+                              {readMoreNotification.state && readMoreNotification.id == res.iNotificationId ?
+                                <div className="">
+                                  <span>{res.vDesc}</span>
+                                  {res.vDesc.length > 55 ?
+                                    <div>
+                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium " onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
+                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
+                                        readNotification(res.iNotificationId);
+                                      }}>Clear</span>
+                                    </div>
+                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
+                                      readNotification(res.iNotificationId);
+                                    }}>Clear</span>}
+                                </div>
+                                :
+                                <div className="">
+                                  <span className="NotextLimit2" >{res.vDesc}</span>
+                                  {res.vDesc.length > 55 ?
+                                    <div className="">
+                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer  font-medium"
+                                        onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>
+                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal" onClick={() => {
+                                        readNotification(res.iNotificationId);
+                                      }}>Clear</span>
+                                    </div>
+
+                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
+                                      readNotification(res.iNotificationId);
+                                    }}>Clear</span>}
+                                </div>
+                              }
+                              {/* {!readMoreNotification ?
+                                
+                                :
+                              } */}
+                            </p>
+                            {/* </div> */}
+                            {/* <span
                             className="w-[30%] text-center text-[15px]"
                             onClick={() => {
                               readNotification(res.iNotificationId);
@@ -633,7 +670,9 @@ export const UserAppBar = (props: any) => {
                           >
                             Read
                           </span> */}
+                          </div>
                         </div>
+
                       </div>
                     );
                   })
