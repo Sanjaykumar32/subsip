@@ -18,6 +18,7 @@
     "@react-spring/web": "^9.6.1",
     "@reduxjs/toolkit": "^1.8.6",
     "axios": "^1.2.1",
+    "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
