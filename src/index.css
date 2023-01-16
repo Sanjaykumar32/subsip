@@ -233,19 +233,63 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
+    .MainBanner {
+        top: 170px;
+    }
 
-    /* .css-1x9yojm-MuiContainer-root {
-        padding-top: 145px !important;
-    } */
+    p.text-black.md\:text-white.text-\[0\.95rem\].textLimit2.font-normal {
+        margin-bottom: 0 !important;
+    }
 
     .grid-about {
         grid-template-columns: 1fr;
     }
 
+    .MuiGrid-root.MuiGrid-item.MuiGrid-grid-sm-12.MuiGrid-grid-md-4.css-1a6vfpf-MuiGrid-root {
+        width: 100%;
+        margin-top: 7px;
+    }
 
+    .css-1a6vfpf-MuiGrid-root {
+        padding-right: 0% !important;
+    }
 
+    .css-1f8hgvq-MuiGrid-root {
+        display: flex;
+        justify-content: space-between !important;
+    }
 
+    span.text-\[14px\].py-\[20px\].flex.font-\[400\].text-\[\#252525\] {
+        margin: 25px 0px !important;
+    }
 
+    .MuiGrid-root.MuiGrid-container.css-11lq3yg-MuiGrid-root {
+        display: flex;
+        justify-content: center !important;
+    }
+
+    .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation0.MuiCard-root.border-\[1px\].border-\[\#dadde5\].css-ill3aq-MuiPaper-root-MuiCard-root img {
+        height: 350px !important;
+    }
+
+    .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.css-mhc70k-MuiGrid-root {
+        margin: 25px 0px;
+    }
+
+    .css-1v5u2yv {
+        margin-top: 50px !important;
+    }
+
+    .css-1dsi6ev-MuiContainer-root {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+}
+
+.grid.grid-cols-2.px-\[60px\].py-\[10px\].bg-\[\#2C2E30\] {
+    display: flex;
+    justify-content: space-between !important;
 }
 
 
@@ -321,4 +365,8 @@ h2 {
 
 .headerTop {
     padding-top: 7rem !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation0.MuiPopover-paper.css-aqqxug-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+    overflow: auto !important;
 }

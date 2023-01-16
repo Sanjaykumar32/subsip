@@ -42,12 +42,13 @@ export function ClickOnCategory() {
   const [activeCate, setActiveCate] = useState<any>(false);
   const [subCatdata, setSubData] = useState<any>([]);
 
+
   const location = useLocation();
 
   const [searchParams] = useSearchParams();
   const subCatId = searchParams.get("subCategory");
 
-  console.log("subCatId", subcatIdss);
+  console.log(subCatdata, "subCatdata");
 
   const getCateID = location.pathname.split("/")[2];
 
@@ -146,6 +147,8 @@ export function ClickOnCategory() {
   }, [getCateID, location]);
   const navigate = useNavigate();
 
+
+
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
@@ -193,34 +196,38 @@ export function ClickOnCategory() {
                             // handleSubList(item?.iSubCategoryId);
                             handleSubList(null)
                           setActiveCate(item?.iCategoryId);
-                          setSubData(filteredSubCategory);
+                          // setSubData(filteredSubCategory);
                         }}
                       >
                         {item?.vName}
                       </AccordionSummary>
 
-                      <AccordionDetails>
-                        {subCatdata.length > 0 ? subCatdata.map((res: any, i: number) => (
-                          <Link
-                            // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
-                            key={i}
-                            onClick={() => handleSubList(res?.iSubCategoryId)}
-                          >
-                            <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
-                          </Link>
-                          // <Link
-                          //   href={{
-                          //     pathname: "/category",
-                          //     query: {subCategory: res?.iSubCategoryId },
-                          //   }}
-                          //   key={index}
-                          // >
-                          //   Some Text
-                          // </Link>
-                        )) : <Link>
-                          <Typography className="text-[#252525]" >No Sub category Here</Typography>
-                        </Link>}
-                      </AccordionDetails>
+                      {activeCate &&
+                        <AccordionDetails>
+                          {activeCate && filteredSubCategory.length > 0 ? filteredSubCategory.map((res: any, i: number) => (
+
+                            <Link
+                              // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
+                              key={i}
+                              onClick={() => handleSubList(res?.iSubCategoryId)}
+
+                            >
+
+                              <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
+                            </Link>
+                            // <Link
+                            //   href={{
+                            //     pathname: "/category",
+                            //     query: {subCategory: res?.iSubCategoryId },
+                            //   }}
+                            //   key={index}
+                            // >
+                            //   Some Text
+                            // </Link>
+                          )) : <Link>
+                            <Typography className="text-[#252525]" >No Sub category Here</Typography>
+                          </Link>}
+                        </AccordionDetails>}
                     </Accordion>
                   </Link>
                 ))}

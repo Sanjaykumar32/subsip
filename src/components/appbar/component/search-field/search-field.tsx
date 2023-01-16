@@ -19,7 +19,7 @@ export const SearchField = () => {
   const navigate = useNavigate();
   const businessData = useAppSelector(GET_BUSINESS);
 
-  console.log(categoryData, 'categoryData sea')
+  // console.log(categoryData, 'categoryData sea')
 
 
 
