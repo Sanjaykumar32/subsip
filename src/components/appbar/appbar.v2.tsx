@@ -38,12 +38,15 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_BUSINESS, GET_CATEGORY, GET_USER_NOTIFICTAION } from "data/selectors";
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import Stack from '@mui/material/Stack';
+import {
+  GET_BUSINESS,
+  GET_CATEGORY,
+  GET_USER_NOTIFICTAION,
+} from "data/selectors";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
 import { format } from "date-fns";
-
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -64,7 +67,7 @@ export const UserAppBar = (props: any) => {
   const userId = localStorage.getItem("userId");
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
-  console.log(readMoreNotification, 'readMoreNotification')
+  console.log(readMoreNotification, "readMoreNotification");
 
   const getcategory = useCallback(async () => {
     try {
@@ -88,7 +91,7 @@ export const UserAppBar = (props: any) => {
         );
       }
     } catch (error) {
-      console.log(error, 'this is  err res');
+      console.log(error, "this is  err res");
     }
   }, [dispatch, userId]);
 
@@ -111,14 +114,14 @@ export const UserAppBar = (props: any) => {
         console.log(error);
       }
     },
-    [dispatch, getUserNotification, userId]
+    [dispatch, userId]
   );
 
   useEffect(() => {
     if (auth.isAuthenticated) {
       setInterval(() => {
         getUserNotification();
-      }, 1000);
+      }, 40000);
     }
   }, [auth.isAuthenticated, getUserNotification]);
 
@@ -165,7 +168,7 @@ export const UserAppBar = (props: any) => {
       setLocation(el);
       navigate(`/?${el}`);
     }
-  }
+  };
 
   const handleLocation = (event: any) => {
     setLocation(event.target.value);
@@ -330,10 +333,6 @@ export const UserAppBar = (props: any) => {
     options: businessData.map((option) => option.vLocation),
   };
 
-
-
-
-
   return (
     <>
       <AppBar
@@ -344,10 +343,11 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${props.display ? props.display : sticky ? '' : "non-sticky"
-          } `}
+        className={`${
+          props.display ? props.display : sticky ? "" : "non-sticky"
+        } `}
 
-      // style={{ position: props.display && 'fixed' }}
+        // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -451,14 +451,18 @@ export const UserAppBar = (props: any) => {
                   <Autocomplete
                     {...defaultProps}
                     id="disable-close-on-select"
-                    //  onClick={disableCloseOnSelect}  
+                    //  onClick={disableCloseOnSelect}
                     onChange={(event, newValue: any) => {
-                      console.log(event, 'event onchange');
+                      console.log(event, "event onchange");
                       handlevalue(newValue?.vLocation);
-
                     }}
                     renderInput={(params) => (
-                      <TextField {...params} onChange={handleLocation} label="Search" variant="standard" />
+                      <TextField
+                        {...params}
+                        onChange={handleLocation}
+                        label="Search"
+                        variant="standard"
+                      />
                     )}
                   />
                 </Stack>
@@ -607,55 +611,109 @@ export const UserAppBar = (props: any) => {
               >
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
-                    console.log(res.iNotificationId, 'res')
+                    console.log(res.iNotificationId, "res");
 
                     return (
-                      <div className="Notification list w-[350px] bg-[#fff] mx-2 px-2 py-2  shadow-lg rounded-[6px] border-solid   my-2 " key={i} >
+                      <div
+                        className="Notification list w-[350px] bg-[#fff] mx-2 px-2 py-2  shadow-lg rounded-[6px] border-solid   my-2 "
+                        key={i}
+                      >
                         <div className="">
                           <div className="grid w-full gap-[5px]">
                             {/* <li className="text-black cursor-pointer text-[16px] "> */}
                             <div className="flex gap-[5px] items-center ">
-                              <div className="bg-red-500 px-[13px] py-[5px] text-[12px] rounded-[30px] text-white "> Announcement</div>
+                              <div className="bg-red-500 px-[13px] py-[5px] text-[12px] rounded-[30px] text-white ">
+                                {" "}
+                                Announcement
+                              </div>
                               <div className=" text-[14px] font-[400] text-[#262626] ">
-                                {res.dDate && format(new Date(res.dDate),
-                                  'dd-MM-yyyy'
-                                )}
+                                {res.dDate &&
+                                  format(new Date(res.dDate), "dd-MM-yyyy")}
                               </div>
                             </div>
-                            <h1 className="text-[18px] font-[900] text-[#252525]" >{res.vHeadline}</h1>
+                            <h1 className="text-[18px] font-[900] text-[#252525]">
+                              {res.vHeadline}
+                            </h1>
                             {/* <div className="flex "> */}
                             <p className="text-[14px] flex font-[400] text-[#262626]">
-                              {readMoreNotification.state && readMoreNotification.id == res.iNotificationId ?
+                              {readMoreNotification.state &&
+                              readMoreNotification.id == res.iNotificationId ? (
                                 <div className="">
                                   <span>{res.vDesc}</span>
-                                  {res.vDesc.length > 55 ?
+                                  {res.vDesc.length > 55 ? (
                                     <div>
-                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium " onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
-                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
-                                        readNotification(res.iNotificationId);
-                                      }}>Clear</span>
+                                      <span
+                                        className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium "
+                                        onClick={() =>
+                                          setReadMoreNotification({
+                                            state: false,
+                                            id: res.iNotificationId,
+                                          })
+                                        }
+                                      >
+                                        {" "}
+                                        Read Less
+                                      </span>
+                                      <span
+                                        className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                        onClick={() => {
+                                          readNotification(res.iNotificationId);
+                                        }}
+                                      >
+                                        Clear
+                                      </span>
                                     </div>
-                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
-                                      readNotification(res.iNotificationId);
-                                    }}>Clear</span>}
+                                  ) : (
+                                    <span
+                                      className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                      onClick={() => {
+                                        readNotification(res.iNotificationId);
+                                      }}
+                                    >
+                                      Clear
+                                    </span>
+                                  )}
                                 </div>
-                                :
+                              ) : (
                                 <div className="">
-                                  <span className="NotextLimit2" >{res.vDesc}</span>
-                                  {res.vDesc.length > 55 ?
+                                  <span className="NotextLimit2">
+                                    {res.vDesc}
+                                  </span>
+                                  {res.vDesc.length > 55 ? (
                                     <div className="">
-                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer  font-medium"
-                                        onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>
-                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal" onClick={() => {
-                                        readNotification(res.iNotificationId);
-                                      }}>Clear</span>
+                                      <span
+                                        className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer  font-medium"
+                                        onClick={() =>
+                                          setReadMoreNotification({
+                                            state: true,
+                                            id: res.iNotificationId,
+                                          })
+                                        }
+                                      >
+                                        {" "}
+                                        ...Read More
+                                      </span>
+                                      <span
+                                        className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
+                                        onClick={() => {
+                                          readNotification(res.iNotificationId);
+                                        }}
+                                      >
+                                        Clear
+                                      </span>
                                     </div>
-
-                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
-                                      readNotification(res.iNotificationId);
-                                    }}>Clear</span>}
+                                  ) : (
+                                    <span
+                                      className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                      onClick={() => {
+                                        readNotification(res.iNotificationId);
+                                      }}
+                                    >
+                                      Clear
+                                    </span>
+                                  )}
                                 </div>
-                              }
+                              )}
                               {/* {!readMoreNotification ?
                                 
                                 :
@@ -672,7 +730,6 @@ export const UserAppBar = (props: any) => {
                           </span> */}
                           </div>
                         </div>
-
                       </div>
                     );
                   })

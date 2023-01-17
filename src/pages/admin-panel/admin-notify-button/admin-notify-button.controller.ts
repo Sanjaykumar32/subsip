@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AdminRoutePathEnum } from "enum";
 import { toast } from "react-hot-toast";
 
-
 interface INewNotifyButtonControllerReturns {
   getters: {
     headline: string;
@@ -33,13 +32,7 @@ export const NewNotifyButtonController =
     const dispatch = useAppDispatch();
     const NotifyScreen = useLocation();
     const navigate = useNavigate();
-
-
-    const userID = NotifyScreen?.state?.id
-
-    console.log(userID, 'NotifyScreen')
-
-
+    const userID = NotifyScreen?.state?.id;
     const handleDateChange = (date: Moment | null): void => {
       if (!date) {
         return;
@@ -60,21 +53,16 @@ export const NewNotifyButtonController =
     };
 
     const submitHandler = async () => {
-      const res = await dispatch(
+      await dispatch(
         AdminThunk.newNotifyButton({
           headline: headline,
           date: date,
           desc: description,
-          userIds: userID
+          userIds: userID,
         })
       );
-
-      console.log(res, 'res')
-
-      navigate(AdminRoutePathEnum.ADMIN_SUBSCRIBERS)
-
-      toast.success('Notification Add SuccessFull')
-
+      navigate(AdminRoutePathEnum.ADMIN_SUBSCRIBERS);
+      toast.success("Notification sent Successfully");
     };
 
     return {
