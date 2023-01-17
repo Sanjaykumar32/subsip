@@ -118,7 +118,7 @@ export const UserAppBar = (props: any) => {
     if (auth.isAuthenticated) {
       setInterval(() => {
         getUserNotification();
-      }, 1000);
+      }, 10000);
     }
   }, [auth.isAuthenticated, getUserNotification]);
 
@@ -363,27 +363,57 @@ export const UserAppBar = (props: any) => {
             </IconButton>
           </div>
 
-          <div className="w-[100%] flex justify-center ">
-            <Logo variant="dark" />
+
+  {/*---------------------------- bage logos ------------------------ */}
+          <div className={`flex w-full  ${auth.isAuthenticated ? 'justify-end' : 'justify-center'}`}>
+            <div className=" grid-cols-1">
+
+              <Logo variant="dark" />
+            </div>
+          
+            {auth.isAuthenticated ? (
+              <div className="w-[30%] grid-cols-1  align-end text-right">
+                <IconButton
+                  sx={{ mx: 1 }}
+                  onClick={handleNotificationClick}
+                  id="basic-button"
+                  aria-controls={openNotification ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openNotification ? "true" : undefined}
+                >
+                  <Badge
+                    badgeContent={
+                      userNotificationData.length > 0
+                        ? userNotificationData.length
+                        : ""
+                    }
+                    color={userNotificationData.length > 0 ? "error" : undefined}
+                  >
+                    <FontAwesomeIcon icon={faBell} />
+                  </Badge>
+                </IconButton>
+
+                <IconButton>
+                  <Badge badgeContent={2} color="error">
+                    <FontAwesomeIcon icon={faUser}
+                    />
+                  </Badge>
+                </IconButton>
+              </div>
+            ) : (
+              <Button
+                variant="contained"
+                sx={{
+                  minWidth: "fit-content",
+                  display: { xs: "none", md: "none" },
+                }}
+              >
+                Log In
+              </Button>
+            )}
           </div>
-          {auth.isAuthenticated ? (
-            <IconButton>
-              <Badge badgeContent={2} color="error">
-                <FontAwesomeIcon icon={faUser} />
-              </Badge>
-            </IconButton>
-          ) : (
-            <Button
-              variant="contained"
-              sx={{
-                minWidth: "fit-content",
-                display: { xs: "none", md: "none" },
-              }}
-            >
-              Log In
-            </Button>
-          )}
         </Toolbar>
+
         <Toolbar
           sx={{
             px: 4,
@@ -409,6 +439,8 @@ export const UserAppBar = (props: any) => {
             <SearchField />
           )}
 
+
+          {/* < ------------------- location input field ---------------------> */}
           {homepage === "/" && (
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {!locationPopUp ? (
@@ -610,7 +642,7 @@ export const UserAppBar = (props: any) => {
                     console.log(res.iNotificationId, 'res')
 
                     return (
-                      <div className="Notification list w-[350px] bg-[#cbc8c8] mx-2 px-2 py-2  shadow-md rounded-[6px] border-solid   my-2 " key={i} >
+                      <div className="Notification list w-[350px]  mx-2 px-2 py-2  shadow-md rounded-[6px] border-solid   my-2 " key={i} >
                         <div className="">
                           <div className="grid w-full gap-[5px]">
                             {/* <li className="text-black cursor-pointer text-[16px] "> */}
@@ -633,11 +665,11 @@ export const UserAppBar = (props: any) => {
                                       <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium " onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
                                       <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
                                         readNotification(res.iNotificationId);
-                                      }}>Clear</span>
+                                      }}>Mark read</span>
                                     </div>
                                     : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
                                       readNotification(res.iNotificationId);
-                                    }}>Clear</span>}
+                                    }}>Mark read</span>}
                                 </div>
                                 :
                                 <div className="">
@@ -648,12 +680,12 @@ export const UserAppBar = (props: any) => {
                                         onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>
                                       <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal" onClick={() => {
                                         readNotification(res.iNotificationId);
-                                      }}>Clear</span>
+                                      }}>Mark read</span>
                                     </div>
 
                                     : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
                                       readNotification(res.iNotificationId);
-                                    }}>Clear</span>}
+                                    }}>Mark read</span>}
                                 </div>
                               }
                               {/* {!readMoreNotification ?
@@ -690,11 +722,11 @@ export const UserAppBar = (props: any) => {
           )}
         </Toolbar>
         {props?.userMenu == true && categoryData.length > 0 && (
-          <animated.div style={{ overflow: "hidden", ...spring }}>
+          <animated.div style={{ overflow: "hidden", ...spring }} className='hight'>
             <Toolbar>
               <div className="moblieMenu">
                 <List
-                  className="categoryListing"
+                  className="categoryListing "
                   sx={{
                     display: "flex",
                     flexDirection: { xs: "column", md: "row" },
@@ -727,12 +759,80 @@ export const UserAppBar = (props: any) => {
                       index === 3 && (
                         <ListItem>
                           <Link href={`/category/all`}>{"More"}</Link>
+
                         </ListItem>
                       )
                     )
                   )}
+
+                  { isMobile ? 
+                  <ListItem  className='w-[100%]' >
+                    <Box sx={{ display: { xs: "Block", md: "flex" } }}>
+                      {!locationPopUp ? (
+                        <Button
+                          onClick={showLocationPopUp}
+                          disableRipple
+                          sx={{ color: "text.primary" }}
+                          className='w-[100%]'
+                        >
+                          <FontAwesomeIcon
+                            icon={faLocationDot}
+                            size="sm"
+                            style={{ marginRight: "8px" }}
+                          />
+                          Location
+                        </Button>
+                      ) : (
+
+
+                        <Stack spacing={1} sx={{ m: 1, width: "25ch" }}>
+                          <Autocomplete
+                            {...defaultProps}
+                            id="disable-close-on-select"
+                            //  onClick={disableCloseOnSelect}  
+                            onChange={(event, newValue: any) => {
+                              console.log(event, 'event onchange');
+                              handlevalue(newValue?.vLocation);
+
+                            }}
+                            renderInput={(params) => (
+                              <TextField {...params} onChange={handleLocation} label="Search" variant="standard" />
+                            )}
+                          />
+                        </Stack>
+                      )}
+
+                      {/* <Divider
+                        flexItem
+                        orientation="vertical"
+                        variant="middle"
+                        sx={{ mx: 1, height: "30px", my: "auto" }}
+                      /> */}
+                    </Box>
+                  </ListItem> : null}
+
+                  <ListItem className=" rounded-[10px]">
+
+                    {!auth.isAuthenticated ? 
+                      <Button
+                      className="w-[100%]"
+                        variant="contained"
+                        sx={{ minWidth: "100px" }}
+                        onClick={() => {
+                          navigate(AuthRoutePathEnum.SIGN_IN);
+                        }}
+                      >
+                        Log In
+                      </Button> : null }
+                    
+                  </ListItem>
+
                 </List>
               </div>
+
+
+
+
             </Toolbar>
           </animated.div>
         )}

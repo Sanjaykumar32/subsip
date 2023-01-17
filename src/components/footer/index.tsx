@@ -77,8 +77,9 @@ export function FooterMain() {
         </div>
         <div className="flex justify-end">
           <ul className="flex gap-[15px]  text-[#ffffff]">
-            <li onClick={handleRoute}  className='cursor-pointer '>Terms and Conditions</li>
-            <li onClick={handleRoutes} className='cursor-pointer '> Privacy Policy</li>
+            <li onClick={handleRoute}  className='cursor-pointer '>Terms </li>
+            <li>|</li>
+            <li onClick={handleRoutes} className='cursor-pointer '>Privacy </li>
           </ul>
 
         </div>

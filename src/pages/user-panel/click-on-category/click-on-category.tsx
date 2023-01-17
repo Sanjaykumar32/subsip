@@ -208,7 +208,6 @@ export function ClickOnCategory() {
                             onClick={() => handleSubList(res?.iSubCategoryId)}
                             
                           >
-                            
                             <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
                           </Link>
                           // <Link

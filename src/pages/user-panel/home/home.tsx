@@ -18,14 +18,18 @@ import { IBannerData, IBusiness } from "interface";
 import { UserThunk } from "data/thunk/user.thunk";
 import { Button } from "@mui/material";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
+import useTheme from "@mui/material/styles/useTheme";
+
 
 /**
  *
  */
 export function Home() {
   const location = useLocation();
+  const theme = useTheme();
   const [showMoreData, setMoreData] = useState(false);
-
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const settings: any = {
     infinite: true,
     slidesToShow: 1,
