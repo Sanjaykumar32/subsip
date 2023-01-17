@@ -33,6 +33,7 @@ export const NewNotifyButtonController =
     const NotifyScreen = useLocation();
     const navigate = useNavigate();
     const userID = NotifyScreen?.state?.id;
+    const rewardScreen = NotifyScreen?.state?.rewardScreen;
     const handleDateChange = (date: Moment | null): void => {
       if (!date) {
         return;
@@ -61,7 +62,12 @@ export const NewNotifyButtonController =
           userIds: userID,
         })
       );
-      navigate(AdminRoutePathEnum.ADMIN_SUBSCRIBERS);
+      if (rewardScreen) {
+        navigate(AdminRoutePathEnum.ADMIN_MILESTONES);
+      } else {
+        navigate(AdminRoutePathEnum.ADMIN_SUBSCRIBERS);
+      }
+
       toast.success("Notification sent Successfully");
     };
 

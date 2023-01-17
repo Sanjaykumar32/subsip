@@ -114,14 +114,14 @@ export const UserAppBar = (props: any) => {
         console.log(error);
       }
     },
-    [dispatch, userId]
+    [dispatch, getUserNotification, userId]
   );
 
   useEffect(() => {
     if (auth.isAuthenticated) {
       setInterval(() => {
         getUserNotification();
-      }, 40000);
+      }, 1000);
     }
   }, [auth.isAuthenticated, getUserNotification]);
 

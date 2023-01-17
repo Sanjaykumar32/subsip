@@ -83,7 +83,7 @@ export function AdminRewardsToWinner() {
           variant="contained"
           onClick={() =>
             navigate(AdminRoutePathEnum.ADMIN_NOTIFY_BUTTON, {
-              state: { id: selectionModel, Notify: true },
+              state: { id: selectionModel, Notify: true, rewardScreen: true },
             })
           }
         >
