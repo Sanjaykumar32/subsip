@@ -106,7 +106,6 @@ export function LocationPage() {
                 {/* ))} */}
               </Grid>
 
-
               <Grid item sm={12} md={4} sx={{ px: 2, mt: "-35px" }}>
                 {isAuthenticated && (
                   <Box
@@ -115,25 +114,27 @@ export function LocationPage() {
                       justifyContent: "flex-end",
                       paddingBottom: "10px",
                     }}
+                    onClick={handleClickOpen}
                   >
                     <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}>
                       <FontAwesomeIcon
                         icon={faArrowUpRightFromSquare}
                         style={{ marginRight: 4 }}
-                        onClick={handleClickOpen}
                       />
                       Referral
                     </Typography>
                   </Box>
                 )}
                 {bussinessByName.map((res: IBusiness, index: number) => {
-                  console.log(res, 'res')
+                  console.log(res, "res");
                   return <Location {...res} key={index} />;
                 })}
               </Grid>
             </Grid>
 
-            <span className="text-[14px] py-[20px] flex font-[400] text-[#252525]">{res?.vBodyDescription}</span>
+            <span className="text-[14px] py-[20px] flex font-[400] text-[#252525]">
+              {res?.vBodyDescription}
+            </span>
             {open && (
               <ResponsiveDialog
                 open={open}

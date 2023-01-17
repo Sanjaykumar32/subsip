@@ -233,10 +233,13 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
+    .MainBanner {
+        top: 170px;
+    }
 
-    /* .css-1x9yojm-MuiContainer-root {
-        padding-top: 145px !important;
-    } */
+    p.text-black.md\:text-white.text-\[0\.95rem\].textLimit2.font-normal {
+        margin-bottom: 0 !important;
+    }
 
     .grid-about {
         grid-template-columns: 1fr;
@@ -255,6 +258,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
         display: flex;
         justify-content: space-between !important;
     }
+
     span.text-\[14px\].py-\[20px\].flex.font-\[400\].text-\[\#252525\] {
         margin: 25px 0px !important;
     }
@@ -273,6 +277,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
     .css-1v5u2yv{
         margin-top: 50px !important;
     }
+
     .css-1dsi6ev-MuiContainer-root {
         padding-left: 0px !important;
         padding-right: 0px !important;

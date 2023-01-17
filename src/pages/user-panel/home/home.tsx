@@ -178,7 +178,7 @@ export function Home() {
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
               <div className="max-w-[100%] mt-[-38px] lg:mt-[78px] lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
-                <div className="w-[80%] md:w-[45%] gap-5 flex flex-col px-2 pt-10 md:px-10">
+                <div className="w-[80%] md:w-[45%] gap-5 flex flex-col px-2 lg:pt-10 md:px-10">
                   <div>
                     <span className="bg-[#0275d8] rounded-md text-[0.9rem] py-[5px] px-[10px] font-normal text-white">
                       Featured
@@ -217,7 +217,7 @@ export function Home() {
                     </button>
                   </span>
                 </div>
-                <div className=" relative min-h-[353px] max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
+                <div className=" relative md:min-h-[353px] md:h-[200px] md:max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
                   <img
                     src={
                       ele?.vImage
@@ -231,7 +231,7 @@ export function Home() {
             </div>
           ))}
         </Slider>
-        {bannerData.length > 0 && <SliderArrow refVal={sliderRef} />}
+        {bannerData.length > 0 && <SliderArrow bannerType='MainBanner' refVal={sliderRef} />}
       </div>
 
       <div className="w-full px-5 mt-8">
@@ -399,19 +399,19 @@ export function Home() {
         {filterBanner.filter(
           (el) => parseInt(el.iCategory) == CateFirst[2]
         ) && (
-          <div className="moreBtn">
-            {/* {console.log(CateFirst[3])} */}
-            {showMoreData ? (
-              <Button variant="contained" onClick={handleLessData}>
-                Less...
-              </Button>
-            ) : (
-              <Button variant="contained" onClick={handleMoreData}>
-                Load More...
-              </Button>
-            )}
-          </div>
-        )}
+            <div className="moreBtn">
+              {/* {console.log(CateFirst[3])} */}
+              {showMoreData ? (
+                <Button variant="contained" onClick={handleLessData}>
+                  Less...
+                </Button>
+              ) : (
+                <Button variant="contained" onClick={handleMoreData}>
+                  Load More...
+                </Button>
+              )}
+            </div>
+          )}
       </div>
     </div>
   );
@@ -509,7 +509,7 @@ const SliderCard = (props: any) => {
 const SliderArrow = (props: any) => {
   return (
     <div
-      className={`w-full pointer-events-none z-50 bg-transparent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex px-5 justify-between  text-white font-normal `}
+      className={` ${props.bannerType} w-full pointer-events-none z-50 bg-transparent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex px-5 justify-between  text-white font-normal `}
     >
       <SlArrowLeft
         onClick={() => props?.refVal?.current?.slickPrev()}

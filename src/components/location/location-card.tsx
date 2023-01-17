@@ -22,6 +22,7 @@ import { IBusiness } from "interface";
 import { useAppDispatch, useAppSelector } from "data";
 import { UserThunk } from "data/thunk/user.thunk";
 import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
+import toast from "react-hot-toast";
 
 export const Title = ({ children, ...props }: TypographyProps) => (
   <Typography variant="h5" fontWeight={900} sx={{ mt: 2, mb: 1 }} {...props}>
@@ -62,13 +63,11 @@ export const Subscribe = ({
   const [searchParams] = useSearchParams();
   const referralcode = searchParams.get("referralCode");
   const businessId = location.id;
-  const [disableButton, setDisableButton] = useState<boolean>(false);
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
 
   async function onButtonClick(): Promise<void> {
     localStorage.setItem("referralcode", referralcode ? referralcode : "");
     localStorage.setItem("businessId", businessId ? businessId : "");
-
     if (auth?.isAuthenticated) {
       try {
         const response = await dispatch(
@@ -78,7 +77,7 @@ export const Subscribe = ({
             referredCode: referralcode,
           })
         );
-        navigate('');
+        navigate("");
       } catch (error) {
         console.log(error);
       }
@@ -86,6 +85,15 @@ export const Subscribe = ({
       navigate("/auth/sign-in");
     }
   }
+
+  const handleUnsub = async () => {
+    await dispatch(
+      UserThunk.UNSubscriberToBusiness({
+        businessId: businessId ? "" + businessId : "0",
+      })
+    );
+    toast.success("UnSubsriber To Business Successfully");
+  };
   return (
     <>
       <Box sx={{ my: 3 }}>
@@ -104,9 +112,9 @@ export const Subscribe = ({
           variant="contained"
           color="inherit"
           sx={{ fontWeight: 800, borderRadius: "24px" }}
-          disabled={true}
+          onClick={() => handleUnsub()}
         >
-          Subscribed
+          Unsubscribe
         </Button>
       ) : (
         <Button
@@ -154,7 +162,7 @@ export function Location({
   vLocation,
   subscriberCount,
   vTagLine,
-  vPreview
+  vPreview,
 }: IBusiness) {
   const auth = useAuth();
   return (

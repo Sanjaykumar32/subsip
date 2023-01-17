@@ -42,12 +42,13 @@ export function ClickOnCategory() {
   const [activeCate, setActiveCate] = useState<any>(false);
   const [subCatdata, setSubData] = useState<any>([]);
 
+
   const location = useLocation();
 
   const [searchParams] = useSearchParams();
   const subCatId = searchParams.get("subCategory");
 
-  console.log(subCatdata ,"subCatdata");
+  console.log(subCatdata, "subCatdata");
 
   const getCateID = location.pathname.split("/")[2];
 
@@ -145,6 +146,8 @@ export function ClickOnCategory() {
     }
   }, [getCateID, location]);
   const navigate = useNavigate();
+
+
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>

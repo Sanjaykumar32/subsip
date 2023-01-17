@@ -109,8 +109,6 @@ export function AdminSubscribers() {
   );
   const [selectedRows, setSelectedRows] = useState<any>([]);
 
-  console.log(selectionModel, "itemsss");
-
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
       <Box
