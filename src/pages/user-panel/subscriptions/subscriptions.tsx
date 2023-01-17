@@ -21,26 +21,20 @@ import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
 import { toast } from "react-hot-toast";
 
-
 export function Subscriptions() {
   const [subscribe, setSubscribe] = useState(false);
   const [search, setSearch] = useState("");
   const dispatch = useAppDispatch();
 
-
-
-
-
-
-
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
-
       const UserID = localStorage.getItem("userId");
 
       // console.log(UserID, 'UserID')
 
-      await dispatch(AdminThunk.allSubscriberOfBussiness({ userId: Number(UserID) }));
+      await dispatch(
+        AdminThunk.allSubscriberOfBussiness({ userId: Number(UserID) })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -52,9 +46,7 @@ export function Subscriptions() {
 
   const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
 
-  console.log(subscribeBusiness, 'subscribeBusiness')
-
-
+  console.log(subscribeBusiness, "subscribeBusiness");
 
   const array = subscribeBusiness.filter((el) => {
     return Object.values(el?.businessName)
@@ -65,10 +57,8 @@ export function Subscriptions() {
 
   console.log(array, "array");
 
-
-
   const handleSubs = async (item: any) => {
-    console.log(item, 'numbersss')
+    console.log(item, "numbersss");
 
     const response = await dispatch(
       UserThunk.addSubscriberToBusiness({
@@ -77,29 +67,22 @@ export function Subscriptions() {
       })
     );
 
-    console.log(response, 'response')
-    toast.success("Subsriber To Business Successfully")
+    console.log(response, "response");
+    toast.success("Subsriber To Business Successfully");
     allsubscriberOfBussiness();
-
-
-
-  }
+  };
 
   const handleUnsub = async (item: any) => {
-    console.log(item, 'numbersss')
+    console.log(item, "numbersss");
 
     const response = await dispatch(
       UserThunk.UNSubscriberToBusiness({
-        businessId: item?.iBusinessId ? '' + item?.iBusinessId : '0'
+        businessId: item?.iBusinessId ? "" + item?.iBusinessId : "0",
       })
     );
-
-    console.log(response, 'response')
-    toast.success("UnSubsriber To Business Successfully")
-
+    toast.success("UnSubsriber To Business Successfully");
     allsubscriberOfBussiness();
-
-  }
+  };
 
   const handleSearch = (e: any) => {
     setSearch(e.target.value);
@@ -187,7 +170,7 @@ export function Subscriptions() {
                   variant="contained"
                   color="inherit"
                   size="small"
-                  sx={{ borderRadius: "30px", px: 3, }}
+                  sx={{ borderRadius: "30px", px: 3 }}
                 >
                   subscribe
                 </Button>
@@ -196,10 +179,7 @@ export function Subscriptions() {
             <Divider sx={{ mt: 1 }} />
           </>
         ))}
-
       </Container>
     </Container>
   );
 }
-
-

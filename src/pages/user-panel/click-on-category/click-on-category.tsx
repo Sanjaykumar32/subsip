@@ -202,32 +202,30 @@ export function ClickOnCategory() {
                         {item?.vName}
                       </AccordionSummary>
 
-                      {activeCate &&
-                        <AccordionDetails>
-                          {activeCate && filteredSubCategory.length > 0 ? filteredSubCategory.map((res: any, i: number) => (
-
-                            <Link
-                              // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
-                              key={i}
-                              onClick={() => handleSubList(res?.iSubCategoryId)}
-
-                            >
-
-                              <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
-                            </Link>
-                            // <Link
-                            //   href={{
-                            //     pathname: "/category",
-                            //     query: {subCategory: res?.iSubCategoryId },
-                            //   }}
-                            //   key={index}
-                            // >
-                            //   Some Text
-                            // </Link>
-                          )) : <Link>
-                            <Typography className="text-[#252525]" >No Sub category Here</Typography>
-                          </Link>}
-                        </AccordionDetails>}
+                      <AccordionDetails>
+                        {filteredSubCategory.length > 0 ? filteredSubCategory.map((res: any, i: number) => (
+                          
+                          <Link
+                            // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
+                            key={i}
+                            onClick={() => handleSubList(res?.iSubCategoryId)}
+                            
+                          >
+                            <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
+                          </Link>
+                          // <Link
+                          //   href={{
+                          //     pathname: "/category",
+                          //     query: {subCategory: res?.iSubCategoryId },
+                          //   }}
+                          //   key={index}
+                          // >
+                          //   Some Text
+                          // </Link>
+                        )) : <Link>
+                          <Typography className="text-[#252525]" >No Sub category Here</Typography>
+                        </Link>}
+                      </AccordionDetails>
                     </Accordion>
                   </Link>
                 ))}

@@ -65,7 +65,7 @@ export default function ResponsiveDialog({
             }}
             placeholder={
               refferralCode.referralCode
-                ? refferralCode.referralCode
+                ? `${hostName}/listing/${businessId}?referralCode=${refferralCode.referralCode}`
                 : "Referral Code"
             }
           />

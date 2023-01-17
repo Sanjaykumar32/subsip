@@ -38,12 +38,15 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_BUSINESS, GET_CATEGORY, GET_USER_NOTIFICTAION } from "data/selectors";
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import Stack from '@mui/material/Stack';
+import {
+  GET_BUSINESS,
+  GET_CATEGORY,
+  GET_USER_NOTIFICTAION,
+} from "data/selectors";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
 import { format } from "date-fns";
-
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -64,7 +67,7 @@ export const UserAppBar = (props: any) => {
   const userId = localStorage.getItem("userId");
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
-  console.log(readMoreNotification, 'readMoreNotification')
+  console.log(readMoreNotification, "readMoreNotification");
 
   const getcategory = useCallback(async () => {
     try {
@@ -88,7 +91,7 @@ export const UserAppBar = (props: any) => {
         );
       }
     } catch (error) {
-      console.log(error, 'this is  err res');
+      console.log(error, "this is  err res");
     }
   }, [dispatch, userId]);
 
@@ -118,7 +121,7 @@ export const UserAppBar = (props: any) => {
     if (auth.isAuthenticated) {
       setInterval(() => {
         getUserNotification();
-      }, 1000);
+      }, 10000);
     }
   }, [auth.isAuthenticated, getUserNotification]);
 
@@ -165,7 +168,7 @@ export const UserAppBar = (props: any) => {
       setLocation(el);
       navigate(`/?${el}`);
     }
-  }
+  };
 
   const handleLocation = (event: any) => {
     setLocation(event.target.value);
@@ -330,10 +333,6 @@ export const UserAppBar = (props: any) => {
     options: businessData.map((option) => option.vLocation),
   };
 
-
-
-
-
   return (
     <>
       <AppBar
@@ -344,7 +343,7 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${props.display ? props.display : sticky ? '' : "non-sticky"
+        className={`${props.display ? props.display : sticky ? "" : "non-sticky"
           } `}
 
       // style={{ position: props.display && 'fixed' }}
@@ -363,27 +362,57 @@ export const UserAppBar = (props: any) => {
             </IconButton>
           </div>
 
-          <div className="w-[100%] flex justify-center ">
-            <Logo variant="dark" />
+
+          {/*---------------------------- bage logos ------------------------ */}
+          <div className={`flex w-full  ${auth.isAuthenticated ? 'justify-end' : 'justify-center'}`}>
+            <div className=" grid-cols-1">
+
+              <Logo variant="dark" />
+            </div>
+
+            {auth.isAuthenticated ? (
+              <div className="w-[30%] grid-cols-1  align-end text-right">
+                <IconButton
+                  sx={{ mx: 1 }}
+                  onClick={handleNotificationClick}
+                  id="basic-button"
+                  aria-controls={openNotification ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openNotification ? "true" : undefined}
+                >
+                  <Badge
+                    badgeContent={
+                      userNotificationData.length > 0
+                        ? userNotificationData.length
+                        : ""
+                    }
+                    color={userNotificationData.length > 0 ? "error" : undefined}
+                  >
+                    <FontAwesomeIcon icon={faBell} />
+                  </Badge>
+                </IconButton>
+
+                <IconButton>
+                  <Badge badgeContent={2} color="error">
+                    <FontAwesomeIcon icon={faUser}
+                    />
+                  </Badge>
+                </IconButton>
+              </div>
+            ) : (
+              <Button
+                variant="contained"
+                sx={{
+                  minWidth: "fit-content",
+                  display: { xs: "none", md: "none" },
+                }}
+              >
+                Log In
+              </Button>
+            )}
           </div>
-          {auth.isAuthenticated ? (
-            <IconButton>
-              <Badge badgeContent={2} color="error">
-                <FontAwesomeIcon icon={faUser} />
-              </Badge>
-            </IconButton>
-          ) : (
-            <Button
-              variant="contained"
-              sx={{
-                minWidth: "fit-content",
-                display: { xs: "none", md: "none" },
-              }}
-            >
-              Log In
-            </Button>
-          )}
         </Toolbar>
+
         <Toolbar
           sx={{
             px: 4,
@@ -409,6 +438,8 @@ export const UserAppBar = (props: any) => {
             <SearchField />
           )}
 
+
+          {/* < ------------------- location input field ---------------------> */}
           {homepage === "/" && (
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {!locationPopUp ? (
@@ -451,14 +482,18 @@ export const UserAppBar = (props: any) => {
                   <Autocomplete
                     {...defaultProps}
                     id="disable-close-on-select"
-                    //  onClick={disableCloseOnSelect}  
+                    //  onClick={disableCloseOnSelect}
                     onChange={(event, newValue: any) => {
-                      console.log(event, 'event onchange');
+                      console.log(event, "event onchange");
                       handlevalue(newValue?.vLocation);
-
                     }}
                     renderInput={(params) => (
-                      <TextField {...params} onChange={handleLocation} label="Search" variant="standard" />
+                      <TextField
+                        {...params}
+                        onChange={handleLocation}
+                        label="Search"
+                        variant="standard"
+                      />
                     )}
                   />
                 </Stack>
@@ -607,55 +642,64 @@ export const UserAppBar = (props: any) => {
               >
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
-                    console.log(res.iNotificationId, 'res')
+                    console.log(res.iNotificationId, "res");
 
                     return (
-                      <div className="Notification list w-[350px] bg-[#fff] mx-2 px-2 py-2  shadow-lg rounded-[6px] border-solid   my-2 " key={i} >
+                      <div className="Notification list w-[350px]  mx-2 px-2 py-2  shadow-md rounded-[6px] border-solid   my-2 " key={i} >
                         <div className="">
                           <div className="grid w-full gap-[5px]">
                             {/* <li className="text-black cursor-pointer text-[16px] "> */}
                             <div className="flex gap-[5px] items-center ">
-                              <div className="bg-red-500 px-[13px] py-[5px] text-[12px] rounded-[30px] text-white "> Announcement</div>
+                              <div className="bg-red-500 px-[13px] py-[5px] text-[12px] rounded-[30px] text-white ">
+                                {" "}
+                                Announcement
+                              </div>
                               <div className=" text-[14px] font-[400] text-[#262626] ">
-                                {res.dDate && format(new Date(res.dDate),
-                                  'dd-MM-yyyy'
-                                )}
+                                {res.dDate &&
+                                  format(new Date(res.dDate), "dd-MM-yyyy")}
                               </div>
                             </div>
-                            <h1 className="text-[18px] font-[900] text-[#252525]" >{res.vHeadline}</h1>
+                            <h1 className="text-[18px] font-[900] text-[#252525]">
+                              {res.vHeadline}
+                            </h1>
                             {/* <div className="flex "> */}
                             <p className="text-[14px] flex font-[400] text-[#262626]">
-                              {readMoreNotification.state && readMoreNotification.id == res.iNotificationId ?
+                              {readMoreNotification.state &&
+                                readMoreNotification.id == res.iNotificationId ? (
                                 <div className="">
                                   <span>{res.vDesc}</span>
-                                  {res.vDesc.length > 55 ?
+                                  {res.vDesc.length > 55 ? 
                                     <div>
                                       <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium " onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
                                       <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
                                         readNotification(res.iNotificationId);
-                                      }}>Clear</span>
+                                      }}>Mark read</span>
                                     </div>
                                     : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
                                       readNotification(res.iNotificationId);
-                                    }}>Clear</span>}
+                                    }}>Mark read</span>}
                                 </div>
-                                :
+                              ) : (
                                 <div className="">
-                                  <span className="NotextLimit2" >{res.vDesc}</span>
-                                  {res.vDesc.length > 55 ?
+                                  <span className="NotextLimit2">
+                                    {res.vDesc}
+                                  </span>
+                                  {res.vDesc.length > 55 ? 
                                     <div className="">
                                       <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer  font-medium"
                                         onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>
-                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal" onClick={() => {
-                                        readNotification(res.iNotificationId);
-                                      }}>Clear</span>
+                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
+                                        onClick={() => {
+                                          readNotification(res.iNotificationId);
+                                        }}>Mark read</span>
                                     </div>
 
-                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
-                                      readNotification(res.iNotificationId);
-                                    }}>Clear</span>}
+                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                      onClick={() => {
+                                        readNotification(res.iNotificationId);
+                                      }}>Mark read</span>}
                                 </div>
-                              }
+                              )}
                               {/* {!readMoreNotification ?
                                 
                                 :
@@ -672,7 +716,6 @@ export const UserAppBar = (props: any) => {
                           </span> */}
                           </div>
                         </div>
-
                       </div>
                     );
                   })
@@ -690,11 +733,11 @@ export const UserAppBar = (props: any) => {
           )}
         </Toolbar>
         {props?.userMenu == true && categoryData.length > 0 && (
-          <animated.div style={{ overflow: "hidden", ...spring }}>
+          <animated.div style={{ overflow: "hidden", ...spring }} className='hight'>
             <Toolbar>
               <div className="moblieMenu">
                 <List
-                  className="categoryListing"
+                  className="categoryListing "
                   sx={{
                     display: "flex",
                     flexDirection: { xs: "column", md: "row" },
@@ -727,12 +770,80 @@ export const UserAppBar = (props: any) => {
                       index === 3 && (
                         <ListItem>
                           <Link href={`/category/all`}>{"More"}</Link>
+
                         </ListItem>
                       )
                     )
                   )}
+
+                  {isMobile ?
+                    <ListItem className='w-[100%]' >
+                      <Box sx={{ display: { xs: "Block", md: "flex" } }}>
+                        {!locationPopUp ? (
+                          <Button
+                            onClick={showLocationPopUp}
+                            disableRipple
+                            sx={{ color: "text.primary" }}
+                            className='w-[100%]'
+                          >
+                            <FontAwesomeIcon
+                              icon={faLocationDot}
+                              size="sm"
+                              style={{ marginRight: "8px" }}
+                            />
+                            Location
+                          </Button>
+                        ) : (
+
+
+                          <Stack spacing={1} sx={{ m: 1, width: "25ch" }}>
+                            <Autocomplete
+                              {...defaultProps}
+                              id="disable-close-on-select"
+                              //  onClick={disableCloseOnSelect}  
+                              onChange={(event, newValue: any) => {
+                                console.log(event, 'event onchange');
+                                handlevalue(newValue?.vLocation);
+
+                              }}
+                              renderInput={(params) => (
+                                <TextField {...params} onChange={handleLocation} label="Search" variant="standard" />
+                              )}
+                            />
+                          </Stack>
+                        )}
+
+                        {/* <Divider
+                        flexItem
+                        orientation="vertical"
+                        variant="middle"
+                        sx={{ mx: 1, height: "30px", my: "auto" }}
+                      /> */}
+                      </Box>
+                    </ListItem> : null}
+
+                  <ListItem className=" rounded-[10px]">
+
+                    {!auth.isAuthenticated ?
+                      <Button
+                        className="w-[100%]"
+                        variant="contained"
+                        sx={{ minWidth: "100px" }}
+                        onClick={() => {
+                          navigate(AuthRoutePathEnum.SIGN_IN);
+                        }}
+                      >
+                        Log In
+                      </Button> : null}
+
+                  </ListItem>
+
                 </List>
               </div>
+
+
+
+
             </Toolbar>
           </animated.div>
         )}
