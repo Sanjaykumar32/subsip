@@ -164,6 +164,7 @@ export const UserAppBar = (props: any) => {
       setLocation("");
       setLocationPopUP(false);
       navigate(`/?`);
+      setOpen(false)
     } else {
       setLocation(el);
       navigate(`/?${el}`);
@@ -302,9 +303,10 @@ export const UserAppBar = (props: any) => {
   // );
 
   const [open, setOpen] = useState<boolean>(false);
+  console.log(open, 'open')
   const spring = useSpring({
     from: { height: "0px" },
-    to: { height: !isMobile ? "auto" : open ? "250px" : "0px" },
+    to: { height: !isMobile ? "auto" : open ? "320px" : "0px" },
   });
 
   const [sticky, setSticky] = useState("");
@@ -332,6 +334,10 @@ export const UserAppBar = (props: any) => {
   const flatProps = {
     options: businessData.map((option) => option.vLocation),
   };
+
+  const handleBanner = () => {
+    setOpen(false)
+  }
 
   return (
     <>
@@ -392,12 +398,77 @@ export const UserAppBar = (props: any) => {
                   </Badge>
                 </IconButton>
 
-                <IconButton>
-                  <Badge badgeContent={2} color="error">
-                    <FontAwesomeIcon icon={faUser}
-                    />
-                  </Badge>
-                </IconButton>
+
+                {auth.isAuthenticated &&
+                  <>
+                    <IconButton
+                      sx={{ mx: 1 }}
+                      onClick={handleClick}
+                      id="basic-button"
+                      aria-controls={opens ? "basic-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={opens ? "true" : undefined}
+                    >
+                      <FontAwesomeIcon icon={faUserCircle} />
+                    </IconButton>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={opens}
+                      onClose={handleClose}
+                      className="Account-popup"
+                      transformOrigin={{ horizontal: "right", vertical: "top" }}
+                      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                      PaperProps={{
+                        elevation: 0,
+                        sx: {
+                          overflow: "visible",
+                          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                          mt: 1.5,
+                          "& .MuiAvatar-root": {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
+                          },
+                          "&:before": {
+                            content: '""',
+                            display: "block",
+                            position: "absolute",
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: "background.paper",
+                            transform: "translateY(-50%) rotate(45deg)",
+                            zIndex: 0,
+                          },
+                        },
+                      }}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
+                      {menuItem.map((setting: any) => (
+                        <MenuItem
+                          key={setting.route}
+                          onClick={() => {
+                            setting.title === "Logout" && auth.signOut();
+                            handleClose();
+                          }}
+                        >
+                          <Link key="profile-menu" href={setting.route}>
+                            <Typography textAlign="left" className="text-black ">
+                              {setting.title}
+                            </Typography>
+                          </Link>
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </>
+                }
+
+
               </div>
             ) : (
               <Button
@@ -583,6 +654,8 @@ export const UserAppBar = (props: any) => {
                   </MenuItem>
                 ))}
               </Menu>
+
+
               <IconButton
                 sx={{ mx: 1 }}
                 onClick={handleNotificationClick}
@@ -640,6 +713,8 @@ export const UserAppBar = (props: any) => {
                   "aria-labelledby": "basic-button",
                 }}
               >
+
+                {/* <-------------------------- notification dropdown -----------------> */}
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
                     console.log(res.iNotificationId, "res");
@@ -732,8 +807,10 @@ export const UserAppBar = (props: any) => {
             </Box>
           )}
         </Toolbar>
+
+        {/* <-------------------------mobile dropdown-----------------> */}
         {props?.userMenu == true && categoryData.length > 0 && (
-          <animated.div style={{ overflow: "hidden", ...spring }} className='hight'>
+          <animated.div style={{ overflow: "hidden", ...spring }} >
             <Toolbar>
               <div className="moblieMenu">
                 <List
@@ -750,26 +827,26 @@ export const UserAppBar = (props: any) => {
                   {categoryData.map((item: any, index: any) =>
                     index === 0 ? (
                       <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`}>
+                        <Link href={`/category/${item?.iCategoryId}`} onClick={handleBanner}>
                           {item?.vName}
                         </Link>
                       </ListItem>
                     ) : index === 1 ? (
                       <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`}>
+                        <Link href={`/category/${item?.iCategoryId}`} onClick={handleBanner}>
                           {item?.vName}
                         </Link>
                       </ListItem>
                     ) : index === 2 ? (
                       <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`}>
+                        <Link href={`/category/${item?.iCategoryId}`} onClick={handleBanner}>
                           {item?.vName}
                         </Link>
                       </ListItem>
                     ) : (
                       index === 3 && (
                         <ListItem>
-                          <Link href={`/category/all`}>{"More"}</Link>
+                          <Link href={`/category/all`} onClick={handleBanner} >{"More"}</Link >
 
                         </ListItem>
                       )
@@ -777,14 +854,14 @@ export const UserAppBar = (props: any) => {
                   )}
 
                   {isMobile ?
-                    <ListItem className='w-[100%]' >
-                      <Box sx={{ display: { xs: "Block", md: "flex" } }}>
+                    <ListItem className='' >
+                      <Box sx={{ display: { xs: "Block", md: "flex" } }} className='w-[100%]  mt-2'>
                         {!locationPopUp ? (
                           <Button
                             onClick={showLocationPopUp}
                             disableRipple
                             sx={{ color: "text.primary" }}
-                            className='w-[100%]'
+                            className=''
                           >
                             <FontAwesomeIcon
                               icon={faLocationDot}
@@ -796,13 +873,14 @@ export const UserAppBar = (props: any) => {
                         ) : (
 
 
-                          <Stack spacing={1} sx={{ m: 1, width: "25ch" }}>
+                          <Stack spacing={1} className='w-[100%] my-3'>
                             <Autocomplete
                               {...defaultProps}
                               id="disable-close-on-select"
                               //  onClick={disableCloseOnSelect}  
                               onChange={(event, newValue: any) => {
                                 console.log(event, 'event onchange');
+                                setOpen(false)
                                 handlevalue(newValue?.vLocation);
 
                               }}
@@ -822,9 +900,9 @@ export const UserAppBar = (props: any) => {
                       </Box>
                     </ListItem> : null}
 
-                  <ListItem className=" rounded-[10px]">
+                  <ListItem className=" rounded-[10px] my-5">
 
-                    {!auth.isAuthenticated ?
+                    {!auth.isAuthenticated && isMobile ?
                       <Button
                         className="w-[100%]"
                         variant="contained"
