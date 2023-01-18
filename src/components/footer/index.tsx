@@ -12,7 +12,7 @@ import {
 import { Links } from "./links";
 import { SocialIcons } from "./social";
 import { Logo } from "components/logo";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export * from "./links";
 export * from "./social";
@@ -25,26 +25,26 @@ export const FooterContainer = styled(Paper)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  borderRedius: '0px',
+  borderRedius: '0px !important',
 }));
 
 
 
 export function FooterMain() {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
 
-  const handleRoute = ()=>{
+  const handleRoute = () => {
     navigate('/terms')
   }
-  const handleRoutes = ()=> {
+  const handleRoutes = () => {
     navigate('/privacy')
   }
   return (
     <div>
-      <FooterContainer>
+      <FooterContainer className=" footerCss rounded-none " >
         <Container maxWidth="lg" disableGutters>
           <Grid container>
             {isMobile && (
@@ -77,7 +77,7 @@ export function FooterMain() {
         </div>
         <div className="flex justify-end">
           <ul className="flex gap-[15px]  text-[#ffffff]">
-            <li onClick={handleRoute}  className='cursor-pointer '>Terms </li>
+            <li onClick={handleRoute} className='cursor-pointer '>Terms </li>
             <li>|</li>
             <li onClick={handleRoutes} className='cursor-pointer '>Privacy </li>
           </ul>

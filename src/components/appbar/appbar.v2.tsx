@@ -98,7 +98,7 @@ export const UserAppBar = (props: any) => {
   const readNotification = useCallback(
     async (id: number) => {
       const data = {
-        read: userId ? parseInt(userId) : 0,
+        read: userId ? 1 : 0,
       };
       try {
         if (userId) {
@@ -668,7 +668,7 @@ export const UserAppBar = (props: any) => {
                                 readMoreNotification.id == res.iNotificationId ? (
                                 <div className="">
                                   <span>{res.vDesc}</span>
-                                  {res.vDesc.length > 55 ? 
+                                  {res.vDesc.length > 55 ?
                                     <div>
                                       <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium " onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
                                       <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
@@ -684,7 +684,7 @@ export const UserAppBar = (props: any) => {
                                   <span className="NotextLimit2">
                                     {res.vDesc}
                                   </span>
-                                  {res.vDesc.length > 55 ? 
+                                  {res.vDesc.length > 55 ?
                                     <div className="">
                                       <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer  font-medium"
                                         onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>

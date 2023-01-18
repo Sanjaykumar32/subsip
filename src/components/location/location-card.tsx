@@ -165,6 +165,7 @@ export function Location({
   vPreview,
 }: IBusiness) {
   const auth = useAuth();
+
   return (
     <Card
       elevation={3}
