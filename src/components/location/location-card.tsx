@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { theme } from "theme";
 import {
   Card,
@@ -21,8 +21,9 @@ import {
 import { IBusiness } from "interface";
 import { useAppDispatch, useAppSelector } from "data";
 import { UserThunk } from "data/thunk/user.thunk";
-import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
+import { GET_ALL_SUBSCRIBER_OF_BUSINESS, GET_BUSINESS } from "data/selectors";
 import toast from "react-hot-toast";
+import { AdminThunk } from "data/thunk/admin.thunk";
 
 export const Title = ({ children, ...props }: TypographyProps) => (
   <Typography variant="h5" fontWeight={900} sx={{ mt: 2, mb: 1 }} {...props}>
@@ -64,15 +65,50 @@ export const Subscribe = ({
   const referralcode = searchParams.get("referralCode");
   const businessId = location.id;
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
-  const [showButton, setButton] = useState<boolean>(true);
+  const [showButton, setButton] = useState<boolean>(false);
+  const bussinessByName = useAppSelector(GET_BUSINESS);
 
-  console.log(isSubscribed, "isSubscribed");
 
-  async function getDatalist() {
-    if (businessId) {
-      await dispatch(UserThunk.business({ businessId: Number(businessId) }));
+  console.log(bussinessByName, 'bussinessByName')
+
+  useEffect(() => {
+
+    console.log(isSubscribed, "isSubscribed");
+
+    const getdata = isSubscribed.filter((item: any) => item?.iAdminId == userId)[0]
+
+    console.log(getdata, 'getdata')
+
+    if (getdata === undefined) {
+      setButton(true)
+      console.log(true, "isSubscribed");
+    } else {
+      setButton(false)
+      console.log(false, "isSubscribed");
     }
-  }
+
+  }, [isSubscribed]);
+
+
+
+  const allsubscriberOfBussinesss = useCallback(async () => {
+    try {
+      await dispatch(
+        AdminThunk.allSubscriberOfBussiness({
+          userId: userId ? parseInt(userId) : 0,
+          businessId: businessId ? parseInt(businessId) : 0,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [businessId, dispatch, userId]);
+
+  useEffect(() => {
+    allsubscriberOfBussinesss();
+  }, [allsubscriberOfBussinesss]);
+
+
 
   async function onButtonClick(): Promise<void> {
     localStorage.setItem("referralcode", referralcode ? referralcode : "");
@@ -82,11 +118,13 @@ export const Subscribe = ({
         const response = await dispatch(
           UserThunk.addSubscriberToBusiness({
             businessId: businessId ? parseInt(businessId) : 0,
-            userId: userId ? userId : "",
+            userId: userId ? parseInt(userId) : "",
             referredCode: referralcode,
           })
         );
+        allsubscriberOfBussinesss();
         navigate("");
+
       } catch (error) {
         console.log(error);
       }
@@ -102,26 +140,14 @@ export const Subscribe = ({
         businessId: businessId ? "" + businessId : "0",
       })
     );
-    setButton(false);
+    // setButton(false);
+    allsubscriberOfBussinesss();
     toast.success("Unsubsribed  Successfully");
   };
 
-  useEffect(() => {
-    getDatalist();
-  }, [businessId]);
 
-  useEffect(() => {
-    console.log(isSubscribed, "item.iSubscriberId;");
-    if (isSubscribed) {
-      console.log(isSubscribed, "if k ander");
 
-      // isSubscribed.map((item) => {
-      //   item.iSubscriberId && setButton(false);
-      // });
-    } else {
-      console.log("false");
-    }
-  }, [isSubscribed]);
+
 
   return (
     <>
@@ -135,7 +161,7 @@ export const Subscribe = ({
         </Typography>
       </Box>
 
-      {showButton && (
+      {!showButton ? (
         <Button
           size="large"
           variant="contained"
@@ -145,9 +171,7 @@ export const Subscribe = ({
         >
           Unsubscribe
         </Button>
-      )}
-
-      {!showButton && (
+      ) : (
         <Button
           size="large"
           variant="contained"
@@ -160,6 +184,20 @@ export const Subscribe = ({
           Subscribe Now
         </Button>
       )}
+
+      {/* {!showButton && (
+        <Button
+          size="large"
+          variant="contained"
+          color="error"
+          onClick={() => {
+            onButtonClick();
+          }}
+          sx={{ fontWeight: 800, borderRadius: "24px" }}
+        >
+          Subscribe Now
+        </Button>
+      )} */}
     </>
   );
 };
