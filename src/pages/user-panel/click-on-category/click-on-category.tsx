@@ -41,6 +41,7 @@ export function ClickOnCategory() {
   const [searchParams] = useSearchParams();
 
   console.log(subCatdata, "subCatdata");
+  console.log(activeCate , 'activeCate')
 
   const getCateID = location.pathname.split("/")[2];
 
@@ -163,7 +164,7 @@ export function ClickOnCategory() {
           <Grid item xs={12} md={2.1} sx={{ paddingRight: "20px" }}>
             <Box sx={{ overflow: "auto", my: 1 }} className="pl-[18px]">
               <Typography variant="body1" fontWeight="600">
-                Listings by Category:
+                Listings by Category
               </Typography>
 
               <div>
@@ -238,7 +239,7 @@ export function ClickOnCategory() {
         )}
         <Grid item xs={12} md={9.8}>
           <Box>
-            <Typography variant="alternet">Browse restaurants</Typography>
+            <Typography variant="alternet">Browse {activeCate == 65 ? 'Restaurants' : activeCate == 66 ? 'Home Services' : activeCate == 67 ? 'Auto Services' : activeCate == 68 ? 'More' : 'Restaurants'}</Typography>
             <Box
               sx={{
                 display: "flex",
@@ -403,19 +404,13 @@ export function ClickOnCategory() {
                               {data.footer}
                             </Typography>
                           </Box> */}
-                        </>
-                      </Card>
-                    </Grid>
-                  ))
-              ) : (
-                <div className="grid w-full justify-center py-4 ">
-                  <span>
-                    {subcatIdss
-                      ? "This Subcatogery No listing Here "
-                      : "This Category no listing Here "}{" "}
-                  </span>
-                </div>
-              )}
+                      </>
+                    </Card>
+                  </Grid>
+                ))
+                : <div className="grid w-full justify-center py-24 ">
+                  <span>{subcatIdss ? 'This Subcatogery No listing Here ' : "This Category no listing Here "} </span>
+                </div>}
             </Grid>
           </Box>
         </Grid>
