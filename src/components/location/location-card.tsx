@@ -66,7 +66,13 @@ export const Subscribe = ({
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
   const [showButton, setButton] = useState<boolean>(true);
 
-  console.log(showButton, "showButton");
+  console.log(isSubscribed, "isSubscribed");
+
+  async function getDatalist() {
+    if (businessId) {
+      await dispatch(UserThunk.business({ businessId: Number(businessId) }));
+    }
+  }
 
   async function onButtonClick(): Promise<void> {
     localStorage.setItem("referralcode", referralcode ? referralcode : "");
@@ -100,6 +106,23 @@ export const Subscribe = ({
     toast.success("Unsubsribed  Successfully");
   };
 
+  useEffect(() => {
+    getDatalist();
+  }, [businessId]);
+
+  useEffect(() => {
+    console.log(isSubscribed, "item.iSubscriberId;");
+    if (isSubscribed) {
+      console.log(isSubscribed, "if k ander");
+
+      // isSubscribed.map((item) => {
+      //   item.iSubscriberId && setButton(false);
+      // });
+    } else {
+      console.log("false");
+    }
+  }, [isSubscribed]);
+
   return (
     <>
       <Box sx={{ my: 3 }}>
@@ -112,7 +135,7 @@ export const Subscribe = ({
         </Typography>
       </Box>
 
-      {showButton && isSubscribed.length > 0 && (
+      {showButton && (
         <Button
           size="large"
           variant="contained"
