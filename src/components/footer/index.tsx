@@ -12,7 +12,7 @@ import {
 import { Links } from "./links";
 import { SocialIcons } from "./social";
 import { Logo } from "components/logo";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export * from "./links";
 export * from "./social";
@@ -31,15 +31,15 @@ export const FooterContainer = styled(Paper)(({ theme }) => ({
 
 
 export function FooterMain() {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
 
-  const handleRoute = ()=>{
+  const handleRoute = () => {
     navigate('/terms')
   }
-  const handleRoutes = ()=> {
+  const handleRoutes = () => {
     navigate('/privacy')
   }
   return (
@@ -48,7 +48,7 @@ export function FooterMain() {
         <Container maxWidth="lg" disableGutters>
           <Grid container>
             {isMobile && (
-              <Grid item>
+              <Grid item >
                 <Box>
                   <Logo />
                   <Typography> Free certificates from businesses you love </Typography>
@@ -71,19 +71,39 @@ export function FooterMain() {
         </Container>
       </FooterContainer>
 
-      <div className="grid grid-cols-2 px-[60px] py-[10px] bg-[#2C2E30]">
-        <div className="flex justify-start">
-          <p className="text-[#ffffff]">Copyright  2023. All rights reserved.</p>
-        </div>
-        <div className="flex justify-end">
-          <ul className="flex gap-[15px]  text-[#ffffff]">
-            <li onClick={handleRoute}  className='cursor-pointer '>Terms </li>
-            <li>|</li>
-            <li onClick={handleRoutes} className='cursor-pointer '>Privacy </li>
-          </ul>
+
+      {!isMobile ?
+        <div className="grid-cols-2  px-[125px] grid  py-[10px] bg-[#2C2E30]">
+          <div className="flex justify-start">
+            <p className="text-[#ffffff]">Copyright  2023. All rights reserved.</p>
+          </div>
+          <div className={`${isMobile ? 'flex justify-start py-5' : "flex justify-end"}`}>
+            <ul className="flex gap-[15px]  text-[#ffffff]">
+              <li onClick={handleRoute} className='cursor-pointer '>Terms </li>
+              <li>|</li>
+              <li onClick={handleRoutes} className='cursor-pointer '>Privacy </li>
+            </ul>
+
+          </div>
+        </div> :
+        <div className=" flex pb-10 bg-[#2C2E30] justify-center">
+          <div className="">
+            <div className='my-4'>
+              <ul className="flex justify-center gap-[15px]  text-[#ffffff]">
+                <li onClick={handleRoute} className='cursor-pointer '>Terms </li>
+                <li>|</li>
+                <li onClick={handleRoutes} className='cursor-pointer '>Privacy </li>
+              </ul>
+            </div>
+            <div className="">
+              <p className="text-[#ffffff]">Copyright  2023. All rights reserved.</p>
+            </div>
+          </div>
 
         </div>
-      </div>
+
+      }
+
 
     </div>
   );
