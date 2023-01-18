@@ -98,7 +98,7 @@ export const UserAppBar = (props: any) => {
   const readNotification = useCallback(
     async (id: number) => {
       const data = {
-        read: userId ? 1 : 0,
+        'read': userId ? 1 : 0,
       };
       try {
         if (userId) {

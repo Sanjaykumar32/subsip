@@ -49,7 +49,7 @@ export function ClickOnCategory() {
   const subCatId = searchParams.get("subCategory");
 
   console.log(subCatdata, "subCatdata");
-  console.log(activeCate , 'activeCate')
+  console.log(activeCate, 'activeCate')
 
   const getCateID = location.pathname.split("/")[2];
 
@@ -205,12 +205,12 @@ export function ClickOnCategory() {
 
                       <AccordionDetails>
                         {filteredSubCategory.length > 0 ? filteredSubCategory.map((res: any, i: number) => (
-                          
+
                           <Link
                             // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
                             key={i}
                             onClick={() => handleSubList(res?.iSubCategoryId)}
-                            
+
                           >
                             <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
                           </Link>
