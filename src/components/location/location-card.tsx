@@ -90,6 +90,13 @@ export const Subscribe = ({
   }, [isSubscribed]);
 
 
+  async function getDatalist() {
+    if (businessId) {
+      await dispatch(UserThunk.business({ businessId: Number(businessId) }));
+    }
+  }
+
+
 
   const allsubscriberOfBussinesss = useCallback(async () => {
     try {
@@ -123,8 +130,9 @@ export const Subscribe = ({
           })
         );
         allsubscriberOfBussinesss();
+        getDatalist()
         navigate("");
-
+        toast.success("Subsribed  Successfully");
       } catch (error) {
         console.log(error);
       }
@@ -142,8 +150,11 @@ export const Subscribe = ({
     );
     // setButton(false);
     allsubscriberOfBussinesss();
+    getDatalist()
     toast.success("Unsubsribed  Successfully");
   };
+
+
 
 
 

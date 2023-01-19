@@ -99,6 +99,13 @@ img.Logo {
         margin: 0 0rem !important;
     }
 
+    img.Logo {
+        position: absolute;
+        left: -10px;
+        top: -25px;
+    }
+
+
     .topheader {
         padding-top: 10px;
         padding-left: 20px;

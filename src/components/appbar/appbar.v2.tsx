@@ -68,6 +68,8 @@ export const UserAppBar = (props: any) => {
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
   console.log(readMoreNotification, "readMoreNotification");
+  console.log(homepage.split("/")[1], " sdasdacategory");
+
 
   const getcategory = useCallback(async () => {
     try {
@@ -332,7 +334,7 @@ export const UserAppBar = (props: any) => {
     getOptionLabel: (option: any) => option.vLocation,
   };
   const flatProps = {
-    options: businessData.map((option) => option.vLocation),
+    options: businessData.map((option: { vLocation: any; }) => option.vLocation),
   };
 
   const handleBanner = () => {

@@ -509,7 +509,7 @@ const SliderCard = (props: any) => {
       />
       <div className=" pl-3 py-3  ">
         <span
-          className="text-black text-[1.3rem] font-semibold cursor-pointer sliderTitle"
+          className="text-black text-[1.3rem] font-semibold cursor-pointer textLimit2 sliderTitle"
           onClick={() => {
             auth?.isAuthenticated
               ? onImageClick()
