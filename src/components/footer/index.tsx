@@ -25,7 +25,7 @@ export const FooterContainer = styled(Paper)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  borderRedius: '0px',
+  borderRedius: '0px !important',
 }));
 
 
@@ -44,7 +44,7 @@ export function FooterMain() {
   }
   return (
     <div>
-      <FooterContainer>
+      <FooterContainer className=" footerCss rounded-none " >
         <Container maxWidth="lg" disableGutters>
           <Grid container>
             {isMobile && (

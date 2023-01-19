@@ -97,11 +97,18 @@ export const UserAppBar = (props: any) => {
  
   
   const readNotification = useCallback(
+<<<<<<< HEAD
     async ({id , readId} :any) => {
        console.log(id , readId ,  'ids')
       // const data = {
       //   read: Number   userId ?  parseInt(userId) : 0,
       // };
+=======
+    async (id: number) => {
+      const data = {
+        'read': userId ? 1 : 0,
+      };
+>>>>>>> 35e9d10968516a4f7b0c6aec339b6bee8d10b57f
       try {
        
           await dispatch(

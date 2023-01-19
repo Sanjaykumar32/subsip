@@ -72,6 +72,7 @@ export function LocationPage() {
     getDatalist();
   }, [businessId, locations]);
 
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -104,6 +105,9 @@ export function LocationPage() {
                   />
                 </Card>
                 {/* ))} */}
+                <span className="text-[14px] py-[20px] flex font-[400] text-[#252525]">
+                  {res?.vBodyDescription}
+                </span>
               </Grid>
 
               <Grid item sm={12} md={4} sx={{ px: 2, mt: "-35px" }}>
@@ -132,9 +136,7 @@ export function LocationPage() {
               </Grid>
             </Grid>
 
-            <span className="text-[14px] py-[20px] flex font-[400] text-[#252525]">
-              {res?.vBodyDescription}
-            </span>
+
             {open && (
               <ResponsiveDialog
                 open={open}
