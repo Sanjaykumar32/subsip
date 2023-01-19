@@ -25,11 +25,13 @@ import { GET_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { toast } from "react-hot-toast";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 export function AdminListing() {
   const dispatch = useAppDispatch();
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+  const [search, setSearch] = useState('')
 
   async function deleteDatalist(ID: number) {
     setLoader(true);
@@ -127,6 +129,42 @@ export function AdminListing() {
     };
   });
 
+  const list = rows.filter((el) => {
+    return Object.values(el.Name.concat('' , el.Location).toString()).join('').toLowerCase().includes(search.toString().toLowerCase())
+  })
+
+  const items1 = businessData.map((item) => {
+    return( {
+      id: item.iBusinessId,
+      name: item.vName
+    })
+  })
+
+  const items2 = businessData.map((item) => {
+    return( {
+      id: item.iSubCategory,
+      name: item.vLocation
+    })
+  })
+   
+  const items3 = items1.concat(items2)
+
+
+
+  const handleOnSearch = (string: any, results: any) => {
+    console.log(string, results, 'serach and results')
+    setSearch(string)
+  }
+
+  const handleOnSelect = (item: any) => {
+    console.log(item, 'select vlaue')
+    setSearch(item.name)
+  }
+
+  const handleClear = () => {
+    setSearch('')
+  }
+
   return (
     <>
       {loader ?
@@ -135,6 +173,7 @@ export function AdminListing() {
         </div>
         :
         <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
+
           {/* {loader && */}
           {/* } */}
           <Box
@@ -169,7 +208,20 @@ export function AdminListing() {
                 my: 1,
               }}
             >
+              <div className="App w-full mr-2">
+                <header className="App-header w-full">
+                  <div className=" w-full xl:w-[80%] mx-[auto]  " >
+                    <ReactSearchAutocomplete
+                      items={items3}
+                      onSearch={handleOnSearch}
+                      onSelect={handleOnSelect}
+                      onClear={handleClear}
+                    />
+                  </div>
+                </header>
+              </div>
               <Box>
+
                 <Typography variant="caption" sx={{ mr: 1 }}>
                   Sort By:
                 </Typography>
@@ -198,7 +250,7 @@ export function AdminListing() {
 
 
               <DataGrid
-                rows={rows}
+                rows={list}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}

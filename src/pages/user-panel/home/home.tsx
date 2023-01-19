@@ -84,6 +84,52 @@ export function Home() {
     ],
   };
 
+
+
+  const cardSettingsScroll: any = {
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 4,
+    cssEase: "linear",
+    lazyLoad: true,
+    autoplay: false,
+    speed: 700,
+    responsive: [
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          adaptiveHeight: true,
+        },
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          adaptiveHeight: true,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          adaptiveHeight: true,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          adaptiveHeight: true,
+        },
+      },
+    ],
+  };
+
   const sliderRef = useRef<Slider>(null);
   const cardRef = useRef<Slider>(null);
   const cardRef2 = useRef<Slider>(null);
@@ -173,12 +219,12 @@ export function Home() {
 
   return (
     <div className="w-full overflow-x-hidden">
-      <div className="pt-5 pb-10 bg-white md:bg-black relative  w-full">
+      <div className="py-20 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
-              <div className="max-w-[100%] mt-[-38px] lg:mt-[78px] lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
-                <div className="w-[80%] md:w-[45%] gap-5 flex flex-col px-2 lg:pt-10 md:px-10">
+              <div className="max-w-[100%] mt-[-38px]  lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
+                <div className="w-[80%] md:w-[45%] gap-5 flex flex-col justify-center px-2 lg:pt-10 md:px-10">
                   <div>
                     <span className="bg-[#0275d8] rounded-md text-[0.9rem] py-[5px] px-[10px] font-normal text-white">
                       Featured
@@ -217,7 +263,7 @@ export function Home() {
                     </button>
                   </span>
                 </div>
-                <div className=" relative md:min-h-[353px] md:h-[200px] md:max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
+                <div className=" rounded-[6px] relative md:min-h-[375px] md:h-[200px] md:max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
                   <img
                     src={
                       ele?.vImage
@@ -231,14 +277,14 @@ export function Home() {
             </div>
           ))}
         </Slider>
-        {bannerData.length > 0 && <SliderArrow bannerType='MainBanner' refVal={sliderRef} />}
+        {!isMobile && bannerData.length > 0 && <SliderArrow bannerType='MainBanner' refVal={sliderRef} />}
       </div>
 
       <div className="w-full px-5 mt-8">
         <p className="font-semibold text-[1.2rem] pb-5">Seattle, WA</p>
 
         <div className="relative">
-          <Slider ref={cardRef} {...cardSettings}>
+          <Slider ref={cardRef} {...cardSettingsScroll}>
             {filterBanner
               .filter((el) => parseInt(el.iCategory) == CateFirst[0])
               .map((ele: IBusiness, index: number) => {
@@ -458,12 +504,12 @@ const SliderCard = (props: any) => {
       <img
         src={imgSrc}
         alt="image"
-        className="w-full object-cover h-[215px]"
+        className="w-full object-cover h-[215px]  cursor-pointer "
         onClick={onImageClick}
       />
       <div className=" pl-3 py-3  ">
         <span
-          className="text-black text-[1.3rem] font-semibold cursor-pointer sliderTitle"
+          className="text-black text-[1.3rem] font-semibold cursor-pointer textLimit2 sliderTitle"
           onClick={() => {
             auth?.isAuthenticated
               ? onImageClick()

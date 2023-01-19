@@ -31,6 +31,7 @@ export function SignIn(): ReactElement {
         <Typography variant="alternet"> Log in </Typography>
         <Box
           sx={{ display: "flex", justifyContent: "center", whiteSpace: "pre" }}
+          className='mx-5 '
         >
           <Typography fontWeight={500} variant="body1">
             New to PoshSub?
@@ -48,7 +49,7 @@ export function SignIn(): ReactElement {
             </Typography>
           </Link>
         </Box>
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} className='mx-5 '>
           <FormGroup sx={{ textAlign: "left", my: 2 }}>
             <InputBox>
               <Label> Email </Label>
@@ -91,7 +92,7 @@ export function SignIn(): ReactElement {
                 color: theme.palette.info.main,
               }}
             >
-              <Typography fontWeight={500} variant="body1">
+              <Typography fontWeight={500} variant="body1" className="py-5">
                 Forgot Password?
               </Typography>
             </Link>

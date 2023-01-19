@@ -4,7 +4,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Button,
   Card,
   Container,
   Drawer,
@@ -22,12 +21,7 @@ import {
 import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import {
-  useNavigate,
-  useLocation,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum } from "enum";
@@ -36,19 +30,18 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
   const [subcatIdss, setSubCatIdData] = useState<any>();
-
+  const auth = useAuth();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [activeCate, setActiveCate] = useState<any>(false);
   const [subCatdata, setSubData] = useState<any>([]);
 
-
   const location = useLocation();
 
   const [searchParams] = useSearchParams();
-  const subCatId = searchParams.get("subCategory");
 
   console.log(subCatdata, "subCatdata");
+  console.log(activeCate, 'activeCate')
 
   const getCateID = location.pathname.split("/")[2];
 
@@ -101,8 +94,6 @@ export function ClickOnCategory() {
 
   const businessData = useAppSelector(GET_BUSINESS);
 
-  const auth = useAuth();
-
   const allBusiness = useCallback(async () => {
     try {
       await dispatch(UserThunk.business());
@@ -126,18 +117,6 @@ export function ClickOnCategory() {
     }
   );
 
-  console.log(listFilter, "listFilter");
-
-  const totalLenght = businessData.filter(
-    (item: any) => item.iCategory === ids
-  );
-
-  // const filerData = subCategoryData.filter((item) => {
-  //   return item.iSubCategoryId == subCatId.id;
-  // });
-
-  // console.log(filerData, "filerData");
-
   useEffect(() => {
     if (getCateID) {
       console.log(getCateID, "getCateID");
@@ -147,7 +126,11 @@ export function ClickOnCategory() {
   }, [getCateID, location]);
   const navigate = useNavigate();
 
+  const [expanded, setExpanded] = React.useState<string>("");
 
+  const handleChange = (panel: string) => {
+    setExpanded(panel ? panel : "");
+  };
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
@@ -178,65 +161,81 @@ export function ClickOnCategory() {
           <Grid item xs={12} md={2.1} sx={{ paddingRight: "20px" }}>
             <Box sx={{ overflow: "auto", my: 1 }} className="pl-[18px]">
               <Typography variant="body1" fontWeight="600">
-                Listings by Category:
+                Listings by Category
               </Typography>
 
               <div>
                 {categoryData.map((item, index) => (
                   <Link href={`/category/${item?.iCategoryId}`} key={index}>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                        className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId ? " activeCate" : ""
-                          }  `}
-                        onClick={() => {
-                          handleList(item?.iCategoryId),
-                            // handleSubList(item?.iSubCategoryId);
-                            handleSubList(null)
-                          setActiveCate(item?.iCategoryId);
-                          // setSubData(filteredSubCategory);
+                    {item && (
+                      <Accordion
+                        expanded={expanded === item.vName}
+                        onChange={() => {
+                          item.vName && handleChange(item.vName);
                         }}
                       >
-                        {item?.vName}
-                      </AccordionSummary>
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel1a-content"
+                          id="panel1a-header"
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
+                            ? " activeCate"
+                            : ""
+                            }  `}
+                          onClick={() => {
+                            handleList(item?.iCategoryId),
+                              // handleSubList(item?.iSubCategoryId);
+                              handleSubList(null);
+                            setActiveCate(item?.iCategoryId);
+                            // setSubData(filteredSubCategory);
+                          }}
+                        >
+                          {item?.vName}
+                        </AccordionSummary>
 
-                      <AccordionDetails>
-                        {filteredSubCategory.length > 0 ? filteredSubCategory.map((res: any, i: number) => (
-                          
-                          <Link
-                            // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
-                            key={i}
-                            onClick={() => handleSubList(res?.iSubCategoryId)}
-                            
-                          >
-                            <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
-                          </Link>
-                          // <Link
-                          //   href={{
-                          //     pathname: "/category",
-                          //     query: {subCategory: res?.iSubCategoryId },
-                          //   }}
-                          //   key={index}
-                          // >
-                          //   Some Text
-                          // </Link>
-                        )) : <Link>
-                          <Typography className="text-[#252525]" >No Sub category Here</Typography>
-                        </Link>}
-                      </AccordionDetails>
-                    </Accordion>
+                        <AccordionDetails>
+                          {   filteredSubCategory.length > 0 ? (
+                            filteredSubCategory.map((res: any, i: number) => (
+                              <Link
+                                // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
+                                key={i}
+                                onClick={() =>
+                                  handleSubList(res?.iSubCategoryId)
+                                }
+                              >
+                                <Typography className="text-[#252525]" key={i}>
+                                  {res.vName}
+                                </Typography>
+                              </Link>
+                              // <Link
+                              //   href={{
+                              //     pathname: "/category",
+                              //     query: {subCategory: res?.iSubCategoryId },
+                              //   }}
+                              //   key={index}
+                              // >
+                              //   Some Text
+                              // </Link>
+                            ))
+                          ) : (
+                            <Link>
+                              <Typography className="text-[#252525]">
+                                No Sub category Here
+                              </Typography>
+                            </Link>
+                          )}
+                        </AccordionDetails>
+                      </Accordion>
+                    )}
                   </Link>
                 ))}
               </div>
             </Box>
-          </Grid >
-        )
-        }
+          </Grid>
+        )}
         <Grid item xs={12} md={9.8}>
           <Box>
-            <Typography variant="alternet">Browse restaurants</Typography>
+            <Typography variant="alternet">Browse {activeCate == 65 ? 'Restaurants' : activeCate == 66 ? 'Home Services' : activeCate == 67 ? 'Auto Services' : activeCate == 68 ? 'More' : 'Restaurants'}</Typography>
             <Box
               sx={{
                 display: "flex",
@@ -245,15 +244,20 @@ export function ClickOnCategory() {
                 paddingBottom: "20px",
               }}
             >
-              {listFilter
-                .filter(
-                  (el) => subcatIdss ? el.iCategory === ids && el.iSubCategory === subcatIdss : el.iCategory === ids
-                ).length > 0 ? (
+              {listFilter.filter((el) =>
+                subcatIdss
+                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                  : el.iCategory === ids
+              ).length > 0 ? (
                 <Typography variant="body2" fontWeight="600">
-                  {listFilter
-                    .filter(
-                      (el) => subcatIdss ? el.iCategory === ids && el.iSubCategory === subcatIdss : el.iCategory === ids
-                    ).length} listings
+                  {
+                    listFilter.filter((el) =>
+                      subcatIdss
+                        ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                        : el.iCategory === ids
+                    ).length
+                  }{" "}
+                  listings
                 </Typography>
               ) : (
                 <Typography variant="body2" fontWeight="600">
@@ -293,94 +297,98 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
+                listFilter.filter((el) =>
+                  subcatIdss
+                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                    : el.iCategory === ids
+                ).length > 0 ? (
                 listFilter
-                  .filter(
-                    (el) => subcatIdss ? el.iCategory === ids && el.iSubCategory === subcatIdss : el.iCategory === ids
-                  ).length > 0 ?
-                listFilter.filter(
-                  (el) => subcatIdss ? el.iCategory === ids && el.iSubCategory === subcatIdss : el.iCategory === ids
-                ).map((data: any, index: any) => (
-                  <Grid
-                    key={index}
-                    item
-                    sm={4}
-                    className="pb-[20px] "
-                    onClick={() => {
-                      auth?.isAuthenticated
-                        ? navigate(`/listing/${data.iBusinessId}`)
-                        : navigate(AuthRoutePathEnum.SIGN_IN);
-                    }}
-                  >
-                    <Card
-                      sx={{
-                        maxWidth: "330px",
-                        minHeight: "350px",
+                  .filter((el) =>
+                    subcatIdss
+                      ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                      : el.iCategory === ids
+                  )
+                  .map((data: any, index: any) => (
+                    <Grid
+                      key={index}
+                      item
+                      sm={4}
+                      className="pb-[20px] "
+                      onClick={() => {
+                        auth?.isAuthenticated
+                          ? navigate(`/listing/${data.iBusinessId}`)
+                          : navigate(AuthRoutePathEnum.SIGN_IN);
                       }}
-                      elevation={0}
-                      className="border-[1px] border-[#dadde5] "
-                      style={{ boxShadow: "0 0 20px #0100001a" }}
                     >
-                      <>
-                        {/* {setActiveCate(true)} */}
+                      <Card
+                        sx={{
+                          maxWidth: "330px",
+                          minHeight: "350px",
+                        }}
+                        elevation={0}
+                        className="border-[1px] border-[#dadde5] "
+                        style={{ boxShadow: "0 0 20px #0100001a" }}
+                      >
+                        <>
 
-                        <img
-                          src={
-                            data.vImage
-                              ? "http://159.223.194.50:8000/" + data.vImage
-                              : ""
-                          }
-                          // alt={data.eStatus}
-                          width="100%"
-                          height="100px"
-                          style={{ objectFit: "cover", height: "215px" }}
-                        />
-                        <Box sx={{ py: 1.5, pl: "12px" }}>
-                          <Typography variant="body1" fontWeight={600}>
-                            {data.vName}
-                          </Typography>
-                          <Typography
-                            variant="caption"
-                            fontWeight={600}
-                            color={theme.palette.grey[500]}
-                          >
-                            {data.vLocation}
-                          </Typography>
-                          <Box sx={{ my: 1, lineHeight: 0 }}>
-                            <Typography
-                              fontSize={11}
-                              fontWeight={600}
-                              className={"textLimit2"}
-                            >
-                              {data.tDescription}
+                          <img
+                            src={
+                              data.vImage
+                                ? "http://159.223.194.50:8000/" + data.vImage
+                                : ""
+                            }
+                            // alt={data.eStatus}
+                            width="100%"
+                            height="100px"
+                            style={{ objectFit: "cover", height: "215px" }}
+                          />
+                          <Box sx={{ py: 1.5, pl: "12px" }}>
+                            <Typography variant="body1" fontWeight={600}>
+                              {data.vName}
                             </Typography>
-                          </Box>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "baseline",
-                            }}
-                          >
                             <Typography
                               variant="caption"
                               fontWeight={600}
                               color={theme.palette.grey[500]}
                             >
-                              {data.subscriberCount + " Subscribe"}
+                              {data.vLocation}
                             </Typography>
-                            {/* <Button color="error" variant="rounded" size="small">
+                            <Box sx={{ my: 1, lineHeight: 0 }}>
+                              <Typography
+                                fontSize={11}
+                                fontWeight={600}
+                                className={"textLimit2"}
+                              >
+                                {data.tDescription}
+                              </Typography>
+                            </Box>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "baseline",
+                              }}
+                            >
+                              <Typography
+                                variant="caption"
+                                fontWeight={600}
+                                color={theme.palette.grey[500]}
+                              >
+                                {data.subscriberCount + " Subscribe"}
+                              </Typography>
+                              {/* <Button color="error" variant="rounded" size="small">
                                 Subscribe
                               </Button> */}
-                            <div className="raletive">
-                              <div className="subscribeLebalListing">
-                                <span className=" text-white  ">
-                                  Subscribe
-                                </span>
+                              <div className="raletive">
+                                <div className="subscribeLebalListing">
+                                  <span className=" text-white  ">
+                                    Subscribe
+                                  </span>
+                                </div>
                               </div>
-                            </div>
+                            </Box>
                           </Box>
-                        </Box>
-                        {/* <Box
+                          {/* <Box
                             sx={{
                               textAlign: "center",
                               backgroundColor: theme.palette.grey[300],
@@ -391,17 +399,17 @@ export function ClickOnCategory() {
                               {data.footer}
                             </Typography>
                           </Box> */}
-                      </>
-                    </Card>
-                  </Grid>
-                ))
-                : <div className="grid w-full justify-center py-4 ">
+                        </>
+                      </Card>
+                    </Grid>
+                  )))
+                : <div className="grid w-full justify-center py-24 ">
                   <span>{subcatIdss ? 'This Subcatogery No listing Here ' : "This Category no listing Here "} </span>
                 </div>}
             </Grid>
           </Box>
         </Grid>
-      </Grid >
-    </Container >
+      </Grid>
+    </Container>
   );
 }
