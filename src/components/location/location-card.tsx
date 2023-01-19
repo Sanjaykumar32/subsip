@@ -77,6 +77,7 @@ export const Subscribe = ({
             referredCode: referralcode,
           })
         );
+         console.log(response ,'response res')
         navigate("");
       } catch (error) {
         console.log(error);
@@ -94,6 +95,8 @@ export const Subscribe = ({
     );
     toast.success("UnSubsriber To Business Successfully");
   };
+
+  console.log(isSubscribed , 'isSubscribed')
   return (
     <>
       <Box sx={{ my: 3 }}>

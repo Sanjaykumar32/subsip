@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
-import { Box, IconButton, styled, Grid } from "@mui/material";
+import { Box, IconButton, styled, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faInstagram,
   faTwitter,
@@ -21,6 +22,7 @@ export const SocialBox = styled(Box)(({ theme }) => ({
 }));
 
 export const IconList = styled(Grid)(({ theme }) => ({
+
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
@@ -32,6 +34,8 @@ export const IconList = styled(Grid)(({ theme }) => ({
 }));
 
 export function SocialIcons() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const socialIcons = useMemo(
     () => [
       {
@@ -59,7 +63,7 @@ export function SocialIcons() {
   );
 
   return (
-    <IconList container spacing={{ xs: 2, sm: 3, md: 4 }} className="footerIconDP" >
+    <IconList container spacing={{ xs: 2, sm: 3, md: 4 }} className={!isMobile ? "gap-[20px] footerIconDP" :  'footerIconDP'} >
       {socialIcons.map((data, index: number) => (
         <Grid item key={`Social-${data.link}-${index}`}>
           <IconButton onClick={() => (window.location.href = data.link)}>

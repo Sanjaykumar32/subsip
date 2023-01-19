@@ -207,7 +207,9 @@ export function AdminLayout(props: Props) {
           </Box>
         </Toolbar>
       </AppBar> */}
-      <UserAppBar userMenu={false} display={"adminHeader"} />
+
+      <UserAppBar userMenu={true} display={"adminHeader"} />
+
       <Box
         component="nav"
         sx={{

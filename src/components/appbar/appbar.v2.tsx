@@ -67,7 +67,7 @@ export const UserAppBar = (props: any) => {
   const userId = localStorage.getItem("userId");
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
-  console.log(readMoreNotification, "readMoreNotification");
+  console.log(userNotificationData, "userNotificationData");
 
   const getcategory = useCallback(async () => {
     try {
@@ -94,27 +94,29 @@ export const UserAppBar = (props: any) => {
       console.log(error, "this is  err res");
     }
   }, [dispatch, userId]);
-
+ 
+  
   const readNotification = useCallback(
-    async (id: number) => {
-      const data = {
-        read: userId ? parseInt(userId) : 0,
-      };
+    async ({id , readId} :any) => {
+       console.log(id , readId ,  'ids')
+      // const data = {
+      //   read: Number   userId ?  parseInt(userId) : 0,
+      // };
       try {
-        if (userId) {
+       
           await dispatch(
             AdminThunk.readUserNotification({
               notificationId: id,
-              read: data,
+              read: readId,
             })
           );
-        }
+     
         await getUserNotification();
       } catch (error) {
         console.log(error);
       }
     },
-    [dispatch, getUserNotification, userId]
+    [dispatch, getUserNotification]
   );
 
   useEffect(() => {
@@ -331,9 +333,9 @@ export const UserAppBar = (props: any) => {
     options: businessData,
     getOptionLabel: (option: any) => option.vLocation,
   };
-  const flatProps = {
-    options: businessData.map((option) => option.vLocation),
-  };
+  // const flatProps = {
+  //   options: businessData.map((option) => option.vLocation),
+  // };
 
   const handleBanner = () => {
     setOpen(false)
@@ -369,7 +371,8 @@ export const UserAppBar = (props: any) => {
           </div>
 
 
-          {/*---------------------------- bage logos ------------------------ */}
+          {/*---------------------------- bage logos header ------------------------ */}
+
           <div className={`flex w-full  ${auth.isAuthenticated ? 'justify-end' : 'justify-center'}`}>
             <div className=" grid-cols-1">
 
@@ -399,7 +402,7 @@ export const UserAppBar = (props: any) => {
                 </IconButton>
 
 
-                {auth.isAuthenticated &&
+                {auth.isAuthenticated && isMobile &&
                   <>
                     <IconButton
                       sx={{ mx: 1 }}
@@ -483,6 +486,8 @@ export const UserAppBar = (props: any) => {
             )}
           </div>
         </Toolbar>
+
+
 
         <Toolbar
           sx={{
@@ -745,14 +750,17 @@ export const UserAppBar = (props: any) => {
                                   <span>{res.vDesc}</span>
                                   {res.vDesc.length > 55 ?
                                     <div>
-                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium " onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
-                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
-                                        readNotification(res.iNotificationId);
-                                      }}>Mark read</span>
+                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium "
+                                        onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
+                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                        onClick={() => {
+                                          readNotification({id: res.iNotificationId , readId : 1});
+                                        }}>Mark read</span>
                                     </div>
-                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  " onClick={() => {
-                                      readNotification(res.iNotificationId);
-                                    }}>Mark read</span>}
+                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                      onClick={() => {
+                                        readNotification({id: res.iNotificationId , readId : 1});
+                                      }}>Mark read</span>}
                                 </div>
                               ) : (
                                 <div className="">
@@ -765,13 +773,13 @@ export const UserAppBar = (props: any) => {
                                         onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>
                                       <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
                                         onClick={() => {
-                                          readNotification(res.iNotificationId);
+                                          readNotification({id: res.iNotificationId , readId : 1});
                                         }}>Mark read</span>
                                     </div>
 
                                     : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification(res.iNotificationId);
+                                        readNotification({id: res.iNotificationId , readId : 1});
                                       }}>Mark read</span>}
                                 </div>
                               )}
@@ -809,6 +817,7 @@ export const UserAppBar = (props: any) => {
         </Toolbar>
 
         {/* <-------------------------mobile dropdown-----------------> */}
+
         {props?.userMenu == true && categoryData.length > 0 && (
           <animated.div style={{ overflow: "hidden", ...spring }} >
             <Toolbar>
