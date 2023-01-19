@@ -193,35 +193,8 @@ export function ClickOnCategory() {
                           {item?.vName}
                         </AccordionSummary>
 
-<<<<<<< HEAD
-                      <AccordionDetails>
-                     {auth.isAuthenticated && filteredSubCategory.length > 0 ? filteredSubCategory.map((res: any, i: number) => (
-                          
-                          <Link
-                            // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
-                            key={i}
-                            onClick={() => handleSubList(res?.iSubCategoryId)}
-                            
-                          >
-                            <Typography className="text-[#252525]" key={i}>{res.vName}</Typography>
-                          </Link>
-                          // <Link
-                          //   href={{
-                          //     pathname: "/category",
-                          //     query: {subCategory: res?.iSubCategoryId },
-                          //   }}
-                          //   key={index}
-                          // >
-                          //   Some Text
-                          // </Link>
-                        )) : <Link>
-                          <Typography className="text-[#252525]" >No Sub category Here</Typography>
-                        </Link>}
-                      </AccordionDetails>
-                    </Accordion>
-=======
                         <AccordionDetails>
-                          {filteredSubCategory.length > 0 ? (
+                          {   filteredSubCategory.length > 0 ? (
                             filteredSubCategory.map((res: any, i: number) => (
                               <Link
                                 // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
@@ -254,7 +227,6 @@ export function ClickOnCategory() {
                         </AccordionDetails>
                       </Accordion>
                     )}
->>>>>>> 35e9d10968516a4f7b0c6aec339b6bee8d10b57f
                   </Link>
                 ))}
               </div>

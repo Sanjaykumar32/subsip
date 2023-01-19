@@ -122,11 +122,7 @@ export const Subscribe = ({
             referredCode: referralcode,
           })
         );
-<<<<<<< HEAD
          console.log(response ,'response res')
-=======
-        allsubscriberOfBussinesss();
->>>>>>> 35e9d10968516a4f7b0c6aec339b6bee8d10b57f
         navigate("");
 
       } catch (error) {
@@ -149,14 +145,7 @@ export const Subscribe = ({
     toast.success("Unsubsribed  Successfully");
   };
 
-<<<<<<< HEAD
   console.log(isSubscribed , 'isSubscribed')
-=======
-
-
-
-
->>>>>>> 35e9d10968516a4f7b0c6aec339b6bee8d10b57f
   return (
     <>
       <Box sx={{ my: 3 }}>
