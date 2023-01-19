@@ -206,7 +206,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 .footerIconDP {
     display: flex;
     padding: 35px 21px;
-    gap: 20px;
+   
 }
 
 .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-hyum1k-MuiToolbar-root {
@@ -233,6 +233,10 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
+    .footerIconDP {
+        display: flex;
+        padding: 35px 21px;
+    }
     .MainBanner {
         top: 170px;
     }

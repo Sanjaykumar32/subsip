@@ -254,7 +254,7 @@ export class AdminService {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/user/notification/${payload.notificationId}`,
       method: "PUT",
-      data: payload.read,
+      data: { read:payload.read},
     });
 
     return res.data;

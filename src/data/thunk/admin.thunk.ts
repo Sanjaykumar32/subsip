@@ -463,6 +463,7 @@ export class AdminThunk {
   public static readUserNotification = createAsyncThunk(
     "admin/read/UserNotification",
     async (payload: IReadNotificationRequest): Promise<any> => {
+       
       const response = await AdminService.readNotification(payload);
       return response;
     }

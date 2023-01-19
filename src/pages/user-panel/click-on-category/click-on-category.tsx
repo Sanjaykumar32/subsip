@@ -30,7 +30,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
   const [subcatIdss, setSubCatIdData] = useState<any>();
-
+  const auth = useAuth();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [activeCate, setActiveCate] = useState<any>(false);
@@ -93,8 +93,6 @@ export function ClickOnCategory() {
   };
 
   const businessData = useAppSelector(GET_BUSINESS);
-
-  const auth = useAuth();
 
   const allBusiness = useCallback(async () => {
     try {
@@ -196,7 +194,7 @@ export function ClickOnCategory() {
                         </AccordionSummary>
 
                         <AccordionDetails>
-                          {filteredSubCategory.length > 0 ? (
+                          {   filteredSubCategory.length > 0 ? (
                             filteredSubCategory.map((res: any, i: number) => (
                               <Link
                                 // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}

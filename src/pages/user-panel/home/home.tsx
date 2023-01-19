@@ -219,7 +219,7 @@ export function Home() {
 
   return (
     <div className="w-full overflow-x-hidden">
-      <div className="py-16 bg-white md:bg-black relative  w-full">
+      <div className="py-20 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
@@ -263,7 +263,7 @@ export function Home() {
                     </button>
                   </span>
                 </div>
-                <div className=" relative md:min-h-[353px] md:h-[200px] md:max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
+                <div className=" rounded-[6px] relative md:min-h-[375px] md:h-[200px] md:max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
                   <img
                     src={
                       ele?.vImage
@@ -504,7 +504,7 @@ const SliderCard = (props: any) => {
       <img
         src={imgSrc}
         alt="image"
-        className="w-full object-cover h-[215px]"
+        className="w-full object-cover h-[215px]  cursor-pointer "
         onClick={onImageClick}
       />
       <div className=" pl-3 py-3  ">
