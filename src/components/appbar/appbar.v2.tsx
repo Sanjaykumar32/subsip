@@ -67,13 +67,7 @@ export const UserAppBar = (props: any) => {
   const userId = localStorage.getItem("userId");
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
-<<<<<<< HEAD
-  console.log(readMoreNotification, "readMoreNotification");
-  console.log(homepage.split("/")[1], " sdasdacategory");
-
-=======
   console.log(userNotificationData, "userNotificationData");
->>>>>>> 6e18b8504c91b3d9c7e9b863c5ad27bf27edf548
 
   const getcategory = useCallback(async () => {
     try {
@@ -100,23 +94,21 @@ export const UserAppBar = (props: any) => {
       console.log(error, "this is  err res");
     }
   }, [dispatch, userId]);
- 
-  
+
   const readNotification = useCallback(
-    async ({id , readId} :any) => {
-       console.log(id , readId ,  'ids')
+    async ({ id, readId }: any) => {
+      console.log(id, readId, "ids");
       // const data = {
       //   read: Number   userId ?  parseInt(userId) : 0,
       // };
       try {
-       
-          await dispatch(
-            AdminThunk.readUserNotification({
-              notificationId: id,
-              read: readId,
-            })
-          );
-     
+        await dispatch(
+          AdminThunk.readUserNotification({
+            notificationId: id,
+            read: readId,
+          })
+        );
+
         await getUserNotification();
       } catch (error) {
         console.log(error);
@@ -172,7 +164,7 @@ export const UserAppBar = (props: any) => {
       setLocation("");
       setLocationPopUP(false);
       navigate(`/?`);
-      setOpen(false)
+      setOpen(false);
     } else {
       setLocation(el);
       navigate(`/?${el}`);
@@ -311,7 +303,7 @@ export const UserAppBar = (props: any) => {
   // );
 
   const [open, setOpen] = useState<boolean>(false);
-  console.log(open, 'open')
+  console.log(open, "open");
   const spring = useSpring({
     from: { height: "0px" },
     to: { height: !isMobile ? "auto" : open ? "320px" : "0px" },
@@ -339,19 +331,13 @@ export const UserAppBar = (props: any) => {
     options: businessData,
     getOptionLabel: (option: any) => option.vLocation,
   };
-<<<<<<< HEAD
-  const flatProps = {
-    options: businessData.map((option: { vLocation: any; }) => option.vLocation),
-  };
-=======
   // const flatProps = {
   //   options: businessData.map((option) => option.vLocation),
   // };
->>>>>>> 6e18b8504c91b3d9c7e9b863c5ad27bf27edf548
 
   const handleBanner = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <>
@@ -363,10 +349,11 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${props.display ? props.display : sticky ? "" : "non-sticky"
-          } `}
+        className={`${
+          props.display ? props.display : sticky ? "" : "non-sticky"
+        } `}
 
-      // style={{ position: props.display && 'fixed' }}
+        // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -382,12 +369,14 @@ export const UserAppBar = (props: any) => {
             </IconButton>
           </div>
 
-
           {/*---------------------------- bage logos header ------------------------ */}
 
-          <div className={`flex w-full  ${auth.isAuthenticated ? 'justify-end' : 'justify-center'}`}>
+          <div
+            className={`flex w-full  ${
+              auth.isAuthenticated ? "justify-end" : "justify-center"
+            }`}
+          >
             <div className=" grid-cols-1">
-
               <Logo variant="dark" />
             </div>
 
@@ -407,14 +396,15 @@ export const UserAppBar = (props: any) => {
                         ? userNotificationData.length
                         : ""
                     }
-                    color={userNotificationData.length > 0 ? "error" : undefined}
+                    color={
+                      userNotificationData.length > 0 ? "error" : undefined
+                    }
                   >
                     <FontAwesomeIcon icon={faBell} />
                   </Badge>
                 </IconButton>
 
-
-                {auth.isAuthenticated && isMobile &&
+                {auth.isAuthenticated && isMobile && (
                   <>
                     <IconButton
                       sx={{ mx: 1 }}
@@ -473,7 +463,10 @@ export const UserAppBar = (props: any) => {
                           }}
                         >
                           <Link key="profile-menu" href={setting.route}>
-                            <Typography textAlign="left" className="text-black ">
+                            <Typography
+                              textAlign="left"
+                              className="text-black "
+                            >
                               {setting.title}
                             </Typography>
                           </Link>
@@ -481,9 +474,7 @@ export const UserAppBar = (props: any) => {
                       ))}
                     </Menu>
                   </>
-                }
-
-
+                )}
               </div>
             ) : (
               <Button
@@ -498,8 +489,6 @@ export const UserAppBar = (props: any) => {
             )}
           </div>
         </Toolbar>
-
-
 
         <Toolbar
           sx={{
@@ -525,7 +514,6 @@ export const UserAppBar = (props: any) => {
           ) : (
             <SearchField />
           )}
-
 
           {/* < ------------------- location input field ---------------------> */}
           {homepage === "/" && (
@@ -672,7 +660,6 @@ export const UserAppBar = (props: any) => {
                 ))}
               </Menu>
 
-
               <IconButton
                 sx={{ mx: 1 }}
                 onClick={handleNotificationClick}
@@ -730,14 +717,16 @@ export const UserAppBar = (props: any) => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-
                 {/* <-------------------------- notification dropdown -----------------> */}
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
                     console.log(res.iNotificationId, "res");
 
                     return (
-                      <div className="Notification list w-[350px]  mx-2 px-2 py-2  shadow-md rounded-[6px] border-solid   my-2 " key={i} >
+                      <div
+                        className="Notification list w-[350px]  mx-2 px-2 py-2  shadow-md rounded-[6px] border-solid   my-2 "
+                        key={i}
+                      >
                         <div className="">
                           <div className="grid w-full gap-[5px]">
                             {/* <li className="text-black cursor-pointer text-[16px] "> */}
@@ -757,42 +746,93 @@ export const UserAppBar = (props: any) => {
                             {/* <div className="flex "> */}
                             <p className="text-[14px] flex font-[400] text-[#262626]">
                               {readMoreNotification.state &&
-                                readMoreNotification.id == res.iNotificationId ? (
+                              readMoreNotification.id == res.iNotificationId ? (
                                 <div className="">
                                   <span>{res.vDesc}</span>
-                                  {res.vDesc.length > 55 ?
+                                  {res.vDesc.length > 55 ? (
                                     <div>
-                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium "
-                                        onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
-                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                      <span
+                                        className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium "
+                                        onClick={() =>
+                                          setReadMoreNotification({
+                                            state: false,
+                                            id: res.iNotificationId,
+                                          })
+                                        }
+                                      >
+                                        {" "}
+                                        Read Less
+                                      </span>
+                                      <span
+                                        className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                         onClick={() => {
-                                          readNotification({id: res.iNotificationId , readId : 1});
-                                        }}>Mark read</span>
+                                          readNotification({
+                                            id: res.iNotificationId,
+                                            readId: 1,
+                                          });
+                                        }}
+                                      >
+                                        Mark read
+                                      </span>
                                     </div>
-                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                  ) : (
+                                    <span
+                                      className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({id: res.iNotificationId , readId : 1});
-                                      }}>Mark read</span>}
+                                        readNotification({
+                                          id: res.iNotificationId,
+                                          readId: 1,
+                                        });
+                                      }}
+                                    >
+                                      Mark read
+                                    </span>
+                                  )}
                                 </div>
                               ) : (
                                 <div className="">
                                   <span className="NotextLimit2">
                                     {res.vDesc}
                                   </span>
-                                  {res.vDesc.length > 55 ?
+                                  {res.vDesc.length > 55 ? (
                                     <div className="">
-                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer  font-medium"
-                                        onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>
-                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
+                                      <span
+                                        className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer  font-medium"
+                                        onClick={() =>
+                                          setReadMoreNotification({
+                                            state: true,
+                                            id: res.iNotificationId,
+                                          })
+                                        }
+                                      >
+                                        {" "}
+                                        ...Read More
+                                      </span>
+                                      <span
+                                        className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
                                         onClick={() => {
-                                          readNotification({id: res.iNotificationId , readId : 1});
-                                        }}>Mark read</span>
+                                          readNotification({
+                                            id: res.iNotificationId,
+                                            readId: 1,
+                                          });
+                                        }}
+                                      >
+                                        Mark read
+                                      </span>
                                     </div>
-
-                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                  ) : (
+                                    <span
+                                      className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({id: res.iNotificationId , readId : 1});
-                                      }}>Mark read</span>}
+                                        readNotification({
+                                          id: res.iNotificationId,
+                                          readId: 1,
+                                        });
+                                      }}
+                                    >
+                                      Mark read
+                                    </span>
+                                  )}
                                 </div>
                               )}
                               {/* {!readMoreNotification ?
@@ -831,7 +871,7 @@ export const UserAppBar = (props: any) => {
         {/* <-------------------------mobile dropdown-----------------> */}
 
         {props?.userMenu == true && categoryData.length > 0 && (
-          <animated.div style={{ overflow: "hidden", ...spring }} >
+          <animated.div style={{ overflow: "hidden", ...spring }}>
             <Toolbar>
               <div className="moblieMenu">
                 <List
@@ -848,41 +888,54 @@ export const UserAppBar = (props: any) => {
                   {categoryData.map((item: any, index: any) =>
                     index === 0 ? (
                       <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`} onClick={handleBanner}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
                           {item?.vName}
                         </Link>
                       </ListItem>
                     ) : index === 1 ? (
                       <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`} onClick={handleBanner}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
                           {item?.vName}
                         </Link>
                       </ListItem>
                     ) : index === 2 ? (
                       <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`} onClick={handleBanner}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
                           {item?.vName}
                         </Link>
                       </ListItem>
                     ) : (
                       index === 3 && (
                         <ListItem>
-                          <Link href={`/category/all`} onClick={handleBanner} >{"More"}</Link >
-
+                          <Link href={`/category/all`} onClick={handleBanner}>
+                            {"More"}
+                          </Link>
                         </ListItem>
                       )
                     )
                   )}
 
-                  {isMobile ?
-                    <ListItem className='' >
-                      <Box sx={{ display: { xs: "Block", md: "flex" } }} className='w-[100%]  mt-2'>
+                  {isMobile ? (
+                    <ListItem className="">
+                      <Box
+                        sx={{ display: { xs: "Block", md: "flex" } }}
+                        className="w-[100%]  mt-2"
+                      >
                         {!locationPopUp ? (
                           <Button
                             onClick={showLocationPopUp}
                             disableRipple
                             sx={{ color: "text.primary" }}
-                            className=''
+                            className=""
                           >
                             <FontAwesomeIcon
                               icon={faLocationDot}
@@ -892,21 +945,23 @@ export const UserAppBar = (props: any) => {
                             Location
                           </Button>
                         ) : (
-
-
-                          <Stack spacing={1} className='w-[100%] my-3'>
+                          <Stack spacing={1} className="w-[100%] my-3">
                             <Autocomplete
                               {...defaultProps}
                               id="disable-close-on-select"
-                              //  onClick={disableCloseOnSelect}  
+                              //  onClick={disableCloseOnSelect}
                               onChange={(event, newValue: any) => {
-                                console.log(event, 'event onchange');
-                                setOpen(false)
+                                console.log(event, "event onchange");
+                                setOpen(false);
                                 handlevalue(newValue?.vLocation);
-
                               }}
                               renderInput={(params) => (
-                                <TextField {...params} onChange={handleLocation} label="Search" variant="standard" />
+                                <TextField
+                                  {...params}
+                                  onChange={handleLocation}
+                                  label="Search"
+                                  variant="standard"
+                                />
                               )}
                             />
                           </Stack>
@@ -919,11 +974,11 @@ export const UserAppBar = (props: any) => {
                         sx={{ mx: 1, height: "30px", my: "auto" }}
                       /> */}
                       </Box>
-                    </ListItem> : null}
+                    </ListItem>
+                  ) : null}
 
                   <ListItem className=" rounded-[10px] my-5">
-
-                    {!auth.isAuthenticated && isMobile ?
+                    {!auth.isAuthenticated && isMobile ? (
                       <Button
                         className="w-[100%]"
                         variant="contained"
@@ -933,16 +988,11 @@ export const UserAppBar = (props: any) => {
                         }}
                       >
                         Log In
-                      </Button> : null}
-
+                      </Button>
+                    ) : null}
                   </ListItem>
-
                 </List>
               </div>
-
-
-
-
             </Toolbar>
           </animated.div>
         )}
