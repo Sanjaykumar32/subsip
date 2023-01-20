@@ -34,6 +34,7 @@ export interface IBussinessResponse {
 }
 
 export interface IBusiness {
+  subscriberIds: any;
   iBusinessId: number;
   vName: string;
   vTagLine: string;
@@ -60,6 +61,7 @@ export interface IBusiness {
   subCategoryName: string;
   subscriberCount: number;
   vEmail: any;
+  
 }
 
 export interface IReferralCountResponse {

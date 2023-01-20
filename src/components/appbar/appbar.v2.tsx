@@ -47,6 +47,18 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import { format } from "date-fns";
+import {
+
+  faDiagramProject,
+  faHome,
+  faList,
+  faSearch,
+  faTrophy,
+
+} from "@fortawesome/free-solid-svg-icons";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -67,13 +79,65 @@ export const UserAppBar = (props: any) => {
   const userId = localStorage.getItem("userId");
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
-<<<<<<< HEAD
-  console.log(readMoreNotification, "readMoreNotification");
-  console.log(homepage.split("/")[1], " sdasdacategory");
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-=======
-  console.log(userNotificationData, "userNotificationData");
->>>>>>> 6e18b8504c91b3d9c7e9b863c5ad27bf27edf548
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+
+  const routeAdmin = homepage.split("/")[1]
+
+
+  // isMobile admin list----------------------------------------
+  const menuList = React.useMemo(
+    () => [
+      {
+        title: "Dashboard",
+        icon: faHome,
+        route: AdminRoutePathEnum.ADMIN,
+      },
+
+      {
+        title: "Listing",
+        icon: faList,
+        route: AdminRoutePathEnum.ADMIN_LISTING,
+      },
+
+      {
+        title: "Subscribers",
+        icon: faHome,
+        route: AdminRoutePathEnum.ADMIN_SUBSCRIBERS,
+      },
+
+      {
+        title: "Categories",
+        icon: faUser,
+        route: AdminRoutePathEnum.ADMIN_CATEGORY,
+      },
+
+      {
+        title: "Notifications",
+        icon: faBell,
+        route: AdminRoutePathEnum.ADMIN_NOTIFICATION,
+      },
+
+      {
+        title: "Rewards",
+        icon: faTrophy,
+        route: AdminRoutePathEnum.ADMIN_MILESTONES,
+      },
+
+      {
+        title: "Referrals",
+        icon: faDiagramProject,
+        route: AdminRoutePathEnum.ADMIN_REFERRALS,
+      },
+    ],
+    []
+  );
+
+
 
   const getcategory = useCallback(async () => {
     try {
@@ -100,23 +164,23 @@ export const UserAppBar = (props: any) => {
       console.log(error, "this is  err res");
     }
   }, [dispatch, userId]);
- 
-  
+
+
   const readNotification = useCallback(
-    async ({id , readId} :any) => {
-       console.log(id , readId ,  'ids')
+    async ({ id, readId }: any) => {
+      console.log(id, readId, 'ids')
       // const data = {
       //   read: Number   userId ?  parseInt(userId) : 0,
       // };
       try {
-       
-          await dispatch(
-            AdminThunk.readUserNotification({
-              notificationId: id,
-              read: readId,
-            })
-          );
-     
+
+        await dispatch(
+          AdminThunk.readUserNotification({
+            notificationId: id,
+            read: readId,
+          })
+        );
+
         await getUserNotification();
       } catch (error) {
         console.log(error);
@@ -317,6 +381,11 @@ export const UserAppBar = (props: any) => {
     to: { height: !isMobile ? "auto" : open ? "320px" : "0px" },
   });
 
+  const spring2 = useSpring({
+    from: { height: "0px" },
+    to: { height:  open ? "auto" : "0px" },
+  });
+
   const [sticky, setSticky] = useState("");
 
   useEffect(() => {
@@ -339,15 +408,9 @@ export const UserAppBar = (props: any) => {
     options: businessData,
     getOptionLabel: (option: any) => option.vLocation,
   };
-<<<<<<< HEAD
   const flatProps = {
     options: businessData.map((option: { vLocation: any; }) => option.vLocation),
   };
-=======
-  // const flatProps = {
-  //   options: businessData.map((option) => option.vLocation),
-  // };
->>>>>>> 6e18b8504c91b3d9c7e9b863c5ad27bf27edf548
 
   const handleBanner = () => {
     setOpen(false)
@@ -376,7 +439,7 @@ export const UserAppBar = (props: any) => {
             alignItems: "center",
           }}
         >
-          <div className=" absolute  left-4 top-[3px] ">
+          <div className=" absolute  left-4 top-[14px] ">
             <IconButton onClick={() => setOpen(!open)}>
               <FontAwesomeIcon icon={open ? faClose : faBars} size="sm" />
             </IconButton>
@@ -385,7 +448,7 @@ export const UserAppBar = (props: any) => {
 
           {/*---------------------------- bage logos header ------------------------ */}
 
-          <div className={`flex w-full  ${auth.isAuthenticated ? 'justify-end' : 'justify-center'}`}>
+          <div className={`flex w-full  ${auth.isAuthenticated ? 'justify-end items-center' : 'justify-center'}`}>
             <div className=" grid-cols-1">
 
               <Logo variant="dark" />
@@ -766,12 +829,12 @@ export const UserAppBar = (props: any) => {
                                         onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
                                       <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                         onClick={() => {
-                                          readNotification({id: res.iNotificationId , readId : 1});
+                                          readNotification({ id: res.iNotificationId, readId: 1 });
                                         }}>Mark read</span>
                                     </div>
                                     : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({id: res.iNotificationId , readId : 1});
+                                        readNotification({ id: res.iNotificationId, readId: 1 });
                                       }}>Mark read</span>}
                                 </div>
                               ) : (
@@ -785,13 +848,13 @@ export const UserAppBar = (props: any) => {
                                         onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>
                                       <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
                                         onClick={() => {
-                                          readNotification({id: res.iNotificationId , readId : 1});
+                                          readNotification({ id: res.iNotificationId, readId: 1 });
                                         }}>Mark read</span>
                                     </div>
 
                                     : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({id: res.iNotificationId , readId : 1});
+                                        readNotification({ id: res.iNotificationId, readId: 1 });
                                       }}>Mark read</span>}
                                 </div>
                               )}
@@ -946,12 +1009,123 @@ export const UserAppBar = (props: any) => {
             </Toolbar>
           </animated.div>
         )}
+
+    {/* <<<<<<<<<<<<<<<< ---------admin list dropdown --------------->>>>>>>>>>>>>>. */}
+
+        {routeAdmin == 'admin' && isMobile && open &&
+          <animated.div style={{ overflow: "hidden", ...spring2 }} className='mt-[-60px]' >
+            <Toolbar>
+              <div className="moblieMenu">
+                <List
+                  className="categoryListing"
+                  sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", md: "row" },
+                    ".MuiListItem-root": {
+                      minWidth: "fit-content",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <List className="">
+                    {menuList.map((item, index) => (
+                      <Link
+                        // to={item.route}
+                        onClick={handleBanner}
+                        href={`${item.route}`}
+                        key={item.title}
+                        
+                        style={{
+                          color: theme.palette.getContrastText(
+                            theme.palette.background.default
+                          ),
+                          textDecoration: "none",
+                        }}
+                      >
+                        <ListItem key={index} disablePadding>
+                          <ListItemButton>
+                            <ListItemIcon>
+                              <FontAwesomeIcon icon={item.icon} />
+                            </ListItemIcon>
+                            <ListItemText primary={item.title} />
+                          </ListItemButton>
+                        </ListItem>
+                      </Link>
+                    ))}
+                  </List>
+
+                  {/* {isMobile ?
+                    <ListItem className='' >
+                      <Box sx={{ display: { xs: "Block", md: "flex" } }} className='w-[100%]  mt-2'>
+                        {!locationPopUp ? (
+                          <Button
+                            onClick={showLocationPopUp}
+                            disableRipple
+                            sx={{ color: "text.primary" }}
+                            className=''
+                          >
+                            <FontAwesomeIcon
+                              icon={faLocationDot}
+                              size="sm"
+                              style={{ marginRight: "8px" }}
+                            />
+                            Location
+                          </Button>
+                        ) : (
+
+
+                          <Stack spacing={1} className='w-[100%] my-3'>
+                            <Autocomplete
+                              {...defaultProps}
+                              id="disable-close-on-select"
+                              //  onClick={disableCloseOnSelect}  
+                              onChange={(event, newValue: any) => {
+                                console.log(event, 'event onchange');
+                                setOpen(false)
+                                handlevalue(newValue?.vLocation);
+
+                              }}
+                              renderInput={(params) => (
+                                <TextField {...params} onChange={handleLocation} label="Search" variant="standard" />
+                              )}
+                            />
+                          </Stack>
+                        )}
+                      </Box>
+                    </ListItem> : null} */}
+
+                  {/* <ListItem className=" rounded-[10px] my-5">
+
+                    {!auth.isAuthenticated && isMobile ?
+                      <Button
+                        className="w-[100%]"
+                        variant="contained"
+                        sx={{ minWidth: "100px" }}
+                        onClick={() => {
+                          navigate(AuthRoutePathEnum.SIGN_IN);
+                        }}
+                      >
+                        Log In
+                      </Button> : null}
+
+                  </ListItem> */}
+
+                </List>
+              </div>
+            </Toolbar>
+          </animated.div>}
+
+
+
+
+
       </AppBar>
       <Backdrop
         open={open}
         sx={{ zIndex: theme.zIndex.appBar - 1 }}
         onClick={() => setOpen(false)}
       />
+
     </>
   );
 };
