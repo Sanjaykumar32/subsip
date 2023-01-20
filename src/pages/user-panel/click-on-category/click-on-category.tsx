@@ -41,7 +41,7 @@ export function ClickOnCategory() {
   const [searchParams] = useSearchParams();
 
   console.log(subCatdata, "subCatdata");
-  console.log(activeCate, 'activeCate')
+  console.log(activeCate, "activeCate");
 
   const getCateID = location.pathname.split("/")[2];
 
@@ -126,11 +126,21 @@ export function ClickOnCategory() {
   }, [getCateID, location]);
   const navigate = useNavigate();
 
-  const [expanded, setExpanded] = React.useState<string>("");
+  const [expanded, setExpanded] = React.useState<string | false>(false);
 
-  const handleChange = (panel: string) => {
-    setExpanded(panel ? panel : "");
-  };
+  // const handleChange =
+  //   (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+  //     setExpanded(isExpanded ? panel : "");
+  //   };
+
+  // const handleChange = (panel: string) => (isExpanded: boolean) => {
+  //   setExpanded(isExpanded ? panel : false);
+  // };
+
+  const handleChange =
+    (panel: string) => (_event: React.SyntheticEvent, newExpanded: boolean) => {
+      setExpanded(newExpanded ? panel : false);
+    };
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
@@ -147,8 +157,9 @@ export function ClickOnCategory() {
                   <ListItem
                     key={index}
                     sx={{ px: 0 }}
-                    className={` ${activeCate && " activeCate "
-                      }  cursor-pointer `}
+                    className={` ${
+                      activeCate && " activeCate "
+                    }  cursor-pointer `}
                   >
                     {item.vName}
                   </ListItem>
@@ -167,21 +178,20 @@ export function ClickOnCategory() {
               <div>
                 {categoryData.map((item, index) => (
                   <Link href={`/category/${item?.iCategoryId}`} key={index}>
-                    {item && (
+                    {item && item?.vName && (
                       <Accordion
                         expanded={expanded === item.vName}
-                        onChange={() => {
-                          item.vName && handleChange(item.vName);
-                        }}
+                        onChange={handleChange(item.vName)}
                       >
                         <AccordionSummary
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id="panel1a-header"
-                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
-                            ? " activeCate"
-                            : ""
-                            }  `}
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
+                            activeCate === item?.iCategoryId
+                              ? " activeCate"
+                              : ""
+                          }  `}
                           onClick={() => {
                             handleList(item?.iCategoryId),
                               // handleSubList(item?.iSubCategoryId);
@@ -194,7 +204,7 @@ export function ClickOnCategory() {
                         </AccordionSummary>
 
                         <AccordionDetails>
-                          {   filteredSubCategory.length > 0 ? (
+                          {filteredSubCategory.length > 0 ? (
                             filteredSubCategory.map((res: any, i: number) => (
                               <Link
                                 // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
@@ -235,7 +245,18 @@ export function ClickOnCategory() {
         )}
         <Grid item xs={12} md={9.8}>
           <Box>
-            <Typography variant="alternet">Browse {activeCate == 65 ? 'Restaurants' : activeCate == 66 ? 'Home Services' : activeCate == 67 ? 'Auto Services' : activeCate == 68 ? 'More' : 'Restaurants'}</Typography>
+            <Typography variant="alternet">
+              Browse{" "}
+              {activeCate == 65
+                ? "Restaurants"
+                : activeCate == 66
+                ? "Home Services"
+                : activeCate == 67
+                ? "Auto Services"
+                : activeCate == 68
+                ? "More"
+                : "Restaurants"}
+            </Typography>
             <Box
               sx={{
                 display: "flex",
@@ -297,11 +318,11 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
-                listFilter.filter((el) =>
-                  subcatIdss
-                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
-                    : el.iCategory === ids
-                ).length > 0 ? (
+              listFilter.filter((el) =>
+                subcatIdss
+                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                  : el.iCategory === ids
+              ).length > 0 ? (
                 listFilter
                   .filter((el) =>
                     subcatIdss
@@ -330,7 +351,6 @@ export function ClickOnCategory() {
                         style={{ boxShadow: "0 0 20px #0100001a" }}
                       >
                         <>
-
                           <img
                             src={
                               data.vImage
@@ -402,10 +422,16 @@ export function ClickOnCategory() {
                         </>
                       </Card>
                     </Grid>
-                  )))
-                : <div className="grid w-full justify-center py-24 ">
-                  <span>{subcatIdss ? 'This Subcatogery No listing Here ' : "This Category no listing Here "} </span>
-                </div>}
+                  ))
+              ) : (
+                <div className="grid w-full justify-center py-24 ">
+                  <span>
+                    {subcatIdss
+                      ? "This Subcatogery No listing Here "
+                      : "This Category no listing Here "}{" "}
+                  </span>
+                </div>
+              )}
             </Grid>
           </Box>
         </Grid>
