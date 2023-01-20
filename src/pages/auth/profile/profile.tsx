@@ -1,22 +1,21 @@
 import React from "react";
+import { Form } from "react-router-dom";
 import { InputBox, Label } from "components";
 import {
   Box,
   Button,
   Container,
   FormGroup,
-  IconButton,
   TextField,
   Typography,
-  useTheme,
 } from "@mui/material";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import profileController from "./profileController";
 
 export function Profile() {
-  const theme = useTheme();
+  const { getters, handlers } = profileController();
+  const { theme, value } = getters;
+  const { changeHandler, submitHandler } = handlers;
 
   return (
     <Container sx={{ p: 5 }} maxWidth={false}>
@@ -31,50 +30,46 @@ export function Profile() {
           Verified
         </Typography>
       </Box>
-
       <Container maxWidth="xs" sx={{ my: 4 }}>
-        <Box sx={{ my: 1, textAlign: "center" }}>
-          <FormGroup sx={{ textAlign: "left" }}>
-            <InputBox>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Label> Email </Label>
-                <Typography fontWeight={400} variant="caption" sx={{ ml: 1 }}>
-                  (rewards will be sent here)
-                </Typography>
-              </Box>
-              <TextField fullWidth />
-            </InputBox>
-            <InputBox>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Label> My Location </Label>
-                <Typography fontWeight={400} variant="caption" sx={{ ml: 1 }}>
-                  (city)
-                </Typography>
-              </Box>
-              <TextField
-                fullWidth
-                InputProps={{
-                  endAdornment: (
-                    <IconButton>
-                      <FontAwesomeIcon icon={faLocationDot} size="xs" />
-                    </IconButton>
-                  ),
-                }}
-              />
-            </InputBox>
-            <Button
-              variant="contained"
-              sx={{ mt: 4, fontSize: theme.typography.pxToRem(20) }}
-            >
-              Update Email
-            </Button>
-            <Button
-              variant="contained"
-              sx={{ mt: 2, fontSize: theme.typography.pxToRem(20) }}
-            >
-              Reset Password
-            </Button>
-          </FormGroup>
+        <Box sx={{ my: 1 }}>
+          <Typography variant="alternet">Change Password </Typography>
+
+          <Form onSubmit={submitHandler}>
+            <FormGroup sx={{ textAlign: "left" }}>
+              <InputBox>
+                <Label>Old Password</Label>
+                <TextField
+                  fullWidth
+                  type="password"
+                  name="oldPassword"
+                  value={value.oldPassword}
+                  onChange={changeHandler}
+                />
+              </InputBox>
+
+              <InputBox>
+                <Label>New Password</Label>
+                <TextField
+                  fullWidth
+                  type="password"
+                  name="newPassword"
+                  value={value.newPassword}
+                  onChange={changeHandler}
+                />
+              </InputBox>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{ mt: 4, fontSize: theme.typography.pxToRem(20) }}
+              >
+                Change my password
+              </Button>
+              <Typography fontWeight={500} variant="body2" sx={{ my: 2 }}>
+                Please contact us if you have any trouble resetting your
+                password.
+              </Typography>
+            </FormGroup>
+          </Form>
         </Box>
       </Container>
     </Container>
