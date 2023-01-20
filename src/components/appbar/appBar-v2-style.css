@@ -77,19 +77,24 @@
 
 /*  logo css */
 
+
 .logoHheader {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 img.Logo.LightVariant {
     filter: invert(100%);
 }
 
-img.Logo {
+/* img.Logo {
     position: absolute;
-    left: -10px;
+    left: 0px;
     top: -15px;
-}
+} */
 
 
 
@@ -100,9 +105,7 @@ img.Logo {
     }
 
     img.Logo {
-        position: absolute;
-        left: -10px;
-        top: -25px;
+        height: 60px;
     }
 
 
