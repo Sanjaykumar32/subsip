@@ -97,6 +97,16 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 
 
 
+.css-li3b9n-MuiButtonBase-root-MuiButton-root{
+    display: flex;
+    justify-content: start !important;
+    padding: 0% !important;
+}
+.css-1u2w381-MuiModal-root-MuiDrawer-root{
+    z-index: 1099 !important;
+}
+
+
 
 .sliderTitle:hover {
     border-bottom: 2px solid #5e5e5e;
@@ -233,6 +243,10 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
+    svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root {
+        height: 40px;
+        width: 40px;
+    }
     .css-d3fbhi-MuiBackdrop-root{
         z-index: 0 !important;
     }
