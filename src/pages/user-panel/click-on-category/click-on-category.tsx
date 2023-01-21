@@ -265,7 +265,7 @@ export function ClickOnCategory() {
         {!isMobile && (
           <Grid item xs={12} md={2.1} sx={{ paddingRight: "20px" }}>
             <Box sx={{ overflow: "auto", my: 1 }} className="pl-[18px]">
-              <Typography variant="body1" fontWeight="600">
+              <Typography variant="body1" fontWeight="600" className="py-5">
                 Listings by Category
               </Typography>
 
@@ -296,7 +296,7 @@ export function ClickOnCategory() {
                           {item?.vName}
                         </AccordionSummary>
 
-                        <AccordionDetails>
+                        <AccordionDetails >
                           {filteredSubCategory.length > 0 ? (
                             filteredSubCategory.map((res: any, i: number) => (
                               <Link
@@ -305,10 +305,14 @@ export function ClickOnCategory() {
                                 onClick={() =>
                                   handleSubList(res?.iSubCategoryId)
                                 }
-                              >
-                                <Typography className="text-[#252525]" key={i}>
+                              
+                              > 
+                              <div   className={subcatIdss == res.iSubCategoryId ? 'bg-[#c9c8c8]' : ''}>
+                              <Typography className={`text-[#252525] py-1} `} key={i} >
                                   {res.vName}
                                 </Typography>
+                              </div>
+                              
                               </Link>
                               // <Link
                               //   href={{

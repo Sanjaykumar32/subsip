@@ -225,14 +225,14 @@ export function Rewards() {
         </Box>
       </PageHeader>
 
-      <Grid container sx={{ my: 3 }}>
-        {!isMobile ? (
+      <Grid container sx={{ my: 3 }} className=' justify-center'>
+        {/* {!isMobile ? (
           <Grid item xs={12} md={4}>
             {subscribedList}
           </Grid>
         ) : (
           <Drawer open>{subscribedList}</Drawer>
-        )}
+        )} */}
 
         <Grid item xs={12} md={8}>
           <TableContainer sx={{ height: 400, width: "100%" }}>

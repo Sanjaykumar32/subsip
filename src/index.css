@@ -240,7 +240,12 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 .grid-about {
     grid-template-columns: 1fr 1fr;
 }
-
+.css-15v22id-MuiAccordionDetails-root{
+    padding: 0% !important;
+}
+p.MuiTypography-root.MuiTypography-body1.text-\[\#252525\].py-1\}.css-29o67s-MuiTypography-root {
+    padding: 6px 8px;
+}
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
     svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root {
