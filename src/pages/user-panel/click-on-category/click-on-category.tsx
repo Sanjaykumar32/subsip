@@ -18,7 +18,7 @@ import {
 import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum } from "enum";
@@ -113,12 +113,23 @@ export function ClickOnCategory() {
   }, [getCateID, location]);
   const navigate = useNavigate();
 
-  const [expanded, setExpanded] = React.useState<string | false>(false);
+  const [expanded, setExpanded] = React.useState<any>(false);
+
+  console.log(expanded, "expanded");
 
   const handleChange =
     (panel: string) => (_event: React.SyntheticEvent, newExpanded: boolean) => {
+      console.log(panel, "panel");
+      console.log(newExpanded, "newExpanded");
+
       setExpanded(newExpanded ? panel : false);
     };
+
+  useEffect(() => {
+    if (activeCate == getCateID) {
+      setExpanded(true);
+    }
+  }, [activeCate, getCateID]);
 
   const [state, setState] = React.useState(false);
 
@@ -160,7 +171,7 @@ export function ClickOnCategory() {
                       <Link href={`/category/${item?.iCategoryId}`} key={index}>
                         {item && item?.vName && (
                           <Accordion
-                            expanded={expanded === item.vName}
+                            expanded={expanded == item.vName}
                             onChange={handleChange(item.vName)}
                           >
                             <AccordionSummary
@@ -237,13 +248,13 @@ export function ClickOnCategory() {
                   <Link href={`/category/${item?.iCategoryId}`} key={index}>
                     {item && item?.vName && (
                       <Accordion
-                        expanded={expanded === item.vName}
+                        expanded={expanded == item.vName}
                         onChange={handleChange(item.vName)}
                       >
                         <AccordionSummary
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
-                          id="panel1a-header"
+                          id={item.vName}
                           className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
                             activeCate === item?.iCategoryId
                               ? " activeCate"
@@ -264,7 +275,6 @@ export function ClickOnCategory() {
                           {filteredSubCategory.length > 0 ? (
                             filteredSubCategory.map((res: any, i: number) => (
                               <Link
-                                // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
                                 key={i}
                                 onClick={() =>
                                   handleSubList(res?.iSubCategoryId)
@@ -274,15 +284,6 @@ export function ClickOnCategory() {
                                   {res.vName}
                                 </Typography>
                               </Link>
-                              // <Link
-                              //   href={{
-                              //     pathname: "/category",
-                              //     query: {subCategory: res?.iSubCategoryId },
-                              //   }}
-                              //   key={index}
-                              // >
-                              //   Some Text
-                              // </Link>
                             ))
                           ) : (
                             <Link>
