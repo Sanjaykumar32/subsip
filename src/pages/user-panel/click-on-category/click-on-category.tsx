@@ -6,12 +6,9 @@ import {
   Box,
   Card,
   Container,
-  Drawer,
   FormControl,
   Grid,
   Link,
-  List,
-  ListItem,
   MenuItem,
   Select,
   Typography,
@@ -26,13 +23,10 @@ import { UserThunk } from "data/thunk/user.thunk";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum } from "enum";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListIcon from '@mui/icons-material/List';
-
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import ListIcon from "@mui/icons-material/List";
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
@@ -41,20 +35,10 @@ export function ClickOnCategory() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [activeCate, setActiveCate] = useState<any>(false);
-  const [subCatdata, setSubData] = useState<any>([]);
-
   const location = useLocation();
-
-  const [searchParams] = useSearchParams();
-
-  console.log(subCatdata, "subCatdata");
-  console.log(activeCate, "activeCate");
-
   const getCateID = location.pathname.split("/")[2];
-
   const categoryData = useAppSelector(GET_CATEGORY);
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
-
   const dispatch = useAppDispatch();
 
   const getcategory = useCallback(async () => {
@@ -64,8 +48,6 @@ export function ClickOnCategory() {
       console.log(error);
     }
   }, [dispatch]);
-
-  console.log(subCategoryData, "subCategoryData");
 
   const filteredSubCategory = subCategoryData?.filter((item) => {
     return item.iCategoryId == getCateID;
@@ -115,8 +97,6 @@ export function ClickOnCategory() {
 
   const listFilter = businessData.filter(
     (el: { vName: { toString: () => string } }) => {
-      // console.log(el ,'el business');
-      //  return Object.values(el.vName.toString().toLowerCase().includes(location.search.slice(1 ,20).toString().toLowerCase()))
       return Object.values(el.vName.toString().toLowerCase())
         .join("")
         .toLowerCase()
@@ -135,131 +115,114 @@ export function ClickOnCategory() {
 
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
-  // const handleChange =
-  //   (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-  //     setExpanded(isExpanded ? panel : "");
-  //   };
-
-  // const handleChange = (panel: string) => (isExpanded: boolean) => {
-  //   setExpanded(isExpanded ? panel : false);
-  // };
-
   const handleChange =
     (panel: string) => (_event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
 
-
   const [state, setState] = React.useState(false);
 
-  console.log(state, 'state')
-
   const toggleDrawer = () => {
-    setState(true)
-  }
+    setState(true);
+  };
 
   const toggleDrawerClose = () => {
-    setState(false)
-  }
-
-
-
-
-
-
+    setState(false);
+  };
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
-
         {/* <------------------------ Mobile view listting cagegory ---------------> */}
 
-        {isMobile &&
-         <div>
-             <React.Fragment >
-            <Button onClick={toggleDrawer} className="py-5">
-              <ListIcon />
-            </Button>
-            <SwipeableDrawer
-              open={state}
-              onClose={toggleDrawerClose}
-              onOpen={toggleDrawer}
-            >
-
-              <Box
-                sx={{ width: 250 }}
-                className='mt-40'
-                role="presentation"
-               
-               
+        {isMobile && (
+          <div>
+            <React.Fragment>
+              <Button onClick={toggleDrawer} className="py-5">
+                <ListIcon />
+              </Button>
+              <SwipeableDrawer
+                open={state}
+                onClose={toggleDrawerClose}
+                onOpen={toggleDrawer}
               >
-                <Typography variant="body1" fontWeight="600"  className='py-5 text-[16px] pl-2 font-normal'>
-                  Listings by subcategory
-                </Typography>
+                <Box sx={{ width: 250 }} className="mt-40" role="presentation">
+                  <Typography
+                    variant="body1"
+                    fontWeight="600"
+                    className="py-5 text-[16px] pl-2 font-normal"
+                  >
+                    Listings by subcategory
+                  </Typography>
 
-                <div >
-                  {categoryData.map((item, index) => (
-                    <Link href={`/category/${item?.iCategoryId}`} key={index}>
-                      {item && item?.vName && (
-                        <Accordion
-                          expanded={expanded === item.vName}
-                          onChange={handleChange(item.vName)}
-                        >
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                            className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
-                              ? " activeCate"
-                              : ""
-                              }  `}
-                            onClick={() => {
-                              handleList(item?.iCategoryId),
-                                // handleSubList(item?.iSubCategoryId);
-                                handleSubList(null);
-                              setActiveCate(item?.iCategoryId);
-                              // setSubData(filteredSubCategory);
-                            }}
+                  <div>
+                    {categoryData.map((item, index) => (
+                      <Link href={`/category/${item?.iCategoryId}`} key={index}>
+                        {item && item?.vName && (
+                          <Accordion
+                            expanded={expanded === item.vName}
+                            onChange={handleChange(item.vName)}
                           >
-                            {item?.vName}
-                          </AccordionSummary>
+                            <AccordionSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1a-content"
+                              id="panel1a-header"
+                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
+                                activeCate === item?.iCategoryId
+                                  ? " activeCate"
+                                  : ""
+                              }  `}
+                              onClick={() => {
+                                handleList(item?.iCategoryId),
+                                  // handleSubList(item?.iSubCategoryId);
+                                  handleSubList(null);
+                                setActiveCate(item?.iCategoryId);
+                                // setSubData(filteredSubCategory);
+                              }}
+                            >
+                              {item?.vName}
+                            </AccordionSummary>
 
-                          <AccordionDetails>
-                            {filteredSubCategory.length > 0 ? (
-                              filteredSubCategory.map((res: any, i: number) => (
-                                <Link
-                                  // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
-                                  key={i}
-                                  onClick={() =>
-                                    handleSubList(res?.iSubCategoryId)
-                                  }
-                                >
-                                  <Typography className="text-[#252525]" key={i} onClick={toggleDrawerClose}>
-                                    {res.vName}
+                            <AccordionDetails>
+                              {filteredSubCategory.length > 0 ? (
+                                filteredSubCategory.map(
+                                  (res: any, i: number) => (
+                                    <Link
+                                      // href={`/category/${res?.iCategoryId}?subCategory=${res?.iSubCategoryId}`}
+                                      key={i}
+                                      onClick={() =>
+                                        handleSubList(res?.iSubCategoryId)
+                                      }
+                                    >
+                                      <Typography
+                                        className="text-[#252525]"
+                                        key={i}
+                                        onClick={toggleDrawerClose}
+                                      >
+                                        {res.vName}
+                                      </Typography>
+                                    </Link>
+                                  )
+                                )
+                              ) : (
+                                <Link>
+                                  <Typography className="text-[#252525]">
+                                    No Sub category Here
                                   </Typography>
                                 </Link>
-                              ))
-                            ) : (
-                              <Link>
-                                <Typography className="text-[#252525]">
-                                  No Sub category Here
-                                </Typography>
-                              </Link>
-                            )}
-                          </AccordionDetails>
-                        </Accordion>
-                      )}
-                    </Link>
-                  ))}
-                </div>
-                <Divider />
-
-              </Box>
-
-            </SwipeableDrawer>
-          </React.Fragment>
-         </div>
-        }
+                              )}
+                            </AccordionDetails>
+                          </Accordion>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
+                  <Divider />
+                </Box>
+              </SwipeableDrawer>
+            </React.Fragment>
+          </div>
+        )}
 
         {/* <------------------------ Desktop view listting cagegory ---------------> */}
         {!isMobile && (
@@ -281,10 +244,11 @@ export function ClickOnCategory() {
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id="panel1a-header"
-                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
-                            ? " activeCate"
-                            : ""
-                            }  `}
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
+                            activeCate === item?.iCategoryId
+                              ? " activeCate"
+                              : ""
+                          }  `}
                           onClick={() => {
                             handleList(item?.iCategoryId),
                               // handleSubList(item?.iSubCategoryId);
@@ -344,12 +308,12 @@ export function ClickOnCategory() {
               {activeCate == 65
                 ? "Restaurants"
                 : activeCate == 66
-                  ? "Home Services"
-                  : activeCate == 67
-                    ? "Auto Services"
-                    : activeCate == 68
-                      ? "More"
-                      : "Restaurants"}
+                ? "Home Services"
+                : activeCate == 67
+                ? "Auto Services"
+                : activeCate == 68
+                ? "More"
+                : "Restaurants"}
             </Typography>
             <Box
               sx={{
@@ -412,11 +376,11 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
-                listFilter.filter((el) =>
-                  subcatIdss
-                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
-                    : el.iCategory === ids
-                ).length > 0 ? (
+              listFilter.filter((el) =>
+                subcatIdss
+                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                  : el.iCategory === ids
+              ).length > 0 ? (
                 listFilter
                   .filter((el) =>
                     subcatIdss
