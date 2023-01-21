@@ -32,10 +32,6 @@ import "./appBar-v2-style.css";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate, useLocation } from "react-router-dom";
 import { SearchField } from "./component/search-field/search-field";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import FormControl from "@mui/material/FormControl";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
 import {
@@ -48,13 +44,10 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import { format } from "date-fns";
 import {
-
   faDiagramProject,
   faHome,
   faList,
-  faSearch,
   faTrophy,
-
 } from "@fortawesome/free-solid-svg-icons";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -79,15 +72,7 @@ export const UserAppBar = (props: any) => {
   const userId = localStorage.getItem("userId");
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-
-  const routeAdmin = homepage.split("/")[1]
-
+  const routeAdmin = homepage.split("/")[1];
 
   // isMobile admin list----------------------------------------
   const menuList = React.useMemo(
@@ -137,8 +122,6 @@ export const UserAppBar = (props: any) => {
     []
   );
 
-
-
   const getcategory = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getCategory());
@@ -165,10 +148,9 @@ export const UserAppBar = (props: any) => {
     }
   }, [dispatch, userId]);
 
-
   const readNotification = useCallback(
     async ({ id, readId }: any) => {
-      console.log(id, readId, 'ids')
+      console.log(id, readId, "ids");
       // const data = {
       //   read: Number   userId ?  parseInt(userId) : 0,
       // };
@@ -382,7 +364,7 @@ export const UserAppBar = (props: any) => {
 
   const spring2 = useSpring({
     from: { height: "0px" },
-    to: { height:  open ? "auto" : "0px" },
+    to: { height: open ? "auto" : "0px" },
   });
 
   const [sticky, setSticky] = useState("");
@@ -408,7 +390,7 @@ export const UserAppBar = (props: any) => {
     getOptionLabel: (option: any) => option.vLocation,
   };
   const flatProps = {
-    options: businessData.map((option: { vLocation: any; }) => option.vLocation),
+    options: businessData.map((option: { vLocation: any }) => option.vLocation),
   };
 
   const handleBanner = () => {
@@ -447,7 +429,13 @@ export const UserAppBar = (props: any) => {
 
           {/*---------------------------- bage logos header ------------------------ */}
 
-          <div className={`flex w-full  ${auth.isAuthenticated ? 'justify-end items-center' : 'justify-center'}`}>
+          <div
+            className={`flex w-full  ${
+              auth.isAuthenticated
+                ? "justify-end items-center"
+                : "justify-center"
+            }`}
+          >
             <div className=" grid-cols-1">
               <Logo variant="dark" />
             </div>
@@ -818,7 +806,7 @@ export const UserAppBar = (props: any) => {
                             {/* <div className="flex "> */}
                             <p className="text-[14px] flex font-[400] text-[#262626]">
                               {readMoreNotification.state &&
-                              readMoreNotification.id == res.iNotificationId ? 
+                              readMoreNotification.id == res.iNotificationId ? (
                                 <div className="">
                                   <span>{res.vDesc}</span>
                                   {res.vDesc.length > 55 ? (
@@ -838,17 +826,30 @@ export const UserAppBar = (props: any) => {
                                       <span
                                         className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                         onClick={() => {
-                                          readNotification({ id: res.iNotificationId, readId: 1 });
-                                        }}>Mark read</span>
+                                          readNotification({
+                                            id: res.iNotificationId,
+                                            readId: 1,
+                                          });
+                                        }}
+                                      >
+                                        Mark read
+                                      </span>
                                     </div>
-                                  ) : 
+                                  ) : (
                                     <span
                                       className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({ id: res.iNotificationId, readId: 1 });
-                                      }}>Mark read</span>}
+                                        readNotification({
+                                          id: res.iNotificationId,
+                                          readId: 1,
+                                        });
+                                      }}
+                                    >
+                                      Mark read
+                                    </span>
+                                  )}
                                 </div>
-                               : 
+                              ) : (
                                 <div className="">
                                   <span className="NotextLimit2">
                                     {res.vDesc}
@@ -870,17 +871,30 @@ export const UserAppBar = (props: any) => {
                                       <span
                                         className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
                                         onClick={() => {
-                                          readNotification({ id: res.iNotificationId, readId: 1 });
-                                        }}>Mark read</span>
+                                          readNotification({
+                                            id: res.iNotificationId,
+                                            readId: 1,
+                                          });
+                                        }}
+                                      >
+                                        Mark read
+                                      </span>
                                     </div>
-                                  ) : 
+                                  ) : (
                                     <span
                                       className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({ id: res.iNotificationId, readId: 1 });
-                                      }}>Mark read</span>}
+                                        readNotification({
+                                          id: res.iNotificationId,
+                                          readId: 1,
+                                        });
+                                      }}
+                                    >
+                                      Mark read
+                                    </span>
+                                  )}
                                 </div>
-                              }
+                              )}
                               {/* {!readMoreNotification ?
                                 
                                 :
@@ -1043,10 +1057,13 @@ export const UserAppBar = (props: any) => {
           </animated.div>
         )}
 
-    {/* <<<<<<<<<<<<<<<< ---------admin list dropdown --------------->>>>>>>>>>>>>>. */}
+        {/* <<<<<<<<<<<<<<<< ---------admin list dropdown --------------->>>>>>>>>>>>>>. */}
 
-        {routeAdmin == 'admin' && isMobile && open &&
-          <animated.div style={{ overflow: "hidden", ...spring2 }} className='mt-[-60px]' >
+        {routeAdmin == "admin" && isMobile && open && (
+          <animated.div
+            style={{ overflow: "hidden", ...spring2 }}
+            className="mt-[-60px]"
+          >
             <Toolbar>
               <div className="moblieMenu">
                 <List
@@ -1067,7 +1084,6 @@ export const UserAppBar = (props: any) => {
                         onClick={handleBanner}
                         href={`${item.route}`}
                         key={item.title}
-                        
                         style={{
                           color: theme.palette.getContrastText(
                             theme.palette.background.default
@@ -1075,7 +1091,13 @@ export const UserAppBar = (props: any) => {
                           textDecoration: "none",
                         }}
                       >
-                        <ListItem key={index} disablePadding>
+                        <ListItem
+                          key={index}
+                          disablePadding
+                          className={
+                            props.menu == item.title ? "bg-[#c9c8c8]" : ""
+                          }
+                        >
                           <ListItemButton>
                             <ListItemIcon>
                               <FontAwesomeIcon icon={item.icon} />
@@ -1142,23 +1164,17 @@ export const UserAppBar = (props: any) => {
                       </Button> : null}
 
                   </ListItem> */}
-
                 </List>
               </div>
             </Toolbar>
-          </animated.div>}
-
-
-
-
-
+          </animated.div>
+        )}
       </AppBar>
       <Backdrop
         open={open}
         sx={{ zIndex: theme.zIndex.appBar - 1 }}
         onClick={() => setOpen(false)}
       />
-
     </>
   );
 };
