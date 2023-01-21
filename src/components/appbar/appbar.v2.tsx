@@ -88,6 +88,8 @@ export const UserAppBar = (props: any) => {
 
   const routeAdmin = homepage.split("/")[1]
 
+  console.log(routeAdmin , 'routeAdmin')
+
 
   // isMobile admin list----------------------------------------
   const menuList = React.useMemo(
@@ -588,7 +590,8 @@ export const UserAppBar = (props: any) => {
           )}
 
           {/* < ------------------- location input field ---------------------> */}
-          {homepage === "/" && (
+
+          {homepage == "/" || routeAdmin == 'category'  ? (
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {!locationPopUp ? (
                 <Button
@@ -654,7 +657,9 @@ export const UserAppBar = (props: any) => {
                 sx={{ mx: 1, height: "30px", my: "auto" }}
               />
             </Box>
-          )}
+          ) : null }
+
+
           {!auth.isAuthenticated ? (
             <Button
               variant="contained"
