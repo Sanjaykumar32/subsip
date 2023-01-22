@@ -17,16 +17,15 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { GET_REFERRAL_LIST, GET_REFFERRAL_CODE } from "data/selectors";
+import { GET_REFERRAL_LIST } from "data/selectors";
 import { useNavigate } from "react-router-dom";
 import { AdminRoutePathEnum } from "enum";
 import toast from "react-hot-toast";
 
 export function AdminReferral() {
-
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userId");
-
+  const dispatch = useAppDispatch();
+  const referralData = useAppSelector(GET_REFERRAL_LIST);
 
   async function deleteDataReferral(ID: number) {
     await dispatch(AdminThunk.deleteReferralPrice(ID));
@@ -37,7 +36,7 @@ export function AdminReferral() {
   const columns: GridColDef[] = [
     {
       field: "MilestoneName",
-      headerName: "Milestone Name",
+      headerName: "Milestone hhhhName",
       width: 200,
     },
 
@@ -45,7 +44,9 @@ export function AdminReferral() {
       field: "Amount",
       headerName: "Amount",
       width: 200,
-      renderCell: (params) => <Chip label={params.value[1] + ' / ' + params.value[0]} color="info" />,
+      renderCell: (params) => (
+        <Chip label={params.value[1] + " / " + params.value[0]} color="info" />
+      ),
     },
     {
       field: "Actions",
@@ -54,91 +55,28 @@ export function AdminReferral() {
       renderCell: (params) => (
         <Box>
           <Tooltip title={params.value[0]}>
-            <FontAwesomeIcon icon={faPen}
+            <FontAwesomeIcon
+              icon={faPen}
               onClick={() => {
                 navigate("/admin/referral-price", {
                   state: { id: params.value[2], edit: true },
                 });
               }}
             />
-
           </Tooltip>
           <Tooltip title={params.value[1]}>
-            <FontAwesomeIcon icon={faTrash}
+            <FontAwesomeIcon
+              icon={faTrash}
               onClick={() => {
                 deleteDataReferral(params.value[2]);
               }}
               className="ml-[25px]"
             />
           </Tooltip>
-        </Box >
+        </Box>
       ),
     },
   ];
-
-  // const rows = [
-  //   {
-  //     id: 1,
-  //     MilestoneName: "India Gate Restaurant",
-  //     Achieved: "17 subscribers",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 2,
-  //     MilestoneName: "India Gate Restaurant",
-  //     Achieved: "17 subscribers",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 3,
-  //     MilestoneName: "India Gate Restaurant",
-  //     Achieved: "17 subscribers",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 4,
-  //     MilestoneName: "India Gate Restaurant",
-  //     Achieved: "17 subscribers",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 5,
-  //     MilestoneName: "India Gate Restaurant",
-  //     Achieved: "17 subscribers",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 6,
-  //     MilestoneName: "India Gate Restaurant",
-  //     Achieved: "17 subscribers",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 7,
-  //     MilestoneName: "India Gate Restaurant",
-  //     Achieved: "17 subscribers",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 8,
-  //     MilestoneName: "India Gate Restaurant",
-  //     Achieved: "17 subscribers",
-  //     Actions: "Edit",
-  //   },
-  //   {
-  //     id: 9,
-  //     MilestoneName: "India Gate Restaurant",
-  //     Achieved: "17 subscribers",
-  //     Actions: "Edit",
-  //   },
-  // ];
-
-  const dispatch = useAppDispatch();
-
-  const refferalCodeData = useAppSelector(GET_REFFERRAL_CODE);
-
-
-  const referralData = useAppSelector(GET_REFERRAL_LIST);
 
   const referralList = useCallback(async () => {
     try {
@@ -152,17 +90,16 @@ export function AdminReferral() {
     referralList();
   }, [referralList]);
 
-  console.log(referralData, 'referralData')
+  console.log(referralData, "referralData");
 
   const rows = referralData.map((item: any) => {
     return {
       id: item?.iMilestoneId,
       MilestoneName: item?.milestoneName,
       Amount: [item?.iAmount, item?.userCount],
-      Actions: ['Edit', 'Dalete', item?.iMilestoneId],
+      Actions: ["Edit", "Dalete", item?.iMilestoneId],
     };
   });
-
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
