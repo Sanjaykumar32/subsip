@@ -235,7 +235,7 @@ export function Home() {
 
                   <div>
                     <span
-                      className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle"
+                      className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer "
                       onClick={() => {
                         auth?.isAuthenticated
                           ? onImageClick(ele.iBusinessId)
@@ -520,7 +520,7 @@ const SliderCard = (props: any) => {
       />
       <div className=" pl-3 py-3  ">
         <span
-          className="text-black text-[1.3rem] font-semibold cursor-pointer textLimit2 sliderTitle"
+          className="text-black text-[1.3rem] font-semibold cursor-pointer textLimit2 "
           onClick={() => {
             auth?.isAuthenticated
               ? onImageClick()

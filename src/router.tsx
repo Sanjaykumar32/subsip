@@ -42,7 +42,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { About } from "about/about";
 import TermConditions from "termsConditions/termConditions";
 import { PrivacyPolicy } from "privacyPolicy/privacyPolicy";
-
+import { ReferredUserList } from "pages/admin-panel/reffered-list/referred-list";
 
 export const router = createBrowserRouter([
   {
@@ -120,11 +120,11 @@ export const router = createBrowserRouter([
       },
       {
         path: RoutePathEnum.TERMS,
-        element: <TermConditions/>
+        element: <TermConditions />,
       },
       {
-        path:RoutePathEnum.PRIVACY,
-        element:<PrivacyPolicy/>
+        path: RoutePathEnum.PRIVACY,
+        element: <PrivacyPolicy />,
       },
       {
         path: AuthRoutePathEnum.CHANGE_PASSWORD,
@@ -216,6 +216,10 @@ export const router = createBrowserRouter([
       {
         path: AdminRoutePathEnum.ADMIN_SUBSCRIBERS,
         element: <AdminSubscribers />,
+      },
+      {
+        path: AdminRoutePathEnum.REFFERED_USER_LIST,
+        element: <ReferredUserList />,
       },
     ],
   },

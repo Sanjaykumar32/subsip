@@ -81,7 +81,7 @@ export const UserAppBar = (props: any) => {
 
   const routeAdmin = homepage.split("/")[1]
 
-  console.log(routeAdmin , 'routeAdmin')
+  console.log(searchLocation, 'searchLocation')
 
 
   // isMobile admin list----------------------------------------
@@ -215,6 +215,14 @@ export const UserAppBar = (props: any) => {
 
   const showLocationPopUp = () => {
     setLocationPopUP(true);
+    // if (routeAdmin == 'category') {
+    //   navigate(`?${searchLocation}`, {
+    //     state: {
+    //       categoryPage: true,
+    //       data: searchLocation
+    //     }
+    //   })
+    // }
   };
 
   // const disableCloseOnSelect = () => {
@@ -222,25 +230,54 @@ export const UserAppBar = (props: any) => {
   //   setLocationPopUP(false);
   //   navigate(`/?`);
   // };
+
   const handlevalue = (el: any) => {
-    if (el == undefined) {
-      setLocation("");
-      setLocationPopUP(false);
-      navigate(`/?`);
-      setOpen(false);
-    } else {
-      setLocation(el);
-      navigate(`/?${el}`);
+    if (homepage == '/') {
+      if (el == undefined) {
+        setLocation("");
+        setLocationPopUP(false);
+        navigate(`/?`);
+        setOpen(false);
+      } else {
+        setLocation(el);
+        navigate(`/?${el}`);
+      }
     }
-  };
+
+    // if (routeAdmin == 'category') {
+    //   if (el == undefined) {
+    //     setLocation("");
+    //     setLocationPopUP(false);
+    //     navigate(`?`);
+    //     setOpen(false);
+    //   } else {
+    //     setLocation(el);
+    //     navigate(`?${el}`, {
+    //       state: {
+    //         categoryPage: true,
+    //         data:el
+    //       }
+    //     })
+
+    //   }
+    // }
+  }
 
   const handleLocation = (event: any) => {
-    setLocation(event.target.value);
-    navigate(`/?${event.target.value}`);
+    if (homepage == '/') {
+      setLocation(event.target.value);
+      navigate(`/?${event.target.value}`);
+    }
+
+    // if (routeAdmin == 'category') {
+    //   setLocation(event.target.value);
+    //   navigate(`?${event.target.value}`);
+    // }
+
   };
 
   const handleLocationSearch = () => {
-    navigate(`/?${searchLocation}`);
+    // navigate(`/?${searchLocation}`);
     setLocationPopUP(false);
   };
 
@@ -366,6 +403,7 @@ export const UserAppBar = (props: any) => {
   // );
 
   const [open, setOpen] = useState<boolean>(false);
+
   console.log(open, "open");
   const spring = useSpring({
     from: { height: "0px" },
@@ -417,11 +455,10 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${
-          props.display ? props.display : sticky ? "" : "non-sticky"
-        } `}
+        className={`${props.display ? props.display : sticky ? "" : "non-sticky"
+          } `}
 
-        // style={{ position: props.display && 'fixed' }}
+      // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -440,11 +477,10 @@ export const UserAppBar = (props: any) => {
           {/*---------------------------- bage logos header ------------------------ */}
 
           <div
-            className={`flex w-full  ${
-              auth.isAuthenticated
-                ? "justify-end items-center"
-                : "justify-center"
-            }`}
+            className={`flex w-full  ${auth.isAuthenticated
+              ? "justify-end items-center"
+              : "justify-center"
+              }`}
           >
             <div className=" grid-cols-1">
               <Logo variant="dark" />
@@ -587,7 +623,7 @@ export const UserAppBar = (props: any) => {
 
           {/* < ------------------- location input field ---------------------> */}
 
-          {homepage == "/" || routeAdmin == 'category'  ? (
+          {homepage == "/" || routeAdmin == 'category' ? (
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {!locationPopUp ? (
                 <Button
@@ -653,7 +689,7 @@ export const UserAppBar = (props: any) => {
                 sx={{ mx: 1, height: "30px", my: "auto" }}
               />
             </Box>
-          ) : null }
+          ) : null}
 
 
           {!auth.isAuthenticated ? (
@@ -819,7 +855,7 @@ export const UserAppBar = (props: any) => {
                             {/* <div className="flex "> */}
                             <p className="text-[14px] flex font-[400] text-[#262626]">
                               {readMoreNotification.state &&
-                              readMoreNotification.id == res.iNotificationId ? (
+                                readMoreNotification.id == res.iNotificationId ? (
                                 <div className="">
                                   <span>{res.vDesc}</span>
                                   {res.vDesc.length > 55 ? (
