@@ -45,3 +45,6 @@ export const GET_USER_NOTIFICTAION = (state: RootState) =>
   state.admin.userNotification;
 
 export const GET_USER = (state: RootState) => state.admin.getUser;
+
+export const GET_REFERRAL_USER = (state: RootState) =>
+  state.admin.getReferralUser;

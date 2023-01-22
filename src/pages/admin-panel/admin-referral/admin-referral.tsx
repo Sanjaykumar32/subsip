@@ -17,15 +17,15 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { GET_REFERRAL_LIST } from "data/selectors";
 import { useNavigate } from "react-router-dom";
 import { AdminRoutePathEnum } from "enum";
 import toast from "react-hot-toast";
+import { GET_REFERRAL_USER } from "data/selectors";
 
 export function AdminReferral() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const referralData = useAppSelector(GET_REFERRAL_LIST);
+  const referralData = useAppSelector(GET_REFERRAL_USER);
 
   async function deleteDataReferral(ID: number) {
     await dispatch(AdminThunk.deleteReferralPrice(ID));
@@ -35,18 +35,18 @@ export function AdminReferral() {
 
   const columns: GridColDef[] = [
     {
-      field: "MilestoneName",
-      headerName: "Milestone hhhhName",
+      field: "vName",
+      headerName: "Milestone Name",
       width: 200,
     },
 
     {
-      field: "Amount",
+      field: "iamount",
       headerName: "Amount",
       width: 200,
-      renderCell: (params) => (
-        <Chip label={params.value[1] + " / " + params.value[0]} color="info" />
-      ),
+      renderCell: (params) => {
+        return params.value ? <Chip label={params.value} color="info" /> : "-";
+      },
     },
     {
       field: "Actions",
@@ -80,7 +80,7 @@ export function AdminReferral() {
 
   const referralList = useCallback(async () => {
     try {
-      await dispatch(AdminThunk.refferalDetail());
+      await dispatch(AdminThunk.getReferralUser());
     } catch (error) {
       console.log(error);
     }
@@ -95,8 +95,8 @@ export function AdminReferral() {
   const rows = referralData.map((item: any) => {
     return {
       id: item?.iMilestoneId,
-      MilestoneName: item?.milestoneName,
-      Amount: [item?.iAmount, item?.userCount],
+      vName: item?.vName,
+      iamount: item?.iamount,
       Actions: ["Edit", "Dalete", item?.iMilestoneId],
     };
   });

@@ -254,7 +254,7 @@ export class AdminService {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/user/notification/${payload.notificationId}`,
       method: "PUT",
-      data: { read:payload.read},
+      data: { read: payload.read },
     });
 
     return res.data;
@@ -313,6 +313,18 @@ export class AdminService {
   public static async getRefferal(): Promise<any> {
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: "/user/milestone/4",
+      method: "GET",
+    });
+    return res.data;
+  }
+
+  /**
+   * get referral user
+   * @return {Promise<any>}
+   */
+  public static async getReferralUser(): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/milestone",
       method: "GET",
     });
     return res.data;
