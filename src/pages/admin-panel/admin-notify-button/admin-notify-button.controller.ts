@@ -34,6 +34,7 @@ export const NewNotifyButtonController =
     const navigate = useNavigate();
     const userID = NotifyScreen?.state?.id;
     const rewardScreen = NotifyScreen?.state?.rewardScreen;
+    const referralScreen = NotifyScreen?.state?.referralScreen;
     const handleDateChange = (date: Moment | null): void => {
       if (!date) {
         return;
@@ -64,6 +65,8 @@ export const NewNotifyButtonController =
       );
       if (rewardScreen) {
         navigate(AdminRoutePathEnum.ADMIN_MILESTONES);
+      } else if (referralScreen) {
+        navigate(AdminRoutePathEnum.REFFERED_USER_LIST);
       } else {
         navigate(AdminRoutePathEnum.ADMIN_SUBSCRIBERS);
       }

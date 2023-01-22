@@ -5,6 +5,7 @@ import {
   Chip,
   Container,
   FormControl,
+  Link,
   MenuItem,
   Select,
   Tooltip,
@@ -18,7 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useNavigate } from "react-router-dom";
-import { AdminRoutePathEnum } from "enum";
+import { AdminRoutePathEnum, RoutePathEnum } from "enum";
 import toast from "react-hot-toast";
 import { GET_REFERRAL_USER } from "data/selectors";
 
@@ -33,6 +34,15 @@ export function AdminReferral() {
     toast.success("Listing Delete SuccessFully");
   }
 
+  const userData = (id: any) => {
+    navigate(`${AdminRoutePathEnum.REFFERED_USER_LIST}`, {
+      state: {
+        id: id,
+        referralScreen: "referralScreen",
+      },
+    });
+  };
+
   const columns: GridColDef[] = [
     {
       field: "vName",
@@ -44,8 +54,17 @@ export function AdminReferral() {
       field: "iamount",
       headerName: "Amount",
       width: 200,
-      renderCell: (params) => {
-        return params.value ? <Chip label={params.value} color="info" /> : "-";
+      renderCell: (params: any) => {
+        console.log(params, "params");
+        return params.value ? (
+          <Chip
+            label={params.value}
+            color="info"
+            onClick={() => userData(params.id)}
+          />
+        ) : (
+          "-"
+        );
       },
     },
     {
@@ -90,13 +109,12 @@ export function AdminReferral() {
     referralList();
   }, [referralList]);
 
-  console.log(referralData, "referralData");
-
   const rows = referralData.map((item: any) => {
     return {
       id: item?.iMilestoneId,
       vName: item?.vName,
       iamount: item?.iamount,
+      users: item?.users,
       Actions: ["Edit", "Dalete", item?.iMilestoneId],
     };
   });
