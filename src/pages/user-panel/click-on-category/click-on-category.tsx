@@ -41,6 +41,9 @@ export function ClickOnCategory() {
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const dispatch = useAppDispatch();
 
+  const pathSerchValue = location.search.slice(1 , 25)
+
+  console.log(pathSerchValue  , 'pathSerchValue')
   const getcategory = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getCategory());
@@ -106,7 +109,7 @@ export function ClickOnCategory() {
 
   useEffect(() => {
     if (getCateID) {
-      console.log(getCateID, "getCateID");
+      // console.log(getCateID, "getCateID");
       handleList(Number(getCateID));
       setActiveCate(Number(getCateID));
     }
@@ -115,12 +118,12 @@ export function ClickOnCategory() {
 
   const [expanded, setExpanded] = React.useState<any>(false);
 
-  console.log(expanded, "expanded");
+  // console.log(expanded, "expanded");
 
   const handleChange =
     (panel: string) => (_event: React.SyntheticEvent, newExpanded: boolean) => {
-      console.log(panel, "panel");
-      console.log(newExpanded, "newExpanded");
+      // console.log(panel, "panel");
+      // console.log(newExpanded, "newExpanded");
 
       setExpanded(newExpanded ? panel : false);
     };
@@ -463,8 +466,8 @@ export function ClickOnCategory() {
                                 Subscribe
                               </Button> */}
                               <div className="raletive">
-                                <div className="subscribeLebalListing">
-                                  <span className=" text-white  ">
+                                <div className="subscribeLebalListing bg-[#dc2626] ">
+                                  <span className=" text-white ">
                                     Subscribe
                                   </span>
                                 </div>
