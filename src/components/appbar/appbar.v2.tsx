@@ -67,13 +67,7 @@ export const UserAppBar = (props: any) => {
   const userId = localStorage.getItem("userId");
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
-<<<<<<< HEAD
-  console.log(readMoreNotification, "readMoreNotification");
-  console.log(homepage.split("/")[1], " sdasdacategory");
-
-=======
   console.log(userNotificationData, "userNotificationData");
->>>>>>> 6e18b8504c91b3d9c7e9b863c5ad27bf27edf548
 
   const getcategory = useCallback(async () => {
     try {
@@ -100,23 +94,23 @@ export const UserAppBar = (props: any) => {
       console.log(error, "this is  err res");
     }
   }, [dispatch, userId]);
- 
-  
+
+
   const readNotification = useCallback(
-    async ({id , readId} :any) => {
-       console.log(id , readId ,  'ids')
+    async ({ id, readId }: any) => {
+      console.log(id, readId, 'ids')
       // const data = {
       //   read: Number   userId ?  parseInt(userId) : 0,
       // };
       try {
-       
-          await dispatch(
-            AdminThunk.readUserNotification({
-              notificationId: id,
-              read: readId,
-            })
-          );
-     
+
+        await dispatch(
+          AdminThunk.readUserNotification({
+            notificationId: id,
+            read: readId,
+          })
+        );
+
         await getUserNotification();
       } catch (error) {
         console.log(error);
@@ -339,15 +333,9 @@ export const UserAppBar = (props: any) => {
     options: businessData,
     getOptionLabel: (option: any) => option.vLocation,
   };
-<<<<<<< HEAD
-  const flatProps = {
-    options: businessData.map((option: { vLocation: any; }) => option.vLocation),
-  };
-=======
   // const flatProps = {
   //   options: businessData.map((option) => option.vLocation),
   // };
->>>>>>> 6e18b8504c91b3d9c7e9b863c5ad27bf27edf548
 
   const handleBanner = () => {
     setOpen(false)
@@ -766,12 +754,12 @@ export const UserAppBar = (props: any) => {
                                         onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
                                       <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                         onClick={() => {
-                                          readNotification({id: res.iNotificationId , readId : 1});
+                                          readNotification({ id: res.iNotificationId, readId: 1 });
                                         }}>Mark read</span>
                                     </div>
                                     : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({id: res.iNotificationId , readId : 1});
+                                        readNotification({ id: res.iNotificationId, readId: 1 });
                                       }}>Mark read</span>}
                                 </div>
                               ) : (
@@ -785,13 +773,13 @@ export const UserAppBar = (props: any) => {
                                         onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>
                                       <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
                                         onClick={() => {
-                                          readNotification({id: res.iNotificationId , readId : 1});
+                                          readNotification({ id: res.iNotificationId, readId: 1 });
                                         }}>Mark read</span>
                                     </div>
 
                                     : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({id: res.iNotificationId , readId : 1});
+                                        readNotification({ id: res.iNotificationId, readId: 1 });
                                       }}>Mark read</span>}
                                 </div>
                               )}
