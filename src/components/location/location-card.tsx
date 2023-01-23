@@ -69,7 +69,7 @@ export const Subscribe = ({
   const bussinessByName = useAppSelector(GET_BUSINESS);
 
 
-  console.log(bussinessByName, 'bussinessByName')
+  // console.log(bussinessByName, 'bussinessByName')
 
   useEffect(() => {
 
@@ -132,7 +132,7 @@ export const Subscribe = ({
         allsubscriberOfBussinesss();
         getDatalist()
         navigate("");
-        toast.success("Subsribed  Successfully");
+        toast.success("Subscribed Successfully");
       } catch (error) {
         console.log(error);
       }
@@ -151,7 +151,7 @@ export const Subscribe = ({
     // setButton(false);
     allsubscriberOfBussinesss();
     getDatalist()
-    toast.success("Unsubsribed  Successfully");
+    toast.success("Unsubscribed Successfully");
   };
 
 
@@ -195,20 +195,6 @@ export const Subscribe = ({
           Subscribe Now
         </Button>
       )}
-
-      {/* {!showButton && (
-        <Button
-          size="large"
-          variant="contained"
-          color="error"
-          onClick={() => {
-            onButtonClick();
-          }}
-          sx={{ fontWeight: 800, borderRadius: "24px" }}
-        >
-          Subscribe Now
-        </Button>
-      )} */}
     </>
   );
 };
@@ -250,7 +236,7 @@ export function Location({
     <Card
       elevation={3}
       sx={{
-        height: "100%",
+        height: "83%",
         position: "relative",
         display: "flex",
         flexDirection: "column",

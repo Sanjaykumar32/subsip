@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Box, Container, useTheme } from "@mui/material";
 import { Card, Grid, Typography } from "@mui/material";
 import {
@@ -33,8 +33,9 @@ export function LocationPage() {
   const locations = useLocation();
   const dispatch = useAppDispatch();
   const businessId = locations.pathname.split("/")[2];
+  const [name, setName] = useState('')
 
-  const handleClickOpen = async () => {
+  const handleClickOpen = async (el: any) => {
     try {
       await dispatch(
         AdminThunk.refferralCode({ userId: userId ? userId : "" })
@@ -43,6 +44,7 @@ export function LocationPage() {
       console.log(error);
     }
     setOpen(true);
+    setName(el)
   };
 
   const allsubscriberOfBussinesss = useCallback(async () => {
@@ -118,19 +120,22 @@ export function LocationPage() {
                       justifyContent: "flex-end",
                       paddingBottom: "10px",
                     }}
-                    onClick={handleClickOpen}
+                  
                   >
-                    <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}>
+                    <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }} 
+                        onClick={() => handleClickOpen(res?.vName)}
+                        className=' cursor-pointer'
+                     >
                       <FontAwesomeIcon
                         icon={faArrowUpRightFromSquare}
                         style={{ marginRight: 4 }}
+                     
                       />
                       Referral
                     </Typography>
                   </Box>
                 )}
                 {bussinessByName.map((res: IBusiness, index: number) => {
-                  console.log(res, "res");
                   return <Location {...res} key={index} />;
                 })}
               </Grid>
@@ -139,6 +144,7 @@ export function LocationPage() {
 
             {open && (
               <ResponsiveDialog
+                title={name}
                 open={open}
                 handleClose={handleClose}
                 refferralCode={refferralCode}

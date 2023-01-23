@@ -68,7 +68,7 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
     } else {
       setAuthenticated(false);
       // navigate('/auth/sign-in')
-      toast.success("Log Out SuccessFully")
+      toast.success("Log Out Successfully")
       console.log('token false here')
     }
   }, [token]);

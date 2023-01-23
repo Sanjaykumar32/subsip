@@ -60,7 +60,7 @@ export const SubCategoryController = (): ISubcategoryControllerReturns => {
 
   async function deleteSubCategorylist(ID: number): Promise<void> {
     await dispatch(AdminThunk.deleteSubCategory({ subCategoryId: ID }));
-    toast.success("Category Delete SuccessFully");
+    toast.success("Category Deleted Successfully");
     getSubCategory();
   }
 

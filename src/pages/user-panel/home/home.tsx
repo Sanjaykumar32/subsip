@@ -20,16 +20,16 @@ import { Button } from "@mui/material";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import toast from "react-hot-toast";
 
 
-/**
- *
- */
-export function Home() {
+export function Home({ alertOnBottom}:any) {
   const location = useLocation();
   const theme = useTheme();
   const [showMoreData, setMoreData] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [scroll , setScroll ] = useState(false)
   const settings: any = {
     infinite: true,
     slidesToShow: 1,
@@ -154,7 +154,6 @@ export function Home() {
 
   const businessData = useAppSelector(GET_BUSINESS);
 
-  console.log(businessData, 'businessData')
 
   const filterBanner = businessData.filter((item) => {
     return Object.values(item.vLocation.toString().toLowerCase())
@@ -163,10 +162,14 @@ export function Home() {
       .includes(location.search.toString().slice(1, 19).toLowerCase());
   });
 
-  console.log(filterBanner, "location.search.toString().slice(1, 19)");
+  console.log(businessData, 'businessData');
+  console.log(filterBanner, 'filterBanner')
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
+
+  console.log(CateFirst, 'CateFirst')
+  console.log(categoryData, 'categoryData')
   const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
@@ -201,8 +204,6 @@ export function Home() {
     setMoreData(false);
   };
   const locatiosn = useLocation();
-  // const businessId = location.id;
-  console.log(locatiosn, "location home ");
 
   async function onImageClick(id: number): Promise<void> {
     try {
@@ -219,8 +220,18 @@ export function Home() {
     }
   }
 
+ 
+  const handleOnDocumentBottom = useCallback(() => {
+     setScroll(true)
+
+  }, [alertOnBottom]);
+
+  useBottomScrollListener(handleOnDocumentBottom);
+
+
+
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden" >
       <div className="py-20 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
@@ -235,7 +246,7 @@ export function Home() {
 
                   <div>
                     <span
-                      className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer "
+                      className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle"
                       onClick={() => {
                         auth?.isAuthenticated
                           ? onImageClick(ele.iBusinessId)
@@ -283,7 +294,12 @@ export function Home() {
       </div>
 
       <div className="w-full px-5 mt-8">
-        <p className="font-semibold text-[1.2rem] pb-5">Seattle, WA</p>
+
+        <p className="font-semibold text-[24px] pb-2 mx-5 ">
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[0]).length > 0 &&
+            'Restaurants'
+          }
+        </p>
 
         <div className="relative">
           <Slider ref={cardRef} {...cardSettingsScroll}>
@@ -295,7 +311,7 @@ export function Home() {
                     style={{
                       boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
                     }}
-                    key={`${ele.eStatus}+${index}`}
+                    key={`${ele?.eStatus}+${index}`}
                     className="relative overflow-x-auto md:overflow-x-hidden "
                   >
                     <SliderCard
@@ -304,8 +320,8 @@ export function Home() {
                       tagLine={ele?.vTagLine}
                       des={ele?.tDescription}
                       location={ele?.vLocation}
-                      id={ele.iBusinessId}
-                      subscriberCount={ele.subscriberCount}
+                      id={ele?.iBusinessId}
+                      subscriberCount={ele?.subscriberCount}
                       subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                     />
                   </div>
@@ -317,7 +333,13 @@ export function Home() {
           ).length > 0 && <SliderArrow refVal={cardRef} />}
         </div>
 
-        <div className="relative mt-10 w-full">
+        <p className="font-semibold text-[24px]  mt-5 mx-5">
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1]).length > 0 &&
+            'Home Services'
+          }
+        </p>
+        <div className="relative mt-5 w-full">
+
           <Slider ref={cardRef2} {...cardSettings}>
             {filterBanner
               .filter((el) => parseInt(el.iCategory) == CateFirst[1])
@@ -338,6 +360,7 @@ export function Home() {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
+                      subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                     />
                   </div>
                 );
@@ -346,6 +369,12 @@ export function Home() {
           {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1])
             .length > 0 && <SliderArrow refVal={cardRef2} />}
         </div>
+
+        <p className="font-semibold text-[24px]  mt-5 mx-5">
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[2]).length > 0 &&
+            'Auto Services'
+          }
+        </p>
 
         <div className="relative my-10 w-full">
           <Slider ref={cardRef3} {...cardSettings}>
@@ -368,6 +397,7 @@ export function Home() {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
+                      subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                     />
                   </div>
                 );
@@ -378,8 +408,16 @@ export function Home() {
         </div>
 
         {/* More data show */}
-        {showMoreData ? (
+
+
+
+        {scroll ? (
           <>
+            <p className="font-semibold text-[24px]  mt-5 mx-5">
+              {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[3]).length > 0 &&
+                'More'
+              }
+            </p>
             <div className="relative my-10 w-full">
               <Slider ref={cardRef3} {...cardSettings}>
                 {filterBanner
@@ -401,6 +439,7 @@ export function Home() {
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
                           subscriberCount={ele.subscriberCount}
+                          subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                         />
                       </div>
                     );
@@ -432,6 +471,7 @@ export function Home() {
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
                           subscriberCount={ele.subscriberCount}
+                          subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                         />
                       </div>
                     );
@@ -444,12 +484,11 @@ export function Home() {
           </>
         ) : null}
 
-        {/* { && */}
-        {filterBanner.filter(
+   
+        {/* {filterBanner.filter(
           (el) => parseInt(el.iCategory) == CateFirst[2]
         ) && (
             <div className="moreBtn">
-              {/* {console.log(CateFirst[3])} */}
               {showMoreData ? (
                 <Button variant="contained" onClick={handleLessData}>
                   Less...
@@ -460,7 +499,7 @@ export function Home() {
                 </Button>
               )}
             </div>
-          )}
+          )} */}
       </div>
     </div>
   );
@@ -469,17 +508,15 @@ export function Home() {
 const SliderCard = (props: any) => {
   const { des, imgSrc, location, name, id, subscriberCount, subcriber } = props;
 
-  console.log(subcriber, 'subcriber split');
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId")
 
-  const filters = subcriber && subcriber.filter((el: any) => {
+  const filters = subcriber && subcriber?.filter((el: any) => {
     return el == userId
   })[0]
 
-  console.log(filters, 'filtersssss')
   async function onImageClick(): Promise<void> {
     try {
       const response: any = await dispatch(
@@ -495,20 +532,47 @@ const SliderCard = (props: any) => {
     }
   }
 
-  async function onButtonClick(): Promise<void> {
+  const allBusiness = useCallback(async () => {
+    try {
+      await dispatch(UserThunk.business());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  async function SubcribeBtn(): Promise<void> {
     !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
+    console.log('this is btn stb')
     try {
       await dispatch(
         UserThunk.addSubscriberToBusiness({
           businessId: id,
           userId: userId ? userId : "",
-          referredCode: "dkfdhfjkh",
+          referredCode: null,
         })
       );
+
+      allBusiness()
+      // allsubscriberOfBussinesss();
+      // getDatalist()
+      // toast.success("Subsribed  Successfully")
+
     } catch (error) {
       console.log(error);
     }
   }
+
+
+  const handleUnsub = async (id: any) => {
+    await dispatch(
+      UserThunk.UNSubscriberToBusiness({
+        businessId: id ? "" + id : "0",
+      })
+    );
+    allBusiness()
+    toast.success("Unsubsribed  Successfully")
+  };
+
 
   return (
     <div className="w-full mx-auto  md:mx-5 relative max-w-[307px] bg-white  border-[1px] border-[#DADDE5] ">
@@ -518,9 +582,9 @@ const SliderCard = (props: any) => {
         className="w-full object-cover h-[215px]  cursor-pointer "
         onClick={onImageClick}
       />
-      <div className=" pl-3 py-3  ">
+      <div className=" pl-4 py-4  ">
         <span
-          className="text-black text-[1.3rem] font-semibold cursor-pointer textLimit2 "
+          className="text-black text-[19px] leading-[22px] font-semibold cursor-pointer textLimit2 my-3 "
           onClick={() => {
             auth?.isAuthenticated
               ? onImageClick()
@@ -529,13 +593,13 @@ const SliderCard = (props: any) => {
         >
           {name}
         </span>
-        <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold py-2">
+        <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold ">
           {location ? location : " "}
         </p>
-        <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434D59] textLimit2 py-2 pl-3 ">
+        <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434d59] textLimit2 my-3 ">
           {des ? des : "--"}
         </p>
-        <div className="flex justify-between">
+        <div className="flex justify-between my-2">
           <p className="text-[0.9rem] text-[#CDCDCD]">
             <span className="text-[20px] text-black pr-2">
               {" "}
@@ -544,13 +608,13 @@ const SliderCard = (props: any) => {
             {subscriberCount ? "subscribers" : " "}
           </p>
 
-          <div className="raletive cursor-pointer " onClick={onButtonClick}>
+          <div className="raletive cursor-pointer "  >
             {filters == userId && auth?.isAuthenticated ?
-              <div className="subscribeLebalListing bg-[#e0e0e0] " >
+              <div className="subscribeLebalListing bg-[#e0e0e0] " onClick={() => handleUnsub(id)} >
                 <span className=" text-[#262626] font-medium"> Unsubscribe</span>
               </div>
               :
-              <div className="subscribeLebalListing bg-[#dc2626] ">
+              <div className="subscribeLebalListing bg-[#09292b]" onClick={SubcribeBtn} >
                 <span className=" text-white font-medium"> Subscribe</span>
               </div>
             }
