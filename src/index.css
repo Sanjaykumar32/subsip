@@ -21,7 +21,7 @@
     text-align: center;
     padding: 5px 18px 5px 45px;
     position: relative;
-    background: #dc2626;
+ 
 }
 
 
@@ -95,6 +95,16 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
     width: 80%;
 }
 
+
+
+.css-li3b9n-MuiButtonBase-root-MuiButton-root{
+    display: flex;
+    justify-content: start !important;
+    padding: 0% !important;
+}
+.css-1u2w381-MuiModal-root-MuiDrawer-root{
+    z-index: 1099 !important;
+}
 
 
 
@@ -230,9 +240,27 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 .grid-about {
     grid-template-columns: 1fr 1fr;
 }
-
+.css-15v22id-MuiAccordionDetails-root{
+    padding: 0% !important;
+}
+p.MuiTypography-root.MuiTypography-body1.text-\[\#252525\].py-1\}.css-29o67s-MuiTypography-root {
+    padding: 6px 8px;
+}
 /* mobile mode css */
 @media screen and (min-device-width: 300px) and (max-device-width: 767px) {
+    svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root {
+        height: 40px;
+        width: 40px;
+    }
+    .css-d3fbhi-MuiBackdrop-root{
+        z-index: 0 !important;
+    }
+    .sc-eDvSVe.cmyNjn {
+        z-index: 1 !important;
+    }
+    .MuiButtonBase-root.MuiListItemButton-root.MuiListItemButton-gutters.MuiListItemButton-root.MuiListItemButton-gutters.css-1b5cfng-MuiButtonBase-root-MuiListItemButton-root {
+        padding: 8px 0px;
+    }
     .footerIconDP {
         display: flex;
         padding: 35px 21px;
@@ -445,4 +473,8 @@ h2 {
 
 .footerCss {
     border-radius: 0px !important;
+}
+
+.css-d3fbhi-MuiBackdrop-root{
+    z-index: 0 !important;
 }

@@ -43,11 +43,6 @@ export function AdminLayout(props: Props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
   const menuList = React.useMemo(
     () => [
       {
@@ -94,6 +89,14 @@ export function AdminLayout(props: Props) {
     ],
     []
   );
+  const [menu, setMenu] = React.useState<any>("Dashboard");
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const handleActive = (item: any) => {
+    setMenu(item);
+  };
 
   const drawer = (
     <div>
@@ -126,8 +129,16 @@ export function AdminLayout(props: Props) {
               textDecoration: "none",
             }}
           >
-            <ListItem key={index} disablePadding>
-              <ListItemButton>
+            <ListItem
+              key={index}
+              disablePadding
+              className={menu == item.title ? "bg-[#c9c8c8]" : ""}
+            >
+              <ListItemButton
+                onClick={() => {
+                  handleActive(item.title);
+                }}
+              >
                 <ListItemIcon>
                   <FontAwesomeIcon icon={item.icon} />
                 </ListItemIcon>
@@ -145,71 +156,7 @@ export function AdminLayout(props: Props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      {/* <AppBar
-        elevation={0}
-        color="default"
-        position="fixed"
-        sx={{
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-        }}
-      >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h5"
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              fontFamily: "Kessel",
-              fontWeight: 700,
-              letterSpacing: ".2rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            PoshSub
-          </Typography>
-          {!isMobile && (
-            <TextField
-              size="small"
-              sx={{ width: "50%" }}
-              label="Search Listings"
-              InputProps={{
-                sx: { borderRadius: "60px" },
-                endAdornment: (
-                  <InputAdornment position="end" sx={{ mx: 1 }}>
-                    <FontAwesomeIcon icon={faSearch} />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          )}
-          <Box>
-            <Badge badgeContent={5} color="primary" sx={{ mx: 2 }}>
-              <FontAwesomeIcon icon={faBell} size="lg" />
-            </Badge>
-            {!isMobile && (
-              <FontAwesomeIcon
-                icon={faUserCircle}
-                size="xl"
-                style={{ margin: theme.spacing(0, 2) }}
-              />
-            )}
-          </Box>
-        </Toolbar>
-      </AppBar> */}
-
-      <UserAppBar userMenu={false} display={"adminHeader"} />
-
+      <UserAppBar userMenu={false} display={"adminHeader"} menu={menu} />
       <Box
         component="nav"
         sx={{
@@ -243,7 +190,7 @@ export function AdminLayout(props: Props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,

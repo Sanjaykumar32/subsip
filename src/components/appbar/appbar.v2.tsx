@@ -32,10 +32,6 @@ import "./appBar-v2-style.css";
 import { AdminRoutePathEnum, AuthRoutePathEnum, RoutePathEnum } from "enum";
 import { useNavigate, useLocation } from "react-router-dom";
 import { SearchField } from "./component/search-field/search-field";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import FormControl from "@mui/material/FormControl";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
 import {
@@ -47,6 +43,15 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import { format } from "date-fns";
+import {
+  faDiagramProject,
+  faHome,
+  faList,
+  faTrophy,
+} from "@fortawesome/free-solid-svg-icons";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -67,7 +72,65 @@ export const UserAppBar = (props: any) => {
   const userId = localStorage.getItem("userId");
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
 
-  console.log(userNotificationData, "userNotificationData");
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+
+  const routeAdmin = homepage.split("/")[1]
+
+  console.log(searchLocation, 'searchLocation')
+
+
+  // isMobile admin list----------------------------------------
+  const menuList = React.useMemo(
+    () => [
+      {
+        title: "Dashboard",
+        icon: faHome,
+        route: AdminRoutePathEnum.ADMIN,
+      },
+
+      {
+        title: "Listing",
+        icon: faList,
+        route: AdminRoutePathEnum.ADMIN_LISTING,
+      },
+
+      {
+        title: "Subscribers",
+        icon: faHome,
+        route: AdminRoutePathEnum.ADMIN_SUBSCRIBERS,
+      },
+
+      {
+        title: "Categories",
+        icon: faUser,
+        route: AdminRoutePathEnum.ADMIN_CATEGORY,
+      },
+
+      {
+        title: "Notifications",
+        icon: faBell,
+        route: AdminRoutePathEnum.ADMIN_NOTIFICATION,
+      },
+
+      {
+        title: "Rewards",
+        icon: faTrophy,
+        route: AdminRoutePathEnum.ADMIN_MILESTONES,
+      },
+
+      {
+        title: "Referrals",
+        icon: faDiagramProject,
+        route: AdminRoutePathEnum.ADMIN_REFERRALS,
+      },
+    ],
+    []
+  );
 
   const getcategory = useCallback(async () => {
     try {
@@ -95,15 +158,13 @@ export const UserAppBar = (props: any) => {
     }
   }, [dispatch, userId]);
 
-
   const readNotification = useCallback(
     async ({ id, readId }: any) => {
-      console.log(id, readId, 'ids')
+      console.log(id, readId, "ids");
       // const data = {
       //   read: Number   userId ?  parseInt(userId) : 0,
       // };
       try {
-
         await dispatch(
           AdminThunk.readUserNotification({
             notificationId: id,
@@ -154,6 +215,14 @@ export const UserAppBar = (props: any) => {
 
   const showLocationPopUp = () => {
     setLocationPopUP(true);
+    // if (routeAdmin == 'category') {
+    //   navigate(`?${searchLocation}`, {
+    //     state: {
+    //       categoryPage: true,
+    //       data: searchLocation
+    //     }
+    //   })
+    // }
   };
 
   // const disableCloseOnSelect = () => {
@@ -161,25 +230,54 @@ export const UserAppBar = (props: any) => {
   //   setLocationPopUP(false);
   //   navigate(`/?`);
   // };
+
   const handlevalue = (el: any) => {
-    if (el == undefined) {
-      setLocation("");
-      setLocationPopUP(false);
-      navigate(`/?`);
-      setOpen(false)
-    } else {
-      setLocation(el);
-      navigate(`/?${el}`);
+    if (homepage == '/') {
+      if (el == undefined) {
+        setLocation("");
+        setLocationPopUP(false);
+        navigate(`/?`);
+        setOpen(false);
+      } else {
+        setLocation(el);
+        navigate(`/?${el}`);
+      }
     }
-  };
+
+    // if (routeAdmin == 'category') {
+    //   if (el == undefined) {
+    //     setLocation("");
+    //     setLocationPopUP(false);
+    //     navigate(`?`);
+    //     setOpen(false);
+    //   } else {
+    //     setLocation(el);
+    //     navigate(`?${el}`, {
+    //       state: {
+    //         categoryPage: true,
+    //         data:el
+    //       }
+    //     })
+
+    //   }
+    // }
+  }
 
   const handleLocation = (event: any) => {
-    setLocation(event.target.value);
-    navigate(`/?${event.target.value}`);
+    if (homepage == '/') {
+      setLocation(event.target.value);
+      navigate(`/?${event.target.value}`);
+    }
+
+    // if (routeAdmin == 'category') {
+    //   setLocation(event.target.value);
+    //   navigate(`?${event.target.value}`);
+    // }
+
   };
 
   const handleLocationSearch = () => {
-    navigate(`/?${searchLocation}`);
+    // navigate(`/?${searchLocation}`);
     setLocationPopUP(false);
   };
 
@@ -305,10 +403,16 @@ export const UserAppBar = (props: any) => {
   // );
 
   const [open, setOpen] = useState<boolean>(false);
-  console.log(open, 'open')
+
+  console.log(open, "open");
   const spring = useSpring({
     from: { height: "0px" },
     to: { height: !isMobile ? "auto" : open ? "320px" : "0px" },
+  });
+
+  const spring2 = useSpring({
+    from: { height: "0px" },
+    to: { height: open ? "auto" : "0px" },
   });
 
   const [sticky, setSticky] = useState("");
@@ -333,13 +437,13 @@ export const UserAppBar = (props: any) => {
     options: businessData,
     getOptionLabel: (option: any) => option.vLocation,
   };
-  // const flatProps = {
-  //   options: businessData.map((option) => option.vLocation),
-  // };
+  const flatProps = {
+    options: businessData.map((option: { vLocation: any }) => option.vLocation),
+  };
 
   const handleBanner = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <>
@@ -364,18 +468,21 @@ export const UserAppBar = (props: any) => {
             alignItems: "center",
           }}
         >
-          <div className=" absolute  left-4 top-[3px] ">
+          <div className=" absolute  left-4 top-[14px] ">
             <IconButton onClick={() => setOpen(!open)}>
               <FontAwesomeIcon icon={open ? faClose : faBars} size="sm" />
             </IconButton>
           </div>
 
-
           {/*---------------------------- bage logos header ------------------------ */}
 
-          <div className={`flex w-full  ${auth.isAuthenticated ? 'justify-end' : 'justify-center'}`}>
+          <div
+            className={`flex w-full  ${auth.isAuthenticated
+              ? "justify-end items-center"
+              : "justify-center"
+              }`}
+          >
             <div className=" grid-cols-1">
-
               <Logo variant="dark" />
             </div>
 
@@ -395,14 +502,15 @@ export const UserAppBar = (props: any) => {
                         ? userNotificationData.length
                         : ""
                     }
-                    color={userNotificationData.length > 0 ? "error" : undefined}
+                    color={
+                      userNotificationData.length > 0 ? "error" : undefined
+                    }
                   >
                     <FontAwesomeIcon icon={faBell} />
                   </Badge>
                 </IconButton>
 
-
-                {auth.isAuthenticated && isMobile &&
+                {auth.isAuthenticated && isMobile && (
                   <>
                     <IconButton
                       sx={{ mx: 1 }}
@@ -461,7 +569,10 @@ export const UserAppBar = (props: any) => {
                           }}
                         >
                           <Link key="profile-menu" href={setting.route}>
-                            <Typography textAlign="left" className="text-black ">
+                            <Typography
+                              textAlign="left"
+                              className="text-black "
+                            >
                               {setting.title}
                             </Typography>
                           </Link>
@@ -469,9 +580,7 @@ export const UserAppBar = (props: any) => {
                       ))}
                     </Menu>
                   </>
-                }
-
-
+                )}
               </div>
             ) : (
               <Button
@@ -486,8 +595,6 @@ export const UserAppBar = (props: any) => {
             )}
           </div>
         </Toolbar>
-
-
 
         <Toolbar
           sx={{
@@ -514,9 +621,9 @@ export const UserAppBar = (props: any) => {
             <SearchField />
           )}
 
-
           {/* < ------------------- location input field ---------------------> */}
-          {homepage === "/" && (
+
+          {homepage == "/" || routeAdmin == 'category' ? (
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {!locationPopUp ? (
                 <Button
@@ -582,7 +689,9 @@ export const UserAppBar = (props: any) => {
                 sx={{ mx: 1, height: "30px", my: "auto" }}
               />
             </Box>
-          )}
+          ) : null}
+
+
           {!auth.isAuthenticated ? (
             <Button
               variant="contained"
@@ -660,7 +769,6 @@ export const UserAppBar = (props: any) => {
                 ))}
               </Menu>
 
-
               <IconButton
                 sx={{ mx: 1 }}
                 onClick={handleNotificationClick}
@@ -718,14 +826,16 @@ export const UserAppBar = (props: any) => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-
                 {/* <-------------------------- notification dropdown -----------------> */}
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
                     console.log(res.iNotificationId, "res");
 
                     return (
-                      <div className="Notification list w-[350px]  mx-2 px-2 py-2  shadow-md rounded-[6px] border-solid   my-2 " key={i} >
+                      <div
+                        className="Notification list w-[350px]  mx-2 px-2 py-2  shadow-md rounded-[6px] border-solid   my-2 "
+                        key={i}
+                      >
                         <div className="">
                           <div className="grid w-full gap-[5px]">
                             {/* <li className="text-black cursor-pointer text-[16px] "> */}
@@ -748,39 +858,90 @@ export const UserAppBar = (props: any) => {
                                 readMoreNotification.id == res.iNotificationId ? (
                                 <div className="">
                                   <span>{res.vDesc}</span>
-                                  {res.vDesc.length > 55 ?
+                                  {res.vDesc.length > 55 ? (
                                     <div>
-                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium "
-                                        onClick={() => setReadMoreNotification({ state: false, id: res.iNotificationId })} >  Read Less</span>
-                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                      <span
+                                        className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer font-medium "
+                                        onClick={() =>
+                                          setReadMoreNotification({
+                                            state: false,
+                                            id: res.iNotificationId,
+                                          })
+                                        }
+                                      >
+                                        {" "}
+                                        Read Less
+                                      </span>
+                                      <span
+                                        className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                         onClick={() => {
-                                          readNotification({ id: res.iNotificationId, readId: 1 });
-                                        }}>Mark read</span>
+                                          readNotification({
+                                            id: res.iNotificationId,
+                                            readId: 1,
+                                          });
+                                        }}
+                                      >
+                                        Mark read
+                                      </span>
                                     </div>
-                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                  ) : (
+                                    <span
+                                      className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({ id: res.iNotificationId, readId: 1 });
-                                      }}>Mark read</span>}
+                                        readNotification({
+                                          id: res.iNotificationId,
+                                          readId: 1,
+                                        });
+                                      }}
+                                    >
+                                      Mark read
+                                    </span>
+                                  )}
                                 </div>
                               ) : (
                                 <div className="">
                                   <span className="NotextLimit2">
                                     {res.vDesc}
                                   </span>
-                                  {res.vDesc.length > 55 ?
+                                  {res.vDesc.length > 55 ? (
                                     <div className="">
-                                      <span className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer  font-medium"
-                                        onClick={() => setReadMoreNotification({ state: true, id: res.iNotificationId })} >  ...Read More</span>
-                                      <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
+                                      <span
+                                        className="text-[14px] w-[50px]  text-[#2196F3] cursor-pointer  font-medium"
+                                        onClick={() =>
+                                          setReadMoreNotification({
+                                            state: true,
+                                            id: res.iNotificationId,
+                                          })
+                                        }
+                                      >
+                                        {" "}
+                                        ...Read More
+                                      </span>
+                                      <span
+                                        className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal"
                                         onClick={() => {
-                                          readNotification({ id: res.iNotificationId, readId: 1 });
-                                        }}>Mark read</span>
+                                          readNotification({
+                                            id: res.iNotificationId,
+                                            readId: 1,
+                                          });
+                                        }}
+                                      >
+                                        Mark read
+                                      </span>
                                     </div>
-
-                                    : <span className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
+                                  ) : (
+                                    <span
+                                      className="text-[14px] w-[50px] ml-2 text-[#2196F3] border-[0.1px] border-[#2196F3] px-2  rounded-[10px] cursor-pointer font-normal  "
                                       onClick={() => {
-                                        readNotification({ id: res.iNotificationId, readId: 1 });
-                                      }}>Mark read</span>}
+                                        readNotification({
+                                          id: res.iNotificationId,
+                                          readId: 1,
+                                        });
+                                      }}
+                                    >
+                                      Mark read
+                                    </span>
+                                  )}
                                 </div>
                               )}
                               {/* {!readMoreNotification ?
@@ -819,7 +980,7 @@ export const UserAppBar = (props: any) => {
         {/* <-------------------------mobile dropdown-----------------> */}
 
         {props?.userMenu == true && categoryData.length > 0 && (
-          <animated.div style={{ overflow: "hidden", ...spring }} >
+          <animated.div style={{ overflow: "hidden", ...spring }}>
             <Toolbar>
               <div className="moblieMenu">
                 <List
@@ -836,33 +997,168 @@ export const UserAppBar = (props: any) => {
                   {categoryData.map((item: any, index: any) =>
                     index === 0 ? (
                       <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`} onClick={handleBanner}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
                           {item?.vName}
                         </Link>
                       </ListItem>
                     ) : index === 1 ? (
                       <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`} onClick={handleBanner}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
                           {item?.vName}
                         </Link>
                       </ListItem>
                     ) : index === 2 ? (
                       <ListItem key={index}>
-                        <Link href={`/category/${item?.iCategoryId}`} onClick={handleBanner}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
                           {item?.vName}
                         </Link>
                       </ListItem>
                     ) : (
                       index === 3 && (
                         <ListItem>
-                          <Link href={`/category/all`} onClick={handleBanner} >{"More"}</Link >
-
+                          <Link href={`/category/all`} onClick={handleBanner}>
+                            {"More"}
+                          </Link>
                         </ListItem>
                       )
                     )
                   )}
 
-                  {isMobile ?
+                  {isMobile ? (
+                    <ListItem className="">
+                      <Box
+                        sx={{ display: { xs: "Block", md: "flex" } }}
+                        className="w-[100%]  mt-2"
+                      >
+                        {!locationPopUp ? (
+                          <Button
+                            onClick={showLocationPopUp}
+                            disableRipple
+                            sx={{ color: "text.primary" }}
+                            className=""
+                          >
+                            <FontAwesomeIcon
+                              icon={faLocationDot}
+                              size="sm"
+                              style={{ marginRight: "8px" }}
+                            />
+                            Location
+                          </Button>
+                        ) : (
+                          <Stack spacing={1} className="w-[100%] my-3">
+                            <Autocomplete
+                              {...defaultProps}
+                              id="disable-close-on-select"
+                              //  onClick={disableCloseOnSelect}
+                              onChange={(event, newValue: any) => {
+                                console.log(event, "event onchange");
+                                setOpen(false);
+                                handlevalue(newValue?.vLocation);
+                              }}
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  onChange={handleLocation}
+                                  label="Search"
+                                  variant="standard"
+                                />
+                              )}
+                            />
+                          </Stack>
+                        )}
+
+                        {/* <Divider
+                        flexItem
+                        orientation="vertical"
+                        variant="middle"
+                        sx={{ mx: 1, height: "30px", my: "auto" }}
+                      /> */}
+                      </Box>
+                    </ListItem>
+                  ) : null}
+
+                  <ListItem className=" rounded-[10px] my-5">
+                    {!auth.isAuthenticated && isMobile ? (
+                      <Button
+                        className="w-[100%]"
+                        variant="contained"
+                        sx={{ minWidth: "100px" }}
+                        onClick={() => {
+                          navigate(AuthRoutePathEnum.SIGN_IN);
+                        }}
+                      >
+                        Log In
+                      </Button>
+                    ) : null}
+                  </ListItem>
+                </List>
+              </div>
+            </Toolbar>
+          </animated.div>
+        )}
+
+        {/* <<<<<<<<<<<<<<<< ---------admin list dropdown --------------->>>>>>>>>>>>>>. */}
+
+        {routeAdmin == "admin" && isMobile && open && (
+          <animated.div
+            style={{ overflow: "hidden", ...spring2 }}
+            className="mt-[-60px]"
+          >
+            <Toolbar>
+              <div className="moblieMenu">
+                <List
+                  className="categoryListing"
+                  sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", md: "row" },
+                    ".MuiListItem-root": {
+                      minWidth: "fit-content",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <List className="">
+                    {menuList.map((item, index) => (
+                      <Link
+                        // to={item.route}
+                        onClick={handleBanner}
+                        href={`${item.route}`}
+                        key={item.title}
+                        style={{
+                          color: theme.palette.getContrastText(
+                            theme.palette.background.default
+                          ),
+                          textDecoration: "none",
+                        }}
+                      >
+                        <ListItem
+                          key={index}
+                          disablePadding
+                          className={
+                            props.menu == item.title ? "bg-[#c9c8c8]" : ""
+                          }
+                        >
+                          <ListItemButton>
+                            <ListItemIcon>
+                              <FontAwesomeIcon icon={item.icon} />
+                            </ListItemIcon>
+                            <ListItemText primary={item.title} />
+                          </ListItemButton>
+                        </ListItem>
+                      </Link>
+                    ))}
+                  </List>
+
+                  {/* {isMobile ?
                     <ListItem className='' >
                       <Box sx={{ display: { xs: "Block", md: "flex" } }} className='w-[100%]  mt-2'>
                         {!locationPopUp ? (
@@ -899,17 +1195,10 @@ export const UserAppBar = (props: any) => {
                             />
                           </Stack>
                         )}
-
-                        {/* <Divider
-                        flexItem
-                        orientation="vertical"
-                        variant="middle"
-                        sx={{ mx: 1, height: "30px", my: "auto" }}
-                      /> */}
                       </Box>
-                    </ListItem> : null}
+                    </ListItem> : null} */}
 
-                  <ListItem className=" rounded-[10px] my-5">
+                  {/* <ListItem className=" rounded-[10px] my-5">
 
                     {!auth.isAuthenticated && isMobile ?
                       <Button
@@ -923,14 +1212,9 @@ export const UserAppBar = (props: any) => {
                         Log In
                       </Button> : null}
 
-                  </ListItem>
-
+                  </ListItem> */}
                 </List>
               </div>
-
-
-
-
             </Toolbar>
           </animated.div>
         )}

@@ -28,6 +28,7 @@ export enum AdminRoutePathEnum {
   ADMIN_SUBCATEGORY = "/admin/subcategory",
   ADMIN_NOTIFICATION = "/admin/notification",
   ADMIN_SUBSCRIBERS = "/admin/subscribers",
+  REFFERED_USER_LIST = "/admin/referredUserList",
 }
 
 export enum RoutePathEnum {
@@ -41,6 +42,6 @@ export enum RoutePathEnum {
   LISTING_PRODUCT = "/listing/:id",
   NONE = "",
   ABOUT = "/about",
-  TERMS = '/terms',
-  PRIVACY = '/privacy'
+  TERMS = "/terms",
+  PRIVACY = "/privacy",
 }

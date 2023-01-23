@@ -83,6 +83,17 @@ export class AdminThunk {
   );
 
   /**
+   * Get Referral User
+   */
+  public static getReferralUser = createAsyncThunk(
+    "admin/getReferralUser",
+    async (): Promise<any> => {
+      const response = await AdminService.getReferralUser();
+      return response;
+    }
+  );
+
+  /**
    * Subscriber of bussiness
    */
   public static subscribeOfBussiness = createAsyncThunk(
@@ -463,7 +474,6 @@ export class AdminThunk {
   public static readUserNotification = createAsyncThunk(
     "admin/read/UserNotification",
     async (payload: IReadNotificationRequest): Promise<any> => {
-       
       const response = await AdminService.readNotification(payload);
       return response;
     }

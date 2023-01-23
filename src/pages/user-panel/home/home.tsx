@@ -154,6 +154,8 @@ export function Home() {
 
   const businessData = useAppSelector(GET_BUSINESS);
 
+  console.log(businessData, 'businessData')
+
   const filterBanner = businessData.filter((item) => {
     return Object.values(item.vLocation.toString().toLowerCase())
       .join("")
@@ -233,7 +235,7 @@ export function Home() {
 
                   <div>
                     <span
-                      className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle"
+                      className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer "
                       onClick={() => {
                         auth?.isAuthenticated
                           ? onImageClick(ele.iBusinessId)
@@ -304,6 +306,7 @@ export function Home() {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
+                      subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                     />
                   </div>
                 );
@@ -464,11 +467,19 @@ export function Home() {
 }
 
 const SliderCard = (props: any) => {
-  const { des, imgSrc, location, name, id, subscriberCount } = props;
+  const { des, imgSrc, location, name, id, subscriberCount, subcriber } = props;
+
+  console.log(subcriber, 'subcriber split');
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem("userId");
+
+  const filters = subcriber && subcriber.filter((el: any) => {
+    return el == userId
+  })[0]
+
+  console.log(filters, 'filtersssss')
   async function onImageClick(): Promise<void> {
     try {
       const response: any = await dispatch(
@@ -509,7 +520,7 @@ const SliderCard = (props: any) => {
       />
       <div className=" pl-3 py-3  ">
         <span
-          className="text-black text-[1.3rem] font-semibold cursor-pointer textLimit2 sliderTitle"
+          className="text-black text-[1.3rem] font-semibold cursor-pointer textLimit2 "
           onClick={() => {
             auth?.isAuthenticated
               ? onImageClick()
@@ -534,9 +545,15 @@ const SliderCard = (props: any) => {
           </p>
 
           <div className="raletive cursor-pointer " onClick={onButtonClick}>
-            <div className="subscribeLebalListing">
-              <span className=" text-white">Subscribe</span>
-            </div>
+            {filters == userId && auth?.isAuthenticated ?
+              <div className="subscribeLebalListing bg-[#e0e0e0] " >
+                <span className=" text-[#262626] font-medium"> Unsubscribe</span>
+              </div>
+              :
+              <div className="subscribeLebalListing bg-[#dc2626] ">
+                <span className=" text-white font-medium"> Subscribe</span>
+              </div>
+            }
           </div>
 
           {/* 
