@@ -63,39 +63,43 @@ export const AddSubCategoryController =
     };
 
     const submitHandler = async (): Promise<void> => {
-      // if (subCategory) {
-      //   // Edit category
-      //   const response: any = await dispatch(
-      //     AdminThunk.updateSubCategory({
-      //       subCategoryId: subCategrory ? parseInt(subCategrory) : 0,
-      //       name: subCategory,
-      //     })
-      //   );
+      if (subCategrory) {
+        //   // Edit category
+        console.log(subCategory, 'subCategory')
+        console.log('this is edit mode')
 
-      //   if (response.payload.data) {
-      //     naviagate(`/admin/subcategory/?category=${categrory}`);
-      //   }
-      //   setSubCategory("");
-      //   setBuisnessName("");
-      // } else {
+        const response: any = await dispatch(
+          AdminThunk.updateSubCategory({
+            subCategoryId: subCategrory ? parseInt(subCategrory) : 0,
+            name: subCategory,
+          })
+        );
 
-      // }
-      // create category
-      const response: any = await dispatch(
-        AdminThunk.subCategory({
-          categoryId: businessName,
-          name: subCategory,
-          addedBy: userId ? parseInt(userId) : 0,
-        })
-      );
-      if (response.payload.data) {
+        // if (response.payload.data) {
+        naviagate(`/admin/subcategory/?category=${categrory}`);
+        // }
+        setSubCategory("");
+        setBuisnessName("");
+      } else {
+        // create category
+        console.log(subCategory, 'subCategory')
+        console.log('this is add New mode')
+        const response: any = await dispatch(
+          AdminThunk.subCategory({
+            categoryId: businessName,
+            name: subCategory,
+            addedBy: userId ? parseInt(userId) : 0,
+          })
+        );
+        // if (response.payload.data) {
         naviagate(
           `${AdminRoutePathEnum.ADMIN_SUBCATEGORY}/?category=${categrory}`
         );
+        // }
+        setSubCategory("");
+        setBuisnessName("");
       }
-      setSubCategory("");
-      setBuisnessName("");
-    };
+    }
 
     const category = useCallback(async () => {
       try {

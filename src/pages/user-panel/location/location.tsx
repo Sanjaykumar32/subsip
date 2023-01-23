@@ -36,7 +36,6 @@ export function LocationPage() {
   const [name, setName] = useState('')
 
   const handleClickOpen = async (el: any) => {
-
     try {
       await dispatch(
         AdminThunk.refferralCode({ userId: userId ? userId : "" })
@@ -137,7 +136,6 @@ export function LocationPage() {
                   </Box>
                 )}
                 {bussinessByName.map((res: IBusiness, index: number) => {
-                  console.log(res, "res");
                   return <Location {...res} key={index} />;
                 })}
               </Grid>
