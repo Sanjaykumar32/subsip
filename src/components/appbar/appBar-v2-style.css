@@ -8,6 +8,9 @@
 .categoryListing li {
     padding: 0 !important;
 }
+.toolbarAdminMenu{
+    padding: 0% !important;
+}
 
 .categoryListing li a {
     font-weight: 400;

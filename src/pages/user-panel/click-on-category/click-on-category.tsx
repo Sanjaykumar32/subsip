@@ -41,9 +41,10 @@ export function ClickOnCategory() {
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const dispatch = useAppDispatch();
 
-  const pathSerchValue = location.search.slice(1 , 25)
+  const pathSerchValue = location.search.slice(1, 25)
 
-  console.log(pathSerchValue  , 'pathSerchValue')
+  const pathName = location?.pathname?.split('/')?.[1]
+
   const getcategory = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getCategory());
@@ -53,7 +54,7 @@ export function ClickOnCategory() {
   }, [dispatch]);
 
   const filteredSubCategory = subCategoryData?.filter((item) => {
-    return item.iCategoryId == getCateID;
+    return item?.iCategoryId == getCateID;
   });
 
   const getSubCategory = useCallback(async () => {
@@ -99,11 +100,20 @@ export function ClickOnCategory() {
   }, [allBusiness]);
 
   const listFilter = businessData.filter(
-    (el: { vName: { toString: () => string } }) => {
-      return Object.values(el.vName.toString().toLowerCase())
+    (el: {
+      vLocation: any; vName: { toString: () => string }
+    }) => {
+      return Object.values(
+        pathName == 'category' ?
+          el?.vLocation?.toString().toLowerCase()
+          : el.vName.toString().toLowerCase()
+      )
         .join("")
         .toLowerCase()
-        .includes(location.search.toString().slice(1, 19).toLowerCase());
+        .includes(
+          pathName == 'category' ? pathSerchValue.toString().toLowerCase() :
+            location.search.toString().slice(1, 19).toLowerCase()
+        );
     }
   );
 
@@ -181,11 +191,10 @@ export function ClickOnCategory() {
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
                               id="panel1a-header"
-                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
-                                activeCate === item?.iCategoryId
+                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
                                   ? " activeCate"
                                   : ""
-                              }  `}
+                                }  `}
                               onClick={() => {
                                 handleList(item?.iCategoryId),
                                   // handleSubList(item?.iSubCategoryId);
@@ -258,11 +267,10 @@ export function ClickOnCategory() {
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id={item.vName}
-                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
-                            activeCate === item?.iCategoryId
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
                               ? " activeCate"
                               : ""
-                          }  `}
+                            }  `}
                           onClick={() => {
                             handleList(item?.iCategoryId),
                               // handleSubList(item?.iSubCategoryId);
@@ -282,14 +290,14 @@ export function ClickOnCategory() {
                                 onClick={() =>
                                   handleSubList(res?.iSubCategoryId)
                                 }
-                              
-                              > 
-                              <div   className={subcatIdss == res.iSubCategoryId ? 'bg-[#c9c8c8]' : ''}>
-                              <Typography className={`text-[#252525] py-1} `} key={i} >
-                                  {res.vName}
-                                </Typography>
-                              </div>
-                              
+
+                              >
+                                <div className={subcatIdss == res.iSubCategoryId ? 'bg-[#c9c8c8]' : ''}>
+                                  <Typography className={`text-[#252525] py-1} `} key={i} >
+                                    {res.vName}
+                                  </Typography>
+                                </div>
+
                               </Link>
                             ))
                           ) : (
@@ -316,12 +324,12 @@ export function ClickOnCategory() {
               {activeCate == 65
                 ? "Restaurants"
                 : activeCate == 66
-                ? "Home Services"
-                : activeCate == 67
-                ? "Auto Services"
-                : activeCate == 68
-                ? "More"
-                : "Restaurants"}
+                  ? "Home Services"
+                  : activeCate == 67
+                    ? "Auto Services"
+                    : activeCate == 68
+                      ? "More"
+                      : "Restaurants"}
             </Typography>
             <Box
               sx={{
@@ -384,11 +392,11 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
-              listFilter.filter((el) =>
-                subcatIdss
-                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
-                  : el.iCategory === ids
-              ).length > 0 ? (
+                listFilter.filter((el) =>
+                  subcatIdss
+                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                    : el.iCategory === ids
+                ).length > 0 ? (
                 listFilter
                   .filter((el) =>
                     subcatIdss
@@ -428,21 +436,22 @@ export function ClickOnCategory() {
                             height="100px"
                             style={{ objectFit: "cover", height: "215px" }}
                           />
-                          <Box sx={{ py: 1.5, pl: "12px" }}>
-                            <Typography variant="body1" fontWeight={600}>
+                          <Box sx={{ py: '16px', pl: "16px" }}>
+                            <Typography variant="body1" fontWeight={600} className='cardDetails'>
                               {data.vName}
                             </Typography>
                             <Typography
                               variant="caption"
                               fontWeight={600}
                               color={theme.palette.grey[500]}
+                              className='cardLocation'
                             >
                               {data.vLocation}
                             </Typography>
                             <Box sx={{ my: 1, lineHeight: 0 }}>
                               <Typography
-                                fontSize={11}
-                                fontWeight={600}
+                                fontSize={16}
+                                
                                 className={"textLimit2"}
                               >
                                 {data.tDescription}
@@ -459,8 +468,10 @@ export function ClickOnCategory() {
                                 variant="caption"
                                 fontWeight={600}
                                 color={theme.palette.grey[500]}
+                                className='items-center'
+
                               >
-                                {data.subscriberCount + " Subscribe"}
+                               <span className="text-[20px] mr-1 text-[#262626]"> {data.subscriberCount}</span> <span className="text-[14px] text-[#cdcdcd]">Subscribe</span>
                               </Typography>
                               {/* <Button color="error" variant="rounded" size="small">
                                 Subscribe
