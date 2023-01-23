@@ -453,6 +453,14 @@ h2 {
     font-weight: 700;
 }
 
+.refferals{
+    padding: 1.5rem !important;
+}
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    width: 33%;
+    height: 35%;
+}
+
 .textLimit2 {
     overflow: hidden;
     text-overflow: ellipsis;

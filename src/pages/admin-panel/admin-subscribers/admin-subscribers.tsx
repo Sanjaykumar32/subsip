@@ -44,7 +44,7 @@ export function AdminSubscribers() {
 
   async function deleteSubscriber(ID: string) {
     await dispatch(UserThunk.deleteSubscriber({ iSubscriberId: ID }));
-    toast.success("Subscriber Delete SuccessFully");
+    toast.success("Subscriber Deleted Successfully");
     allsubscriberOfBussiness();
   }
 

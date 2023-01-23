@@ -12,6 +12,7 @@ import { toast } from "react-hot-toast";
 import { useLocation, useParams } from "react-router-dom";
 
 export default function ResponsiveDialog({
+  title,
   open,
   handleClose,
   refferralCode,
@@ -29,7 +30,7 @@ export default function ResponsiveDialog({
       `${hostName}/listing/${businessId}?referralCode=${refferralCode.referralCode}`
     );
     handleClose();
-    toast.success("Copied SuccessFully");
+    toast.success("Copied Successfully");
   };
 
   return (
@@ -37,9 +38,16 @@ export default function ResponsiveDialog({
       open={open}
       onClose={handleClose}
       aria-labelledby="responsive-dialog-title"
+    
     >
-      <DialogTitle id="responsive-dialog-title">
+      <DialogTitle id="responsive-dialog-title refferals">
+        <div className="flex  flex-col">
+        <span className="text-[1.75rem] text-[#1b1b1b] font-bold">{title}</span>
+        <span className="text-[14px] text-[#1b1b1b] font-semibold">Or copy link</span>
+        </div>
+   
         <IconButton
+          className="px-2 py-4"
           aria-label="close"
           onClick={handleClose}
           sx={{
@@ -56,7 +64,9 @@ export default function ResponsiveDialog({
         <DialogContentText>
           <TextField
             fullWidth
+            aria-readonly
             InputProps={{
+              readOnly: true, 
               endAdornment: (
                 <InputAdornment position="end" sx={{ cursor: "pointer" }}>
                   <FontAwesomeIcon icon={faCopy} onClick={appIdCopy} />

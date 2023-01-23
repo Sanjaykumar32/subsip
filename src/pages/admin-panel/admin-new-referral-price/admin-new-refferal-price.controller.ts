@@ -93,12 +93,12 @@ export const NewReferralPriceController =
               : 0,
           })
         );
-        toast.success("Update Referral SuccessFully")
+        toast.success("Referral Updated Successfully")
         navigate(AdminRoutePathEnum.ADMIN_REFERRALS);
       } else {
         await dispatch(AdminThunk.newReferralPrice(milestoneData)
         );
-        toast.success("Create Referral SuccessFully")
+        toast.success("Referral Created Successfully")
         navigate(AdminRoutePathEnum.ADMIN_REFERRALS);
       }
 

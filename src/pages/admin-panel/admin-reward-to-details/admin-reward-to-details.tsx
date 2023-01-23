@@ -63,7 +63,7 @@ export function AdminRewardToDetails() {
 
   async function deleteRewardlist(ID: number) {
     await dispatch(AdminThunk.deleteReward({ rewardId: ID }));
-    toast.success("Reward Delete SuccessFully");
+    toast.success("Reward Deleted Successfully");
     businessReward();
   }
 

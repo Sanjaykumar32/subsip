@@ -31,7 +31,7 @@ export function AdminReferral() {
   async function deleteDataReferral(ID: number) {
     await dispatch(AdminThunk.deleteReferralPrice(ID));
     referralList();
-    toast.success("Listing Delete SuccessFully");
+    toast.success("Listing Deleted Successfully");
   }
 
   const userData = (id: any) => {

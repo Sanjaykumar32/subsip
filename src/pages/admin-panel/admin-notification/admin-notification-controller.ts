@@ -38,7 +38,7 @@ export const AdminNotificationController =
     async function deleteNotification(ID: number): Promise<void> {
       await dispatch(AdminThunk.deleteNotification({ notificationId: ID }));
       getNotification();
-      toast.success("Notification Deleted SuccessFully");
+      toast.success("Notification Deleted Successfully");
     }
 
     return {

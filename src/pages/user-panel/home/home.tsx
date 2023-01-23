@@ -20,13 +20,15 @@ import { Button } from "@mui/material";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 
-export function Home() {
+export function Home({ alertOnBottom}:any) {
   const location = useLocation();
   const theme = useTheme();
   const [showMoreData, setMoreData] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [scroll , setScroll ] = useState(false)
   const settings: any = {
     infinite: true,
     slidesToShow: 1,
@@ -217,8 +219,18 @@ export function Home() {
     }
   }
 
+ 
+  const handleOnDocumentBottom = useCallback(() => {
+     setScroll(true)
+
+  }, [alertOnBottom]);
+
+  useBottomScrollListener(handleOnDocumentBottom);
+
+
+
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden" >
       <div className="py-20 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
@@ -396,7 +408,7 @@ export function Home() {
 
 
 
-        {showMoreData ? (
+        {scroll ? (
           <>
             <p className="font-semibold text-[24px]  mt-5 mx-5">
               {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[3]).length > 0 &&
@@ -467,12 +479,11 @@ export function Home() {
           </>
         ) : null}
 
-        {/* { && */}
-        {filterBanner.filter(
+   
+        {/* {filterBanner.filter(
           (el) => parseInt(el.iCategory) == CateFirst[2]
         ) && (
             <div className="moreBtn">
-              {/* {console.log(CateFirst[3])} */}
               {showMoreData ? (
                 <Button variant="contained" onClick={handleLessData}>
                   Less...
@@ -483,7 +494,7 @@ export function Home() {
                 </Button>
               )}
             </div>
-          )}
+          )} */}
       </div>
     </div>
   );

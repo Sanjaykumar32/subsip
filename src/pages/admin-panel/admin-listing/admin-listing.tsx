@@ -37,7 +37,7 @@ export function AdminListing() {
     setLoader(true);
     await dispatch(AdminThunk.deleteBusiness(ID));
     allBusiness();
-    toast.success(" Listing Deleted Successfully");
+    toast.success("Listing Deleted Successfully");
     setLoader(false);
   }
 
@@ -118,7 +118,7 @@ export function AdminListing() {
     allBusiness();
   }, [allBusiness]);
 
-  const rows = businessData.map((item) => {
+  const rows = businessData?.map((item) => {
     return {
       id: item.iBusinessId,
       Profile: item.vImage,
@@ -133,14 +133,14 @@ export function AdminListing() {
     return Object.values(el.Name.concat('' , el.Location).toString()).join('').toLowerCase().includes(search.toString().toLowerCase())
   })
 
-  const items1 = businessData.map((item) => {
+  const items1 = businessData?.map((item) => {
     return( {
       id: item.iBusinessId,
       name: item.vName
     })
   })
 
-  const items2 = businessData.map((item) => {
+  const items2 = businessData?.map((item) => {
     return( {
       id: item.iSubCategory,
       name: item.vLocation
@@ -148,21 +148,25 @@ export function AdminListing() {
   })
    
   const items3 = items1.concat(items2)
+  const [indexValue  , setIndex] = useState(false)
 
 
 
   const handleOnSearch = (string: any, results: any) => {
     console.log(string, results, 'serach and results')
     setSearch(string)
+    setIndex(true)
   }
 
   const handleOnSelect = (item: any) => {
     console.log(item, 'select vlaue')
     setSearch(item.name)
+    setIndex(true)
   }
 
   const handleClear = () => {
     setSearch('')
+    setIndex(false)
   }
 
   return (
@@ -208,9 +212,9 @@ export function AdminListing() {
                 my: 1,
               }}
             >
-              <div className="App w-full mr-2">
+              <div className="App w-full mr-2 ">
                 <header className="App-header w-full">
-                  <div className=" w-full xl:w-[80%] mx-[auto]  " >
+                  <div className={`w-full xl:w-[80%] mx-[auto] ${indexValue ? 'z-50' : 'z-0'}` } >
                     <ReactSearchAutocomplete
                       items={items3}
                       onSearch={handleOnSearch}

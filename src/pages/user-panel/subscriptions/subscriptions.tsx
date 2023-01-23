@@ -68,7 +68,7 @@ export function Subscriptions() {
     );
 
     console.log(response, "response");
-    toast.success("Subsriber To Business Successfully");
+    toast.success("Business Subscribed Successfully");
     allsubscriberOfBussiness();
   };
 
@@ -80,7 +80,7 @@ export function Subscriptions() {
         businessId: item?.iBusinessId ? "" + item?.iBusinessId : "0",
       })
     );
-    toast.success("UnSubsriber To Business Successfully");
+    toast.success("Business UnSubscribed Successfully");
     allsubscriberOfBussiness();
   };
 

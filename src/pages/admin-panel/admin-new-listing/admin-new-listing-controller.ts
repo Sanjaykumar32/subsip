@@ -243,12 +243,10 @@ export const NewlistingController = (): INewlistingControllerReturns => {
             : 0,
         })
       );
-      console.log(res, "editrue lisiting successFully");
-      toast.success("Update Listing SuccessFully");
+      toast.success("Listing Updated Successfully");
     } else {
-      console.log("Create lisiting successFully");
       const res = await dispatch(AdminThunk.createListing(form));
-      toast.success("Create Listing SuccessFully");
+      toast.success("Listing Created Successfully");
     }
 
     navigate(AdminRoutePathEnum.ADMIN_LISTING);
