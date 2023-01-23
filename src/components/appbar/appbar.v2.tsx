@@ -81,8 +81,6 @@ export const UserAppBar = (props: any) => {
 
   const routeAdmin = homepage.split("/")[1]
 
-  console.log(searchLocation, 'searchLocation')
-
 
   // isMobile admin list----------------------------------------
   const menuList = React.useMemo(
@@ -215,21 +213,9 @@ export const UserAppBar = (props: any) => {
 
   const showLocationPopUp = () => {
     setLocationPopUP(true);
-    // if (routeAdmin == 'category') {
-    //   navigate(`?${searchLocation}`, {
-    //     state: {
-    //       categoryPage: true,
-    //       data: searchLocation
-    //     }
-    //   })
-    // }
   };
 
-  // const disableCloseOnSelect = () => {
-  //   setLocation("");
-  //   setLocationPopUP(false);
-  //   navigate(`/?`);
-  // };
+
 
   const handlevalue = (el: any) => {
     if (homepage == '/') {
@@ -244,23 +230,18 @@ export const UserAppBar = (props: any) => {
       }
     }
 
-    // if (routeAdmin == 'category') {
-    //   if (el == undefined) {
-    //     setLocation("");
-    //     setLocationPopUP(false);
-    //     navigate(`?`);
-    //     setOpen(false);
-    //   } else {
-    //     setLocation(el);
-    //     navigate(`?${el}`, {
-    //       state: {
-    //         categoryPage: true,
-    //         data:el
-    //       }
-    //     })
+    if (routeAdmin == 'category') {
+      if (el == undefined) {
+        setLocation("");
+        setLocationPopUP(false);
+        navigate(`?`);
+        setOpen(false);
+      } else {
+        setLocation(el);
+        navigate(`?${el}`);
 
-    //   }
-    // }
+      }
+    }
   }
 
   const handleLocation = (event: any) => {
@@ -269,10 +250,10 @@ export const UserAppBar = (props: any) => {
       navigate(`/?${event.target.value}`);
     }
 
-    // if (routeAdmin == 'category') {
-    //   setLocation(event.target.value);
-    //   navigate(`?${event.target.value}`);
-    // }
+    if (routeAdmin == 'category') {
+      // setLocation(event.target.value);
+      navigate(`?${event.target.value}`);
+    }
 
   };
 
@@ -404,7 +385,6 @@ export const UserAppBar = (props: any) => {
 
   const [open, setOpen] = useState<boolean>(false);
 
-  console.log(open, "open");
   const spring = useSpring({
     from: { height: "0px" },
     to: { height: !isMobile ? "auto" : open ? "320px" : "0px" },
@@ -431,7 +411,6 @@ export const UserAppBar = (props: any) => {
   };
   const businessData = useAppSelector(GET_BUSINESS);
 
-  // console.log(businessData  ,'businessData')
 
   const defaultProps = {
     options: businessData,
@@ -1113,10 +1092,10 @@ export const UserAppBar = (props: any) => {
             style={{ overflow: "hidden", ...spring2 }}
             className="mt-[-60px]"
           >
-            <Toolbar>
+            <Toolbar className="toolbarAdminMenu">
               <div className="moblieMenu">
                 <List
-                  className="categoryListing"
+                  className=""
                   sx={{
                     display: "flex",
                     flexDirection: { xs: "column", md: "row" },
@@ -1144,7 +1123,7 @@ export const UserAppBar = (props: any) => {
                           key={index}
                           disablePadding
                           className={
-                            props.menu == item.title ? "bg-[#c9c8c8]" : ""
+                            `${props.menu == item.title ? "bg-[#c9c8c8]" : ""} px-8 py-1`
                           }
                         >
                           <ListItemButton>

@@ -232,7 +232,7 @@ export function AdminNewlisting() {
                   </FormControl>
                 </Box>
 
-                <Box sx={{ my: 4 }}>
+                {/* <Box sx={{ my: 4 }}>
                   <Label> {step5.label} </Label>
                   <Typography variant="body2"> {step5.caption} </Typography>
                   <FormControl fullWidth>
@@ -244,7 +244,7 @@ export function AdminNewlisting() {
                       fullWidth
                     />
                   </FormControl>
-                </Box>
+                </Box> */}
 
                 <Box sx={{ my: 4 }}>
                   <Label id={`${step2.id}-label`}> {step2.label} </Label>

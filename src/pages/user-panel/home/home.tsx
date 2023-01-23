@@ -22,9 +22,6 @@ import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
 
 
-/**
- *
- */
 export function Home() {
   const location = useLocation();
   const theme = useTheme();
@@ -154,7 +151,6 @@ export function Home() {
 
   const businessData = useAppSelector(GET_BUSINESS);
 
-  console.log(businessData, 'businessData')
 
   const filterBanner = businessData.filter((item) => {
     return Object.values(item.vLocation.toString().toLowerCase())
@@ -163,10 +159,14 @@ export function Home() {
       .includes(location.search.toString().slice(1, 19).toLowerCase());
   });
 
-  console.log(filterBanner, "location.search.toString().slice(1, 19)");
+  console.log(businessData, 'businessData');
+  console.log(filterBanner, 'filterBanner')
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
+
+  console.log(CateFirst, 'CateFirst')
+  console.log(categoryData, 'categoryData')
   const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
@@ -201,8 +201,6 @@ export function Home() {
     setMoreData(false);
   };
   const locatiosn = useLocation();
-  // const businessId = location.id;
-  console.log(locatiosn, "location home ");
 
   async function onImageClick(id: number): Promise<void> {
     try {
@@ -235,7 +233,7 @@ export function Home() {
 
                   <div>
                     <span
-                      className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer "
+                      className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle"
                       onClick={() => {
                         auth?.isAuthenticated
                           ? onImageClick(ele.iBusinessId)
@@ -283,7 +281,12 @@ export function Home() {
       </div>
 
       <div className="w-full px-5 mt-8">
-        <p className="font-semibold text-[1.2rem] pb-5">Seattle, WA</p>
+
+        <p className="font-semibold text-[24px] pb-2 mx-5 ">
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[0]).length > 0 &&
+            'Restaurants'
+          }
+        </p>
 
         <div className="relative">
           <Slider ref={cardRef} {...cardSettingsScroll}>
@@ -295,7 +298,7 @@ export function Home() {
                     style={{
                       boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
                     }}
-                    key={`${ele.eStatus}+${index}`}
+                    key={`${ele?.eStatus}+${index}`}
                     className="relative overflow-x-auto md:overflow-x-hidden "
                   >
                     <SliderCard
@@ -304,8 +307,8 @@ export function Home() {
                       tagLine={ele?.vTagLine}
                       des={ele?.tDescription}
                       location={ele?.vLocation}
-                      id={ele.iBusinessId}
-                      subscriberCount={ele.subscriberCount}
+                      id={ele?.iBusinessId}
+                      subscriberCount={ele?.subscriberCount}
                       subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                     />
                   </div>
@@ -317,7 +320,13 @@ export function Home() {
           ).length > 0 && <SliderArrow refVal={cardRef} />}
         </div>
 
-        <div className="relative mt-10 w-full">
+        <p className="font-semibold text-[24px]  mt-5 mx-5">
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1]).length > 0 &&
+            'Home Services'
+          }
+        </p>
+        <div className="relative mt-5 w-full">
+
           <Slider ref={cardRef2} {...cardSettings}>
             {filterBanner
               .filter((el) => parseInt(el.iCategory) == CateFirst[1])
@@ -346,6 +355,12 @@ export function Home() {
           {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1])
             .length > 0 && <SliderArrow refVal={cardRef2} />}
         </div>
+
+        <p className="font-semibold text-[24px]  mt-5 mx-5">
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[2]).length > 0 &&
+            'Auto Services'
+          }
+        </p>
 
         <div className="relative my-10 w-full">
           <Slider ref={cardRef3} {...cardSettings}>
@@ -378,8 +393,16 @@ export function Home() {
         </div>
 
         {/* More data show */}
+
+
+
         {showMoreData ? (
           <>
+            <p className="font-semibold text-[24px]  mt-5 mx-5">
+              {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[3]).length > 0 &&
+                'More'
+              }
+            </p>
             <div className="relative my-10 w-full">
               <Slider ref={cardRef3} {...cardSettings}>
                 {filterBanner
@@ -469,17 +492,15 @@ export function Home() {
 const SliderCard = (props: any) => {
   const { des, imgSrc, location, name, id, subscriberCount, subcriber } = props;
 
-  console.log(subcriber, 'subcriber split');
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem("userId");
 
-  const filters = subcriber && subcriber.filter((el: any) => {
+  const filters = subcriber && subcriber?.filter((el: any) => {
     return el == userId
   })[0]
 
-  console.log(filters, 'filtersssss')
   async function onImageClick(): Promise<void> {
     try {
       const response: any = await dispatch(
@@ -518,9 +539,9 @@ const SliderCard = (props: any) => {
         className="w-full object-cover h-[215px]  cursor-pointer "
         onClick={onImageClick}
       />
-      <div className=" pl-3 py-3  ">
+      <div className=" pl-4 py-4  ">
         <span
-          className="text-black text-[1.3rem] font-semibold cursor-pointer textLimit2 "
+          className="text-black text-[19px] leading-[22px] font-semibold cursor-pointer textLimit2 my-3 "
           onClick={() => {
             auth?.isAuthenticated
               ? onImageClick()
@@ -529,13 +550,13 @@ const SliderCard = (props: any) => {
         >
           {name}
         </span>
-        <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold py-2">
+        <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold ">
           {location ? location : " "}
         </p>
-        <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434D59] textLimit2 py-2 pl-3 ">
+        <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434d59] textLimit2 my-3 ">
           {des ? des : "--"}
         </p>
-        <div className="flex justify-between">
+        <div className="flex justify-between my-2">
           <p className="text-[0.9rem] text-[#CDCDCD]">
             <span className="text-[20px] text-black pr-2">
               {" "}
