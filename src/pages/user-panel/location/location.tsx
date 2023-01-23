@@ -34,6 +34,8 @@ export function LocationPage() {
   const dispatch = useAppDispatch();
   const businessId = locations.pathname.split("/")[2];
 
+  console.log(bussinessByName, 'bussinessByName')
+
   const handleClickOpen = async () => {
     try {
       await dispatch(
@@ -130,7 +132,6 @@ export function LocationPage() {
                   </Box>
                 )}
                 {bussinessByName.map((res: IBusiness, index: number) => {
-                  console.log(res, "res");
                   return <Location {...res} key={index} />;
                 })}
               </Grid>

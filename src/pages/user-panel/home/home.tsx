@@ -20,6 +20,7 @@ import { Button } from "@mui/material";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
+import toast from "react-hot-toast";
 
 
 export function Home() {
@@ -347,6 +348,7 @@ export function Home() {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
+                      subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                     />
                   </div>
                 );
@@ -383,6 +385,7 @@ export function Home() {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
+                      subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                     />
                   </div>
                 );
@@ -424,6 +427,7 @@ export function Home() {
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
                           subscriberCount={ele.subscriberCount}
+                          subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                         />
                       </div>
                     );
@@ -455,6 +459,7 @@ export function Home() {
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
                           subscriberCount={ele.subscriberCount}
+                          subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
                         />
                       </div>
                     );
@@ -495,7 +500,7 @@ const SliderCard = (props: any) => {
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId")
 
   const filters = subcriber && subcriber?.filter((el: any) => {
     return el == userId
@@ -516,20 +521,47 @@ const SliderCard = (props: any) => {
     }
   }
 
-  async function onButtonClick(): Promise<void> {
+  const allBusiness = useCallback(async () => {
+    try {
+      await dispatch(UserThunk.business());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  async function SubcribeBtn(): Promise<void> {
     !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
+    console.log('this is btn stb')
     try {
       await dispatch(
         UserThunk.addSubscriberToBusiness({
           businessId: id,
           userId: userId ? userId : "",
-          referredCode: "dkfdhfjkh",
+          referredCode: null,
         })
       );
+
+      allBusiness()
+      // allsubscriberOfBussinesss();
+      // getDatalist()
+      // toast.success("Subsribed  Successfully")
+
     } catch (error) {
       console.log(error);
     }
   }
+
+
+  const handleUnsub = async (id: any) => {
+    await dispatch(
+      UserThunk.UNSubscriberToBusiness({
+        businessId: id ? "" + id : "0",
+      })
+    );
+    allBusiness()
+    toast.success("Unsubsribed  Successfully")
+  };
+
 
   return (
     <div className="w-full mx-auto  md:mx-5 relative max-w-[307px] bg-white  border-[1px] border-[#DADDE5] ">
@@ -565,13 +597,13 @@ const SliderCard = (props: any) => {
             {subscriberCount ? "subscribers" : " "}
           </p>
 
-          <div className="raletive cursor-pointer " onClick={onButtonClick}>
+          <div className="raletive cursor-pointer "  >
             {filters == userId && auth?.isAuthenticated ?
-              <div className="subscribeLebalListing bg-[#e0e0e0] " >
+              <div className="subscribeLebalListing bg-[#e0e0e0] " onClick={() => handleUnsub(id)} >
                 <span className=" text-[#262626] font-medium"> Unsubscribe</span>
               </div>
               :
-              <div className="subscribeLebalListing bg-[#dc2626] ">
+              <div className="subscribeLebalListing bg-[#09292b]" onClick={SubcribeBtn} >
                 <span className=" text-white font-medium"> Subscribe</span>
               </div>
             }

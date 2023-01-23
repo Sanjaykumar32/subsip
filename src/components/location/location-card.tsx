@@ -69,7 +69,7 @@ export const Subscribe = ({
   const bussinessByName = useAppSelector(GET_BUSINESS);
 
 
-  console.log(bussinessByName, 'bussinessByName')
+  // console.log(bussinessByName, 'bussinessByName')
 
   useEffect(() => {
 
@@ -195,20 +195,6 @@ export const Subscribe = ({
           Subscribe Now
         </Button>
       )}
-
-      {/* {!showButton && (
-        <Button
-          size="large"
-          variant="contained"
-          color="error"
-          onClick={() => {
-            onButtonClick();
-          }}
-          sx={{ fontWeight: 800, borderRadius: "24px" }}
-        >
-          Subscribe Now
-        </Button>
-      )} */}
     </>
   );
 };
