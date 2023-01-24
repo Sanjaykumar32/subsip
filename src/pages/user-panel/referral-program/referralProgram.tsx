@@ -60,7 +60,7 @@ export function ReferralProgram() {
               >
                 <Typography variant="body2"> {res.milestoneName}</Typography>
                 <Chip
-                  label={`${res?.iAmount}/${res?.userCount}`}
+                  label={`${res?.userCount}/${res?.iAmount}`}
                   size="small"
                   sx={{ minWidth: "100px", ml: 2 }}
                 />

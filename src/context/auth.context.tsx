@@ -64,12 +64,11 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   useEffect(() => {
     if (token) {
       setAuthenticated(true);
-      console.log('token here')
+      console.log("token here");
     } else {
       setAuthenticated(false);
       // navigate('/auth/sign-in')
-      toast.success("Log Out Successfully")
-      console.log('token false here')
+      console.log("token false here");
     }
   }, [token]);
 

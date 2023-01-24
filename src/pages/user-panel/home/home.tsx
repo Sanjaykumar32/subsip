@@ -20,16 +20,15 @@ import { Button } from "@mui/material";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
-import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import toast from "react-hot-toast";
 
-
-export function Home({ alertOnBottom}:any) {
+export function Home({ alertOnBottom }: any) {
   const location = useLocation();
   const theme = useTheme();
   const [showMoreData, setMoreData] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const [scroll , setScroll ] = useState(false)
+  const [scroll, setScroll] = useState(false);
   const settings: any = {
     infinite: true,
     slidesToShow: 1,
@@ -83,8 +82,6 @@ export function Home({ alertOnBottom}:any) {
       },
     ],
   };
-
-
 
   const cardSettingsScroll: any = {
     infinite: true,
@@ -154,7 +151,6 @@ export function Home({ alertOnBottom}:any) {
 
   const businessData = useAppSelector(GET_BUSINESS);
 
-
   const filterBanner = businessData.filter((item) => {
     return Object.values(item.vLocation.toString().toLowerCase())
       .join("")
@@ -162,14 +158,14 @@ export function Home({ alertOnBottom}:any) {
       .includes(location.search.toString().slice(1, 19).toLowerCase());
   });
 
-  console.log(businessData, 'businessData');
-  console.log(filterBanner, 'filterBanner')
+  console.log(businessData, "businessData");
+  console.log(filterBanner, "filterBanner");
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
 
-  console.log(CateFirst, 'CateFirst')
-  console.log(categoryData, 'categoryData')
+  console.log(CateFirst, "CateFirst");
+  console.log(categoryData, "categoryData");
   const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
@@ -220,18 +216,14 @@ export function Home({ alertOnBottom}:any) {
     }
   }
 
- 
   const handleOnDocumentBottom = useCallback(() => {
-     setScroll(true)
-
+    setScroll(true);
   }, [alertOnBottom]);
 
   useBottomScrollListener(handleOnDocumentBottom);
 
-
-
   return (
-    <div className="w-full overflow-x-hidden" >
+    <div className="w-full overflow-x-hidden">
       <div className="py-20 bg-white md:bg-black relative  w-full">
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
@@ -248,9 +240,7 @@ export function Home({ alertOnBottom}:any) {
                     <span
                       className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle"
                       onClick={() => {
-                        auth?.isAuthenticated
-                          ? onImageClick(ele.iBusinessId)
-                          : navigate(AuthRoutePathEnum.SIGN_IN);
+                        onImageClick(ele.iBusinessId);
                       }}
                     >
                       {ele.vName}
@@ -290,15 +280,15 @@ export function Home({ alertOnBottom}:any) {
             </div>
           ))}
         </Slider>
-        {!isMobile && bannerData.length > 0 && <SliderArrow bannerType='MainBanner' refVal={sliderRef} />}
+        {!isMobile && bannerData.length > 0 && (
+          <SliderArrow bannerType="MainBanner" refVal={sliderRef} />
+        )}
       </div>
 
       <div className="w-full px-5 mt-8">
-
         <p className="font-semibold text-[24px] pb-2 mx-5 ">
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[0]).length > 0 &&
-            'Restaurants'
-          }
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[0])
+            .length > 0 && "Restaurants"}
         </p>
 
         <div className="relative">
@@ -322,7 +312,9 @@ export function Home({ alertOnBottom}:any) {
                       location={ele?.vLocation}
                       id={ele?.iBusinessId}
                       subscriberCount={ele?.subscriberCount}
-                      subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
+                      subcriber={
+                        ele?.subscriberIds && ele?.subscriberIds.split(",")
+                      }
                     />
                   </div>
                 );
@@ -334,12 +326,10 @@ export function Home({ alertOnBottom}:any) {
         </div>
 
         <p className="font-semibold text-[24px]  mt-5 mx-5">
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1]).length > 0 &&
-            'Home Services'
-          }
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1])
+            .length > 0 && "Home Services"}
         </p>
         <div className="relative mt-5 w-full">
-
           <Slider ref={cardRef2} {...cardSettings}>
             {filterBanner
               .filter((el) => parseInt(el.iCategory) == CateFirst[1])
@@ -360,7 +350,9 @@ export function Home({ alertOnBottom}:any) {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
-                      subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
+                      subcriber={
+                        ele?.subscriberIds && ele?.subscriberIds.split(",")
+                      }
                     />
                   </div>
                 );
@@ -371,9 +363,8 @@ export function Home({ alertOnBottom}:any) {
         </div>
 
         <p className="font-semibold text-[24px]  mt-5 mx-5">
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[2]).length > 0 &&
-            'Auto Services'
-          }
+          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[2])
+            .length > 0 && "Auto Services"}
         </p>
 
         <div className="relative my-10 w-full">
@@ -397,7 +388,9 @@ export function Home({ alertOnBottom}:any) {
                       location={ele?.vLocation}
                       id={ele.iBusinessId}
                       subscriberCount={ele.subscriberCount}
-                      subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
+                      subcriber={
+                        ele?.subscriberIds && ele?.subscriberIds.split(",")
+                      }
                     />
                   </div>
                 );
@@ -409,14 +402,12 @@ export function Home({ alertOnBottom}:any) {
 
         {/* More data show */}
 
-
-
         {scroll ? (
           <>
             <p className="font-semibold text-[24px]  mt-5 mx-5">
-              {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[3]).length > 0 &&
-                'More'
-              }
+              {filterBanner.filter(
+                (el) => parseInt(el.iCategory) == CateFirst[3]
+              ).length > 0 && "More"}
             </p>
             <div className="relative my-10 w-full">
               <Slider ref={cardRef3} {...cardSettings}>
@@ -439,7 +430,9 @@ export function Home({ alertOnBottom}:any) {
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
                           subscriberCount={ele.subscriberCount}
-                          subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
+                          subcriber={
+                            ele?.subscriberIds && ele?.subscriberIds.split(",")
+                          }
                         />
                       </div>
                     );
@@ -471,7 +464,9 @@ export function Home({ alertOnBottom}:any) {
                           location={ele?.vLocation}
                           id={ele.iBusinessId}
                           subscriberCount={ele.subscriberCount}
-                          subcriber={ele?.subscriberIds && ele?.subscriberIds.split(',')}
+                          subcriber={
+                            ele?.subscriberIds && ele?.subscriberIds.split(",")
+                          }
                         />
                       </div>
                     );
@@ -484,7 +479,6 @@ export function Home({ alertOnBottom}:any) {
           </>
         ) : null}
 
-   
         {/* {filterBanner.filter(
           (el) => parseInt(el.iCategory) == CateFirst[2]
         ) && (
@@ -511,11 +505,13 @@ const SliderCard = (props: any) => {
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
 
-  const filters = subcriber && subcriber?.filter((el: any) => {
-    return el == userId
-  })[0]
+  const filters =
+    subcriber &&
+    subcriber?.filter((el: any) => {
+      return el == userId;
+    })[0];
 
   async function onImageClick(): Promise<void> {
     try {
@@ -542,7 +538,7 @@ const SliderCard = (props: any) => {
 
   async function SubcribeBtn(): Promise<void> {
     !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
-    console.log('this is btn stb')
+    console.log("this is btn stb");
     try {
       await dispatch(
         UserThunk.addSubscriberToBusiness({
@@ -552,16 +548,14 @@ const SliderCard = (props: any) => {
         })
       );
 
-      allBusiness()
+      allBusiness();
       // allsubscriberOfBussinesss();
       // getDatalist()
       // toast.success("Subsribed  Successfully")
-
     } catch (error) {
       console.log(error);
     }
   }
-
 
   const handleUnsub = async (id: any) => {
     await dispatch(
@@ -569,10 +563,9 @@ const SliderCard = (props: any) => {
         businessId: id ? "" + id : "0",
       })
     );
-    allBusiness()
-    toast.success("Unsubsribed  Successfully")
+    allBusiness();
+    toast.success("Unsubsribed  Successfully");
   };
-
 
   return (
     <div className="w-full mx-auto  md:mx-5 relative max-w-[307px] bg-white  border-[1px] border-[#DADDE5] ">
@@ -608,16 +601,25 @@ const SliderCard = (props: any) => {
             {subscriberCount ? "subscribers" : " "}
           </p>
 
-          <div className="raletive cursor-pointer "  >
-            {filters == userId && auth?.isAuthenticated ?
-              <div className="subscribeLebalListing bg-[#e0e0e0] " onClick={() => handleUnsub(id)} >
-                <span className=" text-[#262626] font-medium"> Unsubscribe</span>
+          <div className="raletive cursor-pointer ">
+            {filters == userId && auth?.isAuthenticated ? (
+              <div
+                className="subscribeLebalListing bg-[#e0e0e0] "
+                onClick={() => handleUnsub(id)}
+              >
+                <span className=" text-[#262626] font-medium">
+                  {" "}
+                  Unsubscribe
+                </span>
               </div>
-              :
-              <div className="subscribeLebalListing bg-[#09292b]" onClick={SubcribeBtn} >
+            ) : (
+              <div
+                className="subscribeLebalListing bg-[#09292b]"
+                onClick={SubcribeBtn}
+              >
                 <span className=" text-white font-medium"> Subscribe</span>
               </div>
-            }
+            )}
           </div>
 
           {/* 
