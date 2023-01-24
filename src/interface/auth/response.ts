@@ -32,6 +32,7 @@ export interface ISignUp {
 }
 
 export interface IBannerData {
+  subscriberIds: string;
   iBusinessId: number;
   vName: string;
   vTagLine: string;

@@ -536,6 +536,8 @@ export const UserAppBar = (props: any) => {
                           key={setting.route}
                           onClick={() => {
                             setting.title === "Logout" && auth.signOut();
+                            setting.title === "Logout" &&
+                              toast.success("Log Out Successfully");
                             handleClose();
                           }}
                         >
@@ -727,7 +729,8 @@ export const UserAppBar = (props: any) => {
                     key={setting.route}
                     onClick={() => {
                       setting.title === "Logout" && auth.signOut();
-                      toast.success("Log Out Successfully");
+                      setting.title === "Logout" &&
+                        toast.success("Log Out Successfully");
                       handleClose();
                     }}
                   >

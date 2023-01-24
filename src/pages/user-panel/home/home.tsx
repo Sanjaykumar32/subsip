@@ -222,6 +222,37 @@ export function Home({ alertOnBottom }: any) {
 
   useBottomScrollListener(handleOnDocumentBottom);
 
+  async function SubcribeBtn(id: any): Promise<void> {
+    !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
+    console.log("this is btn stb");
+    try {
+      await dispatch(
+        UserThunk.addSubscriberToBusiness({
+          businessId: id,
+          userId: userId ? userId : "",
+          referredCode: null,
+        })
+      );
+
+      allBusiness();
+      // allsubscriberOfBussinesss();
+      // getDatalist()
+      // toast.success("Subsribed  Successfully")
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleUnsub = async (id: any) => {
+    await dispatch(
+      UserThunk.UNSubscriberToBusiness({
+        businessId: id ? "" + id : "0",
+      })
+    );
+    allBusiness();
+    toast.success("Unsubscribed  Successfully");
+  };
+
   return (
     <div className="w-full overflow-x-hidden">
       <div className="py-20 bg-white md:bg-black relative  w-full">
@@ -439,7 +470,7 @@ export function Home({ alertOnBottom }: any) {
                   })}
               </Slider>
               {filterBanner.filter(
-                (el) => parseInt(el.iCategory) == CateFirst[3]
+                (el: any) => parseInt(el.iCategory) == CateFirst[3]
               ).length > 0 && <SliderArrow refVal={cardRef3} />}
             </div>
 
@@ -564,7 +595,7 @@ const SliderCard = (props: any) => {
       })
     );
     allBusiness();
-    toast.success("Unsubsribed  Successfully");
+    toast.success("Unsubscribed  Successfully");
   };
 
   return (
