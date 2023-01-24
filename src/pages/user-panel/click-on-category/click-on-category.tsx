@@ -40,12 +40,12 @@ export function ClickOnCategory() {
   const getCateID = location.pathname.split("/")[2];
   const categoryData = useAppSelector(GET_CATEGORY);
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
   const dispatch = useAppDispatch();
 
-  const pathSerchValue = location.search.slice(1, 25)
+  const pathSerchValue = location.search.slice(1, 25);
 
-  const pathName = location?.pathname?.split('/')?.[1]
+  const pathName = location?.pathname?.split("/")?.[1];
 
   const getcategory = useCallback(async () => {
     try {
@@ -102,19 +102,18 @@ export function ClickOnCategory() {
   }, [allBusiness]);
 
   const listFilter = businessData.filter(
-    (el: {
-      vLocation: any; vName: { toString: () => string }
-    }) => {
+    (el: { vLocation: any; vName: { toString: () => string } }) => {
       return Object.values(
-        pathName == 'category' ?
-          el?.vLocation?.toString().toLowerCase()
+        pathName == "category"
+          ? el?.vLocation?.toString().toLowerCase()
           : el.vName.toString().toLowerCase()
       )
         .join("")
         .toLowerCase()
         .includes(
-          pathName == 'category' ? pathSerchValue.toString().toLowerCase() :
-            location.search.toString().slice(1, 19).toLowerCase()
+          pathName == "category"
+            ? pathSerchValue.toString().toLowerCase()
+            : location.search.toString().slice(1, 19).toLowerCase()
         );
     }
   );
@@ -156,10 +155,6 @@ export function ClickOnCategory() {
     setState(false);
   };
 
-
-
-
-
   async function SubcribeBtn(id: any): Promise<void> {
     !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
     // console.log('this is btn stb')
@@ -172,14 +167,12 @@ export function ClickOnCategory() {
         })
       );
 
-      allBusiness()
-      toast.success("Subscribed  Successfully")
-
+      allBusiness();
+      toast.success("Subsribed  Successfully");
     } catch (error) {
       console.log(error);
     }
   }
-
 
   const handleUnsub = async (id: any) => {
     await dispatch(
@@ -187,12 +180,9 @@ export function ClickOnCategory() {
         businessId: id ? "" + id : "0",
       })
     );
-    allBusiness()
+    allBusiness();
     toast.success("Unsubscribed  Successfully");
   };
-
-
-
 
   async function onImageClick(id: any): Promise<void> {
     try {
@@ -208,11 +198,6 @@ export function ClickOnCategory() {
       console.log(error);
     }
   }
-
-
-
-
-
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
@@ -251,10 +236,11 @@ export function ClickOnCategory() {
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
                               id="panel1a-header"
-                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
-                                ? " activeCate"
-                                : ""
-                                }  `}
+                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
+                                activeCate === item?.iCategoryId
+                                  ? " activeCate"
+                                  : ""
+                              }  `}
                               onClick={() => {
                                 handleList(item?.iCategoryId),
                                   handleSubList(null);
@@ -324,10 +310,11 @@ export function ClickOnCategory() {
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id={item.vName}
-                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
-                            ? " activeCate"
-                            : ""
-                            }  `}
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
+                            activeCate === item?.iCategoryId
+                              ? " activeCate"
+                              : ""
+                          }  `}
                           onClick={() => {
                             handleList(item?.iCategoryId),
                               // handleSubList(item?.iSubCategoryId);
@@ -339,7 +326,7 @@ export function ClickOnCategory() {
                           {item?.vName}
                         </AccordionSummary>
 
-                        <AccordionDetails >
+                        <AccordionDetails>
                           {filteredSubCategory.length > 0 ? (
                             filteredSubCategory.map((res: any, i: number) => (
                               <Link
@@ -347,14 +334,21 @@ export function ClickOnCategory() {
                                 onClick={() =>
                                   handleSubList(res?.iSubCategoryId)
                                 }
-
                               >
-                                <div className={subcatIdss == res.iSubCategoryId ? 'bg-[#c9c8c8]' : ''}>
-                                  <Typography className={`text-[#252525] py-1} `} key={i} >
+                                <div
+                                  className={
+                                    subcatIdss == res.iSubCategoryId
+                                      ? "bg-[#c9c8c8]"
+                                      : ""
+                                  }
+                                >
+                                  <Typography
+                                    className={`text-[#252525] py-1} `}
+                                    key={i}
+                                  >
                                     {res.vName}
                                   </Typography>
                                 </div>
-
                               </Link>
                             ))
                           ) : (
@@ -381,12 +375,12 @@ export function ClickOnCategory() {
               {activeCate == 65
                 ? "Restaurants"
                 : activeCate == 66
-                  ? "Home Services"
-                  : activeCate == 67
-                    ? "Auto Services"
-                    : activeCate == 68
-                      ? "More"
-                      : "Restaurants"}
+                ? "Home Services"
+                : activeCate == 67
+                ? "Auto Services"
+                : activeCate == 68
+                ? "More"
+                : "Restaurants"}
             </Typography>
             <Box
               sx={{
@@ -449,11 +443,11 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
-                listFilter.filter((el) =>
-                  subcatIdss
-                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
-                    : el.iCategory === ids
-                ).length > 0 ? (
+              listFilter.filter((el) =>
+                subcatIdss
+                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                  : el.iCategory === ids
+              ).length > 0 ? (
                 listFilter
                   .filter((el) =>
                     subcatIdss
@@ -461,13 +455,7 @@ export function ClickOnCategory() {
                       : el.iCategory === ids
                   )
                   .map((data: any, index: any) => (
-                    <Grid
-                      key={index}
-                      item
-                      sm={4}
-                      className="pb-[20px] "
-
-                    >
+                    <Grid key={index} item sm={4} className="pb-[20px] ">
                       <>
                         <Card
                           sx={{
@@ -485,9 +473,8 @@ export function ClickOnCategory() {
                                   ? "http://159.223.194.50:8000/" + data.vImage
                                   : ""
                               }
-
                               onClick={() => {
-                                onImageClick(data?.iBusinessId)
+                                onImageClick(data?.iBusinessId);
                                 // auth?.isAuthenticated
                                 //   ? navigate(`/listing/${data?.iBusinessId}`)
                                 //   : navigate(AuthRoutePathEnum.SIGN_IN);
@@ -496,27 +483,34 @@ export function ClickOnCategory() {
                               height="100px"
                               style={{ objectFit: "cover", height: "215px" }}
                             />
-                            <Box sx={{ py: '16px', pl: "16px" }}>
+                            <Box sx={{ py: "16px", pl: "16px" }}>
                               <Typography
                                 onClick={() => {
-                                  onImageClick(data?.iBusinessId)
+                                  onImageClick(data?.iBusinessId);
                                 }}
-                                variant="body1" fontWeight={600} className='cardDetails'>
+                                variant="body1"
+                                fontWeight={600}
+                                className="cardDetails"
+                              >
                                 {data.vName}
                               </Typography>
                               <Typography
                                 variant="caption"
                                 fontWeight={600}
                                 color={theme.palette.grey[500]}
-                                className='cardLocation'
+                                className="cardLocation"
                               >
                                 {data.vLocation}
                               </Typography>
                               <Box sx={{ my: 1, lineHeight: 0 }}>
                                 <Typography
                                   fontSize={16}
+<<<<<<< HEAD
 
                                   className={"textLimit2 pb-[20px]"}
+=======
+                                  className={"textLimit2"}
+>>>>>>> a183c97a122806b3bd1375515210e65be33286bb
                                 >
                                   {data.tDescription}
                                 </Typography>
@@ -533,30 +527,49 @@ export function ClickOnCategory() {
                                   variant="caption"
                                   fontWeight={600}
                                   color={theme.palette.grey[500]}
-                                  className='items-center'
-
+                                  className="items-center"
                                 >
-                                  <span className="text-[20px] mr-1 text-[#262626]"> {data.subscriberCount}</span> <span className="text-[14px] text-[#cdcdcd]">Subscribe</span>
+                                  <span className="text-[20px] mr-1 text-[#262626]">
+                                    {" "}
+                                    {data.subscriberCount}
+                                  </span>{" "}
+                                  <span className="text-[14px] text-[#cdcdcd]">
+                                    Subscribe
+                                  </span>
                                 </Typography>
 
                                 <div className="raletive">
                                   <>
-                                    {data?.subscriberIds && data?.subscriberIds.split('').filter((el: any) => {
-                                      return el == userId
-                                    })[0] && auth?.isAuthenticated
-                                      ?
-                                      <div className="subscribeLebalListing bg-[#e0e0e0]"
-                                        onClick={() => handleUnsub(data?.iBusinessId)} >
-                                        <span className=" text-[#262626] font-medium"> Unsubscribe</span>
+                                    {data?.subscriberIds &&
+                                    data?.subscriberIds
+                                      .split("")
+                                      .filter((el: any) => {
+                                        return el == userId;
+                                      })[0] &&
+                                    auth?.isAuthenticated ? (
+                                      <div
+                                        className="subscribeLebalListing bg-[#e0e0e0]"
+                                        onClick={() =>
+                                          handleUnsub(data?.iBusinessId)
+                                        }
+                                      >
+                                        <span className=" text-[#262626] font-medium">
+                                          {" "}
+                                          Unsubscribe
+                                        </span>
                                       </div>
-                                      :
-                                      <div className="subscribeLebalListing bg-[#09292b]"
-                                        onClick={() => SubcribeBtn(data?.iBusinessId)}>
+                                    ) : (
+                                      <div
+                                        className="subscribeLebalListing bg-[#09292b]"
+                                        onClick={() =>
+                                          SubcribeBtn(data?.iBusinessId)
+                                        }
+                                      >
                                         <span className=" text-white ">
                                           Subscribe
                                         </span>
                                       </div>
-                                    }
+                                    )}
                                   </>
                                 </div>
                               </Box>

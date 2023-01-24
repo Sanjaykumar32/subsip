@@ -599,7 +599,7 @@ const SliderCard = (props: any) => {
         <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434d59] textLimit2 my-3 ">
           {des ? des : "--"}
         </p>
-        <div className="flex justify-between my-2">
+        <div className="flex justify-between my-2 pt-[1em]">
           <p className="text-[0.9rem] text-[#CDCDCD]">
             <span className="text-[20px] text-black pr-2">
               {" "}

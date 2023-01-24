@@ -52,6 +52,7 @@ import {
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import toast from "react-hot-toast";
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -78,9 +79,7 @@ export const UserAppBar = (props: any) => {
     setMobileOpen(!mobileOpen);
   };
 
-
-  const routeAdmin = homepage.split("/")[1]
-
+  const routeAdmin = homepage.split("/")[1];
 
   // isMobile admin list----------------------------------------
   const menuList = React.useMemo(
@@ -215,10 +214,8 @@ export const UserAppBar = (props: any) => {
     setLocationPopUP(true);
   };
 
-
-
   const handlevalue = (el: any) => {
-    if (homepage == '/') {
+    if (homepage == "/") {
       if (el == undefined) {
         setLocation("");
         setLocationPopUP(false);
@@ -230,7 +227,7 @@ export const UserAppBar = (props: any) => {
       }
     }
 
-    if (routeAdmin == 'category') {
+    if (routeAdmin == "category") {
       if (el == undefined) {
         setLocation("");
         setLocationPopUP(false);
@@ -239,22 +236,20 @@ export const UserAppBar = (props: any) => {
       } else {
         setLocation(el);
         navigate(`?${el}`);
-
       }
     }
-  }
+  };
 
   const handleLocation = (event: any) => {
-    if (homepage == '/') {
+    if (homepage == "/") {
       setLocation(event.target.value);
       navigate(`/?${event.target.value}`);
     }
 
-    if (routeAdmin == 'category') {
+    if (routeAdmin == "category") {
       // setLocation(event.target.value);
       navigate(`?${event.target.value}`);
     }
-
   };
 
   const handleLocationSearch = () => {
@@ -284,12 +279,12 @@ export const UserAppBar = (props: any) => {
             route: RoutePathEnum.REWARDS,
           },
           {
-            title: "Refferal Program",
+            title: "Referral Program",
             route: RoutePathEnum.REFER,
           },
           {
             title: "Logout",
-            route: AuthRoutePathEnum.SIGN_IN,
+            route: RoutePathEnum.HOME,
           },
         ];
         setMenuItem(data);
@@ -312,12 +307,12 @@ export const UserAppBar = (props: any) => {
             route: RoutePathEnum.REWARDS,
           },
           {
-            title: "Referrals",
+            title: "Referral Program",
             route: RoutePathEnum.REFER,
           },
           {
             title: "Logout",
-            route: AuthRoutePathEnum.SIGN_IN,
+            route: RoutePathEnum.HOME,
           },
         ];
         setMenuItem(data);
@@ -340,12 +335,12 @@ export const UserAppBar = (props: any) => {
             route: RoutePathEnum.REWARDS,
           },
           {
-            title: "Referrals",
+            title: "Referral Program",
             route: RoutePathEnum.REFER,
           },
           {
             title: "Logout",
-            route: AuthRoutePathEnum.SIGN_IN,
+            route: RoutePathEnum.HOME,
           },
         ];
         setMenuItem(data);
@@ -365,16 +360,12 @@ export const UserAppBar = (props: any) => {
           route: RoutePathEnum.REWARDS,
         },
         {
-          title: "Refferal Program",
+          title: "Referral Program",
           route: RoutePathEnum.REFER,
         },
         {
-          title: "Change Password",
-          route: AuthRoutePathEnum.CHANGE_PASSWORD,
-        },
-        {
           title: "Logout",
-          route: AuthRoutePathEnum.SIGN_IN,
+          route: RoutePathEnum.HOME,
         },
       ];
       setMenuItem(data);
@@ -411,7 +402,6 @@ export const UserAppBar = (props: any) => {
   };
   const businessData = useAppSelector(GET_BUSINESS);
 
-
   const defaultProps = {
     options: businessData,
     getOptionLabel: (option: any) => option.vLocation,
@@ -434,10 +424,11 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${props.display ? props.display : sticky ? "" : "non-sticky"
-          } `}
+        className={`${
+          props.display ? props.display : sticky ? "" : "non-sticky"
+        } `}
 
-      // style={{ position: props.display && 'fixed' }}
+        // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -456,10 +447,11 @@ export const UserAppBar = (props: any) => {
           {/*---------------------------- bage logos header ------------------------ */}
 
           <div
-            className={`flex w-full  ${auth.isAuthenticated
-              ? "justify-end items-center"
-              : "justify-center"
-              }`}
+            className={`flex w-full  ${
+              auth.isAuthenticated
+                ? "justify-end items-center"
+                : "justify-center"
+            }`}
           >
             <div className=" grid-cols-1">
               <Logo variant="dark" />
@@ -544,6 +536,8 @@ export const UserAppBar = (props: any) => {
                           key={setting.route}
                           onClick={() => {
                             setting.title === "Logout" && auth.signOut();
+                            setting.title === "Logout" &&
+                              toast.success("Log Out Successfully");
                             handleClose();
                           }}
                         >
@@ -602,7 +596,7 @@ export const UserAppBar = (props: any) => {
 
           {/* < ------------------- location input field ---------------------> */}
 
-          {homepage == "/" || routeAdmin == 'category' ? (
+          {homepage == "/" || routeAdmin == "category" ? (
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {!locationPopUp ? (
                 <Button
@@ -670,7 +664,6 @@ export const UserAppBar = (props: any) => {
             </Box>
           ) : null}
 
-
           {!auth.isAuthenticated ? (
             <Button
               variant="contained"
@@ -736,6 +729,8 @@ export const UserAppBar = (props: any) => {
                     key={setting.route}
                     onClick={() => {
                       setting.title === "Logout" && auth.signOut();
+                      setting.title === "Logout" &&
+                        toast.success("Log Out Successfully");
                       handleClose();
                     }}
                   >
@@ -834,7 +829,7 @@ export const UserAppBar = (props: any) => {
                             {/* <div className="flex "> */}
                             <p className="text-[14px] flex font-[400] text-[#262626]">
                               {readMoreNotification.state &&
-                                readMoreNotification.id == res.iNotificationId ? (
+                              readMoreNotification.id == res.iNotificationId ? (
                                 <div className="">
                                   <span>{res.vDesc}</span>
                                   {res.vDesc.length > 55 ? (
@@ -1122,9 +1117,9 @@ export const UserAppBar = (props: any) => {
                         <ListItem
                           key={index}
                           disablePadding
-                          className={
-                            `${props.menu == item.title ? "bg-[#c9c8c8]" : ""} px-8 py-1`
-                          }
+                          className={`${
+                            props.menu == item.title ? "bg-[#c9c8c8]" : ""
+                          } px-8 py-1`}
                         >
                           <ListItemButton>
                             <ListItemIcon>

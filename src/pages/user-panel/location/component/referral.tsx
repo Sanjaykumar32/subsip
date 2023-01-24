@@ -38,14 +38,18 @@ export default function ResponsiveDialog({
       open={open}
       onClose={handleClose}
       aria-labelledby="responsive-dialog-title"
-    
     >
       <DialogTitle id="responsive-dialog-title refferals">
         <div className="flex  flex-col">
-        <span className="text-[1.75rem] text-[#1b1b1b] font-bold">{title}</span>
-        <span className="text-[14px] text-[#1b1b1b] font-semibold">Or copy link</span>
+          <span className="text-[1.75rem] text-[#1b1b1b] font-bold">
+            Share {title} with others
+          </span>
+          <span className="text-[14px] text-[#1b1b1b] font-semibold">
+            You currently have 0 referrals, only 1 step away from receiving
+            (next milestone.)
+          </span>
         </div>
-   
+
         <IconButton
           className="px-2 py-4"
           aria-label="close"
@@ -66,7 +70,7 @@ export default function ResponsiveDialog({
             fullWidth
             aria-readonly
             InputProps={{
-              readOnly: true, 
+              readOnly: true,
               endAdornment: (
                 <InputAdornment position="end" sx={{ cursor: "pointer" }}>
                   <FontAwesomeIcon icon={faCopy} onClick={appIdCopy} />
