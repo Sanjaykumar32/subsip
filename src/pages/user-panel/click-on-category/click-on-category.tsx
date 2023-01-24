@@ -505,12 +505,8 @@ export function ClickOnCategory() {
                               <Box sx={{ my: 1, lineHeight: 0 }}>
                                 <Typography
                                   fontSize={16}
-<<<<<<< HEAD
 
                                   className={"textLimit2 pb-[20px]"}
-=======
-                                  className={"textLimit2"}
->>>>>>> a183c97a122806b3bd1375515210e65be33286bb
                                 >
                                   {data.tDescription}
                                 </Typography>
