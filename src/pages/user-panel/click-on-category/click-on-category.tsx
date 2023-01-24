@@ -173,7 +173,7 @@ export function ClickOnCategory() {
       );
 
       allBusiness()
-      toast.success("Subsribed  Successfully")
+      toast.success("Subscribed  Successfully")
 
     } catch (error) {
       console.log(error);
@@ -188,7 +188,7 @@ export function ClickOnCategory() {
       })
     );
     allBusiness()
-    toast.success("Unsubsribed  Successfully");
+    toast.success("Unsubscribed  Successfully");
   };
 
 
@@ -516,7 +516,7 @@ export function ClickOnCategory() {
                                 <Typography
                                   fontSize={16}
 
-                                  className={"textLimit2"}
+                                  className={"textLimit2 pb-[20px]"}
                                 >
                                   {data.tDescription}
                                 </Typography>
@@ -526,6 +526,7 @@ export function ClickOnCategory() {
                                   display: "flex",
                                   justifyContent: "space-between",
                                   alignItems: "baseline",
+                                  paddingTop: "1em",
                                 }}
                               >
                                 <Typography
