@@ -483,7 +483,7 @@ export function ClickOnCategory() {
                               height="100px"
                               style={{ objectFit: "cover", height: "215px" }}
                             />
-                            <Box sx={{ py: "16px", pl: "16px" }}>
+                            <Box sx={{ py: "16px", pl: "16px" }} className="h-[220px] relative w-full " >
                               <Typography
                                 onClick={() => {
                                   onImageClick(data?.iBusinessId);
@@ -506,12 +506,13 @@ export function ClickOnCategory() {
                                 <Typography
                                   fontSize={16}
 
-                                  className={"textLimit2 pb-[20px]"}
+                                  className={"textLimitcate2 pb-[20px]"}
                                 >
                                   {data.tDescription}
                                 </Typography>
                               </Box>
                               <Box
+                              className=" absolute w-[95%] right-0 bottom-[14px] "
                                 sx={{
                                   display: "flex",
                                   justifyContent: "space-between",

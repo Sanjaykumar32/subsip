@@ -479,10 +479,22 @@ h2 {
     -webkit-line-clamp: 1;
     line-clamp: 2;
     -webkit-box-orient: vertical;
-
     color: #434d59 !important;
     padding: 0 4px 0 0px;
 }
+
+
+.textLimitcate2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: #434d59 !important;
+    padding: 0 4px 0 0px;
+}
+
 
 .NotextLimit2 {
     overflow: hidden;

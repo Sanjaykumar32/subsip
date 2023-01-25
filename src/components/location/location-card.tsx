@@ -255,11 +255,11 @@ export function Location({
           />
           <span
             style={{
-              color: theme.palette.info.main,
+              color: "#09292b",
               fontFamily: "Josefin Slab",
             }}
           >
-            RWEARDS
+            REWARDS
           </span>
         </Box>
         <Title>{vName}</Title>

@@ -86,6 +86,8 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
   useEffect(() => {
     if (edit) {
+      console.log('Edit new listinng');
+
       setEditure(true);
       allBusiness();
 
@@ -117,6 +119,27 @@ export const NewlistingController = (): INewlistingControllerReturns => {
           setSubCategory(item?.iSubCategory);
         }
       });
+    }else{
+      navigate(`/admin/new-listing`)
+      setEditure(false);
+      console.log('add new listinng');
+      console.log('add new listinng')
+
+      // const clear = {
+        setBuisnessName("")
+          setBusinessLocation("")
+          setDescription("");
+          setPreview("");
+          setBodyDescription('');
+          setTagLine("")
+          setBanner("")
+          // setBanner(item.onBanner === 1 ? "true" : "false")
+          setEmail("");
+          // console.log(item?.iCountry)
+          setCategory("");
+          setSubCategory("");
+      // }
+
     }
   }, [edit, ListId]);
 
@@ -278,11 +301,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     getcategory();
   }, [getcategory]);
 
-  const filteredSubCategory = subCategoryData?.filter(
-    (item: { iCategoryId: string }) => {
-      return item.iCategoryId == category;
-    }
-  );
+  
 
   const getSubCategory = useCallback(async () => {
     try {
@@ -295,6 +314,18 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   useEffect(() => {
     getSubCategory();
   }, [getSubCategory]);
+
+  const filteredSubCategory = subCategoryData?.filter(
+    (item: { iCategoryId: string }) => {
+      return item.iCategoryId == category;
+    }
+  );
+
+  console.log(subCategoryData?.filter((item: { iCategoryId: string }) => {
+      return item.iCategoryId == category;
+    }), 'item cate sub')
+
+
 
   return {
     getters: {

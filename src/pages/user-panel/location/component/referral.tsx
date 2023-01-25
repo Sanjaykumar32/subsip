@@ -10,6 +10,10 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { AuthRoutePathEnum } from "enum";
 import { toast } from "react-hot-toast";
 import { useLocation, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_REFERRAL_COUNT } from "data/selectors/admin.selectors";
+import { useCallback, useEffect } from "react";
+import { AdminThunk } from "data/thunk/admin.thunk";
 
 export default function ResponsiveDialog({
   title,
@@ -33,6 +37,27 @@ export default function ResponsiveDialog({
     toast.success("Copied Successfully");
   };
 
+
+  const refferralCount = useAppSelector(GET_REFERRAL_COUNT);
+  const dispatch = useAppDispatch();
+  const userId = localStorage.getItem("userId");
+
+  const refferalCount = useCallback(async () => {
+    try {
+      await dispatch(
+        AdminThunk.refferralCount({ userId: userId ? parseInt(userId) : 0 })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, userId]);
+
+  useEffect(() => {
+    refferalCount();
+  }, [refferalCount]);
+
+  console.log(refferralCount, "refferralCount");
+
   return (
     <Dialog
       open={open}
@@ -46,7 +71,7 @@ export default function ResponsiveDialog({
           </span>
           <span className="text-[14px] text-[#1b1b1b] font-semibold">
             You currently have 0 referrals, only 1 step away from receiving
-            (next milestone.)
+            next milestone.
           </span>
         </div>
 

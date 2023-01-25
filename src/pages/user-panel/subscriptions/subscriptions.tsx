@@ -20,17 +20,18 @@ import { useAppDispatch, useAppSelector } from "data";
 import { GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export function Subscriptions() {
   const [subscribe, setSubscribe] = useState(false);
   const [search, setSearch] = useState("");
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
 
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
-      const UserID = localStorage.getItem("userId");
-
-      // console.log(UserID, 'UserID')
+      const UserID = localStorage.getItem("userId")
 
       await dispatch(
         AdminThunk.allSubscriberOfBussiness({ userId: Number(UserID) })
@@ -154,7 +155,9 @@ export function Subscriptions() {
                 alignItems: "baseline",
               }}
             >
-              <Typography variant="body2"> {element.businessName} :</Typography>
+              <div className=" cursor-pointer " onClick={()=> navigate(`/listing/${element?.iBusinessId}`)}>
+                <Typography variant="body2"> {element.businessName}</Typography>
+              </div>
               {!subscribe ? (
                 <Button
                   onClick={() => handleUnsub(element)}
