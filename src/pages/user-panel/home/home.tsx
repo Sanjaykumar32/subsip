@@ -155,14 +155,14 @@ export function Home({ alertOnBottom}:any) {
   const businessData = useAppSelector(GET_BUSINESS);
 
 
-  const filterBanner = businessData.filter((item) => {
-    return Object.values(item.vLocation.toString().toLowerCase())
+  const filterBanner = businessData?.filter((item) => {
+    return Object.values(item?.vLocation?.toString()?.replaceAll(/\s/g,'')?.toLowerCase())
       .join("")
       .toLowerCase()
-      .includes(location.search.toString().slice(1, 19).toLowerCase());
+      .includes(location?.search?.toString()?.slice(1, 19)?.replaceAll(/\s/g,'')?.toLowerCase());
   });
 
-  console.log(businessData, 'businessData');
+  // console.log(businessData, 'businessData');
   console.log(filterBanner, 'filterBanner')
 
   const categoryData = useAppSelector(GET_CATEGORY);
@@ -296,7 +296,7 @@ export function Home({ alertOnBottom}:any) {
       <div className="w-full px-5 mt-8">
 
         <p className="font-semibold text-[24px] pb-2 mx-5 ">
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[0]).length > 0 &&
+          {filterBanner?.filter((el) => parseInt(el?.iCategory) == CateFirst[0]).length > 0 &&
             'Restaurants'
           }
         </p>
@@ -304,15 +304,16 @@ export function Home({ alertOnBottom}:any) {
         <div className="relative">
           <Slider ref={cardRef} {...cardSettingsScroll}>
             {filterBanner
-              .filter((el) => parseInt(el.iCategory) == CateFirst[0])
-              .map((ele: IBusiness, index: number) => {
+              ?.filter((el) => parseInt(el?.iCategory) == CateFirst[0])
+              ?.map((ele: IBusiness, index: number) => {
+                { console.log(ele , 'ele map')}
                 return (
                   <div
-                    style={{
-                      boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
-                    }}
-                    key={`${ele?.eStatus}+${index}`}
-                    className="relative overflow-x-auto md:overflow-x-hidden "
+                  style={{
+                    boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
+                  }}
+                  key={`${ele?.eStatus}+${index}`}
+                  className="relative overflow-x-auto md:overflow-x-hidden "
                   >
                     <SliderCard
                       imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
@@ -328,13 +329,13 @@ export function Home({ alertOnBottom}:any) {
                 );
               })}
           </Slider>
-          {filterBanner.filter(
+          {filterBanner?.filter(
             (el: any) => parseInt(el.iCategory) == CateFirst[0]
           ).length > 0 && <SliderArrow refVal={cardRef} />}
         </div>
 
         <p className="font-semibold text-[24px]  mt-5 mx-5">
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1]).length > 0 &&
+          {filterBanner?.filter((el) => parseInt(el.iCategory) == CateFirst[1]).length > 0 &&
             'Home Services'
           }
         </p>
@@ -342,8 +343,8 @@ export function Home({ alertOnBottom}:any) {
 
           <Slider ref={cardRef2} {...cardSettings}>
             {filterBanner
-              .filter((el) => parseInt(el.iCategory) == CateFirst[1])
-              .map((ele: IBusiness, index: number) => {
+              ?.filter((el) => parseInt(el.iCategory) == CateFirst[1])
+              ?.map((ele: IBusiness, index: number) => {
                 return (
                   <div
                     style={{
@@ -366,12 +367,12 @@ export function Home({ alertOnBottom}:any) {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[1])
+          {filterBanner?.filter((el) => parseInt(el.iCategory) == CateFirst[1])
             .length > 0 && <SliderArrow refVal={cardRef2} />}
         </div>
 
         <p className="font-semibold text-[24px]  mt-5 mx-5">
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[2]).length > 0 &&
+          {filterBanner?.filter((el) => parseInt(el.iCategory) == CateFirst[2]).length > 0 &&
             'Auto Services'
           }
         </p>
@@ -379,8 +380,8 @@ export function Home({ alertOnBottom}:any) {
         <div className="relative my-10 w-full">
           <Slider ref={cardRef3} {...cardSettings}>
             {filterBanner
-              .filter((el) => parseInt(el.iCategory) == CateFirst[2])
-              .map((ele, index) => {
+              ?.filter((el) => parseInt(el.iCategory) == CateFirst[2])
+              ?.map((ele, index) => {
                 return (
                   <div
                     style={{
@@ -403,7 +404,7 @@ export function Home({ alertOnBottom}:any) {
                 );
               })}
           </Slider>
-          {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[2])
+          {filterBanner?.filter((el) => parseInt(el.iCategory) == CateFirst[2])
             .length > 0 && <SliderArrow refVal={cardRef3} />}
         </div>
 
@@ -414,15 +415,15 @@ export function Home({ alertOnBottom}:any) {
         {scroll ? (
           <>
             <p className="font-semibold text-[24px]  mt-5 mx-5">
-              {filterBanner.filter((el) => parseInt(el.iCategory) == CateFirst[3]).length > 0 &&
+              {filterBanner?.filter((el) => parseInt(el.iCategory) == CateFirst[3]).length > 0 &&
                 'More'
               }
             </p>
             <div className="relative my-10 w-full">
               <Slider ref={cardRef3} {...cardSettings}>
                 {filterBanner
-                  .filter((el) => parseInt(el.iCategory) == CateFirst[3])
-                  .map((ele, index) => {
+                  ?.filter((el) => parseInt(el.iCategory) == CateFirst[3])
+                  ?.map((ele, index) => {
                     return (
                       <div
                         style={{
@@ -445,7 +446,7 @@ export function Home({ alertOnBottom}:any) {
                     );
                   })}
               </Slider>
-              {filterBanner.filter(
+              {filterBanner?.filter(
                 (el) => parseInt(el.iCategory) == CateFirst[3]
               ).length > 0 && <SliderArrow refVal={cardRef3} />}
             </div>
@@ -453,8 +454,8 @@ export function Home({ alertOnBottom}:any) {
             <div className="relative my-10 w-full">
               <Slider ref={cardRef3} {...cardSettings}>
                 {filterBanner
-                  .filter((el) => parseInt(el.iCategory) == CateFirst[4])
-                  .map((ele, index) => {
+                  ?.filter((el) => parseInt(el.iCategory) == CateFirst[4])
+                  ?.map((ele, index) => {
                     return (
                       <div
                         style={{
@@ -477,7 +478,7 @@ export function Home({ alertOnBottom}:any) {
                     );
                   })}
               </Slider>
-              {filterBanner.filter(
+              {filterBanner?.filter(
                 (el) => parseInt(el.iCategory) == CateFirst[4]
               ).length > 0 && <SliderArrow refVal={cardRef3} />}
             </div>
@@ -522,7 +523,7 @@ const SliderCard = (props: any) => {
       const response: any = await dispatch(
         UserThunk.business({ businessId: id })
       );
-      if (response.payload.data.length > 0) {
+      if (response?.payload?.data?.length > 0) {
         navigate(`/listing/${id}`);
       } else {
         console.log("nodata");
@@ -582,7 +583,7 @@ const SliderCard = (props: any) => {
         className="w-full object-cover h-[215px]  cursor-pointer "
         onClick={onImageClick}
       />
-      <div className=" pl-4 py-4  ">
+      <div className=" pl-4 py-4 h-[230px] ">
         <span
           className="text-black text-[19px] leading-[22px] font-semibold cursor-pointer textLimit2 my-3 "
           onClick={() => {
@@ -599,7 +600,7 @@ const SliderCard = (props: any) => {
         <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434d59] textLimit2 my-3 ">
           {des ? des : "--"}
         </p>
-        <div className="flex justify-between my-2 pt-[1em]">
+        <div className="flex justify-between my-2 pt-[1em] absolute bottom-[14px] right-0  w-[95%]">
           <p className="text-[0.9rem] text-[#CDCDCD]">
             <span className="text-[20px] text-black pr-2">
               {" "}

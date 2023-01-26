@@ -18,7 +18,7 @@ import {
 import { GET_BUSINESS, GET_CATEGORY, GET_SUB_CATEGORY } from "data/selectors";
 import { useAppDispatch, useAppSelector } from "data";
 import { AdminThunk } from "data/thunk/admin.thunk";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useAsyncError } from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
 import { useAuth } from "context/auth.context";
 import { AuthRoutePathEnum } from "enum";
@@ -88,6 +88,8 @@ export function ClickOnCategory() {
   };
 
   const businessData = useAppSelector(GET_BUSINESS);
+  const [state, setState] = React.useState(false);
+  const [sortValue, setSortValue] = useState('Highest')
 
   const allBusiness = useCallback(async () => {
     try {
@@ -101,19 +103,28 @@ export function ClickOnCategory() {
     allBusiness();
   }, [allBusiness]);
 
-  const listFilter = businessData.filter(
+const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
+  if(sortValue == 'Highest'){
+    return b.subscriberCount - a.subscriberCount
+  }else if(sortValue == 'Lowest'){
+    return a.subscriberCount - b.subscriberCount
+  }
+})
+
+
+  const listFilter = sortSubscriberWise?.filter(
     (el: { vLocation: any; vName: { toString: () => string } }) => {
       return Object.values(
         pathName == "category"
-          ? el?.vLocation?.toString().toLowerCase()
-          : el.vName.toString().toLowerCase()
+          ? el?.vLocation?.replaceAll(/\s/g, '')?.toString().toLowerCase()
+          : el?.vName?.toString()?.replaceAll(/\s/g, '')?.toLowerCase()
       )
         .join("")
         .toLowerCase()
         .includes(
           pathName == "category"
-            ? pathSerchValue.toString().toLowerCase()
-            : location.search.toString().slice(1, 19).toLowerCase()
+            ? pathSerchValue.toString()?.replaceAll(/\s/g, '')?.toLowerCase()
+            : location.search.toString().slice(1, 19)?.replaceAll(/\s/g, '').toLowerCase()
         );
     }
   );
@@ -145,7 +156,7 @@ export function ClickOnCategory() {
     }
   }, [activeCate, getCateID]);
 
-  const [state, setState] = React.useState(false);
+
 
   const toggleDrawer = () => {
     setState(true);
@@ -199,6 +210,10 @@ export function ClickOnCategory() {
     }
   }
 
+  const handleSort = (e: any) => {
+    setSortValue(e.target.value)
+  }
+
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
       <Grid container>
@@ -236,11 +251,10 @@ export function ClickOnCategory() {
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
                               id="panel1a-header"
-                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
-                                activeCate === item?.iCategoryId
+                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
                                   ? " activeCate"
                                   : ""
-                              }  `}
+                                }  `}
                               onClick={() => {
                                 handleList(item?.iCategoryId),
                                   handleSubList(null);
@@ -310,11 +324,10 @@ export function ClickOnCategory() {
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id={item.vName}
-                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
-                            activeCate === item?.iCategoryId
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
                               ? " activeCate"
                               : ""
-                          }  `}
+                            }  `}
                           onClick={() => {
                             handleList(item?.iCategoryId),
                               // handleSubList(item?.iSubCategoryId);
@@ -375,12 +388,12 @@ export function ClickOnCategory() {
               {activeCate == 65
                 ? "Restaurants"
                 : activeCate == 66
-                ? "Home Services"
-                : activeCate == 67
-                ? "Auto Services"
-                : activeCate == 68
-                ? "More"
-                : "Restaurants"}
+                  ? "Home Services"
+                  : activeCate == 67
+                    ? "Auto Services"
+                    : activeCate == 68
+                      ? "More"
+                      : "Restaurants"}
             </Typography>
             <Box
               sx={{
@@ -417,23 +430,24 @@ export function ClickOnCategory() {
                   justifyContent: "space-between",
                 }}
               >
-                <Typography variant="caption">Sort By:</Typography>
+                <Typography variant="caption">Sort By Subscribe</Typography>
                 <FormControl variant="standard">
                   <Select
                     labelId="sort-by-select-label"
                     id="sort-by-simple-select"
-                    value="Newest"
+                    value={sortValue}
                     size="small"
+                    onChange={handleSort}
                     sx={{ fontWeight: 500, ml: 1, mr: 3 }}
                   >
-                    <MenuItem value={"Newest"}>
+                    <MenuItem value={"Highest"}>
                       <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        Newest
+                        Highest
                       </Typography>
                     </MenuItem>
-                    <MenuItem value={"Oldest"}>
+                    <MenuItem value={"Lowest"}>
                       <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        Oldest
+                        Lowest
                       </Typography>
                     </MenuItem>
                   </Select>
@@ -443,11 +457,11 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
-              listFilter.filter((el) =>
-                subcatIdss
-                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
-                  : el.iCategory === ids
-              ).length > 0 ? (
+                listFilter.filter((el) =>
+                  subcatIdss
+                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                    : el.iCategory === ids
+                ).length > 0 ? (
                 listFilter
                   .filter((el) =>
                     subcatIdss
@@ -512,7 +526,7 @@ export function ClickOnCategory() {
                                 </Typography>
                               </Box>
                               <Box
-                              className=" absolute w-[95%] right-0 bottom-[14px] "
+                                className=" absolute w-[95%] right-0 bottom-[14px] "
                                 sx={{
                                   display: "flex",
                                   justifyContent: "space-between",
@@ -538,12 +552,12 @@ export function ClickOnCategory() {
                                 <div className="raletive">
                                   <>
                                     {data?.subscriberIds &&
-                                    data?.subscriberIds
-                                      .split("")
-                                      .filter((el: any) => {
-                                        return el == userId;
-                                      })[0] &&
-                                    auth?.isAuthenticated ? (
+                                      data?.subscriberIds
+                                        .split("")
+                                        .filter((el: any) => {
+                                          return el == userId;
+                                        })[0] &&
+                                      auth?.isAuthenticated ? (
                                       <div
                                         className="subscribeLebalListing bg-[#e0e0e0]"
                                         onClick={() =>

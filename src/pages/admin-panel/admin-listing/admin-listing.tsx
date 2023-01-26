@@ -129,6 +129,8 @@ export function AdminListing() {
     };
   });
 
+  console.log(rows ,'rows');
+
   const list = rows.filter((el) => {
     return Object.values(el.Name.concat('' , el.Location).toString()).join('').toLowerCase().includes(search.toString().toLowerCase())
   })

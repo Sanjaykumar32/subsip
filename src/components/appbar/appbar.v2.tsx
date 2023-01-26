@@ -222,8 +222,8 @@ export const UserAppBar = (props: any) => {
         navigate(`/?`);
         setOpen(false);
       } else {
-        setLocation(el);
-        navigate(`/?${el}`);
+        setLocation(el?.replaceAll(/\s/g,''));
+        navigate(`/?${el?.replaceAll(/\s/g,'')}`);
       }
     }
 
@@ -234,21 +234,21 @@ export const UserAppBar = (props: any) => {
         navigate(`?`);
         setOpen(false);
       } else {
-        setLocation(el);
-        navigate(`?${el}`);
+        setLocation(el?.replaceAll(/\s/g,''));
+        navigate(`?${el?.replaceAll(/\s/g,'')}`);
       }
     }
   };
 
   const handleLocation = (event: any) => {
     if (homepage == "/") {
-      setLocation(event.target.value);
-      navigate(`/?${event.target.value}`);
+      setLocation(event.target.value?.replaceAll(/\s/g,''));
+      navigate(`/?${event.target.value?.replaceAll(/\s/g,'')}`);
     }
 
     if (routeAdmin == "category") {
       // setLocation(event.target.value);
-      navigate(`?${event.target.value}`);
+      navigate(`?${event.target.value?.replaceAll(/\s/g,'')}`);
     }
   };
 
