@@ -570,7 +570,7 @@ const SliderCard = (props: any) => {
       })
     );
     allBusiness()
-    toast.success("Unsubsribed  Successfully")
+    toast.success("Unsubscribed  Successfully")
   };
 
 

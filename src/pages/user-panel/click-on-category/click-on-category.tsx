@@ -168,7 +168,7 @@ export function ClickOnCategory() {
       );
 
       allBusiness();
-      toast.success("Subsribed  Successfully");
+      toast.success("Subscribed  Successfully");
     } catch (error) {
       console.log(error);
     }
