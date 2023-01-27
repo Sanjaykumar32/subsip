@@ -236,12 +236,16 @@ export function Location({
     <Card
       elevation={3}
       sx={{
-        height: "83%",
+        // height: "83%",
         position: "relative",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
       }}
+
+      className=" md:h-[83%] h-full "
+
+
     >
       <Box sx={{ p: 2, fontSize: theme.typography.h5.fontSize }}>
         <Box sx={{ display: "flex" }}>

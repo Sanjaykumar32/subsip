@@ -28,6 +28,8 @@ import {
 import { NewlistingController } from "./admin-new-listing-controller";
 import { Form, useSearchParams } from "react-router-dom";
 import Switch from "@mui/material/Switch";
+import Checkbox from '@mui/material/Checkbox';
+
 
 interface ListFormItem {
   id: string;
@@ -147,6 +149,7 @@ export function AdminNewlisting() {
     image,
     preview,
     bodyDescription,
+    banner
 
   } = getters;
   const {
@@ -296,13 +299,25 @@ export function AdminNewlisting() {
                       <Label> {step6.label} </Label>
                       <Typography variant="body2"> {step6.caption} </Typography>
 
-                      <input
+                      {/* <input
                         // value={image}
                         type="file"
                         onChange={(e: any) => {
                           handleImageChange(e);
                         }}
                       />
+                       */}
+
+                      <div className="flex gap-[20px] w-full  " >
+                        <label htmlFor="fileInput">
+                          <img id="icon" src="https://image.freepik.com/free-icon/upload-arrow_318-26670.jpg" />
+                        </label>
+                        <input id="fileInput" type="file" onChange={(e: any) => { handleImageChange(e); }} />
+
+                        <img src={image} className=" w-[100px] h-[80px] object-cover rounded-sm " />
+                      </div>
+
+
 
                       {/* <FormControl fullWidth >
                         <input
@@ -333,12 +348,15 @@ export function AdminNewlisting() {
                   </Grid>
                   <Grid xs={6} md={4}>
                     <Box>
-                      <Label> {step10.label} </Label>
-                      <Typography variant="body2">
-                        {" "}
-                        {step10.caption}{" "}
-                      </Typography>
-                      <Switch value={'true'} onClick={handleBanner} />
+                      <>
+                        <Label> {step10.label} </Label>
+                        <Typography variant="body2">
+                          {" "}
+                          {step10.caption}{" "}
+                        </Typography>
+                        <Switch checked={banner} onClick={handleBanner} />
+
+                      </>
                     </Box>
                   </Grid>
                 </Grid>

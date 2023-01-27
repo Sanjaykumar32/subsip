@@ -464,9 +464,10 @@ h2 {
     font-weight: 700;
 }
 
-.refferals{
+.refferals {
     padding: 1.5rem !important;
 }
+
 .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
     width: 33%;
     height: 35%;
@@ -522,4 +523,13 @@ h2 {
 
 .css-d3fbhi-MuiBackdrop-root {
     z-index: 0 !important;
+}
+
+#fileInput {
+    display: none;
+}
+
+#icon {
+    width: 40px;
+    cursor: pointer;
 }

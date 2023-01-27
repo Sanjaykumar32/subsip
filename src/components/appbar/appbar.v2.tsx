@@ -222,8 +222,8 @@ export const UserAppBar = (props: any) => {
         navigate(`/?`);
         setOpen(false);
       } else {
-        setLocation(el?.replaceAll(/\s/g,''));
-        navigate(`/?${el?.replaceAll(/\s/g,'')}`);
+        setLocation(el?.replaceAll(/\s/g, ''));
+        navigate(`/?${el?.replaceAll(/\s/g, '')}`);
       }
     }
 
@@ -234,21 +234,21 @@ export const UserAppBar = (props: any) => {
         navigate(`?`);
         setOpen(false);
       } else {
-        setLocation(el?.replaceAll(/\s/g,''));
-        navigate(`?${el?.replaceAll(/\s/g,'')}`);
+        setLocation(el?.replaceAll(/\s/g, ''));
+        navigate(`?${el?.replaceAll(/\s/g, '')}`);
       }
     }
   };
 
   const handleLocation = (event: any) => {
     if (homepage == "/") {
-      setLocation(event.target.value?.replaceAll(/\s/g,''));
-      navigate(`/?${event.target.value?.replaceAll(/\s/g,'')}`);
+      setLocation(event.target.value?.replaceAll(/\s/g, ''));
+      navigate(`/?${event.target.value?.replaceAll(/\s/g, '')}`);
     }
 
     if (routeAdmin == "category") {
       // setLocation(event.target.value);
-      navigate(`?${event.target.value?.replaceAll(/\s/g,'')}`);
+      navigate(`?${event.target.value?.replaceAll(/\s/g, '')}`);
     }
   };
 
@@ -271,7 +271,7 @@ export const UserAppBar = (props: any) => {
             route: RoutePathEnum.PROFILE,
           },
           {
-            title: "Subscription",
+            title: "Subscriptions",
             route: RoutePathEnum.SUBSCRIPTIONS,
           },
           {
@@ -352,7 +352,7 @@ export const UserAppBar = (props: any) => {
           route: RoutePathEnum.PROFILE,
         },
         {
-          title: "Subscription",
+          title: "Subscriptions",
           route: RoutePathEnum.SUBSCRIPTIONS,
         },
         {
@@ -424,11 +424,10 @@ export const UserAppBar = (props: any) => {
           backgroundColor: "white",
           position: "relative ",
         }}
-        className={`${
-          props.display ? props.display : sticky ? "" : "non-sticky"
-        } `}
+        className={`${props.display ? props.display : sticky ? "" : "non-sticky"
+          } `}
 
-        // style={{ position: props.display && 'fixed' }}
+      // style={{ position: props.display && 'fixed' }}
       >
         <Toolbar
           sx={{
@@ -447,11 +446,10 @@ export const UserAppBar = (props: any) => {
           {/*---------------------------- bage logos header ------------------------ */}
 
           <div
-            className={`flex w-full  ${
-              auth.isAuthenticated
-                ? "justify-end items-center"
-                : "justify-center"
-            }`}
+            className={`flex w-full  ${auth.isAuthenticated
+              ? "justify-end items-center"
+              : "justify-center"
+              }`}
           >
             <div className=" grid-cols-1">
               <Logo variant="dark" />
@@ -829,7 +827,7 @@ export const UserAppBar = (props: any) => {
                             {/* <div className="flex "> */}
                             <p className="text-[14px] flex font-[400] text-[#262626]">
                               {readMoreNotification.state &&
-                              readMoreNotification.id == res.iNotificationId ? (
+                                readMoreNotification.id == res.iNotificationId ? (
                                 <div className="">
                                   <span>{res.vDesc}</span>
                                   {res.vDesc.length > 55 ? (
@@ -1117,9 +1115,8 @@ export const UserAppBar = (props: any) => {
                         <ListItem
                           key={index}
                           disablePadding
-                          className={`${
-                            props.menu == item.title ? "bg-[#c9c8c8]" : ""
-                          } px-8 py-1`}
+                          className={`${props.menu == item.title ? "bg-[#c9c8c8]" : ""
+                            } px-8 py-1`}
                         >
                           <ListItemButton>
                             <ListItemIcon>

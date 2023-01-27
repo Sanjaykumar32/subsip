@@ -32,6 +32,7 @@ interface INewlistingControllerReturns {
     businessData: IBusiness[];
     categoryData: ICategoryData[];
     filteredSubCategory: ISubCategoryData[];
+    banner: any;
   };
   handlers: {
     handleHeadlineChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -72,7 +73,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const categoryData = useAppSelector(GET_CATEGORY);
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const businessData = useAppSelector(GET_BUSINESS);
-  const [banner, setBanner] = useState<string>("false");
+  const [banner, setBanner] = useState<any>(false);
   const [editrue, setEditure] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
@@ -83,6 +84,8 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
 
   console.log(businessData, 'editScreen')
+  console.log(image, 'image image image')
+
 
   useEffect(() => {
     if (edit) {
@@ -103,14 +106,15 @@ export const NewlistingController = (): INewlistingControllerReturns => {
           setPreview(item?.vPreview);
           setBodyDescription(item?.vBodyDescription);
           setTagLine(item?.vTagLine)
+          setImage('http://159.223.194.50:8000/' + item?.vImage)
 
 
-          if (item.onBanner == 1) {
-            setBanner("true")
-            console.log(item.onBanner, "item.onBanner true");
+          if (item?.onBanner == 1) {
+            setBanner(true)
+            console.log(item.onBanner, "item.onBanner true 1 ");
           } else {
-            setBanner("false")
-            console.log(item.onBanner, "item.onBanner false");
+            setBanner(false)
+            console.log(item.onBanner, "item.onBanner false 0 ");
           }
           // setBanner(item.onBanner === 1 ? "true" : "false")
           setEmail(item?.vEmail);
@@ -119,25 +123,25 @@ export const NewlistingController = (): INewlistingControllerReturns => {
           setSubCategory(item?.iSubCategory);
         }
       });
-    }else{
+    } else {
       navigate(`/admin/new-listing`)
       setEditure(false);
       console.log('add new listinng');
       console.log('add new listinng')
 
       // const clear = {
-        setBuisnessName("")
-          setBusinessLocation("")
-          setDescription("");
-          setPreview("");
-          setBodyDescription('');
-          setTagLine("")
-          setBanner("")
-          // setBanner(item.onBanner === 1 ? "true" : "false")
-          setEmail("");
-          // console.log(item?.iCountry)
-          setCategory("");
-          setSubCategory("");
+      setBuisnessName("")
+      setBusinessLocation("")
+      setDescription("");
+      setPreview("");
+      setBodyDescription('');
+      setTagLine("")
+      setBanner("")
+      // setBanner(item.onBanner === 1 ? "true" : "false")
+      setEmail("");
+      // console.log(item?.iCountry)
+      setCategory("");
+      setSubCategory("");
       // }
 
     }
@@ -181,8 +185,17 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   };
 
   const handleBanner = (event: any): void => {
-    setBanner(event.target.checked);
-    console.log(event.target.checked + " select category data");
+    console.log(event, "category data");
+
+    if (event.target.checked) {
+      setBanner(true);
+      console.log(" true select category data");
+    } else {
+      setBanner(false);
+      console.log(" false select category data");
+    }
+    // setBanner(event.target.checked);
+    // console.log(event.target.checked + " select category data");
   };
 
   const handleCategoryChange = (event: SelectChangeEvent): void => {
@@ -257,7 +270,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     updatedata.append("bodyDescription", bodyDescription);
 
 
-    if (editrue == true) {
+    if (edit) {
       const res = await dispatch(
         AdminThunk.updateListing({
           data: updatedata,
@@ -267,12 +280,17 @@ export const NewlistingController = (): INewlistingControllerReturns => {
         })
       );
       toast.success("Listing Updated Successfully");
+      // navigate(AdminRoutePathEnum.ADMIN_LISTING);
     } else {
       const res = await dispatch(AdminThunk.createListing(form));
       toast.success("Listing Created Successfully");
+      // navigate(AdminRoutePathEnum.ADMIN_LISTING);
     }
 
     navigate(AdminRoutePathEnum.ADMIN_LISTING);
+
+
+
 
     // const res = await dispatch(AdminThunk.createListing(form));
   };
@@ -301,7 +319,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     getcategory();
   }, [getcategory]);
 
-  
+
 
   const getSubCategory = useCallback(async () => {
     try {
@@ -322,8 +340,8 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   );
 
   console.log(subCategoryData?.filter((item: { iCategoryId: string }) => {
-      return item.iCategoryId == category;
-    }), 'item cate sub')
+    return item.iCategoryId == category;
+  }), 'item cate sub')
 
 
 
@@ -343,6 +361,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       categoryData,
       filteredSubCategory,
       image,
+      banner,
     },
     handlers: {
       handleHeadlineChange,
