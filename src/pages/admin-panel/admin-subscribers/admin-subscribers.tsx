@@ -65,11 +65,11 @@ export function AdminSubscribers() {
         </Box>
       ),
     },
-    {
-      field: "location",
-      headerName: "Location",
-      width: 150,
-    },
+    // {
+    //   field: "location",
+    //   headerName: "Location",
+    //   width: 150,
+    // },
     {
       field: "Actions",
       headerName: "Actions",

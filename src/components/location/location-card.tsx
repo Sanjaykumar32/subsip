@@ -24,6 +24,7 @@ import { UserThunk } from "data/thunk/user.thunk";
 import { GET_ALL_SUBSCRIBER_OF_BUSINESS, GET_BUSINESS } from "data/selectors";
 import toast from "react-hot-toast";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
 
 export const Title = ({ children, ...props }: TypographyProps) => (
   <Typography variant="h5" fontWeight={900} sx={{ mt: 2, mb: 1 }} {...props}>
@@ -43,7 +44,7 @@ export const Address = ({ children, ...props }: TypographyProps) => (
 );
 
 export const Info = ({ children, ...props }: TypographyProps) => (
-  <Typography variant="body1" fontWeight={600} sx={{ mt: 4, mb: 2 }} {...props}>
+  <Typography variant="body1" fontWeight={600} sx={{ mt: 2, mb: 2 }} {...props}>
     {children}
   </Typography>
 );
@@ -67,6 +68,7 @@ export const Subscribe = ({
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
   const [showButton, setButton] = useState<boolean>(false);
   const bussinessByName = useAppSelector(GET_BUSINESS);
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"))
 
 
   // console.log(bussinessByName, 'bussinessByName')
@@ -155,14 +157,9 @@ export const Subscribe = ({
   };
 
 
-
-
-
-
-
   return (
-    <>
-      <Box sx={{ my: 3 }}>
+    <div className={`${isMobile ? 'flex justify-between h-[70px]  items-center' : ''}`}>
+      <Box sx={{ my: 3 }} >
         <Typography
           variant="subtitle1"
           color={color || theme.palette.grey[600]}
@@ -195,7 +192,7 @@ export const Subscribe = ({
           Subscribe Now
         </Button>
       )}
-    </>
+    </div>
   );
 };
 
@@ -231,6 +228,7 @@ export function Location({
   vPreview,
 }: IBusiness) {
   const auth = useAuth();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Card
@@ -248,6 +246,8 @@ export function Location({
 
     >
       <Box sx={{ p: 2, fontSize: theme.typography.h5.fontSize }}>
+        {!isMobile &&
+        <>
         <Box sx={{ display: "flex" }}>
           <span style={{ fontFamily: "Bree Serif" }}> PoshSub </span>
           <Divider
@@ -269,6 +269,8 @@ export function Location({
         <Title>{vName}</Title>
         <Address>{vLocation}</Address>
         <Info>{vPreview}</Info>
+        </>
+          }
 
         <Subscribe subsctibers={subscriberCount} auth={auth} />
       </Box>

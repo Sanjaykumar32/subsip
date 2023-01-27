@@ -32,6 +32,9 @@ export function AdminListing() {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const [search, setSearch] = useState('')
+  const [indexValue, setIndex] = useState(false)
+  const [sortValue, setSortValue] = useState('A-Z')
+
 
   async function deleteDatalist(ID: number) {
     setLoader(true);
@@ -118,7 +121,7 @@ export function AdminListing() {
     allBusiness();
   }, [allBusiness]);
 
-  const rows = businessData?.map((item) => {
+  const rows: any = businessData?.map((item) => {
     return {
       id: item.iBusinessId,
       Profile: item.vImage,
@@ -129,30 +132,39 @@ export function AdminListing() {
     };
   });
 
-  console.log(rows ,'rows');
 
-  const list = rows.filter((el) => {
-    return Object.values(el.Name.concat('' , el.Location).toString()).join('').toLowerCase().includes(search.toString().toLowerCase())
+  const sorted = rows?.slice()?.sort((a: any, b: any) => {
+    if (sortValue == 'A-Z') {
+      return a.Name.toString().toLowerCase().charCodeAt() - b.Name.toString().toLowerCase().charCodeAt()
+    } else if (sortValue == 'Z-A') {
+      return b.Name.toString().toLowerCase().charCodeAt() - a.Name.toString().toLowerCase().charCodeAt()
+    }
+  })
+
+
+  const list = sorted.filter((el: { Name: { concat: (arg0: string, arg1: any) => { (): any; new(): any; toString: { (): { [s: string]: unknown; } | ArrayLike<unknown>; new(): any; }; }; }; Location: any; }) => {
+    return Object.values(el.Name.concat('', el.Location).toString()).join('').toLowerCase().includes(search.toString().toLowerCase())
   })
 
   const items1 = businessData?.map((item) => {
-    return( {
+    return ({
       id: item.iBusinessId,
       name: item.vName
     })
   })
 
   const items2 = businessData?.map((item) => {
-    return( {
+    return ({
       id: item.iSubCategory,
       name: item.vLocation
     })
   })
-   
+
   const items3 = items1.concat(items2)
-  const [indexValue  , setIndex] = useState(false)
 
-
+  const handleSort = (e: any) => {
+    setSortValue(e.target.value)
+  }
 
   const handleOnSearch = (string: any, results: any) => {
     console.log(string, results, 'serach and results')
@@ -216,7 +228,7 @@ export function AdminListing() {
             >
               <div className="App w-full mr-2 ">
                 <header className="App-header w-full">
-                  <div className={`w-full xl:w-[80%] mx-[auto] ${indexValue ? 'z-50' : 'z-0'}` } >
+                  <div className={`w-full xl:w-[80%] mx-[auto] ${indexValue ? 'z-50' : 'z-0'}`} >
                     <ReactSearchAutocomplete
                       items={items3}
                       onSearch={handleOnSearch}
@@ -229,23 +241,24 @@ export function AdminListing() {
               <Box>
 
                 <Typography variant="caption" sx={{ mr: 1 }}>
-                  Sort By:
+                  Sort By
                 </Typography>
                 <FormControl variant="standard">
                   <Select
+                    onChange={handleSort}
                     labelId="sort-by-select-label"
                     id="sort-by-simple-select"
-                    value="Recommended"
+                    value={sortValue}
                     size="small"
                     sx={{ fontWeight: 500 }}
                   >
-                    <MenuItem value={"Recommended"}>
+                    <MenuItem value={"A-Z"}>
                       <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        Recommended
+                        A-Z
                       </Typography>
                     </MenuItem>
-                    <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                      <Typography variant="body2">Oldest</Typography>
+                    <MenuItem value={"Z-A"} sx={{ fontWeight: 500 }}>
+                      <Typography variant="body2">Z-A</Typography>
                     </MenuItem>
                   </Select>
                 </FormControl>
