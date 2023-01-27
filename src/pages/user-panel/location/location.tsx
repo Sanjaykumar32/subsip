@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { RoutePathEnum, AuthRoutePathEnum } from "enum";
 import { useLocation } from "react-router-dom";
 import { UserThunk } from "data/thunk/user.thunk";
+import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
 
 export function LocationPage() {
   const theme = useTheme();
@@ -34,6 +35,7 @@ export function LocationPage() {
   const dispatch = useAppDispatch();
   const businessId = locations.pathname.split("/")[2];
   const [name, setName] = useState('')
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleClickOpen = async (el: any) => {
     try {
@@ -84,75 +86,157 @@ export function LocationPage() {
   const navigate = useNavigate();
 
   return (
-    <Container maxWidth="lg" sx={{ my: 8 }}>
-      <>
-        {bussinessByName.map((res: IBusiness, index: number) => (
-          <div key={index}>
-            <Title>{res?.vName}</Title>
-            <Address>{res?.vLocation}</Address>
-            <Info>{res?.tDescription}</Info>
+    <Container maxWidth="lg" sx={{ my: 5 }}>
+      {!isMobile &&
+        <>
+          {bussinessByName.map((res: IBusiness, index: number) => (
+            <div key={index}>
+              <Title>{res?.vName}</Title>
+              <Address>{res?.vLocation}</Address>
+              <Info>{res?.tDescription}</Info>
 
-            <Grid container spacing={2}>
-              <Grid item sm={12} md={8}>
-                {/* {bussinessByName.map((res: IBusiness, index: number) => ( */}
-                <Card sx={{ width: "100%", maxHeight: "500px" }}>
-                  <img
-                    alt={res.vImage}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      objectFit: "cover",
-                    }}
-                    src={"http://159.223.194.50:8000/" + res.vImage}
-                  />
-                </Card>
-                {/* ))} */}
-                <span className="text-[14px] py-[20px] flex font-[400] text-[#252525]">
-                  {res?.vBodyDescription}
-                </span>
+              <Grid container spacing={2}>
+                <Grid item sm={12} md={8}>
+                  {/* {bussinessByName.map((res: IBusiness, index: number) => ( */}
+                  <Card sx={{ width: "100%", maxHeight: "500px" }}>
+                    <img
+                      alt={res.vImage}
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        objectFit: "cover",
+                      }}
+                      src={"http://159.223.194.50:8000/" + res.vImage}
+                    />
+                  </Card>
+                  {/* ))} */}
+                  <span className="text-[14px] py-[20px] flex font-[400] text-[#252525]">
+                    {res?.vBodyDescription}
+                  </span>
+                </Grid>
+
+                <Grid item sm={12} md={4} sx={{ px: 2, mt: "-35px" }}>
+                  {isAuthenticated && (
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        paddingBottom: "10px",
+                      }}
+
+                    >
+                      <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}
+                        onClick={() => handleClickOpen(res?.vName)}
+                        className=' cursor-pointer'
+                      >
+                        <FontAwesomeIcon
+                          icon={faArrowUpRightFromSquare}
+                          style={{ marginRight: 4 }}
+
+                        />
+                        Referral
+                      </Typography>
+                    </Box>
+                  )}
+                  {bussinessByName.map((res: IBusiness, index: number) => {
+                    return <Location {...res} key={index} />;
+                  })}
+                </Grid>
               </Grid>
+              {open && (
+                <ResponsiveDialog
+                  title={name}
+                  open={open}
+                  handleClose={handleClose}
+                  refferralCode={refferralCode}
+                />
+              )}
+            </div>
+          ))}
+        </>}
 
-              <Grid item sm={12} md={4} sx={{ px: 2, mt: "-35px" }}>
+      {isMobile &&
+        <>
+          {bussinessByName.map((res: IBusiness, index: number) => (
+            <div key={index}>
+
+              <div className="flex justify-between">
+                <div>
+                  <Title>{res?.vName}</Title>
+                  <Address>{res?.vLocation}</Address>
+                </div>
+
                 {isAuthenticated && (
                   <Box
+                    className=" items-end text-center"
                     sx={{
                       display: "flex",
                       justifyContent: "flex-end",
                       paddingBottom: "10px",
                     }}
-                  
+
                   >
-                    <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }} 
-                        onClick={() => handleClickOpen(res?.vName)}
-                        className=' cursor-pointer'
-                     >
+                    <Typography variant="body1" fontWeight={600} sx={{ mr: 1 }}
+                      onClick={() => handleClickOpen(res?.vName)}
+                      className=' cursor-pointer flex align-center items-center'
+                    >
                       <FontAwesomeIcon
                         icon={faArrowUpRightFromSquare}
                         style={{ marginRight: 4 }}
-                     
+
                       />
                       Referral
                     </Typography>
                   </Box>
                 )}
-                {bussinessByName.map((res: IBusiness, index: number) => {
-                  return <Location {...res} key={index} />;
-                })}
+              </div>
+              <Info>{res?.tDescription}</Info>
+
+              <Grid container spacing={2}>
+                <Grid item sm={12} md={8} className='w-full '>
+                  {/* {bussinessByName.map((res: IBusiness, index: number) => ( */}
+                  <Card sx={{ width: "100%", maxHeight: "500px" }}>
+                    <img
+                      className="h-[250px]"
+                      alt={res.vImage}
+                      style={{
+                        width: "100%",
+                        // height: "auto",
+                        objectFit: "cover",
+                      }}
+                      src={"http://159.223.194.50:8000/" + res.vImage}
+                    />
+                  </Card>
+
+                  <Grid item sm={12} md={4} >
+
+
+                    {bussinessByName.map((res: IBusiness, index: number) => {
+                      return <Location {...res} key={index} />;
+                    })}
+
+                    <span className="text-[14px] py-[10px] flex font-[400] text-[#252525]">
+                      {res?.vBodyDescription}
+                    </span>
+
+                  </Grid>
+
+                </Grid>
+
+
               </Grid>
-            </Grid>
+              {open && (
+                <ResponsiveDialog
+                  title={name}
+                  open={open}
+                  handleClose={handleClose}
+                  refferralCode={refferralCode}
+                />
+              )}
+            </div>
+          ))}
+        </>}
 
-
-            {open && (
-              <ResponsiveDialog
-                title={name}
-                open={open}
-                handleClose={handleClose}
-                refferralCode={refferralCode}
-              />
-            )}
-          </div>
-        ))}
-      </>
     </Container>
   );
 }

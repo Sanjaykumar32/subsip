@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -24,6 +24,7 @@ export function AdminNotification() {
   const { getters, handlers } = AdminNotificationController();
   const { notificationData } = getters;
   const { deleteNotification } = handlers;
+  const [sortValue, setSortValue] = useState('A-Z')
 
   const columns: GridColDef[] = [
     {
@@ -56,7 +57,7 @@ export function AdminNotification() {
     },
   ];
 
-  const rows = notificationData.map((item: INotificationdata) => {
+  const rows :any = notificationData.map((item: INotificationdata) => {
     return {
       id: item.iNotificationId,
       vHeadline: item.vHeadline,
@@ -64,6 +65,20 @@ export function AdminNotification() {
       Actions: ["Edit", "Delete", item?.iNotificationId],
     };
   });
+
+  const sortedValue = rows?.slice()?.sort((a: any, b: any) => {
+    if (sortValue == 'A-Z') {
+      return a.vHeadline.toString().toLowerCase().charCodeAt() - b.vHeadline.toString().toLowerCase().charCodeAt()
+    } else if (sortValue == 'Z-A') {
+      return b.vHeadline.toString().toLowerCase().charCodeAt() - a.vHeadline.toString().toLowerCase().charCodeAt()
+    }
+  })
+
+  const handleSort = (e: any) => {
+    setSortValue(e.target.value)
+  }
+
+  console.log(rows , 'rows');
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -100,23 +115,24 @@ export function AdminNotification() {
         >
           <Box>
             <Typography variant="caption" sx={{ mr: 1 }}>
-              Sort By:
+              Sort By
             </Typography>
             <FormControl variant="standard">
               <Select
+                 onChange={handleSort}
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                value="Newest"
+                value={sortValue}
                 size="small"
                 sx={{ fontWeight: 500 }}
               >
-                <MenuItem value={"Newest"}>
+                <MenuItem value={"A-Z"}>
                   <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                    Newest
+                    A-Z
                   </Typography>
                 </MenuItem>
-                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                  <Typography variant="body2">Oldest</Typography>
+                <MenuItem value={"Z-A"} sx={{ fontWeight: 500 }}>
+                  <Typography variant="body2">Z-A</Typography>
                 </MenuItem>
               </Select>
             </FormControl>
@@ -124,7 +140,7 @@ export function AdminNotification() {
         </Box>
         <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
           <DataGrid
-            rows={rows}
+            rows={sortedValue}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}

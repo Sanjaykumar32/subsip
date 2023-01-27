@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -29,6 +29,7 @@ export function AdminCategories() {
   const { getters, handlers } = CategoryController();
   const { attributes } = getters;
   const { deleteCategorylist } = handlers;
+  const [sortValue, setSortValue] = useState('A-Z')
 
   const columns: GridColDef[] = [
     {
@@ -81,7 +82,7 @@ export function AdminCategories() {
     },
   ];
 
-  const rows = categoryData.map(function (res: ICategoryData, index: number) {
+  const rows : any = categoryData?.map(function (res: ICategoryData, index: number) {
     return {
       id: index + 1,
       iCategoryId: res.iCategoryId,
@@ -93,6 +94,20 @@ export function AdminCategories() {
       Actions: ["Edit", "Delete", res?.iCategoryId],
     };
   });
+
+  const sortedValue = rows?.slice()?.sort((a: any, b: any) => {
+    if (sortValue == 'A-Z') {
+      return a.vName.toString().toLowerCase().charCodeAt() - b.vName.toString().toLowerCase().charCodeAt()
+    } else if (sortValue == 'Z-A') {
+      return b.vName.toString().toLowerCase().charCodeAt() - a.vName.toString().toLowerCase().charCodeAt()
+    }
+  })
+ 
+  console.log(sortedValue , 'sort');
+
+  const handleSort = (e: any) => {
+    setSortValue(e.target.value)
+  }
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -131,23 +146,24 @@ export function AdminCategories() {
         >
           <Box>
             <Typography variant="caption" sx={{ mr: 1 }}>
-              Sort By:
+              Sort By
             </Typography>
             <FormControl variant="standard">
               <Select
+                onChange={handleSort}
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                value="Newest"
+                value={sortValue}
                 size="small"
                 sx={{ fontWeight: 500 }}
               >
-                <MenuItem value={"Newest"}>
+                <MenuItem value={"A-Z"}>
                   <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                    Newest
+                    A-Z
                   </Typography>
                 </MenuItem>
-                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                  <Typography variant="body2">Oldest</Typography>
+                <MenuItem value={"Z-A"} sx={{ fontWeight: 500 }}>
+                  <Typography variant="body2">Z-A</Typography>
                 </MenuItem>
               </Select>
             </FormControl>
@@ -155,7 +171,7 @@ export function AdminCategories() {
         </Box>
         <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
           <DataGrid
-            rows={rows}
+            rows={sortedValue}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}

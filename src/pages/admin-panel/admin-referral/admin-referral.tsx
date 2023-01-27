@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect ,useState } from "react";
 import {
   Box,
   Button,
@@ -27,6 +27,7 @@ export function AdminReferral() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const referralData = useAppSelector(GET_REFERRAL_USER);
+  const [sortValue, setSortValue] = useState('A-Z')
 
   async function deleteDataReferral(ID: number) {
     await dispatch(AdminThunk.deleteReferralPrice(ID));
@@ -109,7 +110,7 @@ export function AdminReferral() {
     referralList();
   }, [referralList]);
 
-  const rows = referralData.map((item: any) => {
+  const rows:any = referralData.map((item: any) => {
     return {
       id: item?.iMilestoneId,
       vName: item?.vName,
@@ -118,6 +119,18 @@ export function AdminReferral() {
       Actions: ["Edit", "Dalete", item?.iMilestoneId],
     };
   });
+
+  const sorted = rows?.slice()?.sort((a: any, b: any) => {
+    if (sortValue == 'A-Z') {
+      return a.vName.toString().toLowerCase().charCodeAt() - b.vName.toString().toLowerCase().charCodeAt()
+    } else if (sortValue == 'Z-A') {
+      return b.vName.toString().toLowerCase().charCodeAt() - a.vName.toString().toLowerCase().charCodeAt()
+    }
+  })
+
+  const handleSort = (e:any)=>{
+    setSortValue(e.target.value)
+  }
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -153,23 +166,24 @@ export function AdminReferral() {
         >
           <Box>
             <Typography variant="caption" sx={{ mr: 1 }}>
-              Sort By:
+              Sort By
             </Typography>
             <FormControl variant="standard">
               <Select
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                value="Newest"
+                value={sortValue}
                 size="small"
                 sx={{ fontWeight: 500 }}
+                onChange={handleSort}
               >
-                <MenuItem value={"Newest"}>
+                <MenuItem value={"A-Z"}>
                   <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                    Newest
+                    A-Z
                   </Typography>
                 </MenuItem>
-                <MenuItem value={"Oldest"} sx={{ fontWeight: 500 }}>
-                  <Typography variant="body2">Oldest</Typography>
+                <MenuItem value={"Z-A"} sx={{ fontWeight: 500 }}>
+                  <Typography variant="body2">Z-A</Typography>
                 </MenuItem>
               </Select>
             </FormControl>
@@ -177,7 +191,7 @@ export function AdminReferral() {
         </Box>
         <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
           <DataGrid
-            rows={rows}
+            rows={sorted}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}

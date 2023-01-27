@@ -24,12 +24,12 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import toast from "react-hot-toast";
 
 
-export function Home({ alertOnBottom}:any) {
+export function Home({ alertOnBottom }: any) {
   const location = useLocation();
   const theme = useTheme();
   const [showMoreData, setMoreData] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const [scroll , setScroll ] = useState(false)
+  const [scroll, setScroll] = useState(false)
   const settings: any = {
     infinite: true,
     slidesToShow: 1,
@@ -156,10 +156,10 @@ export function Home({ alertOnBottom}:any) {
 
 
   const filterBanner = businessData?.filter((item) => {
-    return Object.values(item?.vLocation?.toString()?.replaceAll(/\s/g,'')?.toLowerCase())
+    return Object.values(item?.vLocation?.toString()?.replaceAll(/\s/g, '')?.toLowerCase())
       .join("")
       .toLowerCase()
-      .includes(location?.search?.toString()?.slice(1, 19)?.replaceAll(/\s/g,'')?.toLowerCase());
+      .includes(location?.search?.toString()?.slice(1, 19)?.replaceAll(/\s/g, '')?.toLowerCase());
   });
 
   // console.log(businessData, 'businessData');
@@ -220,9 +220,9 @@ export function Home({ alertOnBottom}:any) {
     }
   }
 
- 
+
   const handleOnDocumentBottom = useCallback(() => {
-     setScroll(true)
+    setScroll(true)
 
   }, [alertOnBottom]);
 
@@ -232,7 +232,7 @@ export function Home({ alertOnBottom}:any) {
 
   return (
     <div className="w-full overflow-x-hidden" >
-      <div className="py-20 bg-white md:bg-black relative  w-full">
+      <div className={`${isMobile ? 'py-10' : 'py-20'} 'bg-white md:bg-black relative  w-full'`}>
         <Slider ref={sliderRef} {...settings}>
           {bannerData.map((ele: IBannerData, index: number) => (
             <div key={index}>
@@ -283,7 +283,7 @@ export function Home({ alertOnBottom}:any) {
                         ? "http://159.223.194.50:8000/" + ele?.vImage
                         : "http://159.223.194.50:8000/public/uploads/1672076769972.png"
                     }
-                    className="h-full w-full object-cover object-center rounded-[7px] "
+                    className={`${isMobile ? 'h-[266px]' : 'h-full'} w-full object-cover object-center rounded-[6px] `}
                   />
                 </div>
               </div>
@@ -293,7 +293,7 @@ export function Home({ alertOnBottom}:any) {
         {!isMobile && bannerData.length > 0 && <SliderArrow bannerType='MainBanner' refVal={sliderRef} />}
       </div>
 
-      <div className="w-full px-5 mt-8">
+      <div className={`${!isMobile ? 'mt-8' : ''} w-full px-5 `}>
 
         <p className="font-semibold text-[24px] pb-2 mx-5 ">
           {filterBanner?.filter((el) => parseInt(el?.iCategory) == CateFirst[0]).length > 0 &&
@@ -306,14 +306,14 @@ export function Home({ alertOnBottom}:any) {
             {filterBanner
               ?.filter((el) => parseInt(el?.iCategory) == CateFirst[0])
               ?.map((ele: IBusiness, index: number) => {
-                { console.log(ele , 'ele map')}
+                { console.log(ele, 'ele map') }
                 return (
                   <div
-                  style={{
-                    boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
-                  }}
-                  key={`${ele?.eStatus}+${index}`}
-                  className="relative overflow-x-auto md:overflow-x-hidden "
+                    style={{
+                      boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
+                    }}
+                    key={`${ele?.eStatus}+${index}`}
+                    className="relative overflow-x-auto md:overflow-x-hidden "
                   >
                     <SliderCard
                       imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
@@ -485,7 +485,7 @@ export function Home({ alertOnBottom}:any) {
           </>
         ) : null}
 
-   
+
         {/* {filterBanner.filter(
           (el) => parseInt(el.iCategory) == CateFirst[2]
         ) && (
@@ -586,11 +586,12 @@ const SliderCard = (props: any) => {
       <div className=" pl-4 py-4 h-[230px] ">
         <span
           className="text-black text-[19px] leading-[22px] font-semibold cursor-pointer textLimit2 my-3 "
-          onClick={() => {
-            auth?.isAuthenticated
-              ? onImageClick()
-              : navigate(AuthRoutePathEnum.SIGN_IN);
-          }}
+          // onClick={() => {
+          //   auth?.isAuthenticated
+          //     ? onImageClick()
+          //     : navigate(AuthRoutePathEnum.SIGN_IN);
+          // }}
+          onClick={() => onImageClick()}
         >
           {name}
         </span>
