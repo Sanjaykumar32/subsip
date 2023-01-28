@@ -89,7 +89,7 @@ export function ClickOnCategory() {
 
   const businessData = useAppSelector(GET_BUSINESS);
   const [state, setState] = React.useState(false);
-  const [sortValue, setSortValue] = useState('Highest')
+  const [sortValue, setSortValue] = useState("Highest");
 
   const allBusiness = useCallback(async () => {
     try {
@@ -103,28 +103,31 @@ export function ClickOnCategory() {
     allBusiness();
   }, [allBusiness]);
 
-const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
-  if(sortValue == 'Highest'){
-    return b.subscriberCount - a.subscriberCount
-  }else if(sortValue == 'Lowest'){
-    return a.subscriberCount - b.subscriberCount
-  }
-})
-
+  const sortSubscriberWise = businessData?.slice()?.sort((a, b): any => {
+    if (sortValue == "Highest") {
+      return b.subscriberCount - a.subscriberCount;
+    } else if (sortValue == "Lowest") {
+      return a.subscriberCount - b.subscriberCount;
+    }
+  });
 
   const listFilter = sortSubscriberWise?.filter(
     (el: { vLocation: any; vName: { toString: () => string } }) => {
       return Object.values(
         pathName == "category"
-          ? el?.vLocation?.replaceAll(/\s/g, '')?.toString().toLowerCase()
-          : el?.vName?.toString()?.replaceAll(/\s/g, '')?.toLowerCase()
+          ? el?.vLocation?.replaceAll(/\s/g, "")?.toString().toLowerCase()
+          : el?.vName?.toString()?.replaceAll(/\s/g, "")?.toLowerCase()
       )
         .join("")
         .toLowerCase()
         .includes(
           pathName == "category"
-            ? pathSerchValue.toString()?.replaceAll(/\s/g, '')?.toLowerCase()
-            : location.search.toString().slice(1, 19)?.replaceAll(/\s/g, '').toLowerCase()
+            ? pathSerchValue.toString()?.replaceAll(/\s/g, "")?.toLowerCase()
+            : location.search
+                .toString()
+                .slice(1, 19)
+                ?.replaceAll(/\s/g, "")
+                .toLowerCase()
         );
     }
   );
@@ -155,8 +158,6 @@ const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
       setExpanded(true);
     }
   }, [activeCate, getCateID]);
-
-
 
   const toggleDrawer = () => {
     setState(true);
@@ -211,8 +212,8 @@ const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
   }
 
   const handleSort = (e: any) => {
-    setSortValue(e.target.value)
-  }
+    setSortValue(e.target.value);
+  };
 
   return (
     <Container maxWidth={false} sx={{ p: 4 }}>
@@ -251,10 +252,11 @@ const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
                               id="panel1a-header"
-                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
+                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
+                                activeCate === item?.iCategoryId
                                   ? " activeCate"
                                   : ""
-                                }  `}
+                              }  `}
                               onClick={() => {
                                 handleList(item?.iCategoryId),
                                   handleSubList(null);
@@ -324,10 +326,11 @@ const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id={item.vName}
-                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
+                            activeCate === item?.iCategoryId
                               ? " activeCate"
                               : ""
-                            }  `}
+                          }  `}
                           onClick={() => {
                             handleList(item?.iCategoryId),
                               // handleSubList(item?.iSubCategoryId);
@@ -383,18 +386,17 @@ const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
 
         <Grid item xs={12} md={9.8}>
           <Box>
-            <Typography variant="alternet" className="mt-3">
-              Browse{" "}
-              {activeCate == 65
-                ? "Restaurants"
-                : activeCate == 66
-                  ? "Home Services"
-                  : activeCate == 67
-                    ? "Auto Services"
-                    : activeCate == 68
-                      ? "More"
-                      : "Restaurants"}
-            </Typography>
+            <>
+              {categoryData
+                .filter((el) => el.iCategoryId === activeCate)
+                .map((res, i) => {
+                  return (
+                    <Typography variant="alternet" className="mt-3" key={i}>
+                      Browse {res.vName}
+                    </Typography>
+                  );
+                })}
+            </>
             <Box
               sx={{
                 display: "flex",
@@ -457,11 +459,11 @@ const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
-                listFilter.filter((el) =>
-                  subcatIdss
-                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
-                    : el.iCategory === ids
-                ).length > 0 ? (
+              listFilter.filter((el) =>
+                subcatIdss
+                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                  : el.iCategory === ids
+              ).length > 0 ? (
                 listFilter
                   .filter((el) =>
                     subcatIdss
@@ -497,7 +499,10 @@ const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
                               height="100px"
                               style={{ objectFit: "cover", height: "215px" }}
                             />
-                            <Box sx={{ py: "16px", pl: "16px" }} className="h-[220px] relative w-full " >
+                            <Box
+                              sx={{ py: "16px", pl: "16px" }}
+                              className="h-[220px] relative w-full "
+                            >
                               <Typography
                                 onClick={() => {
                                   onImageClick(data?.iBusinessId);
@@ -519,7 +524,6 @@ const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
                               <Box sx={{ my: 1, lineHeight: 0 }}>
                                 <Typography
                                   fontSize={16}
-
                                   className={"textLimitcate2 pb-[20px]"}
                                 >
                                   {data.tDescription}
@@ -552,12 +556,12 @@ const   sortSubscriberWise = businessData?.slice()?.sort((a, b) : any => {
                                 <div className="raletive">
                                   <>
                                     {data?.subscriberIds &&
-                                      data?.subscriberIds
-                                        .split("")
-                                        .filter((el: any) => {
-                                          return el == userId;
-                                        })[0] &&
-                                      auth?.isAuthenticated ? (
+                                    data?.subscriberIds
+                                      .split("")
+                                      .filter((el: any) => {
+                                        return el == userId;
+                                      })[0] &&
+                                    auth?.isAuthenticated ? (
                                       <div
                                         className="subscribeLebalListing bg-[#e0e0e0]"
                                         onClick={() =>
