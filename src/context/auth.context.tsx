@@ -78,6 +78,7 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
       localStorage.setItem("token", response.token.token);
       localStorage.setItem("userId", response.data.userId);
       setAuthenticated(true);
+      toast.success("Login Successfully");
     } catch (error) {
       console.log(error);
     }
