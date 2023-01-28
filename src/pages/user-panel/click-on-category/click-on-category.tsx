@@ -140,24 +140,20 @@ export function ClickOnCategory() {
     }
   }, [getCateID, location]);
   const navigate = useNavigate();
-
   const [expanded, setExpanded] = React.useState<any>(false);
-
-  // console.log(expanded, "expanded");
 
   const handleChange =
     (panel: string) => (_event: React.SyntheticEvent, newExpanded: boolean) => {
-      // console.log(panel, "panel");
-      // console.log(newExpanded, "newExpanded");
-
       setExpanded(newExpanded ? panel : false);
     };
 
   useEffect(() => {
-    if (activeCate == getCateID) {
-      setExpanded(true);
-    }
-  }, [activeCate, getCateID]);
+    categoryData
+      .filter((el) => el.iCategoryId === activeCate)
+      .map((res) => {
+        setExpanded(res.vName);
+      });
+  }, [activeCate, categoryData, getCateID]);
 
   const toggleDrawer = () => {
     setState(true);
@@ -245,7 +241,7 @@ export function ClickOnCategory() {
                       <Link href={`/category/${item?.iCategoryId}`} key={index}>
                         {item && item?.vName && (
                           <Accordion
-                            expanded={expanded == item.vName}
+                            expanded={expanded === item.vName}
                             onChange={handleChange(item.vName)}
                           >
                             <AccordionSummary
@@ -319,7 +315,7 @@ export function ClickOnCategory() {
                   <Link href={`/category/${item?.iCategoryId}`} key={index}>
                     {item && item?.vName && (
                       <Accordion
-                        expanded={expanded == item.vName}
+                        expanded={expanded === item.vName}
                         onChange={handleChange(item.vName)}
                       >
                         <AccordionSummary
@@ -332,11 +328,8 @@ export function ClickOnCategory() {
                               : ""
                           }  `}
                           onClick={() => {
-                            handleList(item?.iCategoryId),
-                              // handleSubList(item?.iSubCategoryId);
-                              handleSubList(null);
+                            handleSubList(null);
                             setActiveCate(item?.iCategoryId);
-                            // setSubData(filteredSubCategory);
                           }}
                         >
                           {item?.vName}
