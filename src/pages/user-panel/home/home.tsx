@@ -88,8 +88,9 @@ export function Home({ alertOnBottom }: any) {
 
   const cardSettingsScroll: any = {
     infinite: true,
-    slidesToShow: 5,
+    slidesToShow: 1,
     slidesToScroll: 4,
+    adaptiveHeight: false,
     cssEase: "linear",
     lazyLoad: true,
     autoplay: false,
@@ -153,6 +154,10 @@ export function Home({ alertOnBottom }: any) {
   }, [bannerList]);
 
   const businessData = useAppSelector(GET_BUSINESS);
+  console.log(bannerData, 'bannerData');
+  console.log(businessData, 'businessData')
+
+  const banner = businessData?.filter((el: any) => bannerData.map((item) => item.iBusinessId)?.includes(el?.iBusinessId))
 
 
   const filterBanner = businessData?.filter((item) => {
@@ -163,13 +168,13 @@ export function Home({ alertOnBottom }: any) {
   });
 
   // console.log(businessData, 'businessData');
-  console.log(filterBanner, 'filterBanner')
+  // console.log(filterBanner, 'filterBanner')
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
 
-  console.log(CateFirst, 'CateFirst')
-  console.log(categoryData, 'categoryData')
+  // console.log(CateFirst, 'CateFirst')
+  // console.log(categoryData, 'categoryData')
   const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
@@ -234,7 +239,7 @@ export function Home({ alertOnBottom }: any) {
     <div className="w-full overflow-x-hidden" >
       <div className={`${isMobile ? 'py-10' : 'py-20'} 'bg-white md:bg-black relative  w-full'`}>
         <Slider ref={sliderRef} {...settings}>
-          {bannerData.map((ele: IBannerData, index: number) => (
+          {banner?.map((ele: any, index: number) => (
             <div key={index}>
               <div className="max-w-[100%] mt-[-38px]  lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
                 <div className="w-[80%] md:w-[45%] gap-5 flex flex-col justify-center px-2 lg:pt-10 md:px-10">
@@ -262,8 +267,67 @@ export function Home({ alertOnBottom }: any) {
                   <p className="text-black md:text-white text-[0.95rem] textLimit2 font-normal">
                     {ele?.tDescription}
                   </p>
-                  {/* <p className="text-[#0275d8]">{ele?.subscribers}</p> */}
-                  <span>
+                  <p className="text-[#ffff]">{ele?.subscriberCount} Subscribe</p>
+
+                  <div className="raletive">
+                    <>
+                      {ele?.subscriberIds &&
+                        ele?.subscriberIds
+                          .split("")
+                          .filter((el: any) => {
+                            return el == userId;
+                          })[0] &&
+                        auth?.isAuthenticated ? (
+                        // <div
+                        //   className="subscribeLebalListing bg-[#e0e0e0]"
+                        //   onClick={() =>
+                        //     handleUnsub(data?.iBusinessId)
+                        //   }
+                        // >
+                        //   <span className=" text-[#262626] font-medium">
+                        //     {" "}
+                        //     Unsubscribe
+                        //   </span>
+                        // </div>
+                        <span>
+                          <button
+                            className="bg-[#262626] text-[1rem] w-36 rounded-full  py-4 px-2 font-normal text-white"
+                            onClick={() => {
+                              auth?.isAuthenticated
+                                ? onImageClick(ele.iBusinessId)
+                                : navigate(AuthRoutePathEnum.SIGN_IN);
+                            }}
+                          >
+                              Unsubscribe
+                          </button>
+                        </span>
+                      ) : (
+                        // <div
+                        //   className="subscribeLebalListing bg-[#09292b]"
+                        //   onClick={() =>
+                        //     SubcribeBtn(data?.iBusinessId)
+                        //   }
+                        // >
+                        //   <span className=" text-white ">
+                        //     Subscribe
+                        //   </span>
+                        // </div>
+                        <span>
+                          <button
+                            className="bg-[#d32f3f] text-[1rem] w-36 rounded-full  py-4 px-2 font-normal text-white"
+                            onClick={() => {
+                              auth?.isAuthenticated
+                                ? onImageClick(ele.iBusinessId)
+                                : navigate(AuthRoutePathEnum.SIGN_IN);
+                            }}
+                          >
+                            Subscribe
+                          </button>
+                        </span>
+                      )}
+                    </>
+                  </div>
+                  {/* <span>
                     <button
                       className="bg-[#d32f3f] text-[1rem] w-36 rounded-full  py-4 px-2 font-normal text-white"
                       onClick={() => {
@@ -274,7 +338,7 @@ export function Home({ alertOnBottom }: any) {
                     >
                       Subscribe Now
                     </button>
-                  </span>
+                  </span> */}
                 </div>
                 <div className=" rounded-[6px] relative md:min-h-[375px] md:h-[200px] md:max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
                   <img
@@ -301,19 +365,18 @@ export function Home({ alertOnBottom }: any) {
           }
         </p>
 
-        <div className="relative">
+        <div className="relative  ">
           <Slider ref={cardRef} {...cardSettingsScroll}>
             {filterBanner
               ?.filter((el) => parseInt(el?.iCategory) == CateFirst[0])
               ?.map((ele: IBusiness, index: number) => {
-                { console.log(ele, 'ele map') }
                 return (
                   <div
                     style={{
                       boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
                     }}
                     key={`${ele?.eStatus}+${index}`}
-                    className="relative overflow-x-auto md:overflow-x-hidden "
+                    className="relative overflow-x-auto md:overflow-x-hidden  "
                   >
                     <SliderCard
                       imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
@@ -586,12 +649,11 @@ const SliderCard = (props: any) => {
       <div className=" pl-4 py-4 h-[230px] ">
         <span
           className="text-black text-[19px] leading-[22px] font-semibold cursor-pointer textLimit2 my-3 "
-          // onClick={() => {
-          //   auth?.isAuthenticated
-          //     ? onImageClick()
-          //     : navigate(AuthRoutePathEnum.SIGN_IN);
-          // }}
-          onClick={() => onImageClick()}
+          onClick={() => {
+            auth?.isAuthenticated
+              ? onImageClick()
+              : navigate(AuthRoutePathEnum.SIGN_IN);
+          }}
         >
           {name}
         </span>
@@ -621,14 +683,6 @@ const SliderCard = (props: any) => {
               </div>
             }
           </div>
-
-          {/* 
-          <button
-            className="bg-[#D32F3F] text-[0.9rem] w-36 rounded-full  py-2 px-1 font-normal text-white"
-            onClick={onButtonClick}
-          >
-            {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
-          </button> */}
         </div>
       </div>
     </div>

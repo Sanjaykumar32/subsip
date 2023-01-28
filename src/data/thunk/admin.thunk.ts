@@ -58,6 +58,15 @@ export class AdminThunk {
     }
   );
 
+  public static getAllsubscribe = createAsyncThunk(
+    "/subscribers",
+    async (
+    ): Promise<ISubscribeByBussinessIDResponse> => {
+      const response = await AdminService.getAllsubscriber();
+      return response;
+    }
+  );
+
   /**
    * Subscribe By adminId
    */

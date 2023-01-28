@@ -50,6 +50,14 @@ export function AdminNewNotifictaion() {
     handleBusinessNameChange,
     handleBusinessLocationhange,
   } = handlers;
+
+
+  console.log(businessData , 'businessData')
+  console.log(categoryData , 'categoryData')
+  console.log(category, "category state");
+
+  const businessFilter = businessData.filter((el)=> el.iCategory == category)
+  console.log(businessFilter ,'businessFilter');
   return (
     <Container maxWidth="lg">
       <AdminBackButton />
@@ -210,7 +218,7 @@ export function AdminNewNotifictaion() {
               value={businessName}
               onChange={handleBusinessNameChange}
             >
-              {businessData.map((res: IBusiness, i: number) => (
+              {businessFilter?.map((res: IBusiness, i: number) => (
                 <MenuItem value={res.iBusinessId} key={i}>
                   {res.vName}
                 </MenuItem>

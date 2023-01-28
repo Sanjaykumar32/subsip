@@ -44,6 +44,12 @@ export function AdminListing() {
     setLoader(false);
   }
 
+
+  const handleSubscriber = (el: any) => {
+    navigate(AdminRoutePathEnum.ADMIN_SUBSCRIBERS, { state: { ids: el?.row?.SubscriberId } })
+
+  }
+
   const columns: GridColDef[] = [
     {
       field: "Profile",
@@ -71,7 +77,16 @@ export function AdminListing() {
       headerName: "Subscribers",
       width: 200,
       renderCell: (params) => (
-        <Link href={AdminRoutePathEnum.ADMIN_SUBSCRIBERS}>{params.value}</Link>
+        <>
+          {console.log(params.row.SubscriberId, 'render cell ')}
+          {params.row.SubscriberId == null ?
+            <div>No Subscribers</div> :
+            <div
+              className="text-[#0288d1] cursor-pointer"
+              onClick={() => handleSubscriber(params)}
+            >{params.value}
+            </div>}
+        </>
       ),
     },
     {
@@ -121,8 +136,11 @@ export function AdminListing() {
     allBusiness();
   }, [allBusiness]);
 
+  console.log(businessData, 'businessData');
+
   const rows: any = businessData?.map((item) => {
     return {
+      SubscriberId: item.subscriberIds,
       id: item.iBusinessId,
       Profile: item.vImage,
       Name: item.vName,

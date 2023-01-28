@@ -30,6 +30,15 @@ export function ReferralProgram() {
 
   console.log(refferralCount, "refferralCount");
 
+  const list = refferralCount?.map((el:any) =>{
+    return Math.max(el.userCount)  
+  })
+
+ const count:any = [...new Set(list)];
+
+console.log(...new Set(list) ,'list count');
+
+
   return (
     <Container maxWidth="xl" sx={{ p: 2 }}>
       <PageHeader
@@ -39,7 +48,7 @@ export function ReferralProgram() {
         <Box sx={{ display: "flex", alignItems: "baseline" }}>
           <Typography variant="body1">My referrals</Typography>
           <Chip
-            label={refferralCount.length}
+            label={count}
             color="primary"
             size="small"
             sx={{ minWidth: "100px", ml: 2 }}
@@ -48,7 +57,7 @@ export function ReferralProgram() {
       </PageHeader>
 
       <Container maxWidth="xs" sx={{ my: 20 }}>
-        <Typography variant="h6"> Milestones : </Typography>
+        <Typography variant="h6"> Milestones  </Typography>
         {refferralCount.map((res: any, i: number) => {
           return (
             <>

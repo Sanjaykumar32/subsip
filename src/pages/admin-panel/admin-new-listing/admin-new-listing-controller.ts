@@ -77,6 +77,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const [editrue, setEditure] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const ListId = searchParams.get("id");
   const edit = searchParams.get("edit");
 
@@ -85,18 +86,22 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
   console.log(businessData, 'editScreen')
   console.log(image, 'image image image')
+  console.log(location, 'location')
+
 
 
   useEffect(() => {
-    if (edit) {
-      console.log('Edit new listinng');
+
+    if (edit === 'true') {
+      // console.log('Edit new listinng');
+
 
       setEditure(true);
       allBusiness();
 
 
 
-      const filter = businessData?.filter((item) => {
+      const filter = businessData?.filter((item: any) => {
         if (item?.iBusinessId === Number(ListId)) {
           console.log(item, "item");
           // item
@@ -123,11 +128,13 @@ export const NewlistingController = (): INewlistingControllerReturns => {
           setSubCategory(item?.iSubCategory);
         }
       });
+
+
     } else {
-      navigate(`/admin/new-listing`)
+      navigate(`/admin/listing`)
       setEditure(false);
-      console.log('add new listinng');
-      console.log('add new listinng')
+      // console.log('add new listinng');
+      setImage(false)
 
       // const clear = {
       setBuisnessName("")
@@ -224,6 +231,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const navigate = useNavigate();
 
   const submitHandler = async (): Promise<void> => {
+
     const form = new FormData();
     form.append("name", businessName);
     form.append("latitude", "56789");
@@ -237,7 +245,9 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("state", "2");
     form.append("city", "2");
     form.append("onBanner", banner);
-    form.append("image", image, image?.name);
+    if (image?.name) {
+      form.append("image", image, image?.name)
+    }
     form.append("email", email);
     form.append("category", category);
     form.append("subCategory", subCategory);
@@ -245,8 +255,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("preview", preview);
     form.append("bodyDescription", bodyDescription);
 
-    // form
-    // console.log(form, 'form data on edit')
 
     const updatedata = new FormData();
     updatedata.append("name", businessName);
@@ -260,8 +268,10 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     updatedata.append("country", "1");
     updatedata.append("state", "2");
     updatedata.append("city", "2");
-    updatedata.append("onBanner", banner ? "1" : '0');
-    updatedata.append("image", image, image?.name);
+    if (image?.name) {
+      updatedata.append("image", image, image?.name)
+      updatedata.append("onBanner", banner ? "1" : '0');
+    }
     updatedata.append("email", email);
     updatedata.append("category", category);
     updatedata.append("subCategory", subCategory);
@@ -269,8 +279,13 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     updatedata.append("preview", preview);
     updatedata.append("bodyDescription", bodyDescription);
 
+    console.log(ListId, edit, 'this is edit data')
 
-    if (edit) {
+
+
+
+    if (ListId) {
+      // console.log(updatedata, 'update listing')
       const res = await dispatch(
         AdminThunk.updateListing({
           data: updatedata,
@@ -279,20 +294,39 @@ export const NewlistingController = (): INewlistingControllerReturns => {
             : 0,
         })
       );
+      console.log(res, 'update listing')
+
       toast.success("Listing Updated Successfully");
-      // navigate(AdminRoutePathEnum.ADMIN_LISTING);
+      navigate(`/admin/listing`)
     } else {
-      const res = await dispatch(AdminThunk.createListing(form));
       toast.success("Listing Created Successfully");
+      const res = await dispatch(AdminThunk.createListing(form));
+      navigate(`/admin/listing`)
       // navigate(AdminRoutePathEnum.ADMIN_LISTING);
     }
 
-    navigate(AdminRoutePathEnum.ADMIN_LISTING);
+
+
+    // if (edit) {
+    // const res = await dispatch(
+    //   AdminThunk.updateListing({
+    //     data: updatedata,
+    //     iBusinessId: ListId
+    //       ? parseInt(ListId)
+    //       : 0,
+    //   })
+    // );
+    //   toast.success("Listing Updated Successfully");
+    //   navigate(AdminRoutePathEnum.ADMIN_LISTING);
+    // } else {
+    //   const res = await dispatch(AdminThunk.createListing(form));
+    //   toast.success("Listing Created Successfully");
+    //   navigate(AdminRoutePathEnum.ADMIN_LISTING);
+    // }
 
 
 
 
-    // const res = await dispatch(AdminThunk.createListing(form));
   };
 
   const allBusiness = useCallback(async () => {

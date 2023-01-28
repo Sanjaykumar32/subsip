@@ -56,7 +56,7 @@ export const NewNotificationButtonController =
     const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
     const businessData = useAppSelector(GET_BUSINESS);
     const editScreen = useLocation();
-    console.log(editScreen, "helo");
+  
     const notificationData = useAppSelector(GET_NOTIFICATION);
 
     const dispatch = useAppDispatch();
