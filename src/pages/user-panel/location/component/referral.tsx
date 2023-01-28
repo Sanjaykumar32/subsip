@@ -37,8 +37,6 @@ export default function ResponsiveDialog({
     toast.success("Copied Successfully");
   };
 
-
-  const refferralCount = useAppSelector(GET_REFERRAL_COUNT);
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem("userId");
 
@@ -56,8 +54,6 @@ export default function ResponsiveDialog({
     refferalCount();
   }, [refferalCount]);
 
-  console.log(refferralCount, "refferralCount");
-
   return (
     <Dialog
       open={open}
@@ -70,8 +66,8 @@ export default function ResponsiveDialog({
             Share {title} with others
           </span>
           <span className="text-[14px] text-[#1b1b1b] font-semibold">
-            You currently have 0 referrals, only 1 step away from receiving
-            next milestone.
+            You currently have 0 referrals, only 1 step away from receiving next
+            milestone.
           </span>
         </div>
 

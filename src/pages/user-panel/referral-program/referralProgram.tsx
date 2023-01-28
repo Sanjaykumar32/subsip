@@ -5,6 +5,9 @@ import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_REFERRAL_COUNT } from "data/selectors";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import DoneIcon from "@mui/icons-material/Delete";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 export function ReferralProgram() {
   const refferralCount = useAppSelector(GET_REFERRAL_COUNT);
@@ -59,11 +62,21 @@ export function ReferralProgram() {
                 key={i}
               >
                 <Typography variant="body2"> {res.milestoneName}</Typography>
-                <Chip
-                  label={`${res?.userCount}/${res?.iAmount}`}
-                  size="small"
-                  sx={{ minWidth: "100px", ml: 2 }}
-                />
+                {res?.userCount == res?.iAmount ? (
+                  <Chip
+                    label="Done"
+                    size="small"
+                    sx={{ minWidth: "100px", ml: 2 }}
+                    icon={<FontAwesomeIcon icon={faCheck} />}
+                    color="primary"
+                  />
+                ) : (
+                  <Chip
+                    label={`${res?.userCount}/${res?.iAmount}`}
+                    size="small"
+                    sx={{ minWidth: "100px", ml: 2 }}
+                  />
+                )}
               </Box>
               <Divider sx={{ mt: 1 }} />
             </>
