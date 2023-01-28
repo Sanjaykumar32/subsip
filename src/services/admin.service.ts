@@ -72,6 +72,26 @@ export class AdminService {
     return res.data;
   }
 
+
+  /**
+   * Get all Subscribe 
+   *
+   * @return {Promise<ISubscribeByBussinessIDResponse>}
+   */
+  public static async getAllsubscriber(
+  ): Promise<ISubscribeByBussinessIDResponse> {
+    const res: AxiosResponse<ISubscribeByBussinessIDResponse> =
+      await ApiHelper.send<ISubscribeByBussinessIDResponse>({
+        url: StringHelper.translationHelper(
+          "/subscribers",
+          
+        ),
+        method: "GET",
+      });
+
+    return res.data;
+    }
+
   /**
    * Subscribe By adminId
    * @param {ISubscribeByAdminIdRequest} payload

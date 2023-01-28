@@ -37,6 +37,7 @@ export function AdminNewReward() {
     handleBusinessNameChange,
   } = handlers;
 
+  const businessFilter = businessData.filter((el)=> el.iCategory == category)
   return (
     <Container maxWidth="lg">
       <AdminBackButton />
@@ -166,7 +167,7 @@ export function AdminNewReward() {
               value={businessName}
               onChange={handleBusinessNameChange}
             >
-              {businessData.map((res: IBusiness, i: number) => (
+              {businessFilter?.map((res: IBusiness, i: number) => (
                 <MenuItem value={res.iBusinessId} key={i}>
                   {res.vName}
                 </MenuItem>

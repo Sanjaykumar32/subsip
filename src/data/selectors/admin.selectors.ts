@@ -12,6 +12,9 @@ export const GET_SUBSCRIBER_OF_BUSSINESS = (state: RootState) =>
 export const GET_ALL_SUBSCRIBER_OF_BUSINESS = (state: RootState) =>
   state.admin.AllsubscriberOfBussiness;
 
+export const GET_ALL_SUBSCRIBER = (state: RootState) =>
+  state.admin.getAllsubscribe;
+
 export const GET_REFFERRAL_CODE = (state: RootState) =>
   state.admin.refferralCode;
 
