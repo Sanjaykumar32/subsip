@@ -314,7 +314,9 @@ export function AdminNewlisting() {
                         </label>
                         <input id="fileInput" type="file" onChange={(e: any) => { handleImageChange(e); }} />
 
-                        <img src={image} className=" w-[100px] h-[80px] object-cover rounded-sm " />
+                        {image ? <img src={image} className=" w-[100px] h-[80px] object-cover rounded-sm " />
+                          : <div className=" w-[100px] h-[80px] object-cover rounded-sm bg-[#8b8b8b4a] flex justify-center items-center " >
+                            <h1 className=" text-[13px] text-[#000] " >Select Image</h1></div>}
                       </div>
 
 

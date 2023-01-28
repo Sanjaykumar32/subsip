@@ -90,6 +90,7 @@ export function Home({ alertOnBottom }: any) {
     infinite: true,
     slidesToShow: 5,
     slidesToScroll: 4,
+    adaptiveHeight: false,
     cssEase: "linear",
     lazyLoad: true,
     autoplay: false,
@@ -301,7 +302,7 @@ export function Home({ alertOnBottom }: any) {
           }
         </p>
 
-        <div className="relative">
+        <div className="relative  ">
           <Slider ref={cardRef} {...cardSettingsScroll}>
             {filterBanner
               ?.filter((el) => parseInt(el?.iCategory) == CateFirst[0])
@@ -313,7 +314,7 @@ export function Home({ alertOnBottom }: any) {
                       boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
                     }}
                     key={`${ele?.eStatus}+${index}`}
-                    className="relative overflow-x-auto md:overflow-x-hidden "
+                    className="relative overflow-x-auto md:overflow-x-hidden  "
                   >
                     <SliderCard
                       imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
@@ -586,12 +587,11 @@ const SliderCard = (props: any) => {
       <div className=" pl-4 py-4 h-[230px] ">
         <span
           className="text-black text-[19px] leading-[22px] font-semibold cursor-pointer textLimit2 my-3 "
-          // onClick={() => {
-          //   auth?.isAuthenticated
-          //     ? onImageClick()
-          //     : navigate(AuthRoutePathEnum.SIGN_IN);
-          // }}
-          onClick={() => onImageClick()}
+          onClick={() => {
+            auth?.isAuthenticated
+              ? onImageClick()
+              : navigate(AuthRoutePathEnum.SIGN_IN);
+          }}
         >
           {name}
         </span>
@@ -621,14 +621,6 @@ const SliderCard = (props: any) => {
               </div>
             }
           </div>
-
-          {/* 
-          <button
-            className="bg-[#D32F3F] text-[0.9rem] w-36 rounded-full  py-2 px-1 font-normal text-white"
-            onClick={onButtonClick}
-          >
-            {auth?.isAuthenticated ? "Subscribed" : "Subscribe Now"}
-          </button> */}
         </div>
       </div>
     </div>

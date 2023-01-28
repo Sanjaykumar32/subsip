@@ -212,7 +212,7 @@ export function AdminSubscribers() {
               );
               setSelectedRows(selectedRows);
             }}
-            // onSelectionModelChange={setSelectionModel}
+          // onSelectionModelChange={setSelectionModel}
           />
 
           {/* <pre>{JSON.stringify(selectedRows, null, 4)}</pre> */}
