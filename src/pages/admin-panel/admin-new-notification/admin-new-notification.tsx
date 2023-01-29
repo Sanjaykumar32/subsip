@@ -52,12 +52,12 @@ export function AdminNewNotifictaion() {
   } = handlers;
 
 
-  console.log(businessData , 'businessData')
-  console.log(categoryData , 'categoryData')
+  console.log(businessData, 'businessData')
+  console.log(categoryData, 'categoryData')
   console.log(category, "category state");
 
-  const businessFilter = businessData.filter((el)=> el.iCategory == category)
-  console.log(businessFilter ,'businessFilter');
+  const businessFilter = businessData.filter((el) => el.iCategory == category)
+  console.log(businessFilter, 'businessFilter');
   return (
     <Container maxWidth="lg">
       <AdminBackButton />
@@ -119,7 +119,7 @@ export function AdminNewNotifictaion() {
                     *required
                   </Typography>
                 </Box>
-                <DatePicker
+                {/* <DatePicker
                   disableFuture
                   openTo="year"
                   views={["month", "day", "year"]}
@@ -128,11 +128,21 @@ export function AdminNewNotifictaion() {
                   renderInput={(
                     params: JSX.IntrinsicAttributes & TextFieldProps
                   ) => <TextField {...params} fullWidth />}
-                />
+                /> */}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DesktopDatePicker
+                    inputFormat="MMMM/DD/YYYY"
+                    value={date}
+                    onChange={handleDateChange}
+                    renderInput={(
+                      params: JSX.IntrinsicAttributes & TextFieldProps
+                    ) => <TextField {...params} fullWidth />}
+                  />
+                </LocalizationProvider>
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            {/* <Grid item xs={12} md={6}>
               <Box sx={{ mt: 2, alignItems: "center" }}>
                 <Box sx={{ display: "flex" }}>
                   <Typography variant="body2" fontWeight={500}>
@@ -159,9 +169,8 @@ export function AdminNewNotifictaion() {
                   onChange={handleBusinessLocationhange}
                 />
               </Box>
-            </Grid>
-          </Grid>
-          <Grid container spacing={1}>
+            </Grid> */}
+
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mt: 2 }}>
                 <Typography variant="body2" fontWeight={500}>
@@ -183,6 +192,10 @@ export function AdminNewNotifictaion() {
                 </Select>
               </FormControl>
             </Grid>
+
+          </Grid>
+          <Grid container spacing={1}>
+
             <Grid item xs={12} md={6}>
               <FormControl fullWidth sx={{ mt: 2 }}>
                 <Typography variant="body2" fontWeight={500}>
@@ -204,27 +217,33 @@ export function AdminNewNotifictaion() {
                 </Select>
               </FormControl>
             </Grid>
+
+
+            <Grid item xs={12} md={6}>
+              <FormControl sx={{ mt: 2 }} fullWidth>
+                <Typography variant="body2" fontWeight={500}>
+                  Business Name
+                </Typography>
+                <Select
+                  variant="outlined"
+                  labelId="sort-by-select-label"
+                  id="sort-by-simple-select"
+                  size="small"
+                  value={businessName}
+                  onChange={handleBusinessNameChange}
+                >
+                  {businessFilter?.map((res: IBusiness, i: number) => (
+                    <MenuItem value={res.iBusinessId} key={i}>
+                      {res.vName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+
           </Grid>
 
-          <FormControl sx={{ mt: 2 }} fullWidth>
-            <Typography variant="body2" fontWeight={500}>
-              Business Name
-            </Typography>
-            <Select
-              variant="outlined"
-              labelId="sort-by-select-label"
-              id="sort-by-simple-select"
-              size="small"
-              value={businessName}
-              onChange={handleBusinessNameChange}
-            >
-              {businessFilter?.map((res: IBusiness, i: number) => (
-                <MenuItem value={res.iBusinessId} key={i}>
-                  {res.vName}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+
 
           <Box
             sx={{

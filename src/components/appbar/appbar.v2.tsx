@@ -535,7 +535,7 @@ export const UserAppBar = (props: any) => {
                           onClick={() => {
                             setting.title === "Logout" && auth.signOut();
                             setting.title === "Logout" &&
-                              toast.success("Log Out Successfully");
+                              toast.success("You have successfully logged out !");
                             handleClose();
                           }}
                         >
@@ -728,7 +728,7 @@ export const UserAppBar = (props: any) => {
                     onClick={() => {
                       setting.title === "Logout" && auth.signOut();
                       setting.title === "Logout" &&
-                        toast.success("Log Out Successfully");
+                        toast.success("You have successfully logged out !");
                       handleClose();
                     }}
                   >
@@ -818,7 +818,7 @@ export const UserAppBar = (props: any) => {
                               </div>
                               <div className=" text-[14px] font-[400] text-[#262626] ">
                                 {res.dDate &&
-                                  format(new Date(res.dDate), "dd-MM-yyyy")}
+                                  format(new Date(res.dDate), "MMMM dd, yyyy")}
                               </div>
                             </div>
                             <h1 className="text-[18px] font-[900] text-[#252525]">

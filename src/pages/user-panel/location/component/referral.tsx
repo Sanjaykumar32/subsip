@@ -3,7 +3,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { IconButton, InputAdornment, TextField, useMediaQuery } from "@mui/material";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "data";
 import { GET_REFERRAL_COUNT } from "data/selectors/admin.selectors";
 import { useCallback, useEffect } from "react";
 import { AdminThunk } from "data/thunk/admin.thunk";
+import { theme } from "theme";
 
 export default function ResponsiveDialog({
   title,
@@ -39,6 +40,7 @@ export default function ResponsiveDialog({
 
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem("userId");
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const refferalCount = useCallback(async () => {
     try {
@@ -62,7 +64,7 @@ export default function ResponsiveDialog({
     >
       <DialogTitle id="responsive-dialog-title refferals">
         <div className="flex  flex-col">
-          <span className="text-[1.75rem] text-[#1b1b1b] font-bold">
+          <span className={`${isMobile ? 'text-[22px] ' : '' } 'text-[1.75rem] text-[#1b1b1b] font-bold'`}>
             Share {title} with others
           </span>
           <span className="text-[14px] text-[#1b1b1b] font-semibold">

@@ -299,23 +299,20 @@ export function AdminNewlisting() {
                       <Label> {step6.label} </Label>
                       <Typography variant="body2"> {step6.caption} </Typography>
 
-                      {/* <input
-                        // value={image}
-                        type="file"
-                        onChange={(e: any) => {
-                          handleImageChange(e);
-                        }}
-                      />
-                       */}
+                
 
-                      <div className="flex gap-[20px] w-full  " >
+                      <div className="flex  w-full mr-[10px]  gap-2 justify-center items-center align-center" >
                         <label htmlFor="fileInput">
                           <img id="icon" src="https://image.freepik.com/free-icon/upload-arrow_318-26670.jpg" />
                         </label>
                         <input id="fileInput" type="file" onChange={(e: any) => { handleImageChange(e); }} />
 
-                        {image ? <img src={image} className=" w-[100px] h-[80px] object-cover rounded-sm " />
-                          : <div className=" w-[100px] h-[80px] object-cover rounded-sm bg-[#8b8b8b4a] flex justify-center items-center " >
+                        {image ? 
+                        <img src={image} className=" w-[100px] h-[80px] object-cover rounded-[6px] " />
+                    
+                          : 
+                          <div className=" w-[100px] h-[80px] object-cover rounded-[6px] bg-[#8b8b8b4a] flex justify-center items-center " >
+
                             <h1 className=" text-[13px] text-[#000] " >Select Image</h1></div>}
                       </div>
 

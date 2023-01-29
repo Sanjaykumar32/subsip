@@ -43,7 +43,7 @@ export default function OtpBox(props: IOtpBox) {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Enter the OTP</DialogTitle>
+        <DialogTitle>Enter the one-time passcode that was sent to your email</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus

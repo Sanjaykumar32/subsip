@@ -26,7 +26,7 @@ export function ForgetPassword(): ReactElement {
     <Container maxWidth="xs" sx={{ p: 4, my: 3.5 }}>
       <Box sx={{ my: 1 }}>
         <Typography variant="alternet">Forget Password </Typography>
-        <Box sx={{ display: "flex", whiteSpace: "pre", mt: 1 }}>
+        <Box sx={{ display: "flex", mt: 1 }}>
           <Typography fontWeight={500} variant="body2">
             Forget your Password? Enter your email below to reset it.
           </Typography>

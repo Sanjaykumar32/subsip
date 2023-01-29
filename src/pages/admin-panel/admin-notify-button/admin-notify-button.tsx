@@ -89,7 +89,7 @@ export function AdminNotifyButton() {
             </Box>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DesktopDatePicker
-                inputFormat="DD/MMMM/YYYY"
+                inputFormat="MMMM/DD/YYYY"
                 value={date}
                 onChange={handleDateChange}
                 renderInput={(

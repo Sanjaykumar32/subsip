@@ -188,7 +188,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const handleImageChange = (event: {
     target: { files: SetStateAction<any>[] };
   }): void => {
-    setImage(event.target.files[0]);
+    setImage(URL.createObjectURL(event.target.files[0]));
   };
 
   const handleBanner = (event: any): void => {

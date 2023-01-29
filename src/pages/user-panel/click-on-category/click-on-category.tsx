@@ -273,7 +273,7 @@ export function ClickOnCategory() {
                                       }
                                     >
                                       <Typography
-                                        className="text-[#252525]"
+                                        className="text-[#252525] p-[10px]"
                                         key={i}
                                         onClick={toggleDrawerClose}
                                       >

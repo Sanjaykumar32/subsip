@@ -29,7 +29,7 @@ export function SignUp() {
 
   return (
     <Container maxWidth="xs" sx={{ p: 0 }}>
-      <Box sx={{ my: 1, textAlign: "center" }}>
+      <Box sx={{ my: 1, textAlign: "center" }} className='mx-5'>
         <Typography variant="alternet"> Sign up </Typography>
         <Form>
           <FormGroup sx={{ textAlign: "left" }}>

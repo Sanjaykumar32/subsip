@@ -153,6 +153,8 @@ export function Home({ alertOnBottom }: any) {
     bannerList();
   }, [bannerList]);
 
+ 
+
   const businessData = useAppSelector(GET_BUSINESS);
   console.log(bannerData, 'bannerData');
   console.log(businessData, 'businessData')
@@ -242,7 +244,7 @@ export function Home({ alertOnBottom }: any) {
           {banner?.map((ele: any, index: number) => (
             <div key={index}>
               <div className="max-w-[100%] mt-[-38px]  lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
-                <div className="w-[80%] md:w-[45%] gap-5 flex flex-col justify-center px-2 lg:pt-10 md:px-10">
+                <div className="w-[80%] md:w-[45%] gap-4 flex flex-col justify-center px-2 lg:pt-10 md:px-10">
                   <div>
                     <span className="bg-[#0275d8] rounded-md text-[0.9rem] py-[5px] px-[10px] font-normal text-white">
                       Featured
@@ -261,13 +263,13 @@ export function Home({ alertOnBottom }: any) {
                       {ele.vName}
                     </span>
                   </div>
-                  <p className=" text-black md:text-[#bdbdbd] text-[0.8rem] ">
+                  <p className=" text-black md:text-[#bdbdbd] text-[1rem] ">
                     {ele.vLocation}
                   </p>
-                  <p className="text-black md:text-white text-[0.95rem] textLimit2 font-normal">
+                  <p className="text-black md:text-white text-[1.1rem] textLimit2 font-normal">
                     {ele?.tDescription}
                   </p>
-                  <p className="text-[#ffff]">{ele?.subscriberCount} Subscribe</p>
+                  <p className={`${isMobile ? 'text-black text-[16px] font-medium' : 'text-[#ffff] text-[16px] font-medium' }`}>{ele?.subscriberCount} Subscribe</p>
 
                   <div className="raletive">
                     <>
@@ -291,7 +293,7 @@ export function Home({ alertOnBottom }: any) {
                         // </div>
                         <span>
                           <button
-                            className="bg-[#262626] text-[1rem] w-36 rounded-full  py-4 px-2 font-normal text-white"
+                            className="bg-[#e0e0e0] text-[#262626] text-[1rem] w-36 rounded-full  py-4 px-2 font-medium"
                             onClick={() => {
                               auth?.isAuthenticated
                                 ? onImageClick(ele.iBusinessId)
@@ -314,7 +316,7 @@ export function Home({ alertOnBottom }: any) {
                         // </div>
                         <span>
                           <button
-                            className="bg-[#d32f3f] text-[1rem] w-36 rounded-full  py-4 px-2 font-normal text-white"
+                            className="bg-[#ACCF02] text-[1rem] w-36 rounded-full  py-4 px-2 font-medium text-white"
                             onClick={() => {
                               auth?.isAuthenticated
                                 ? onImageClick(ele.iBusinessId)
@@ -440,7 +442,7 @@ export function Home({ alertOnBottom }: any) {
           }
         </p>
 
-        <div className="relative my-10 w-full">
+        <div className="relative my-2 mb-5 w-full">
           <Slider ref={cardRef3} {...cardSettings}>
             {filterBanner
               ?.filter((el) => parseInt(el.iCategory) == CateFirst[2])

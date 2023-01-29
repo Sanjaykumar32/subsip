@@ -23,7 +23,7 @@ export function PasswordChange(): ReactElement {
   const { changeHandler, submitHandler } = handlers;
 
   return (
-    <Container maxWidth="xs" sx={{ p: 4, my: 3.5 }}>
+    <Container maxWidth="xs" sx={{  my: 3.5 }} className='changePadding'>
       <Box sx={{ my: 1 }}>
         <Typography variant="alternet">Change Password </Typography>
 
