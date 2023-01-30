@@ -74,9 +74,9 @@ export class UserService {
   }
 
   /**
-  * add subscriber-to-business
-  * @return {Promise<IAddSubcriberToBuisnessResponse>}
-  */
+   * add subscriber-to-business
+   * @return {Promise<IAddSubcriberToBuisnessResponse>}
+   */
   public static async addSubscriberToBussiness(
     payload: any
   ): Promise<IAddSubcriberToBuisnessResponse> {
@@ -91,9 +91,9 @@ export class UserService {
   }
 
   /**
-    * add subscriber-to-business
-    * @return {Promise<IUnSubscriberResponse>}
-    */
+   * add subscriber-to-business
+   * @return {Promise<IUnSubscriberResponse>}
+   */
   public static async UNSubscriberToBussiness(
     payload: IUNSubscriberRequest
   ): Promise<IUnSubscriberResponse> {
@@ -106,8 +106,6 @@ export class UserService {
 
     return res.data;
   }
-
-
 
   /**
    * Delete Subscribers
@@ -124,6 +122,16 @@ export class UserService {
 
     return res.data;
   }
+
+  /**
+   * get referral user
+   * @return {Promise<any>}
+   */
+  public static async getReferralUser(): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: "/milestone",
+      method: "GET",
+    });
+    return res.data;
+  }
 }
-
-

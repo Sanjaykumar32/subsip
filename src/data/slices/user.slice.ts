@@ -10,6 +10,7 @@ export interface IUserState {
   profilePic: string;
   bannerList: IBannerData[];
   AllBussinessById: IBusiness[];
+  getReferralUser: any[];
 }
 
 const initialState: IUserState = {
@@ -19,6 +20,7 @@ const initialState: IUserState = {
   profilePic: "",
   bannerList: [],
   AllBussinessById: [],
+  getReferralUser: [],
 };
 
 export const userSlice = createSlice({
@@ -41,6 +43,11 @@ export const userSlice = createSlice({
     builder.addCase(UserThunk.business.fulfilled, (state, action) => {
       if (action.payload.data) {
         state.AllBussinessById = action.payload.data;
+      }
+    });
+    builder.addCase(UserThunk.getReferralUser.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.getReferralUser = action.payload.data;
       }
     });
   },

@@ -60,11 +60,9 @@ export class UserThunk {
     }
   );
 
-
-
   /**
- * Add Subscribers to Business
- */
+   * Add Subscribers to Business
+   */
   public static UNSubscriberToBusiness = createAsyncThunk(
     "user/UNSubscriberToBusiness",
     async (payload: IUNSubscriberRequest): Promise<IUnSubscriberResponse> => {
@@ -82,6 +80,17 @@ export class UserThunk {
       payload: IDeleteSubscriberRequest
     ): Promise<IDeleteSubscriberResponse> => {
       const response = await UserService.deleteSubscribers(payload);
+      return response;
+    }
+  );
+
+  /**
+   * Get Referral User
+   */
+  public static getReferralUser = createAsyncThunk(
+    "admin/getReferralUser",
+    async (): Promise<any> => {
+      const response = await UserService.getReferralUser();
       return response;
     }
   );
