@@ -248,6 +248,11 @@ export function AdminListing() {
                 <header className="App-header w-full">
                   <div className={`w-full xl:w-[80%] mx-[auto] ${indexValue ? 'z-50' : 'z-0'}`} >
                     <ReactSearchAutocomplete
+                      styling={
+                        {
+                          zIndex: 999 
+                        }
+                      }
                       items={items3}
                       onSearch={handleOnSearch}
                       onSelect={handleOnSelect}
