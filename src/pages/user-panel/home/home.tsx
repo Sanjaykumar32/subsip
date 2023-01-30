@@ -280,7 +280,7 @@ export function Home({ alertOnBottom }: any) {
                         : "text-[#ffff] text-[16px] font-medium"
                     }`}
                   >
-                    {ele?.subscriberCount} Subscribe
+                    {ele?.subscriberCount} Subscribers
                   </p>
 
                   <div className="raletive">
@@ -310,7 +310,7 @@ export function Home({ alertOnBottom }: any) {
                                 : navigate(AuthRoutePathEnum.SIGN_IN);
                             }}
                           >
-                            Unsubscribe
+                            Subscribed
                           </button>
                         </span>
                       ) : (

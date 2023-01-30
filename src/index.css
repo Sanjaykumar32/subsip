@@ -480,7 +480,7 @@ h2 {
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
-    color: #434d59 !important;
+    /* color: #434d59 !important; */
     padding: 0 4px 0 0px;
 }
 
