@@ -535,7 +535,7 @@ export const UserAppBar = (props: any) => {
                           onClick={() => {
                             setting.title === "Logout" && auth.signOut();
                             setting.title === "Logout" &&
-                              toast.success("You have successfully logged out !");
+                              toast.success("You have successfully logged out!");
                             handleClose();
                           }}
                         >
@@ -728,7 +728,7 @@ export const UserAppBar = (props: any) => {
                     onClick={() => {
                       setting.title === "Logout" && auth.signOut();
                       setting.title === "Logout" &&
-                        toast.success("You have successfully logged out !");
+                        toast.success("You have successfully logged out!");
                       handleClose();
                     }}
                   >
