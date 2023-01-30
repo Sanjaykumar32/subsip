@@ -589,7 +589,7 @@ export const UserAppBar = (props: any) => {
               <Logo variant="dark" />
             </Box>
           ) : (
-            <SearchField />
+            <SearchField  />
           )}
 
           {/* < ------------------- location input field ---------------------> */}
@@ -1192,7 +1192,7 @@ export const UserAppBar = (props: any) => {
       </AppBar>
       <Backdrop
         open={open}
-        sx={{ zIndex: theme.zIndex.appBar - 1 }}
+        // sx={{ zIndex: theme.zIndex.appBar - 1 }}
         onClick={() => setOpen(false)}
       />
     </>

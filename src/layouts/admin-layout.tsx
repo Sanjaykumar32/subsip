@@ -100,7 +100,7 @@ export function AdminLayout(props: Props) {
 
   const drawer = (
     <div>
-      <Toolbar />
+    
       {isMobile && (
         <TextField
           fullWidth

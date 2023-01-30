@@ -233,6 +233,11 @@ export function AdminSubscribers() {
           <div className="App w-full mr-2">
             <div className={`w-full xl:w-[80%] mx-[auto] `} >
               <ReactSearchAutocomplete
+                styling={
+                  {
+                    zIndex: 999 
+                  }
+                }
                 items={items2}
                 onSearch={handleOnSearch}
                 onSelect={handleOnSelect}
