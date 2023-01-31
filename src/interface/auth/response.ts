@@ -7,6 +7,7 @@ export interface ISignInResponse {
 
 export interface IData {
   userId: string;
+  iGroupId:string
 }
 
 export interface IToken {

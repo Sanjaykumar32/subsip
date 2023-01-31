@@ -11,13 +11,15 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { UserThunk } from "data/thunk/user.thunk";
 
 export function ReferralProgram() {
-  const refferralCount = useAppSelector(GET_REFERRAL_USER);
+  const refferralCount = useAppSelector(GET_REFERRAL_COUNT);
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem("userId");
 
   const refferalCount = useCallback(async () => {
     try {
-      await dispatch(UserThunk.getReferralUser());
+      await dispatch(
+        AdminThunk.refferralCount({ userId: userId ? parseInt(userId) : 0 })
+        );
     } catch (error) {
       console.log(error);
     }
@@ -27,10 +29,11 @@ export function ReferralProgram() {
     refferalCount();
   }, [refferalCount]);
 
+
   console.log(refferralCount, "refferralCount");
 
   const list = refferralCount?.map((el: any) => {
-    return Math.max(el.userCount);
+    return Math.max(el.userCount ? el.userCount : 0);
   });
 
   const count: any = [...new Set(list)];
@@ -68,8 +71,8 @@ export function ReferralProgram() {
                 }}
                 key={i}
               >
-                <Typography variant="body2"> {res.vName}</Typography>
-                {res?.userCount == res?.iamount ? (
+                <Typography variant="body2"> {res?.milestoneName}</Typography>
+                {res?.userCount == res?.iAmount ? (
                   <Chip
                     label="Done"
                     size="small"
@@ -79,7 +82,7 @@ export function ReferralProgram() {
                   />
                 ) : (
                   <Chip
-                    label={`${res?.userCount}/${res?.iamount}`}
+                    label={`${res?.userCount ? res?.userCount : 0 }/${res?.iAmount}`}
                     size="small"
                     sx={{ minWidth: "100px", ml: 2 }}
                   />

@@ -75,8 +75,10 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {
       const response: ISignInResponse = await AuthService.signIn(credentials);
+       
       localStorage.setItem("token", response.token.token);
       localStorage.setItem("userId", response.data.userId);
+      localStorage.setItem("iGroupId", response.data.iGroupId);
       setAuthenticated(true);
       toast.success("You have successfully logged in !");
     } catch (error) {

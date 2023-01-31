@@ -28,6 +28,7 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import ListIcon from "@mui/icons-material/List";
 import toast from "react-hot-toast";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
@@ -124,10 +125,10 @@ export function ClickOnCategory() {
           pathName == "category"
             ? pathSerchValue.toString()?.replaceAll(/\s/g, "")?.toLowerCase()
             : location.search
-                .toString()
-                .slice(1, 19)
-                ?.replaceAll(/\s/g, "")
-                .toLowerCase()
+              .toString()
+              .slice(1, 19)
+              ?.replaceAll(/\s/g, "")
+              .toLowerCase()
         );
     }
   );
@@ -248,11 +249,10 @@ export function ClickOnCategory() {
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
                               id="panel1a-header"
-                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
-                                activeCate === item?.iCategoryId
-                                  ? " activeCate"
-                                  : ""
-                              }  `}
+                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
+                                ? " activeCate"
+                                : ""
+                                }  `}
                               onClick={() => {
                                 handleList(item?.iCategoryId),
                                   handleSubList(null);
@@ -262,7 +262,7 @@ export function ClickOnCategory() {
                               {item?.vName}
                             </AccordionSummary>
 
-                            <AccordionDetails>
+                            <AccordionDetails className="!p-0">
                               {filteredSubCategory.length > 0 ? (
                                 filteredSubCategory.map(
                                   (res: any, i: number) => (
@@ -272,13 +272,25 @@ export function ClickOnCategory() {
                                         handleSubList(res?.iSubCategoryId)
                                       }
                                     >
-                                      <Typography
-                                        className="text-[#252525] p-[10px]"
-                                        key={i}
-                                        onClick={toggleDrawerClose}
+                                      <div
+                                        className={
+                                          subcatIdss == res.iSubCategoryId
+                                            ? "bg-[#c9c8c8]"
+                                            : ""
+                                        }
                                       >
-                                        {res.vName}
-                                      </Typography>
+                                        <Typography
+                                          onClick={toggleDrawerClose}
+                                          className='text-[#252525] !py-[10px] hover:bg-[#c9c8c8]'
+                                          key={i}
+                                        >
+
+                                          <div className="flex items-center">
+                                            <span><ArrowRightIcon /></span>
+                                            <span> {res.vName}</span>
+                                          </div>
+                                        </Typography>
+                                      </div>
                                     </Link>
                                   )
                                 )
@@ -322,11 +334,10 @@ export function ClickOnCategory() {
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id={item.vName}
-                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
-                            activeCate === item?.iCategoryId
-                              ? " activeCate"
-                              : ""
-                          }  `}
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
+                            ? " activeCate"
+                            : ""
+                            }  `}
                           onClick={() => {
                             handleSubList(null);
                             setActiveCate(item?.iCategoryId);
@@ -335,7 +346,7 @@ export function ClickOnCategory() {
                           {item?.vName}
                         </AccordionSummary>
 
-                        <AccordionDetails>
+                        <AccordionDetails className="!p-0">
                           {filteredSubCategory.length > 0 ? (
                             filteredSubCategory.map((res: any, i: number) => (
                               <Link
@@ -352,10 +363,13 @@ export function ClickOnCategory() {
                                   }
                                 >
                                   <Typography
-                                    className={`text-[#252525] py-1} `}
+                                    className='text-[#252525] !py-[10px] hover:bg-[#c9c8c8]'
                                     key={i}
                                   >
-                                    {res.vName}
+                                    <div className="flex items-center">
+                                      <span><ArrowRightIcon /></span>
+                                      <span> {res.vName}</span>
+                                    </div>
                                   </Typography>
                                 </div>
                               </Link>
@@ -452,11 +466,11 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
-              listFilter.filter((el) =>
-                subcatIdss
-                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
-                  : el.iCategory === ids
-              ).length > 0 ? (
+                listFilter.filter((el) =>
+                  subcatIdss
+                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                    : el.iCategory === ids
+                ).length > 0 ? (
                 listFilter
                   .filter((el) =>
                     subcatIdss
@@ -549,12 +563,12 @@ export function ClickOnCategory() {
                                 <div className="raletive">
                                   <>
                                     {data?.subscriberIds &&
-                                    data?.subscriberIds
-                                      .split("")
-                                      .filter((el: any) => {
-                                        return el == userId;
-                                      })[0] &&
-                                    auth?.isAuthenticated ? (
+                                      data?.subscriberIds
+                                        .split("")
+                                        .filter((el: any) => {
+                                          return el == userId;
+                                        })[0] &&
+                                      auth?.isAuthenticated ? (
                                       <div
                                         className="subscribeLebalListing bg-[#e0e0e0]"
                                         onClick={() =>
@@ -602,8 +616,8 @@ export function ClickOnCategory() {
                 <div className="grid w-full justify-center py-24 ">
                   <span>
                     {subcatIdss
-                      ? "This Subcatogery No listing Here "
-                      : "This Category no listing Here "}{" "}
+                      ? "No listings available"
+                      : "No listings available"}{" "}
                   </span>
                 </div>
               )}

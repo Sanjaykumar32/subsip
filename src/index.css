@@ -170,7 +170,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr
 .nan {
     padding: 0px 10px !important;
     margin-right: 0px !important;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     color: #5e5e5e;
     background: transparent;
     transition: all 0.3s;
@@ -508,9 +508,9 @@ h2 {
     /* padding: 0 4px 0 0px; */
 }
 
-.headerTop {
+/* .headerTop {
     padding-top: 3rem !important;
-}
+} */
 
 .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation0.MuiPopover-paper.css-aqqxug-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
     overflow: auto !important;
@@ -538,3 +538,27 @@ h2 {
     padding: 0px;
 }
 
+
+/* .reffralText input[readonly] {
+    color: black;
+    font-weight: 800;
+    opacity: 1;
+} */
+
+.reffralText input::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #1a1a1a !important;
+    opacity: 1;
+}
+
+.reffralText input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #1a1a1a !important;
+    opacity: 1;
+}
+
+.reffralText input::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #1a1a1a ;
+    opacity: 1;
+}

@@ -8,7 +8,8 @@
 .categoryListing li {
     padding: 0 !important;
 }
-.toolbarAdminMenu{
+
+.toolbarAdminMenu {
     padding: 0% !important;
 }
 
@@ -68,6 +69,7 @@
     position: relative !important;
     padding: 0px !important;
     box-shadow: 0 1px 20px 0 #91919175 !important;
+    z-index: 1250 !important;
 }
 
 .css-hyum1k-MuiToolbar-root {
@@ -92,6 +94,10 @@
 img.Logo.LightVariant {
     filter: invert(100%);
 }
+
+/* .moblieMenu{
+    width: 100%;
+} */
 
 /* img.Logo {
     position: absolute;

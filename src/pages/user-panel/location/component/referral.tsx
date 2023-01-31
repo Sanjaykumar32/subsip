@@ -92,11 +92,12 @@ export default function ResponsiveDialog({
           <TextField
             fullWidth
             aria-readonly
+            className='reffralText'
             InputProps={{
               readOnly: true,
               endAdornment: (
                 <InputAdornment position="end" sx={{ cursor: "pointer" }}>
-                  <FontAwesomeIcon icon={faCopy} onClick={appIdCopy} />
+                  <FontAwesomeIcon icon={faCopy} onClick={appIdCopy} className='text-[#ACCF02]'/>
                 </InputAdornment>
               ),
             }}

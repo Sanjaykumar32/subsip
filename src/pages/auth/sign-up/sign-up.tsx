@@ -8,6 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import { InputBox, Label } from "components";
 
@@ -21,6 +22,7 @@ export function SignUp() {
   const { changeHandler, submitHandler, handleClose } = handlers;
   const location = useLocation();
   console.log(location, "location");
+  const navigate = useNavigate();
 
   // const submit = () => {
   //   if (location.state.referralcode && location.state.businessId) {
@@ -69,10 +71,13 @@ export function SignUp() {
           </FormGroup>
         </Form>
         <Box sx={{ mt: 3 }}>
-          <Typography variant="caption" fontWeight={600}>
+          <Typography variant="caption" fontWeight={500}>
             By clicking &quot;Create your account&quot;, you are creating a
-            PoshSub account and agree to PoshSub&apos;s Terms of Service and
-            Privacy Policy.
+            PoshSub account and agree to PoshSub&apos;s
+          </Typography>
+          <Typography variant="caption" fontWeight={800} >
+            <span onClick={()=> navigate('/terms')} className=' cursor-pointer' > Terms  </span>
+            <span  onClick={()=> navigate('/privacy')} className=' cursor-pointer'> & Privacy Policy.</span>
           </Typography>
           <Box sx={{ mt: 2 }}>
             <Link

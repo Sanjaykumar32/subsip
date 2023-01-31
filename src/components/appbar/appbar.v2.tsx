@@ -259,7 +259,8 @@ export const UserAppBar = (props: any) => {
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
-    if (userId === "4") {
+    const iGroupId = localStorage.getItem("iGroupId");
+    if (iGroupId === "1") {
       if (homepage.split("/")[1] === "admin") {
         const data = [
           {
@@ -420,7 +421,7 @@ export const UserAppBar = (props: any) => {
         color="default"
         elevation={0}
         sx={{
-          zIndex: theme.zIndex.appBar,
+          // zIndex: theme.zIndex.appBar,
           backgroundColor: "white",
           position: "relative ",
         }}
@@ -574,7 +575,7 @@ export const UserAppBar = (props: any) => {
             justifyContent: "space-between",
             flexGrow: 1,
           }}
-          className="topheader"
+          className={`${isMobile && !open ? '!hidden' : ''} 'topheader'`}
         >
           {homepage.split("/")[1] === "admin" ? (
             <h1></h1>
@@ -954,7 +955,7 @@ export const UserAppBar = (props: any) => {
         {props?.userMenu == true && categoryData.length > 0 && (
           <animated.div style={{ overflow: "hidden", ...spring }}>
             <Toolbar>
-              <div className="moblieMenu">
+              <div className="moblieMenu ">
                 <List
                   className="categoryListing "
                   sx={{
