@@ -165,8 +165,11 @@ export function ClickOnCategory() {
   };
 
   async function SubcribeBtn(id: any): Promise<void> {
-    !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
+    // !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
     // console.log('this is btn stb')
+
+
+
     try {
       await dispatch(
         UserThunk.addSubscriberToBusiness({
@@ -584,9 +587,11 @@ export function ClickOnCategory() {
                                     ) : (
                                       <div
                                         className="subscribeLebalListing bg-[#09292b] cursor-pointer"
-                                        onClick={() =>
-                                          SubcribeBtn(data?.iBusinessId)
-                                        }
+                                        onClick={() => {
+                                          auth?.isAuthenticated
+                                            ? SubcribeBtn(data?.iBusinessId)
+                                            : navigate(AuthRoutePathEnum.SIGN_IN)
+                                        }}
                                       >
                                         <span className=" text-white ">
                                           Subscribe
@@ -625,7 +630,7 @@ export function ClickOnCategory() {
             </Grid>
           </Box>
         </Grid>
-      </Grid>
-    </Container>
+      </Grid >
+    </Container >
   );
 }

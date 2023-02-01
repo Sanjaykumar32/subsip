@@ -240,9 +240,8 @@ export function Home({ alertOnBottom }: any) {
   return (
     <div className="w-full overflow-x-hidden">
       <div
-        className={`${
-          isMobile ? "py-10" : "py-20"
-        } 'bg-white md:bg-black relative  w-full'`}
+        className={`${isMobile ? "py-10" : "py-20"
+          } 'bg-white md:bg-black relative  w-full'`}
       >
         <Slider ref={sliderRef} {...settings}>
           {banner?.map((ele: any, index: number) => (
@@ -259,9 +258,10 @@ export function Home({ alertOnBottom }: any) {
                     <span
                       className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle"
                       onClick={() => {
-                        auth?.isAuthenticated
-                          ? onImageClick(ele.iBusinessId)
-                          : navigate(AuthRoutePathEnum.SIGN_IN);
+                        onImageClick(ele.iBusinessId)
+                        // auth?.isAuthenticated
+                        //   ? onImageClick(ele.iBusinessId)
+                        //   : navigate(AuthRoutePathEnum.SIGN_IN);
                       }}
                     >
                       {ele.vName}
@@ -274,11 +274,10 @@ export function Home({ alertOnBottom }: any) {
                     {ele?.tDescription}
                   </p>
                   <p
-                    className={`${
-                      isMobile
-                        ? "text-black text-[16px] font-medium"
-                        : "text-[#ffff] text-[16px] font-medium"
-                    }`}
+                    className={`${isMobile
+                      ? "text-black text-[16px] font-medium"
+                      : "text-[#ffff] text-[16px] font-medium"
+                      }`}
                   >
                     {ele?.subscriberCount} Subscribers
                   </p>
@@ -286,10 +285,10 @@ export function Home({ alertOnBottom }: any) {
                   <div className="raletive">
                     <>
                       {ele?.subscriberIds &&
-                      ele?.subscriberIds.split("").filter((el: any) => {
-                        return el == userId;
-                      })[0] &&
-                      auth?.isAuthenticated ? (
+                        ele?.subscriberIds.split("").filter((el: any) => {
+                          return el == userId;
+                        })[0] &&
+                        auth?.isAuthenticated ? (
                         // <div
                         //   className="subscribeLebalListing bg-[#e0e0e0]"
                         //   onClick={() =>
@@ -359,9 +358,8 @@ export function Home({ alertOnBottom }: any) {
                         ? "http://159.223.194.50:8000/" + ele?.vImage
                         : "http://159.223.194.50:8000/public/uploads/1672076769972.png"
                     }
-                    className={`${
-                      isMobile ? "h-[266px]" : "h-full"
-                    } w-full object-cover object-center rounded-[6px] `}
+                    className={`${isMobile ? "h-[266px]" : "h-full"
+                      } w-full object-cover object-center rounded-[6px] `}
                   />
                 </div>
               </div>
@@ -636,9 +634,6 @@ const SliderCard = (props: any) => {
       );
 
       allBusiness();
-      // allsubscriberOfBussinesss();
-      // getDatalist()
-      // toast.success("Subsribed  Successfully")
     } catch (error) {
       console.log(error);
     }
@@ -666,9 +661,7 @@ const SliderCard = (props: any) => {
         <span
           className="text-black text-[19px] leading-[22px] font-semibold cursor-pointer textLimit2 my-3 "
           onClick={() => {
-            auth?.isAuthenticated
-              ? onImageClick()
-              : navigate(AuthRoutePathEnum.SIGN_IN);
+            onImageClick()
           }}
         >
           {name}
