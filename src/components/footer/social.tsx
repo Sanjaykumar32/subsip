@@ -63,7 +63,7 @@ export function SocialIcons() {
   );
 
   return (
-    <IconList container spacing={{ xs: 2, sm: 3, md: 4 }} className={!isMobile ? "gap-[20px] footerIconDP" :  'footerIconDP'} >
+    <IconList container spacing={{ xs: 2, sm: 3, md: 4 }} className={!isMobile ? "gap-[10px] footerIconDP" :  'footerIconDP'} >
       {socialIcons.map((data, index: number) => (
         <Grid item key={`Social-${data.link}-${index}`}>
           <IconButton onClick={() => (window.location.href = data.link)}>

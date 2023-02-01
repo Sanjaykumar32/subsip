@@ -51,7 +51,7 @@ export function FooterMain() {
               <Grid item >
                 <Box>
                   <Logo />
-                  <Typography> Free certificates from businesses you love </Typography>
+                  <Typography > Free certificates from businesses you love </Typography>
                 </Box>
               </Grid>
             )}
@@ -59,7 +59,7 @@ export function FooterMain() {
               {!isMobile && (
                 <Box sx={{ mb: 2 }}>
                   <Logo />
-                  <Typography> Free certificates from businesses you love  </Typography>
+                  <Typography className="pl-[10px]"> Free certificates from businesses you love  </Typography>
                 </Box>
               )}
               <SocialIcons />
@@ -73,7 +73,7 @@ export function FooterMain() {
 
 
       {!isMobile ?
-        <div className="grid-cols-2  px-[125px] grid  py-[10px] bg-[#2C2E30]">
+        <div className="grid-cols-2  px-[118px] grid  py-[10px] bg-[#2C2E30]">
           <div className="flex justify-start">
             <p className="text-[#ffffff]">Copyright  2023. All rights reserved.</p>
           </div>

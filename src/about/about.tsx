@@ -1,6 +1,9 @@
+import { useMediaQuery } from '@mui/material';
 import React from 'react'
+import { theme } from 'theme';
 
 export const About = () => {
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <>
 
@@ -27,9 +30,9 @@ export const About = () => {
         </div>
 
        
-          <div className=" grid grid-about">
+          <div className={`${isMobile ? '' : 'grid grid-about'}`}>
             <div className="bg-[#39cd62]">
-              <div className=" mx-10 my-10  overflow-auto">
+              <div className=" mx-10 py-10  overflow-auto">
                 <div className="">
                   <h2 className="text-[#021414] text-[48px] font-bold leading-[48px] font-sans">We’re on a mission <br /> to bust open
                     <span className="text-[#ffffff]">
@@ -45,9 +48,7 @@ export const About = () => {
                 <p className="text-[22px] leading-8 text-[#ffffff] font-sans">AppSumo is the platform 1.25M+ <br />entrepreneurs trust for everything they need to create fulfilling businesses. We’ve got all the tools you need to grow and scale.</p>
               </div>
             </div>
-            <div className="  grid grid-cols-1">
-              <div className="">
-
+            <div className="">
                 <img
                   src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61d63834f499ea37ac0f7061_aboutus-lo.png"
                   loading="lazy"
@@ -55,23 +56,9 @@ export const About = () => {
                   alt=""
                   className=""
                 />
-
-              </div>
             </div>
           </div>
       
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <div className="container-12 w-container m-auto my-[80px]">

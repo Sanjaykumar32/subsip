@@ -73,12 +73,12 @@ export function AdminSubscribers() {
     {
       field: "vEmail",
       headerName: "Email",
-      width: 200,
+      width: 250,
     },
     {
       field: "Verified",
       headerName: "Verified",
-      width: 200,
+      width: 250,
       renderCell: (params) => (
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <VerifiedUserIcon color="success" sx={{ mr: 1 }} />
@@ -94,6 +94,7 @@ export function AdminSubscribers() {
         <Box>
           <Tooltip title={params.value[0]}>
             <FontAwesomeIcon
+             className=" cursor-pointer"
               icon={faTrash}
               onClick={() => {
                 deleteSubscriber(params.value[1]);
@@ -233,11 +234,11 @@ export function AdminSubscribers() {
           <div className="App w-full mr-2">
             <div className={`w-full xl:w-[80%] mx-[auto] `} >
               <ReactSearchAutocomplete
-                styling={
-                  {
-                    zIndex: 999 
-                  }
-                }
+               
+                styling={{
+                  zIndex: 1,
+                }}
+                placeholder="Search"
                 items={items2}
                 onSearch={handleOnSearch}
                 onSelect={handleOnSelect}

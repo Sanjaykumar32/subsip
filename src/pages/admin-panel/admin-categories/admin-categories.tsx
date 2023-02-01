@@ -35,12 +35,12 @@ export function AdminCategories() {
     {
       field: "vName",
       headerName: "Name",
-      width: 200,
+      width: 250,
     },
     {
       field: "subCategoryName",
       headerName: "subcategory",
-      width: 200,
+      width: 250,
       renderCell: (params) => (
         <Link
           href={
@@ -60,6 +60,7 @@ export function AdminCategories() {
         <Box>
           <Tooltip title={params.value[0]}>
             <FontAwesomeIcon
+             className=" cursor-pointer"
               icon={faPen}
               onClick={() => {
                 navigate("/admin/new-category", {
@@ -74,7 +75,7 @@ export function AdminCategories() {
               onClick={() => {
                 deleteCategorylist(params.value[2]);
               }}
-              className="ml-[25px]"
+              className="ml-[25px]  cursor-pointer"
             />
           </Tooltip>
         </Box>

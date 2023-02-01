@@ -136,16 +136,14 @@ export const SearchField = () => {
       <header className="App-header w-full">
         <div className=" w-full xl:w-[80%] mx-[auto]  " >
           <ReactSearchAutocomplete
-        
-          styling={
-              {
-                zIndex: 999 
-              }
-            }
-          items={data}
-          onSearch={(el) => changeHandler(el)}
-          onSelect={(el) => submitHandler(el)}
-          onClear={handleClear}
+            styling={{
+                zIndex: 1
+              }}
+            placeholder="Search"
+            items={data}
+            onSearch={(el) => changeHandler(el)}
+            onSelect={(el) => submitHandler(el)}
+            onClear={handleClear}
           // autoFocus
           // formatResult={formatResult}
           />

@@ -61,8 +61,8 @@ export function Links() {
         title: "Business",
         subTitle: [
           {
-            title: "Advertisement",
-            link: "/join",
+            title: "Advertise",
+            link: "/listing/add",
           },
           {
             title: "Contact Us",
@@ -84,7 +84,7 @@ export function Links() {
                 <Typography fontWeight="600" sx={{ fontSize: "21px" }}>
                   {data.title}
                 </Typography>
-                {data.subTitle.map((subData) => (
+                {data?.subTitle.map((subData) => (
                   <li onClick={scrollToTop} key={`Sub-Links-${subData.title}-${index}}`}>
                     <Link
                       href={subData.link}

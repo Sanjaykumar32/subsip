@@ -30,12 +30,19 @@ export default function ResponsiveDialog({
    * copy referral code
    * @return {void}
    */
-  const appIdCopy = (): void => {
-    navigator.clipboard.writeText(
-      `${hostName}/listing/${businessId}?referralCode=${refferralCode.referralCode}`
-    );
-    handleClose();
-    toast.success("Copied Successfully");
+  const appIdCopy = async (): Promise<void> => {
+    // navigator?.clipboard?.writeText(
+    //   `${hostName}/listing/${businessId}?referralCode=${refferralCode.referralCode}`
+    // );
+    // handleClose();
+    // toast.success("Copied Successfully");
+    try {
+      await navigator.clipboard.writeText(`${hostName}/listing/${businessId}?referralCode=${refferralCode?.referralCode}`);
+      handleClose();
+      toast.success("Copied Successfully");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const dispatch = useAppDispatch();
@@ -64,7 +71,7 @@ export default function ResponsiveDialog({
     >
       <DialogTitle id="responsive-dialog-title refferals">
         <div className="flex  flex-col">
-          <span className={`${isMobile ? 'text-[22px] ' : '' } 'text-[1.75rem] text-[#1b1b1b] font-bold'`}>
+          <span className={`${isMobile ? 'text-[22px] ' : ''} 'text-[1.75rem] text-[#1b1b1b] font-bold'`}>
             Share {title} with others
           </span>
           <span className="text-[14px] text-[#1b1b1b] font-semibold">
@@ -97,7 +104,7 @@ export default function ResponsiveDialog({
               readOnly: true,
               endAdornment: (
                 <InputAdornment position="end" sx={{ cursor: "pointer" }}>
-                  <FontAwesomeIcon icon={faCopy} onClick={appIdCopy} className='text-[#ACCF02]'/>
+                  <FontAwesomeIcon icon={faCopy} onClick={appIdCopy} className='text-[#ACCF02]' />
                 </InputAdornment>
               ),
             }}

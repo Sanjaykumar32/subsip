@@ -84,9 +84,9 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
 
 
-  console.log(businessData, 'editScreen')
-  console.log(image, 'image image image')
-  console.log(location, 'location')
+  // console.log(businessData, 'editScreen')
+  // console.log(image, 'image image image')
+  // console.log(location, 'location')
 
 
 
@@ -94,16 +94,11 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
     if (edit === 'true') {
       // console.log('Edit new listinng');
-
-
       setEditure(true);
       allBusiness();
-
-
-
       const filter = businessData?.filter((item: any) => {
         if (item?.iBusinessId === Number(ListId)) {
-          console.log(item, "item");
+          console.log(item, "item edit value");
           // item
           setBuisnessName(item?.vName);
           setBusinessLocation(item?.vLocation);
@@ -188,7 +183,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const handleImageChange = (event: {
     target: { files: SetStateAction<any>[] };
   }): void => {
-    setImage(URL.createObjectURL(event.target.files[0]));
+    setImage(event.target.files[0]);
   };
 
   const handleBanner = (event: any): void => {
@@ -270,7 +265,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     updatedata.append("city", "2");
     if (image?.name) {
       updatedata.append("image", image, image?.name)
-      updatedata.append("onBanner", banner ? "1" : '0');
+      updatedata.append("onBanner", banner ? '1' : '0');
     }
     updatedata.append("email", email);
     updatedata.append("category", category);
@@ -280,9 +275,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     updatedata.append("bodyDescription", bodyDescription);
 
     console.log(ListId, edit, 'this is edit data')
-
-
-
 
     if (ListId) {
       // console.log(updatedata, 'update listing')
@@ -323,9 +315,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     //   toast.success("Listing Created Successfully");
     //   navigate(AdminRoutePathEnum.ADMIN_LISTING);
     // }
-
-
-
 
   };
 

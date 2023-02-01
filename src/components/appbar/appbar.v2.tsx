@@ -79,6 +79,7 @@ export const UserAppBar = (props: any) => {
     setMobileOpen(!mobileOpen);
   };
 
+  console.log(props , 'props')
   const routeAdmin = homepage.split("/")[1];
 
   // isMobile admin list----------------------------------------
@@ -373,7 +374,7 @@ export const UserAppBar = (props: any) => {
     }
   }, []);
 
-  // );
+
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -414,6 +415,9 @@ export const UserAppBar = (props: any) => {
   const handleBanner = () => {
     setOpen(false);
   };
+
+
+
 
   return (
     <>
@@ -532,7 +536,7 @@ export const UserAppBar = (props: any) => {
                     >
                       {menuItem.map((setting: any) => (
                         <MenuItem
-                          key={setting.route}
+                          key={setting?.route}
                           onClick={() => {
                             setting.title === "Logout" && auth.signOut();
                             setting.title === "Logout" &&
@@ -540,12 +544,12 @@ export const UserAppBar = (props: any) => {
                             handleClose();
                           }}
                         >
-                          <Link key="profile-menu" href={setting.route}>
+                          <Link key="profile-menu" href={setting?.route}>
                             <Typography
                               textAlign="left"
                               className="text-black "
                             >
-                              {setting.title}
+                              {setting?.title}
                             </Typography>
                           </Link>
                         </MenuItem>
@@ -727,15 +731,15 @@ export const UserAppBar = (props: any) => {
                   <MenuItem
                     key={setting.route}
                     onClick={() => {
-                      setting.title === "Logout" && auth.signOut();
-                      setting.title === "Logout" &&
+                      setting?.title === "Logout" && auth?.signOut();
+                      setting?.title === "Logout" &&
                         toast.success("You have successfully logged out!");
                       handleClose();
                     }}
                   >
-                    <Link key="profile-menu" href={setting.route}>
+                    <Link key="profile-menu" href={setting?.route}>
                       <Typography textAlign="left" className="text-black ">
-                        {setting.title}
+                        {setting?.title}
                       </Typography>
                     </Link>
                   </MenuItem>
@@ -952,7 +956,7 @@ export const UserAppBar = (props: any) => {
 
         {/* <-------------------------mobile dropdown-----------------> */}
 
-        {props?.userMenu == true && categoryData.length > 0 && (
+        {props?.userMenu == true && categoryData?.length > 0 && (
           <animated.div style={{ overflow: "hidden", ...spring }}>
             <Toolbar>
               <div className="moblieMenu ">
@@ -1099,6 +1103,7 @@ export const UserAppBar = (props: any) => {
                     },
                   }}
                 >
+                  
                   <List className="">
                     {menuList.map((item, index) => (
                       <Link
@@ -1118,12 +1123,17 @@ export const UserAppBar = (props: any) => {
                           disablePadding
                           className={`${props.menu == item.title ? "bg-[#c9c8c8]" : ""
                             } px-8 py-1`}
-                        >
-                          <ListItemButton>
+                            >
+                        
+                          <ListItemButton  
+                            onClick={() => {
+                              props.handleActive(item?.title);
+                            }}
+                          >
                             <ListItemIcon>
-                              <FontAwesomeIcon icon={item.icon} />
+                              <FontAwesomeIcon icon={item?.icon} />
                             </ListItemIcon>
-                            <ListItemText primary={item.title} />
+                            <ListItemText primary={item?.title} />
                           </ListItemButton>
                         </ListItem>
                       </Link>

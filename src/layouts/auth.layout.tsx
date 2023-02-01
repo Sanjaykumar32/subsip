@@ -24,6 +24,7 @@ export function AuthLayout() {
       }}
     >
       <ScrollToTop />
+      
       {/* <AppBar
         position="static"
         color="transparent"

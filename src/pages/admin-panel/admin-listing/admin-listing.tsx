@@ -102,19 +102,20 @@ export function AdminListing() {
         <Box>
           <Tooltip title={params.value[0]}>
             <FontAwesomeIcon
+              className=" cursor-pointer"
               icon={faPen}
               onClick={() => {
-                navigate(`/admin/new-listing?id=${params.value[2]}&edit=${true}`);
+                navigate(`/admin/new-listing?id=${params?.value[2]}&edit=${true}`);
               }}
             />
           </Tooltip>
-          <Tooltip title={params.value[1]}>
+          <Tooltip title={params?.value[1]}>
             <FontAwesomeIcon
               icon={faTrash}
               onClick={() => {
-                deleteDatalist(params.value[2]);
+                deleteDatalist(params?.value[2]);
               }}
-              className="ml-[25px]"
+              className="ml-[25px] cursor-pointer "
             />
           </Tooltip>
         </Box>
@@ -201,6 +202,8 @@ export function AdminListing() {
     setIndex(false)
   }
 
+  console.log(indexValue , 'indexValue')
+
   return (
     <>
       {loader ?
@@ -246,17 +249,17 @@ export function AdminListing() {
             >
               <div className="App w-full mr-2 ">
                 <header className="App-header w-full">
-                  <div className={`w-full xl:w-[80%] mx-[auto] ${indexValue ? 'z-50' : 'z-0'}`} >
+                  <div className={`w-full xl:w-[80%] mx-[auto] indexSerch `} >
                     <ReactSearchAutocomplete
-                      styling={
-                        {
-                          zIndex: 999 
-                        }
-                      }
                       items={items3}
+                      
                       onSearch={handleOnSearch}
                       onSelect={handleOnSelect}
                       onClear={handleClear}
+                      styling={{
+                        zIndex: 1,
+                      }}
+                      placeholder="Search"
                     />
                   </div>
                 </header>

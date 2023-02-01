@@ -30,12 +30,12 @@ export function AdminNotification() {
     {
       field: "vHeadline",
       headerName: "Name",
-      width: 200,
+      width: 250,
     },
     {
       field: "vDesc",
       headerName: "Description",
-      width: 200,
+      width: 250,
     },
     {
       field: "Actions",
@@ -45,11 +45,12 @@ export function AdminNotification() {
         <Box>
           <Tooltip title={params.value[1]}>
             <FontAwesomeIcon
+            
               icon={faTrash}
               onClick={() => {
                 deleteNotification(params.value[2]);
               }}
-              className="ml-[25px]"
+              className="ml-[25px] cursor-pointer "
             />
           </Tooltip>
         </Box>
@@ -59,9 +60,9 @@ export function AdminNotification() {
 
   const rows :any = notificationData.map((item: INotificationdata) => {
     return {
-      id: item.iNotificationId,
-      vHeadline: item.vHeadline,
-      vDesc: item.vDesc,
+      id: item?.iNotificationId,
+      vHeadline: item?.vHeadline,
+      vDesc: item?.vDesc,
       Actions: ["Edit", "Delete", item?.iNotificationId],
     };
   });

@@ -38,6 +38,7 @@ export function AdminSubCategory() {
         <Box>
           <Tooltip title={params.value[0]}>
             <FontAwesomeIcon
+              className="cursor-pointer"
               icon={faPen}
               onClick={() => {
                 navigate(
@@ -52,7 +53,7 @@ export function AdminSubCategory() {
               onClick={() => {
                 deleteSubCategorylist(params.value[3]);
               }}
-              className="ml-[25px]"
+              className="ml-[25px] cursor-pointer"
             />
           </Tooltip>
         </Box>

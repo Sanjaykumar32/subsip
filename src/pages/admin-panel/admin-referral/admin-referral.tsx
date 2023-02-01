@@ -48,13 +48,13 @@ export function AdminReferral() {
     {
       field: "vName",
       headerName: "Milestone Name",
-      width: 200,
+      width: 250,
     },
 
     {
       field: "iamount",
       headerName: "Amount",
-      width: 200,
+      width: 250,
       renderCell: (params: any) => {
         console.log(params, "params");
         return params.value ? (
@@ -76,6 +76,7 @@ export function AdminReferral() {
         <Box>
           <Tooltip title={params.value[0]}>
             <FontAwesomeIcon
+            className=" cursor-pointer"
               icon={faPen}
               onClick={() => {
                 navigate("/admin/referral-price", {
@@ -90,7 +91,7 @@ export function AdminReferral() {
               onClick={() => {
                 deleteDataReferral(params.value[2]);
               }}
-              className="ml-[25px]"
+              className="ml-[25px] cursor-pointer"
             />
           </Tooltip>
         </Box>

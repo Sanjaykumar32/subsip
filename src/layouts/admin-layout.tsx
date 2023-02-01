@@ -136,7 +136,7 @@ export function AdminLayout(props: Props) {
             >
               <ListItemButton
                 onClick={() => {
-                  handleActive(item.title);
+                  handleActive(item?.title);
                 }}
               >
                 <ListItemIcon>
@@ -156,7 +156,7 @@ export function AdminLayout(props: Props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <UserAppBar userMenu={false} display={"adminHeader"} menu={menu} />
+      <UserAppBar userMenu={false} display={"adminHeader"} menu={menu} handleActive={handleActive}/>
       <Box
         component="nav"
         sx={{

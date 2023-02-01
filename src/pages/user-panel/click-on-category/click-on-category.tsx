@@ -296,7 +296,7 @@ export function ClickOnCategory() {
                                 )
                               ) : (
                                 <Link>
-                                  <Typography className="text-[#252525]">
+                                  <Typography className="text-[#252525] p-[10px]">
                                     No Sub category Here
                                   </Typography>
                                 </Link>
@@ -376,7 +376,7 @@ export function ClickOnCategory() {
                             ))
                           ) : (
                             <Link>
-                              <Typography className="text-[#252525]">
+                              <Typography className="text-[#252525] p-[10px]">
                                 No Sub category Here
                               </Typography>
                             </Link>
@@ -496,6 +496,7 @@ export function ClickOnCategory() {
                                   ? "http://159.223.194.50:8000/" + data.vImage
                                   : ""
                               }
+                              className='cursor-pointer'
                               onClick={() => {
                                 onImageClick(data?.iBusinessId);
                                 // auth?.isAuthenticated
@@ -570,7 +571,7 @@ export function ClickOnCategory() {
                                         })[0] &&
                                       auth?.isAuthenticated ? (
                                       <div
-                                        className="subscribeLebalListing bg-[#e0e0e0]"
+                                        className="subscribeLebalListing bg-[#e0e0e0] cursor-pointer"
                                         onClick={() =>
                                           handleUnsub(data?.iBusinessId)
                                         }
@@ -582,7 +583,7 @@ export function ClickOnCategory() {
                                       </div>
                                     ) : (
                                       <div
-                                        className="subscribeLebalListing bg-[#09292b]"
+                                        className="subscribeLebalListing bg-[#09292b] cursor-pointer"
                                         onClick={() =>
                                           SubcribeBtn(data?.iBusinessId)
                                         }

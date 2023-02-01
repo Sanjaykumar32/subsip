@@ -92,17 +92,17 @@ export function Rewards() {
     {
       field: "rewardName",
       headerName: "Reward Name",
-      width: 150,
+      width: 250,
     },
     {
       field: "businessName",
       headerName: "Business Name",
-      width: 150,
+      width: 250,
     },
     {
       field: "Status",
       headerName: "Status",
-      width: 200,
+      width: 250,
       renderCell: (params) => (
         <Chip
           label={params.value}

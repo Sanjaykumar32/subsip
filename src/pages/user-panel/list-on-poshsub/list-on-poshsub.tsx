@@ -154,22 +154,23 @@ export function ListingOnPoshSub() {
               <Box sx={{ my: 4 }}>
                 <Label id={`${step7.id}-label`}> {step7.label} </Label>
                 <Typography variant="body2"> {step7.caption} </Typography>
-                <Select
-                  fullWidth
-                  id={`${step7.id}-select`}
-                  labelId={`${step7.id}-label`}
-                  // value={value}
+                <TextField
+                  size="small"
+                  // value={}
                   // onChange={(event) => setValue(event.target.value)}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
+                  required
+                  fullWidth
+                />
               </Box>
-              <Box sx={{ my: 4 }}>
+             
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ px: 3, py: 1 }}>
+            <Box sx={{ my: 4 }}>
                 <Label id={`${step9.id}-label`}> {step9.label} </Label>
                 <Typography variant="body2"> {step9.caption} </Typography>
-                <Select
+                {/* <Select
                   fullWidth
                   id={`${step9.id}-select`}
                   labelId={`${step9.id}-label`}
@@ -179,26 +180,14 @@ export function ListingOnPoshSub() {
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ px: 3, py: 1 }}>
-              <Box sx={{ my: 4 }}>
-                <Label id={`${step2.id}-label`}> {step2.label} </Label>
-                <Typography variant="body2"> {step2.caption} </Typography>
-                <Select
-                  fullWidth
-                  id={`${step2.id}-select`}
-                  labelId={`${step2.id}-label`}
-                  // value={value}
+                </Select> */}
+                 <TextField
+                  size="small"
+                  // value={}
                   // onChange={(event) => setValue(event.target.value)}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
+                  required
+                  fullWidth
+                />
               </Box>
               <Box sx={{ my: 4 }}>
                 <Label> {step4.label} </Label>
@@ -212,7 +201,7 @@ export function ListingOnPoshSub() {
                   fullWidth
                 />
               </Box>
-              <Box sx={{ my: 4 }}>
+              {/* <Box sx={{ my: 4 }}>
                 <Label> {step6.label} </Label>
                 <Typography variant="body2"> {step6.caption} </Typography>
                 <input
@@ -233,7 +222,7 @@ export function ListingOnPoshSub() {
                 >
                   <FontAwesomeIcon icon={faUpload} size="lg" />
                 </IconButton>
-              </Box>
+              </Box> */}
               <Box sx={{ my: 4 }}>
                 <Label> {step8.label} </Label>
                 <Typography variant="body2"> {step8.caption} </Typography>

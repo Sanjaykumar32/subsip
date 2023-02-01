@@ -77,7 +77,7 @@ export function AdminNewlisting() {
       },
       {
         id: "q4",
-        label: "Tell us about your buisness?",
+        label: "Tell us about your Business ?",
         type: InputTypeEnum.TEXT_AREA,
         required: false,
         caption:
@@ -103,7 +103,7 @@ export function AdminNewlisting() {
       },
       {
         id: "q8",
-        label: "Buisness Location",
+        label: "Business Location",
         type: InputTypeEnum.SELECT,
         required: false,
       },
@@ -174,6 +174,7 @@ export function AdminNewlisting() {
   const edit = searchParams.get("edit");
 
 
+  console.log(banner , 'banner');
 
 
 
@@ -299,8 +300,6 @@ export function AdminNewlisting() {
                       <Label> {step6.label} </Label>
                       <Typography variant="body2"> {step6.caption} </Typography>
 
-                
-
                       <div className="flex  w-full mr-[10px]  gap-2 justify-center items-center align-center" >
                         <label htmlFor="fileInput">
                           <img id="icon" src="https://image.freepik.com/free-icon/upload-arrow_318-26670.jpg" />
@@ -308,7 +307,7 @@ export function AdminNewlisting() {
                         <input id="fileInput" type="file" onChange={(e: any) => { handleImageChange(e); }} />
 
                         {image ? 
-                        <img src={image} className=" w-[100px] h-[80px] object-cover rounded-[6px] " />
+                        <img src={image?.name ?  URL.createObjectURL(image) : image  } className=" w-[100px] h-[80px] object-cover rounded-[6px] " />
                     
                           : 
                           <div className=" w-[100px] h-[80px] object-cover rounded-[6px] bg-[#8b8b8b4a] flex justify-center items-center " >
