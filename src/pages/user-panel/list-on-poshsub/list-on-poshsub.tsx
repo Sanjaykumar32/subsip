@@ -21,6 +21,7 @@ import Grid from "@mui/material/Grid";
 import { InputTypeEnum } from "enum";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { Form } from "react-router-dom";
 
 interface ListFormItem {
   id: string;
@@ -31,6 +32,13 @@ interface ListFormItem {
 }
 
 export function ListingOnPoshSub() {
+  const [name  , setBusinessName] = useState('')
+  const [tagline , setTagline ] = useState('')
+  const [email , setEmail] = useState('')
+  const [businessCategory , setBusinessCategory] = useState('')
+  const [businessLocation , setBusinessLocation] = useState('')
+  const [ aboutLine , setAboutLine] = useState('')
+  const [subCategory , setSubCategory] = useState('')
   const theme = useTheme();
   const [
     step1,
@@ -105,6 +113,16 @@ export function ListingOnPoshSub() {
 
   const ref = useRef<HTMLInputElement>(null);
 
+  const handleSubmit = () => {
+    console.log(name ,'name')
+    console.log(tagline ,'tagline')
+    console.log(email ,'email')
+    console.log(businessCategory ,'businessCategory')
+    console.log(businessLocation ,'businessLocation')
+    console.log(aboutLine ,'aboutLine')
+    console.log(subCategory ,'subCategory')
+  }
+
   return (
     <Container maxWidth="md" disableGutters sx={{ p: 4 }}>
       <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
@@ -112,7 +130,10 @@ export function ListingOnPoshSub() {
           List your business on PoshSub
         </Typography>
       </Box>
-
+  
+      <Form
+          onSubmit={handleSubmit}
+        >
       <FormControl fullWidth size="small">
         <Grid container>
           <Grid item xs={12} md={6}>
@@ -122,9 +143,9 @@ export function ListingOnPoshSub() {
                 <Typography variant="body2"> {step1.caption} </Typography>
                 <TextField
                   size="small"
-                  // value={}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
+                  value={name}
+                  onChange={(event) => setBusinessName(event.target.value)}
+                  // required
                   fullWidth
                 />
               </Box>
@@ -133,9 +154,9 @@ export function ListingOnPoshSub() {
                 <Typography variant="body2"> {step3.caption} </Typography>
                 <TextField
                   size="small"
-                  // value={}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
+                  value={tagline}
+                  onChange={(event) => setTagline(event.target.value)}
+                  // required
                   fullWidth
                 />
               </Box>
@@ -145,9 +166,9 @@ export function ListingOnPoshSub() {
                 <Typography variant="body2"> {step5.caption} </Typography>
                 <TextField
                   size="small"
-                  // value={}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  // required
                   fullWidth
                 />
               </Box>
@@ -156,9 +177,9 @@ export function ListingOnPoshSub() {
                 <Typography variant="body2"> {step7.caption} </Typography>
                 <TextField
                   size="small"
-                  // value={}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
+                  value={businessCategory}
+                  onChange={(event) => setBusinessCategory(event.target.value)}
+                  // required
                   fullWidth
                 />
               </Box>
@@ -170,22 +191,12 @@ export function ListingOnPoshSub() {
             <Box sx={{ my: 4 }}>
                 <Label id={`${step9.id}-label`}> {step9.label} </Label>
                 <Typography variant="body2"> {step9.caption} </Typography>
-                {/* <Select
-                  fullWidth
-                  id={`${step9.id}-select`}
-                  labelId={`${step9.id}-label`}
-                  // value={value}
-                  // onChange={(event) => setValue(event.target.value)}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select> */}
+               
                  <TextField
                   size="small"
-                  // value={}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
+                  value={businessLocation}
+                  onChange={(event) => setBusinessLocation(event.target.value)}
+                  // required
                   fullWidth
                 />
               </Box>
@@ -195,41 +206,20 @@ export function ListingOnPoshSub() {
                 <TextField
                   multiline
                   minRows={5}
-                  // value={value}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
+                  value={aboutLine}
+                  onChange={(event) => setAboutLine(event.target.value)}
+                  // required
                   fullWidth
                 />
               </Box>
-              {/* <Box sx={{ my: 4 }}>
-                <Label> {step6.label} </Label>
-                <Typography variant="body2"> {step6.caption} </Typography>
-                <input
-                  ref={ref}
-                  type="file"
-                  onChange={(event) => console.log(event.target.value)}
-                  hidden
-                />
-                <IconButton
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: theme.palette.grey[300],
-                    borderRadius: "4px",
-                    p: 4,
-                  }}
-                  onClick={() => ref.current?.click()}
-                >
-                  <FontAwesomeIcon icon={faUpload} size="lg" />
-                </IconButton>
-              </Box> */}
+        
               <Box sx={{ my: 4 }}>
                 <Label> {step8.label} </Label>
                 <Typography variant="body2"> {step8.caption} </Typography>
                 <TextField
-                  // value={value}
-                  // onChange={(event) => setValue(event.target.value)}
-                  required
+                  value={subCategory}
+                  onChange={(event) => setSubCategory(event.target.value)}
+                  // required
                   fullWidth
                   InputProps={{
                     endAdornment: (
@@ -255,9 +245,10 @@ export function ListingOnPoshSub() {
           mt: 3,
         }}
       >
-        <Button variant="rounded"> Submit for Approval </Button>
+        <Button variant="rounded"  type='submit'> Submit for Approval </Button>
         <Link sx={{ mt: 4 }}> Request to remove a existing listing </Link>
       </Box>
+      </Form>
     </Container>
   );
 }

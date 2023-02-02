@@ -72,66 +72,6 @@ export const SearchField = () => {
 
   return (
 
-    // <Stack spacing={1}>
-    //   <Autocomplete
-    //     {...defaultProps}
-    //     id="disable-close-on-select"
-    //     //  onClick={disableCloseOnSelect}  
-    //     onChange={(event, newValue: any) => {
-    //       console.log(event, 'event onchange');
-    //       handlevalue(newValue);
-
-    //     }}
-    //     renderInput={(params: any) => (
-    //       <TextField
-    //         size="small"
-    //         className="searchH"
-    //         fullWidth
-    //         onChange={changeHandler}
-    //         sx={{ mx: { xs: 0, md: 4 } }}
-    //         {...params}
-    //         label="Search"
-    //         variant="standard"
-    //         InputProps={{
-
-    //                 endAdornment: (
-    //                   <IconButton>
-    //                     <FontAwesomeIcon
-    //                       icon={faSearch}
-    //                       size="sm"
-    //                       onClick={submitHandler}
-    //                     />
-    //                   </IconButton>
-    //                 ),
-    //               }}
-
-    //         />
-
-    //     )}
-    //   />
-    // </Stack>
-
-    //  <TextField
-    //     label="Search Listing"
-    //     size="small"
-    //     className="searchH"
-    //     fullWidth
-    //     onChange={changeHandler}
-    //     sx={{ mx: { xs: 0, md: 4 } }}
-    //     InputProps={{
-    //       sx: { borderRadius: "60px" },
-    //       endAdornment: (
-    //         <IconButton>
-    //           <FontAwesomeIcon
-    //             icon={faSearch}
-    //             size="sm"
-    //             onClick={submitHandler}
-    //           />
-    //         </IconButton>
-    //       ),
-    //     }}
-    //   />
-
     <div className="App w-full ">
       <header className="App-header w-full">
         <div className=" w-full xl:w-[80%] mx-[auto]  " >

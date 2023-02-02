@@ -29,6 +29,7 @@ import Divider from "@mui/material/Divider";
 import ListIcon from "@mui/icons-material/List";
 import toast from "react-hot-toast";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
@@ -288,8 +289,8 @@ export function ClickOnCategory() {
                                           key={i}
                                         >
 
-                                          <div className="flex items-center">
-                                            <span><ArrowRightIcon /></span>
+                                          <div className="flex items-center gap-1">
+                                            <span  className="pl-1 "><AccountTreeTwoToneIcon className="!h-[20px] !w-[20px]"/></span>
                                             <span> {res.vName}</span>
                                           </div>
                                         </Typography>
@@ -369,8 +370,8 @@ export function ClickOnCategory() {
                                     className='text-[#252525] !py-[10px] hover:bg-[#c9c8c8]'
                                     key={i}
                                   >
-                                    <div className="flex items-center">
-                                      <span><ArrowRightIcon /></span>
+                                    <div className="flex items-center gap-1">
+                                      <span className="pl-1"><AccountTreeTwoToneIcon  className="!h-[20px] !w-[20px]"/></span>
                                       <span> {res.vName}</span>
                                     </div>
                                   </Typography>

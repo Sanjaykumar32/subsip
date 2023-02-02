@@ -22,6 +22,7 @@ import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import toast from "react-hot-toast";
+import ScrollToTop from "scrollTop";
 
 export function Home({ alertOnBottom }: any) {
   const location = useLocation();
@@ -238,6 +239,8 @@ export function Home({ alertOnBottom }: any) {
   useBottomScrollListener(handleOnDocumentBottom);
 
   return (
+    <>
+    <ScrollToTop/>
     <div className="w-full overflow-x-hidden">
       <div
         className={`${isMobile ? "py-10" : "py-20"
@@ -581,6 +584,7 @@ export function Home({ alertOnBottom }: any) {
           )} */}
       </div>
     </div>
+    </>
   );
 }
 

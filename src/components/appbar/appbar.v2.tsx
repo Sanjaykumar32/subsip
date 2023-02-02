@@ -53,6 +53,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import toast from "react-hot-toast";
+import ScrollToTop from "scrollTop";
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -79,7 +80,7 @@ export const UserAppBar = (props: any) => {
     setMobileOpen(!mobileOpen);
   };
 
-  console.log(props , 'props')
+  console.log(categoryData, 'categoryData')
   const routeAdmin = homepage.split("/")[1];
 
   // isMobile admin list----------------------------------------
@@ -404,10 +405,11 @@ export const UserAppBar = (props: any) => {
   };
   const businessData = useAppSelector(GET_BUSINESS);
 
-  const defaultProps = {
+  const defaultProps =  {
     options: businessData,
     getOptionLabel: (option: any) => option.vLocation,
   };
+
   const flatProps = {
     options: businessData.map((option: { vLocation: any }) => option.vLocation),
   };
@@ -417,11 +419,11 @@ export const UserAppBar = (props: any) => {
   };
 
 
-
-
   return (
     <>
+      <ScrollToTop />
       <AppBar
+
         color="default"
         elevation={0}
         sx={{
@@ -430,7 +432,7 @@ export const UserAppBar = (props: any) => {
           position: "relative ",
         }}
         className={`${props.display ? props.display : sticky ? "" : "non-sticky"
-          } `}
+          } ${!isMobile ? '!pt-4' : ''} `}
 
       // style={{ position: props.display && 'fixed' }}
       >
@@ -594,7 +596,7 @@ export const UserAppBar = (props: any) => {
               <Logo variant="dark" />
             </Box>
           ) : (
-            <SearchField  />
+            <SearchField />
           )}
 
           {/* < ------------------- location input field ---------------------> */}
@@ -979,6 +981,7 @@ export const UserAppBar = (props: any) => {
                           onClick={handleBanner}
                         >
                           {item?.vName}
+
                         </Link>
                       </ListItem>
                     ) : index === 1 ? (
@@ -999,8 +1002,44 @@ export const UserAppBar = (props: any) => {
                           {item?.vName}
                         </Link>
                       </ListItem>
+                    ) : index === 3 ? (
+                      <ListItem key={index}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
+                          {item?.vName}
+                        </Link>
+                      </ListItem>
+                    ) : index === 4 ? (
+                      <ListItem key={index}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
+                          {item?.vName}
+                        </Link>
+                      </ListItem>
+                    ) : index === 5 ? (
+                      <ListItem key={index}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
+                          {item?.vName}
+                        </Link>
+                      </ListItem>
+                    ) : index === 6 ? (
+                      <ListItem key={index}>
+                        <Link
+                          href={`/category/${item?.iCategoryId}`}
+                          onClick={handleBanner}
+                        >
+                          {item?.vName}
+                        </Link>
+                      </ListItem>
                     ) : (
-                      index === 3 && (
+                      index === 7 && (
                         <ListItem>
                           <Link href={`/category/all`} onClick={handleBanner}>
                             {"More"}
@@ -1103,7 +1142,7 @@ export const UserAppBar = (props: any) => {
                     },
                   }}
                 >
-                  
+
                   <List className="">
                     {menuList.map((item, index) => (
                       <Link
@@ -1123,9 +1162,9 @@ export const UserAppBar = (props: any) => {
                           disablePadding
                           className={`${props.menu == item.title ? "bg-[#c9c8c8]" : ""
                             } px-8 py-1`}
-                            >
-                        
-                          <ListItemButton  
+                        >
+
+                          <ListItemButton
                             onClick={() => {
                               props.handleActive(item?.title);
                             }}

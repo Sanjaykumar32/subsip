@@ -291,8 +291,8 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       toast.success("Listing Updated Successfully");
       navigate(`/admin/listing`)
     } else {
-      toast.success("Listing Created Successfully");
       const res = await dispatch(AdminThunk.createListing(form));
+      toast.success("Listing Created Successfully");
       navigate(`/admin/listing`)
       // navigate(AdminRoutePathEnum.ADMIN_LISTING);
     }
