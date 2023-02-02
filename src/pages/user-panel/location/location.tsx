@@ -33,8 +33,8 @@ export function LocationPage() {
   const refferralCode = useAppSelector(GET_REFFERRAL_CODE);
   const locations = useLocation();
   const dispatch = useAppDispatch();
-  const businessId = locations.pathname.split("/")[2];
-  const [name, setName] = useState('')
+  const businessName = locations.pathname.split("/")[2];
+  const [name, setName] = useState("");
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleClickOpen = async (el: any) => {
@@ -46,7 +46,7 @@ export function LocationPage() {
       console.log(error);
     }
     setOpen(true);
-    setName(el)
+    setName(el);
   };
 
   const allsubscriberOfBussinesss = useCallback(async () => {
@@ -54,28 +54,31 @@ export function LocationPage() {
       await dispatch(
         AdminThunk.allSubscriberOfBussiness({
           userId: userId ? parseInt(userId) : 0,
-          businessId: businessId ? parseInt(businessId) : 0,
+          businessId: businessName ? parseInt(businessName) : 0,
         })
       );
     } catch (error) {
       console.log(error);
     }
-  }, [businessId, dispatch, userId]);
+  }, [businessName, dispatch, userId]);
 
   useEffect(() => {
     allsubscriberOfBussinesss();
   }, [allsubscriberOfBussinesss]);
 
+  console.log(businessName, "businessId");
+
   async function getDatalist() {
-    if (businessId) {
-      await dispatch(UserThunk.business({ businessId: Number(businessId) }));
+    if (businessName) {
+      await dispatch(
+        UserThunk.business({ businessName: businessName.replace(/-/g, " ") })
+      );
     }
   }
 
   useEffect(() => {
     getDatalist();
-  }, [businessId, locations]);
-
+  }, [businessName, locations]);
 
   const handleClose = () => {
     setOpen(false);
@@ -87,7 +90,7 @@ export function LocationPage() {
 
   return (
     <Container maxWidth="lg" sx={{ my: 5 }}>
-      {!isMobile &&
+      {!isMobile && (
         <>
           {bussinessByName.map((res: IBusiness, index: number) => (
             <div key={index}>
@@ -123,16 +126,17 @@ export function LocationPage() {
                         justifyContent: "flex-end",
                         paddingBottom: "10px",
                       }}
-
                     >
-                      <Typography variant="body1" fontWeight={600} sx={{ mr: 2 }}
+                      <Typography
+                        variant="body1"
+                        fontWeight={600}
+                        sx={{ mr: 2 }}
                         onClick={() => handleClickOpen(res?.vName)}
-                        className=' cursor-pointer'
+                        className=" cursor-pointer"
                       >
                         <FontAwesomeIcon
                           icon={faArrowUpRightFromSquare}
                           style={{ marginRight: 4 }}
-
                         />
                         Referral
                       </Typography>
@@ -153,13 +157,13 @@ export function LocationPage() {
               )}
             </div>
           ))}
-        </>}
+        </>
+      )}
 
-      {isMobile &&
+      {isMobile && (
         <>
           {bussinessByName.map((res: IBusiness, index: number) => (
             <div key={index}>
-
               <div className="flex justify-between">
                 <div>
                   <Title>{res?.vName}</Title>
@@ -174,16 +178,17 @@ export function LocationPage() {
                       justifyContent: "flex-end",
                       paddingBottom: "10px",
                     }}
-
                   >
-                    <Typography variant="body1" fontWeight={600} sx={{ mr: 1 }}
+                    <Typography
+                      variant="body1"
+                      fontWeight={600}
+                      sx={{ mr: 1 }}
                       onClick={() => handleClickOpen(res?.vName)}
-                      className=' cursor-pointer flex align-center items-center'
+                      className=" cursor-pointer flex align-center items-center"
                     >
                       <FontAwesomeIcon
                         icon={faArrowUpRightFromSquare}
                         style={{ marginRight: 4 }}
-
                       />
                       Referral
                     </Typography>
@@ -193,7 +198,7 @@ export function LocationPage() {
               <Info>{res?.tDescription}</Info>
 
               <Grid container spacing={2}>
-                <Grid item sm={12} md={8} className='w-full '>
+                <Grid item sm={12} md={8} className="w-full ">
                   {/* {bussinessByName.map((res: IBusiness, index: number) => ( */}
                   <Card sx={{ width: "100%", maxHeight: "500px" }}>
                     <img
@@ -208,9 +213,7 @@ export function LocationPage() {
                     />
                   </Card>
 
-                  <Grid item sm={12} md={4} >
-
-
+                  <Grid item sm={12} md={4}>
                     {bussinessByName.map((res: IBusiness, index: number) => {
                       return <Location {...res} key={index} />;
                     })}
@@ -218,12 +221,8 @@ export function LocationPage() {
                     <span className="text-[14px] py-[10px] flex font-[400] text-[#252525]">
                       {res?.vBodyDescription}
                     </span>
-
                   </Grid>
-
                 </Grid>
-
-
               </Grid>
               {open && (
                 <ResponsiveDialog
@@ -235,8 +234,8 @@ export function LocationPage() {
               )}
             </div>
           ))}
-        </>}
-
+        </>
+      )}
     </Container>
   );
 }

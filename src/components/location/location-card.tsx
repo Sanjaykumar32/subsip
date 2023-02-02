@@ -68,37 +68,35 @@ export const Subscribe = ({
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
   const [showButton, setButton] = useState<boolean>(false);
   const bussinessByName = useAppSelector(GET_BUSINESS);
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"))
-
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   // console.log(bussinessByName, 'bussinessByName')
 
   useEffect(() => {
-
     console.log(isSubscribed, "isSubscribed");
 
-    const getdata = isSubscribed.filter((item: any) => item?.iAdminId == userId)[0]
+    const getdata = isSubscribed.filter(
+      (item: any) => item?.iAdminId == userId
+    )[0];
 
-    console.log(getdata, 'getdata')
+    console.log(getdata, "getdata");
 
     if (getdata === undefined) {
-      setButton(true)
+      setButton(true);
       console.log(true, "isSubscribed");
     } else {
-      setButton(false)
+      setButton(false);
       console.log(false, "isSubscribed");
     }
-
   }, [isSubscribed]);
 
-
   async function getDatalist() {
-    if (businessId) {
-      await dispatch(UserThunk.business({ businessId: Number(businessId) }));
+    if (businessName) {
+      await dispatch(
+        UserThunk.business({ businessName: businessName.replace(/-/g, " ") })
+      );
     }
   }
-
-
 
   const allsubscriberOfBussinesss = useCallback(async () => {
     try {
@@ -117,8 +115,6 @@ export const Subscribe = ({
     allsubscriberOfBussinesss();
   }, [allsubscriberOfBussinesss]);
 
-
-
   async function onButtonClick(): Promise<void> {
     localStorage.setItem("referralcode", referralcode ? referralcode : "");
     localStorage.setItem("businessId", businessId ? businessId : "");
@@ -132,7 +128,7 @@ export const Subscribe = ({
           })
         );
         allsubscriberOfBussinesss();
-        getDatalist()
+        getDatalist();
         navigate("");
         toast.success("Subscribed Successfully");
       } catch (error) {
@@ -152,14 +148,17 @@ export const Subscribe = ({
     );
     // setButton(false);
     allsubscriberOfBussinesss();
-    getDatalist()
+    getDatalist();
     toast.success("Unsubscribed Successfully");
   };
 
-
   return (
-    <div className={`${isMobile ? 'flex justify-between h-[70px]  items-center' : ''}`}>
-      <Box sx={{ my: 3 }} >
+    <div
+      className={`${
+        isMobile ? "flex justify-between h-[70px]  items-center" : ""
+      }`}
+    >
+      <Box sx={{ my: 3 }}>
         <Typography
           variant="subtitle1"
           color={color || theme.palette.grey[600]}
@@ -240,37 +239,34 @@ export function Location({
         flexDirection: "column",
         justifyContent: "space-between",
       }}
-
       className=" md:h-[83%] h-full "
-
-
     >
       <Box sx={{ p: 2, fontSize: theme.typography.h5.fontSize }}>
-        {!isMobile &&
-        <>
-        <Box sx={{ display: "flex" }}>
-          <span style={{ fontFamily: "Bree Serif" }}> PoshSub </span>
-          <Divider
-            color="info"
-            sx={{ m: 1 }}
-            variant="middle"
-            orientation="vertical"
-            flexItem
-          />
-          <span
-            style={{
-              color: "#09292b",
-              fontFamily: "Josefin Slab",
-            }}
-          >
-            REWARDS
-          </span>
-        </Box>
-        <Title>{vName}</Title>
-        <Address>{vLocation}</Address>
-        <Info>{vPreview}</Info>
-        </>
-          }
+        {!isMobile && (
+          <>
+            <Box sx={{ display: "flex" }}>
+              <span style={{ fontFamily: "Bree Serif" }}> PoshSub </span>
+              <Divider
+                color="info"
+                sx={{ m: 1 }}
+                variant="middle"
+                orientation="vertical"
+                flexItem
+              />
+              <span
+                style={{
+                  color: "#09292b",
+                  fontFamily: "Josefin Slab",
+                }}
+              >
+                REWARDS
+              </span>
+            </Box>
+            <Title>{vName}</Title>
+            <Address>{vLocation}</Address>
+            <Info>{vPreview}</Info>
+          </>
+        )}
 
         <Subscribe subsctibers={subscriberCount} auth={auth} />
       </Box>
