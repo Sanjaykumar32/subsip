@@ -20,14 +20,10 @@ const ListBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-
-
 export function Links() {
-
-
   const scrollToTop = () => {
-    window.scrollTo(0, 0)
-  }
+    window.scrollTo(0, 0);
+  };
 
   const links = useMemo(
     () => [
@@ -85,22 +81,31 @@ export function Links() {
                   {data.title}
                 </Typography>
                 {data?.subTitle.map((subData) => (
-                  <li onClick={scrollToTop} key={`Sub-Links-${subData.title}-${index}}`}>
-                    <Link
-                      href={subData.link}
-
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: "17px",
-                          color: "#fff",
-                          mt: 1,
-                          whiteSpace: "nowrap",
-                        }}
+                  <li
+                    onClick={scrollToTop}
+                    key={`Sub-Links-${subData.title}-${index}}`}
+                  >
+                    {subData.title === "Contact Us" ? (
+                      <a
+                        href={`mailto: Subsipinc@gmail.com?subject= Request to remove a existing advertise`}
+                        className="py-[20px] cursor-pointer"
                       >
                         {subData.title}
-                      </Typography>
-                    </Link>
+                      </a>
+                    ) : (
+                      <Link href={subData.link}>
+                        <Typography
+                          sx={{
+                            fontSize: "17px",
+                            color: "#fff",
+                            mt: 1,
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {subData.title}
+                        </Typography>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ListBox>

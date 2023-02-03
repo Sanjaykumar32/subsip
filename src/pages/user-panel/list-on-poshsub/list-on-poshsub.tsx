@@ -32,13 +32,13 @@ interface ListFormItem {
 }
 
 export function ListingOnPoshSub() {
-  const [name  , setBusinessName] = useState('')
-  const [tagline , setTagline ] = useState('')
-  const [email , setEmail] = useState('')
-  const [businessCategory , setBusinessCategory] = useState('')
-  const [businessLocation , setBusinessLocation] = useState('')
-  const [ aboutLine , setAboutLine] = useState('')
-  const [subCategory , setSubCategory] = useState('')
+  const [name, setBusinessName] = useState("");
+  const [tagline, setTagline] = useState("");
+  const [email, setEmail] = useState("");
+  const [businessCategory, setBusinessCategory] = useState("");
+  const [businessLocation, setBusinessLocation] = useState("");
+  const [aboutLine, setAboutLine] = useState("");
+  const [subCategory, setSubCategory] = useState("");
   const theme = useTheme();
   const [
     step1,
@@ -114,140 +114,124 @@ export function ListingOnPoshSub() {
   const ref = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
-    console.log(name ,'name')
-    console.log(tagline ,'tagline')
-    console.log(email ,'email')
-    console.log(businessCategory ,'businessCategory')
-    console.log(businessLocation ,'businessLocation')
-    console.log(aboutLine ,'aboutLine')
-    console.log(subCategory ,'subCategory')
-  }
+    console.log(name, "name");
+    console.log(tagline, "tagline");
+    console.log(email, "email");
+    console.log(businessCategory, "businessCategory");
+    console.log(businessLocation, "businessLocation");
+    console.log(aboutLine, "aboutLine");
+    console.log(subCategory, "subCategory");
+  };
 
   return (
     <Container maxWidth="md" disableGutters sx={{ p: 4 }}>
       <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
         <Typography variant="alternet" sx={{ ml: { xs: 0, md: 3 } }}>
-        Advertise on Subsip
+          Advertise on Subsip
         </Typography>
       </Box>
-  
-      <Form
-          onSubmit={handleSubmit}
-        >
-      <FormControl fullWidth size="small">
-        <Grid container>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ px: 3, py: 1 }}>
-              <Box sx={{ my: 4 }}>
-                <Label> {step1.label} </Label>
-                <Typography variant="body2"> {step1.caption} </Typography>
-                <TextField
-                  size="small"
-                  value={name}
-                  onChange={(event) => setBusinessName(event.target.value)}
-                  // required
-                  fullWidth
-                />
-              </Box>
-              <Box sx={{ my: 4 }}>
-                <Label> {step3.label} </Label>
-                <Typography variant="body2"> {step3.caption} </Typography>
-                <TextField
-                  size="small"
-                  value={tagline}
-                  onChange={(event) => setTagline(event.target.value)}
-                  // required
-                  fullWidth
-                />
-              </Box>
-              <Box sx={{ my: 4 }}>
-                <Label> {step5.label} </Label>
-              
-                <Typography variant="body2"> {step5.caption} </Typography>
-                <TextField
-                  size="small"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  // required
-                  fullWidth
-                />
-              </Box>
-              <Box sx={{ my: 4 }}>
-                <Label id={`${step7.id}-label`}> {step7.label} </Label>
-                <Typography variant="body2"> {step7.caption} </Typography>
-                <TextField
-                  size="small"
-                  value={businessCategory}
-                  onChange={(event) => setBusinessCategory(event.target.value)}
-                  // required
-                  fullWidth
-                />
-              </Box>
-             
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ px: 3, py: 1 }}>
-            <Box sx={{ my: 4 }}>
-                <Label id={`${step9.id}-label`}> {step9.label} </Label>
-                <Typography variant="body2"> {step9.caption} </Typography>
-               
-                 <TextField
-                  size="small"
-                  value={businessLocation}
-                  onChange={(event) => setBusinessLocation(event.target.value)}
-                  // required
-                  fullWidth
-                />
-              </Box>
-              <Box sx={{ my: 4 }}>
-                <Label> {step4.label} </Label>
-                <Typography variant="body2"> {step4.caption} </Typography>
-                <TextField
-                  multiline
-                  minRows={5}
-                  value={aboutLine}
-                  onChange={(event) => setAboutLine(event.target.value)}
-                  // required
-                  fullWidth
-                />
-              </Box>
-        
-              <Box sx={{ my: 4 }}>
-                <Label> {step8.label} </Label>
-                <Typography variant="body2"> {step8.caption} </Typography>
-                <TextField
-                  value={subCategory}
-                  onChange={(event) => setSubCategory(event.target.value)}
-                  // required
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <IconButton>
-                        <FontAwesomeIcon icon={faLocationDot} size="xs" />
-                      </IconButton>
-                    ),
-                  }}
-                />
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
-      </FormControl>
 
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          mt: 3,
-        }}
-      >
-        <Button variant="rounded"  type='submit'>Advertise</Button>
-        <Link sx={{ mt: 4 }}> Request to remove a existing listing </Link>
-      </Box>
+      <Form onSubmit={handleSubmit}>
+        <FormControl fullWidth size="small">
+          <Grid container>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ px: 3, py: 1 }}>
+                <Box sx={{ my: 4 }}>
+                  <Label> {step1.label} </Label>
+                  <Typography variant="body2"> {step1.caption} </Typography>
+                  <TextField
+                    size="small"
+                    value={name}
+                    onChange={(event) => setBusinessName(event.target.value)}
+                    // required
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label> {step5.label} </Label>
+
+                  <Typography variant="body2"> {step5.caption} </Typography>
+                  <TextField
+                    size="small"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    // required
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label id={`${step7.id}-label`}> {step7.label} </Label>
+                  <Typography variant="body2"> {step7.caption} </Typography>
+                  <TextField
+                    size="small"
+                    value={businessCategory}
+                    onChange={(event) =>
+                      setBusinessCategory(event.target.value)
+                    }
+                    // required
+                    fullWidth
+                  />
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ px: 3, py: 1 }}>
+                <Box sx={{ my: 4 }}>
+                  <Label id={`${step9.id}-label`}> {step9.label} </Label>
+                  <Typography variant="body2"> {step9.caption} </Typography>
+
+                  <TextField
+                    size="small"
+                    value={businessLocation}
+                    onChange={(event) =>
+                      setBusinessLocation(event.target.value)
+                    }
+                    // required
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ my: 4 }}>
+                  <Label> {step8.label} </Label>
+                  <Typography variant="body2"> {step8.caption} </Typography>
+                  <TextField
+                    value={subCategory}
+                    onChange={(event) => setSubCategory(event.target.value)}
+                    // required
+                    fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton>
+                          <FontAwesomeIcon icon={faLocationDot} size="xs" />
+                        </IconButton>
+                      ),
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </FormControl>
+
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            mt: 3,
+          }}
+        >
+          <Button variant="rounded" type="submit">
+            Advertise
+          </Button>
+          <a
+            href={`mailto: Subsipinc@gmail.com?subject= Request to remove a existing advertise`}
+            className="py-[10px] cursor-pointer"
+          >
+            Request to remove a existing advertise
+          </a>
+        </Box>
       </Form>
     </Container>
   );

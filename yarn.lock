@@ -3980,7 +3980,7 @@
   "version" "3.6.1"
 
 "ci-info@^3.6.1":
-  "version" "3.6.1"
+  "version" "3.7.0"
 
 "cidr-regex@^3.1.1":
   "integrity" "sha512-RBqYd32aDwbCMFJRL6wHOlDNYJsPNTt8vC82ErHF5vKt8QQzxm1FrkW8s/R5pVrXMf17sba09Uoy91PKiddAsw=="

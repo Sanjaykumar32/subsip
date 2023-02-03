@@ -28,8 +28,8 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import ListIcon from "@mui/icons-material/List";
 import toast from "react-hot-toast";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import AccountTreeTwoToneIcon from "@mui/icons-material/AccountTreeTwoTone";
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
@@ -126,10 +126,10 @@ export function ClickOnCategory() {
           pathName == "category"
             ? pathSerchValue.toString()?.replaceAll(/\s/g, "")?.toLowerCase()
             : location.search
-              .toString()
-              .slice(1, 19)
-              ?.replaceAll(/\s/g, "")
-              .toLowerCase()
+                .toString()
+                .slice(1, 19)
+                ?.replaceAll(/\s/g, "")
+                .toLowerCase()
         );
     }
   );
@@ -169,8 +169,6 @@ export function ClickOnCategory() {
     // !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
     // console.log('this is btn stb')
 
-
-
     try {
       await dispatch(
         UserThunk.addSubscriberToBusiness({
@@ -197,13 +195,15 @@ export function ClickOnCategory() {
     toast.success("Unsubscribed  Successfully");
   };
 
-  async function onImageClick(id: any): Promise<void> {
+  async function onImageClick(item: any): Promise<void> {
     try {
       const response: any = await dispatch(
-        UserThunk.business({ businessId: id })
+        UserThunk.business({ businessId: item.iBusinessId })
       );
       if (response.payload.data.length > 0) {
-        navigate(`/listing/${id}`);
+        navigate(`/listing/${item.vName.replace(/\s+/g, "-")}`, {
+          state: { businessId: item.iBusinessId },
+        });
       } else {
         console.log("nodata");
       }
@@ -253,10 +253,11 @@ export function ClickOnCategory() {
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
                               id="panel1a-header"
-                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
-                                ? " activeCate"
-                                : ""
-                                }  `}
+                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
+                                activeCate === item?.iCategoryId
+                                  ? " activeCate"
+                                  : ""
+                              }  `}
                               onClick={() => {
                                 handleList(item?.iCategoryId),
                                   handleSubList(null);
@@ -285,12 +286,13 @@ export function ClickOnCategory() {
                                       >
                                         <Typography
                                           onClick={toggleDrawerClose}
-                                          className='text-[#252525] !py-[10px] hover:bg-[#c9c8c8]'
+                                          className="text-[#252525] !py-[10px] hover:bg-[#c9c8c8]"
                                           key={i}
                                         >
-
                                           <div className="flex items-center gap-1">
-                                            <span  className="pl-1 "><AccountTreeTwoToneIcon className="!h-[20px] !w-[20px]"/></span>
+                                            <span className="pl-1 ">
+                                              <AccountTreeTwoToneIcon className="!h-[20px] !w-[20px]" />
+                                            </span>
                                             <span> {res.vName}</span>
                                           </div>
                                         </Typography>
@@ -338,10 +340,11 @@ export function ClickOnCategory() {
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id={item.vName}
-                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
-                            ? " activeCate"
-                            : ""
-                            }  `}
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
+                            activeCate === item?.iCategoryId
+                              ? " activeCate"
+                              : ""
+                          }  `}
                           onClick={() => {
                             handleSubList(null);
                             setActiveCate(item?.iCategoryId);
@@ -367,11 +370,13 @@ export function ClickOnCategory() {
                                   }
                                 >
                                   <Typography
-                                    className='text-[#252525] !py-[10px] hover:bg-[#c9c8c8]'
+                                    className="text-[#252525] !py-[10px] hover:bg-[#c9c8c8]"
                                     key={i}
                                   >
                                     <div className="flex items-center gap-1">
-                                      <span className="pl-1"><AccountTreeTwoToneIcon  className="!h-[20px] !w-[20px]"/></span>
+                                      <span className="pl-1">
+                                        <AccountTreeTwoToneIcon className="!h-[20px] !w-[20px]" />
+                                      </span>
                                       <span> {res.vName}</span>
                                     </div>
                                   </Typography>
@@ -470,11 +475,11 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
-                listFilter.filter((el) =>
-                  subcatIdss
-                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
-                    : el.iCategory === ids
-                ).length > 0 ? (
+              listFilter.filter((el) =>
+                subcatIdss
+                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                  : el.iCategory === ids
+              ).length > 0 ? (
                 listFilter
                   .filter((el) =>
                     subcatIdss
@@ -500,9 +505,9 @@ export function ClickOnCategory() {
                                   ? "http://159.223.194.50:8000/" + data.vImage
                                   : ""
                               }
-                              className='cursor-pointer'
+                              className="cursor-pointer"
                               onClick={() => {
-                                onImageClick(data?.iBusinessId);
+                                onImageClick(data);
                                 // auth?.isAuthenticated
                                 //   ? navigate(`/listing/${data?.iBusinessId}`)
                                 //   : navigate(AuthRoutePathEnum.SIGN_IN);
@@ -517,7 +522,7 @@ export function ClickOnCategory() {
                             >
                               <Typography
                                 onClick={() => {
-                                  onImageClick(data?.iBusinessId);
+                                  onImageClick(data);
                                 }}
                                 variant="body1"
                                 fontWeight={600}
@@ -568,12 +573,12 @@ export function ClickOnCategory() {
                                 <div className="raletive">
                                   <>
                                     {data?.subscriberIds &&
-                                      data?.subscriberIds
-                                        .split("")
-                                        .filter((el: any) => {
-                                          return el == userId;
-                                        })[0] &&
-                                      auth?.isAuthenticated ? (
+                                    data?.subscriberIds
+                                      .split("")
+                                      .filter((el: any) => {
+                                        return el == userId;
+                                      })[0] &&
+                                    auth?.isAuthenticated ? (
                                       <div
                                         className="subscribeLebalListing bg-[#e0e0e0] cursor-pointer"
                                         onClick={() =>
@@ -591,7 +596,9 @@ export function ClickOnCategory() {
                                         onClick={() => {
                                           auth?.isAuthenticated
                                             ? SubcribeBtn(data?.iBusinessId)
-                                            : navigate(AuthRoutePathEnum.SIGN_IN)
+                                            : navigate(
+                                                AuthRoutePathEnum.SIGN_IN
+                                              );
                                         }}
                                       >
                                         <span className=" text-white ">
@@ -631,7 +638,7 @@ export function ClickOnCategory() {
             </Grid>
           </Box>
         </Grid>
-      </Grid >
-    </Container >
+      </Grid>
+    </Container>
   );
 }
