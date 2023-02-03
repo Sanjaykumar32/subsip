@@ -53,10 +53,12 @@ export const Subscribe = ({
   subsctibers,
   color,
   auth,
+  businessId,
 }: {
   subsctibers: number;
   color?: string;
   auth?: IAuthContext;
+  businessId: any
 }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -64,13 +66,14 @@ export const Subscribe = ({
   const location = useParams();
   const [searchParams] = useSearchParams();
   const referralcode = searchParams.get("referralCode");
-  const businessId = location.id;
+ 
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
   const [showButton, setButton] = useState<boolean>(false);
   const bussinessByName = useAppSelector(GET_BUSINESS);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  // console.log(bussinessByName, 'bussinessByName')
+
+  console.log(businessId, 'businessId')
 
   useEffect(() => {
     console.log(isSubscribed, "isSubscribed");
@@ -91,11 +94,11 @@ export const Subscribe = ({
   }, [isSubscribed]);
 
   async function getDatalist() {
-    if (businessName) {
-      await dispatch(
-        UserThunk.business({ businessName: businessName.replace(/-/g, " ") })
-      );
-    }
+    // if (businessName) {
+    //   await dispatch(
+    //     UserThunk.business({ businessName: businessName.replace(/-/g, " ") })
+    //   );
+    // }
   }
 
   const allsubscriberOfBussinesss = useCallback(async () => {
@@ -103,7 +106,7 @@ export const Subscribe = ({
       await dispatch(
         AdminThunk.allSubscriberOfBussiness({
           userId: userId ? parseInt(userId) : 0,
-          businessId: businessId ? parseInt(businessId) : 0,
+          businessId: businessId ? businessId : 0,
         })
       );
     } catch (error) {
@@ -122,7 +125,7 @@ export const Subscribe = ({
       try {
         const response = await dispatch(
           UserThunk.addSubscriberToBusiness({
-            businessId: businessId ? parseInt(businessId) : 0,
+            businessId: businessId ? businessId : 0,
             userId: userId ? parseInt(userId) : "",
             referredCode: referralcode,
           })
@@ -225,6 +228,7 @@ export function Location({
   subscriberCount,
   vTagLine,
   vPreview,
+  iBusinessId,
 }: IBusiness) {
   const auth = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -268,7 +272,7 @@ export function Location({
           </>
         )}
 
-        <Subscribe subsctibers={subscriberCount} auth={auth} />
+        <Subscribe subsctibers={subscriberCount} auth={auth} businessId={iBusinessId}/>
       </Box>
 
       <CardFooter vTagLine={vTagLine} />

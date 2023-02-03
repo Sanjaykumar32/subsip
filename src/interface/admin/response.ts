@@ -35,7 +35,7 @@ export interface IBussinessResponse {
 
 export interface IBusiness {
   subscriberIds: any;
-  iBusinessId: number;
+  iBusinessId: any;
   vName: string;
   vTagLine: string;
   dLatitude: number;

@@ -48,37 +48,39 @@ export function LocationPage() {
     setOpen(true);
     setName(el);
   };
+  const businessId = bussinessByName?.[0]?.iBusinessId
 
   const allsubscriberOfBussinesss = useCallback(async () => {
     try {
       await dispatch(
         AdminThunk.allSubscriberOfBussiness({
           userId: userId ? parseInt(userId) : 0,
-          businessId: businessName ? parseInt(businessName) : 0,
+          businessId: businessId ? businessId  : 0,
         })
       );
     } catch (error) {
       console.log(error);
     }
-  }, [businessName, dispatch, userId]);
+  }, [businessId, dispatch, userId]);
 
   useEffect(() => {
     allsubscriberOfBussinesss();
   }, [allsubscriberOfBussinesss]);
 
-  console.log(businessName, "businessId");
+
+ const businessIds = locations?.state?.businessId 
 
   async function getDatalist() {
-    if (businessName) {
+    if (businessIds) {
       await dispatch(
-        UserThunk.business({ businessName: businessName.replace(/-/g, " ") })
+        UserThunk.business({ businessId: parseInt(businessIds)})
       );
     }
   }
 
   useEffect(() => {
     getDatalist();
-  }, [businessName, locations]);
+  }, [businessIds, locations]);
 
   const handleClose = () => {
     setOpen(false);

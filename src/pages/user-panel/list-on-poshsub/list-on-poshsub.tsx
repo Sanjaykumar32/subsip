@@ -53,7 +53,7 @@ export function ListingOnPoshSub() {
   ]: ListFormItem[] = [
     {
       id: "q1",
-      label: "What is your buisness called?",
+      label: "Name",
       type: InputTypeEnum.INPUT,
       required: true,
     },
@@ -81,7 +81,7 @@ export function ListingOnPoshSub() {
     },
     {
       id: "q5",
-      label: "Support Email?",
+      label: "Email",
       type: InputTypeEnum.INPUT,
       required: true,
     },
@@ -93,7 +93,7 @@ export function ListingOnPoshSub() {
     },
     {
       id: "q7",
-      label: "Pick a Buisness Category",
+      label: "Business Name",
       type: InputTypeEnum.SELECT,
       required: true,
     },
@@ -127,7 +127,7 @@ export function ListingOnPoshSub() {
     <Container maxWidth="md" disableGutters sx={{ p: 4 }}>
       <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
         <Typography variant="alternet" sx={{ ml: { xs: 0, md: 3 } }}>
-          List your business on PoshSub
+        Advertise on Subsip
         </Typography>
       </Box>
   
@@ -245,7 +245,7 @@ export function ListingOnPoshSub() {
           mt: 3,
         }}
       >
-        <Button variant="rounded"  type='submit'> Submit for Approval </Button>
+        <Button variant="rounded"  type='submit'>Advertise</Button>
         <Link sx={{ mt: 4 }}> Request to remove a existing listing </Link>
       </Box>
       </Form>

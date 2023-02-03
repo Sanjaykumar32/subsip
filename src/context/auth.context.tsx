@@ -80,7 +80,7 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
       localStorage.setItem("userId", response.data.userId);
       localStorage.setItem("iGroupId", response.data.iGroupId);
       setAuthenticated(true);
-      toast.success("You have successfully logged in !");
+      toast.success("You have successfully logged in!");
     } catch (error) {
       console.log(error);
     }

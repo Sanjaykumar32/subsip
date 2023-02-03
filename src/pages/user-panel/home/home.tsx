@@ -152,8 +152,8 @@ export function Home({ alertOnBottom }: any) {
   }, [bannerList]);
 
   const businessData = useAppSelector(GET_BUSINESS);
-  console.log(bannerData, "bannerData");
-  console.log(businessData, "businessData");
+  // console.log(bannerData, "bannerData");
+  // console.log(businessData, "businessData");
 
   const banner = businessData?.filter((el: any) =>
     bannerData.map((item) => item.iBusinessId)?.includes(el?.iBusinessId)
@@ -179,9 +179,11 @@ export function Home({ alertOnBottom }: any) {
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
+  const moreData = categoryData.map((item : any)=> item?.vName)
 
-  // console.log(CateFirst, 'CateFirst')
-  // console.log(categoryData, 'categoryData')
+  console.log( CateFirst[3], 'CateFirst')
+  console.log(moreData[3], 'moreData[3]')
+  console.log(scroll , 'scroll');
   const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
@@ -217,13 +219,15 @@ export function Home({ alertOnBottom }: any) {
   };
   const locatiosn = useLocation();
 
-  async function onImageClick(name: string): Promise<void> {
+  async function onImageClick(name: string , id:any): Promise<void> {
     try {
       const response: any = await dispatch(
         UserThunk.business({ businessName: name })
       );
       if (response.payload.data.length > 0) {
-        navigate(`/listing/${name.replace(/\s+/g, "-")}`);
+        navigate(`/listing/${name.replace(/\s+/g, "-")}` , 
+        {state : {businessId : id}}
+        );
       } else {
         console.log("nodata");
       }
@@ -237,6 +241,8 @@ export function Home({ alertOnBottom }: any) {
   }, [alertOnBottom]);
 
   useBottomScrollListener(handleOnDocumentBottom);
+
+  console.log(banner , 'banner');
 
   return (
     <>
@@ -262,7 +268,7 @@ export function Home({ alertOnBottom }: any) {
                       <span
                         className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle"
                         onClick={() => {
-                          onImageClick(ele.vName);
+                          onImageClick(ele.vName , ele.iBusinessId);
                           // auth?.isAuthenticated
                           //   ? onImageClick(ele.iBusinessId)
                           //   : navigate(AuthRoutePathEnum.SIGN_IN);
@@ -310,7 +316,7 @@ export function Home({ alertOnBottom }: any) {
                               className="bg-[#e0e0e0] text-[#262626] text-[1rem] w-36 rounded-full  py-4 px-2 font-medium"
                               onClick={() => {
                                 auth?.isAuthenticated
-                                  ? onImageClick(ele.vName)
+                                  ? onImageClick(ele?.vName , ele?.iBusinessId)
                                   : navigate(AuthRoutePathEnum.SIGN_IN);
                               }}
                             >
@@ -333,7 +339,7 @@ export function Home({ alertOnBottom }: any) {
                               className="bg-[#ACCF02] text-[1rem] w-36 rounded-full  py-4 px-2 font-medium text-white"
                               onClick={() => {
                                 auth?.isAuthenticated
-                                  ? onImageClick(ele.vName)
+                                  ? onImageClick(ele?.vName , ele?.iBusinessId)
                                   : navigate(AuthRoutePathEnum.SIGN_IN);
                               }}
                             >
@@ -504,7 +510,7 @@ export function Home({ alertOnBottom }: any) {
               <p className="font-semibold text-[24px]  mt-5 mx-5">
                 {filterBanner?.filter(
                   (el) => parseInt(el.iCategory) == CateFirst[3]
-                ).length > 0 && "More"}
+                ).length > 0 && moreData[3]}
               </p>
               <div className="relative my-10 w-full">
                 <Slider ref={cardRef3} {...cardSettings}>
@@ -540,6 +546,12 @@ export function Home({ alertOnBottom }: any) {
                   (el) => parseInt(el.iCategory) == CateFirst[3]
                 ).length > 0 && <SliderArrow refVal={cardRef3} />}
               </div>
+               
+              <p className="font-semibold text-[24px]  mt-5 mx-5">
+                {filterBanner?.filter(
+                  (el) => parseInt(el.iCategory) == CateFirst[4]
+                ).length > 0 && moreData[4]}
+              </p>
 
               <div className="relative my-10 w-full">
                 <Slider ref={cardRef3} {...cardSettings}>
@@ -578,21 +590,7 @@ export function Home({ alertOnBottom }: any) {
             </>
           ) : null}
 
-          {/* {filterBanner.filter(
-          (el) => parseInt(el.iCategory) == CateFirst[2]
-        ) && (
-            <div className="moreBtn">
-              {showMoreData ? (
-                <Button variant="contained" onClick={handleLessData}>
-                  Less...
-                </Button>
-              ) : (
-                <Button variant="contained" onClick={handleMoreData}>
-                  Load More...
-                </Button>
-              )}
-            </div>
-          )} */}
+          
         </div>
       </div>
     </>
@@ -613,6 +611,7 @@ const SliderCard = (props: any) => {
       return el == userId;
     })[0];
 
+
   async function onImageClick(): Promise<void> {
     try {
       const response: any = await dispatch(
@@ -620,7 +619,9 @@ const SliderCard = (props: any) => {
       );
       if (response?.payload?.data?.length > 0) {
         console.log(name, "name");
-        navigate(`/listing/${name.replace(/\s+/g, "-")}`);
+        navigate(`/listing/${name.replace(/\s+/g, "-")}` , 
+           {state : {businessId : id}}
+        );
       } else {
         console.log("nodata");
       }

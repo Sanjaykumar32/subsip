@@ -16,6 +16,10 @@ import {
   useMediaQuery,
   useTheme,
   Typography,
+  InputAdornment,
+  FormControl,
+  InputLabel,
+  Input,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -406,7 +410,7 @@ export const UserAppBar = (props: any) => {
   const businessData = useAppSelector(GET_BUSINESS);
 
   const defaultProps =  {
-    options: businessData,
+    options:  searchLocation == '' ? [] : businessData ,
     getOptionLabel: (option: any) => option.vLocation,
   };
 
@@ -617,31 +621,16 @@ export const UserAppBar = (props: any) => {
                   Location
                 </Button>
               ) : (
-                // <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-                //   <InputLabel htmlFor="standard-adornment-password">
-                //     Search
-                //   </InputLabel>
-                //   <Input
-                //     id="standard-adornment-password"
-                //     type={"text"}
-                //     onChange={handleLocation}
-                //     endAdornment={
-                //       <InputAdornment position="end">
-                //         <IconButton
-                //           aria-label="toggle password visibility"
-                //         // onClick={handleClickShowPassword}
-                //         // onMouseDown={handleMouseDownPassword}
-                //         >
-                //           <Button onClick={handleLocationClose}>Cancel</Button>
-                //         </IconButton>
-                //       </InputAdornment>
-                //     }
-                //   />
-                // </FormControl>
-
                 <Stack spacing={1} sx={{ m: 1, width: "25ch" }}>
                   <Autocomplete
                     {...defaultProps}
+                    noOptionsText
+                    openOnFocus={true}
+                    onClose={(e)=>{
+                       if(e.cancelable == false){
+                        setLocationPopUP(false)
+                       }
+                    }}
                     id="disable-close-on-select"
                     //  onClick={disableCloseOnSelect}
                     onChange={(event, newValue: any) => {
@@ -654,6 +643,8 @@ export const UserAppBar = (props: any) => {
                         onChange={handleLocation}
                         label="Search"
                         variant="standard"
+                        
+                    
                       />
                     )}
                   />

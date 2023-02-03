@@ -15,6 +15,7 @@ import { GET_REFERRAL_COUNT } from "data/selectors/admin.selectors";
 import { useCallback, useEffect } from "react";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { theme } from "theme";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export default function ResponsiveDialog({
   title,
@@ -31,18 +32,18 @@ export default function ResponsiveDialog({
    * @return {void}
    */
   const appIdCopy = async (): Promise<void> => {
-    // navigator?.clipboard?.writeText(
-    //   `${hostName}/listing/${businessId}?referralCode=${refferralCode.referralCode}`
-    // );
-    // handleClose();
-    // toast.success("Copied Successfully");
-    try {
-      await navigator.clipboard.writeText(`${hostName}/listing/${businessId}?referralCode=${refferralCode?.referralCode}`);
-      handleClose();
-      toast.success("Copied Successfully");
-    } catch (e) {
-      console.log(e);
-    }
+    // new window.ClipboardEvent(`${hostName}/listing/${businessId}?referralCode=${refferralCode?.referralCode}`);
+    handleClose();
+    toast.success("Copied Successfully");
+    // try {
+    //   await navigator.clipboard.writeText(`${hostName}/listing/${businessId}?referralCode=${refferralCode?.referralCode}`);
+    //   handleClose();
+    //   toast.success("Copied Successfully");
+    // } catch (e) {
+    //   console.log(e);
+    // }
+
+
   };
 
   const dispatch = useAppDispatch();
@@ -104,7 +105,10 @@ export default function ResponsiveDialog({
               readOnly: true,
               endAdornment: (
                 <InputAdornment position="end" sx={{ cursor: "pointer" }}>
-                  <FontAwesomeIcon icon={faCopy} onClick={appIdCopy} className='text-[#ACCF02]' />
+                  <CopyToClipboard text={`${hostName}/listing/${businessId}?referralCode=${refferralCode?.referralCode}`}
+                    onCopy={appIdCopy}>
+                    <FontAwesomeIcon icon={faCopy} className='text-[#ACCF02]' />
+                  </CopyToClipboard>
                 </InputAdornment>
               ),
             }}
