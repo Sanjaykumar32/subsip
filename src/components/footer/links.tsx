@@ -1,5 +1,10 @@
 import React, { useMemo } from "react";
 import { Link, Grid, List, styled, Typography, Box } from "@mui/material";
+import AndroidIcon from '@mui/icons-material/Android';
+import AppleIcon from '@mui/icons-material/Apple';
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { theme } from "theme";
+
 
 const LinkBox = styled(Grid)(({ theme }) => ({
   display: "flex",
@@ -41,7 +46,7 @@ export function Links() {
         ],
       },
       {
-        title: "PoshSub",
+        title: "Subsip",
         subTitle: [
           {
             title: "About",
@@ -51,6 +56,10 @@ export function Links() {
             title: "Blog",
             link: "/referal",
           },
+          {
+            title: 'FAQs',
+            link:'/',
+          }
         ],
       },
       {
@@ -66,9 +75,24 @@ export function Links() {
           },
         ],
       },
+      {
+        title:'coming soon',
+        subTitle:[
+          {
+            title:'IOS',
+            link: "/",
+          },
+          {
+            title:'Android',
+            link: "/",
+          },
+        ]
+      }
     ],
     []
   );
+
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <LinkBox container spacing={4}>
@@ -86,12 +110,14 @@ export function Links() {
                     key={`Sub-Links-${subData.title}-${index}}`}
                   >
                     {subData.title === "Contact Us" ? (
+                    <Typography className="!mt-[8px]">
                       <a
-                        href={`mailto: Subsipinc@gmail.com?subject= Request to remove a existing advertise`}
-                        className="py-[20px] cursor-pointer"
+                        href={`mailto: Subsipinc@gmail.com?subject=  I have a question`}
+                        className="cursor-pointer"
                       >
                         {subData.title}
                       </a>
+                      </Typography>
                     ) : (
                       <Link href={subData.link}>
                         <Typography
@@ -101,7 +127,10 @@ export function Links() {
                             mt: 1,
                             whiteSpace: "nowrap",
                           }}
+                          className='flex justify-start align-center text-center'
                         >
+                          {subData.title == 'IOS' && <AppleIcon className='!h-[25px] !w-[25px] mr-1'/>}
+                          {subData.title == 'Android' && <AndroidIcon className='!h-[25px] !w-[25px] mr-1'/>}
                           {subData.title}
                         </Typography>
                       </Link>

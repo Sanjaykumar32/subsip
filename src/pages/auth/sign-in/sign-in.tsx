@@ -34,7 +34,7 @@ export function SignIn(): ReactElement {
           className='mx-5 '
         >
           <Typography fontWeight={500} variant="body1">
-            New to PoshSub?
+            New to Subsip?
           </Typography>
           <Link
             to={AuthRoutePathEnum.SIGN_UP}

@@ -89,7 +89,7 @@ export function ResponsiveAppBar() {
           textDecoration: "none",
         }}
       >
-        PoshSub
+        Subsip
       </Typography>
     ),
     []
@@ -137,7 +137,7 @@ export function ResponsiveAppBar() {
           }}
           onClick={(event) => setAnchorElMenu(event.target as HTMLElement)}
         >
-          PoshSub
+          Subsip
         </Typography>
       </Box>
     ),
@@ -271,7 +271,7 @@ export function ResponsiveAppBar() {
   const commonMenu = useMemo(
     () => [
       <Link key="listing-new" href={RoutePathEnum.LISTING_ADD}>
-        List on PoshSub
+        List on Subsip
       </Link>,
 
       <Divider

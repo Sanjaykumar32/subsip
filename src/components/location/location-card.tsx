@@ -249,7 +249,7 @@ export function Location({
         {!isMobile && (
           <>
             <Box sx={{ display: "flex" }}>
-              <span style={{ fontFamily: "Bree Serif" }}> PoshSub </span>
+              <span style={{ fontFamily: "Bree Serif" }}> Subsip </span>
               <Divider
                 color="info"
                 sx={{ m: 1 }}

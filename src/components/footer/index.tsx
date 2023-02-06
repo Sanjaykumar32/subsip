@@ -48,10 +48,10 @@ export function FooterMain() {
         <Container maxWidth="lg" disableGutters>
           <Grid container>
             {isMobile && (
-              <Grid item >
-                <Box>
+              <Grid item className="">
+                <Box className="">
                   <Logo />
-                  <Typography > Free certificates from businesses you love </Typography>
+                  <Typography className=""> Free certificates from businesses you love </Typography>
                 </Box>
               </Grid>
             )}
@@ -59,9 +59,10 @@ export function FooterMain() {
               {!isMobile && (
                 <Box sx={{ mb: 2 }}>
                   <Logo />
-                  <Typography className="pl-[10px]"> Free certificates from businesses you love  </Typography>
+                  <Typography className=""> Free certificates from businesses you love  </Typography>
                 </Box>
               )}
+            
               <SocialIcons />
             </Grid>
             <Grid item xs={12} md={8} order={{ xs: 1, md: 1 }}>
@@ -73,7 +74,7 @@ export function FooterMain() {
 
 
       {!isMobile ?
-        <div className="grid-cols-2  px-[118px] grid  py-[10px] bg-[#2C2E30]">
+        <div className="grid-cols-2  px-[118px] grid  pt-[10px] pb-10 bg-[#2C2E30]">
           <div className="flex justify-start">
             <p className="text-[#ffffff]">Copyright  2023. All rights reserved.</p>
           </div>

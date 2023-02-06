@@ -73,11 +73,14 @@ export function SignUp() {
         <Box sx={{ mt: 3 }}>
           <Typography variant="caption" fontWeight={500}>
             By clicking &quot;Create your account&quot;, you are creating a
-            PoshSub account and agree to PoshSub&apos;s
+            Subsip account and agree to Subsip&apos;s
           </Typography>
           <Typography variant="caption" fontWeight={800} >
             <span onClick={()=> navigate('/terms')} className=' cursor-pointer' > Terms  </span>
-            <span  onClick={()=> navigate('/privacy')} className=' cursor-pointer'> & Privacy Policy.</span>
+            <span  onClick={()=> navigate('/privacy')} className=' cursor-pointer'> & Privacy Policy.</span><br />
+          </Typography>
+          <Typography>
+            <span className="text-[12px] font-normal">Use your best email address because the rewards and certificates will be sent there</span>
           </Typography>
           <Box sx={{ mt: 2 }}>
             <Link

@@ -125,7 +125,7 @@ export function ListingOnPoshSub() {
 
   return (
     <Container maxWidth="md" disableGutters sx={{ p: 4 }}>
-      <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
+      <Box sx={{ textAlign: { xs: "center", md: "center" } }}>
         <Typography variant="alternet" sx={{ ml: { xs: 0, md: 3 } }}>
           Advertise on Subsip
         </Typography>
@@ -226,10 +226,10 @@ export function ListingOnPoshSub() {
             Advertise
           </Button>
           <a
-            href={`mailto: Subsipinc@gmail.com?subject= Request to remove a existing advertise`}
+            href={`mailto: Subsipinc@gmail.com?subject= Request to remove an existing business listing`}
             className="py-[10px] cursor-pointer"
           >
-            Request to remove a existing advertise
+           Request to remove an existing business listing
           </a>
         </Box>
       </Form>

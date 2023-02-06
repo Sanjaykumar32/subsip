@@ -215,9 +215,11 @@ export const UserAppBar = (props: any) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  
+ 
   const showLocationPopUp = () => {
     setLocationPopUP(true);
+  
   };
 
   const handlevalue = (el: any) => {
@@ -422,12 +424,17 @@ export const UserAppBar = (props: any) => {
     setOpen(false);
   };
 
+//  const handleLocationPopup = ()=> {
+//   setLocationPopUP(false)
+//  }
+
+
 
   return (
     <>
       <ScrollToTop />
       <AppBar
-
+        //  onClick={handleLocationPopup}
         color="default"
         elevation={0}
         sx={{
@@ -624,8 +631,10 @@ export const UserAppBar = (props: any) => {
                 <Stack spacing={1} sx={{ m: 1, width: "25ch" }}>
                   <Autocomplete
                     {...defaultProps}
-                    noOptionsText
-                    openOnFocus={true}
+                    selectOnFocus={true}
+                    noOptionsText={'Search'}
+                    autoSelect={true}
+                    
                     onClose={(e)=>{
                        if(e.cancelable == false){
                         setLocationPopUP(false)
@@ -637,14 +646,14 @@ export const UserAppBar = (props: any) => {
                       console.log(event, "event onchange");
                       handlevalue(newValue?.vLocation);
                     }}
+                    openOnFocus
                     renderInput={(params) => (
                       <TextField
                         {...params}
                         onChange={handleLocation}
                         label="Search"
                         variant="standard"
-                        
-                    
+                        // focused
                       />
                     )}
                   />

@@ -16,49 +16,52 @@ export const About = () => {
                 <span className="text-span-28"> certificates from</span>
 
                 <br />businesses you love on <br />
-                <span className="text-span-23 text-[#ffffff] relative "> PoshSub!
+                <span className="text-span-23 text-[#ffffff] relative "> Subsip
+                  Free certificates from businesses you love!
+                  <span className='flex justify-center'>
                   <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cc5de7c28e28abf099cb_Vector%2034.svg"
                     loading="lazy"
                     data-w-id="579a5b13-ba88-5afc-891d-33a5fda814ee"
-                    alt="" className="image-118 absolute bottom-[-4px] left-[0%]  h-[18px] w-auto"
+                    alt="" className="image-118   h-[18px] w-auto"
                   // style=""
                   />
+                  </span>
                 </span>
               </h2>
             </div>
           </div>
         </div>
 
-       
-          <div className={`${isMobile ? '' : 'grid grid-about'}`}>
-            <div className="bg-[#39cd62]">
-              <div className=" mx-10 py-10  overflow-auto">
-                <div className="">
-                  <h2 className="text-[#021414] text-[48px] font-bold leading-[48px] font-sans">We’re on a mission <br /> to bust open
-                    <span className="text-[#ffffff]">
-                      <br />the doors of entrepreneurship<br />
-                      ‍</span>for everyone.
-                  </h2>
-                  <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cc6a7aec847695fa23b4_Vector%2035.svg"
-                    loading="lazy"
-                    alt=""
-                    className="w-[150px] m-auto my-3"
-                  />
-                </div>
-                <p className="text-[22px] leading-8 text-[#ffffff] font-sans">AppSumo is the platform 1.25M+ <br />entrepreneurs trust for everything they need to create fulfilling businesses. We’ve got all the tools you need to grow and scale.</p>
-              </div>
-            </div>
-            <div className="">
-                <img
-                  src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61d63834f499ea37ac0f7061_aboutus-lo.png"
+
+        <div className={`${isMobile ? '' : 'grid grid-about'}`}>
+          <div className="bg-[#39cd62]">
+            <div className=" mx-10 py-10  overflow-auto">
+              <div className="">
+                <h2 className="text-[#021414] text-[48px] font-bold leading-[48px] font-sans">We’re on a mission <br /> to bust open
+                  <span className="text-[#ffffff]">
+                    <br />the doors of entrepreneurship<br />
+                    ‍</span>for everyone.
+                </h2>
+                <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cc6a7aec847695fa23b4_Vector%2035.svg"
                   loading="lazy"
-                  id="video-overlay-img"
                   alt=""
-                  className=""
+                  className="w-[150px] m-auto my-3"
                 />
+              </div>
+              <p className="text-[22px] leading-8 text-[#ffffff] font-sans">AppSumo is the platform 1.25M+ <br />entrepreneurs trust for everything they need to create fulfilling businesses. We’ve got all the tools you need to grow and scale.</p>
             </div>
           </div>
-      
+          <div className="">
+            <img
+              src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61d63834f499ea37ac0f7061_aboutus-lo.png"
+              loading="lazy"
+              id="video-overlay-img"
+              alt=""
+              className=""
+            />
+          </div>
+        </div>
+
 
 
         <div className="container-12 w-container m-auto my-[80px]">
