@@ -81,25 +81,13 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const ListId = searchParams.get("id");
   const edit = searchParams.get("edit");
 
-
-
-
-  // console.log(businessData, 'editScreen')
-  // console.log(image, 'image image image')
-  // console.log(location, 'location')
-
-
-
   useEffect(() => {
 
     if (edit === 'true') {
-      // console.log('Edit new listinng');
       setEditure(true);
       allBusiness();
       const filter = businessData?.filter((item: any) => {
         if (item?.iBusinessId === Number(ListId)) {
-          console.log(item, "item edit value");
-          // item
           setBuisnessName(item?.vName);
           setBusinessLocation(item?.vLocation);
           setDescription(item?.tDescription);
@@ -111,14 +99,10 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
           if (item?.onBanner == 1) {
             setBanner(true)
-            console.log(item.onBanner, "item.onBanner true 1 ");
           } else {
             setBanner(false)
-            console.log(item.onBanner, "item.onBanner false 0 ");
           }
-          // setBanner(item.onBanner === 1 ? "true" : "false")
           setEmail(item?.vEmail);
-          // console.log(item?.iCountry)
           setCategory(item?.iCategory);
           setSubCategory(item?.iSubCategory);
         }
@@ -128,10 +112,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     } else {
       navigate(`/admin/listing`)
       setEditure(false);
-      // console.log('add new listinng');
       setImage(false)
-
-      // const clear = {
       setBuisnessName("")
       setBusinessLocation("")
       setDescription("");
@@ -139,12 +120,9 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       setBodyDescription('');
       setTagLine("")
       setBanner("")
-      // setBanner(item.onBanner === 1 ? "true" : "false")
       setEmail("");
-      // console.log(item?.iCountry)
       setCategory("");
       setSubCategory("");
-      // }
 
     }
   }, [edit, ListId]);
@@ -187,24 +165,16 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   };
 
   const handleBanner = (event: any): void => {
-    console.log(event, "category data");
 
     if (event.target.checked) {
       setBanner(true);
-      console.log(" true select category data");
     } else {
       setBanner(false);
-      console.log(" false select category data");
     }
-    // setBanner(event.target.checked);
-    // console.log(event.target.checked + " select category data");
   };
 
   const handleCategoryChange = (event: SelectChangeEvent): void => {
-    // setCategory(event.target.value as string);
     setCategory(event.target.value as string);
-
-    // console.log(event.target.value)
   };
 
   const handleBusinessNameChange = (
@@ -274,10 +244,8 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     updatedata.append("preview", preview);
     updatedata.append("bodyDescription", bodyDescription);
 
-    console.log(ListId, edit, 'this is edit data')
 
     if (ListId) {
-      // console.log(updatedata, 'update listing')
       const res = await dispatch(
         AdminThunk.updateListing({
           data: updatedata,
@@ -286,7 +254,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
             : 0,
         })
       );
-      console.log(res, 'update listing')
 
       toast.success("Listing Updated Successfully");
       navigate(`/admin/listing`)
@@ -294,7 +261,6 @@ export const NewlistingController = (): INewlistingControllerReturns => {
       const res = await dispatch(AdminThunk.createListing(form));
       toast.success("Listing Created Successfully");
       navigate(`/admin/listing`)
-      // navigate(AdminRoutePathEnum.ADMIN_LISTING);
     }
 
 

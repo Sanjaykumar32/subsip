@@ -56,7 +56,6 @@ export function AdminReferral() {
       headerName: "Amount",
       width: 250,
       renderCell: (params: any) => {
-        console.log(params, "params");
         return params.value ? (
           <Chip
             label={params.value}

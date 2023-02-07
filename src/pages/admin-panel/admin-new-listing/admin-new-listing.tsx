@@ -174,12 +174,6 @@ export function AdminNewlisting() {
   const edit = searchParams.get("edit");
 
 
-  console.log(banner , 'banner');
-
-
-
-
-
   return (
     <Container maxWidth="lg">
       <AdminBackButton />

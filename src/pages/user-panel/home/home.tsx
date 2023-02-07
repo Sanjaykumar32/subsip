@@ -152,8 +152,6 @@ export function Home({ alertOnBottom }: any) {
   }, [bannerList]);
 
   const businessData = useAppSelector(GET_BUSINESS);
-  // console.log(bannerData, "bannerData");
-  // console.log(businessData, "businessData");
 
   const banner = businessData?.filter((el: any) =>
     bannerData.map((item) => item.iBusinessId)?.includes(el?.iBusinessId)
@@ -174,16 +172,9 @@ export function Home({ alertOnBottom }: any) {
       );
   });
 
-  // console.log(businessData, 'businessData');
-  // console.log(filterBanner, 'filterBanner')
-
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
   const moreData = categoryData.map((item : any)=> item?.vName)
-
-  console.log( CateFirst[3], 'CateFirst')
-  console.log(moreData[3], 'moreData[3]')
-  console.log(scroll , 'scroll');
   const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
@@ -241,8 +232,6 @@ export function Home({ alertOnBottom }: any) {
   }, [alertOnBottom]);
 
   useBottomScrollListener(handleOnDocumentBottom);
-
-  console.log(banner , 'banner');
 
   return (
     <>
@@ -618,7 +607,6 @@ const SliderCard = (props: any) => {
         UserThunk.business({ businessId: id })
       );
       if (response?.payload?.data?.length > 0) {
-        console.log(name, "name");
         navigate(`/listing/${name.replace(/\s+/g, "-")}` , 
            {state : {businessId : id}}
         );
@@ -640,7 +628,6 @@ const SliderCard = (props: any) => {
 
   async function SubcribeBtn(): Promise<void> {
     !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
-    console.log("this is btn stb");
     try {
       await dispatch(
         UserThunk.addSubscriberToBusiness({

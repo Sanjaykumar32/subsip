@@ -137,7 +137,6 @@ export function AdminListing() {
     allBusiness();
   }, [allBusiness]);
 
-  console.log(businessData, 'businessData');
 
   const rows: any = businessData?.map((item) => {
     return {
@@ -192,7 +191,6 @@ export function AdminListing() {
   }
 
   const handleOnSelect = (item: any) => {
-    console.log(item, 'select vlaue')
     setSearch(item.name)
     setIndex(true)
   }
@@ -202,7 +200,6 @@ export function AdminListing() {
     setIndex(false)
   }
 
-  console.log(indexValue , 'indexValue')
 
   return (
     <>

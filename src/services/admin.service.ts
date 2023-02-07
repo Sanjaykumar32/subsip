@@ -140,7 +140,6 @@ export class AdminService {
       return res.data;
     } catch (err: any) {
       localStorage.clear();
-      // console.log(err?.response?.status, 'this is catch err')
     }
   }
 
@@ -582,7 +581,6 @@ export class AdminService {
   public static async deleteBusiness(
     payload: IDeleteListingRequest
   ): Promise<any> {
-    console.log(payload);
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `business/${payload}`,
       method: "DELETE",
@@ -595,7 +593,6 @@ export class AdminService {
    * @return {Promise<any>}
    */
   public static async deleteReferral(payload: any): Promise<any> {
-    console.log(payload);
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `milestone/${payload}`,
       method: "DELETE",
@@ -610,7 +607,6 @@ export class AdminService {
   public static async deleteCategory(
     payload: IDeleteCategoryRequest
   ): Promise<any> {
-    console.log(payload);
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/category`,
       method: "DELETE",
@@ -627,7 +623,6 @@ export class AdminService {
   public static async deleteSubCategory(
     payload: IDeleteListingRequest
   ): Promise<any> {
-    console.log(payload);
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/sub-category`,
       method: "DELETE",
@@ -659,7 +654,6 @@ export class AdminService {
   public static async deleteReward(
     payload: IDeleteRewardRequest
   ): Promise<any> {
-    console.log(payload);
     const res: AxiosResponse<any> = await ApiHelper.send<any>({
       url: `/user/reward?rewardId=${payload.rewardId}`,
       method: "DELETE",

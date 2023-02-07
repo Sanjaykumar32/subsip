@@ -314,7 +314,6 @@ export class AdminThunk {
   public static newNotifyButton = createAsyncThunk(
     "admin/newNotifyButton",
     async (payload: INewNotifyButtonRequest): Promise<void> => {
-      console.log(payload, "payload");
       const response = await AdminService.newReward(payload);
       return response;
     }
@@ -337,7 +336,6 @@ export class AdminThunk {
   public static createListing = createAsyncThunk(
     "admin/createListing",
     async (payload: any): Promise<void> => {
-      console.log(payload, "payload");
       const response = await AdminService.craeteListing(payload);
       return response;
     }
@@ -349,7 +347,6 @@ export class AdminThunk {
   public static updateListing = createAsyncThunk(
     "admin/update/createListing",
     async (payload: any): Promise<void> => {
-      console.log(payload, "payload");
       const response = await AdminService.updateListing(payload);
       return response;
     }

@@ -63,10 +63,6 @@ const SignInController = (): ISignInControllerReturns => {
    * @return {void}
    */
   const submitHandler = (): void => {
-
-    // console.log(location.state.businessId, location.state.referralcode)
-
-
     setErrors(validate(value));
     setErrorCount(errorCount + 1);
     if (!errors.email && !errors.password) {

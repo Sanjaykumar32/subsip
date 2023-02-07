@@ -38,8 +38,6 @@ export function AdminSubscribers() {
 
   const routeValue = location?.state?.ids?.split(',')
 
-  console.log(getAllsubcriber , 'getAllsubcriber');
-
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
       await dispatch(
@@ -143,9 +141,6 @@ export function AdminSubscribers() {
     };
   });
 
-
-  console.log(rows ,'fil')
-
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>(() =>
     rowsData.map((r) => r.userID)
   );
@@ -165,7 +160,6 @@ export function AdminSubscribers() {
   }
 
   const handleOnSelect = (item: any) => {
-    console.log(item, 'select vlaue')
     setSearch(item.name)
     setIndex(true)
   }
@@ -175,7 +169,6 @@ export function AdminSubscribers() {
     setIndex(false)
   }
 
-  console.log(routeValue , 'routeValue');
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>

@@ -32,7 +32,6 @@ export default function OtpBox(props: IOtpBox) {
 
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location, "location");
 
   const submit = () => {
     if (location.state.referralcode && location.state.businessId) {

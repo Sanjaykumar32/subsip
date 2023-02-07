@@ -73,23 +73,15 @@ export const Subscribe = ({
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
 
-  console.log(businessId, 'businessId')
-
   useEffect(() => {
-    console.log(isSubscribed, "isSubscribed");
-
     const getdata = isSubscribed.filter(
       (item: any) => item?.iAdminId == userId
     )[0];
 
-    console.log(getdata, "getdata");
-
     if (getdata === undefined) {
       setButton(true);
-      console.log(true, "isSubscribed");
     } else {
       setButton(false);
-      console.log(false, "isSubscribed");
     }
   }, [isSubscribed]);
 

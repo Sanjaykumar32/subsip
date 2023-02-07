@@ -67,7 +67,6 @@ export const NewReferralPriceController =
         setEditure(true)
         const filter = referralData?.filter((item: any) => {
           if (item?.iMilestoneId === editScreen?.state?.id) {
-            console.log(item, 'item')
             setMileStoneName(item?.vName)
             setReferralAmount(item?.iamount)
           }

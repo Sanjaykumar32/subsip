@@ -48,7 +48,10 @@ export function PoshSubLogo(props: PoshSubLogoProps) {
     //     </tspan>
     //   </text>
     // </LogoCss>
-    <img src={LogoImage} className={props.variant === "light" ? 'Logo LightVariant' : 'Logo darkVariant'} />
+    // <img src={LogoImage} className={props.variant === "light" ? 'Logo LightVariant' : 'Logo darkVariant'} />
+    <span className="text-[40px] font-bold ">
+      Subsip
+    </span>
   );
 }
 

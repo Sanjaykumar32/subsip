@@ -58,6 +58,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import toast from "react-hot-toast";
 import ScrollToTop from "scrollTop";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -84,7 +85,6 @@ export const UserAppBar = (props: any) => {
     setMobileOpen(!mobileOpen);
   };
 
-  console.log(categoryData, 'categoryData')
   const routeAdmin = homepage.split("/")[1];
 
   // isMobile admin list----------------------------------------
@@ -163,10 +163,7 @@ export const UserAppBar = (props: any) => {
 
   const readNotification = useCallback(
     async ({ id, readId }: any) => {
-      console.log(id, readId, "ids");
-      // const data = {
-      //   read: Number   userId ?  parseInt(userId) : 0,
-      // };
+      
       try {
         await dispatch(
           AdminThunk.readUserNotification({
@@ -191,7 +188,6 @@ export const UserAppBar = (props: any) => {
     }
   }, [auth.isAuthenticated, getUserNotification]);
 
-  // console.log(categoryData, 'categoryData');
 
   const CateName = categoryData.map((item: any) => item?.vName);
 
@@ -215,12 +211,18 @@ export const UserAppBar = (props: any) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
- 
+
+  let inputRef: { focus: () => void; };
+
   const showLocationPopUp = () => {
     setLocationPopUP(true);
-  
   };
+
+  useEffect(()=>{
+    setTimeout(function () {
+      inputRef.focus()
+    }, 100)
+  },[locationPopUp])
 
   const handlevalue = (el: any) => {
     if (homepage == "/") {
@@ -411,10 +413,19 @@ export const UserAppBar = (props: any) => {
   };
   const businessData = useAppSelector(GET_BUSINESS);
 
-  const defaultProps =  {
-    options:  searchLocation == '' ? [] : businessData ,
+  const defaultProps = {
+    options: searchLocation == '' ? [] : businessData,
     getOptionLabel: (option: any) => option.vLocation,
   };
+
+  const serchList = businessData.map((el, index) => {
+    return {
+      id: index,
+      name: el.vLocation
+    }
+
+
+  })
 
   const flatProps = {
     options: businessData.map((option: { vLocation: any }) => option.vLocation),
@@ -424,17 +435,13 @@ export const UserAppBar = (props: any) => {
     setOpen(false);
   };
 
-//  const handleLocationPopup = ()=> {
-//   setLocationPopUP(false)
-//  }
-
 
 
   return (
     <>
       <ScrollToTop />
       <AppBar
-        //  onClick={handleLocationPopup}
+      
         color="default"
         elevation={0}
         sx={{
@@ -614,51 +621,57 @@ export const UserAppBar = (props: any) => {
 
           {homepage == "/" || routeAdmin == "category" ? (
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              {!locationPopUp ? (
-                <Button
-                  onClick={showLocationPopUp}
-                  disableRipple
-                  sx={{ minWidth: "120px", color: "text.primary" }}
-                >
-                  <FontAwesomeIcon
-                    icon={faLocationDot}
-                    size="sm"
-                    style={{ marginRight: "8px" }}
-                  />
-                  Location
-                </Button>
-              ) : (
-                <Stack spacing={1} sx={{ m: 1, width: "25ch" }}>
-                  <Autocomplete
-                    {...defaultProps}
-                    selectOnFocus={true}
-                    noOptionsText={'Search'}
-                    autoSelect={true}
-                    
-                    onClose={(e)=>{
-                       if(e.cancelable == false){
-                        setLocationPopUP(false)
-                       }
-                    }}
-                    id="disable-close-on-select"
-                    //  onClick={disableCloseOnSelect}
-                    onChange={(event, newValue: any) => {
-                      console.log(event, "event onchange");
-                      handlevalue(newValue?.vLocation);
-                    }}
-                    openOnFocus
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        onChange={handleLocation}
-                        label="Search"
-                        variant="standard"
-                        // focused
-                      />
-                    )}
-                  />
-                </Stack>
-              )}
+
+              <Button
+                className={`${locationPopUp == false ? '!block' : '!hidden'}`}
+                onClick={showLocationPopUp}
+                disableRipple
+                sx={{ minWidth: "120px", color: "text.primary" }}
+              >
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  size="sm"
+                  style={{ marginRight: "8px" }}
+                />
+                Location
+              </Button>
+
+
+              <Stack spacing={1} sx={{ m: 1, width: "25ch" }} className={`${locationPopUp == true ? '!block' : '!hidden'}`}>
+                <Autocomplete
+                  {...defaultProps}
+                  selectOnFocus={false}
+                  noOptionsText={'Please enter location'}
+                  autoSelect={true}
+                  onClose={(e) => {
+                    if (e.cancelable == false) {
+                      setLocationPopUP(false)
+                    }
+                  }}
+                  id="disable-close-on-select"
+                  onChange={(event, newValue: any) => {
+                    console.log(event, "event onchange");
+                    handlevalue(newValue?.vLocation);
+                  }}
+                  openOnFocus
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      onChange={handleLocation}
+                      label="Search"
+                      variant="standard"
+                      // focused
+                      inputRef={input => {
+                        inputRef = input;
+                      }}
+                    />
+
+                  )}
+
+                />
+ 
+              </Stack>
+
 
               <Divider
                 flexItem
@@ -808,7 +821,6 @@ export const UserAppBar = (props: any) => {
                 {/* <-------------------------- notification dropdown -----------------> */}
                 {userNotificationData.length > 0 ? (
                   userNotificationData.map((res: any, i: number) => {
-                    console.log(res.iNotificationId, "res");
 
                     return (
                       <div
@@ -1055,12 +1067,13 @@ export const UserAppBar = (props: any) => {
                         sx={{ display: { xs: "Block", md: "flex" } }}
                         className="w-[100%]  mt-2"
                       >
-                        {!locationPopUp ? (
+                     
                           <Button
+                          
                             onClick={showLocationPopUp}
                             disableRipple
                             sx={{ color: "text.primary" }}
-                            className=""
+                            className={`${locationPopUp == false ? '!block' : '!hidden' }`}
                           >
                             <FontAwesomeIcon
                               icon={faLocationDot}
@@ -1069,11 +1082,20 @@ export const UserAppBar = (props: any) => {
                             />
                             Location
                           </Button>
-                        ) : (
-                          <Stack spacing={1} className="w-[100%] my-3">
+                    
+                          <Stack spacing={1}  className={`${locationPopUp == true ? '!block' : '!hidden' } w-[100%] my-3`}>
                             <Autocomplete
                               {...defaultProps}
+                              selectOnFocus={false}
+                              openOnFocus
+                              noOptionsText={'Please enter location'}
+                              autoSelect={true}
                               id="disable-close-on-select"
+                              onClose={(e) => {
+                                if (e.cancelable == false) {
+                                  setLocationPopUP(false)
+                                }
+                              }}
                               //  onClick={disableCloseOnSelect}
                               onChange={(event, newValue: any) => {
                                 console.log(event, "event onchange");
@@ -1086,18 +1108,15 @@ export const UserAppBar = (props: any) => {
                                   onChange={handleLocation}
                                   label="Search"
                                   variant="standard"
+                                  inputRef={input => {
+                                    inputRef = input;
+                                  }}
+                                
                                 />
                               )}
                             />
                           </Stack>
-                        )}
-
-                        {/* <Divider
-                        flexItem
-                        orientation="vertical"
-                        variant="middle"
-                        sx={{ mx: 1, height: "30px", my: "auto" }}
-                      /> */}
+                      
                       </Box>
                     </ListItem>
                   ) : null}
@@ -1248,3 +1267,7 @@ export const UserAppBar = (props: any) => {
     </>
   );
 };
+function showInput(): void {
+  throw new Error("Function not implemented.");
+}
+

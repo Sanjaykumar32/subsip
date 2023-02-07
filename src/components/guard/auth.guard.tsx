@@ -19,7 +19,7 @@ export function GuestGuard({ children }: IAuthGuardProps): ReactElement {
   const businessId = localStorage.getItem("businessId");
 
 
-  console.log("kkkkk", referralcode, isAuthenticated);
+
   // const location = useLocation();
 
   // console.log(location?.state?.businessId, location?.state?.referralcode)
@@ -30,8 +30,6 @@ export function GuestGuard({ children }: IAuthGuardProps): ReactElement {
 
   if (isAuthenticated) {
     if (referralcode) {
-
-      console.log(referralcode, 'referralcode')
       // navigate(url);
     } else {
       navigate(RoutePathEnum.HOME);

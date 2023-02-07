@@ -35,9 +35,7 @@ export function ListingOnPoshSub() {
   const [name, setBusinessName] = useState("");
   const [tagline, setTagline] = useState("");
   const [email, setEmail] = useState("");
-  const [businessCategory, setBusinessCategory] = useState("");
   const [businessLocation, setBusinessLocation] = useState("");
-  const [aboutLine, setAboutLine] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const theme = useTheme();
   const [
@@ -51,75 +49,67 @@ export function ListingOnPoshSub() {
     step8,
     step9,
   ]: ListFormItem[] = [
-    {
-      id: "q1",
-      label: "Name",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q2",
-      label: "Step 2: Tag your product in that category",
-      type: InputTypeEnum.SELECT,
-      required: true,
-    },
-    {
-      id: "q3",
-      label: "Tagline",
-      type: InputTypeEnum.INPUT,
-      required: true,
-      caption:
-        "What's your pitch? Tell buyers about your product in 100 characters or less.",
-    },
-    {
-      id: "q4",
-      label: "Tell us about your buisness?",
-      type: InputTypeEnum.TEXT_AREA,
-      required: true,
-      caption:
-        "Share a high-level introduction to your product. Check out our copy guidelines for inspiration.",
-    },
-    {
-      id: "q5",
-      label: "Email",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q6",
-      label: "Featured Image?",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-    {
-      id: "q7",
-      label: "Business Name",
-      type: InputTypeEnum.SELECT,
-      required: true,
-    },
-    {
-      id: "q8",
-      label: "Pick subcategory",
-      type: InputTypeEnum.SELECT,
-      required: true,
-    },
-    {
-      id: "q9",
-      label: "Buisness Location",
-      type: InputTypeEnum.INPUT,
-      required: true,
-    },
-  ];
+      {
+        id: "q1",
+        label: "Name",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q2",
+        label: "Step 2: Tag your product in that category",
+        type: InputTypeEnum.SELECT,
+        required: true,
+      },
+      {
+        id: "q3",
+        label: "Tagline",
+        type: InputTypeEnum.INPUT,
+        required: true,
+        caption:
+          "What's your pitch? Tell buyers about your product in 100 characters or less.",
+      },
+      {
+        id: "q4",
+        label: "Tell us about your buisness?",
+        type: InputTypeEnum.TEXT_AREA,
+        required: true,
+        caption:
+          "Share a high-level introduction to your product. Check out our copy guidelines for inspiration.",
+      },
+      {
+        id: "q5",
+        label: "Email",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q6",
+        label: "Featured Image?",
+        type: InputTypeEnum.INPUT,
+        required: true,
+      },
+      {
+        id: "q7",
+        label: "Business Name",
+        type: InputTypeEnum.SELECT,
+        required: true,
+      },
+      {
+        id: "q8",
+        label: "Business Location",
+        type: InputTypeEnum.SELECT,
+        required: true,
+      },
+
+    ];
 
   const ref = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
     console.log(name, "name");
-    console.log(tagline, "tagline");
     console.log(email, "email");
-    console.log(businessCategory, "businessCategory");
     console.log(businessLocation, "businessLocation");
-    console.log(aboutLine, "aboutLine");
     console.log(subCategory, "subCategory");
   };
 
@@ -159,27 +149,14 @@ export function ListingOnPoshSub() {
                     fullWidth
                   />
                 </Box>
-                <Box sx={{ my: 4 }}>
-                  <Label id={`${step7.id}-label`}> {step7.label} </Label>
-                  <Typography variant="body2"> {step7.caption} </Typography>
-                  <TextField
-                    size="small"
-                    value={businessCategory}
-                    onChange={(event) =>
-                      setBusinessCategory(event.target.value)
-                    }
-                    // required
-                    fullWidth
-                  />
-                </Box>
+
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>
               <Box sx={{ px: 3, py: 1 }}>
                 <Box sx={{ my: 4 }}>
-                  <Label id={`${step9.id}-label`}> {step9.label} </Label>
-                  <Typography variant="body2"> {step9.caption} </Typography>
-
+                  <Label id={`${step7.id}-label`}> {step7.label} </Label>
+                  <Typography variant="body2"> {step7.caption} </Typography>
                   <TextField
                     size="small"
                     value={businessLocation}
@@ -190,6 +167,7 @@ export function ListingOnPoshSub() {
                     fullWidth
                   />
                 </Box>
+
                 <Box sx={{ my: 4 }}>
                   <Label> {step8.label} </Label>
                   <Typography variant="body2"> {step8.caption} </Typography>
@@ -229,7 +207,7 @@ export function ListingOnPoshSub() {
             href={`mailto: Subsipinc@gmail.com?subject= Request to remove an existing business listing`}
             className="py-[10px] cursor-pointer"
           >
-           Request to remove an existing business listing
+            Request to remove an existing business listing
           </a>
         </Box>
       </Form>

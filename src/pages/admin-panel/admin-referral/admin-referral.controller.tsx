@@ -42,7 +42,6 @@ export const ReferralController = (): IReferralControllerReturns => {
     referralList();
   }, [referralList]);
 
-  console.log(referralData, 'referralData')
 
 
 

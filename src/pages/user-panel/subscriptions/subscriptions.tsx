@@ -47,8 +47,6 @@ export function Subscriptions() {
 
   const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
 
-  console.log(subscribeBusiness, "subscribeBusiness");
-
   const array = subscribeBusiness.filter((el) => {
     return Object.values(el?.businessName)
       .join("")
@@ -56,26 +54,18 @@ export function Subscriptions() {
       .includes(search.toString().toLowerCase());
   });
 
-  console.log(array, "array");
-
   const handleSubs = async (item: any) => {
-    console.log(item, "numbersss");
-
     const response = await dispatch(
       UserThunk.addSubscriberToBusiness({
         businessId: item?.iBusinessId ? parseInt(item?.iBusinessId) : 0,
         userId: item?.iAdminId ? parseInt(item?.iAdminId) : 0,
       })
     );
-
-    console.log(response, "response");
     toast.success("Business Subscribed Successfully");
     allsubscriberOfBussiness();
   };
 
   const handleUnsub = async (item: any) => {
-    console.log(item, "numbersss");
-
     const response = await dispatch(
       UserThunk.UNSubscriberToBusiness({
         businessId: item?.iBusinessId ? "" + item?.iBusinessId : "0",

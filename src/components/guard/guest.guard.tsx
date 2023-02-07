@@ -21,7 +21,6 @@ export function GuestGuard({ children }: IAuthGuardProps) {
   useEffect(() => {
     if (isAuthenticated) {
       if (referralcode) {
-        console.log(referralcode, "referralcode");
         navigate(`/listing/${businessId}`);
       } else {
         navigate(RoutePathEnum.HOME);

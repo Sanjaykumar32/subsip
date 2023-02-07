@@ -4,7 +4,9 @@ import AndroidIcon from '@mui/icons-material/Android';
 import AppleIcon from '@mui/icons-material/Apple';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "theme";
-
+// import appleImage from "/public/static/apple.png"
+import appleImage from "../../assets/images/apple.png"
+import androidImage from '../../assets/images/android.jpeg'
 
 const LinkBox = styled(Grid)(({ theme }) => ({
   display: "flex",
@@ -56,10 +58,10 @@ export function Links() {
             title: "Blog",
             link: "/referal",
           },
-          {
-            title: 'FAQs',
-            link:'/',
-          }
+          // {
+          //   title: 'FAQs',
+          //   link:'/',
+          // }
         ],
       },
       {
@@ -76,14 +78,14 @@ export function Links() {
         ],
       },
       {
-        title:'coming soon',
-        subTitle:[
+        title: 'coming soon',
+        subTitle: [
           {
-            title:'IOS',
+            title: <img src={appleImage} alt="" className='h-[32px]' />,
             link: "/",
           },
           {
-            title:'Android',
+            title: <img src={androidImage} alt="" className='h-[31px]' />,
             link: "/",
           },
         ]
@@ -110,13 +112,13 @@ export function Links() {
                     key={`Sub-Links-${subData.title}-${index}}`}
                   >
                     {subData.title === "Contact Us" ? (
-                    <Typography className="!mt-[8px]">
-                      <a
-                        href={`mailto: Subsipinc@gmail.com?subject=  I have a question`}
-                        className="cursor-pointer"
-                      >
-                        {subData.title}
-                      </a>
+                      <Typography className="!mt-[8px]">
+                        <a
+                          href={`mailto: Subsipinc@gmail.com?subject=  I have a question`}
+                          className="cursor-pointer"
+                        >
+                          {subData.title}
+                        </a>
                       </Typography>
                     ) : (
                       <Link href={subData.link}>
@@ -129,9 +131,17 @@ export function Links() {
                           }}
                           className='flex justify-start align-center text-center'
                         >
-                          {subData.title == 'IOS' && <AppleIcon className='!h-[25px] !w-[25px] mr-1'/>}
-                          {subData.title == 'Android' && <AndroidIcon className='!h-[25px] !w-[25px] mr-1'/>}
+                          {/* {subData.title == 'IOS'
+                           && 
+                          //  <AppleIcon className='!h-[25px] !w-[25px] mr-1'/>
+                          <img src={appleImage} alt=""  className='h-[32px]'/>
+                           }
+                          {subData.title == 'Android' &&
+                           <img src={androidImage} alt=""  className='h-[31px]'/>
+                          //  <AndroidIcon className='!h-[25px] !w-[25px] mr-1'/>
+                           } */}
                           {subData.title}
+
                         </Typography>
                       </Link>
                     )}

@@ -79,7 +79,6 @@ export function AdminNotification() {
     setSortValue(e.target.value)
   }
 
-  console.log(rows , 'rows');
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>

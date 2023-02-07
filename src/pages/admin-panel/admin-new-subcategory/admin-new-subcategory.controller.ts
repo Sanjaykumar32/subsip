@@ -65,9 +65,6 @@ export const AddSubCategoryController =
     const submitHandler = async (): Promise<void> => {
       if (subCategrory) {
         //   // Edit category
-        console.log(subCategory, 'subCategory')
-        console.log('this is edit mode')
-
         const response: any = await dispatch(
           AdminThunk.updateSubCategory({
             subCategoryId: subCategrory ? parseInt(subCategrory) : 0,
@@ -75,15 +72,10 @@ export const AddSubCategoryController =
           })
         );
 
-        // if (response.payload.data) {
         naviagate(`/admin/subcategory/?category=${categrory}`);
-        // }
         setSubCategory("");
         setBuisnessName("");
       } else {
-        // create category
-        console.log(subCategory, 'subCategory')
-        console.log('this is add New mode')
         const response: any = await dispatch(
           AdminThunk.subCategory({
             categoryId: businessName,
@@ -91,11 +83,9 @@ export const AddSubCategoryController =
             addedBy: userId ? parseInt(userId) : 0,
           })
         );
-        // if (response.payload.data) {
         naviagate(
           `${AdminRoutePathEnum.ADMIN_SUBCATEGORY}/?category=${categrory}`
         );
-        // }
         setSubCategory("");
         setBuisnessName("");
       }

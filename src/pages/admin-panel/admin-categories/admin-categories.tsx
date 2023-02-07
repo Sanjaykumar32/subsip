@@ -104,7 +104,6 @@ export function AdminCategories() {
     }
   })
  
-  console.log(sortedValue , 'sort');
 
   const handleSort = (e: any) => {
     setSortValue(e.target.value)

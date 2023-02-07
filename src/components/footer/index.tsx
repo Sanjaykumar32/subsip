@@ -42,6 +42,10 @@ export function FooterMain() {
   const handleRoutes = () => {
     navigate('/privacy')
   }
+
+  const handleHomeRoute = ()=>{
+    navigate('/')
+  }
   return (
     <div>
       <FooterContainer className=" footerCss rounded-none " >
@@ -50,7 +54,10 @@ export function FooterMain() {
             {isMobile && (
               <Grid item className="">
                 <Box className="">
-                  <Logo />
+                  {/* <Logo /> */}
+                  <span className="text-[40px] font-bold cursor-pointer "  onClick={handleHomeRoute}>
+                    Subsip
+                  </span>
                   <Typography className=""> Free certificates from businesses you love </Typography>
                 </Box>
               </Grid>
@@ -58,11 +65,14 @@ export function FooterMain() {
             <Grid item xs={12} md={4} order={{ xs: 2, md: 0 }}>
               {!isMobile && (
                 <Box sx={{ mb: 2 }}>
-                  <Logo />
+                  {/* <Logo /> */}
+                  <span className="text-[40px] font-bold cursor-pointer " onClick={handleHomeRoute}>
+                    Subsip
+                  </span>
                   <Typography className=""> Free certificates from businesses you love  </Typography>
                 </Box>
               )}
-            
+
               <SocialIcons />
             </Grid>
             <Grid item xs={12} md={8} order={{ xs: 1, md: 1 }}>

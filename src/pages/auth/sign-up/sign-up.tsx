@@ -21,13 +21,7 @@ export function SignUp() {
   const { theme, value, errors, open } = getters;
   const { changeHandler, submitHandler, handleClose } = handlers;
   const location = useLocation();
-  console.log(location, "location");
   const navigate = useNavigate();
-
-  // const submit = () => {
-  //   if (location.state.referralcode && location.state.businessId) {
-  //   }
-  // };
 
   return (
     <Container maxWidth="xs" sx={{ p: 0 }}>

@@ -70,8 +70,6 @@ export function Rewards() {
     allsubscriberOfBussiness();
   }, [allsubscriberOfBussiness]);
 
-  console.log(subscribeBusiness, "subscribeBusiness");
-
   const rewardClaimed = useCallback(
     async (id: any) => {
       try {

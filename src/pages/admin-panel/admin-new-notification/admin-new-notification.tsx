@@ -51,13 +51,7 @@ export function AdminNewNotifictaion() {
     handleBusinessLocationhange,
   } = handlers;
 
-
-  console.log(businessData, 'businessData')
-  console.log(categoryData, 'categoryData')
-  console.log(category, "category state");
-
   const businessFilter = businessData.filter((el) => el.iCategory == category)
-  console.log(businessFilter, 'businessFilter');
   return (
     <Container maxWidth="lg">
       <AdminBackButton />

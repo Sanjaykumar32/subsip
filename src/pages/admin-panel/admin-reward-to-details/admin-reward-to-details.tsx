@@ -32,10 +32,6 @@ export function AdminRewardToDetails() {
   const [searchParams] = useSearchParams();
   const bussinessId = searchParams.get("businessId");
 
-  console.log(bussinessId, 'bussinessId');
-
-
-
   const businessReward = useCallback(async () => {
     try {
       await dispatch(

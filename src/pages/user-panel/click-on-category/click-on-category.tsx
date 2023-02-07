@@ -136,7 +136,6 @@ export function ClickOnCategory() {
 
   useEffect(() => {
     if (getCateID) {
-      // console.log(getCateID, "getCateID");
       handleList(Number(getCateID));
       setActiveCate(Number(getCateID));
     }
@@ -167,8 +166,6 @@ export function ClickOnCategory() {
 
   async function SubcribeBtn(id: any): Promise<void> {
     // !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
-    // console.log('this is btn stb')
-
     try {
       await dispatch(
         UserThunk.addSubscriberToBusiness({

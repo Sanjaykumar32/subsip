@@ -30,15 +30,11 @@ export function ReferralProgram() {
   }, [refferalCount]);
 
 
-  console.log(refferralCount, "refferralCount");
-
   const list = refferralCount?.map((el: any) => {
     return Math.max(el.userCount ? el.userCount : 0);
   });
 
   const count: any = [...new Set(list)];
-
-  console.log(...new Set(list), "list count");
 
   return (
     <Container maxWidth="xl" sx={{ p: 2 }}>

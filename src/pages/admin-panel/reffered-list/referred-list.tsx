@@ -17,7 +17,6 @@ export function ReferredUserList() {
   const userdata = useAppSelector(GET_USER);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state.id, "location");
 
   const referralData = useAppSelector(GET_REFERRAL_USER);
 
@@ -39,7 +38,6 @@ export function ReferredUserList() {
       return { id: res?.iAdminId, vEmail: res?.vEmail };
     });
 
-  console.log(rows, "referralData");
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>(() =>
     rows.map((r: any) => r.id)
   );

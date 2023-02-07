@@ -28,14 +28,11 @@ export const SearchFieldController = () => {
     return item.vName === search;
   })[0];
 
-  //  console.log(Conid ,'conid');
   /**
    * @return {Promise<void>}
    */
 
   async function submitHandler(el:any) {
-    console.log(el ,'elment submit')
-
     if(el.iBusinessid){
         navigate(`/listing/${el.iBusinessid}`)
     }else{

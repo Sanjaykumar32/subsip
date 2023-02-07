@@ -16,8 +16,6 @@ export function AdminRewardsMileStones() {
   const rewardData = useAppSelector(GET_REWARDS);
   const navigate = useNavigate();
 
-  console.log(rewardData, "rewardData");
-
   const getReward = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getReward());
