@@ -194,7 +194,7 @@ export function AdminLayout(props: Props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              top: "75px",
+              top: "82px",
             },
           }}
           open

@@ -35,10 +35,10 @@ export const About = () => {
 
 
         <div className='bg-[#fff] '>
-          <div className="container-12 w-container m-auto " >
-            <div className=" py-20  overflow-auto">
+          <div className="m-auto mx-10 " >
+            <div className=" py-20 ">
               <div className="">
-                <h2 className="text-[#021414] text-[48px] flex justify-center flex-col align-center text-center font-bold leading-[48px] font-sans">We’re on a mission to bust open
+                <h2 className="text-[#021414] aboutText  flex justify-center flex-col align-center text-center font-bold leading-[56px] font-sans">We’re on a mission to bust open
                   <span className="text-[#ACCF02]">
                     the doors of entrepreneurship
                     ‍</span>for everyone.
@@ -60,14 +60,14 @@ export const About = () => {
 
 
         <div className="container-12 w-container m-auto my-[20px]  ">
-          <div className="about-wrk-head mb-5">
+          <div className="flex justify-center mb-1 " >
             <h2 className="heading-40 relative">How it
               <span className="text-span-25 text-[#ACCF02]" > works</span>
             </h2>
-            <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cd50c5d3d5e8db67cd88_double-ar.svg"
+            { !isMobile && <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cd50c5d3d5e8db67cd88_double-ar.svg"
               loading="lazy"
               alt=""
-              className="flip-image-121 absolute top-[25px] left-[10px]" />
+              className="flip-image-121 absolute top-[25px] left-[32%]" />}
           </div>
           <div className=" grid grid-cols-2 justify-center gap-2">
             <div className=" grid-cols-1">
@@ -86,7 +86,7 @@ export const About = () => {
             <div className="flex justify-evenly gap-4">
               <div className="">
                 <div className=" relative">
-                  <h2 className="text-[46px] text-[#021414] font-extrabold ">Business
+                  <h2 className="text-[30px] text-[#021414] font-extrabold ">Business
                   </h2>
                 </div>
                 <p className="text-[20px] text-[#ffffff] mt-5">List your digital products.<br />Apply for AppSumo Select.
@@ -100,7 +100,7 @@ export const About = () => {
             <div className="flex justify-evenly gap-4">
               <div className="">
                 <div className=" relative">
-                  <h2 className="text-[46px] text-[#021414] font-extrabold ">Subscribers
+                  <h2 className="text-[30px] text-[#021414] font-extrabold ">Subscribers
                   </h2>
                 </div>
                 <p className="text-[20px] text-[#ffffff] mt-5">

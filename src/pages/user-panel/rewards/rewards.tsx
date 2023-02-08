@@ -20,6 +20,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { Search } from "@mui/icons-material";
 import { useAppSelector, useAppDispatch } from "data";
+import Stack from '@mui/material/Stack';
 import {
   GET_ALL_SUBSCRIBER_OF_BUSINESS,
   GET_USER_REWARDS,
@@ -108,8 +109,8 @@ export function Rewards() {
             params.value == "Missed"
               ? "errorColor"
               : params.value == "Available"
-              ? "successColor"
-              : "warningColor"
+                ? "successColor"
+                : "warningColor"
           }
           onClick={() => {
             params.value == "Available" && rewardClaimed(params.id);
@@ -181,6 +182,17 @@ export function Rewards() {
     [listBusiness]
   );
 
+  function NoRowsOverlay() {
+    return (
+      <Stack height="100%" alignItems="center" justifyContent="center">
+        {filter == 'Available' && 'No rewards available at this moment. Please check back soon.'}
+        {filter == 'Claimed' && 'You have not claimed any rewards yet.'}
+        {filter == 'Missed' && 'You have not missed any rewards yet.'}
+        {filter == '' && 'No Data'}
+      </Stack>
+    );
+  }
+
   return (
     <Container maxWidth="xl" sx={{ p: 2 }}>
       <PageHeader
@@ -235,6 +247,7 @@ export function Rewards() {
         <Grid item xs={12} md={8}>
           <TableContainer sx={{ height: 400, width: "100%" }}>
             <DataGrid
+              components={{ NoRowsOverlay }}
               rows={list}
               columns={columns}
               pageSize={5}

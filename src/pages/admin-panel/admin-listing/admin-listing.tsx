@@ -210,8 +210,6 @@ export function AdminListing() {
         :
         <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
 
-          {/* {loader && */}
-          {/* } */}
           <Box
             sx={{
               display: "flex",

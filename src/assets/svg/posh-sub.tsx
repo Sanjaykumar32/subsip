@@ -50,7 +50,7 @@ export function PoshSubLogo(props: PoshSubLogoProps) {
     // </LogoCss>
     // <img src={LogoImage} className={props.variant === "light" ? 'Logo LightVariant' : 'Logo darkVariant'} />
     <span className="text-[40px] font-bold ">
-      Subsip
+      subsip
     </span>
   );
 }

@@ -77,19 +77,19 @@ export function Links() {
           },
         ],
       },
-      {
-        title: 'coming soon',
-        subTitle: [
-          {
-            title: <img src={appleImage} alt="" className='h-[32px]' />,
-            link: "/",
-          },
-          {
-            title: <img src={androidImage} alt="" className='h-[31px]' />,
-            link: "/",
-          },
-        ]
-      }
+      // {
+      //   title: 'coming soon',
+      //   subTitle: [
+      //     {
+      //       title: <img src={appleImage} alt="" className='h-[32px]' />,
+      //       link: "/",
+      //     },
+      //     {
+      //       title: <img src={androidImage} alt="" className='h-[31px]' />,
+      //       link: "/",
+      //     },
+      //   ]
+      // }
     ],
     []
   );

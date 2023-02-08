@@ -56,7 +56,7 @@ export function FooterMain() {
                 <Box className="">
                   {/* <Logo /> */}
                   <span className="text-[40px] font-bold cursor-pointer "  onClick={handleHomeRoute}>
-                    Subsip
+                    subsip
                   </span>
                   <Typography className=""> Free certificates from businesses you love </Typography>
                 </Box>
@@ -67,7 +67,7 @@ export function FooterMain() {
                 <Box sx={{ mb: 2 }}>
                   {/* <Logo /> */}
                   <span className="text-[40px] font-bold cursor-pointer " onClick={handleHomeRoute}>
-                    Subsip
+                    subsip
                   </span>
                   <Typography className=""> Free certificates from businesses you love  </Typography>
                 </Box>

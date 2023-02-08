@@ -73,9 +73,9 @@ export function SignUp() {
             <span onClick={()=> navigate('/terms')} className=' cursor-pointer' > Terms  </span>
             <span  onClick={()=> navigate('/privacy')} className=' cursor-pointer'> & Privacy Policy.</span><br />
           </Typography>
-          <Typography>
+          {/* <Typography>
             <span className="text-[12px] font-normal">Use your best email address because the rewards and certificates will be sent there</span>
-          </Typography>
+          </Typography> */}
           <Box sx={{ mt: 2 }}>
             <Link
               to={AuthRoutePathEnum.SIGN_IN}

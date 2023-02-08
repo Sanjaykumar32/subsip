@@ -36,8 +36,12 @@ export function LocationPage() {
   const businessName = locations.pathname.split("/")[2];
   const [name, setName] = useState("");
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const auth = useAuth();
+  const isAuthenticated = auth.isAuthenticated;
+  const navigate = useNavigate();
 
   const handleClickOpen = async (el: any) => {
+   if(isAuthenticated){
     try {
       await dispatch(
         AdminThunk.refferralCode({ userId: userId ? userId : "" })
@@ -47,6 +51,10 @@ export function LocationPage() {
     }
     setOpen(true);
     setName(el);
+  }else{
+    navigate('/auth/sign-in')
+  }
+
   };
   const businessId = bussinessByName?.[0]?.iBusinessId
 
@@ -86,9 +94,6 @@ export function LocationPage() {
     setOpen(false);
   };
 
-  const auth = useAuth();
-  const isAuthenticated = auth.isAuthenticated;
-  const navigate = useNavigate();
 
   return (
     <Container maxWidth="lg" sx={{ my: 5 }}>
@@ -121,7 +126,7 @@ export function LocationPage() {
                 </Grid>
 
                 <Grid item sm={12} md={4} sx={{ px: 2, mt: "-35px" }}>
-                  {isAuthenticated && (
+                  
                     <Box
                       sx={{
                         display: "flex",
@@ -143,13 +148,13 @@ export function LocationPage() {
                         Referral
                       </Typography>
                     </Box>
-                  )}
+                  
                   {bussinessByName.map((res: IBusiness, index: number) => {
                     return <Location {...res} key={index} />;
                   })}
                 </Grid>
               </Grid>
-              {open && (
+              {open  &&  (
                 <ResponsiveDialog
                   title={name}
                   open={open}
@@ -172,7 +177,7 @@ export function LocationPage() {
                   <Address>{res?.vLocation}</Address>
                 </div>
 
-                {isAuthenticated && (
+               
                   <Box
                     className=" items-end text-center"
                     sx={{
@@ -195,7 +200,7 @@ export function LocationPage() {
                       Referral
                     </Typography>
                   </Box>
-                )}
+                
               </div>
               <Info>{res?.tDescription}</Info>
 

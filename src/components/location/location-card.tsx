@@ -177,7 +177,7 @@ export const Subscribe = ({
         <Button
           size="large"
           variant="contained"
-          color="error"
+          className="!bg-[#09292b] !text-white"
           onClick={() => {
             onButtonClick();
           }}

@@ -3,80 +3,75 @@ import React from 'react'
 const TermConditions = () => {
   return (
     <div className="flex  justify-center">
-    <div className='w-[80%] my-10'>
-      <h1 className='text-[40px] font-bold'> Terms and Conditions</h1>
-      <p className='text-[18px]  leading-8'><br />
-       <span >Welcome to www.Subsip.com!</span><br />
+      <div className='w-[80%] my-10'>
+        <h1 className='text-[40px] font-bold'>Terms and Conditions of www.subsip.com</h1>
+        <p className='text-[18px]  leading-8'><br />
+          
+          The following terms and conditions (collectively, these {`"Terms and Conditions"`}) apply to your use of www.subsip.com, including any content, functionality and services offered on or via www.subsip.com (the {`"Website"`}).
+         <br /><br />  Please read the Terms and Conditions carefully before you start using Subsip, because by using the Website you accept and agree to be bound and abide by these Terms and Conditions.
+          <br /><br /> These Terms and Conditions are effective as of February 5, 2023. We expressly reserve the right to change these Terms and Conditions from time to time without notice to you. You acknowledge and agree that it is your responsibility to review this Website and these Terms and Conditions from time to time and to familiarize yourself with any modifications. Your continued use of this Website after such modifications will constitute acknowledgement of the modified Terms and Conditions and agreement to abide and be bound by the modified Terms and Conditions.
+          <br /><br /> 
+          <b className='text-[22px]'>Conduct on Website</b><br />
 
-        These terms and conditions outline the rules and regulations for the use of Subsip’s Website, located at www.Subsip.com.
-        By accessing this website we assume you accept these terms and conditions. Do not continue to use www.Subsip.com if you do not agree to take all of the terms and conditions stated on this page.
-        The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: `Client`, `You` and `Your` refers to you, the person log on this website and compliant to the Company’s terms and conditions. `The Company`, `Ourselves`, `We`, `Our` and `Us`, refers to our Company. `Party`, `Parties`, or `Us`, refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance with and subject to, prevailing law of Washington State. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.
-        Cookies
-        We employ the use of cookies. By accessing www.Subsip.com, you agreed to use cookies in agreement with the Subsip’s Privacy Policy.
-        Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.
-        License
-        Unless otherwise stated, Subsip and/or its licensors own the intellectual property rights for all material on www.Subsip.com. All intellectual property rights are reserved. You may access this from www.Subsip.com for your own personal use subjected to restrictions set in these terms and conditions.
-        You must not:
-        * Republish material from www.Subsip.com
-        * Sell, rent or sub-license material from www.Subsip.com
-        * Reproduce, duplicate or copy material from www.Subsip.com
-        * Redistribute content from www.Subsip.com
+           Your use of the Website is subject to all applicable laws and regulations, and you are solely responsible for the substance of your communications through the Website.
+          <br /><br /> By posting information in or otherwise using any communications service, chat room, message board, newsgroup, software library, or other interactive service that may be available to you on or through this Website, you agree that you will not upload, share, post, or otherwise distribute or facilitate distribution of any content — including text, communications, software, images, sounds, data, or other information — that:
+          <br /> •	Is unlawful, threatening, abusive, harassing, defamatory, libelous, deceptive, fraudulent, invasive of {`another's`} privacy, tortious, contains explicit or graphic descriptions or accounts of sexual acts (including but not limited to sexual language of a violent or threatening nature directed at another individual or group of individuals), or otherwise violates our rules or policies
+          <br />
+          •	Victimizes, harasses, degrades, or intimidates an individual or group of individuals on the basis of religion, gender, sexual orientation, race, ethnicity, age, or disability
+          <br />
+          •	Infringes on any patent, trademark, trade secret, copyright, right of publicity, or other proprietary right of any party
+          <br />
+          •	Constitutes unauthorized or unsolicited advertising, junk or bulk email (also known as {`"spamming"`}), chain letters, any other form of unauthorized solicitation, or any form of lottery or gambling
+          <br />
+          •	Contains software viruses or any other computer code, files, or programs that are designed or intended to disrupt, damage, or limit the functioning of any software, hardware, or telecommunications equipment or to damage or obtain unauthorized access to any data or other information of any third party
+          <br />
+          •	Impersonates any person or entity, including any of our employees or representatives
+          <br />
+          <br />
+          We neither endorse nor assume any liability for the contents of any material uploaded or submitted by third party users of the Website. We generally do not pre-screen, monitor, or edit the content posted by users of communications services, chat rooms, message boards, newsgroups, software libraries, or other interactive services that may be available on or through this Website.
+          <br /> However, we and our agents have the right at their sole discretion to remove any content that, in our judgment, does not comply with these Terms of Use and any other rules of user conduct for our Website, or is otherwise harmful, objectionable, or inaccurate. We are not responsible for any failure or delay in removing such content. You hereby consent to such removal and waive any claim against us arising out of such removal of content.
+          <br /><br />
+          You agree that we may at any time, and at our sole discretion, terminate your membership, account, or other affiliation with our site without prior notice to you for violating any of the above provisions.
+          <br /><br />
+          In addition, you acknowledge that we will cooperate fully with investigations of violations of systems or network security at other sites, including cooperating with law enforcement authorities in investigating suspected criminal violations.
+          <br /><br />
+          
+          <b className='text-[22px]'>Intellectual Property</b><br />
+          By accepting these Terms and Conditions, you acknowledge and agree that all content presented to you on this Website is protected by copyrights, trademarks, service marks, patents or other proprietary rights and laws, and is the sole property of Subsip.
+          <br /><br />
+          You are only permitted to use the content as expressly authorized by us or the specific content provider. Except for a single copy made for personal use only, you may not copy, reproduce, modify, republish, upload, post, transmit, or distribute any documents or information from this Website in any form or by any means without prior written permission from us or the specific content provider, and you are solely responsible for obtaining permission before reusing any copyrighted material that is available on this Website.
+         <br /><br />
+         
+          <b className='text-[22px]'>Third Party Websites</b><br />
+          This Website may link you to other sites on the Internet or otherwise include references to information, documents, software, materials and/or services provided by other parties. These websites may contain information or material that some people may find inappropriate or offensive.
+        <br /><br />
+          These other websites and parties are not under our control, and you acknowledge that we are not responsible for the accuracy, copyright compliance, legality, decency, or any other aspect of the content of such sites, nor are we responsible for errors or omissions in any references to other parties or their products and services. The inclusion of such a link or reference is provided merely as a convenience and does not imply endorsement of, or association with, the Website or party by us, or any warranty of any kind, either express or implied.
+        <br /><br />
+    
+           <b className='text-[22px]'>Disclaimer of Warranties, Limitations of Liability and Indemnification</b><br />
+         
+          Your use of Subsip is at your sole risk. The Website is provided {`"as is" `}and {`"as available"`}. We disclaim all warranties of any kind, express or implied, including, without limitation, the warranties of merchantability, fitness for a particular purpose and non-infringement.
+          <br /><br />
+          We are not liable for damages, direct or consequential, resulting from your use of the Website, and you agree to defend, indemnify and hold us harmless from any claims, losses, liability costs and expenses (including but not limits to {`attorney's`} fees) arising from your violation of any {`third-party's`} rights. You acknowledge that you have only a limited, non-exclusive, nontransferable license to use the Website. Because the Website is not error or bug free, you agree that you will use it carefully and avoid using it ways which might result in any loss of your or any third {`party's`} property or information.
+         <br /><br />
+          
+          <b className='text-[22px]'>Term and termination</b><br />
+          This Terms and Conditions will become effective in relation to you when you create a Subsip account or when you start using the Subsip and will remain effective until terminated by you or by us.
+          <br /><br />
+          Subsip reserves the right to terminate this Terms and Conditions or suspend your account at any time in case of unauthorized, or suspected unauthorized use of the Website whether in contravention of this Terms and Conditions or otherwise. If Subsip terminates this Terms and Conditions, or suspends your account for any of the reasons set out in this section, Subsip shall have no liability or responsibility to you.
+          <br /><br />
+          <b className='text-[22px]'>Assignment</b><br />
+        
+          Subsip may assign this Terms and Conditions or any part of it without restrictions. You may not assign this Terms and Conditions or any part of it to any third party.
+          <br /><br />
+          <b className='text-[22px]'>Governing Law</b><br />
+         
+          These Terms and Conditions and any dispute or claim arising out of, or related to them, shall be governed by and construed in accordance with the internal laws of the us without giving effect to any choice or conflict of law provision or rule.
+         <br /><br />
+          Any legal suit, action or proceeding arising out of, or related to, these Terms of Service or the Website shall be instituted exclusively in the federal courts of us.
 
-        This Agreement shall begin on the date hereof.
-
-        Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Subsip does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Subsip, its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, Subsip. shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.
-        Subsip reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.
-        You warrant and represent that:
-        * You are entitled to post the Comments on our website and have all necessary licenses and consents to do so;
-        * The Comments do not invade any intellectual property right, including without limitation copyright, patent or trademark of any third party;
-        * The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material which is an invasion of privacy
-        * The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.
-        You hereby grant Subsip a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.
-        Hyperlinking to our Content
-        The following organizations may link to our Website without prior written approval:
-        * Government agencies;
-        * Search engines;
-        * News organizations;
-        * Online directory distributors may link to our Website in the same manner as they hyperlink to the Websites of other listed businesses; and
-        * System wide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.
-        These organizations may link to our home page, to publications or to other Website information so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products and/or services; and (c) fits within the context of the linking party’s site.
-        We may consider and approve other link requests from the following types of organizations:
-        * commonly-known consumer and/or business information sources;
-        * dot.com community sites;
-        * associations or other groups representing charities;
-        * online directory distributors;
-        * internet portals;
-        * accounting, law and consulting firms; and
-        * educational institutions and trade associations.
-        We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of Subsip; and (d) the link is in the context of general resource information.
-        These organizations may link to our home page so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party’s site.
-        If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to Subsip. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.
-        Approved organizations may hyperlink to our Website as follows:
-        * By use of our corporate name; or
-        * By use of the uniform resource locator being linked to; or
-        * By use of any other description of our Website being linked to that makes sense within the context and format of content on the linking party’s site.
-        No use of Subsip’s logo or other artwork will be allowed for linking absent a trademark license agreement.
-        iFrames
-        Without prior approval and written permission, you may not create frames around our Webpages that alter in any way the visual presentation or appearance of our Website.
-        Content Liability
-        We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.
-        Your Privacy
-        Please read Privacy Policy
-        Reservation of Rights
-        We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request. We also reserve the right to amen these terms and conditions and it’s linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking terms and conditions.
-        Removal of links from our website
-        If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment. We will consider requests to remove links but we are not obligated to or so or to respond to you directly.
-        We do not ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we promise to ensure that the website remains available or that the material on the website is kept up to date.
-        Disclaimer
-        To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:
-        * limit or exclude our or your liability for death or personal injury;
-        * limit or exclude our or your liability for fraud or fraudulent misrepresentation;
-        * limit any of our or your liabilities in any way that is not permitted under applicable law; or
-        * exclude any of our or your liabilities that may not be excluded under applicable law.
-        The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.
-        As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature
-      </p>
-    </div>
+        </p>
+      </div>
     </div>
   )
 }

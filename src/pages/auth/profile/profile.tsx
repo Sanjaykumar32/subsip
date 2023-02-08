@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import profileController from "./profileController";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export function Profile() {
   const { getters, handlers } = profileController();
@@ -28,6 +29,11 @@ export function Profile() {
         </Box>
         <Typography fontWeight={400} variant="caption">
           Verified
+        </Typography>
+      </Box>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Typography fontWeight={400} variant='body2'>
+         <span className="text-[16px] font-bold"> User-Id:</span>  <AccountCircleIcon className="!h-5 !w-5"/> poshsub@yopmail.com
         </Typography>
       </Box>
       <Container maxWidth="xs" sx={{ my: 4 }}>

@@ -445,7 +445,7 @@ export function ClickOnCategory() {
                   justifyContent: "space-between",
                 }}
               >
-                <Typography variant="caption">Sort By Subscribe</Typography>
+                <Typography variant="caption">Sort By subscribers</Typography>
                 <FormControl variant="standard">
                   <Select
                     labelId="sort-by-select-label"
