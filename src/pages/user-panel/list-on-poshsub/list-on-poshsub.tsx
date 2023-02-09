@@ -125,7 +125,7 @@ export function ListingOnPoshSub() {
         <FormControl fullWidth size="small">
           <Grid container>
             <Grid item xs={12} md={6}>
-              <Box sx={{ px: 3, py: 1 }}>
+              <Box sx={{ px: 3 }}>
                 <Box sx={{ my: 4 }}>
                   <Label> {step1.label} </Label>
                   <Typography variant="body2"> {step1.caption} </Typography>
@@ -137,7 +137,7 @@ export function ListingOnPoshSub() {
                     fullWidth
                   />
                 </Box>
-                <Box sx={{ my: 4 }}>
+                <Box sx={{ mt: 4 }}>
                   <Label> {step5.label} </Label>
 
                   <Typography variant="body2"> {step5.caption} </Typography>
@@ -153,7 +153,7 @@ export function ListingOnPoshSub() {
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Box sx={{ px: 3, py: 1 }}>
+              <Box sx={{ px: 3 }}>
                 <Box sx={{ my: 4 }}>
                   <Label id={`${step7.id}-label`}> {step7.label} </Label>
                   <Typography variant="body2"> {step7.caption} </Typography>
@@ -205,7 +205,7 @@ export function ListingOnPoshSub() {
           </Button>
           <a
             href={`mailto: Subsipinc@gmail.com?subject= Request to remove an existing business listing`}
-            className="py-[10px] cursor-pointer"
+            className="py-[25px] cursor-pointer decoration-solid underline listResText"
           >
             Request to remove an existing business listing
           </a>

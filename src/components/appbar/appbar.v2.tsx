@@ -432,6 +432,8 @@ export const UserAppBar = (props: any) => {
   };
 
   const handleBanner = () => {
+    // navigate(`/category?${item.vName.replace(/\s/g,'-')}` ,
+    // {state:{id: item?.iCategoryId ,vName: item.vName.replace(/\s/g,'-')}})
     setOpen(false);
   };
 
@@ -991,6 +993,7 @@ export const UserAppBar = (props: any) => {
                         <Link
                           href={`/category/${item?.iCategoryId}`}
                           onClick={handleBanner}
+                          className='p-[10px]'
                         >
                           {item?.vName}
 
@@ -1001,6 +1004,7 @@ export const UserAppBar = (props: any) => {
                         <Link
                           href={`/category/${item?.iCategoryId}`}
                           onClick={handleBanner}
+                          className='p-[10px]'
                         >
                           {item?.vName}
                         </Link>
@@ -1010,6 +1014,7 @@ export const UserAppBar = (props: any) => {
                         <Link
                           href={`/category/${item?.iCategoryId}`}
                           onClick={handleBanner}
+                          className='p-[10px]'
                         >
                           {item?.vName}
                         </Link>
@@ -1019,6 +1024,7 @@ export const UserAppBar = (props: any) => {
                         <Link
                           href={`/category/${item?.iCategoryId}`}
                           onClick={handleBanner}
+                          className='p-[10px]'
                         >
                           {item?.vName}
                         </Link>
@@ -1028,6 +1034,7 @@ export const UserAppBar = (props: any) => {
                         <Link
                           href={`/category/${item?.iCategoryId}`}
                           onClick={handleBanner}
+                          className='p-[10px]'
                         >
                           {item?.vName}
                         </Link>
@@ -1037,6 +1044,7 @@ export const UserAppBar = (props: any) => {
                         <Link
                           href={`/category/${item?.iCategoryId}`}
                           onClick={handleBanner}
+                          className='p-[10px]'
                         >
                           {item?.vName}
                         </Link>
@@ -1046,6 +1054,7 @@ export const UserAppBar = (props: any) => {
                         <Link
                           href={`/category/${item?.iCategoryId}`}
                           onClick={handleBanner}
+                          className='p-[10px]'
                         >
                           {item?.vName}
                         </Link>
@@ -1053,7 +1062,7 @@ export const UserAppBar = (props: any) => {
                     ) : (
                       index === 7 && (
                         <ListItem>
-                          <Link href={`/category/all`} onClick={handleBanner}>
+                          <Link  onClick={handleBanner}   className='p-[10px]'>
                             {"More"}
                           </Link>
                         </ListItem>

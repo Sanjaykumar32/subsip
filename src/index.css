@@ -304,6 +304,9 @@ h2 {
     .aboutText{
         font-size: 36px;
     }
+    .listResText{
+        font-size: 14px;
+    }
     .ab-h2 {
         margin-top: 0px;
         font-family: Barlow, sans-serif;

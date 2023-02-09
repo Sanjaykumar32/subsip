@@ -71,16 +71,16 @@ export const About = () => {
           </div>
           <div className=" grid grid-cols-2 justify-center gap-2">
             <div className=" grid-cols-1">
-              <button onClick={()=> setBusiness('Business')} className=' hover:bg-[#144272] hover:text-white border-[0.5px] border-solid border-[#595959] rounded-[6px] w-full py-4 text-[22px] font-medium bg-[#ACCF02]'>Business</button>
+              <button onClick={()=> setBusiness('Subscribers')}  className=' hover:bg-[#144272] hover:text-white border-[0.5px] border-solid border-[#595959] rounded-[6px] w-full py-4 text-[22px] font-medium bg-[#ACCF02]'>Subscribers</button>
             </div>
             <div className=" grid-cols-1">
-              <button onClick={()=> setBusiness('Subscribers')}  className=' hover:bg-[#144272] hover:text-white border-[0.5px] border-solid border-[#595959] rounded-[6px] w-full py-4 text-[22px] font-medium bg-[#ACCF02]'>Subscribers</button>
+              <button onClick={()=> setBusiness('Business')} className=' hover:bg-[#144272] hover:text-white border-[0.5px] border-solid border-[#595959] rounded-[6px] w-full py-4 text-[22px] font-medium bg-[#ACCF02]'>Business</button>
             </div>
           </div>
 
          
 
-          <div className=" mt-1 bg-[#39cd62]">
+          <div className=" mt-1 bg-[#fff] border-[0.5px] border-[#595959] border-solid rounded-[6px]">
             {business == 'Business' &&
           <div className="  py-[40px] px-5  m-auto ">
             <div className="flex justify-evenly gap-4">
@@ -89,7 +89,7 @@ export const About = () => {
                   <h2 className="text-[30px] text-[#021414] font-extrabold ">Business
                   </h2>
                 </div>
-                <p className="text-[20px] text-[#ffffff] mt-5">List your digital products.<br />Apply for AppSumo Select.
+                <p className="text-[20px] text-[#262626] mt-5">List your digital products.<br />Apply for AppSumo Select.
                 AppSumo is the platform 1.25M+ <br />entrepreneurs trust for everything they need to create fulfilling businesses. We’ve got all the tools you need to grow and scale.
                 </p>
               </div>
@@ -103,8 +103,9 @@ export const About = () => {
                   <h2 className="text-[30px] text-[#021414] font-extrabold ">Subscribers
                   </h2>
                 </div>
-                <p className="text-[20px] text-[#ffffff] mt-5">
-                AppSumo is the platform 1.25M+ <br />entrepreneurs trust for everything they need to create fulfilling businesses. We’ve got all the tools you need to grow and scale.
+                <p className="text-[20px] text-[#262626] mt-5">
+                AppSumo is the platform 1.25M+ <br />  AppSumo is the platform 1.25M+ br
+                <br /> entrepreneurs trust for everything they need to create fulfilling businesses. We’ve got all the tools you need to grow and scale.
                 </p>
               </div>
             </div>

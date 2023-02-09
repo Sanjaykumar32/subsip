@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { Form } from "react-router-dom";
 import { InputBox, Label } from "components";
 import {
@@ -12,11 +12,37 @@ import {
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import profileController from "./profileController";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useAppDispatch, useAppSelector } from "data";
+import { GET_ALL_SUBSCRIBER, GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
+import { AdminThunk } from "data/thunk/admin.thunk";
 
 export function Profile() {
   const { getters, handlers } = profileController();
   const { theme, value } = getters;
   const { changeHandler, submitHandler } = handlers;
+  const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
+  const userId = localStorage.getItem("userId");
+  const dispatch = useAppDispatch();
+
+  const email =  subscribeBusiness?.map((el:any)=>{
+    return el.vEmail
+  })
+
+  const allsubscriberOfBussiness = useCallback(async () => {
+    try {
+      await dispatch(
+        AdminThunk.allSubscriberOfBussiness({
+          userId: userId ? parseInt(userId) : 0,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, userId]);
+
+  useEffect(() => {
+    allsubscriberOfBussiness();
+  }, [allsubscriberOfBussiness]);
 
   return (
     <Container sx={{ p: 5 }} maxWidth={false}>
@@ -31,9 +57,12 @@ export function Profile() {
           Verified
         </Typography>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "center"  }} className='mt-2'>
         <Typography fontWeight={400} variant='body2'>
-         <span className="text-[16px] font-bold"> User-Id:</span>  <AccountCircleIcon className="!h-5 !w-5"/> poshsub@yopmail.com
+         <span className="text-[20px] font-bold">Email: 
+         </span> 
+          <span className="px-1"><AccountCircleIcon className="!h-5 !w-5 "/></span>
+           <span> {email[0]}</span>
         </Typography>
       </Box>
       <Container maxWidth="xs" sx={{ my: 4 }}>
