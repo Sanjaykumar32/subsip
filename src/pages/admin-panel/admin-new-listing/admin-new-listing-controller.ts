@@ -94,7 +94,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
           setPreview(item?.vPreview);
           setBodyDescription(item?.vBodyDescription);
           setTagLine(item?.vTagLine)
-          setImage('http://159.223.194.50:8000/' + item?.vImage)
+          setImage('http://api.subsip.com:8000/' + item?.vImage)
 
 
           if (item?.onBanner == 1) {

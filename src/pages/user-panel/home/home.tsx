@@ -355,8 +355,8 @@ export function Home({ alertOnBottom }: any) {
                     <img
                       src={
                         ele?.vImage
-                          ? "http://159.223.194.50:8000/" + ele?.vImage
-                          : "http://159.223.194.50:8000/public/uploads/1672076769972.png"
+                          ? "http://api.subsip.com:8000/" + ele?.vImage
+                          : "http://api.subsip.com:8000/public/uploads/1672076769972.png"
                       }
                       className={`${
                         isMobile ? "h-[266px]" : "h-full"
@@ -393,7 +393,7 @@ export function Home({ alertOnBottom }: any) {
                       className="relative overflow-x-auto md:overflow-x-hidden "
                     >
                       <SliderCard
-                        imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
+                        imgSrc={"http://api.subsip.com:8000/" + ele?.vImage}
                         name={ele?.vName}
                         tagLine={ele?.vTagLine}
                         des={ele?.tDescription}
@@ -432,7 +432,7 @@ export function Home({ alertOnBottom }: any) {
                       className="relative overflow-x-auto md:overflow-x-hidden "
                     >
                       <SliderCard
-                        imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
+                        imgSrc={"http://api.subsip.com:8000/" + ele?.vImage}
                         name={ele?.vName}
                         tagLine={ele?.vTagLine}
                         des={ele?.tDescription}
@@ -472,7 +472,7 @@ export function Home({ alertOnBottom }: any) {
                       className="relative overflow-x-auto md:overflow-x-hidden "
                     >
                       <SliderCard
-                        imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
+                        imgSrc={"http://api.subsip.com:8000/" + ele?.vImage}
                         name={ele?.vName}
                         tagLine={ele?.vTagLine}
                         des={ele?.tDescription}
@@ -515,7 +515,7 @@ export function Home({ alertOnBottom }: any) {
                           className="relative overflow-x-auto md:overflow-x-hidden "
                         >
                           <SliderCard
-                            imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
+                            imgSrc={"http://api.subsip.com:8000/" + ele?.vImage}
                             name={ele?.vName}
                             tagLine={ele?.vTagLine}
                             des={ele?.tDescription}
@@ -556,7 +556,7 @@ export function Home({ alertOnBottom }: any) {
                           className="relative overflow-x-auto md:overflow-x-hidden "
                         >
                           <SliderCard
-                            imgSrc={"http://159.223.194.50:8000/" + ele?.vImage}
+                            imgSrc={"http://api.subsip.com:8000/" + ele?.vImage}
                             name={ele?.vName}
                             tagLine={ele?.vTagLine}
                             des={ele?.tDescription}
