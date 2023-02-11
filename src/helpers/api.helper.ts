@@ -57,7 +57,7 @@ export class ApiHelper {
   }
 
   public static init() {
-    axios.defaults.baseURL = "http://api.subsip.com:8000";
+    axios.defaults.baseURL = "https://api.subsip.com";
     ApiHelper.initRequestManager();
   }
 }

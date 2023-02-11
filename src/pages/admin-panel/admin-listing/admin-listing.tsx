@@ -62,7 +62,7 @@ export function AdminListing() {
               height: "30px",
               width: "30px",
             }}
-            src={"http://api.subsip.com:8000/" + params.value}
+            src={"https://api.subsip.com/" + params.value}
           />
         );
       },

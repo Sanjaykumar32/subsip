@@ -116,7 +116,7 @@ export function LocationPage() {
                         height: "auto",
                         objectFit: "cover",
                       }}
-                      src={"http://api.subsip.com:8000/" + res.vImage}
+                      src={"https://api.subsip.com/" + res.vImage}
                     />
                   </Card>
                   {/* ))} */}
@@ -216,7 +216,7 @@ export function LocationPage() {
                         // height: "auto",
                         objectFit: "cover",
                       }}
-                      src={"http://api.subsip.com:8000/" + res.vImage}
+                      src={"https://api.subsip.com/" + res.vImage}
                     />
                   </Card>
 

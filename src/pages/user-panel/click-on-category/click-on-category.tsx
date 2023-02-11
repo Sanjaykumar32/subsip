@@ -499,7 +499,7 @@ export function ClickOnCategory() {
                             <img
                               src={
                                 data.vImage
-                                  ? "http://api.subsip.com:8000/" + data.vImage
+                                  ? "https://api.subsip.com/" + data.vImage
                                   : ""
                               }
                               className="cursor-pointer"
