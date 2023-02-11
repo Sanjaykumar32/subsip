@@ -643,7 +643,7 @@ export const UserAppBar = (props: any) => {
                 <Autocomplete
                   {...defaultProps}
                   selectOnFocus={false}
-                  noOptionsText={'Please enter location'}
+                  noOptionsText={'Enter your city'}
                   autoSelect={true}
                   onClose={(e) => {
                     if (e.cancelable == false) {
@@ -1097,7 +1097,7 @@ export const UserAppBar = (props: any) => {
                               {...defaultProps}
                               selectOnFocus={false}
                               openOnFocus
-                              noOptionsText={'Please enter location'}
+                              noOptionsText={'Enter your city'}
                               autoSelect={true}
                               id="disable-close-on-select"
                               onClose={(e) => {

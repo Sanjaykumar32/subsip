@@ -114,7 +114,7 @@ export function Links() {
                     {subData.title === "Contact Us" ? (
                       <Typography className="!mt-[8px]">
                         <a
-                          href={`mailto: Subsipinc@gmail.com?subject=  I have a question`}
+                          href={`mailto: info@subsip.com?subject=  I have a question`}
                           className="cursor-pointer"
                         >
                           {subData.title}

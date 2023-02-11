@@ -14,10 +14,10 @@ export const About = () => {
           <div className="banner-content">
             <div className="banner-heading ">
 
-              <h2 className="ab-h2">Claim free
-                <span className="text-span-28"> certificates from</span>
+              <h2 className="ab-h2">Use the vouchers
+                <span className="text-span-28"> you claim on Subsip</span>
 
-                <br />businesses you love on <br />
+                <br />you claim on Subsip to try out the goods and services of businesses<br />
                 <span className="text-span-23 text-[#ffffff] relative "> Subsip
                   Free certificates from businesses you love!
                   <span className='flex justify-center'>
@@ -34,7 +34,7 @@ export const About = () => {
         </div>
 
 
-        <div className='bg-[#fff] '>
+        {/* <div className='bg-[#fff] '>
           <div className="m-auto mx-10 " >
             <div className=" py-20 ">
               <div className="">
@@ -55,7 +55,7 @@ export const About = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
 
 

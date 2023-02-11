@@ -204,7 +204,7 @@ export function ListingOnPoshSub() {
             Advertise
           </Button>
           <a
-            href={`mailto: Subsipinc@gmail.com?subject= Request to remove an existing business listing`}
+            href={`mailto: info@subsip.com?subject= Request to remove an existing business listing`}
             className="py-[25px] cursor-pointer decoration-solid underline listResText"
           >
             Request to remove an existing business listing
