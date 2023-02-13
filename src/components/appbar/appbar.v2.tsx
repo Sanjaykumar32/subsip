@@ -85,7 +85,8 @@ export const UserAppBar = (props: any) => {
     setMobileOpen(!mobileOpen);
   };
 
-  const routeAdmin = homepage.split("/")[1];
+  console.log(searchLocation ,'searchLocation');
+  const routeAdmin = homepage?.split("/")[1];
 
   // isMobile admin list----------------------------------------
   const menuList = React.useMemo(
@@ -249,7 +250,7 @@ export const UserAppBar = (props: any) => {
       }
     }
   };
-
+ 
   const handleLocation = (event: any) => {
     if (homepage == "/") {
       setLocation(event.target.value?.replaceAll(/\s/g, ''));
@@ -258,6 +259,7 @@ export const UserAppBar = (props: any) => {
 
     if (routeAdmin == "category") {
       // setLocation(event.target.value);
+      setLocation(event.target.value?.replaceAll(/\s/g, ''));
       navigate(`?${event.target.value?.replaceAll(/\s/g, '')}`);
     }
   };

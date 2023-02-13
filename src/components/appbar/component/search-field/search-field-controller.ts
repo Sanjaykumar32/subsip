@@ -33,10 +33,13 @@ export const SearchFieldController = () => {
    */
 
   async function submitHandler(el:any) {
-    if(el.iBusinessid){
-        navigate(`/listing/${el.iBusinessid}`)
+    if(el.iCategoryid){
+      navigate(`/category/${el.iCategoryid}`)
     }else{
-        navigate(`/category/${el.iCategoryid}`)
+      navigate(`/listing/${el.name.replaceAll(/\s/g, "-")}` 
+      , {state : {businessId : el.iBusinessid}}
+      )
+      // console.log(el ,'search el')
     }
    
     // try {

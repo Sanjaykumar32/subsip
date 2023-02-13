@@ -33,12 +33,26 @@ export function LocationPage() {
   const refferralCode = useAppSelector(GET_REFFERRAL_CODE);
   const locations = useLocation();
   const dispatch = useAppDispatch();
-  const businessName = locations.pathname.split("/")[2];
+  const businessNames = locations.pathname.split("/")[2];
   const [name, setName] = useState("");
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const auth = useAuth();
   const isAuthenticated = auth.isAuthenticated;
   const navigate = useNavigate();
+
+  const businessName = businessNames.toString().split('-').join(" ")
+
+  async function getDatalist() {
+    if (businessName) {
+      await dispatch(
+        UserThunk.business({ businessName: businessName})
+      );
+    }
+  }
+
+  useEffect(() => {
+    getDatalist();
+  }, [businessName]);
 
   const handleClickOpen = async (el: any) => {
    if(isAuthenticated){
@@ -63,7 +77,7 @@ export function LocationPage() {
       await dispatch(
         AdminThunk.allSubscriberOfBussiness({
           userId: userId ? parseInt(userId) : 0,
-          businessId: businessId ? businessId  : 0,
+          businessId: businessId ? parseInt(businessId)  : 0,
         })
       );
     } catch (error) {
@@ -78,28 +92,34 @@ export function LocationPage() {
 
  const businessIds = locations?.state?.businessId 
 
-  async function getDatalist() {
-    if (businessIds) {
-      await dispatch(
-        UserThunk.business({ businessId: parseInt(businessIds)})
-      );
-    }
-  }
-
-  useEffect(() => {
-    getDatalist();
-  }, [businessIds, locations]);
+ 
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  console.log(bussinessByName  ,locations  ,businessName , 'bussinessByName')
+
+  const filterBusiness = bussinessByName?.filter((el)=>{
+    return Object.values(
+         el?.vName?.toString()?.replaceAll(/\s/g, "")?.toLowerCase()
+    )
+      .join("")
+      .toLowerCase()
+      .includes(businessName
+              .toString()
+              .slice(1, 30)
+              ?.replaceAll(/\s/g, "")
+              .toLowerCase()
+      );
+  })
 
 
   return (
     <Container maxWidth="lg" sx={{ my: 5 }}>
       {!isMobile && (
         <>
-          {bussinessByName.map((res: IBusiness, index: number) => (
+          {filterBusiness?.map((res: IBusiness, index: number) => (
             <div key={index}>
               <Title>{res?.vName}</Title>
               <Address>{res?.vLocation}</Address>
@@ -116,7 +136,7 @@ export function LocationPage() {
                         height: "auto",
                         objectFit: "cover",
                       }}
-                      src={"https://api.subsip.com/" + res.vImage}
+                      src={"http://159.223.194.50:8000/" + res.vImage}
                     />
                   </Card>
                   {/* ))} */}
@@ -149,7 +169,7 @@ export function LocationPage() {
                       </Typography>
                     </Box>
                   
-                  {bussinessByName.map((res: IBusiness, index: number) => {
+                  {filterBusiness.map((res: IBusiness, index: number) => {
                     return <Location {...res} key={index} />;
                   })}
                 </Grid>
@@ -169,7 +189,7 @@ export function LocationPage() {
 
       {isMobile && (
         <>
-          {bussinessByName.map((res: IBusiness, index: number) => (
+          {filterBusiness.map((res: IBusiness, index: number) => (
             <div key={index}>
               <div className="flex justify-between">
                 <div>
@@ -216,12 +236,12 @@ export function LocationPage() {
                         // height: "auto",
                         objectFit: "cover",
                       }}
-                      src={"https://api.subsip.com/" + res.vImage}
+                      src={"http://159.223.194.50:8000/" + res.vImage}
                     />
                   </Card>
 
                   <Grid item sm={12} md={4}>
-                    {bussinessByName.map((res: IBusiness, index: number) => {
+                    {filterBusiness.map((res: IBusiness, index: number) => {
                       return <Location {...res} key={index} />;
                     })}
 

@@ -58,7 +58,7 @@ export function FooterMain() {
                   <span className="text-[40px] font-bold cursor-pointer "  onClick={handleHomeRoute}>
                     subsip
                   </span>
-                  <Typography className=""> Use the vouchers you claim on Subsip to try out the goods and services of businesses </Typography>
+                  <Typography className=""> Discover vetted businesses, subscribe to their listings <br /> & claim rewards  — with Subsip </Typography>
                 </Box>
               </Grid>
             )}
@@ -69,7 +69,7 @@ export function FooterMain() {
                   <span className="text-[40px] font-bold cursor-pointer " onClick={handleHomeRoute}>
                     subsip
                   </span>
-                  <Typography className=""> Use the vouchers you claim on Subsip to try out the goods and services of businesses  </Typography>
+                  <Typography className=""> Discover vetted businesses, subscribe to their listings <br /> & claim rewards  — with Subsip  </Typography>
                 </Box>
               )}
 

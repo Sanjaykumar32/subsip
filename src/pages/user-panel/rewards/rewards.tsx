@@ -197,7 +197,7 @@ export function Rewards() {
     <Container maxWidth="xl" sx={{ p: 2 }}>
       <PageHeader
         name="Rewards"
-        icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
+        icon={{ icon: faCircleQuestion, tooltip: "Once you claim a reward" }}
       >
         <Box sx={{ display: "flex" }} className="gap-4">
           {/* {[
@@ -247,6 +247,7 @@ export function Rewards() {
         <Grid item xs={12} md={8}>
           <TableContainer sx={{ height: 400, width: "100%" }}>
             <DataGrid
+            disableSelectionOnClick
               components={{ NoRowsOverlay }}
               rows={list}
               columns={columns}

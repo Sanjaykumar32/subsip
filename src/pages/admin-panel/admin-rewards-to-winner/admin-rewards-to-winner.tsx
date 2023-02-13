@@ -99,6 +99,7 @@ export function AdminRewardsToWinner() {
           }}
         >
           <DataGrid
+            disableSelectionOnClick
             rows={rows}
             columns={columns}
             pageSize={5}

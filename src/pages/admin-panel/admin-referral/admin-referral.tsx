@@ -191,6 +191,7 @@ export function AdminReferral() {
         </Box>
         <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
           <DataGrid
+          disableSelectionOnClick
             rows={sorted}
             columns={columns}
             pageSize={5}

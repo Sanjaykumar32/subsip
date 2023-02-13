@@ -44,6 +44,7 @@ export function ClickOnCategory() {
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const userId = localStorage.getItem("userId");
   const dispatch = useAppDispatch();
+  console.log(location?.state?.id , 'location')
 
   const pathSerchValue = location.search.slice(1, 25);
 

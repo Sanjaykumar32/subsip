@@ -140,6 +140,7 @@ export function AdminNotification() {
         </Box>
         <Box style={{ height: 400, width: "100%", marginTop: "5px" }}>
           <DataGrid
+          disableSelectionOnClick
             rows={sortedValue}
             columns={columns}
             pageSize={5}

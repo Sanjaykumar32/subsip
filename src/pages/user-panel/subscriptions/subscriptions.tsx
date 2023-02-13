@@ -27,7 +27,7 @@ export function Subscriptions() {
   const [search, setSearch] = useState("");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const [sortValue, setSortValue] = useState('A-Z')
 
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
@@ -45,15 +45,26 @@ export function Subscriptions() {
     allsubscriberOfBussiness();
   }, [allsubscriberOfBussiness]);
 
-  const subscribeBusiness = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
+  const subscribeBusiness : any = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
 
-  const array = subscribeBusiness.filter((el) => {
+  const sorted = subscribeBusiness?.slice()?.sort((a: any, b: any) => {
+    if (sortValue == 'A-Z') {
+      return a.businessName.toString().toLowerCase().charCodeAt() - b.businessName.toString().toLowerCase().charCodeAt()
+    } else if (sortValue == 'Z-A') {
+      return b.businessName.toString().toLowerCase().charCodeAt() - a.businessName.toString().toLowerCase().charCodeAt()
+    }
+  })
+
+  const array = sorted.filter((el : any) => {
     return Object.values(el?.businessName)
       .join("")
       .toLowerCase()
       .includes(search.toString().toLowerCase());
   });
 
+
+
+  console.log(array ,'array')
   const handleSubs = async (item: any) => {
     const response = await dispatch(
       UserThunk.addSubscriberToBusiness({
@@ -78,6 +89,12 @@ export function Subscriptions() {
   const handleSearch = (e: any) => {
     setSearch(e.target.value);
   };
+
+  const handleSort = (e: any) => {
+    setSortValue(e.target.value)
+  }
+
+
   return (
     <Container maxWidth={false} sx={{ px: 5, py: 10 }}>
       <PageHeader
@@ -106,15 +123,16 @@ export function Subscriptions() {
             </Typography>
             <FormControl variant="standard">
               <Select
+                   onChange={handleSort}
                 variant="standard"
                 labelId="sort-by-select-label"
                 id="sort-by-simple-select"
-                value="Newest"
+                value={sortValue}
                 size="small"
                 sx={{ ml: 1 }}
               >
-                <MenuItem value={"Newest"}>Newest</MenuItem>
-                <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                <MenuItem value={"A-Z"}>A-Z</MenuItem>
+                <MenuItem value={"Z-A"}>Z-A</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -134,7 +152,7 @@ export function Subscriptions() {
             ),
           }}
         />
-        {array.map((element, index: number) => (
+        {array.map((element : any, index: number) => (
           <>
             <Box
               key={`${element.businessName}-${index}`}

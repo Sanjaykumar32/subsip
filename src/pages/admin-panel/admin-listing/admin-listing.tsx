@@ -247,7 +247,7 @@ export function AdminListing() {
                   <div className={`w-full xl:w-[80%] mx-[auto] indexSerch `} >
                     <ReactSearchAutocomplete
                       items={items3}
-                      
+
                       onSearch={handleOnSearch}
                       onSelect={handleOnSelect}
                       onClear={handleClear}
@@ -290,6 +290,7 @@ export function AdminListing() {
 
 
               <DataGrid
+                disableSelectionOnClick
                 rows={list}
                 columns={columns}
                 pageSize={5}

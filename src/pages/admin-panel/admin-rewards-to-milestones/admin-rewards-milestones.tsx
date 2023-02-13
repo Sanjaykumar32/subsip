@@ -89,6 +89,7 @@ export function AdminRewardsMileStones() {
           }}
         >
           <DataGrid
+          disableSelectionOnClick
             rows={rows}
             columns={columns}
             pageSize={5}
