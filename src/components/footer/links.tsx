@@ -68,7 +68,7 @@ export function Links() {
         title: "Business",
         subTitle: [
           {
-            title: "Advertise",
+            title: "Partners",
             link: "/listing/add",
           },
           {

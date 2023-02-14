@@ -989,11 +989,18 @@ export const UserAppBar = (props: any) => {
                     },
                   }}
                 >
-                  {categoryData.map((item: any, index: any) =>
+                  {categoryData?.map((item: any, index: any) =>
                     index === 0 ? (
                       <ListItem key={index}>
                         <Link
                           href={`/category/${item?.iCategoryId}`}
+                        //   href={{
+                        //     pathname:  "/category",
+                        //     query: {
+                        //         id: item?.iCategoryId,
+                        //         title: item.vName,
+                        //     }
+                        // }}
                           onClick={handleBanner}
                           className='p-[10px]'
                         >

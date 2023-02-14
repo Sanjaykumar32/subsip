@@ -50,6 +50,8 @@ export function ClickOnCategory() {
 
   const pathName = location?.pathname?.split("/")?.[1];
 
+  console.log(pathSerchValue , 'path serch')
+
   const getcategory = useCallback(async () => {
     try {
       await dispatch(AdminThunk.getCategory());

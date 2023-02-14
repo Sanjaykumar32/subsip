@@ -96,7 +96,9 @@ const SignUpController = (): ISignUpControllerReturns => {
         email: value.email,
         password: value.password,
       });
-      handleClickOpen();
+      // if(value.email && value.password ){
+        handleClickOpen();
+      // }
       setValue({ email: "", password: "" });
     }
   };

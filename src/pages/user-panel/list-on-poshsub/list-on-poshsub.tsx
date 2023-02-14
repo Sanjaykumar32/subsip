@@ -37,6 +37,7 @@ export function ListingOnPoshSub() {
   const [email, setEmail] = useState("");
   const [businessLocation, setBusinessLocation] = useState("");
   const [subCategory, setSubCategory] = useState("");
+  const [phone, setPhoneNumber] = useState('')
   const theme = useTheme();
   const [
     step1,
@@ -57,8 +58,8 @@ export function ListingOnPoshSub() {
       },
       {
         id: "q2",
-        label: "Step 2: Tag your product in that category",
-        type: InputTypeEnum.SELECT,
+        label: "Phone number ",
+        type: InputTypeEnum.INPUT,
         required: true,
       },
       {
@@ -111,13 +112,14 @@ export function ListingOnPoshSub() {
     console.log(email, "email");
     console.log(businessLocation, "businessLocation");
     console.log(subCategory, "subCategory");
+    console.log(phone, 'phone')
   };
 
   return (
     <Container maxWidth="md" disableGutters sx={{ p: 4 }}>
       <Box sx={{ textAlign: { xs: "center", md: "center" } }}>
         <Typography variant="alternet" sx={{ ml: { xs: 0, md: 3 } }}>
-          Advertise on Subsip
+          Partner with Subsip
         </Typography>
       </Box>
 
@@ -137,7 +139,7 @@ export function ListingOnPoshSub() {
                     fullWidth
                   />
                 </Box>
-                <Box sx={{ mt: 4 }}>
+                <Box sx={{ my: 4 }}>
                   <Label> {step5.label} </Label>
 
                   <Typography variant="body2"> {step5.caption} </Typography>
@@ -145,6 +147,19 @@ export function ListingOnPoshSub() {
                     size="small"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
+                    // required
+                    fullWidth
+                  />
+                </Box>
+
+                <Box sx={{ mt: 4 }}>
+                  <Label> {step2.label} </Label>
+                  <Typography variant="body2"> {step2.caption} </Typography>
+                  <TextField
+                    type="number"
+                    size="small"
+                    value={phone}
+                    onChange={(event) => setPhoneNumber(event.target.value)}
                     // required
                     fullWidth
                   />
@@ -197,11 +212,11 @@ export function ListingOnPoshSub() {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            mt: 3,
+            mt: 5,
           }}
         >
-          <Button variant="rounded" type="submit">
-            Advertise
+          <Button variant="rounded" type="submit" className="!text-[16px] !py-1">
+            Partner with Subsip
           </Button>
           <a
             href={`mailto: info@subsip.com?subject= Request to remove an existing business listing`}
