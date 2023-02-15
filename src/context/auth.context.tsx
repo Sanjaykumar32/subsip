@@ -75,7 +75,6 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   const signIn = useCallback(async (credentials: ICredentials) => {
     try {
       const response: ISignInResponse = await AuthService.signIn(credentials);
-       
       localStorage.setItem("token", response.token.token);
       localStorage.setItem("userId", response.data.userId);
       localStorage.setItem("iGroupId", response.data.iGroupId);
@@ -88,9 +87,12 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
 
   const signUp = useCallback(async (credentials: ISignUpRequest) => {
     try {
-      await AuthService.signUp(credentials);
-    } catch (error) {
-      console.log(error);
+      const res: any =  await AuthService.signUp(credentials)
+      console.log(res , 'res auth')
+    } catch (error :any) {
+      console.log(error.response.data.success , 'error' );
+   
+      toast.success(error.response.data.message);
     }
   }, []);
 

@@ -92,13 +92,13 @@ const SignUpController = (): ISignUpControllerReturns => {
     setErrors(validate(value));
     setErrorCount(errorCount + 1);
     if (!errors.email && !errors.password) {
-      await auth.signUp({
+      auth.signUp({
         email: value.email,
         password: value.password,
-      });
-      // if(value.email && value.password ){
+      })
+      if(value.email && value.password ){
         handleClickOpen();
-      // }
+      }
       setValue({ email: "", password: "" });
     }
   };

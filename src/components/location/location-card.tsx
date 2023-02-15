@@ -85,13 +85,21 @@ export const Subscribe = ({
     }
   }, [isSubscribed]);
 
-  async function getDatalist() {
-    // if (businessName) {
-    //   await dispatch(
-    //     UserThunk.business({ businessName: businessName.replace(/-/g, " ") })
-    //   );
-    // }
-  }
+  // async function getDatalist() {
+  //   if (businessName) {
+  //     await dispatch(
+  //       UserThunk.business({ businessName: businessName.replace(/-/g, " ") })
+  //     );
+  //   }
+  // }
+
+  const allBusiness = useCallback(async () => {
+    try {
+      await dispatch(UserThunk.business());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
 
   const allsubscriberOfBussinesss = useCallback(async () => {
     try {
@@ -123,7 +131,7 @@ export const Subscribe = ({
           })
         );
         allsubscriberOfBussinesss();
-        getDatalist();
+        allBusiness();
         navigate("");
         toast.success("Subscribed Successfully");
       } catch (error) {
@@ -143,7 +151,7 @@ export const Subscribe = ({
     );
     // setButton(false);
     allsubscriberOfBussinesss();
-    getDatalist();
+    allBusiness();
     toast.success("Unsubscribed Successfully");
   };
 

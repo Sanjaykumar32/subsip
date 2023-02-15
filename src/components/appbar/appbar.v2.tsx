@@ -85,7 +85,6 @@ export const UserAppBar = (props: any) => {
     setMobileOpen(!mobileOpen);
   };
 
-  console.log(searchLocation ,'searchLocation');
   const routeAdmin = homepage?.split("/")[1];
 
   // isMobile admin list----------------------------------------

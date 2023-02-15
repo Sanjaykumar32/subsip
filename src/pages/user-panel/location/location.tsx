@@ -98,7 +98,7 @@ export function LocationPage() {
     setOpen(false);
   };
 
-  console.log(bussinessByName  ,locations  ,businessName , 'bussinessByName')
+  // console.log(bussinessByName  ,locations  ,businessName , 'bussinessByName')
 
   const filterBusiness = bussinessByName?.filter((el)=>{
     return Object.values(
@@ -136,7 +136,7 @@ export function LocationPage() {
                         height: "auto",
                         objectFit: "cover",
                       }}
-                      src={"http://159.223.194.50:8000/" + res.vImage}
+                      src={"https://api.subsip.com/" + res.vImage}
                     />
                   </Card>
                   {/* ))} */}
