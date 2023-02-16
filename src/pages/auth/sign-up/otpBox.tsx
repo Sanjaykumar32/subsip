@@ -54,7 +54,7 @@ export default function OtpBox(props: IOtpBox) {
             variant="standard"
             onChange={changeHandler}
           />
-        <span className="text-[12px] pt-3 ">{`If you don't find mail in "Inbox" please check "Spam or Junk" folder`}</span>
+        <span className="text-[12px] pt-3 ">{`If you don't find the email in your inbox please check the spam or junk folder`}</span>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
