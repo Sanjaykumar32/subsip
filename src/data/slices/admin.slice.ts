@@ -34,7 +34,8 @@ export interface IAdminState {
   userNotification: any;
   getUser: IUser[];
   getReferralUser: any[];
-  getAllsubscribe:any[];
+  getAllsubscribe: any[];
+  getAllUser: any[];
 }
 
 const initialState: IAdminState = {
@@ -56,7 +57,8 @@ const initialState: IAdminState = {
   userNotification: [],
   getUser: [],
   getReferralUser: [],
-  getAllsubscribe:[],
+  getAllsubscribe: [],
+  getAllUser: [],
 };
 
 export const adminSlice = createSlice({
@@ -177,6 +179,11 @@ export const adminSlice = createSlice({
     builder.addCase(AdminThunk.getReferralUser.fulfilled, (state, action) => {
       if (action.payload) {
         state.getReferralUser = action.payload.data;
+      }
+    });
+    builder.addCase(AdminThunk.getAllUser.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.getAllUser = action.payload.data;
       }
     });
   },

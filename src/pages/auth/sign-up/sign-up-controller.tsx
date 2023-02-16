@@ -49,15 +49,16 @@ const SignUpController = (): ISignUpControllerReturns => {
 
   const handleClickOpen = async () => {
     setOpen(true);
-    await dispatch(
-      AuthenticationThunk.sendOtp({
-        email: value.email,
-      })
-    );
+    // await dispatch(
+    //   AuthenticationThunk.sendOtp({
+    //     email: value.email,
+    //   })
+    // );
   };
 
   const handleClose = () => {
     setOpen(false);
+    sessionStorage.clear()
   };
 
   /**
@@ -89,11 +90,11 @@ const SignUpController = (): ISignUpControllerReturns => {
    * @return {void}
    */
   const showPopUp = sessionStorage.getItem("signUp")
-  useEffect(()=>{
+  useEffect(() => {
     if (showPopUp == '1') {
       handleClickOpen();
     }
-  },[showPopUp])
+  }, [showPopUp])
 
   const submitHandler = async (): Promise<void> => {
     setErrors(validate(value));

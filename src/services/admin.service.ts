@@ -84,13 +84,13 @@ export class AdminService {
       await ApiHelper.send<ISubscribeByBussinessIDResponse>({
         url: StringHelper.translationHelper(
           "/subscribers",
-          
+
         ),
         method: "GET",
       });
 
     return res.data;
-    }
+  }
 
   /**
    * Subscribe By adminId
@@ -186,9 +186,8 @@ export class AdminService {
   ): Promise<ISubscriberOfBussinessResponse> {
     const res: AxiosResponse<ISubscriberOfBussinessResponse> =
       await ApiHelper.send<ISubscriberOfBussinessResponse>({
-        url: `/business/subscriber?userId=${payload.userId}${
-          payload?.businessId ? `&businessId=${payload.businessId}` : ""
-        }`,
+        url: `/business/subscriber?userId=${payload.userId}${payload?.businessId ? `&businessId=${payload.businessId}` : ""
+          }`,
         method: "GET",
       });
 
@@ -482,6 +481,25 @@ export class AdminService {
     });
     return res.data;
   }
+
+
+
+  /**
+    * admin All user
+    * @return {Promise<any>}
+    */
+  public static async getAllUser(): Promise<any> {
+    const res: AxiosResponse<any> = await ApiHelper.send<any>({
+      url: `/user`,
+      method: "GET",
+    });
+    return res.data;
+  }
+
+
+
+
+
 
   /**
    * user Reward

@@ -1,4 +1,5 @@
 import { useAppDispatch } from "data";
+import { AuthenticationThunk } from "data/thunk";
 import { UserThunk } from "data/thunk/user.thunk";
 import {
   ICredentials,
@@ -17,6 +18,7 @@ import React, {
 import toast from "react-hot-toast";
 // import { useNavigate } from "react-router-dom";
 import { AuthService } from "services";
+
 
 interface IAuthProvider {
   children: ReactElement;
@@ -56,6 +58,10 @@ const AuthContext = createContext<IAuthContext>(initState);
  */
 export function AuthProvider({ children }: IAuthProvider): ReactElement {
   const token = localStorage.getItem("token");
+
+  const dispatch = useAppDispatch();
+
+
   // const navigate = useNavigate();
   const [isAuthenticated, setAuthenticated] = useState<boolean>(
     initState.isAuthenticated
@@ -78,7 +84,7 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
       localStorage.setItem("token", response.token.token);
       localStorage.setItem("userId", response.data.userId);
       localStorage.setItem("iGroupId", response.data.iGroupId);
-      if(response.success == 1){
+      if (response.success == 1) {
         localStorage.setItem("email", credentials.email);
       }
       setAuthenticated(true);
@@ -90,23 +96,33 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
 
   const signUp = useCallback(async (credentials: ISignUpRequest) => {
     try {
-      const res: any =  await AuthService.signUp(credentials)
-       console.log(res , 'res auth')
-       if(res.success == 1){
-        sessionStorage.setItem("signUp" , res.success)
-       }
-    } catch (error :any) {
-      console.log(error , 'error' );
-      toast.success(error.response.data.message);
+      const res: any = await AuthService.signUp(credentials)
+      console.log(res, 'res auth')
+
+      if (res.success == 1) {
+        // toast.success('Signup SuccessFull');
+        const res = await dispatch(AuthenticationThunk.sendOtp({ email: credentials.email }))
+        sessionStorage.setItem("signUp", '1')
+      }
+    } catch (error: any) {
+      console.log(error, 'error');
+      toast.error(error.response.data.message);
     }
   }, []);
 
   const checkOtp = useCallback(async (credentials: ISendOTpRequest) => {
     try {
-      await AuthService.checkOtpSend(credentials);
+      const res = await AuthService.checkOtpSend(credentials);
       setAuthenticated(true);
+
+      if (res.success == 1) {
+        toast.success("Otp Verifition Successfull");
+      }
+
+      sessionStorage.clear()
     } catch (error) {
       console.log(error);
+      // toast.error(error.response.data.message);
     }
   }, []);
 

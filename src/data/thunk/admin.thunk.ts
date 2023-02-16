@@ -273,6 +273,18 @@ export class AdminThunk {
     }
   );
 
+
+  /**
+   * Get All User
+   */
+  public static getAllUser = createAsyncThunk(
+    "admin/getAllUser",
+    async (): Promise<any> => {
+      const response = await AdminService.getAllUser();
+      return response;
+    }
+  );
+
   /**
    * Get User Reward
    */
