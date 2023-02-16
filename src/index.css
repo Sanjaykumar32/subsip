@@ -278,10 +278,16 @@ p.MuiTypography-root.MuiTypography-body1.text-\[\#252525\].py-1\}.css-29o67s-Mui
     margin-top: 0px;
     font-family: Barlow, sans-serif;
     color: #ACCF02;
-    font-size: 48px;
+    font-size: 56px;
     line-height: 80px;
     font-weight: 800;
     text-align: center;
+    margin-right: 15%;
+}
+.setImage{
+    position: absolute;
+    top: 40%;
+    left: 4%;
 }
 
 h2 {
@@ -313,11 +319,16 @@ h2 {
     .listResText{
         font-size: 14px;
     }
+    .setImage{
+        position: absolute;
+        top: 93%;
+        left: 41%;
+    }
     .ab-h2 {
         margin-top: 0px;
         font-family: Barlow, sans-serif;
         color: #ACCF02;
-        font-size: 42px;
+        font-size: 30px;
         line-height: 66px;
         font-weight: 800;
         text-align: center;
@@ -477,7 +488,7 @@ h2 {
 
 .about-banner {
     /* background-color: #09292b; */
-    background-color: black;
+    background-color:#fff;
     text-align: center;
 }
 

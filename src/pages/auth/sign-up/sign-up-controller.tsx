@@ -3,7 +3,7 @@ import { useAuth } from "context/auth.context";
 import { useAppDispatch } from "data";
 import { AuthenticationThunk } from "data/thunk";
 import { UserThunk } from "data/thunk/user.thunk";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 interface IInitialValue {
@@ -88,17 +88,21 @@ const SignUpController = (): ISignUpControllerReturns => {
   /**
    * @return {void}
    */
+  const showPopUp = sessionStorage.getItem("signUp")
+  useEffect(()=>{
+    if (showPopUp == '1') {
+      handleClickOpen();
+    }
+  },[showPopUp])
+
   const submitHandler = async (): Promise<void> => {
     setErrors(validate(value));
     setErrorCount(errorCount + 1);
     if (!errors.email && !errors.password) {
-      auth.signUp({
+      await auth.signUp({
         email: value.email,
         password: value.password,
       })
-      if(value.email && value.password ){
-        handleClickOpen();
-      }
       setValue({ email: "", password: "" });
     }
   };

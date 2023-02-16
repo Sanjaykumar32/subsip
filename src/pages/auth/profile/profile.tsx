@@ -44,6 +44,8 @@ export function Profile() {
     allsubscriberOfBussiness();
   }, [allsubscriberOfBussiness]);
 
+  const userEmail =  localStorage.getItem('email')
+
   return (
     <Container sx={{ p: 5 }} maxWidth={false}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -61,8 +63,12 @@ export function Profile() {
         <Typography fontWeight={400} variant='body2'>
          <span className="text-[20px] font-bold">Email: 
          </span> 
-          <span className="px-1"><AccountCircleIcon className="!h-5 !w-5 "/></span>
-           <span> {email[0]}</span>
+          {userEmail && <>
+          <span className="px-1">
+           <AccountCircleIcon className="!h-5 !w-5 "/></span>
+           <span> {userEmail }</span>
+           </>
+           }
         </Typography>
       </Box>
       <Container maxWidth="xs" sx={{ my: 4 }}>

@@ -78,6 +78,9 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
       localStorage.setItem("token", response.token.token);
       localStorage.setItem("userId", response.data.userId);
       localStorage.setItem("iGroupId", response.data.iGroupId);
+      if(response.success == 1){
+        localStorage.setItem("email", credentials.email);
+      }
       setAuthenticated(true);
       toast.success("You have successfully logged in!");
     } catch (error) {
@@ -88,10 +91,12 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   const signUp = useCallback(async (credentials: ISignUpRequest) => {
     try {
       const res: any =  await AuthService.signUp(credentials)
-      console.log(res , 'res auth')
+       console.log(res , 'res auth')
+       if(res.success == 1){
+        sessionStorage.setItem("signUp" , res.success)
+       }
     } catch (error :any) {
-      console.log(error.response.data.success , 'error' );
-   
+      console.log(error , 'error' );
       toast.success(error.response.data.message);
     }
   }, []);

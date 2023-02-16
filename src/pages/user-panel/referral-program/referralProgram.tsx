@@ -40,7 +40,7 @@ export function ReferralProgram() {
     <Container maxWidth="xl" sx={{ p: 2 }}>
       <PageHeader
         name="Referral program"
-        icon={{ icon: faCircleQuestion, tooltip: "Need Help?" }}
+        icon={{ icon: faCircleQuestion, tooltip: "Each time you invite someone to subscribe to a listing, you will be credited with one referral. Extra rewards and perks will be unlocked for being an advocate for Subsip. Share a listing you love with family and friends to unlock exclusive benefits." }}
       >
         <Box sx={{ display: "flex", alignItems: "baseline" }}>
           <Typography variant="body1">My referrals</Typography>

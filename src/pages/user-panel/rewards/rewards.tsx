@@ -197,7 +197,7 @@ export function Rewards() {
     <Container maxWidth="xl" sx={{ p: 2 }}>
       <PageHeader
         name="Rewards"
-        icon={{ icon: faCircleQuestion, tooltip: "Once you claim a reward" }}
+        icon={{ icon: faCircleQuestion, tooltip: "The certificates you claim will be emailed to you within 24 hours. Use your certificate before the expiration date shown on it." }}
       >
         <Box sx={{ display: "flex" }} className="gap-4">
           {/* {[
