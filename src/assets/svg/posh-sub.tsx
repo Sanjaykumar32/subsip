@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material";
-import LogoImage from "../images/Poshsub_logo.png"
+import LogoImage from "../images/subsiplo.png"
 
 const LogoCss = styled("svg", {
   shouldForwardProp: (props) => props !== "color",
@@ -48,10 +48,10 @@ export function PoshSubLogo(props: PoshSubLogoProps) {
     //     </tspan>
     //   </text>
     // </LogoCss>
-    // <img src={LogoImage} className={props.variant === "light" ? 'Logo LightVariant' : 'Logo darkVariant'} />
-    <span className="text-[40px] font-bold ">
-      subsip
-    </span>
+    <img src={LogoImage} className={props.variant === "light" ? 'Logo LightVariant h-[80px]' : 'Logo darkVariant'} />
+    // <span className="text-[40px] font-bold ">
+    //   subsip
+    // </span>
   );
 }
 

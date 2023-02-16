@@ -13,6 +13,7 @@ import { Links } from "./links";
 import { SocialIcons } from "./social";
 import { Logo } from "components/logo";
 import { useNavigate } from "react-router-dom";
+import LogoImage from "../../assets/images/subsiplo.png"
 
 export * from "./links";
 export * from "./social";
@@ -54,22 +55,28 @@ export function FooterMain() {
             {isMobile && (
               <Grid item className="">
                 <Box className="">
-                  {/* <Logo /> */}
-                  <span className="text-[40px] font-bold cursor-pointer "  onClick={handleHomeRoute}>
+                  <Logo />
+                  {/* <span className="text-[40px] font-bold cursor-pointer "  onClick={handleHomeRoute}>
                     subsip
+                  </span> */}
+                  <span>
+                    <img src={LogoImage} alt="" className="Logo LightVariant" />
                   </span>
-                  <Typography className=""> Discover vetted businesses, subscribe to their listings <br /> & claim rewards  — with Subsip </Typography>
+                  <Typography className=""> Discover vetted businesses, subscribe to <br /> their listings  & claim rewards</Typography>
                 </Box>
               </Grid>
             )}
             <Grid item xs={12} md={4} order={{ xs: 2, md: 0 }}>
               {!isMobile && (
                 <Box sx={{ mb: 2 }}>
-                  {/* <Logo /> */}
-                  <span className="text-[40px] font-bold cursor-pointer " onClick={handleHomeRoute}>
+                  <Logo />
+                  {/* <span className="text-[40px] font-bold cursor-pointer " onClick={handleHomeRoute}>
                     subsip
-                  </span>
-                  <Typography className=""> Discover vetted businesses, subscribe to their listings <br /> & claim rewards  — with Subsip  </Typography>
+                  </span> */}
+                   {/* <span>
+                    <img src={LogoImage} alt=""  className="Logo LightVariant"/>
+                  </span> */}
+                  <Typography className=""> Discover vetted businesses, subscribe to <br /> their listings  & claim rewards </Typography>
                 </Box>
               )}
 
