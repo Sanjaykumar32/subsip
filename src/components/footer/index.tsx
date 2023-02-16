@@ -59,9 +59,9 @@ export function FooterMain() {
                   {/* <span className="text-[40px] font-bold cursor-pointer "  onClick={handleHomeRoute}>
                     subsip
                   </span> */}
-                  <span>
+                  {/* <span>
                     <img src={LogoImage} alt="" className="Logo LightVariant" />
-                  </span>
+                  </span> */}
                   <Typography className=""> Discover vetted businesses, subscribe to <br /> their listings  & claim rewards</Typography>
                 </Box>
               </Grid>
