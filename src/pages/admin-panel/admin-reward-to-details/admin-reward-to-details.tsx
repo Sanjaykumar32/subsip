@@ -49,6 +49,7 @@ export function AdminRewardToDetails() {
       id: item?.iRewardId,
       rewardName: item?.rewardName,
       redeemedUserCount: [item?.redeemedUserCount, item?.redeemedUserId],
+      rewardCount:item?.rewardCount,
       Actions: ["Edit", "Delete", item?.iRewardId],
     };
   });
@@ -72,13 +73,13 @@ export function AdminRewardToDetails() {
 
     {
       field: "redeemedUserCount",
-      headerName: "Redeemed Count",
-      width: 200,
+      headerName: "Redeemed Count / Reward Count",
+      width: 300,
       renderCell: (params) => (
         <Link
-          href={`${AdminRoutePathEnum.ADMIN_REWARDS_TO_WINNERS}?userId=${params?.value[1]}`}
+        href={`${AdminRoutePathEnum.ADMIN_REWARDS_TO_WINNERS}?userId=${params?.value[1]}`}
         >
-          {params?.value[0]}
+          {params?.value[0]}/{params?.row?.rewardCount}
         </Link>
       ),
     },
@@ -89,9 +90,9 @@ export function AdminRewardToDetails() {
       width: 150,
       renderCell: (params) => (
         <Box>
-          <Tooltip title={params.value[0]}>
+          {/* <Tooltip title={params.value[0]}>
             <FontAwesomeIcon icon={faPen} />
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title={params.value[1]}>
             <FontAwesomeIcon
               icon={faTrash}

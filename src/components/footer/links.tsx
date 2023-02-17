@@ -97,7 +97,7 @@ export function Links() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <LinkBox container spacing={4}>
+    <LinkBox container spacing={4} className={`${isMobile ? 'justify-between': ''}`}>
       {links.map((data, index: number) => {
         return (
           <Grid key={`Links-${data.title}-${index}}`} item sm={6} md={3}>

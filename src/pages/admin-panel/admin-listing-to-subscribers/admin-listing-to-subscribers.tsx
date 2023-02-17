@@ -119,8 +119,6 @@ export function AdminListingToSubscribers() {
         AdminThunk.subscribeOfBussiness({ businessId: businessId })
       );
 
-      // await dispatch(AdminThunk.getAllUser());
-
     } catch (error) {
       console.log(error);
     }
@@ -130,20 +128,6 @@ export function AdminListingToSubscribers() {
     AllBusiness();
   }, [AllBusiness]);
 
-
-
-  const getAllUser = useCallback(async () => {
-    try {
-      dispatch(AdminThunk.getAllUser());
-
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    getAllUser();
-  }, [getAllUser]);
 
   const allSubscriberOfBussiness = useAppSelector(GET_SUBSCRIBER_OF_BUSSINESS);
 

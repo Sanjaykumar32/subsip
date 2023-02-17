@@ -7,7 +7,7 @@ export function Logo(props: PoshSubLogoProps): ReactElement {
 
   return (
     <div
-      style={{ width: "150px", height: "48px", cursor: "pointer", }}
+      style={{ width: "150px", cursor: "pointer", }}
       onClick={() => navigate('/')}
       className='logoHheader '
     >

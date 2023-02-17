@@ -191,7 +191,7 @@ export const Subscribe = ({
           }}
           sx={{ fontWeight: 800, borderRadius: "24px" }}
         >
-          Subscribe Now
+          Subscribe
         </Button>
       )}
     </div>

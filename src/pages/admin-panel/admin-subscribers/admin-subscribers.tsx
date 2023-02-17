@@ -20,7 +20,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AdminRoutePathEnum } from "enum";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
-import { GET_ALL_SUBSCRIBER, GET_ALL_SUBSCRIBER_OF_BUSINESS } from "data/selectors";
+import { GET_ALL_SUBSCRIBER, GET_ALL_SUBSCRIBER_OF_BUSINESS, GET_ALL_USER } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
 import toast from "react-hot-toast";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
@@ -35,6 +35,8 @@ export function AdminSubscribers() {
   const location =  useLocation()
 
   const getAllsubcriber =  useAppSelector(GET_ALL_SUBSCRIBER)
+  const getAllUserData = useAppSelector(GET_ALL_USER)
+  // console.log(getAllUserData ,'getAllUserData')
 
   const routeValue = location?.state?.ids?.split(',')
 
@@ -84,24 +86,24 @@ export function AdminSubscribers() {
         </Box>
       ),
     },
-    {
-      field: "Actions",
-      headerName: "Actions",
-      width: 110,
-      renderCell: (params) => (
-        <Box>
-          <Tooltip title={params.value[0]}>
-            <FontAwesomeIcon
-             className=" cursor-pointer"
-              icon={faTrash}
-              onClick={() => {
-                deleteSubscriber(params.value[1]);
-              }}
-            />
-          </Tooltip>
-        </Box>
-      ),
-    },
+    // {
+    //   field: "Actions",
+    //   headerName: "Actions",
+    //   width: 110,
+    //   renderCell: (params) => (
+    //     <Box>
+    //       <Tooltip title={params.value[0]}>
+    //         <FontAwesomeIcon
+    //          className=" cursor-pointer"
+    //           icon={faTrash}
+    //           onClick={() => {
+    //             deleteSubscriber(params.value[1]);
+    //           }}
+    //         />
+    //       </Tooltip>
+    //     </Box>
+    //   ),
+    // },
   ];
 
   useEffect(() => {
@@ -112,32 +114,32 @@ export function AdminSubscribers() {
     getallsubscribe()
   },[getallsubscribe])
 
-  const filter = getAllsubcriber?.filter((el) => {
-    return Object.values(el.vEmail.toLowerCase()).join('').toString().includes(search.toString().toLowerCase())
+  const filter = getAllUserData?.filter((el) => {
+    return Object.values(el.email.toLowerCase()).join('').toString().includes(search.toString().toLowerCase())
   })
 
-  const rows = getAllsubcriber?.filter((el)=> routeValue?.includes(el.iAdminId.toString()))
+  const rows = getAllUserData?.filter((el)=> routeValue?.includes(el.userId.toString()))
 
   const rowsDataSingle =  rows.map((item)=>{
     return {
-      id: item.iAdminId,
-      vEmail: item.vEmail,
-      userID: item.iAdminId,
+      id: item.userId,
+      vEmail: item.email,
+      userID: item.userId,
       Verified: "Verified",
       location: "-",
-      Actions: ["Delete", item.iSubscriberId],
+      // Actions: ["Delete", item.iSubscriberId],
       
     }
   })
   
   const rowsData = filter?.map((item: any) => {
     return {
-      id: item.iAdminId,
-      vEmail: item.vEmail,
-      userID: item.iAdminId,
+      id: item.userId,
+      vEmail: item.email,
+      userID: item.userId,
       Verified: "Verified",
       location: "-",
-      Actions: ["Delete", item.iSubscriberId],
+      // Actions: ["Delete", item.iSubscriberId],
     };
   });
 
@@ -169,6 +171,18 @@ export function AdminSubscribers() {
     setIndex(false)
   }
 
+  const getAllUser = useCallback(async () => {
+    try {
+      dispatch(AdminThunk.getAllUser());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getAllUser();
+  }, [getAllUser]);
+
 
   return (
     <Container maxWidth={false} disableGutters sx={{ m: 0 }}>
@@ -185,7 +199,7 @@ export function AdminSubscribers() {
             color={theme.palette.info.main}
             sx={{ fontWeight: 600 }}
           >
-            {getAllsubcriber.length} Subscribers
+            {getAllUserData.length} Subscribers
           </Typography>
         </Box>
         {/* notification */}

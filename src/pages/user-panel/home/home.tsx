@@ -23,6 +23,10 @@ import useTheme from "@mui/material/styles/useTheme";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import toast from "react-hot-toast";
 import ScrollToTop from "scrollTop";
+import {
+  CircularProgress,
+} from "@mui/material";
+
 
 export function Home({ alertOnBottom }: any) {
   const location = useLocation();
@@ -171,6 +175,7 @@ export function Home({ alertOnBottom }: any) {
           ?.toLowerCase()
       );
   });
+
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
@@ -372,24 +377,30 @@ export function Home({ alertOnBottom }: any) {
           )}
         </div>
 
+        {/* {loader ? */}
+        {/* <div className="flex justify-center">
+          <CircularProgress />
+        </div> */}
+       
+      
         <div className={`${!isMobile ? "mt-8" : ""} w-full px-5 `}>
           <p className="font-semibold text-[24px]  mt-5 mx-5">
             {filterBanner?.filter(
-              (el) => parseInt(el.iCategory) == CateFirst[0]
+              (el) => parseInt(el?.iCategory) == CateFirst[0]
             ).length > 0 && "Restaurants"}
           </p>
 
           <div className="relative my-2 mb-5 w-full">
             <Slider ref={cardRef3} {...cardSettings}>
               {filterBanner
-                ?.filter((el) => parseInt(el.iCategory) == CateFirst[0])
+                ?.filter((el) => parseInt(el?.iCategory) == CateFirst[0])
                 ?.map((ele, index) => {
                   return (
                     <div
                       style={{
                         boxShadow: "0 0 20px rgb(1 0 0 / 10%)",
                       }}
-                      key={`${ele.categoryName}+${index}`}
+                      key={`${ele?.categoryName}+${index}`}
                       className="relative overflow-x-auto md:overflow-x-hidden "
                     >
                       <SliderCard
@@ -398,8 +409,8 @@ export function Home({ alertOnBottom }: any) {
                         tagLine={ele?.vTagLine}
                         des={ele?.tDescription}
                         location={ele?.vLocation}
-                        id={ele.iBusinessId}
-                        subscriberCount={ele.subscriberCount}
+                        id={ele?.iBusinessId}
+                        subscriberCount={ele?.subscriberCount}
                         subcriber={
                           ele?.subscriberIds && ele?.subscriberIds.split(",")
                         }
@@ -421,7 +432,7 @@ export function Home({ alertOnBottom }: any) {
           <div className="relative mt-5 w-full">
             <Slider ref={cardRef2} {...cardSettings}>
               {filterBanner
-                ?.filter((el) => parseInt(el.iCategory) == CateFirst[1])
+                ?.filter((el) => parseInt(el?.iCategory) == CateFirst[1])
                 ?.map((ele: IBusiness, index: number) => {
                   return (
                     <div
@@ -588,7 +599,7 @@ export function Home({ alertOnBottom }: any) {
 
 const SliderCard = (props: any) => {
   const { des, imgSrc, location, name, id, subscriberCount, subcriber } = props;
-
+ 
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

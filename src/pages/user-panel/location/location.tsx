@@ -40,12 +40,13 @@ export function LocationPage() {
   const isAuthenticated = auth.isAuthenticated;
   const navigate = useNavigate();
 
-  const businessName = businessNames.toString().split('-').join(" ")
+  const businessName:any = businessNames.toString().split('-').join(" ")
+  console.log(businessName , '---' , isNaN(businessName) , 'businessName')
 
   async function getDatalist() {
     if (businessName) {
       await dispatch(
-        UserThunk.business({ businessName: businessName})
+        UserThunk.business( isNaN(businessName) ? { businessName: businessName} : {businessId : businessName})
       );
     }
   }
@@ -98,22 +99,32 @@ export function LocationPage() {
     setOpen(false);
   };
 
-  // console.log(bussinessByName  ,locations  ,businessName , 'bussinessByName')
+  console.log(bussinessByName  ,'bussinessByName')
+  
+  const filterName = bussinessByName.filter((el:any)=>{
+       return el?.iBusinessId == businessName 
+  })
 
-  const filterBusiness = bussinessByName?.filter((el)=>{
+  console.log(filterName , 'filterName')
+
+  const filterBusiness = bussinessByName?.filter((el: {
+    iBusinessId: any; vName: { toString: () => string; }; 
+})=>{
     return Object.values(
          el?.vName?.toString()?.replaceAll(/\s/g, "")?.toLowerCase()
     )
       .join("")
       .toLowerCase()
-      .includes(businessName
-              .toString()
-              .slice(1, 30)
-              ?.replaceAll(/\s/g, "")
-              .toLowerCase()
+      .includes(isNaN(businessName) ? businessName.toString()
+      ?.replaceAll(/\s/g, "")
+      .toLowerCase() : filterName[0]?.vName.toString()
+      ?.replaceAll(/\s/g, "")
+      .toLowerCase()
+              
       );
   })
 
+  console.log(filterBusiness , 'filterBusiness')
 
   return (
     <Container maxWidth="lg" sx={{ my: 5 }}>
@@ -236,7 +247,7 @@ export function LocationPage() {
                         // height: "auto",
                         objectFit: "cover",
                       }}
-                      src={"http://159.223.194.50:8000/" + res.vImage}
+                      src={"https://api.subsip.com/" + res.vImage}
                     />
                   </Card>
 

@@ -88,6 +88,9 @@
     justify-content: center;
     align-items: center;
 }
+.Logo{
+    height: 42px;
+}
 
 
 img.Logo.LightVariant {
@@ -113,8 +116,9 @@ img.Logo.LightVariant {
     }
 
     img.Logo {
-        height: 60px;
+        height: 36px;
     }
+    
 
 
     .topheader {
