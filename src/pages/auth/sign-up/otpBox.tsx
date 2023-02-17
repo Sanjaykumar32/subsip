@@ -34,9 +34,7 @@ export default function OtpBox(props: IOtpBox) {
   const navigate = useNavigate();
 
   const submit = () => {
-    if (location.state.referralcode && location.state.businessId) {
-      navigate(`/listing/?${location.state.businessId}`);
-    }
+    navigate('/auth/sign-in')
   };
 
   return (
@@ -54,7 +52,7 @@ export default function OtpBox(props: IOtpBox) {
             variant="standard"
             onChange={changeHandler}
           />
-        <span className="text-[12px] pt-3 ">{`If you don't find the email in your inbox please check the spam or junk folder`}</span>
+          <span className="text-[12px] pt-3 ">{`If you don't find the email in your inbox please check the spam or junk folder`}</span>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
@@ -63,6 +61,7 @@ export default function OtpBox(props: IOtpBox) {
               verifyOtp();
               handleClose();
               submit();
+
             }}
           >
             Submit

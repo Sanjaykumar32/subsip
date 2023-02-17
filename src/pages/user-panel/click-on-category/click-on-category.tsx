@@ -44,13 +44,13 @@ export function ClickOnCategory() {
   const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
   const userId = localStorage.getItem("userId");
   const dispatch = useAppDispatch();
-  console.log(location?.state?.id , 'location')
+  console.log(location?.state?.id, 'location')
 
   const pathSerchValue = location.search.slice(1, 25);
 
   const pathName = location?.pathname?.split("/")?.[1];
 
-  console.log(pathSerchValue , 'path serch')
+  console.log(pathSerchValue, 'path serch')
 
   const getcategory = useCallback(async () => {
     try {
@@ -129,10 +129,10 @@ export function ClickOnCategory() {
           pathName == "category"
             ? pathSerchValue.toString()?.replaceAll(/\s/g, "")?.toLowerCase()
             : location.search
-                .toString()
-                .slice(1, 19)
-                ?.replaceAll(/\s/g, "")
-                .toLowerCase()
+              .toString()
+              .slice(1, 19)
+              ?.replaceAll(/\s/g, "")
+              .toLowerCase()
         );
     }
   );
@@ -253,11 +253,10 @@ export function ClickOnCategory() {
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"
                               id="panel1a-header"
-                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
-                                activeCate === item?.iCategoryId
-                                  ? " activeCate"
-                                  : ""
-                              }  `}
+                              className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
+                                ? " activeCate"
+                                : ""
+                                }  `}
                               onClick={() => {
                                 handleList(item?.iCategoryId),
                                   handleSubList(null);
@@ -340,11 +339,10 @@ export function ClickOnCategory() {
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id={item.vName}
-                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${
-                            activeCate === item?.iCategoryId
-                              ? " activeCate"
-                              : ""
-                          }  `}
+                          className={`font-normal text-[16px] leading-[24px] min-h-[50px] text-[#434d59] cursor-pointer nan ${activeCate === item?.iCategoryId
+                            ? " activeCate"
+                            : ""
+                            }  `}
                           onClick={() => {
                             handleSubList(null);
                             setActiveCate(item?.iCategoryId);
@@ -475,11 +473,11 @@ export function ClickOnCategory() {
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}
               {listFilter.length > 0 &&
-              listFilter.filter((el) =>
-                subcatIdss
-                  ? el.iCategory === ids && el.iSubCategory === subcatIdss
-                  : el.iCategory === ids
-              ).length > 0 ? (
+                listFilter.filter((el) =>
+                  subcatIdss
+                    ? el.iCategory === ids && el.iSubCategory === subcatIdss
+                    : el.iCategory === ids
+                ).length > 0 ? (
                 listFilter
                   .filter((el) =>
                     subcatIdss
@@ -573,12 +571,12 @@ export function ClickOnCategory() {
                                 <div className="raletive">
                                   <>
                                     {data?.subscriberIds &&
-                                    data?.subscriberIds
-                                      .split("")
-                                      .filter((el: any) => {
-                                        return el == userId;
-                                      })[0] &&
-                                    auth?.isAuthenticated ? (
+                                      data?.subscriberIds
+                                        .split(",")
+                                        .filter((el: any) => {
+                                          return el == userId;
+                                        })[0] &&
+                                      auth?.isAuthenticated ? (
                                       <div
                                         className="subscribeLebalListing bg-[#e0e0e0] cursor-pointer"
                                         onClick={() =>
@@ -597,8 +595,8 @@ export function ClickOnCategory() {
                                           auth?.isAuthenticated
                                             ? SubcribeBtn(data?.iBusinessId)
                                             : navigate(
-                                                AuthRoutePathEnum.SIGN_IN
-                                              );
+                                              AuthRoutePathEnum.SIGN_IN
+                                            );
                                         }}
                                       >
                                         <span className=" text-white ">

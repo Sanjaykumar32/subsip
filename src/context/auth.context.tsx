@@ -113,10 +113,11 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   const checkOtp = useCallback(async (credentials: ISendOTpRequest) => {
     try {
       const res = await AuthService.checkOtpSend(credentials);
-      setAuthenticated(true);
+      // setAuthenticated(true);
 
       if (res.success == 1) {
-        toast.success("Otp Verifition Successfull");
+        toast.success("Otp Verifition Successfull")
+        toast.success("Your Account Create Successfully Please Login Now")
       }
 
       sessionStorage.clear()

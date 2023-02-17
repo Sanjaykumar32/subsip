@@ -179,7 +179,7 @@ export function Home({ alertOnBottom }: any) {
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
-  const moreData = categoryData.map((item : any)=> item?.vName)
+  const moreData = categoryData.map((item: any) => item?.vName)
   const userId = localStorage.getItem("userId");
 
   const getcategory = useCallback(async () => {
@@ -215,14 +215,14 @@ export function Home({ alertOnBottom }: any) {
   };
   const locatiosn = useLocation();
 
-  async function onImageClick(name: string , id:any): Promise<void> {
+  async function onImageClick(name: string, id: any): Promise<void> {
     try {
       const response: any = await dispatch(
         UserThunk.business({ businessName: name })
       );
       if (response.payload.data.length > 0) {
-        navigate(`/listing/${name.replace(/\s+/g, "-")}` , 
-        {state : {businessId : id}}
+        navigate(`/listing/${name.replace(/\s+/g, "-")}`,
+          { state: { businessId: id } }
         );
       } else {
         console.log("nodata");
@@ -243,9 +243,8 @@ export function Home({ alertOnBottom }: any) {
       <ScrollToTop />
       <div className="w-full overflow-x-hidden">
         <div
-          className={`${
-            isMobile ? "py-10" : "py-20"
-          } 'bg-white md:bg-black relative  w-full'`}
+          className={`${isMobile ? "py-10" : "py-20"
+            } 'bg-white md:bg-black relative  w-full'`}
         >
           <Slider ref={sliderRef} {...settings}>
             {banner?.map((ele: any, index: number) => (
@@ -262,7 +261,7 @@ export function Home({ alertOnBottom }: any) {
                       <span
                         className="text-black md:text-white text-[1.6rem] font-semibold cursor-pointer sliderTitle"
                         onClick={() => {
-                          onImageClick(ele.vName , ele.iBusinessId);
+                          onImageClick(ele.vName, ele.iBusinessId);
                           // auth?.isAuthenticated
                           //   ? onImageClick(ele.iBusinessId)
                           //   : navigate(AuthRoutePathEnum.SIGN_IN);
@@ -278,11 +277,10 @@ export function Home({ alertOnBottom }: any) {
                       {ele?.tDescription}
                     </p>
                     <p
-                      className={`${
-                        isMobile
-                          ? "text-black text-[16px] font-medium"
-                          : "text-[#ffff] text-[16px] font-medium"
-                      }`}
+                      className={`${isMobile
+                        ? "text-black text-[16px] font-medium"
+                        : "text-[#ffff] text-[16px] font-medium"
+                        }`}
                     >
                       {ele?.subscriberCount} Subscribers
                     </p>
@@ -290,10 +288,10 @@ export function Home({ alertOnBottom }: any) {
                     <div className="raletive">
                       <>
                         {ele?.subscriberIds &&
-                        ele?.subscriberIds.split("").filter((el: any) => {
-                          return el == userId;
-                        })[0] &&
-                        auth?.isAuthenticated ? (
+                          ele?.subscriberIds.split(",").filter((el: any) => {
+                            return el == userId;
+                          })[0] &&
+                          auth?.isAuthenticated ? (
                           // <div
                           //   className="subscribeLebalListing bg-[#e0e0e0]"
                           //   onClick={() =>
@@ -310,7 +308,7 @@ export function Home({ alertOnBottom }: any) {
                               className="bg-[#e0e0e0] text-[#262626] text-[1rem] w-36 rounded-full  py-4 px-2 font-medium"
                               onClick={() => {
                                 auth?.isAuthenticated
-                                  ? onImageClick(ele?.vName , ele?.iBusinessId)
+                                  ? onImageClick(ele?.vName, ele?.iBusinessId)
                                   : navigate(AuthRoutePathEnum.SIGN_IN);
                               }}
                             >
@@ -333,7 +331,7 @@ export function Home({ alertOnBottom }: any) {
                               className="bg-[#ACCF02] text-[1rem] w-36 rounded-full  py-4 px-2 font-medium text-white"
                               onClick={() => {
                                 auth?.isAuthenticated
-                                  ? onImageClick(ele?.vName , ele?.iBusinessId)
+                                  ? onImageClick(ele?.vName, ele?.iBusinessId)
                                   : navigate(AuthRoutePathEnum.SIGN_IN);
                               }}
                             >
@@ -363,9 +361,8 @@ export function Home({ alertOnBottom }: any) {
                           ? "https://api.subsip.com/" + ele?.vImage
                           : "https://api.subsip.com/public/uploads/1672076769972.png"
                       }
-                      className={`${
-                        isMobile ? "h-[266px]" : "h-full"
-                      } w-full object-cover object-center rounded-[6px] `}
+                      className={`${isMobile ? "h-[266px]" : "h-full"
+                        } w-full object-cover object-center rounded-[6px] `}
                     />
                   </div>
                 </div>
@@ -381,8 +378,8 @@ export function Home({ alertOnBottom }: any) {
         {/* <div className="flex justify-center">
           <CircularProgress />
         </div> */}
-       
-      
+
+
         <div className={`${!isMobile ? "mt-8" : ""} w-full px-5 `}>
           <p className="font-semibold text-[24px]  mt-5 mx-5">
             {filterBanner?.filter(
@@ -546,7 +543,7 @@ export function Home({ alertOnBottom }: any) {
                   (el) => parseInt(el.iCategory) == CateFirst[3]
                 ).length > 0 && <SliderArrow refVal={cardRef3} />}
               </div>
-               
+
               <p className="font-semibold text-[24px]  mt-5 mx-5">
                 {filterBanner?.filter(
                   (el) => parseInt(el.iCategory) == CateFirst[4]
@@ -590,7 +587,7 @@ export function Home({ alertOnBottom }: any) {
             </>
           ) : null}
 
-          
+
         </div>
       </div>
     </>
@@ -599,7 +596,7 @@ export function Home({ alertOnBottom }: any) {
 
 const SliderCard = (props: any) => {
   const { des, imgSrc, location, name, id, subscriberCount, subcriber } = props;
- 
+
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -618,8 +615,8 @@ const SliderCard = (props: any) => {
         UserThunk.business({ businessId: id })
       );
       if (response?.payload?.data?.length > 0) {
-        navigate(`/listing/${name.replace(/\s+/g, "-")}` , 
-           {state : {businessId : id}}
+        navigate(`/listing/${name.replace(/\s+/g, "-")}`,
+          { state: { businessId: id } }
         );
       } else {
         console.log("nodata");
