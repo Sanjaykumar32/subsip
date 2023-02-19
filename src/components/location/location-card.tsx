@@ -66,7 +66,7 @@ export const Subscribe = ({
   const location = useParams();
   const [searchParams] = useSearchParams();
   const referralcode = searchParams.get("referralCode");
- 
+
   const isSubscribed = useAppSelector(GET_ALL_SUBSCRIBER_OF_BUSINESS);
   const [showButton, setButton] = useState<boolean>(false);
   const bussinessByName = useAppSelector(GET_BUSINESS);
@@ -119,25 +119,35 @@ export const Subscribe = ({
   }, [allsubscriberOfBussinesss]);
 
   async function onButtonClick(): Promise<void> {
-    localStorage.setItem("referralcode", referralcode ? referralcode : "");
-    localStorage.setItem("businessId", businessId ? businessId : "");
+    // localStorage.setItem("referralcode", referralcode ? referralcode : "");
+    // localStorage.setItem("businessId", businessId ? businessId : "");
+    const getLocalref = localStorage.getItem('referralcode')
+
+    console.log(referralcode, 'this ref code', getLocalref, 'this ref codelocation')
+
+
+
     if (auth?.isAuthenticated) {
       try {
         const response = await dispatch(
           UserThunk.addSubscriberToBusiness({
             businessId: businessId ? businessId : 0,
             userId: userId ? parseInt(userId) : "",
-            referredCode: referralcode,
+            referredCode: getLocalref ? getLocalref : referralcode,
           })
         );
         allsubscriberOfBussinesss();
         allBusiness();
+        localStorage.setItem("referralcode", "")
+        localStorage.setItem("businessId", "")
         navigate("");
         toast.success("Subscribed Successfully");
       } catch (error) {
         console.log(error);
       }
     } else {
+      localStorage.setItem("referralcode", referralcode ? referralcode : "");
+      localStorage.setItem("businessId", businessId ? businessId : "");
       navigate("/auth/sign-in");
     }
     setButton(true);
@@ -157,9 +167,8 @@ export const Subscribe = ({
 
   return (
     <div
-      className={`${
-        isMobile ? "flex justify-between h-[70px]  items-center" : ""
-      }`}
+      className={`${isMobile ? "flex justify-between h-[70px]  items-center" : ""
+        }`}
     >
       <Box sx={{ my: 3 }}>
         <Typography
@@ -272,7 +281,7 @@ export function Location({
           </>
         )}
 
-        <Subscribe subsctibers={subscriberCount} auth={auth} businessId={iBusinessId}/>
+        <Subscribe subsctibers={subscriberCount} auth={auth} businessId={iBusinessId} />
       </Box>
 
       <CardFooter vTagLine={vTagLine} />
