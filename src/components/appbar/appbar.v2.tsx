@@ -746,6 +746,7 @@ export const UserAppBar = (props: any) => {
                 }}
               >
                 {menuItem.map((setting: any) => (
+                  <Link key="profile-menu" href={setting?.route}>
                   <MenuItem
                     key={setting.route}
                     onClick={() => {
@@ -755,12 +756,11 @@ export const UserAppBar = (props: any) => {
                       handleClose();
                     }}
                   >
-                    <Link key="profile-menu" href={setting?.route}>
                       <Typography textAlign="left" className="text-black ">
                         {setting?.title}
                       </Typography>
-                    </Link>
                   </MenuItem>
+                    </Link>
                 ))}
               </Menu>
 
@@ -993,13 +993,6 @@ export const UserAppBar = (props: any) => {
                       <ListItem key={index}>
                         <Link
                           href={`/category/${item?.iCategoryId}`}
-                        //   href={{
-                        //     pathname:  "/category",
-                        //     query: {
-                        //         id: item?.iCategoryId,
-                        //         title: item.vName,
-                        //     }
-                        // }}
                           onClick={handleBanner}
                           className='p-[10px]'
                         >

@@ -85,13 +85,7 @@ export const Subscribe = ({
     }
   }, [isSubscribed]);
 
-  // async function getDatalist() {
-  //   if (businessName) {
-  //     await dispatch(
-  //       UserThunk.business({ businessName: businessName.replace(/-/g, " ") })
-  //     );
-  //   }
-  // }
+
 
   const allBusiness = useCallback(async () => {
     try {
@@ -130,9 +124,11 @@ export const Subscribe = ({
             referredCode: referralcode,
           })
         );
+ 
         allsubscriberOfBussinesss();
         allBusiness();
         navigate("");
+    
         toast.success("Subscribed Successfully");
       } catch (error) {
         console.log(error);
@@ -144,6 +140,7 @@ export const Subscribe = ({
   }
 
   const handleUnsub = async () => {
+    if (auth?.isAuthenticated) {
     await dispatch(
       UserThunk.UNSubscriberToBusiness({
         businessId: businessId ? "" + businessId : "0",
@@ -153,6 +150,7 @@ export const Subscribe = ({
     allsubscriberOfBussinesss();
     allBusiness();
     toast.success("Unsubscribed Successfully");
+    }
   };
 
   return (

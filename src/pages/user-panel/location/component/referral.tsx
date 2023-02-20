@@ -74,7 +74,7 @@ export default function ResponsiveDialog({
     >
       <DialogTitle id="responsive-dialog-title refferals">
         <div className="flex  flex-col">
-          <span className={`${isMobile ? 'text-[22px] ' : ''} 'text-[1.75rem] text-[#1b1b1b] font-bold'`}>
+          <span className={`${isMobile ? 'text-[20px] ' : ''} 'text-[1.75rem] text-[#1b1b1b] font-bold'`}>
             Share {title} with others
           </span>
           <span className="text-[14px] text-[#1b1b1b] font-semibold">

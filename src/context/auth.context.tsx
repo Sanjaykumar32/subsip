@@ -88,6 +88,7 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
         localStorage.setItem("email", credentials.email);
       }
       setAuthenticated(true);
+      
       toast.success("You have successfully logged in!");
     } catch (error) {
       console.log(error);
@@ -116,8 +117,12 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
       // setAuthenticated(true);
 
       if (res.success == 1) {
-        toast.success("Otp Verifition Successfull")
-        toast.success("Your Account Create Successfully Please Login Now")
+        toast.success("Otp Verifition Successfull" , {
+          duration: 3000,
+        })
+        toast.success("Your Account Create Successfully Please Login Now", {
+          duration: 10000,
+        });
       }
 
       sessionStorage.clear()

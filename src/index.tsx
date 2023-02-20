@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider, useLocation } from "react-router-dom";
 import { AuthProvider } from "context/auth.context";
 import { store } from "data";
 import { theme } from "theme";
@@ -29,7 +29,7 @@ root.render(
         // toastOptions=[{}]
         toastOptions={{
           // Define default options
-          duration: 10000
+          duration: 3000
         }}
 
       />

@@ -32,7 +32,7 @@ import { MuiColor } from "type";
 export function Rewards() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState("Available");
   const [businessSearch, setSearchBusiness] = useState("");
   const userId = localStorage.getItem("userId");
 
@@ -91,17 +91,17 @@ export function Rewards() {
     {
       field: "rewardName",
       headerName: "Reward Name",
-      width: 250,
+      width: 200,
     },
     {
       field: "businessName",
       headerName: "Business Name",
-      width: 250,
+      width: 200,
     },
     {
       field: "Status",
       headerName: "Status",
-      width: 250,
+      width: 200,
       renderCell: (params) => (
         <Chip
           label={params.value}
@@ -188,7 +188,7 @@ export function Rewards() {
         {filter == 'Available' && 'No rewards available at this moment. Please check back soon.'}
         {filter == 'Claimed' && 'You have not claimed any rewards yet.'}
         {filter == 'Missed' && 'You have not missed any rewards yet.'}
-        {filter == '' && 'No Data'}
+       
       </Stack>
     );
   }

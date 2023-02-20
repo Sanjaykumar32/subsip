@@ -53,7 +53,7 @@ export function ReferralProgram() {
         </Box>
       </PageHeader>
 
-      <Container maxWidth="xs" sx={{ my: 20 }}>
+      <Container maxWidth="xs" sx={{ my: 15 }} className='!p-0'>
         <Typography variant="h6"> Milestones </Typography>
         {refferralCount.map((res: any, i: number) => {
           return (

@@ -607,3 +607,10 @@ h2 {
     color: #1a1a1a;
     opacity: 1;
 }
+.css-1ysjrvj-MuiStack-root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+}

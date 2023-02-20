@@ -1,45 +1,53 @@
 import { useMediaQuery } from '@mui/material';
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { theme } from 'theme';
 import image from '../assets/images/start1.png'
 export const About = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [business, setBusiness] = useState('Subscribers')
+  const navigate = useNavigate();
   console.log(business, 'business')
+  const handleRoute = ()=>{
+    navigate('/auth/sign-in')
+  }
+  const handleBusinessRoute = ()=> {
+    navigate('/listing/add')
+  }
   return (
     <>
 
       <div className="">
-        <div className='bg-[#021414] py-16'>
-      
-        <div className='about-banner flex justify-center items-center  py-12 md:pt-[5rem]'>
-               <div className='w-[10%]  flex justify-center'>
-               <span className=''>
-                    <img src={image}
-                      loading="lazy"
-                      alt="" className="image-118   h-[60px] w-auto"
-                    />
-                  </span>
-               </div>
-          <div className="banner-content w-[90%]">
-            <div className="banner-heading ">
-            
-              <h3 className="ab-h2">
-             
-                <span className="text-span-23 text-[#021414] relative  ">
-                The discovery <br /> platform built for <br /> growth
-                  {/* <span className='flex justify-center'>
+        <div className=''>
+
+          <div className='about-banner flex justify-center items-center  py-12 md:pt-[5rem]'>
+            <div className='w-[10%]  flex justify-center'>
+              <span className=''>
+                <img src={image}
+                  loading="lazy"
+                  alt="" className="image-118   h-[60px] w-auto"
+                />
+              </span>
+            </div>
+            <div className="banner-content w-[90%]">
+              <div className="banner-heading ">
+
+                <h3 className="ab-h2">
+
+                  <span className="text-span-23 text-[#021414] relative  ">
+                    The discovery <br /> platform built for growth
+                    {/* <span className='flex justify-center'>
                     <img src="https://assets.website-files.com/615b54e9eebdbb6f52457d5b/61b6cc5de7c28e28abf099cb_Vector%2034.svg"
                       loading="lazy"
                       data-w-id="579a5b13-ba88-5afc-891d-33a5fda814ee"
                       alt="" className="image-118   h-[14px] w-auto"
                     />
                   </span> */}
-                </span>
-              </h3>
+                  </span>
+                </h3>
+              </div>
             </div>
           </div>
-        </div>
         </div>
 
 
@@ -80,7 +88,7 @@ export const About = () => {
           </div>
           <div className=" grid grid-cols-2 justify-center gap-2">
             <div className=" grid-cols-1">
-              <button onClick={() => setBusiness('Subscribers')} className={`  border-[0.5px] border-solid  rounded-[6px] w-full py-4 text-[18px] font-medium ${business == 'Subscribers' ? 'bg-[#ACCF02] border-[#595959]' : 'border-[#ACCF02] text-[#ACCF02]'} `}>Subscribers</button>
+              <button onClick={() => setBusiness('Subscribers')} className={`  border-[0.5px] border-solid  rounded-[6px] w-full py-4 text-[18px] font-medium ${business == 'Subscribers' ? 'bg-[#ACCF02] border-[#595959]' : 'border-[#ACCF02] text-[#ACCF02]'} `}>Subscriber</button>
             </div>
             <div className=" grid-cols-1">
               <button onClick={() => setBusiness('Business')} className={` border-[0.5px] border-solid  rounded-[6px] w-full py-4 text-[18px] font-medium ${business == 'Business' ? 'bg-[#ACCF02] border-[#595959]' : 'border-[#ACCF02] text-[#ACCF02]'} `}>Business</button>
@@ -105,7 +113,12 @@ export const About = () => {
                       <li>Turn excess inventory into a stream of new business without losing regular business. </li>
                       <li> Issue certificates en masse as part of a broader promotional initiative.</li>
                       <li> Recycle dollars back into your business.</li>
+                   
+                        <div className="mt-4">
+                            <button onClick={handleBusinessRoute} className={` border-[0.5px] border-solid  rounded-[6px] px-4  py-2  text-[14px] font-medium ${business == 'Business' ? 'bg-[#ACCF02] border-[#595959]' : 'border-[#ACCF02] text-[#ACCF02]'} `}>Business</button>
+                        </div>
                     </ul>
+
                   </div>
                 </div>
               </div>}
@@ -127,7 +140,9 @@ export const About = () => {
                       <li>Invite your friends to subscribe to listings and get extra perks like early access and exclusive certificates for our loyal influencers.</li>
                       <li>Check to see how many referrals you have and how many referrals are remaining to hit the next milestone.</li>
                       <li> A new model for Loyalty, Rewards and Referrals.</li>
-
+                      <div className="mt-4">
+                            <button onClick={handleRoute} className={` border-[0.5px] border-solid  rounded-[6px] px-4  py-2  text-[14px] font-medium ${business == 'Subscribers' ? 'bg-[#ACCF02] border-[#595959]' : 'border-[#ACCF02] text-[#ACCF02]'} `}>Subscriber</button>
+                        </div>
                     </ul>
 
                   </div>

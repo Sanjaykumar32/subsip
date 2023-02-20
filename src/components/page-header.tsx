@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode , useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Box, Typography, Tooltip, IconButton, Grid } from "@mui/material";
@@ -19,6 +19,7 @@ export function PageHeader({
   icon,
   children,
 }: PageHeaderProps): ReactElement {
+  const [showTooltip, setShowTooltip] = useState(false);
   return (
     <Box
       sx={{
@@ -38,9 +39,17 @@ export function PageHeader({
             <Typography variant="alternet" color="black">
               {name}
             </Typography>
-            <Tooltip title={icon.tooltip}>
+            <Tooltip 
+             title={icon.tooltip} 
+             open={showTooltip}
+             onOpen={() => setShowTooltip(true)}
+             onClose={() => setShowTooltip(false)}
+             >
               <IconButton sx={{ ml: 0.5 }}>
-                <FontAwesomeIcon icon={icon.icon} />
+                <FontAwesomeIcon
+                 icon={icon.icon}
+                 onClick={() => setShowTooltip(!showTooltip)}
+                 />
               </IconButton>
             </Tooltip>
           </Box>
