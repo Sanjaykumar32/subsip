@@ -238,6 +238,7 @@ export function Home({ alertOnBottom }: any) {
 
   useBottomScrollListener(handleOnDocumentBottom);
 
+  
   return (
     <>
       <ScrollToTop />

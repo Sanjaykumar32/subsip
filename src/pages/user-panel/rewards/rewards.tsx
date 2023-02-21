@@ -143,6 +143,7 @@ export function Rewards() {
       .toLowerCase()
       .includes(filter.toString().toLowerCase());
   });
+  const totalPages:any = Math.ceil(list.length);
 
   const filterBusiness = rewardData.filter((el) => {
     return Object.values(el.businessName)
@@ -251,8 +252,8 @@ export function Rewards() {
               components={{ NoRowsOverlay }}
               rows={list}
               columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
+              // pageSize={5}
+              // rowsPerPageOptions={[5]}
             />
           </TableContainer>
         </Grid>

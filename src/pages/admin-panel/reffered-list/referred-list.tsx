@@ -90,8 +90,8 @@ export function ReferredUserList() {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            // pageSize={5}
+            // rowsPerPageOptions={[5]}
             checkboxSelection
             selectionModel={selectionModel}
             onSelectionModelChange={(e) => {

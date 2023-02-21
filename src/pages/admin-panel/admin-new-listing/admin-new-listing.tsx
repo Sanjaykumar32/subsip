@@ -190,7 +190,7 @@ export function AdminNewlisting() {
                       size="small"
                       value={businessName}
                       onChange={handleBusinessNameChange}
-                    // required
+                    required
                     />
                   </FormControl>
                 </Box>
@@ -276,9 +276,9 @@ export function AdminNewlisting() {
                       onChange={handleSubCategoryChange}
                       className="listingSelect"
                     >
-                      {filteredSubCategory.map((res, i: number) => (
-                        <MenuItem value={res.iSubCategoryId} key={i}>
-                          {res.vName}
+                      {filteredSubCategory?.map((res, i: number) => (
+                        <MenuItem value={res?.iSubCategoryId} key={i}>
+                          {res?.vName}
                         </MenuItem>
                       ))}
                     </Select>

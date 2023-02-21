@@ -193,8 +193,8 @@ export function AdminReferralToSubscribe() {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            // pageSize={5}
+            // rowsPerPageOptions={[5]}
             checkboxSelection
           />
         </Box>

@@ -78,7 +78,7 @@ export function AdminListing() {
       width: 200,
       renderCell: (params) => (
         <>
-          {console.log(params.row.SubscriberId, 'render cell ')}
+          {/* {console.log(params.row.SubscriberId, 'render cell ')} */}
           {params.row.SubscriberId == null ?
             <div>No Subscribers</div> :
             <div
@@ -293,8 +293,8 @@ export function AdminListing() {
                 disableSelectionOnClick
                 rows={list}
                 columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
+                // pageSize={5}
+                // rowsPerPageOptions={[5]}
               />
             </Box>
           </Container>

@@ -390,7 +390,7 @@ export const UserAppBar = (props: any) => {
 
   const spring = useSpring({
     from: { height: "0px" },
-    to: { height: !isMobile ? "auto" : open ? "320px" : "0px" },
+    to: { height: !isMobile ? "auto" : open ? "400px" : "0px" },
   });
 
   const spring2 = useSpring({

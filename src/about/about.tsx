@@ -115,7 +115,9 @@ export const About = () => {
                       <li> Recycle dollars back into your business.</li>
                    
                         <div className="mt-4">
-                            <button onClick={handleBusinessRoute} className={` border-[0.5px] border-solid  rounded-[6px] px-4  py-2  text-[14px] font-medium ${business == 'Business' ? 'bg-[#ACCF02] border-[#595959]' : 'border-[#ACCF02] text-[#ACCF02]'} `}>Business</button>
+                            <button onClick={handleBusinessRoute} className={` border-[0.5px] border-solid  rounded-[6px] px-4  py-2  text-[14px] font-medium ${business == 'Business' ? 'bg-[#ACCF02] border-[#595959]' : 'border-[#ACCF02] text-[#ACCF02]'} `}>
+                              Partner with us
+                              </button>
                         </div>
                     </ul>
 
@@ -141,7 +143,9 @@ export const About = () => {
                       <li>Check to see how many referrals you have and how many referrals are remaining to hit the next milestone.</li>
                       <li> A new model for Loyalty, Rewards and Referrals.</li>
                       <div className="mt-4">
-                            <button onClick={handleRoute} className={` border-[0.5px] border-solid  rounded-[6px] px-4  py-2  text-[14px] font-medium ${business == 'Subscribers' ? 'bg-[#ACCF02] border-[#595959]' : 'border-[#ACCF02] text-[#ACCF02]'} `}>Subscriber</button>
+                            <button onClick={handleRoute} className={` border-[0.5px] border-solid  rounded-[6px] px-4  py-2  text-[14px] font-medium ${business == 'Subscribers' ? 'bg-[#ACCF02] border-[#595959]' : 'border-[#ACCF02] text-[#ACCF02]'} `}>
+                             Get started
+                            </button>
                         </div>
                     </ul>
 

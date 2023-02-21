@@ -81,6 +81,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const ListId = searchParams.get("id");
   const edit = searchParams.get("edit");
 
+
   useEffect(() => {
 
     if (edit === 'true') {
@@ -209,7 +210,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     form.append("country", "1");
     form.append("state", "2");
     form.append("city", "2");
-    form.append("onBanner", banner);
+    form.append("onBanner", banner ? 'true' : 'false');
     if (image?.name) {
       form.append("image", image, image?.name)
     }
@@ -235,8 +236,8 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     updatedata.append("city", "2");
     if (image?.name) {
       updatedata.append("image", image, image?.name)
-      updatedata.append("onBanner", banner ? '1' : '0');
     }
+    updatedata.append("onBanner",  banner ? '1' : '0');
     updatedata.append("email", email);
     updatedata.append("category", category);
     updatedata.append("subCategory", subCategory);
@@ -246,7 +247,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
 
     if (ListId) {
-      const res = await dispatch(
+      const res :any = await dispatch(
         AdminThunk.updateListing({
           data: updatedata,
           iBusinessId: ListId
@@ -254,13 +255,18 @@ export const NewlistingController = (): INewlistingControllerReturns => {
             : 0,
         })
       );
-
-      toast.success("Listing Updated Successfully");
-      navigate(`/admin/listing`)
+     
+      if(res?.payload?.success == 1){
+        toast.success("Listing Updated Successfully");
+        navigate(`/admin/listing`)
+      }
+    
     } else {
-      const res = await dispatch(AdminThunk.createListing(form));
-      toast.success("Listing Created Successfully");
-      navigate(`/admin/listing`)
+      const res:any = await dispatch(AdminThunk.createListing(form));
+      if(res.payload.success == 1){
+        toast.success("Listing Created Successfully");
+        navigate(`/admin/listing`)
+      }
     }
 
 
@@ -281,7 +287,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     //   toast.success("Listing Created Successfully");
     //   navigate(AdminRoutePathEnum.ADMIN_LISTING);
     // }
-
+    allBusiness()
   };
 
   const allBusiness = useCallback(async () => {
@@ -324,13 +330,13 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
   const filteredSubCategory = subCategoryData?.filter(
     (item: { iCategoryId: string }) => {
-      return item.iCategoryId == category;
+      return item?.iCategoryId == category;
     }
   );
 
-  console.log(subCategoryData?.filter((item: { iCategoryId: string }) => {
-    return item.iCategoryId == category;
-  }), 'item cate sub')
+  // console.log(subCategoryData?.filter((item: { iCategoryId: string }) => {
+  //   return item.iCategoryId == category;
+  // }), 'item cate sub')
 
 
 

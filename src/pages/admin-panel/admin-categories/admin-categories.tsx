@@ -174,8 +174,8 @@ export function AdminCategories() {
           disableSelectionOnClick
             rows={sortedValue}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            // pageSize={5}
+            // rowsPerPageOptions={[5]}
           />
         </Box>
       </Container>

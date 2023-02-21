@@ -265,8 +265,8 @@ export function AdminSubscribers() {
           <DataGrid
             rows={routeValue == undefined ?  rowsData : rowsDataSingle}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            // pageSize={5}
+            // rowsPerPageOptions={[5]}
             checkboxSelection
             selectionModel={selectionModel}
             onSelectionModelChange={(e) => {

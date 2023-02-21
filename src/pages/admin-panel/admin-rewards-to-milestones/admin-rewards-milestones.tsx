@@ -92,8 +92,8 @@ export function AdminRewardsMileStones() {
           disableSelectionOnClick
             rows={rows}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            // pageSize={5}
+            // rowsPerPageOptions={[5]}
           />
         </Box>
       </Container>
