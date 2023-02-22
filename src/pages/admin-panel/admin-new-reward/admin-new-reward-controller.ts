@@ -68,7 +68,7 @@ export const NewRewardController = (): INewRewardControllerReturns => {
     setAvailibility(event.target.value as unknown as number);
   };
 
-  const filteredSubCategory = subCategoryData?.filter(
+  const filteredSubCategory = subCategoryData && subCategoryData?.filter(
     (item: { iCategoryId: string }) => {
       return item.iCategoryId == category;
     }

@@ -219,6 +219,7 @@ export function AdminListing() {
             <Box>
               <Button
                 onClick={() => {
+                  console.log('click' , AdminRoutePathEnum.ADMIN_NEW_LISTING);
                   navigate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
                 }}
                 size="large"

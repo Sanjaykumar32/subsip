@@ -39,7 +39,7 @@ export const AddSubCategoryController =
 
     useEffect(() => {
       if (subCategrory) {
-        const filter = subCategoryData?.filter((item: any) => {
+        const filter = subCategoryData && subCategoryData?.filter((item: any) => {
           if (item?.iSubCategoryId == subCategrory) {
             setSubCategory(item?.vName);
           }

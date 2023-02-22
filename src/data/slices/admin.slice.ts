@@ -143,7 +143,7 @@ export const adminSlice = createSlice({
 
     builder.addCase(AdminThunk.getSubCategory.fulfilled, (state, action) => {
       if (action.payload) {
-        state.subCategory = action.payload.data;
+        state.subCategory = action?.payload?.data;
       }
     });
     builder.addCase(AdminThunk.refferralCount.fulfilled, (state, action) => {

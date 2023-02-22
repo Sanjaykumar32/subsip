@@ -614,3 +614,9 @@ h2 {
     align-self: center;
     text-align: center;
 }
+.slick-list{
+    height: 452px;
+}
+/* .slick-slide {
+    max-width: 360px;
+} */

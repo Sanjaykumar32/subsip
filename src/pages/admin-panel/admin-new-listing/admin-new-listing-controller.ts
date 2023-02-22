@@ -328,15 +328,11 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     getSubCategory();
   }, [getSubCategory]);
 
-  const filteredSubCategory = subCategoryData?.filter(
+  const filteredSubCategory = subCategoryData && subCategoryData?.filter(
     (item: { iCategoryId: string }) => {
       return item?.iCategoryId == category;
     }
   );
-
-  // console.log(subCategoryData?.filter((item: { iCategoryId: string }) => {
-  //   return item.iCategoryId == category;
-  // }), 'item cate sub')
 
 
 

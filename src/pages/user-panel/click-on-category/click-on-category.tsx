@@ -60,7 +60,7 @@ export function ClickOnCategory() {
     }
   }, [dispatch]);
 
-  const filteredSubCategory = subCategoryData?.filter((item) => {
+  const filteredSubCategory = subCategoryData && subCategoryData?.filter((item) => {
     return item?.iCategoryId == getCateID;
   });
 
@@ -267,8 +267,8 @@ export function ClickOnCategory() {
                             </AccordionSummary>
 
                             <AccordionDetails className="!p-0">
-                              {filteredSubCategory.length > 0 ? (
-                                filteredSubCategory.map(
+                              {filteredSubCategory?.length > 0 ? (
+                                filteredSubCategory?.map(
                                   (res: any, i: number) => (
                                     <Link
                                       key={i}

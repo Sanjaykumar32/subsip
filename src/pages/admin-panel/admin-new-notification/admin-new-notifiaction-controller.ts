@@ -117,7 +117,7 @@ export const NewNotificationButtonController =
       setBusinessLocation(event.target.value as string);
     };
 
-    const filteredSubCategory = subCategoryData?.filter(
+    const filteredSubCategory = subCategoryData && subCategoryData?.filter(
       (item: { iCategoryId: string }) => {
         return item.iCategoryId == category;
       }

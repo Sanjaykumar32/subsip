@@ -26,6 +26,8 @@ import ScrollToTop from "scrollTop";
 import {
   CircularProgress,
 } from "@mui/material";
+import { SliderArrow } from "./sliderArrow";
+import { SliderCard } from "./sliderCard";
 
 
 export function Home({ alertOnBottom }: any) {
@@ -42,6 +44,7 @@ export function Home({ alertOnBottom }: any) {
     lazyLoad: true,
     autoplay: true,
     speed: 700,
+    adaptiveHeight: true,
   };
 
   const cardSettings: any = {
@@ -52,13 +55,13 @@ export function Home({ alertOnBottom }: any) {
     lazyLoad: true,
     autoplay: true,
     speed: 700,
+
     responsive: [
       {
         breakpoint: 1500,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 4,
-          adaptiveHeight: true,
         },
       },
       {
@@ -66,7 +69,6 @@ export function Home({ alertOnBottom }: any) {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          adaptiveHeight: true,
         },
       },
       {
@@ -74,7 +76,6 @@ export function Home({ alertOnBottom }: any) {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          adaptiveHeight: true,
         },
       },
       {
@@ -82,7 +83,6 @@ export function Home({ alertOnBottom }: any) {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          adaptiveHeight: true,
         },
       },
     ],
@@ -238,7 +238,7 @@ export function Home({ alertOnBottom }: any) {
 
   useBottomScrollListener(handleOnDocumentBottom);
 
-  
+
   return (
     <>
       <ScrollToTop />
@@ -594,147 +594,3 @@ export function Home({ alertOnBottom }: any) {
     </>
   );
 }
-
-const SliderCard = (props: any) => {
-  const { des, imgSrc, location, name, id, subscriberCount, subcriber } = props;
-
-  const auth = useAuth();
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const userId = localStorage.getItem("userId");
-
-  const filters =
-    subcriber &&
-    subcriber?.filter((el: any) => {
-      return el == userId;
-    })[0];
-
-
-  async function onImageClick(): Promise<void> {
-    try {
-      const response: any = await dispatch(
-        UserThunk.business({ businessId: id })
-      );
-      if (response?.payload?.data?.length > 0) {
-        navigate(`/listing/${name.replace(/\s+/g, "-")}`,
-          { state: { businessId: id } }
-        );
-      } else {
-        console.log("nodata");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const allBusiness = useCallback(async () => {
-    try {
-      await dispatch(UserThunk.business());
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch]);
-
-  async function SubcribeBtn(): Promise<void> {
-    !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
-    try {
-      await dispatch(
-        UserThunk.addSubscriberToBusiness({
-          businessId: id,
-          userId: userId ? userId : "",
-          referredCode: null,
-        })
-      );
-
-      allBusiness();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const handleUnsub = async (id: any) => {
-    await dispatch(
-      UserThunk.UNSubscriberToBusiness({
-        businessId: id ? "" + id : "0",
-      })
-    );
-    allBusiness();
-    toast.success("Unsubscribed  Successfully");
-  };
-
-  return (
-    <div className="w-full mx-auto  md:mx-5 relative max-w-[307px] bg-white  border-[1px] border-[#DADDE5] ">
-      <img
-        src={imgSrc}
-        alt="image"
-        className="w-full object-cover h-[215px]  cursor-pointer "
-        onClick={onImageClick}
-      />
-      <div className=" pl-4 py-4 h-[230px] ">
-        <span
-          className="text-black text-[19px] leading-[22px] font-semibold cursor-pointer textLimit2 my-3 "
-          onClick={() => {
-            onImageClick();
-          }}
-        >
-          {name}
-        </span>
-        <p className="text-[0.9rem] text-[#09292B] leading-[22px] font-semibold ">
-          {location ? location : " "}
-        </p>
-        <p className="text-[1rem] leading-[24px] text-ellipsis text-[#434d59] textLimit2 my-3 ">
-          {des ? des : "--"}
-        </p>
-        <div className="flex justify-between my-2 pt-[1em] absolute bottom-[14px] right-0  w-[95%]">
-          <p className="text-[0.9rem] text-[#CDCDCD]">
-            <span className="text-[20px] text-black pr-2">
-              {" "}
-              {subscriberCount ? subscriberCount : " "}{" "}
-            </span>
-            {subscriberCount ? "subscribers" : " "}
-          </p>
-
-          <div className="raletive cursor-pointer ">
-            {filters == userId && auth?.isAuthenticated ? (
-              <div
-                className="subscribeLebalListing bg-[#e0e0e0] "
-                onClick={() => handleUnsub(id)}
-              >
-                <span className=" text-[#262626] font-medium">
-                  {" "}
-                  Unsubscribe
-                </span>
-              </div>
-            ) : (
-              <div
-                className="subscribeLebalListing bg-[#09292b]"
-                onClick={SubcribeBtn}
-              >
-                <span className=" text-white font-medium"> Subscribe</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const SliderArrow = (props: any) => {
-  return (
-    <div
-      className={` ${props.bannerType} w-full pointer-events-none z-50 bg-transparent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex px-5 justify-between  text-white font-normal `}
-    >
-      <SlArrowLeft
-        onClick={() => props?.refVal?.current?.slickPrev()}
-        className={`text-3xl md:text-4xl p-2 rounded-full bg-[#09292b] font-normal relative pointer-events-auto z-50 cursor-pointer `}
-      />
-      <SlArrowRight
-        onClick={() => {
-          props?.refVal?.current?.slickNext();
-        }}
-        className="text-3xl md:text-4xl p-2 rounded-full bg-[#09292b] font-normal relative z-50 pointer-events-auto cursor-pointer"
-      />
-    </div>
-  );
-};

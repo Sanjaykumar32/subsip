@@ -173,7 +173,7 @@ export function AdminNewlisting() {
   const id = searchParams.get("id");
   const edit = searchParams.get("edit");
 
-
+console.log(filteredSubCategory , 'filteredSubCategory');
   return (
     <Container maxWidth="lg">
       <AdminBackButton />

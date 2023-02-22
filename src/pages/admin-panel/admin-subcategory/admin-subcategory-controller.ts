@@ -46,13 +46,13 @@ export const SubCategoryController = (): ISubcategoryControllerReturns => {
     getSubCategory();
   }, [getSubCategory]);
 
-  const CategoryName = categoryData?.filter((item: any) => {
-    return item.iCategoryId == id;
+  const CategoryName = categoryData && categoryData?.filter((item: any) => {
+    return item?.iCategoryId == id;
   })[0];
 
   useEffect(() => {
-    const filteredSubCategory = subCategoryData?.filter((item) => {
-      return item.iCategoryId == id;
+    const filteredSubCategory = subCategoryData && subCategoryData?.filter((item) => {
+      return item?.iCategoryId == id;
     });
 
     setData(filteredSubCategory);
@@ -64,7 +64,7 @@ export const SubCategoryController = (): ISubcategoryControllerReturns => {
     getSubCategory();
   }
 
-  const category = data.forEach((res: ISubCategoryData, index: number) => {
+  const category = data?.forEach((res: ISubCategoryData, index: number) => {
     attributes.push({
       id: index + 1,
       vName: res.vName ? res.vName : "",
