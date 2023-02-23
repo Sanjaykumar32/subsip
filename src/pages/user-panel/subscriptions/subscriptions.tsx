@@ -106,7 +106,7 @@ export function Subscriptions() {
         }}
       />
 
-      <Container maxWidth="xs">
+      <Container maxWidth="xs" className="!p-0 h-[225px]">
         <Box
           sx={{
             display: "flex",

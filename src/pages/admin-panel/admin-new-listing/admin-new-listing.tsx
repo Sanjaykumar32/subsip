@@ -173,7 +173,6 @@ export function AdminNewlisting() {
   const id = searchParams.get("id");
   const edit = searchParams.get("edit");
 
-console.log(filteredSubCategory , 'filteredSubCategory');
   return (
     <Container maxWidth="lg">
       <AdminBackButton />
@@ -276,7 +275,7 @@ console.log(filteredSubCategory , 'filteredSubCategory');
                       onChange={handleSubCategoryChange}
                       className="listingSelect"
                     >
-                      {filteredSubCategory?.map((res, i: number) => (
+                      {filteredSubCategory && filteredSubCategory?.map((res, i: number) => (
                         <MenuItem value={res?.iSubCategoryId} key={i}>
                           {res?.vName}
                         </MenuItem>

@@ -551,7 +551,7 @@ h2 {
 }
 
 .headerTop {
-    padding-top: 3rem !important;
+    padding-top: 7rem !important;
 }
 
 
@@ -617,6 +617,4 @@ h2 {
 .slick-list{
     height: 452px;
 }
-/* .slick-slide {
-    max-width: 360px;
-} */
+

@@ -138,7 +138,7 @@ export function AdminListing() {
   }, [allBusiness]);
 
 
-  const rows: any = businessData?.map((item) => {
+  const rows: any = businessData?.map((item :any) => {
     return {
       SubscriberId: item.subscriberIds,
       id: item.iBusinessId,
@@ -160,18 +160,18 @@ export function AdminListing() {
   })
 
 
-  const list = sorted.filter((el: { Name: { concat: (arg0: string, arg1: any) => { (): any; new(): any; toString: { (): { [s: string]: unknown; } | ArrayLike<unknown>; new(): any; }; }; }; Location: any; }) => {
+  const list = sorted?.filter((el: { Name: { concat: (arg0: string, arg1: any) => { (): any; new(): any; toString: { (): { [s: string]: unknown; } | ArrayLike<unknown>; new(): any; }; }; }; Location: any; }) => {
     return Object.values(el.Name.concat('', el.Location).toString()).join('').toLowerCase().includes(search.toString().toLowerCase())
   })
 
-  const items1 = businessData?.map((item) => {
+  const items1 = businessData?.map((item :any) => {
     return ({
       id: item.iBusinessId,
       name: item.vName
     })
   })
 
-  const items2 = businessData?.map((item) => {
+  const items2 = businessData?.map((item :any) => {
     return ({
       id: item.iSubCategory,
       name: item.vLocation
@@ -219,7 +219,6 @@ export function AdminListing() {
             <Box>
               <Button
                 onClick={() => {
-                  console.log('click' , AdminRoutePathEnum.ADMIN_NEW_LISTING);
                   navigate(AdminRoutePathEnum.ADMIN_NEW_LISTING);
                 }}
                 size="large"

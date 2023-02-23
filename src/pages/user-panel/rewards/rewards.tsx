@@ -91,17 +91,17 @@ export function Rewards() {
     {
       field: "rewardName",
       headerName: "Reward Name",
-      width: 200,
+      width: isMobile ? 125 : 200,
     },
     {
       field: "businessName",
       headerName: "Business Name",
-      width: 200,
+      width: isMobile ? 125 : 200,
     },
     {
       field: "Status",
       headerName: "Status",
-      width: 200,
+      width: isMobile ? 125 : 200,
       renderCell: (params) => (
         <Chip
           label={params.value}
@@ -113,14 +113,14 @@ export function Rewards() {
                 : "warningColor"
           }
           onClick={() => {
-            params.value == "Available" && rewardClaimed(params.id);
+            params.value == "Available" && rewardClaimed(params?.id);
           }}
         />
       ),
     },
   ];
 
-  const rows = rewardData.map((item) => {
+  const rows = rewardData?.map((item) => {
     return {
       id: item.rewardId,
       rewardName: item.rewardName,
@@ -143,7 +143,7 @@ export function Rewards() {
       .toLowerCase()
       .includes(filter.toString().toLowerCase());
   });
-  const totalPages:any = Math.ceil(list.length);
+  const totalPages: any = Math.ceil(list.length);
 
   const filterBusiness = rewardData.filter((el) => {
     return Object.values(el.businessName)
@@ -189,7 +189,7 @@ export function Rewards() {
         {filter == 'Available' && 'No rewards available at this moment. Please check back soon.'}
         {filter == 'Claimed' && 'You have not claimed any rewards yet.'}
         {filter == 'Missed' && 'You have not missed any rewards yet.'}
-       
+
       </Stack>
     );
   }
@@ -248,12 +248,12 @@ export function Rewards() {
         <Grid item xs={12} md={8}>
           <TableContainer sx={{ height: 400, width: "100%" }}>
             <DataGrid
-            disableSelectionOnClick
+              disableSelectionOnClick
               components={{ NoRowsOverlay }}
               rows={list}
               columns={columns}
-              // pageSize={5}
-              // rowsPerPageOptions={[5]}
+            // pageSize={5}
+            // rowsPerPageOptions={[5]}
             />
           </TableContainer>
         </Grid>

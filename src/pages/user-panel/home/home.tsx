@@ -55,7 +55,6 @@ export function Home({ alertOnBottom }: any) {
     lazyLoad: true,
     autoplay: true,
     speed: 700,
-
     responsive: [
       {
         breakpoint: 1500,
@@ -88,50 +87,6 @@ export function Home({ alertOnBottom }: any) {
     ],
   };
 
-  const cardSettingsScroll: any = {
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 4,
-    adaptiveHeight: false,
-    cssEase: "linear",
-    lazyLoad: true,
-    autoplay: false,
-    speed: 700,
-    responsive: [
-      {
-        breakpoint: 1500,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          adaptiveHeight: true,
-        },
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          adaptiveHeight: true,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          adaptiveHeight: true,
-        },
-      },
-      {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          adaptiveHeight: true,
-        },
-      },
-    ],
-  };
 
   const sliderRef = useRef<Slider>(null);
   const cardRef = useRef<Slider>(null);
@@ -175,7 +130,6 @@ export function Home({ alertOnBottom }: any) {
           ?.toLowerCase()
       );
   });
-
 
   const categoryData = useAppSelector(GET_CATEGORY);
   const CateFirst = categoryData.map((item: any) => item?.iCategoryId);
@@ -382,10 +336,14 @@ export function Home({ alertOnBottom }: any) {
 
 
         <div className={`${!isMobile ? "mt-8" : ""} w-full px-5 `}>
-          <p className="font-semibold text-[24px]  mt-5 mx-5">
-            {filterBanner?.filter(
+ 
+
+        {filterBanner?.filter(
               (el) => parseInt(el?.iCategory) == CateFirst[0]
-            ).length > 0 && "Restaurants"}
+            ).length > 0 && 
+            <>
+          <p className="font-semibold text-[24px]  mt-5 mx-5">
+          Restaurants
           </p>
 
           <div className="relative my-2 mb-5 w-full">
@@ -421,11 +379,15 @@ export function Home({ alertOnBottom }: any) {
               (el) => parseInt(el.iCategory) == CateFirst[0]
             ).length > 0 && <SliderArrow refVal={cardRef3} />}
           </div>
+          </>}
 
-          <p className="font-semibold text-[24px]  mt-5 mx-5">
-            {filterBanner?.filter(
+
+          {filterBanner?.filter(
               (el) => parseInt(el.iCategory) == CateFirst[1]
-            ).length > 0 && "Home Services"}
+            ).length > 0 && 
+            <>
+          <p className="font-semibold text-[24px]  mt-5 mx-5">
+          Home Services
           </p>
           <div className="relative mt-5 w-full">
             <Slider ref={cardRef2} {...cardSettings}>
@@ -460,11 +422,16 @@ export function Home({ alertOnBottom }: any) {
               (el) => parseInt(el.iCategory) == CateFirst[1]
             ).length > 0 && <SliderArrow refVal={cardRef2} />}
           </div>
+          </>}
 
-          <p className="font-semibold text-[24px]  mt-5 mx-5">
-            {filterBanner?.filter(
+
+
+          {filterBanner?.filter(
               (el) => parseInt(el.iCategory) == CateFirst[2]
-            ).length > 0 && "Auto Services"}
+            ).length > 0 && 
+            <>
+          <p className="font-semibold text-[24px]  mt-5 mx-5">
+           Auto Services
           </p>
 
           <div className="relative my-2 mb-5 w-full">
@@ -500,15 +467,18 @@ export function Home({ alertOnBottom }: any) {
               (el) => parseInt(el.iCategory) == CateFirst[2]
             ).length > 0 && <SliderArrow refVal={cardRef3} />}
           </div>
+          </>}
 
           {/* More data show */}
 
           {scroll ? (
             <>
-              <p className="font-semibold text-[24px]  mt-5 mx-5">
                 {filterBanner?.filter(
                   (el) => parseInt(el.iCategory) == CateFirst[3]
-                ).length > 0 && moreData[3]}
+                ).length > 0 && 
+                <>
+              <p className="font-semibold text-[24px]  mt-5 mx-5">
+              {moreData[3]}
               </p>
               <div className="relative my-10 w-full">
                 <Slider ref={cardRef3} {...cardSettings}>
@@ -544,11 +514,14 @@ export function Home({ alertOnBottom }: any) {
                   (el) => parseInt(el.iCategory) == CateFirst[3]
                 ).length > 0 && <SliderArrow refVal={cardRef3} />}
               </div>
-
-              <p className="font-semibold text-[24px]  mt-5 mx-5">
-                {filterBanner?.filter(
+              </>}
+   
+              {filterBanner?.filter(
                   (el) => parseInt(el.iCategory) == CateFirst[4]
-                ).length > 0 && moreData[4]}
+                ).length > 0 &&
+                <>
+              <p className="font-semibold text-[24px]  mt-5 mx-5">
+                 {moreData[4]}
               </p>
 
               <div className="relative my-10 w-full">
@@ -585,6 +558,7 @@ export function Home({ alertOnBottom }: any) {
                   (el) => parseInt(el.iCategory) == CateFirst[4]
                 ).length > 0 && <SliderArrow refVal={cardRef3} />}
               </div>
+              </>}
             </>
           ) : null}
 

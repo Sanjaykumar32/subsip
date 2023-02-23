@@ -390,7 +390,7 @@ export const UserAppBar = (props: any) => {
 
   const spring = useSpring({
     from: { height: "0px" },
-    to: { height: !isMobile ? "auto" : open ? "400px" : "0px" },
+    to: { height: !isMobile ? "auto" : open ? "425px" : "0px" },
   });
 
   const spring2 = useSpring({
@@ -414,10 +414,18 @@ export const UserAppBar = (props: any) => {
   };
   const businessData = useAppSelector(GET_BUSINESS);
 
+  const data = businessData?.map((item:any)=>{
+       return  item?.vLocation
+  })
+
+  const removeDupValue =  [...new Set(data)];
+
+
   const defaultProps = {
-    options: searchLocation == '' ? [] : businessData,
-    getOptionLabel: (option: any) => option.vLocation,
+    options: searchLocation == '' ? [] : removeDupValue,
+    getOptionLabel: (option: any) => option,
   };
+
 
   const serchList = businessData.map((el, index) => {
     return {
@@ -437,7 +445,6 @@ export const UserAppBar = (props: any) => {
     // {state:{id: item?.iCategoryId ,vName: item.vName.replace(/\s/g,'-')}})
     setOpen(false);
   };
-
 
 
   return (
@@ -1271,7 +1278,7 @@ export const UserAppBar = (props: any) => {
       </AppBar>
       <Backdrop
         open={open}
-        // sx={{ zIndex: theme.zIndex.appBar - 1 }}
+        sx={{ zIndex: 999}}
         onClick={() => setOpen(false)}
       />
     </>

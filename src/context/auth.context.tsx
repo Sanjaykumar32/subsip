@@ -106,8 +106,10 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
         sessionStorage.setItem("signUp", '1')
       }
     } catch (error: any) {
-      console.log(error, 'error');
-      toast.error(error.response.data.message);
+      console.log(error.response.data.message, 'error ');
+      if(error.response.data.message){
+        toast.error('A user is already registered with this e-mail address.');
+      }
     }
   }, []);
 

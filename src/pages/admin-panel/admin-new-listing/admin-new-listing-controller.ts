@@ -71,7 +71,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
   const [businessLocation, setBusinessLocation] = useState<string>("");
   const categoryData = useAppSelector(GET_CATEGORY);
-  const subCategoryData = useAppSelector(GET_SUB_CATEGORY);
+  const subCategoryData: any = useAppSelector(GET_SUB_CATEGORY);
   const businessData = useAppSelector(GET_BUSINESS);
   const [banner, setBanner] = useState<any>(false);
   const [editrue, setEditure] = useState<boolean>(false);
@@ -81,13 +81,12 @@ export const NewlistingController = (): INewlistingControllerReturns => {
   const ListId = searchParams.get("id");
   const edit = searchParams.get("edit");
 
-
   useEffect(() => {
 
     if (edit === 'true') {
       setEditure(true);
       allBusiness();
-      const filter = businessData?.filter((item: any) => {
+      const filter = businessData && businessData?.filter((item: any) => {
         if (item?.iBusinessId === Number(ListId)) {
           setBuisnessName(item?.vName);
           setBusinessLocation(item?.vLocation);
@@ -237,7 +236,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     if (image?.name) {
       updatedata.append("image", image, image?.name)
     }
-    updatedata.append("onBanner",  banner ? '1' : '0');
+    updatedata.append("onBanner", banner ? '1' : '0');
     updatedata.append("email", email);
     updatedata.append("category", category);
     updatedata.append("subCategory", subCategory);
@@ -247,7 +246,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
 
 
     if (ListId) {
-      const res :any = await dispatch(
+      const res: any = await dispatch(
         AdminThunk.updateListing({
           data: updatedata,
           iBusinessId: ListId
@@ -255,22 +254,21 @@ export const NewlistingController = (): INewlistingControllerReturns => {
             : 0,
         })
       );
-     
-      if(res?.payload?.success == 1){
+
+      if (res?.payload?.success == 1) {
         toast.success("Listing Updated Successfully");
         navigate(`/admin/listing`)
+        getSubCategory()
       }
-    
+
     } else {
-      const res:any = await dispatch(AdminThunk.createListing(form));
-      if(res.payload.success == 1){
+      const res: any = await dispatch(AdminThunk.createListing(form));
+      if (res.payload.success == 1) {
         toast.success("Listing Created Successfully");
         navigate(`/admin/listing`)
+        getSubCategory()
       }
     }
-
-
-
     // if (edit) {
     // const res = await dispatch(
     //   AdminThunk.updateListing({
@@ -288,6 +286,7 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     //   navigate(AdminRoutePathEnum.ADMIN_LISTING);
     // }
     allBusiness()
+    getSubCategory()
   };
 
   const allBusiness = useCallback(async () => {
@@ -328,12 +327,20 @@ export const NewlistingController = (): INewlistingControllerReturns => {
     getSubCategory();
   }, [getSubCategory]);
 
-  const filteredSubCategory = subCategoryData && subCategoryData?.filter(
-    (item: { iCategoryId: string }) => {
-      return item?.iCategoryId == category;
-    }
-  );
 
+  function subCateGory() {
+    return subCategoryData && subCategoryData?.filter(
+      (item: { iCategoryId: string }) => {
+          if(category){
+            return  item?.iCategoryId == category
+          }else{
+           return [] 
+          }
+      }
+    )
+  }
+  
+  const filteredSubCategory: any = subCateGory()
 
 
   return {

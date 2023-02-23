@@ -224,8 +224,8 @@ export function ClickOnCategory() {
         {isMobile && (
           <div>
             <React.Fragment>
-              <Button onClick={toggleDrawer} className="py-5">
-                <ListIcon />
+              <Button onClick={toggleDrawer} className="!p-0 !flex !justify-start">
+                <ListIcon className="!h-[42px] !w-[42px]"  />
               </Button>
               <SwipeableDrawer
                 open={state}
