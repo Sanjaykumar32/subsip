@@ -53,7 +53,7 @@ export function Home({ alertOnBottom }: any) {
     slidesToScroll: 4,
     cssEase: "linear",
     lazyLoad: true,
-    autoplay: true,
+    autoplay: false,
     speed: 700,
     responsive: [
       {
