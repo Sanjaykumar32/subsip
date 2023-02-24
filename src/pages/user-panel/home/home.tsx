@@ -483,7 +483,7 @@ export function Home({ alertOnBottom }: any) {
               <p className="font-semibold text-[24px]  mt-5 mx-5">
               {moreData[3]}
               </p>
-              <div className="relative my-10 w-full">
+              <div className="relative my-10 w-full iner-slider">
                 <Slider ref={cardRef3} {...cardSettings}>
                   {filterBanner
                     ?.filter((el) => parseInt(el.iCategory) == CateFirst[3])
@@ -527,7 +527,7 @@ export function Home({ alertOnBottom }: any) {
                  {moreData[4]}
               </p>
 
-              <div className="relative my-10 w-full">
+              <div className="relative my-10 w-full iner-slider">
                 <Slider ref={cardRef3} {...cardSettings}>
                   {filterBanner
                     ?.filter((el) => parseInt(el.iCategory) == CateFirst[4])
