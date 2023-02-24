@@ -96,7 +96,7 @@ export function Subscriptions() {
 
 
   return (
-    <Container maxWidth={false} sx={{ px: 5, py: 10 }}>
+    <Container maxWidth={false} sx={{ px: 5, py: 20 }}>
       <PageHeader
         name="Subscriptions"
         icon={{
@@ -106,7 +106,7 @@ export function Subscriptions() {
         }}
       />
 
-      <Container maxWidth="xs" className="!p-0 h-[225px]">
+      <Container maxWidth="xs" className="!p-0 !pt-2">
         <Box
           sx={{
             display: "flex",

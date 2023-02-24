@@ -13,7 +13,7 @@ import { Links } from "./links";
 import { SocialIcons } from "./social";
 import { Logo } from "components/logo";
 import { useNavigate } from "react-router-dom";
-import LogoImage from "../../assets/images/subsipLogo.png"
+import LogoImage from "../../assets/images/subsiplogoNew.png"
 
 export * from "./links";
 export * from "./social";

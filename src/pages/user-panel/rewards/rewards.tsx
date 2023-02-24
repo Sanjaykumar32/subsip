@@ -14,13 +14,19 @@ import {
   Chip,
 } from "@mui/material";
 import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridOverlay } from "@mui/x-data-grid";
 import TableContainer from "@mui/material/TableContainer";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { Search } from "@mui/icons-material";
 import { useAppSelector, useAppDispatch } from "data";
 import Stack from '@mui/material/Stack';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import {
   GET_ALL_SUBSCRIBER_OF_BUSINESS,
   GET_USER_REWARDS,
@@ -53,7 +59,7 @@ export function Rewards() {
 
   useEffect(() => {
     getUserReward();
-  }, [getUserReward]);
+  }, [getUserReward, filter]);
 
   const allsubscriberOfBussiness = useCallback(async () => {
     try {
@@ -194,6 +200,14 @@ export function Rewards() {
     );
   }
 
+  function customNoRowsOverlay() {
+    return (
+      <GridOverlay>
+        <div>No Rows</div>
+      </GridOverlay>
+    )
+  }
+
   return (
     <Container maxWidth="xl" sx={{ p: 2 }}>
       <PageHeader
@@ -246,7 +260,7 @@ export function Rewards() {
         )} */}
 
         <Grid item xs={12} md={8}>
-          <TableContainer sx={{ height: 400, width: "100%" }}>
+          {/* <TableContainer sx={{ height: 400, width: "75%" }}>
             <DataGrid
               disableSelectionOnClick
               components={{ NoRowsOverlay }}
@@ -255,6 +269,49 @@ export function Rewards() {
             // pageSize={5}
             // rowsPerPageOptions={[5]}
             />
+          </TableContainer> */}
+
+          <TableContainer component={Paper}  sx={{ height: 400 }}
+          >
+            <Table sx={{ minWidth: 300 }}
+              aria-label="caption table"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell>Reward Name</TableCell>
+                  <TableCell>Business Name</TableCell>
+                  <TableCell>Status</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody
+              >
+                {list?.map((row) => (
+                  <TableRow key={row.rewardName}
+                  >
+                    <TableCell component="th" scope="row">
+                      {row.rewardName}
+                    </TableCell>
+                    <TableCell>{row.businessName}</TableCell>
+                    <TableCell >
+                      <Chip
+                        label={row.Status}
+                        className={
+                          row.Status == "Missed"
+                            ? "errorColor"
+                            : row.Status == "Available"
+                              ? "successColor"
+                              : "warningColor"
+                        }
+                        onClick={() => {
+                          row.Status == "Available" && rewardClaimed(row?.id);
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow> 
+                  ))}
+              </TableBody>
+
+            </Table>
           </TableContainer>
         </Grid>
       </Grid>

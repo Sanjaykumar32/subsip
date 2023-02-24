@@ -661,7 +661,7 @@ export const UserAppBar = (props: any) => {
                   id="disable-close-on-select"
                   onChange={(event, newValue: any) => {
                     console.log(event, "event onchange");
-                    handlevalue(newValue?.vLocation);
+                    handlevalue(newValue);
                   }}
                   openOnFocus
                   renderInput={(params) => (
@@ -1117,7 +1117,7 @@ export const UserAppBar = (props: any) => {
                               onChange={(event, newValue: any) => {
                                 console.log(event, "event onchange");
                                 setOpen(false);
-                                handlevalue(newValue?.vLocation);
+                                handlevalue(newValue);
                               }}
                               renderInput={(params) => (
                                 <TextField
