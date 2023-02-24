@@ -618,3 +618,17 @@ h2 {
     height: 452px;
 }
 
+@media screen and (min-device-width: 300px) and (max-device-width: 767px) { 
+    .iner-slider .slick-list {
+        padding-left: 0 !important;
+    }
+    .iner-slider .slick-active.slick-current { 
+        width: 13% !important;
+    }
+
+    .iner-slider .slick-track {
+        display: flex;
+        column-gap: 20px;
+}
+}
+

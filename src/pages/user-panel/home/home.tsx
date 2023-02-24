@@ -82,6 +82,9 @@ export function Home({ alertOnBottom }: any) {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '60px',
+          autoplay: false,
         },
       },
     ],
@@ -346,7 +349,7 @@ export function Home({ alertOnBottom }: any) {
           Restaurants
           </p>
 
-          <div className="relative my-2 mb-5 w-full">
+          <div className="relative my-2 mb-5 w-full iner-slider">
             <Slider ref={cardRef3} {...cardSettings}>
               {filterBanner
                 ?.filter((el) => parseInt(el?.iCategory) == CateFirst[0])
@@ -389,7 +392,7 @@ export function Home({ alertOnBottom }: any) {
           <p className="font-semibold text-[24px]  mt-5 mx-5">
           Home Services
           </p>
-          <div className="relative mt-5 w-full">
+          <div className="relative my-2 mb-5 w-full iner-slider">
             <Slider ref={cardRef2} {...cardSettings}>
               {filterBanner
                 ?.filter((el) => parseInt(el?.iCategory) == CateFirst[1])
@@ -434,7 +437,7 @@ export function Home({ alertOnBottom }: any) {
            Auto Services
           </p>
 
-          <div className="relative my-2 mb-5 w-full">
+          <div className="relative my-2 mb-5 w-full iner-slider">
             <Slider ref={cardRef3} {...cardSettings}>
               {filterBanner
                 ?.filter((el) => parseInt(el.iCategory) == CateFirst[2])
