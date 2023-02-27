@@ -54,6 +54,7 @@ export function AdminListing() {
     {
       field: "Profile",
       headerName: "Profile",
+      // sortable:false,
       width: 70,
       renderCell: (params) => {
         return (
@@ -71,9 +72,12 @@ export function AdminListing() {
       field: "Name",
       headerName: "Name",
       width: 200,
+      // sortable:false,
+      
     },
     {
       field: "Subscribers",
+      // sortable:false,
       headerName: "Subscribers",
       width: 200,
       renderCell: (params) => (
@@ -93,11 +97,13 @@ export function AdminListing() {
       field: "Location",
       headerName: "Location",
       width: 150,
+      // sortable:false,
     },
     {
       field: "Actions",
       headerName: "Actions",
       width: 110,
+      // sortable:false,
       renderCell: (params) => (
         <Box>
           <Tooltip title={params.value[0]}>
@@ -293,6 +299,7 @@ export function AdminListing() {
                 disableSelectionOnClick
                 rows={list}
                 columns={columns}
+                // disableColumnMenu
                 // pageSize={5}
                 // rowsPerPageOptions={[5]}
               />

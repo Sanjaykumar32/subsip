@@ -43,7 +43,7 @@ export function Home({ alertOnBottom }: any) {
     cssEase: "linear",
     lazyLoad: true,
     autoplay: true,
-    speed: 700,
+    speed: isMobile ? 500 : 700,
     adaptiveHeight: true,
   };
 
@@ -54,7 +54,7 @@ export function Home({ alertOnBottom }: any) {
     cssEase: "linear",
     lazyLoad: true,
     autoplay: false,
-    speed: 700,
+    speed: isMobile ? 500 : 700,
     responsive: [
       {
         breakpoint: 1500,
@@ -527,7 +527,7 @@ export function Home({ alertOnBottom }: any) {
                  {moreData[4]}
               </p>
 
-              <div className="relative my-10 w-full iner-slider">
+              <div className="relative p-padding my-10 w-full iner-slider">
                 <Slider ref={cardRef3} {...cardSettings}>
                   {filterBanner
                     ?.filter((el) => parseInt(el.iCategory) == CateFirst[4])

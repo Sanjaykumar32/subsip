@@ -32,7 +32,7 @@ interface ListFormItem {
 }
 
 export function ListingOnPoshSub() {
-  const [name, setBusinessName] = useState("");
+  // const [name, setBusinessName] = useState("");
   const [tagline, setTagline] = useState("");
   const [email, setEmail] = useState("");
   const [businessLocation, setBusinessLocation] = useState("");
@@ -108,7 +108,7 @@ export function ListingOnPoshSub() {
   const ref = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
-    console.log(name, "name");
+    // console.log(name, "name");
     console.log(email, "email");
     console.log(businessLocation, "businessLocation");
     console.log(subCategory, "subCategory");
@@ -128,7 +128,7 @@ export function ListingOnPoshSub() {
           <Grid container>
             <Grid item xs={12} md={6}>
               <Box sx={{ px: 3 }}>
-                <Box sx={{ my: 4 }}>
+                {/* <Box sx={{ my: 4 }}>
                   <Label> {step1.label} </Label>
                   <Typography variant="body2"> {step1.caption} </Typography>
                   <TextField
@@ -138,7 +138,7 @@ export function ListingOnPoshSub() {
                     // required
                     fullWidth
                   />
-                </Box>
+                </Box> */}
                 <Box sx={{ my: 4 }}>
                   <Label> {step5.label} </Label>
 

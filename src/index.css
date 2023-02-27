@@ -634,5 +634,8 @@ h2 {
     .undefined.w-full.pointer-events-none.z-50.bg-transparent.absolute.top-1\/2.left-1\/2.-translate-x-1\/2.-translate-y-1\/2.flex.px-5.justify-between.text-white.font-normal {
         display: none;
 }
+ .p-padding{
+    margin-left: 14px;
+ }
 }
 

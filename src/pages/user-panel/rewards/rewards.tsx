@@ -200,13 +200,6 @@ export function Rewards() {
     );
   }
 
-  function customNoRowsOverlay() {
-    return (
-      <GridOverlay>
-        <div>No Rows</div>
-      </GridOverlay>
-    )
-  }
 
   return (
     <Container maxWidth="xl" sx={{ p: 2 }}>
@@ -271,10 +264,11 @@ export function Rewards() {
             />
           </TableContainer> */}
 
-          <TableContainer component={Paper}  sx={{ height: 400 }}
+          <TableContainer component={Paper} sx={{ height: 400 }}
           >
             <Table sx={{ minWidth: 300 }}
               aria-label="caption table"
+
             >
               <TableHead>
                 <TableRow>
@@ -284,15 +278,19 @@ export function Rewards() {
                 </TableRow>
               </TableHead>
               <TableBody
+              // component={NoRowsOverlay}
               >
                 {list?.map((row) => (
                   <TableRow key={row.rewardName}
+
                   >
                     <TableCell component="th" scope="row">
                       {row.rewardName}
                     </TableCell>
                     <TableCell>{row.businessName}</TableCell>
-                    <TableCell >
+                    <TableCell
+
+                    >
                       <Chip
                         label={row.Status}
                         className={
@@ -307,11 +305,16 @@ export function Rewards() {
                         }}
                       />
                     </TableCell>
-                  </TableRow> 
-                  ))}
+                  </TableRow>
+                ))}
+
               </TableBody>
 
             </Table>
+            {list?.length == 0 &&
+            <div className="flex justify-center items-center h-[300px]">
+              <span> {NoRowsOverlay()}</span>
+            </div>}
           </TableContainer>
         </Grid>
       </Grid>
