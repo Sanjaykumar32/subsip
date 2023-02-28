@@ -38,6 +38,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { SearchField } from "./component/search-field/search-field";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
+import useDetectKeyboardOpen from "use-detect-keyboard-open";
 import {
   GET_BUSINESS,
   GET_CATEGORY,
@@ -78,9 +79,9 @@ export const UserAppBar = (props: any) => {
   const homepage = location.pathname;
   const userId = localStorage.getItem("userId");
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
-
+  const isKeyboardOpen = useDetectKeyboardOpen();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+console.log(isKeyboardOpen , 'isKeyboardOpen')
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };

@@ -2,6 +2,7 @@ import React, { ReactElement, ReactNode , useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Box, Typography, Tooltip, IconButton, Grid } from "@mui/material";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 interface IconDetail {
   icon: IconDefinition;
@@ -20,6 +21,9 @@ export function PageHeader({
   children,
 }: PageHeaderProps): ReactElement {
   const [showTooltip, setShowTooltip] = useState(false);
+  const handleTooltipClose = () => {
+    setShowTooltip(false);
+  };
   return (
     <Box
       sx={{
@@ -39,9 +43,13 @@ export function PageHeader({
             <Typography variant="alternet" color="black">
               {name}
             </Typography>
+            <ClickAwayListener onClickAway={handleTooltipClose}>
             <Tooltip 
              title={icon.tooltip} 
              open={showTooltip}
+             disableFocusListener
+             disableHoverListener
+             disableTouchListener
              onOpen={() => setShowTooltip(true)}
              onClose={() => setShowTooltip(false)}
              >
@@ -52,6 +60,7 @@ export function PageHeader({
                  />
               </IconButton>
             </Tooltip>
+            </ClickAwayListener>
           </Box>
         </Grid>
 

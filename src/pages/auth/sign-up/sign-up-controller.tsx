@@ -58,7 +58,8 @@ const SignUpController = (): ISignUpControllerReturns => {
 
   const handleClose = () => {
     setOpen(false);
-    sessionStorage.clear()
+    // sessionStorage.clear() 
+    sessionStorage.removeItem('signUp');
   };
 
   /**

@@ -88,7 +88,7 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
         localStorage.setItem("email", credentials.email);
       }
       setAuthenticated(true);
-      
+
       toast.success("You have successfully logged in!");
     } catch (error) {
       console.log(error);
@@ -98,39 +98,71 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
   const signUp = useCallback(async (credentials: ISignUpRequest) => {
     try {
       const res: any = await AuthService.signUp(credentials)
-      console.log(res, 'res auth')
 
       if (res.success == 1) {
         // toast.success('Signup SuccessFull');
+
         const res = await dispatch(AuthenticationThunk.sendOtp({ email: credentials.email }))
         sessionStorage.setItem("signUp", '1')
+        sessionStorage.setItem('email', credentials?.email)
+        sessionStorage.setItem('password', credentials?.password)
       }
     } catch (error: any) {
       console.log(error.response.data.message, 'error ');
-      if(error.response.data.message){
-        toast.error('A user is already registered with this e-mail address.');
+      if (error.response.data.message) {
+        toast.error('A user is already registered with this e-mail address.'
+          , {
+            duration: 10000,
+          }
+        );
       }
     }
   }, []);
+
 
   const checkOtp = useCallback(async (credentials: ISendOTpRequest) => {
     try {
       const res = await AuthService.checkOtpSend(credentials);
       // setAuthenticated(true);
+     
+      const logInEmail:any = sessionStorage.getItem('email')
+      const logInPassword :any = sessionStorage.getItem('password')
+       console.log(logInEmail , logInPassword , 'sesstion value')
 
       if (res.success == 1) {
-        toast.success("Otp Verifition Successfull" , {
+        toast.success("Otp Verifition Successfull", {
           duration: 3000,
         })
         toast.success("Your Account Create Successfully Please Login Now", {
-          duration: 10000,
+          duration: 5000,
         });
-      }
 
-      sessionStorage.clear()
-    } catch (error) {
+        try {
+          const response: any = await AuthService.signIn({ email: logInEmail, password: logInPassword });
+       console.log(response , 'response login')
+           localStorage.setItem("token", response.token.token);
+          localStorage.setItem("userId", response.data.userId);
+          localStorage.setItem("iGroupId", response.data.iGroupId);
+          if (response.success == 1) {
+            localStorage.setItem("email", logInEmail);
+          }
+          setAuthenticated(true);
+          sessionStorage.clear()
+          toast.success("You have successfully logged in!" 
+          , {
+            duration: 10000,
+          }
+          );
+        } catch (error) {
+          console.log(error);
+        }
+
+
+      }
+     
+    } catch (error:any) {
       console.log(error);
-      // toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   }, []);
 

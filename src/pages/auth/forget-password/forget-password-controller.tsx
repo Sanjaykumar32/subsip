@@ -3,6 +3,7 @@ import { useAppDispatch } from "data";
 import { AuthenticationThunk } from "data/thunk";
 import { UserThunk } from "data/thunk/user.thunk";
 import { ChangeEvent, useState } from "react";
+import { toast } from "react-hot-toast";
 
 interface IInitialValue {
   email: string;
@@ -37,9 +38,25 @@ const ForgetPasswordController = (): IForgetPasswordControllerReturns => {
   /**
    * @return {void}
    */
-  const submitHandler = (): void => {
-    dispatch(AuthenticationThunk.forgetPassword({ email: value.email }));
+  const submitHandler = async (): Promise<void> => {
+
+    try {
+      const res: any = await dispatch(AuthenticationThunk.forgetPassword({ email: value.email }));
+     
+      if(res.payload.success == 1){
+        toast.success("We have sent you an e-mail" , {
+          duration:5000
+        });
+      }
+    } catch (error) {
+        toast.error('No user with this email address on our records' ,{
+          duration:5000
+        })
+     
+    }
+  
     setValue({ email: "" });
+
   };
 
   return {

@@ -36,6 +36,7 @@ export function ForgetPassword(): ReactElement {
             <InputBox>
               <Label> Email * </Label>
               <TextField
+                required
                 fullWidth
                 name="email"
                 value={value.email}
