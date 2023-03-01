@@ -81,7 +81,8 @@ export const UserAppBar = (props: any) => {
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
   const isKeyboardOpen = useDetectKeyboardOpen();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-console.log(isKeyboardOpen , 'isKeyboardOpen')
+
+// console.log(isKeyboardOpen , 'isKeyboardOpen')
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -197,12 +198,14 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
+    setOpen(false)
   };
 
   const handleNotificationClick = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     setAnchorNoticationEl(event.currentTarget);
+    setOpen(false)
   };
 
   const handleNotificationClose = () => {
@@ -226,6 +229,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
   },[locationPopUp])
 
   const handlevalue = (el: any) => {
+    setLocationPopUP(false)
     if (homepage == "/") {
       if (el == undefined) {
         setLocation("");
@@ -252,6 +256,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
   };
  
   const handleLocation = (event: any) => {
+
     if (homepage == "/") {
       setLocation(event.target.value?.replaceAll(/\s/g, ''));
       navigate(`/?${event.target.value?.replaceAll(/\s/g, '')}`);
@@ -263,6 +268,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
       navigate(`?${event.target.value?.replaceAll(/\s/g, '')}`);
     }
   };
+
 
   const handleLocationSearch = () => {
     // navigate(`/?${searchLocation}`);
@@ -391,7 +397,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
 
   const spring = useSpring({
     from: { height: "0px" },
-    to: { height: !isMobile ? "auto" : open ? "425px" : "0px" },
+    to: { height: !isMobile ? "auto" : open ? "450px" : "0px" },
   });
 
   const spring2 = useSpring({
@@ -444,7 +450,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
   const handleBanner = () => {
     // navigate(`/category?${item.vName.replace(/\s/g,'-')}` ,
     // {state:{id: item?.iCategoryId ,vName: item.vName.replace(/\s/g,'-')}})
-    setOpen(false);
+    setOpen(false); 
   };
 
 
@@ -487,7 +493,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
               : "justify-center"
               }`}
           >
-            <div className=" grid-cols-1">
+            <div className=" grid-cols-1"  onClick={()=> setOpen(false)}>
               <Logo variant="dark" />
             </div>
 
@@ -625,7 +631,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
               <Logo variant="dark" />
             </Box>
           ) : (
-            <SearchField />
+            <SearchField handleBanner={handleBanner} />
           )}
 
           {/* < ------------------- location input field ---------------------> */}
@@ -661,7 +667,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
                   }}
                   id="disable-close-on-select"
                   onChange={(event, newValue: any) => {
-                    console.log(event, "event onchange");
+                    console.log(event , "event onchange-----------");
                     handlevalue(newValue);
                   }}
                   openOnFocus
@@ -671,7 +677,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
                       onChange={handleLocation}
                       label="Search"
                       variant="standard"
-                      // focused
+                      focused
                       inputRef={input => {
                         inputRef = input;
                       }}
@@ -1079,7 +1085,7 @@ console.log(isKeyboardOpen , 'isKeyboardOpen')
                     )
                   )}
 
-                  {isMobile ? (
+                  {isMobile &&  (homepage == "/" || routeAdmin == "category")  ? (
                     <ListItem className="">
                       <Box
                         sx={{ display: { xs: "Block", md: "flex" } }}

@@ -95,7 +95,7 @@ export const router = createBrowserRouter([
         element: <ClickOnCategory />,
       },
       {
-        path: RoutePathEnum.LISTING_ADD,
+        path: RoutePathEnum.PARTNERS_ADD,
         element: <ListingOnPoshSub />,
       },
       {

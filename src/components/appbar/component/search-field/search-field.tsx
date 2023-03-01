@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField, IconButton } from "@mui/material";
@@ -10,12 +10,12 @@ import { useAppSelector } from "data";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useNavigate } from "react-router-dom";
 
-export const SearchField = () => {
+export const SearchField = ({handleBanner}:any) => {
   const { getters, handlers } = SearchFieldController();
-  const { search } = getters;
-  const { changeHandler, submitHandler, setSearch } = handlers;
+  const { search  } = getters;
+  const { changeHandler, submitHandler, setSearch  } = handlers;
   const categoryData = useAppSelector(GET_CATEGORY);
-
+ 
   const navigate = useNavigate();
   const businessData = useAppSelector(GET_BUSINESS);
 
@@ -37,9 +37,10 @@ export const SearchField = () => {
     console.log(string, results, 'serach and results')
   }
 
-  const handleOnSelect = (item: any) => {
-    console.log(item, 'select vlaue')
-    // submitHandler(item.name)
+  const submitHandlers = (el: any) => {
+    console.log(el ,'submit el input')
+    submitHandler(el)
+    handleBanner()
   }
 
   const list = businessData.map((el: any) => {
@@ -77,7 +78,7 @@ export const SearchField = () => {
             placeholder="Search"
             items={data}
             onSearch={(el) => changeHandler(el)}
-            onSelect={(el) => submitHandler(el)}
+            onSelect={(el)=> submitHandlers(el)}
             onClear={handleClear}
           // autoFocus
           // formatResult={formatResult}

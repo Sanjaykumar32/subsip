@@ -76,11 +76,11 @@ export const SliderCard = (props: any) => {
     };
   
     return (
-      <div className="w-full mx-auto  md:mx-5 relative max-w-[307px] bg-white  border-[1px] border-[#DADDE5] ">
+      <div className="w-full mx-auto  md:mx-5 relative rounded-[7px] max-w-[307px] bg-white  border-[1px] border-[#DADDE5] ">
         <img
           src={imgSrc}
           alt="image"
-          className="w-full object-cover h-[215px]  cursor-pointer "
+          className="w-full rounded-t-[7px] object-cover h-[215px]  cursor-pointer "
           onClick={onImageClick}
         />
         <div className=" pl-4 py-4 h-[230px] ">

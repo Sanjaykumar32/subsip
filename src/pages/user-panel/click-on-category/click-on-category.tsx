@@ -30,6 +30,7 @@ import ListIcon from "@mui/icons-material/List";
 import toast from "react-hot-toast";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import AccountTreeTwoToneIcon from "@mui/icons-material/AccountTreeTwoTone";
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 export function ClickOnCategory() {
   const [ids, setId] = useState<any>();
@@ -224,9 +225,7 @@ export function ClickOnCategory() {
         {isMobile && (
           <div>
             <React.Fragment>
-              <Button onClick={toggleDrawer} className="!p-0 !flex !justify-start">
-                <ListIcon className="!h-[42px] !w-[42px]"  />
-              </Button>
+             
               <SwipeableDrawer
                 open={state}
                 onClose={toggleDrawerClose}
@@ -400,7 +399,40 @@ export function ClickOnCategory() {
 
         <Grid item xs={12} md={9.8}>
           <Box>
+              {isMobile &&
+                  <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    justifyContent: "end",
+                  }}
+                >
+                  <Typography variant="caption">Sort By subscribers</Typography>
+                  <FormControl variant="standard">
+                    <Select
+                      labelId="sort-by-select-label"
+                      id="sort-by-simple-select"
+                      value={sortValue}
+                      size="small"
+                      onChange={handleSort}
+                      sx={{ fontWeight: 500, ml: 1}}
+                    >
+                      <MenuItem value={"Highest"}>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          Highest
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem value={"Lowest"}>
+                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                          Lowest
+                        </Typography>
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              }
             <>
+               
               {categoryData
                 .filter((el) => el.iCategoryId === activeCate)
                 .map((res, i) => {
@@ -417,6 +449,7 @@ export function ClickOnCategory() {
                 alignItems: "baseline",
                 justifyContent: "space-between",
                 paddingBottom: "20px",
+                paddingTop:'10px'
               }}
             >
               {listFilter.filter((el) =>
@@ -439,7 +472,16 @@ export function ClickOnCategory() {
                   No listings Here
                 </Typography>
               )}
-              <Box
+              
+              {isMobile ?
+               <Button onClick={toggleDrawer} className="">
+               <div className="border-[1px] font-semibold px-3 py-[0.5px] border-[#accf02]  rounded-full">
+               <FilterListIcon className="!h-[22px] mr-1 !w-[22px] "  />
+                <span >Filter</span>
+               </div>
+               </Button>
+                :
+               <Box
                 sx={{
                   display: "flex",
                   alignItems: "baseline",
@@ -469,6 +511,9 @@ export function ClickOnCategory() {
                   </Select>
                 </FormControl>
               </Box>
+              }
+                 
+             
             </Box>
             <Grid container className=" pb-[20px] ">
               {/* || el.iSubCategory === subcatIdss */}

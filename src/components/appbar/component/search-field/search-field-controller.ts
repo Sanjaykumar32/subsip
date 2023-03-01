@@ -39,7 +39,6 @@ export const SearchFieldController = () => {
       navigate(`/listing/${el.name.replaceAll(/\s/g, "-")}` 
       , {state : {businessId : el.iBusinessid}}
       )
-      // console.log(el ,'search el')
     }
    
     // try {

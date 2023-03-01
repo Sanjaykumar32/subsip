@@ -270,7 +270,7 @@ export function ResponsiveAppBar() {
 
   const commonMenu = useMemo(
     () => [
-      <Link key="listing-new" href={RoutePathEnum.LISTING_ADD}>
+      <Link key="listing-new" href={RoutePathEnum.PARTNERS_ADD}>
         List on Subsip
       </Link>,
 

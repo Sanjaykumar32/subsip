@@ -69,7 +69,7 @@ export function Links() {
         subTitle: [
           {
             title: "Partners",
-            link: "/listing/add",
+            link: "/partners",
           },
           {
             title: "Contact Us",

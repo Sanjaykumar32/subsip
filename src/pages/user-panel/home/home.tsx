@@ -187,7 +187,7 @@ export function Home({ alertOnBottom }: any) {
     } catch (error) {
       console.log(error);
     }
-  }
+  }2
 
   const handleOnDocumentBottom = useCallback(() => {
     setScroll(true);
@@ -207,10 +207,10 @@ export function Home({ alertOnBottom }: any) {
           <Slider ref={sliderRef} {...settings}>
             {banner?.map((ele: any, index: number) => (
               <div key={index}>
-                <div className="max-w-[100%] mt-[-38px]  lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
+                <div className="max-w-[100%]   lg:max-w-[80%] xl:max-w-[70%] gap-5 min-h-[300px] mx-auto flex flex-col-reverse md:flex-row justify-between px-5 lg:px-0 relative">
                   <div className="w-[80%] md:w-[45%] gap-4 flex flex-col justify-center px-2 lg:pt-10 md:px-10">
                     <div>
-                      <span className="bg-[#0275d8] rounded-md text-[0.9rem] py-[5px] px-[10px] font-normal text-white">
+                      <span className="bg-[#0275d8] rounded-[7px] text-[0.9rem] py-[5px] px-[10px] font-normal text-white">
                         Featured
                       </span>
                     </div>
@@ -263,7 +263,7 @@ export function Home({ alertOnBottom }: any) {
                           // </div>
                           <span>
                             <button
-                              className="bg-[#e0e0e0] text-[#262626] text-[1rem] w-36 rounded-full  py-4 px-2 font-medium"
+                              className="bg-[#e0e0e0] text-[#262626]  text-[1rem] w-36 rounded-full  py-4 px-2 font-medium"
                               onClick={() => {
                                 auth?.isAuthenticated
                                   ? onImageClick(ele?.vName, ele?.iBusinessId)
@@ -312,15 +312,15 @@ export function Home({ alertOnBottom }: any) {
                     </button>
                   </span> */}
                   </div>
-                  <div className=" rounded-[6px] relative md:min-h-[375px] md:h-[200px] md:max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
+                  <div className="  relative md:min-h-[375px] md:h-[200px] md:max-h-[calc(100vh-25rem)] w-full  md:w-[60%] flex justify-center items-center">
                     <img
                       src={
                         ele?.vImage
                           ? "https://api.subsip.com/" + ele?.vImage
                           : "https://api.subsip.com/public/uploads/1672076769972.png"
                       }
-                      className={`${isMobile ? "h-[266px]" : "h-full"
-                        } w-full object-cover object-center rounded-[6px] `}
+                      className={`${isMobile ? "h-[266px]  rounded-[7px]" : "h-full"
+                        } w-full object-cover object-center rounded-[7px] `}
                     />
                   </div>
                 </div>
@@ -474,7 +474,7 @@ export function Home({ alertOnBottom }: any) {
 
           {/* More data show */}
 
-          {scroll ? (
+          {/* {scroll ? ( */}
             <>
                 {filterBanner?.filter(
                   (el) => parseInt(el.iCategory) == CateFirst[3]
@@ -563,7 +563,7 @@ export function Home({ alertOnBottom }: any) {
               </div>
               </>}
             </>
-          ) : null}
+          {/* // ) : null} */}
 
 
         </div>

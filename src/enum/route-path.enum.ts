@@ -38,7 +38,7 @@ export enum RoutePathEnum {
   SUBSCRIPTIONS = "/subscriptions",
   REFER = "/refer",
   PROFILE = "/profile",
-  LISTING_ADD = "/listing/add",
+  PARTNERS_ADD = "/partners",
   LISTING_PRODUCT = "/listing/:id",
   NONE = "",
   ABOUT = "/about",
