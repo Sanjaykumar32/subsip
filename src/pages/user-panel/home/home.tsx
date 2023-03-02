@@ -43,7 +43,7 @@ export function Home({ alertOnBottom }: any) {
     cssEase: "linear",
     lazyLoad: true,
     autoplay: true,
-    speed: isMobile ? 500 : 700,
+    speed: isMobile ? 300 : 700,
     adaptiveHeight: true,
   };
 
@@ -54,7 +54,7 @@ export function Home({ alertOnBottom }: any) {
     cssEase: "linear",
     lazyLoad: true,
     autoplay: false,
-    speed: isMobile ? 500 : 700,
+    speed: isMobile ? 300 : 700,
     responsive: [
       {
         breakpoint: 1500,

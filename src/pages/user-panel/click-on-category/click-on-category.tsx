@@ -407,7 +407,7 @@ export function ClickOnCategory() {
                     justifyContent: "end",
                   }}
                 >
-                  <Typography variant="caption">Sort By subscribers</Typography>
+                  <Typography variant="caption">short by highest</Typography>
                   <FormControl variant="standard">
                     <Select
                       labelId="sort-by-select-label"
@@ -488,7 +488,7 @@ export function ClickOnCategory() {
                   justifyContent: "space-between",
                 }}
               >
-                <Typography variant="caption">Sort By subscribers</Typography>
+                <Typography variant="caption">short by highest</Typography>
                 <FormControl variant="standard">
                   <Select
                     labelId="sort-by-select-label"

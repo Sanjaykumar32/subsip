@@ -229,7 +229,7 @@ export const UserAppBar = (props: any) => {
   },[locationPopUp])
 
   const handlevalue = (el: any) => {
-    setLocationPopUP(false)
+   console.log(el ,'el value');
     if (homepage == "/") {
       if (el == undefined) {
         setLocation("");
@@ -256,7 +256,7 @@ export const UserAppBar = (props: any) => {
   };
  
   const handleLocation = (event: any) => {
-
+   console.log(event.target.value , 'event')
     if (homepage == "/") {
       setLocation(event.target.value?.replaceAll(/\s/g, ''));
       navigate(`/?${event.target.value?.replaceAll(/\s/g, '')}`);
@@ -422,8 +422,9 @@ export const UserAppBar = (props: any) => {
   const businessData = useAppSelector(GET_BUSINESS);
 
   const data = businessData?.map((item:any)=>{
-       return  item?.vLocation
+       return  item?.vLocation.toString().toLowerCase()
   })
+ 
 
   const removeDupValue =  [...new Set(data)];
 
@@ -1125,6 +1126,7 @@ export const UserAppBar = (props: any) => {
                                 console.log(event, "event onchange");
                                 setOpen(false);
                                 handlevalue(newValue);
+                                setLocationPopUP(false)
                               }}
                               renderInput={(params) => (
                                 <TextField

@@ -29,10 +29,6 @@ export function AdminGuard({ children }: IAuthGuardProps): ReactElement {
     } else {
       navigate(RoutePathEnum.HOME);
     }
-
-
-
-
   }, [navigate, isAuthenticated, userId]);
 
 

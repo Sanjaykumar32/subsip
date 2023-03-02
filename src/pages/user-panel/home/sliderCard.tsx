@@ -48,7 +48,7 @@ export const SliderCard = (props: any) => {
     }, [dispatch]);
   
     async function SubcribeBtn(): Promise<void> {
-      !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
+      // !auth?.isAuthenticated && navigate(AuthRoutePathEnum.SIGN_IN);
       try {
         await dispatch(
           UserThunk.addSubscriberToBusiness({
@@ -121,7 +121,13 @@ export const SliderCard = (props: any) => {
               ) : (
                 <div
                   className="subscribeLebalListing bg-[#09292b]"
-                  onClick={SubcribeBtn}
+                  onClick={() => {
+                    auth?.isAuthenticated
+                      ? SubcribeBtn()
+                      : navigate(
+                        AuthRoutePathEnum.SIGN_IN
+                      );
+                  }}
                 >
                   <span className=" text-white font-medium"> Subscribe</span>
                 </div>
