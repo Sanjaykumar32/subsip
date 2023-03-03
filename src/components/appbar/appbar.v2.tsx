@@ -20,8 +20,13 @@ import {
   FormControl,
   InputLabel,
   Input,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  styled,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Dialog from '@mui/material/Dialog';
 import {
   faBars,
   faClose,
@@ -60,6 +65,7 @@ import ListItemText from "@mui/material/ListItemText";
 import toast from "react-hot-toast";
 import ScrollToTop from "scrollTop";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { GridCloseIcon } from "@mui/x-data-grid";
 
 export const UserAppBar = (props: any) => {
   const theme = useTheme();
@@ -82,7 +88,7 @@ export const UserAppBar = (props: any) => {
   const isKeyboardOpen = useDetectKeyboardOpen();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-// console.log(isKeyboardOpen , 'isKeyboardOpen')
+  // console.log(isKeyboardOpen , 'isKeyboardOpen')
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -165,7 +171,7 @@ export const UserAppBar = (props: any) => {
 
   const readNotification = useCallback(
     async ({ id, readId }: any) => {
-      
+
       try {
         await dispatch(
           AdminThunk.readUserNotification({
@@ -222,14 +228,14 @@ export const UserAppBar = (props: any) => {
     setLocationPopUP(true);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setTimeout(function () {
       inputRef.focus()
     }, 100)
-  },[locationPopUp])
+  }, [locationPopUp])
 
   const handlevalue = (el: any) => {
-   console.log(el ,'el value');
+    console.log(el, 'el value');
     if (homepage == "/") {
       if (el == undefined) {
         setLocation("");
@@ -254,9 +260,9 @@ export const UserAppBar = (props: any) => {
       }
     }
   };
- 
+
   const handleLocation = (event: any) => {
-   console.log(event.target.value , 'event')
+    console.log(event.target.value, 'event')
     if (homepage == "/") {
       setLocation(event.target.value?.replaceAll(/\s/g, ''));
       navigate(`/?${event.target.value?.replaceAll(/\s/g, '')}`);
@@ -397,7 +403,7 @@ export const UserAppBar = (props: any) => {
 
   const spring = useSpring({
     from: { height: "0px" },
-    to: { height: !isMobile ? "auto" : open ? "450px" : "0px" },
+    to: { height: !isMobile ? "auto" : open ? "425px" : "0px" },
   });
 
   const spring2 = useSpring({
@@ -421,12 +427,12 @@ export const UserAppBar = (props: any) => {
   };
   const businessData = useAppSelector(GET_BUSINESS);
 
-  const data = businessData?.map((item:any)=>{
-       return  item?.vLocation.toString().toLowerCase()
+  const data = businessData?.map((item: any) => {
+    return item?.vLocation.toString().toLowerCase()
   })
- 
 
-  const removeDupValue =  [...new Set(data)];
+
+  const removeDupValue = [...new Set(data)];
 
 
   const defaultProps = {
@@ -451,15 +457,51 @@ export const UserAppBar = (props: any) => {
   const handleBanner = () => {
     // navigate(`/category?${item.vName.replace(/\s/g,'-')}` ,
     // {state:{id: item?.iCategoryId ,vName: item.vName.replace(/\s/g,'-')}})
-    setOpen(false); 
+    setOpen(false);
   };
 
+
+
+
+  function BootstrapDialogTitle(props: any) {
+    const { children, onClose, ...other } = props;
+
+    return (
+      <DialogTitle sx={{ m: 0, p: 2 }} className='!p-0' {...other}>
+        {children}
+        {onClose ? (
+          <IconButton
+            aria-label="close"
+            onClick={onClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <GridCloseIcon  className="!h-[25px] !w-[25px]"/>
+          </IconButton>
+        ) : null}
+      </DialogTitle>
+    );
+  }
+
+
+  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+      padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+      padding: theme.spacing(1),
+    },
+  }));
 
   return (
     <>
       <ScrollToTop />
       <AppBar
-      
+
         color="default"
         elevation={0}
         sx={{
@@ -494,7 +536,7 @@ export const UserAppBar = (props: any) => {
               : "justify-center"
               }`}
           >
-            <div className=" grid-cols-1"  onClick={()=> setOpen(false)}>
+            <div className=" grid-cols-1" onClick={() => setOpen(false)}>
               <Logo variant="dark" />
             </div>
 
@@ -613,11 +655,12 @@ export const UserAppBar = (props: any) => {
         <Toolbar
           sx={{
             px: 4,
+            py:1,
             alignItems: "center",
             justifyContent: "space-between",
             flexGrow: 1,
           }}
-          className={`${isMobile && !open ? '!hidden' : ''} 'topheader'`}
+          className={`${isMobile &&  (homepage.split("/")[1] === "admin" ? !open : open) ? '!hidden' : ''} 'topheader'`}
         >
           {homepage.split("/")[1] === "admin" ? (
             <h1></h1>
@@ -632,73 +675,152 @@ export const UserAppBar = (props: any) => {
               <Logo variant="dark" />
             </Box>
           ) : (
-            <SearchField handleBanner={handleBanner} />
+            <>
+              {/* <----------------- search field and location input----------------> */}
+
+              <div className="flex gap-2 items-center w-full">
+                <div className={`${isMobile ? 'w-full' :  "w-[40%] ml-[8%]"}`}>
+                  <SearchField handleBanner={handleBanner} />
+
+                </div>
+                <div>
+                  {homepage == "/" || routeAdmin == "category" ? (
+                    <Box sx={{ display: {md: "flex" } }}>
+                         {searchLocation && !isMobile && <div className="items-center px-1 py-2">
+                            <span className="text-[16px]">{searchLocation}</span>
+                          </div>}
+                      <Button
+                        // className={`${locationPopUp == false ? '!block' : '!hidden'}`}
+                        onClick={showLocationPopUp}
+                        disableRipple
+                        sx={{ minWidth: "50px", color: "text.primary" }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faLocationDot}
+                          size="xl"
+                          style={{ marginRight: "8px" }}
+                        />
+                     
+                      </Button>
+
+
+                      {/* <div>
+                        <BootstrapDialog
+                          // onClose={() => setLocationPopUP(false)}
+                          aria-labelledby="customized-dialog-title"
+                          open={locationPopUp}
+                        >
+                          <BootstrapDialogTitle id="customized-dialog-title" onClose={() => setLocationPopUP(false)}>
+                            Location
+                          </BootstrapDialogTitle>
+                          <DialogContent dividers>
+                            <Stack spacing={1} sx={{ m: 1, width: "50ch" }} >
+                              <Autocomplete
+                                {...defaultProps}
+                                selectOnFocus={false}
+                                noOptionsText={'Enter your city'}
+                                autoSelect={true}
+                                onClose={(e) => {
+                                  if (e.cancelable == false) {
+                                    setLocationPopUP(false)
+                                  }
+                                }}
+                                id="disable-close-on-select"
+                                onChange={(event, newValue: any) => {
+                                  console.log(event, "event onchange-----------");
+                                  handlevalue(newValue);
+                                }}
+                                openOnFocus
+                                renderInput={(params) => (
+                                  <TextField
+                                    {...params}
+                                    onChange={handleLocation}
+                                    label="Search"
+                                    variant="standard"
+                                    focused
+                                    inputRef={input => {
+                                      inputRef = input;
+                                    }}
+                                  />
+
+                                )}
+
+                              />
+                            </Stack>
+
+                          </DialogContent>
+
+                        </BootstrapDialog>
+                      </div> */}
+
+
+                      <Dialog open={locationPopUp}>
+                        <DialogTitle>Location</DialogTitle>
+                        <BootstrapDialogTitle id="customized-dialog-title" onClose={() => {
+                           setLocationPopUP(false)
+                           navigate('/?')
+                           setLocation('')
+                          } }>
+                        </BootstrapDialogTitle>
+                        <DialogContent>
+                          <Stack spacing={1} sx={ isMobile ?  {width: "25ch" , height:"auto" , m: 1} : {width: "50ch" ,m: 1}}  >
+                            <Autocomplete
+                              {...defaultProps}
+                              selectOnFocus={false}
+                              noOptionsText={'Enter your city'}
+                              autoSelect={true}
+                              onClose={(e) => {
+                                if (e.cancelable == false) {
+                                  setLocationPopUP(false)
+                                }
+                              }}
+                              id="disable-close-on-select"
+                              onChange={(event:any, newValue: any) => {
+                                console.log(event, "event onchange-----------");
+                                handlevalue(newValue);
+                                setLocationPopUP(false)
+                              }}
+                              // openOnFocus
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  onChange={handleLocation}
+                                  // label="Search"
+                                  variant="standard"
+                                  focused
+                                  inputRef={input => {
+                                    inputRef = input;
+                                  }}
+                                />
+
+                              )}
+
+                            />
+                          </Stack>
+
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={() => {
+                               navigate('/?')
+                               setLocationPopUP(false)
+                               setLocation('')
+                          }
+                            }>Cancel</Button>
+                        </DialogActions>
+                      </Dialog>
+
+
+                    </Box>
+                  ) : null}
+                </div>
+              </div>
+
+            </>
           )}
 
           {/* < ------------------- location input field ---------------------> */}
 
-          {homepage == "/" || routeAdmin == "category" ? (
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
 
-              <Button
-                className={`${locationPopUp == false ? '!block' : '!hidden'}`}
-                onClick={showLocationPopUp}
-                disableRipple
-                sx={{ minWidth: "120px", color: "text.primary" }}
-              >
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  size="sm"
-                  style={{ marginRight: "8px" }}
-                />
-                Location
-              </Button>
-
-
-              <Stack spacing={1} sx={{ m: 1, width: "25ch" }} className={`${locationPopUp == true ? '!block' : '!hidden'}`}>
-                <Autocomplete
-                  {...defaultProps}
-                  selectOnFocus={false}
-                  noOptionsText={'Enter your city'}
-                  autoSelect={true}
-                  onClose={(e) => {
-                    if (e.cancelable == false) {
-                      setLocationPopUP(false)
-                    }
-                  }}
-                  id="disable-close-on-select"
-                  onChange={(event, newValue: any) => {
-                    console.log(event , "event onchange-----------");
-                    handlevalue(newValue);
-                  }}
-                  openOnFocus
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      onChange={handleLocation}
-                      label="Search"
-                      variant="standard"
-                      focused
-                      inputRef={input => {
-                        inputRef = input;
-                      }}
-                    />
-
-                  )}
-
-                />
- 
-              </Stack>
-
-
-              <Divider
-                flexItem
-                orientation="vertical"
-                variant="middle"
-                sx={{ mx: 1, height: "30px", my: "auto" }}
-              />
-            </Box>
-          ) : null}
 
           {!auth.isAuthenticated ? (
             <Button
@@ -762,20 +884,20 @@ export const UserAppBar = (props: any) => {
               >
                 {menuItem.map((setting: any) => (
                   <Link key="profile-menu" href={setting?.route}>
-                  <MenuItem
-                    key={setting.route}
-                    onClick={() => {
-                      setting?.title === "Logout" && auth?.signOut();
-                      setting?.title === "Logout" &&
-                        toast.success("You have successfully logged out!");
-                      handleClose();
-                    }}
-                  >
+                    <MenuItem
+                      key={setting.route}
+                      onClick={() => {
+                        setting?.title === "Logout" && auth?.signOut();
+                        setting?.title === "Logout" &&
+                          toast.success("You have successfully logged out!");
+                        handleClose();
+                      }}
+                    >
                       <Typography textAlign="left" className="text-black ">
                         {setting?.title}
                       </Typography>
-                  </MenuItem>
-                    </Link>
+                    </MenuItem>
+                  </Link>
                 ))}
               </Menu>
 
@@ -1078,7 +1200,7 @@ export const UserAppBar = (props: any) => {
                     ) : (
                       index === 7 && (
                         <ListItem>
-                          <Link  onClick={handleBanner}   className='p-[10px]'>
+                          <Link onClick={handleBanner} className='p-[10px]'>
                             {"More"}
                           </Link>
                         </ListItem>
@@ -1086,66 +1208,66 @@ export const UserAppBar = (props: any) => {
                     )
                   )}
 
-                  {isMobile &&  (homepage == "/" || routeAdmin == "category")  ? (
+                  {/* {isMobile && (homepage == "/" || routeAdmin == "category") ? (
                     <ListItem className="">
                       <Box
                         sx={{ display: { xs: "Block", md: "flex" } }}
                         className="w-[100%]  mt-2"
                       >
-                     
-                          <Button
-                          
-                            onClick={showLocationPopUp}
-                            disableRipple
-                            sx={{ color: "text.primary" }}
-                            className={`${locationPopUp == false ? '!block' : '!hidden' }`}
-                          >
-                            <FontAwesomeIcon
-                              icon={faLocationDot}
-                              size="sm"
-                              style={{ marginRight: "8px" }}
-                            />
-                            Location
-                          </Button>
-                    
-                          <Stack spacing={1}  className={`${locationPopUp == true ? '!block' : '!hidden' } w-[100%] my-3`}>
-                            <Autocomplete
-                              {...defaultProps}
-                              selectOnFocus={false}
-                              openOnFocus
-                              noOptionsText={'Enter your city'}
-                              autoSelect={true}
-                              id="disable-close-on-select"
-                              onClose={(e) => {
-                                if (e.cancelable == false) {
-                                  setLocationPopUP(false)
-                                }
-                              }}
-                              //  onClick={disableCloseOnSelect}
-                              onChange={(event, newValue: any) => {
-                                console.log(event, "event onchange");
-                                setOpen(false);
-                                handlevalue(newValue);
+
+                        <Button
+
+                          onClick={showLocationPopUp}
+                          disableRipple
+                          sx={{ color: "text.primary" }}
+                          className={`${locationPopUp == false ? '!block' : '!hidden'}`}
+                        >
+                          <FontAwesomeIcon
+                            icon={faLocationDot}
+                            size="sm"
+                            style={{ marginRight: "8px" }}
+                          />
+                          Location
+                        </Button>
+
+                        <Stack spacing={1} className={`${locationPopUp == true ? '!block' : '!hidden'} w-[100%] my-3`}>
+                          <Autocomplete
+                            {...defaultProps}
+                            selectOnFocus={false}
+                            openOnFocus
+                            noOptionsText={'Enter your city'}
+                            autoSelect={true}
+                            id="disable-close-on-select"
+                            onClose={(e) => {
+                              if (e.cancelable == false) {
                                 setLocationPopUP(false)
-                              }}
-                              renderInput={(params) => (
-                                <TextField
-                                  {...params}
-                                  onChange={handleLocation}
-                                  label="Search"
-                                  variant="standard"
-                                  inputRef={input => {
-                                    inputRef = input;
-                                  }}
-                                
-                                />
-                              )}
-                            />
-                          </Stack>
-                      
+                              }
+                            }}
+                            //  onClick={disableCloseOnSelect}
+                            onChange={(event, newValue: any) => {
+                              console.log(event, "event onchange");
+                              setOpen(false);
+                              handlevalue(newValue);
+                              setLocationPopUP(false)
+                            }}
+                            renderInput={(params) => (
+                              <TextField
+                                {...params}
+                                onChange={handleLocation}
+                                label="Search"
+                                variant="standard"
+                                inputRef={input => {
+                                  inputRef = input;
+                                }}
+
+                              />
+                            )}
+                          />
+                        </Stack>
+
                       </Box>
                     </ListItem>
-                  ) : null}
+                  ) : null} */}
 
                   <ListItem className=" rounded-[10px] my-5">
                     {!auth.isAuthenticated && isMobile ? (
@@ -1287,7 +1409,7 @@ export const UserAppBar = (props: any) => {
       </AppBar>
       <Backdrop
         open={open}
-        sx={{ zIndex: 999}}
+        sx={{ zIndex: 999 }}
         onClick={() => setOpen(false)}
       />
     </>

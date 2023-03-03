@@ -81,7 +81,7 @@ export function Home({ alertOnBottom }: any) {
         breakpoint: 500,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
           centerMode: true,
           centerPadding: '60px',
           autoplay: false,

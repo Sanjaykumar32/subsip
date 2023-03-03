@@ -69,8 +69,8 @@ export const SearchField = ({handleBanner}:any) => {
   return (
 
     <div className="App w-full ">
-      <header className="App-header w-full">
-        <div className=" w-full xl:w-[80%] mx-[auto]  " >
+      <header className="App-header">
+        <div className=" w-full" >
           <ReactSearchAutocomplete
             styling={{
                 zIndex: 1

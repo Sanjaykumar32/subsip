@@ -399,12 +399,27 @@ export function ClickOnCategory() {
 
         <Grid item xs={12} md={9.8}>
           <Box>
-              {isMobile &&
+            
+            <>
+               
+              {categoryData
+                .filter((el) => el.iCategoryId === activeCate)
+                .map((res, i) => {
+                  return (
+                    <Typography variant="alternet" className="mt-3" key={i}>
+                      Browse {res.vName}
+                    </Typography>
+                  );
+                })}
+            </>
+
+            {isMobile &&
                   <Box
                   sx={{
                     display: "flex",
                     alignItems: "baseline",
                     justifyContent: "end",
+                    marginY:1
                   }}
                 >
                   <Typography variant="caption">short by highest</Typography>
@@ -431,18 +446,6 @@ export function ClickOnCategory() {
                   </FormControl>
                 </Box>
               }
-            <>
-               
-              {categoryData
-                .filter((el) => el.iCategoryId === activeCate)
-                .map((res, i) => {
-                  return (
-                    <Typography variant="alternet" className="mt-3" key={i}>
-                      Browse {res.vName}
-                    </Typography>
-                  );
-                })}
-            </>
             <Box
               sx={{
                 display: "flex",
