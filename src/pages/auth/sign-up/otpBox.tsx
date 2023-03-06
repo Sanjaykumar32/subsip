@@ -61,7 +61,6 @@ export default function OtpBox(props: IOtpBox) {
               verifyOtp();
               handleClose();
               submit();
-
             }}
           >
             Submit

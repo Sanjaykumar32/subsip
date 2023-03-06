@@ -145,9 +145,9 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
       console.log(logInEmail, logInPassword, 'sesstion value')
 
       if (res.success == 1) {
-        toast.success("Otp Verifition Successfull", {
-          duration: 3000,
-        })
+        // toast.success("Otp Verifition Successfull", {
+        //   duration: 3000,
+        // })
         toast.success("Your Account Create Successfully Please Login Now", {
           duration: 5000,
         });

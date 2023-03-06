@@ -192,10 +192,9 @@ export function Rewards() {
   function NoRowsOverlay() {
     return (
       <Stack height="100%" alignItems="center" justifyContent="center">
-        {filter == 'Available' && 'No rewards available at this moment. Please check back soon.'}
+        {filter == 'Available' && 'No rewards available at this moment.'}
         {filter == 'Claimed' && 'You have not claimed any rewards yet.'}
         {filter == 'Missed' && 'You have not missed any rewards yet.'}
-
       </Stack>
     );
   }

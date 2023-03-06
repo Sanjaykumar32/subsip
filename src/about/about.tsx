@@ -100,7 +100,7 @@ export const About = () => {
           <div className=" mt-1 bg-[#fff] border-[0.5px] border-[#ACCF02] border-solid rounded-[6px]">
             {business == 'Business' &&
               <div className="  py-[40px] px-5  m-auto ">
-                <div className="flex justify-evenly  gap-4">
+                <div className={`flex gap-4 ${isMobile ? 'justify-evenly' : 'mx-[3rem]'}`}>
                   <div className="">
                     <div className=" relative">
                       <h2 className="text-[24px] text-[#021414] font-extrabold ">Attention Businesses!

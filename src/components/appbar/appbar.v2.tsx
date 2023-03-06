@@ -403,7 +403,7 @@ export const UserAppBar = (props: any) => {
 
   const spring = useSpring({
     from: { height: "0px" },
-    to: { height: !isMobile ? "auto" : open ? "425px" : "0px" },
+    to: auth.isAuthenticated ? { height: !isMobile ? "auto" : open ? "350px" : "0px" } : { height: !isMobile ? "auto" : open ? "425px" : "0px" },
   });
 
   const spring2 = useSpring({
@@ -437,7 +437,7 @@ export const UserAppBar = (props: any) => {
 
   const defaultProps = {
     options: searchLocation == '' ? [] : removeDupValue,
-    getOptionLabel: (option: any) => option,
+    getOptionLabel: (option: any) =>  capitalizeFirstLetter(option),
   };
 
 
@@ -480,7 +480,7 @@ export const UserAppBar = (props: any) => {
               color: (theme) => theme.palette.grey[500],
             }}
           >
-            <GridCloseIcon  className="!h-[25px] !w-[25px]"/>
+            <GridCloseIcon className="!h-[30px] !w-[30px] !text-[#595959]" />
           </IconButton>
         ) : null}
       </DialogTitle>
@@ -496,6 +496,10 @@ export const UserAppBar = (props: any) => {
       padding: theme.spacing(1),
     },
   }));
+
+  function capitalizeFirstLetter(string : any) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
   return (
     <>
@@ -655,12 +659,12 @@ export const UserAppBar = (props: any) => {
         <Toolbar
           sx={{
             px: 4,
-            py:1,
+            py: 1,
             alignItems: "center",
             justifyContent: "space-between",
             flexGrow: 1,
           }}
-          className={`${isMobile &&  (homepage.split("/")[1] === "admin" ? !open : open) ? '!hidden' : ''} 'topheader'`}
+          className={`${isMobile && (homepage.split("/")[1] === "admin" ? !open : open) ? '!hidden' : ''} 'topheader'`}
         >
           {homepage.split("/")[1] === "admin" ? (
             <h1></h1>
@@ -679,30 +683,29 @@ export const UserAppBar = (props: any) => {
               {/* <----------------- search field and location input----------------> */}
 
               <div className="flex gap-2 items-center w-full">
-                <div className={`${isMobile ? 'w-full' :  "w-[40%] ml-[8%]"}`}>
+                <div className={`${isMobile ? 'w-full' : "w-[50%] ml-[8%]"}`}>
                   <SearchField handleBanner={handleBanner} />
 
                 </div>
                 <div>
                   {homepage == "/" || routeAdmin == "category" ? (
-                    <Box sx={{ display: {md: "flex" } }}>
-                         {searchLocation && !isMobile && <div className="items-center px-1 py-2">
-                            <span className="text-[16px]">{searchLocation}</span>
-                          </div>}
+                    <Box sx={{ display: { md: "flex" } }}>
                       <Button
                         // className={`${locationPopUp == false ? '!block' : '!hidden'}`}
                         onClick={showLocationPopUp}
                         disableRipple
-                        sx={{ minWidth: "50px", color: "text.primary" }}
+                        sx={{ minWidth:0 , marginLeft:1 , color: "text.primary" , p:0 }}
                       >
                         <FontAwesomeIcon
                           icon={faLocationDot}
                           size="xl"
                           style={{ marginRight: "8px" }}
                         />
-                     
-                      </Button>
 
+                      </Button>
+                      {searchLocation && !isMobile && <div className="items-center py-2">
+                        <span className="text-[16px]">{capitalizeFirstLetter(searchLocation)}</span>
+                      </div>}
 
                       {/* <div>
                         <BootstrapDialog
@@ -755,17 +758,20 @@ export const UserAppBar = (props: any) => {
 
 
                       <Dialog open={locationPopUp}>
-                        <DialogTitle>Location</DialogTitle>
+                        <div className={'flex justify-center'}>
+                          <DialogTitle>Location</DialogTitle>
+                        </div>
                         <BootstrapDialogTitle id="customized-dialog-title" onClose={() => {
-                           setLocationPopUP(false)
-                           navigate('/?')
-                           setLocation('')
-                          } }>
+                          setLocationPopUP(false)
+                          navigate('/?')
+                          setLocation('')
+                        }}>
                         </BootstrapDialogTitle>
                         <DialogContent>
-                          <Stack spacing={1} sx={ isMobile ?  {width: "25ch" , height:"auto" , m: 1} : {width: "50ch" ,m: 1}}  >
+                          <Stack spacing={1} sx={isMobile ? { width: "25ch", height: "auto", m: 1 } : { width: "50ch", m: 1 }}  >
                             <Autocomplete
                               {...defaultProps}
+                              freeSolo
                               selectOnFocus={false}
                               noOptionsText={'Enter your city'}
                               autoSelect={true}
@@ -775,7 +781,7 @@ export const UserAppBar = (props: any) => {
                                 }
                               }}
                               id="disable-close-on-select"
-                              onChange={(event:any, newValue: any) => {
+                              onChange={(event: any, newValue: any) => {
                                 console.log(event, "event onchange-----------");
                                 handlevalue(newValue);
                                 setLocationPopUP(false)
@@ -800,12 +806,7 @@ export const UserAppBar = (props: any) => {
 
                         </DialogContent>
                         <DialogActions>
-                          <Button onClick={() => {
-                               navigate('/?')
-                               setLocationPopUP(false)
-                               setLocation('')
-                          }
-                            }>Cancel</Button>
+
                         </DialogActions>
                       </Dialog>
 
@@ -1197,15 +1198,16 @@ export const UserAppBar = (props: any) => {
                           {item?.vName}
                         </Link>
                       </ListItem>
-                    ) : (
-                      index === 7 && (
-                        <ListItem>
-                          <Link onClick={handleBanner} className='p-[10px]'>
-                            {"More"}
-                          </Link>
-                        </ListItem>
-                      )
-                    )
+                    ) : null
+                    //  (
+                    //   index === 7 && (
+                    //     <ListItem>
+                    //       <Link onClick={handleBanner} className='p-[10px]'>
+                    //         {"More"}
+                    //       </Link>
+                    //     </ListItem>
+                    //   )
+                    // )
                   )}
 
                   {/* {isMobile && (homepage == "/" || routeAdmin == "category") ? (
@@ -1269,20 +1271,34 @@ export const UserAppBar = (props: any) => {
                     </ListItem>
                   ) : null} */}
 
-                  <ListItem className=" rounded-[10px] my-5">
-                    {!auth.isAuthenticated && isMobile ? (
+                  {!auth.isAuthenticated && isMobile ? (<ListItem className=" rounded-[10px] my-5">
+                    <div className="w-full grid grid-cols-2 gap-4">
                       <Button
-                        className="w-[100%]"
+
                         variant="contained"
-                        sx={{ minWidth: "100px" }}
+                        sx={{ minWidth: "80px" }}
                         onClick={() => {
                           navigate(AuthRoutePathEnum.SIGN_IN);
+                          setOpen(false)
                         }}
                       >
                         Log In
                       </Button>
-                    ) : null}
-                  </ListItem>
+                      <Button
+
+                        variant="contained"
+                        sx={{ minWidth: "80px" }}
+                        onClick={() => {
+                          navigate(AuthRoutePathEnum.SIGN_UP);
+                          setOpen(false)
+                        }}
+                      >
+                        sign up
+                      </Button>
+                    </div>
+
+                  </ListItem>)
+                    : null}
                 </List>
               </div>
             </Toolbar>

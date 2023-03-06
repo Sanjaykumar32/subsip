@@ -96,7 +96,7 @@ export function Subscriptions() {
 
 
   return (
-    <Container maxWidth={false} sx={{ px: 5, py: 20 }}>
+    <Container maxWidth={false} sx={{ px: 5, pt: 8  ,pb:10}}>
       <PageHeader
         name="Subscriptions"
         icon={{
