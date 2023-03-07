@@ -145,12 +145,12 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
       console.log(logInEmail, logInPassword, 'sesstion value')
 
       if (res.success == 1) {
-        // toast.success("Otp Verifition Successfull", {
-        //   duration: 3000,
-        // })
-        toast.success("Your Account Create Successfully Please Login Now", {
-          duration: 5000,
-        });
+        toast.success("Your account has been created successfully!", {
+          duration: 3000,
+        })
+        // toast.success("Your Account Create Successfully Please Login Now", {
+        //   duration: 5000,
+        // });
 
         try {
           const response: any = await AuthService.signIn({ email: logInEmail, password: logInPassword });
@@ -163,11 +163,11 @@ export function AuthProvider({ children }: IAuthProvider): ReactElement {
           }
           setAuthenticated(true);
           sessionStorage.clear()
-          toast.success("You have successfully logged in!"
-            , {
-              duration: 10000,
-            }
-          );
+          // toast.success("You have successfully logged in!"
+          //   , {
+          //     duration: 10000,
+          //   }
+          // );
         } catch (error) {
           console.log(error);
         }
