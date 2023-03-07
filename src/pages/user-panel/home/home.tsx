@@ -520,7 +520,7 @@ export function Home({ alertOnBottom }: any) {
               </>}
    
               {filterBanner?.filter(
-                  (el) => parseInt(el.iCategory) == CateFirst[4]
+                  (el) => parseInt(el?.iCategory) == CateFirst[4]
                 ).length > 0 &&
                 <>
               <p className="font-semibold text-[24px]  mt-5 mx-5">

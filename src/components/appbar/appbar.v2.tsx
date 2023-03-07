@@ -44,6 +44,7 @@ import { SearchField } from "./component/search-field/search-field";
 import { AdminThunk } from "data/thunk/admin.thunk";
 import { useAppDispatch, useAppSelector } from "data";
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
+import CloseIcon from '@mui/icons-material/Close';
 import {
   GET_BUSINESS,
   GET_CATEGORY,
@@ -87,11 +88,18 @@ export const UserAppBar = (props: any) => {
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
   const isKeyboardOpen = useDetectKeyboardOpen();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [viewValue , setValue] = useState('')
 
-  // console.log(isKeyboardOpen , 'isKeyboardOpen')
+  console.log(searchLocation  ,locationPopUp, 'locationPopUp')
+  console.log(viewValue , 'viewValue');
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(()=>{
+    setValue('')
+    setLocation('')
+  },[homepage])
 
   const routeAdmin = homepage?.split("/")[1];
 
@@ -242,9 +250,11 @@ export const UserAppBar = (props: any) => {
         setLocationPopUP(false);
         navigate(`/?`);
         setOpen(false);
+        setValue('')
       } else {
         setLocation(el?.replaceAll(/\s/g, ''));
         navigate(`/?${el?.replaceAll(/\s/g, '')}`);
+        setValue(el)
       }
     }
 
@@ -254,9 +264,11 @@ export const UserAppBar = (props: any) => {
         setLocationPopUP(false);
         navigate(`?`);
         setOpen(false);
+        setValue('')
       } else {
         setLocation(el?.replaceAll(/\s/g, ''));
         navigate(`?${el?.replaceAll(/\s/g, '')}`);
+        setValue(el)
       }
     }
   };
@@ -682,19 +694,20 @@ export const UserAppBar = (props: any) => {
             <>
               {/* <----------------- search field and location input----------------> */}
 
-              <div className="flex gap-2 items-center w-full">
-                <div className={`${isMobile ? 'w-full' : "w-[50%] ml-[8%]"}`}>
+              <div className={`${isMobile ? '' : 'flex'} gap-2 items-center w-full`}>
+                <div className={`${isMobile ? 'w-full' : "w-[52%] ml-[8%]"}`}>
                   <SearchField handleBanner={handleBanner} />
 
                 </div>
                 <div>
                   {homepage == "/" || routeAdmin == "category" ? (
                     <Box sx={{ display: { md: "flex" } }}>
+                      <div className="flex">
                       <Button
-                        // className={`${locationPopUp == false ? '!block' : '!hidden'}`}
+                        className={`${isMobile  ? '!py-3 !pr-1' : '!pl-3'}`}
                         onClick={showLocationPopUp}
                         disableRipple
-                        sx={{ minWidth:0 , marginLeft:1 , color: "text.primary" , p:0 }}
+                        sx={{ minWidth:0 , color: "text.primary" , p:0 }}
                       >
                         <FontAwesomeIcon
                           icon={faLocationDot}
@@ -703,10 +716,13 @@ export const UserAppBar = (props: any) => {
                         />
 
                       </Button>
-                      {searchLocation && !isMobile && <div className="items-center py-2">
-                        <span className="text-[16px]">{capitalizeFirstLetter(searchLocation)}</span>
+                      {viewValue  && <div className="items-center py-3">
+                        <span className="text-[16px]">{capitalizeFirstLetter(viewValue)}
+                        {/* <CloseIcon onClick={()=> {setLocation(''), navigate('/')}}
+                         className="!h-[22px] ml-1 cursor-pointer !w-[22px]"/> */}
+                         </span>
                       </div>}
-
+                      </div>
                       {/* <div>
                         <BootstrapDialog
                           // onClose={() => setLocationPopUP(false)}
@@ -759,12 +775,13 @@ export const UserAppBar = (props: any) => {
 
                       <Dialog open={locationPopUp}>
                         <div className={'flex justify-center'}>
-                          <DialogTitle>Location</DialogTitle>
+                          <DialogTitle className=" !font-bold !text-[22px]">Location</DialogTitle>
                         </div>
                         <BootstrapDialogTitle id="customized-dialog-title" onClose={() => {
                           setLocationPopUP(false)
                           navigate('/?')
                           setLocation('')
+                          setValue('')
                         }}>
                         </BootstrapDialogTitle>
                         <DialogContent>
@@ -774,10 +791,12 @@ export const UserAppBar = (props: any) => {
                               freeSolo
                               selectOnFocus={false}
                               noOptionsText={'Enter your city'}
+                              value={searchLocation}
                               autoSelect={true}
                               onClose={(e) => {
                                 if (e.cancelable == false) {
                                   setLocationPopUP(false)
+                                  setValue('')
                                 }
                               }}
                               id="disable-close-on-select"
@@ -794,6 +813,7 @@ export const UserAppBar = (props: any) => {
                                   // label="Search"
                                   variant="standard"
                                   focused
+                                  // value={searchLocation}
                                   inputRef={input => {
                                     inputRef = input;
                                   }}
@@ -803,14 +823,10 @@ export const UserAppBar = (props: any) => {
 
                             />
                           </Stack>
-
                         </DialogContent>
                         <DialogActions>
-
                         </DialogActions>
                       </Dialog>
-
-
                     </Box>
                   ) : null}
                 </div>
