@@ -88,18 +88,18 @@ export const UserAppBar = (props: any) => {
   const [readMoreNotification, setReadMoreNotification] = useState<any>({});
   const isKeyboardOpen = useDetectKeyboardOpen();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [viewValue , setValue] = useState('')
+  const [viewValue, setValue] = useState('')
 
-  console.log(searchLocation  ,locationPopUp, 'locationPopUp')
-  console.log(viewValue , 'viewValue');
+  console.log(searchLocation, locationPopUp, 'locationPopUp')
+  console.log(viewValue, 'viewValue');
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setValue('')
     setLocation('')
-  },[homepage])
+  }, [homepage])
 
   const routeAdmin = homepage?.split("/")[1];
 
@@ -449,7 +449,7 @@ export const UserAppBar = (props: any) => {
 
   const defaultProps = {
     options: searchLocation == '' ? [] : removeDupValue,
-    getOptionLabel: (option: any) =>  capitalizeFirstLetter(option),
+    getOptionLabel: (option: any) => capitalizeFirstLetter(option),
   };
 
 
@@ -509,9 +509,9 @@ export const UserAppBar = (props: any) => {
     },
   }));
 
-  function capitalizeFirstLetter(string : any) {
+  function capitalizeFirstLetter(string: any) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-}
+  }
 
   return (
     <>
@@ -670,7 +670,7 @@ export const UserAppBar = (props: any) => {
 
         <Toolbar
           sx={{
-            px: 4,
+            px: 2,
             py: 1,
             alignItems: "center",
             justifyContent: "space-between",
@@ -694,36 +694,37 @@ export const UserAppBar = (props: any) => {
             <>
               {/* <----------------- search field and location input----------------> */}
 
-              <div className={`${isMobile ? '' : 'flex'} gap-2 items-center w-full`}>
-                <div className={`${isMobile ? 'w-full' : "w-[52%] ml-[8%]"}`}>
-                  <SearchField handleBanner={handleBanner} />
+              {homepage == "/" || routeAdmin == "category" ?
+                (<div className={`${isMobile ? '' : 'flex'} gap-2 items-center w-full`}>
 
-                </div>
-                <div>
-                  {homepage == "/" || routeAdmin == "category" ? (
-                    <Box sx={{ display: { md: "flex" } }}>
-                      <div className="flex">
-                      <Button
-                        className={`${isMobile  ? '!py-3 !pr-1' : '!pl-3'}`}
-                        onClick={showLocationPopUp}
-                        disableRipple
-                        sx={{ minWidth:0 , color: "text.primary" , p:0 }}
-                      >
-                        <FontAwesomeIcon
-                          icon={faLocationDot}
-                          size="xl"
-                          style={{ marginRight: "8px" }}
-                        />
+                    <div className={`${isMobile ? 'w-full' : "w-[52%] ml-[8%]"}`}>
+                      <SearchField handleBanner={handleBanner} />
+                    </div>
+                    <div>
 
-                      </Button>
-                      {viewValue  && <div className="items-center py-3">
-                        <span className="text-[16px]">{capitalizeFirstLetter(viewValue)}
-                        {/* <CloseIcon onClick={()=> {setLocation(''), navigate('/')}}
+                      <Box sx={{ display: { md: "flex" } }}>
+                        <div className="flex">
+                          <Button
+                            className={`${isMobile ? '!py-4 !pr-1' : '!pl-3'}`}
+                            onClick={showLocationPopUp}
+                            disableRipple
+                            sx={{ minWidth: 0, color: "text.primary", p: 0 }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faLocationDot}
+                              size="xl"
+                              style={{ marginRight: "8px" }}
+                            />
+
+                          </Button>
+                          {viewValue && <div className="items-center py-3">
+                            <span className="text-[16px]">{capitalizeFirstLetter(viewValue)}
+                              {/* <CloseIcon onClick={()=> {setLocation(''), navigate('/')}}
                          className="!h-[22px] ml-1 cursor-pointer !w-[22px]"/> */}
-                         </span>
-                      </div>}
-                      </div>
-                      {/* <div>
+                            </span>
+                          </div>}
+                        </div>
+                        {/* <div>
                         <BootstrapDialog
                           // onClose={() => setLocationPopUP(false)}
                           aria-labelledby="customized-dialog-title"
@@ -773,64 +774,64 @@ export const UserAppBar = (props: any) => {
                       </div> */}
 
 
-                      <Dialog open={locationPopUp}>
-                        <div className={'flex justify-center'}>
-                          <DialogTitle className=" !font-bold !text-[22px]">Location</DialogTitle>
-                        </div>
-                        <BootstrapDialogTitle id="customized-dialog-title" onClose={() => {
-                          setLocationPopUP(false)
-                          navigate('/?')
-                          setLocation('')
-                          setValue('')
-                        }}>
-                        </BootstrapDialogTitle>
-                        <DialogContent>
-                          <Stack spacing={1} sx={isMobile ? { width: "25ch", height: "auto", m: 1 } : { width: "50ch", m: 1 }}  >
-                            <Autocomplete
-                              {...defaultProps}
-                              freeSolo
-                              selectOnFocus={false}
-                              noOptionsText={'Enter your city'}
-                              value={searchLocation}
-                              autoSelect={true}
-                              onClose={(e) => {
-                                if (e.cancelable == false) {
+                        <Dialog open={locationPopUp}>
+                          <div className={'flex justify-center'}>
+                            <DialogTitle className=" !font-bold !text-[22px]">Location</DialogTitle>
+                          </div>
+                          <BootstrapDialogTitle id="customized-dialog-title" onClose={() => {
+                            setLocationPopUP(false)
+                            navigate('/?')
+                            setLocation('')
+                            setValue('')
+                          }}>
+                          </BootstrapDialogTitle>
+                          <DialogContent>
+                            <Stack spacing={1} sx={isMobile ? { width: "25ch", height: "auto", m: 1 } : { width: "50ch", m: 1 }}  >
+                              <Autocomplete
+                                {...defaultProps}
+                                freeSolo
+                                selectOnFocus={false}
+                                noOptionsText={'Enter your city'}
+                                value={searchLocation}
+                                autoSelect={true}
+                                onClose={(e) => {
+                                  if (e.cancelable == false) {
+                                    setLocationPopUP(false)
+                                    setValue('')
+                                  }
+                                }}
+                                id="disable-close-on-select"
+                                onChange={(event: any, newValue: any) => {
+                                  console.log(event, "event onchange-----------");
+                                  handlevalue(newValue);
                                   setLocationPopUP(false)
-                                  setValue('')
-                                }
-                              }}
-                              id="disable-close-on-select"
-                              onChange={(event: any, newValue: any) => {
-                                console.log(event, "event onchange-----------");
-                                handlevalue(newValue);
-                                setLocationPopUP(false)
-                              }}
-                              // openOnFocus
-                              renderInput={(params) => (
-                                <TextField
-                                  {...params}
-                                  onChange={handleLocation}
-                                  // label="Search"
-                                  variant="standard"
-                                  focused
-                                  // value={searchLocation}
-                                  inputRef={input => {
-                                    inputRef = input;
-                                  }}
-                                />
+                                }}
+                                // openOnFocus
+                                renderInput={(params) => (
+                                  <TextField
+                                    {...params}
+                                    onChange={handleLocation}
+                                    // label="Search"
+                                    variant="standard"
+                                    focused
+                                    // value={searchLocation}
+                                    inputRef={input => {
+                                      inputRef = input;
+                                    }}
+                                  />
 
-                              )}
+                                )}
 
-                            />
-                          </Stack>
-                        </DialogContent>
-                        <DialogActions>
-                        </DialogActions>
-                      </Dialog>
-                    </Box>
-                  ) : null}
-                </div>
-              </div>
+                              />
+                            </Stack>
+                          </DialogContent>
+                          <DialogActions>
+                          </DialogActions>
+                        </Dialog>
+                      </Box>
+
+                    </div>
+                  </div>) : null}
 
             </>
           )}
@@ -1309,7 +1310,7 @@ export const UserAppBar = (props: any) => {
                           setOpen(false)
                         }}
                       >
-                        sign up
+                        Sign up
                       </Button>
                     </div>
 

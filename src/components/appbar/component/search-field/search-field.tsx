@@ -41,6 +41,7 @@ export const SearchField = ({handleBanner}:any) => {
     console.log(el ,'submit el input')
     submitHandler(el)
     handleBanner()
+    
   }
 
   const list = businessData.map((el: any) => {

@@ -16,6 +16,7 @@ export const SearchFieldController = () => {
    */
   function changeHandler(event: any): void {
     // event.preventDefault();
+   
     setSearch(event);
    
   }
@@ -24,7 +25,7 @@ export const SearchFieldController = () => {
   //   navigate(`/?${search.trim()}`)
   // },[search])
 
-  const Conid = BussinessByName?.filter((item) => {
+  const Conid = BussinessByName?.filter((item:any) => {
     return item.vName === search;
   })[0];
 
