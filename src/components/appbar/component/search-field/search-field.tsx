@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField, IconButton } from "@mui/material";
@@ -19,9 +19,10 @@ export const SearchField = ({handleBanner}:any) => {
   const navigate = useNavigate();
   const businessData = useAppSelector(GET_BUSINESS);
 
-  const handleClear = () => {
+  const handleClear = (e:any) => {
     setSearch('')
     navigate(`/`)
+    console.log(e , 'clear');
     // if(el == undefined){
     //   setLocation("");
     //     setLocationPopUP(false);
@@ -37,14 +38,21 @@ export const SearchField = ({handleBanner}:any) => {
     console.log(string, results, 'serach and results')
   }
 
+   const [ value  , setValue] = useState(false)
   const submitHandlers = (el: any) => {
     console.log(el ,'submit el input')
     submitHandler(el)
     handleBanner()
+
+    // if(el){
+    //   setValue(true)
+    // }else{
+    //   setValue(false)
+    // }
     
   }
 
-  const list = businessData.map((el: any) => {
+  const list = businessData?.map((el: any) => {
     return (
       {
         iBusinessid: el.iBusinessId,
@@ -54,7 +62,7 @@ export const SearchField = ({handleBanner}:any) => {
   })
 
 
-  const list2: any = categoryData.map((el: any) => {
+  const list2: any = categoryData?.map((el: any) => {
     return (
       {
         iCategoryid: el.iCategoryId,
@@ -63,9 +71,11 @@ export const SearchField = ({handleBanner}:any) => {
     )
   })
 
-  const data = list.concat(list2)
+  const data = list?.concat(list2)
 
-
+  const handleOnFocus = (e:any) => {
+    console.log(e ,'Focused')
+  }
 
   return (
 
@@ -81,7 +91,9 @@ export const SearchField = ({handleBanner}:any) => {
             onSearch={(el) => changeHandler(el)}
             onSelect={(el)=> submitHandlers(el)}
             onClear={handleClear}
-          // autoFocus
+            onFocus={handleOnFocus}
+            autoFocus
+            // autoFocus={!value ? false : true}
           // formatResult={formatResult}
           />
         </div>

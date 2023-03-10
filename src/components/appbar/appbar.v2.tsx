@@ -247,7 +247,7 @@ export const UserAppBar = (props: any) => {
     if (homepage == "/") {
       if (el == undefined) {
         setLocation("");
-        setLocationPopUP(false);
+        // setLocationPopUP(false);
         navigate(`/?`);
         setOpen(false);
         setValue('')
@@ -255,13 +255,14 @@ export const UserAppBar = (props: any) => {
         setLocation(el?.replaceAll(/\s/g, ''));
         navigate(`/?${el?.replaceAll(/\s/g, '')}`);
         setValue(el)
+        setLocationPopUP(false)
       }
     }
 
     if (routeAdmin == "category") {
       if (el == undefined) {
         setLocation("");
-        setLocationPopUP(false);
+        // setLocationPopUP(false);
         navigate(`?`);
         setOpen(false);
         setValue('')
@@ -269,6 +270,7 @@ export const UserAppBar = (props: any) => {
         setLocation(el?.replaceAll(/\s/g, ''));
         navigate(`?${el?.replaceAll(/\s/g, '')}`);
         setValue(el)
+        setLocationPopUP(false)
       }
     }
   };
@@ -676,7 +678,7 @@ export const UserAppBar = (props: any) => {
             justifyContent: "space-between",
             flexGrow: 1,
           }}
-          className={`${isMobile && (homepage.split("/")[1] === "admin" ? !open : open) ? '!hidden' : ''} 'topheader'`}
+          className={`${isMobile && (homepage.split("/")[1] === "admin" ? !open : open) ? '!hidden' : ''} 'topheader' ${isMobile  ? '!min-h-0' : '' }`}
         >
           {homepage.split("/")[1] === "admin" ? (
             <h1></h1>
@@ -703,7 +705,7 @@ export const UserAppBar = (props: any) => {
                     <div>
 
                       <Box sx={{ display: { md: "flex" } }}>
-                        <div className="flex">
+                        <div className="flex  items-center">
                           <Button
                             className={`${isMobile ? '!py-4 !pr-1' : '!pl-3'}`}
                             onClick={showLocationPopUp}
@@ -774,7 +776,7 @@ export const UserAppBar = (props: any) => {
                       </div> */}
 
 
-                        <Dialog open={locationPopUp}>
+                        <Dialog open={locationPopUp} onClose={()=> setLocationPopUP(false)}>
                           <div className={'flex justify-center'}>
                             <DialogTitle className=" !font-bold !text-[22px]">Location</DialogTitle>
                           </div>
@@ -786,7 +788,7 @@ export const UserAppBar = (props: any) => {
                           }}>
                           </BootstrapDialogTitle>
                           <DialogContent>
-                            <Stack spacing={1} sx={isMobile ? { width: "25ch", height: "auto", m: 1 } : { width: "50ch", m: 1 }}  >
+                            <Stack spacing={1} sx={isMobile ? { width: "25ch", height: "auto", m: 1 } : { width: "42ch" , height:'6ch', m: 1 }}  >
                               <Autocomplete
                                 {...defaultProps}
                                 freeSolo
@@ -796,7 +798,7 @@ export const UserAppBar = (props: any) => {
                                 autoSelect={true}
                                 onClose={(e) => {
                                   if (e.cancelable == false) {
-                                    setLocationPopUP(false)
+                                    // setLocationPopUP(false)
                                     setValue('')
                                   }
                                 }}
@@ -804,7 +806,7 @@ export const UserAppBar = (props: any) => {
                                 onChange={(event: any, newValue: any) => {
                                   console.log(event, "event onchange-----------");
                                   handlevalue(newValue);
-                                  setLocationPopUP(false)
+                                  // setLocationPopUP(false)
                                 }}
                                 // openOnFocus
                                 renderInput={(params) => (
@@ -1443,7 +1445,9 @@ export const UserAppBar = (props: any) => {
       <Backdrop
         open={open}
         sx={{ zIndex: 999 }}
-        onClick={() => setOpen(false)}
+        onClick={() => 
+          setOpen(false)
+        }
       />
     </>
   );

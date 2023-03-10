@@ -455,14 +455,14 @@ export function ClickOnCategory() {
                 paddingTop:'10px'
               }}
             >
-              {listFilter.filter((el) =>
+              {listFilter?.filter((el:any) =>
                 subcatIdss
                   ? el.iCategory === ids && el.iSubCategory === subcatIdss
                   : el.iCategory === ids
               ).length > 0 ? (
                 <Typography variant="body2" fontWeight="600">
                   {
-                    listFilter.filter((el) =>
+                    listFilter?.filter((el:any) =>
                       subcatIdss
                         ? el.iCategory === ids && el.iSubCategory === subcatIdss
                         : el.iCategory === ids
