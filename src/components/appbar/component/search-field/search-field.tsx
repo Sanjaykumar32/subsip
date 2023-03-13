@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField, IconButton } from "@mui/material";
@@ -10,19 +10,18 @@ import { useAppSelector } from "data";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useNavigate } from "react-router-dom";
 
-export const SearchField = ({handleBanner}:any) => {
+export const SearchField = ({ handleBanner, setLocationPopUP }: any) => {
   const { getters, handlers } = SearchFieldController();
-  const { search  } = getters;
-  const { changeHandler, submitHandler, setSearch  } = handlers;
+  const { search } = getters;
+  const { changeHandler, submitHandler, setSearch } = handlers;
   const categoryData = useAppSelector(GET_CATEGORY);
- 
+
   const navigate = useNavigate();
   const businessData = useAppSelector(GET_BUSINESS);
-
-  const handleClear = (e:any) => {
+  const ref: any = useRef()
+  const handleClear = () => {
     setSearch('')
     navigate(`/`)
-    console.log(e , 'clear');
     // if(el == undefined){
     //   setLocation("");
     //     setLocationPopUP(false);
@@ -38,67 +37,125 @@ export const SearchField = ({handleBanner}:any) => {
     console.log(string, results, 'serach and results')
   }
 
-   const [ value  , setValue] = useState(false)
+  const [value, setValue] = useState(false)
+
   const submitHandlers = (el: any) => {
-    console.log(el ,'submit el input')
     submitHandler(el)
     handleBanner()
+    if (el) {
+      setValue(true)
+      setLocationPopUP(false)
+    } else {
+      setValue(false)
+    }
 
-    // if(el){
-    //   setValue(true)
-    // }else{
-    //   setValue(false)
-    // }
-    
   }
 
   const list = businessData?.map((el: any) => {
     return (
       {
-        iBusinessid: el.iBusinessId,
-        name: el.vName
+        iBusinessid: el?.iBusinessId,
+        name: el?.vName
       }
     )
   })
 
-
   const list2: any = categoryData?.map((el: any) => {
     return (
       {
-        iCategoryid: el.iCategoryId,
-        name: el.vName
+        iCategoryid: el?.iCategoryId,
+        name: el?.vName
       }
     )
   })
 
   const data = list?.concat(list2)
 
-  const handleOnFocus = (e:any) => {
-    console.log(e ,'Focused')
+
+  const defaultProps = {
+    options: data,
+    getOptionLabel: (option: any) => option.name,
+  };
+
+  console.log(defaultProps , 'defal');
+
+  const handleOnFocus = (e: any) => {
+    console.log(e, 'Focused')
   }
 
-  return (
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [value])
 
+
+
+  const formatResult = (item: any) => {
+    return (
+      <>
+        <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
+      </>
+    )
+  }
+  return (
     <div className="App w-full ">
       <header className="App-header">
-        <div className=" w-full" >
+        <div className=" w-full"
+        >
           <ReactSearchAutocomplete
             styling={{
-                zIndex: 1
-              }}
+              zIndex: 1
+            }}
             placeholder="Search"
             items={data}
             onSearch={(el) => changeHandler(el)}
-            onSelect={(el)=> submitHandlers(el)}
+            onSelect={(el) => submitHandlers(el)}
             onClear={handleClear}
             onFocus={handleOnFocus}
-            autoFocus
-            // autoFocus={!value ? false : true}
-          // formatResult={formatResult}
+            // autoFocus
+            formatResult={formatResult}
           />
+
+
+          {/* <Stack spacing={1} >
+            <Autocomplete
+              {...defaultProps}
+              freeSolo
+              selectOnFocus={false}
+              noOptionsText={'Enter your city'}
+              // value={searchLocation}
+              autoSelect={true}
+              onClose={(e) => {
+                if (e.cancelable == false) {
+                  // setLocationPopUP(false)
+                  // setValue('')
+                }
+              }}
+              id="disable-close-on-select"
+              onChange={(event: any, newValue: any) => {
+                console.log(event,  newValue ,"event onchange-----------");
+                submitHandlers(newValue);
+                // setLocationPopUP(false)
+              }}
+              // openOnFocus
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  // onChange={handleLocation}
+                  // label="Search"
+                  variant="standard"
+                  focused
+                  // value={searchLocation}
+                  // inputRef={input => {
+                  //   inputRef = input;
+                  // }}
+                />
+
+              )}
+
+            />
+          </Stack> */}
         </div>
       </header>
     </div>
-
   );
 };

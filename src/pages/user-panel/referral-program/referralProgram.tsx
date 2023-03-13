@@ -37,7 +37,7 @@ export function ReferralProgram() {
   const count: any = [...new Set(list)];
 
   return (
-    <Container maxWidth="xl" sx={{ p: 2 }}>
+    <Container maxWidth="xl"  sx={{ py: 8 , px:2 }}>
       <PageHeader
         name="Referral program"
         icon={{ icon: faCircleQuestion, tooltip: "Each time you invite someone to subscribe to a listing, you will be credited with one referral. Extra rewards and perks will be unlocked for being an advocate for Subsip. Share a listing you love with family and friends to unlock exclusive benefits." }}
@@ -53,7 +53,7 @@ export function ReferralProgram() {
         </Box>
       </PageHeader>
 
-      <Container maxWidth="xs" sx={{ my: 15 }} className='!p-0'>
+      <Container maxWidth="xs" sx={{ mb: 18 , mt:8 }} className='!p-0'>
         <Typography variant="h6"> Milestones </Typography>
         {refferralCount.map((res: any, i: number) => {
           return (

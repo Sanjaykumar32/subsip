@@ -90,8 +90,6 @@ export const UserAppBar = (props: any) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [viewValue, setValue] = useState('')
 
-  console.log(searchLocation, locationPopUp, 'locationPopUp')
-  console.log(viewValue, 'viewValue');
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -678,7 +676,7 @@ export const UserAppBar = (props: any) => {
             justifyContent: "space-between",
             flexGrow: 1,
           }}
-          className={`${isMobile && (homepage.split("/")[1] === "admin" ? !open : open) ? '!hidden' : ''} 'topheader' ${isMobile  ? '!min-h-0' : '' }`}
+          className={`${isMobile && (homepage.split("/")[1] === "admin" ? !open : open) ? '!hidden' : ''} 'topheader' ${isMobile && !(homepage.split("/")[1] === "admin") ? '!min-h-0' : '' }`}
         >
           {homepage.split("/")[1] === "admin" ? (
             <h1></h1>
@@ -700,7 +698,7 @@ export const UserAppBar = (props: any) => {
                 (<div className={`${isMobile ? '' : 'flex'} gap-2 items-center w-full`}>
 
                     <div className={`${isMobile ? 'w-full' : "w-[52%] ml-[8%]"}`}>
-                      <SearchField handleBanner={handleBanner} />
+                      <SearchField handleBanner={handleBanner} setLocationPopUP={setLocationPopUP} />
                     </div>
                     <div>
 
@@ -817,9 +815,9 @@ export const UserAppBar = (props: any) => {
                                     variant="standard"
                                     focused
                                     // value={searchLocation}
-                                    inputRef={input => {
-                                      inputRef = input;
-                                    }}
+                                    // inputRef={input => {
+                                    //   inputRef = input;
+                                    // }}
                                   />
 
                                 )}

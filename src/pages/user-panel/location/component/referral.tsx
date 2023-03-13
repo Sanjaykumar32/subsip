@@ -27,7 +27,6 @@ export default function ResponsiveDialog({
   const businessId = location.id;
   const hostName = window.location.origin;
 
-  console.log(location , hostName , 'location');
 
   /**
    * copy referral code

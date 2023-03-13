@@ -82,7 +82,6 @@ export function AdminListing() {
       width: 200,
       renderCell: (params) => (
         <>
-          {/* {console.log(params.row.SubscriberId, 'render cell ')} */}
           {params.row.SubscriberId == null ?
             <div>No Subscribers</div> :
             <div

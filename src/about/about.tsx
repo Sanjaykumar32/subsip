@@ -7,7 +7,6 @@ export const About = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [business, setBusiness] = useState('Subscribers')
   const navigate = useNavigate();
-  console.log(business, 'business')
   const handleRoute = ()=>{
     navigate('/auth/sign-in')
   }

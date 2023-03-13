@@ -63,8 +63,6 @@ export function Subscriptions() {
   });
 
 
-
-  console.log(array ,'array')
   const handleSubs = async (item: any) => {
     const response = await dispatch(
       UserThunk.addSubscriberToBusiness({

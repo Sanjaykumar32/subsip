@@ -36,7 +36,6 @@ export function AdminSubscribers() {
 
   const getAllsubcriber =  useAppSelector(GET_ALL_SUBSCRIBER)
   const getAllUserData = useAppSelector(GET_ALL_USER)
-  // console.log(getAllUserData ,'getAllUserData')
 
   const routeValue = location?.state?.ids?.split(',')
 

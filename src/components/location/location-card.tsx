@@ -117,9 +117,6 @@ export const Subscribe = ({
     // localStorage.setItem("businessId", businessId ? businessId : "");
     const getLocalref = localStorage.getItem('referralcode')
 
-    console.log(referralcode, 'this ref code', getLocalref, 'this ref codelocation')
-
-
 
     if (auth?.isAuthenticated) {
       try {

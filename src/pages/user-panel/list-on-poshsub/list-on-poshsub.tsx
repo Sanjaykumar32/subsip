@@ -108,7 +108,6 @@ export function ListingOnPoshSub() {
   const ref = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
-    // console.log(name, "name");
     console.log(email, "email");
     console.log(businessLocation, "businessLocation");
     console.log(subCategory, "subCategory");

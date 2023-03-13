@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "data";
 import { GET_BUSINESS } from "data/selectors";
 import { UserThunk } from "data/thunk/user.thunk";
-import { ChangeEvent, useState , useEffect } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { useNavigate, useRoutes } from "react-router-dom";
 
 export const SearchFieldController = () => {
@@ -16,16 +16,15 @@ export const SearchFieldController = () => {
    */
   function changeHandler(event: any): void {
     // event.preventDefault();
-   
     setSearch(event);
-   
+
   }
 
   // useEffect(()=>{
   //   navigate(`/?${search.trim()}`)
   // },[search])
 
-  const Conid = BussinessByName?.filter((item:any) => {
+  const Conid = BussinessByName?.filter((item: any) => {
     return item.vName === search;
   })[0];
 
@@ -33,15 +32,15 @@ export const SearchFieldController = () => {
    * @return {Promise<void>}
    */
 
-  async function submitHandler(el:any) {
-    if(el.iCategoryid){
+  async function submitHandler(el: any) {
+    if (el.iCategoryid) {
       navigate(`/category/${el.iCategoryid}`)
-    }else{
-      navigate(`/listing/${el.name.replaceAll(/\s/g, "-")}` 
-      , {state : {businessId : el.iBusinessid}}
+    } else {
+      navigate(`/listing/${el.name.replaceAll(/\s/g, "-")}`
+        , { state: { businessId: el.iBusinessid } }
       )
     }
-   
+
     // try {
     //   const response: any = await dispatch(
     //     UserThunk.business({ businessName: search })

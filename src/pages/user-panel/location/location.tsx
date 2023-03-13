@@ -41,7 +41,6 @@ export function LocationPage() {
   const navigate = useNavigate();
 
   const businessName:any = businessNames.toString().split('-').join(" ")
-  console.log(businessName , '---' , isNaN(businessName) , 'businessName')
 
   async function getDatalist() {
     if (businessName) {
@@ -99,13 +98,11 @@ export function LocationPage() {
     setOpen(false);
   };
 
-  console.log(bussinessByName  ,'bussinessByName')
   
   const filterName = bussinessByName.filter((el:any)=>{
        return el?.iBusinessId == businessName 
   })
 
-  console.log(filterName , 'filterName')
 
   const filterBusiness = bussinessByName?.filter((el: {
     iBusinessId: any; vName: { toString: () => string; }; 
@@ -124,7 +121,6 @@ export function LocationPage() {
       );
   })
 
-  console.log(filterBusiness , 'filterBusiness')
 
   return (
     <Container maxWidth="lg" sx={{ my: 5 }}>

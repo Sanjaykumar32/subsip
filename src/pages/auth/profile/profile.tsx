@@ -47,7 +47,7 @@ export function Profile() {
   const userEmail =  localStorage.getItem('email')
 
   return (
-    <Container sx={{ p: 5 }} maxWidth={false}>
+    <Container sx={{ py: 8 , px:5 }} maxWidth={false}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Typography variant="h6" fontWeight={600}>
           Profile
