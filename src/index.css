@@ -641,7 +641,22 @@ h2 {
  .css-1qqsdnr-MuiAutocomplete-root .MuiInput-root.MuiInputBase-sizeSmall .MuiInput-input {
     padding: 26px 4px 3px 0 !important;
 }
+
+
+
 }
 
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-sizeSmall.MuiAutocomplete-inputRoot.css-6oquw4-MuiInputBase-root-MuiOutlinedInput-root{
+    border-radius: 24px !important;
+}
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-sizeSmall.MuiInputBase-adornedEnd.MuiAutocomplete-inputRoot.css-16u7hov-MuiInputBase-root-MuiOutlinedInput-root{
+    border-radius: 24px !important;
+}
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-sizeSmall.MuiInputBase-adornedStart.MuiAutocomplete-inputRoot.css-17gv9i3-MuiInputBase-root-MuiOutlinedInput-root {
+    border-radius: 24px !important;
+}
+.css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root.MuiInputBase-sizeSmall {
+    border-radius: 24px !important;
+}
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TextField, IconButton } from "@mui/material";
+import { TextField, IconButton, InputAdornment } from "@mui/material";
 import { SearchFieldController } from "./search-field-controller";
 import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
@@ -9,8 +9,10 @@ import { GET_BUSINESS, GET_CATEGORY } from "data/selectors";
 import { useAppSelector } from "data";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useNavigate } from "react-router-dom";
+import { createFilterOptions } from '@mui/material/Autocomplete';
+import SearchIcon from '@mui/icons-material/Search';
 
-export const SearchField = ({ handleBanner, setLocationPopUP }: any) => {
+export const SearchField = ({ handleBanner }: any) => {
   const { getters, handlers } = SearchFieldController();
   const { search } = getters;
   const { changeHandler, submitHandler, setSearch } = handlers;
@@ -22,6 +24,7 @@ export const SearchField = ({ handleBanner, setLocationPopUP }: any) => {
   const handleClear = () => {
     setSearch('')
     navigate(`/`)
+    console.log('clear');
     // if(el == undefined){
     //   setLocation("");
     //     setLocationPopUP(false);
@@ -37,18 +40,13 @@ export const SearchField = ({ handleBanner, setLocationPopUP }: any) => {
     console.log(string, results, 'serach and results')
   }
 
-  const [value, setValue] = useState(false)
+  // const [value, setValue] = useState(false)
+  const [value, setValue] = React.useState<any | null>(null);
 
   const submitHandlers = (el: any) => {
+    console.log(el, 'el select');
     submitHandler(el)
     handleBanner()
-    if (el) {
-      setValue(true)
-      setLocationPopUP(false)
-    } else {
-      setValue(false)
-    }
-
   }
 
   const list = businessData?.map((el: any) => {
@@ -73,11 +71,9 @@ export const SearchField = ({ handleBanner, setLocationPopUP }: any) => {
 
 
   const defaultProps = {
-    options: data,
+    options: search == '' ? [] : data,
     getOptionLabel: (option: any) => option.name,
   };
-
-  console.log(defaultProps , 'defal');
 
   const handleOnFocus = (e: any) => {
     console.log(e, 'Focused')
@@ -87,21 +83,19 @@ export const SearchField = ({ handleBanner, setLocationPopUP }: any) => {
     window.scrollTo(0, 0);
   }, [value])
 
-
-
-  const formatResult = (item: any) => {
-    return (
-      <>
-        <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
-      </>
-    )
+  const handleClick = (e: any) => {
+    console.log(e.target, 'on click element');
   }
+
+  const top100Films: readonly any[] = search == '' ? [] : data
+  const filter = createFilterOptions<any>();
+
   return (
     <div className="App w-full ">
       <header className="App-header">
-        <div className=" w-full"
-        >
-          <ReactSearchAutocomplete
+        <div className=" w-full">
+
+          {/* <ReactSearchAutocomplete
             styling={{
               zIndex: 1
             }}
@@ -113,47 +107,63 @@ export const SearchField = ({ handleBanner, setLocationPopUP }: any) => {
             onFocus={handleOnFocus}
             // autoFocus
             formatResult={formatResult}
+          /> */}
+
+          <Autocomplete
+            noOptionsText="No results"
+            value={value}
+            onChange={(event, newValue) => {
+              console.log(event, 'event');
+              submitHandlers(newValue);
+              if (typeof newValue === 'string') {
+                console.log(newValue, 'newValue');
+              } else if (newValue && newValue.inputValue) {
+                // Create a new value from the user input
+                setValue({
+                  title: newValue.inputValue,
+                });
+              } else {
+                setValue(newValue);
+              }
+            }}
+           
+            selectOnFocus
+            clearOnBlur
+            handleHomeEndKeys
+            id="free-solo-with-text-demo"
+            options={top100Films}
+            getOptionLabel={(option) => {
+              // Value selected with enter, right from the input
+              if (typeof option === 'string') {
+                return option;
+              }
+              // Add "xxx" option created dynamically
+              if (option.inputValue) {
+                return option.inputValue;
+              }
+              // Regular option
+              return option.name;
+            }}
+            renderOption={(props, option) => <li {...props}>{option.name}</li>}
+
+            freeSolo
+            renderInput={(params) => (
+              <TextField className="search-input" {...params}
+                placeholder="Search"
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment: (<InputAdornment position="start"> <SearchIcon className="!w-[22px] !ml-2 !h-[22px]" />
+                  </InputAdornment>),
+                  disableUnderline: true 
+                }}
+
+              />
+            )}
+            blurOnSelect="touch"
+            onInputChange={changeHandler}
+
+
           />
-
-
-          {/* <Stack spacing={1} >
-            <Autocomplete
-              {...defaultProps}
-              freeSolo
-              selectOnFocus={false}
-              noOptionsText={'Enter your city'}
-              // value={searchLocation}
-              autoSelect={true}
-              onClose={(e) => {
-                if (e.cancelable == false) {
-                  // setLocationPopUP(false)
-                  // setValue('')
-                }
-              }}
-              id="disable-close-on-select"
-              onChange={(event: any, newValue: any) => {
-                console.log(event,  newValue ,"event onchange-----------");
-                submitHandlers(newValue);
-                // setLocationPopUP(false)
-              }}
-              // openOnFocus
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  // onChange={handleLocation}
-                  // label="Search"
-                  variant="standard"
-                  focused
-                  // value={searchLocation}
-                  // inputRef={input => {
-                  //   inputRef = input;
-                  // }}
-                />
-
-              )}
-
-            />
-          </Stack> */}
         </div>
       </header>
     </div>

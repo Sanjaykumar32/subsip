@@ -14,10 +14,17 @@ export const SearchFieldController = () => {
    * @param {ChangeEvent<HTMLInputElement>} event
    * @return {void}
    */
-  function changeHandler(event: any): void {
+  function changeHandler(event: any , input : any , reason :any): void {
     // event.preventDefault();
-    setSearch(event);
-
+    console.log(input , 'input ');
+    console.log(reason , 'reason')
+    if(reason == 'input'){
+      setSearch(event.target.value);
+    }else if(reason == 'clear'){
+      setSearch('')
+      navigate(`/`)
+      console.log('clear');
+    }
   }
 
   // useEffect(()=>{
