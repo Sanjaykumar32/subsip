@@ -99,6 +99,7 @@ export const UserAppBar = (props: any) => {
     setLocation('')
   }, [homepage])
 
+
   const routeAdmin = homepage?.split("/")[1];
 
   // isMobile admin list----------------------------------------
@@ -446,12 +447,10 @@ export const UserAppBar = (props: any) => {
 
   const removeDupValue = [...new Set(data)];
 
-
   const defaultProps = {
-    options: searchLocation == '' ? [] : removeDupValue,
+    options: searchLocation == '' ? [] :  removeDupValue.filter((el) => Object.values(el).join('').toString().toLowerCase().includes(searchLocation.toString().toLowerCase())),
     getOptionLabel: (option: any) => capitalizeFirstLetter(option),
   };
-
 
   const serchList = businessData.map((el, index) => {
     return {
@@ -538,7 +537,7 @@ export const UserAppBar = (props: any) => {
             alignItems: "center",
           }}
         >
-          <div className=" absolute  left-4 top-[14px] ">
+          <div className=" absolute  left-4 top-[10px] ">
             <IconButton onClick={() => setOpen(!open)}>
               <FontAwesomeIcon icon={open ? faClose : faBars} size="sm" />
             </IconButton>
@@ -676,7 +675,7 @@ export const UserAppBar = (props: any) => {
             justifyContent: "space-between",
             flexGrow: 1,
           }}
-          className={`${isMobile && (homepage.split("/")[1] === "admin" ? !open : open) ? '!hidden' : ''} 'topheader' ${isMobile && !(homepage.split("/")[1] === "admin") ? '!min-h-0' : '' }`}
+          className={`${isMobile && (homepage.split("/")[1] === "admin" ? !open : open) ? '!hidden' : ''} 'topheader' ${isMobile && !(homepage.split("/")[1] === "admin") ? '!min-h-0' : ''}`}
         >
           {homepage.split("/")[1] === "admin" ? (
             <h1></h1>
@@ -697,34 +696,34 @@ export const UserAppBar = (props: any) => {
               {homepage == "/" || routeAdmin == "category" ?
                 (<div className={`${isMobile ? '' : 'flex'} gap-2 items-center w-full`}>
 
-                    <div className={`${isMobile ? 'w-full' : "w-[52%] ml-[8%]"}`}>
-                      <SearchField handleBanner={handleBanner} setLocationPopUP={setLocationPopUP} />
-                    </div>
-                    <div>
+                  <div className={`${isMobile ? 'w-full' : "w-[52%] ml-[8%]"}`}>
+                    <SearchField handleBanner={handleBanner} setLocationPopUP={setLocationPopUP} />
+                  </div>
+                  <div>
 
-                      <Box sx={{ display: { md: "flex" } }}>
-                        <div className="flex  items-center">
-                          <Button
-                            className={`${isMobile ? '!py-4 !pr-1' : '!pl-3'}`}
-                            onClick={showLocationPopUp}
-                            disableRipple
-                            sx={{ minWidth: 0, color: "text.primary", p: 0 }}
-                          >
-                            <FontAwesomeIcon
-                              icon={faLocationDot}
-                              size="xl"
-                              style={{ marginRight: "8px" }}
-                            />
+                    <Box sx={{ display: { md: "flex" } }}>
+                      <div className="flex  items-center">
+                        <Button
+                          className={`${isMobile ? '!py-4 !pr-1' : '!pl-3'}`}
+                          onClick={showLocationPopUp}
+                          disableRipple
+                          sx={{ minWidth: 0, color: "text.primary", p: 0 }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faLocationDot}
+                            size="xl"
+                            style={{ marginRight: "8px" }}
+                          />
 
-                          </Button>
-                          {viewValue && <div className="items-center py-3">
-                            <span className="text-[16px]">{capitalizeFirstLetter(viewValue)}
-                              {/* <CloseIcon onClick={()=> {setLocation(''), navigate('/')}}
-                         className="!h-[22px] ml-1 cursor-pointer !w-[22px]"/> */}
-                            </span>
-                          </div>}
-                        </div>
-                        {/* <div>
+                        </Button>
+                        {viewValue && <div className="items-center py-3">
+                          <span className="text-[16px]">{capitalizeFirstLetter(viewValue)}
+                            {/* <CloseIcon onClick={()=> {setLocation(''), navigate('/')}}
+                               className="!h-[22px] ml-1 cursor-pointer !w-[22px]"/> */}
+                          </span>
+                        </div>}
+                      </div>
+                      {/* <div>
                         <BootstrapDialog
                           // onClose={() => setLocationPopUP(false)}
                           aria-labelledby="customized-dialog-title"
@@ -774,64 +773,64 @@ export const UserAppBar = (props: any) => {
                       </div> */}
 
 
-                        <Dialog open={locationPopUp} onClose={()=> setLocationPopUP(false)}>
-                          <div className={'flex justify-center'}>
-                            <DialogTitle className=" !font-bold !text-[22px]">Location</DialogTitle>
-                          </div>
-                          <BootstrapDialogTitle id="customized-dialog-title" onClose={() => {
-                            setLocationPopUP(false)
-                            navigate('/?')
-                            setLocation('')
-                            setValue('')
-                          }}>
-                          </BootstrapDialogTitle>
-                          <DialogContent>
-                            <Stack spacing={1} sx={isMobile ? { width: "25ch", height: "auto", m: 1 } : { width: "42ch" , height:'6ch', m: 1 }}  >
-                              <Autocomplete
-                                {...defaultProps}
-                                freeSolo
-                                selectOnFocus={false}
-                                noOptionsText={'Enter your city'}
-                                value={searchLocation}
-                                autoSelect={true}
-                                onClose={(e) => {
-                                  if (e.cancelable == false) {
-                                    // setLocationPopUP(false)
-                                    setValue('')
-                                  }
-                                }}
-                                id="disable-close-on-select"
-                                onChange={(event: any, newValue: any) => {
-                                  console.log(event, "event onchange-----------");
-                                  handlevalue(newValue);
+                      <Dialog open={locationPopUp} onClose={() => setLocationPopUP(false)}>
+                        <div className={'flex justify-center'}>
+                          <DialogTitle className=" !font-bold !text-[22px]">Location</DialogTitle>
+                        </div>
+                        <BootstrapDialogTitle id="customized-dialog-title" onClose={() => {
+                          setLocationPopUP(false)
+                          navigate('/?')
+                          setLocation('')
+                          setValue('')
+                        }}>
+                        </BootstrapDialogTitle>
+                        <DialogContent>
+                          <Stack spacing={1} sx={isMobile ? { width: "25ch", height: "auto", m: 1 } : { width: "42ch", height: '6ch', m: 1 }}  >
+                            <Autocomplete
+                              {...defaultProps}
+                              freeSolo
+                              selectOnFocus={false}
+                              noOptionsText={'Enter your city'}
+                              value={searchLocation}
+                              autoSelect={true}
+                              onClose={(e) => {
+                                if (e.cancelable == false) {
                                   // setLocationPopUP(false)
-                                }}
-                                // openOnFocus
-                                renderInput={(params) => (
-                                  <TextField
-                                    {...params}
-                                    onChange={handleLocation}
-                                    // label="Search"
-                                    variant="standard"
-                                    focused
-                                    // value={searchLocation}
-                                    // inputRef={input => {
-                                    //   inputRef = input;
-                                    // }}
-                                  />
+                                  setValue('')
+                                }
+                              }}
+                              id="disable-close-on-select"
+                              onChange={(event: any, newValue: any) => {
+                                console.log(event, "event onchange-----------");
+                                handlevalue(newValue);
+                                // setLocationPopUP(false)
+                              }}
+                              // openOnFocus
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  onChange={handleLocation}
+                                  // label="Search"
+                                  variant="standard"
+                                  focused
+                                // value={searchLocation}
+                                // inputRef={input => {
+                                //   inputRef = input;
+                                // }}
+                                />
 
-                                )}
+                              )}
 
-                              />
-                            </Stack>
-                          </DialogContent>
-                          <DialogActions>
-                          </DialogActions>
-                        </Dialog>
-                      </Box>
+                            />
+                          </Stack>
+                        </DialogContent>
+                        <DialogActions>
+                        </DialogActions>
+                      </Dialog>
+                    </Box>
 
-                    </div>
-                  </div>) : null}
+                  </div>
+                </div>) : null}
 
             </>
           )}
@@ -1443,7 +1442,7 @@ export const UserAppBar = (props: any) => {
       <Backdrop
         open={open}
         sx={{ zIndex: 999 }}
-        onClick={() => 
+        onClick={() =>
           setOpen(false)
         }
       />

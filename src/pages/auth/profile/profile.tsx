@@ -71,7 +71,7 @@ export function Profile() {
            }
         </Typography>
       </Box>
-      <Container maxWidth="xs" sx={{ my: 4 }}>
+      <Container maxWidth="xs" sx={{ my: 4 , p:0 }}>
         <Box sx={{ my: 1 }}>
           <Typography variant="alternet">Change Password </Typography>
 

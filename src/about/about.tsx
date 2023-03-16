@@ -125,7 +125,7 @@ export const About = () => {
               </div>}
             {business == 'Subscribers' &&
               <div className="  py-[40px] px-5  m-auto ">
-                <div className=" flex justify-evenly gap-4">
+                <div className={`flex gap-4 ${isMobile ? 'justify-evenly' : 'mx-[3rem]'}`}>
                   <div className="">
                     <div className=" relative">
                       <h2 className="text-[24px] text-[#021414] font-extrabold ">Attention Subscribers!

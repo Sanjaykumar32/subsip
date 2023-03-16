@@ -24,7 +24,6 @@ export const SearchField = ({ handleBanner }: any) => {
   const handleClear = () => {
     setSearch('')
     navigate(`/`)
-    console.log('clear');
     // if(el == undefined){
     //   setLocation("");
     //     setLocationPopUP(false);
@@ -40,11 +39,9 @@ export const SearchField = ({ handleBanner }: any) => {
     console.log(string, results, 'serach and results')
   }
 
-  // const [value, setValue] = useState(false)
   const [value, setValue] = React.useState<any | null>(null);
 
   const submitHandlers = (el: any) => {
-    console.log(el, 'el select');
     submitHandler(el)
     handleBanner()
   }
@@ -75,17 +72,17 @@ export const SearchField = ({ handleBanner }: any) => {
     getOptionLabel: (option: any) => option.name,
   };
 
-  const handleOnFocus = (e: any) => {
-    console.log(e, 'Focused')
-  }
+  // const handleOnFocus = (e: any) => {
+  //   console.log(e, 'Focused')
+  // }
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [value])
 
-  const handleClick = (e: any) => {
-    console.log(e.target, 'on click element');
-  }
+  // const handleClick = (e: any) => {
+  //   console.log(e.target, 'on click element');
+  // }
 
   const top100Films: readonly any[] = search == '' ? [] : data
   const filter = createFilterOptions<any>();
@@ -95,6 +92,7 @@ export const SearchField = ({ handleBanner }: any) => {
       <header className="App-header">
         <div className=" w-full">
 
+{/* <--------------------- option 1  search input ------------------> */}
           {/* <ReactSearchAutocomplete
             styling={{
               zIndex: 1
@@ -109,6 +107,7 @@ export const SearchField = ({ handleBanner }: any) => {
             formatResult={formatResult}
           /> */}
 
+{/* <------------------------ option 2 search input ---------------------> */}
           <Autocomplete
             noOptionsText="No results"
             value={value}
@@ -126,7 +125,6 @@ export const SearchField = ({ handleBanner }: any) => {
                 setValue(newValue);
               }
             }}
-           
             selectOnFocus
             clearOnBlur
             handleHomeEndKeys
@@ -145,7 +143,6 @@ export const SearchField = ({ handleBanner }: any) => {
               return option.name;
             }}
             renderOption={(props, option) => <li {...props}>{option.name}</li>}
-
             freeSolo
             renderInput={(params) => (
               <TextField className="search-input" {...params}
@@ -156,13 +153,10 @@ export const SearchField = ({ handleBanner }: any) => {
                   </InputAdornment>),
                   disableUnderline: true 
                 }}
-
               />
             )}
             blurOnSelect="touch"
             onInputChange={changeHandler}
-
-
           />
         </div>
       </header>
