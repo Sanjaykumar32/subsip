@@ -35,7 +35,7 @@ export function AdminDashboard() {
             >
               <Card
                 sx={{
-                  width: "300px",
+                  width: "100%",
                   borderRadius: "4px",
                   color: theme.palette.text.primary,
                   boxShadow:
